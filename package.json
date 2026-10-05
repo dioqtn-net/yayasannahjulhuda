@@ -1,0 +1,22 @@
+{
+  "name": "nahjul-huda-profile",
+  "version": "1.0.0",
+  "description": "Yayasan Nahjul Huda Website & CMS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); fs.copyFileSync('dist/index.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html');\"",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "navigo": "^8.11.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.1.4"
+  }
+}

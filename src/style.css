@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-slate-800;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal styles */
+.modal-open {
+  overflow: hidden;
+}
+
+/* Fix for grid layout 3 on top, 2 centered below for 5 items */
+.grid-5-centered {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.grid-5-centered > div {
+    flex: 1 1 300px;
+    max-width: 350px;
+}
+
+/* Hide Netlify Badge */
+.netlify-badge, #netlify-badge, a[title="Powered by Netlify"], a[href^="https://www.netlify.com"] {
+    display: none !important;
+}
