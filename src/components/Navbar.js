@@ -2,14 +2,14 @@ export const renderNavbar = () => {
     return `
       <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-20">
+          <div class="flex justify-between items-center py-2 md:py-3">
             <div class="flex items-center">
               <a href="/" data-navigo class="flex-shrink-0 flex items-center">
-                <img class="h-14 md:h-16 w-auto mr-3 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
-                <span class="font-playfair font-bold text-xl text-emerald-800">Yayasan Nahjul Huda</span>
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
               </a>
             </div>
-            <div class="hidden md:flex items-center space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
               <a href="/" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Beranda</a>
               <a href="/profil" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Profil</a>
               <a href="/program" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Program</a>
