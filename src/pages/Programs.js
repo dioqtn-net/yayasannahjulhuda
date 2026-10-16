@@ -6,6 +6,7 @@ export const renderPrograms = (units) => {
         const isEven = index % 2 !== 0;
         const imageUrl = unit.image_url || getUnitImage(unit);
         const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
@@ -32,6 +33,21 @@ export const renderPrograms = (units) => {
                         <p class="text-sm text-slate-600">${unit.facilities || '-'}</p>
                     </div>
                 </div>
+
+                ${isMTs ? `
+                <!-- Wadah Sejarah & Profil MTs -->
+                <div class="bg-emerald-50/60 rounded-xl p-6 border border-emerald-100/90 mb-8 shadow-sm">
+                    <h4 class="font-playfair font-bold text-lg text-emerald-800 mb-3 flex items-center">
+                        <i class="fas fa-landmark mr-2.5 text-emerald-600"></i> Sejarah & Profil MTs
+                    </h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Madrasah Tsanawiyah (MTs) Nahjul Huda didirikan dengan dedikasi tinggi untuk memberikan pendidikan tingkat menengah pertama yang mengintegrasikan kurikulum nasional dengan nilai-nilai kepesantrenan dan pembentukan akhlakul karimah.
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                ` : ''}
                 
                 <a href="https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unit.name)}" target="_blank" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition group">
                     Tanya PPDB via WhatsApp <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i>

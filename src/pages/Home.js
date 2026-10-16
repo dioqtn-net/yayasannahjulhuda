@@ -5,6 +5,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
         const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
@@ -49,6 +50,19 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
                         <p class="text-slate-600">${unit.facilities || '-'}</p>
                     </div>
+                    ${isMTs ? `
+                    <div class="mb-6 bg-emerald-50/60 rounded-xl p-5 border border-emerald-100/90 shadow-sm">
+                        <h4 class="font-playfair font-bold text-emerald-800 mb-2 flex items-center">
+                            <i class="fas fa-landmark mr-2.5 text-emerald-600"></i> Sejarah & Profil MTs
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-2">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Madrasah Tsanawiyah (MTs) Nahjul Huda didirikan dengan dedikasi tinggi untuk memberikan pendidikan tingkat menengah pertama yang mengintegrasikan kurikulum nasional dengan nilai-nilai kepesantrenan dan pembentukan akhlakul karimah.
+                        </p>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                    ` : ''}
                 </div>
                 <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
                     <a href="https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unitName)}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
@@ -62,11 +76,9 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
 
     return `
       <!-- Hero Section -->
-      <section class="relative bg-slate-900 text-white min-h-[500px] flex items-center">
-        <div class="absolute inset-0 z-0">
-          <img src="/logo.png" alt="Hero Background" class="w-full h-full object-cover opacity-30 backdrop-blur-sm">
-          <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/90 to-emerald-800/80"></div>
-        </div>
+      <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white min-h-[500px] flex items-center">
+        <!-- Dark Overlay Wrapper -->
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left fade-in">
           <span class="inline-block py-1 px-3 rounded-full bg-gold-500/20 text-gold-400 font-semibold text-sm mb-4 border border-gold-500/30">Lembaga Pendidikan Islam</span>
           <h1 class="text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">

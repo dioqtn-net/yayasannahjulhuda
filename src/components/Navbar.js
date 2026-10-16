@@ -10,14 +10,14 @@ export const renderNavbar = () => {
               </a>
             </div>
             <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
-              <a href="/" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Beranda</a>
-              <a href="/profil" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Profil</a>
-              <a href="/program" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Program</a>
-              <a href="/fasilitas" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Fasilitas</a>
-              <a href="/berita" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Berita</a>
-              <a href="/galeri" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Galeri</a>
-              <a href="/kontak" data-navigo class="text-slate-600 hover:text-emerald-600 font-medium transition">Kontak</a>
-              <a href="/ppdb" data-navigo class="bg-gold-500 hover:bg-gold-600 text-white px-5 py-2 rounded-full font-semibold transition shadow-sm">Info PPDB</a>
+              <a href="/" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Beranda</a>
+              <a href="/profil" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Profil</a>
+              <a href="/program" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Program</a>
+              <a href="/fasilitas" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Fasilitas</a>
+              <a href="/berita" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Berita</a>
+              <a href="/galeri" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Galeri</a>
+              <a href="/kontak" data-navigo class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Kontak</a>
+              <a href="/ppdb" data-navigo class="bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300 text-white px-5 py-2 rounded-full font-semibold shadow-sm inline-block transform">Info PPDB</a>
             </div>
             <div class="-mr-2 flex items-center md:hidden">
               <button onclick="toggleMobileMenu()" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none">
@@ -30,14 +30,14 @@ export const renderNavbar = () => {
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
           <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Beranda</a>
-            <a href="/profil" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Profil</a>
-            <a href="/program" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Program</a>
-            <a href="/fasilitas" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Fasilitas</a>
-            <a href="/berita" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Berita</a>
-            <a href="/galeri" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Galeri</a>
-            <a href="/kontak" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50">Kontak</a>
-            <a href="/ppdb" data-navigo class="block px-3 py-2 rounded-md text-base font-bold text-emerald-700 hover:text-emerald-800 hover:bg-slate-50">Info PPDB</a>
+            <a href="/" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Beranda</a>
+            <a href="/profil" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Profil</a>
+            <a href="/program" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Program</a>
+            <a href="/fasilitas" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Fasilitas</a>
+            <a href="/berita" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Berita</a>
+            <a href="/galeri" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Galeri</a>
+            <a href="/kontak" data-navigo class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50 transition-colors duration-300">Kontak</a>
+            <a href="/ppdb" data-navigo class="block px-3 py-2 rounded-md text-base font-bold text-white bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300 text-center">Info PPDB</a>
           </div>
         </div>
       </nav>
