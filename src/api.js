@@ -24,7 +24,7 @@ const fallbackData = {
         operational_hours: "Senin - Jumat: 07:00 - 15:00 WIB"
     },
     education_units: [
-        { id: 1, name: "SD Islam (SDI) Nahjul Huda", image_url: "/images/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
+        { id: 1, name: "SD Islam (SDI) AL KINDY", image_url: "/images/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
         { id: 2, name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", image_url: "/images/MI.jpg", description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", curriculum: "Kurikulum Kemenag", extracurricular: "Qiroah, Pramuka, Futsal", facilities: "Lab Komputer, Mushola", wa_number: "+6281234567890" },
         { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Lab IPA, Lab Bahasa, Perpustakaan", wa_number: "+6281234567890" },
         { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Lab Terpadu, Asrama (bagi yang mondok)", wa_number: "+6281234567890" },
@@ -61,7 +61,7 @@ export const getUnitImage = (unit) => {
     if (!unit) return '/images/SDI.jpg';
     if (unit.image_url) return unit.image_url;
     const name = (unit.name || '').toLowerCase();
-    if (name.includes('(sdi)') || name.includes('sd islam') || /\bsdi\b/i.test(name) || /\bsd\b/i.test(name)) return '/images/SDI.jpg';
+    if (name.includes('(sdi)') || name.includes('sd islam') || name.includes('al kindy') || /\bsdi\b/i.test(name) || /\bsd\b/i.test(name)) return '/images/SDI.jpg';
     if (name.includes('(mi)') || name.includes('ibtidaiyah') || /\bmi\b/i.test(name)) return '/images/MI.jpg';
     if (name.includes('(mts)') || name.includes('tsanawiyah') || /\bmts\b/i.test(name)) return '/images/MTs.jpg';
     if (name.includes('(ma)') || name.includes('aliyah') || /\bma\b/i.test(name)) return '/images/MA.jpg';
@@ -108,10 +108,14 @@ export const api = {
         } else {
             await delay(300);
         }
-        return list.map(u => ({
-            ...u,
-            image_url: u.image_url || getUnitImage(u)
-        }));
+        return list.map(u => {
+            const isSDI = u.id === 1 || (u.name && (u.name.includes('SD Islam') || u.name.includes('SDI') || u.name.toLowerCase().includes('al kindy')));
+            return {
+                ...u,
+                name: isSDI ? 'SD Islam (SDI) AL KINDY' : u.name,
+                image_url: u.image_url || getUnitImage(u)
+            };
+        });
     },
 
     async getNews() {

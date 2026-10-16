@@ -84,7 +84,7 @@ export const renderPPDB = (ppdb) => {
                     <div class="relative">
                         <select id="jenjang_pilihan" required class="w-full px-5 py-4 rounded-xl bg-white border-0 text-slate-800 focus:ring-2 focus:ring-gold-500 shadow-inner appearance-none">
                             <option value="" disabled selected>-- Pilih Jenjang Pendidikan --</option>
-                            <option value="SDI Nahjul Huda">SDI Nahjul Huda</option>
+                            <option value="SD Islam (SDI) AL KINDY">SD Islam (SDI) AL KINDY</option>
                             <option value="MI Nahjul Huda">MI Nahjul Huda</option>
                             <option value="MTs Nahjul Huda">MTs Nahjul Huda</option>
                             <option value="MA Nahjul Huda">MA Nahjul Huda</option>

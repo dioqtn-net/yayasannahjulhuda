@@ -4,14 +4,16 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
 
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
+        const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
-            <div class="h-48 sm:h-52 bg-white border-b border-slate-100 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
-                <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-300">
+            <div class="w-full h-48 flex items-center justify-center bg-white p-4 border-b border-slate-100 relative overflow-hidden">
+                <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5 text-center flex-grow flex flex-col justify-between bg-white">
                 <div>
-                    <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">${unit.name}</h3>
+                    <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">${unitName}</h3>
                     <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
                 </div>
                 <div>
@@ -20,19 +22,19 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             </div>
         </div>
         
-        <!-- Modal for ${unit.name} -->
+        <!-- Modal for ${unitName} -->
         <div id="modal-${unit.id}" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
             <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(${unit.id})"></div>
             <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
                 <div class="flex justify-between items-center p-6 border-b border-slate-100">
-                    <h3 class="text-2xl font-playfair font-bold text-emerald-800">${unit.name}</h3>
+                    <h3 class="text-2xl font-playfair font-bold text-emerald-800">${unitName}</h3>
                     <button onclick="closeModal(${unit.id})" class="text-slate-400 hover:text-red-500 transition">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 <div class="p-6 overflow-y-auto">
-                    <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 sm:p-6 shadow-sm">
-                        <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-contain p-2">
+                    <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
+                        <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain">
                     </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
@@ -49,7 +51,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     </div>
                 </div>
                 <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
-                    <a href="https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unit.name)}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
+                    <a href="https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unitName)}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                         <i class="fab fa-whatsapp text-lg mr-2"></i> Tanya PPDB via WhatsApp
                     </a>
                 </div>

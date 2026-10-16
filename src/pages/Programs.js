@@ -5,15 +5,17 @@ export const renderPrograms = (units) => {
     const renderDetailedUnit = (unit, index) => {
         const isEven = index % 2 !== 0;
         const imageUrl = unit.image_url || getUnitImage(unit);
+        const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
                 <div class="aspect-video md:aspect-square bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm flex items-center justify-center p-4 sm:p-6 group">
-                    <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-300">
+                    <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300">
                 </div>
             </div>
             <div class="w-full md:w-2/3">
-                <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${unit.name}</h2>
+                <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${unitName}</h2>
                 <p class="text-slate-600 text-lg mb-6 leading-relaxed">${unit.description}</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
