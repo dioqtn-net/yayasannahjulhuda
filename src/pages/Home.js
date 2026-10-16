@@ -5,14 +5,15 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
         return `
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-emerald-50 transform hover:-translate-y-1 flex flex-col h-full" onclick="openModal(${unit.id})">
-            <div class="h-44 relative flex items-center justify-center p-4 text-center overflow-hidden group">
-                <img src="${imageUrl}" alt="${unit.name}" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition duration-300"></div>
-                <h3 class="relative z-10 text-white font-playfair font-bold text-xl drop-shadow-md px-2">${unit.name}</h3>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
+            <div class="h-48 sm:h-52 bg-white border-b border-slate-100 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+                <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-300">
             </div>
-            <div class="p-5 text-center flex-grow flex flex-col justify-between">
-                <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
+            <div class="p-5 text-center flex-grow flex flex-col justify-between bg-white">
+                <div>
+                    <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">${unit.name}</h3>
+                    <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
+                </div>
                 <div>
                     <span class="inline-block border border-gold-500 text-gold-600 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gold-50 transition">Detail Lengkap</span>
                 </div>
@@ -30,8 +31,8 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     </button>
                 </div>
                 <div class="p-6 overflow-y-auto">
-                    <div class="w-full h-48 sm:h-60 mb-6 rounded-xl overflow-hidden shadow-sm">
-                        <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-cover">
+                    <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 sm:p-6 shadow-sm">
+                        <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-contain p-2">
                     </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
