@@ -1,18 +1,21 @@
-export const renderHome = (profile, units, news, facilities, galleries, ppdb) => {
-    
-    // Top 3 units, bottom 2 units
-    const topUnits = units.slice(0, 3);
-    const bottomUnits = units.slice(3, 5);
+import { getUnitImage } from '../api';
 
-    const renderUnitCard = (unit) => `
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-emerald-50 transform hover:-translate-y-1" onclick="openModal(${unit.id})">
-            <div class="h-32 bg-emerald-600 relative flex items-center justify-center p-4 text-center">
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-700 to-emerald-900 opacity-80"></div>
-                <h3 class="relative z-10 text-white font-playfair font-bold text-xl">${unit.name}</h3>
+export const renderHome = (profile, units, news, facilities, galleries, ppdb) => {
+
+    const renderUnitCard = (unit) => {
+        const imageUrl = unit.image_url || getUnitImage(unit);
+        return `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-emerald-50 transform hover:-translate-y-1 flex flex-col h-full" onclick="openModal(${unit.id})">
+            <div class="h-44 relative flex items-center justify-center p-4 text-center overflow-hidden group">
+                <img src="${imageUrl}" alt="${unit.name}" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition duration-300"></div>
+                <h3 class="relative z-10 text-white font-playfair font-bold text-xl drop-shadow-md px-2">${unit.name}</h3>
             </div>
-            <div class="p-5 text-center">
+            <div class="p-5 text-center flex-grow flex flex-col justify-between">
                 <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
-                <span class="inline-block border border-gold-500 text-gold-600 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gold-50 transition">Detail Lengkap</span>
+                <div>
+                    <span class="inline-block border border-gold-500 text-gold-600 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gold-50 transition">Detail Lengkap</span>
+                </div>
             </div>
         </div>
         
@@ -27,6 +30,9 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     </button>
                 </div>
                 <div class="p-6 overflow-y-auto">
+                    <div class="w-full h-48 sm:h-60 mb-6 rounded-xl overflow-hidden shadow-sm">
+                        <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-cover">
+                    </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-open mr-2 text-gold-500"></i> Kurikulum & Program Unggulan</h4>
@@ -49,6 +55,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             </div>
         </div>
     `;
+    };
 
     return `
       <!-- Hero Section -->

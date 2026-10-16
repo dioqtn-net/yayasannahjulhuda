@@ -1,14 +1,15 @@
+import { getUnitImage } from '../api';
+
 export const renderPrograms = (units) => {
     
     const renderDetailedUnit = (unit, index) => {
         const isEven = index % 2 !== 0;
+        const imageUrl = unit.image_url || getUnitImage(unit);
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
-                <div class="aspect-video md:aspect-square bg-emerald-100 rounded-xl flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-600 to-emerald-400 opacity-90"></div>
-                    <i class="fas fa-school text-6xl text-white relative z-10 opacity-50"></i>
-                    <h3 class="absolute bottom-4 left-4 right-4 text-center text-white font-playfair font-bold text-xl z-10 drop-shadow-md">${unit.name}</h3>
+                <div class="aspect-video md:aspect-square bg-slate-100 rounded-xl overflow-hidden shadow-sm relative group">
+                    <img src="${imageUrl}" alt="${unit.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
                 </div>
             </div>
             <div class="w-full md:w-2/3">

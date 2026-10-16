@@ -24,11 +24,11 @@ const fallbackData = {
         operational_hours: "Senin - Jumat: 07:00 - 15:00 WIB"
     },
     education_units: [
-        { id: 1, name: "SD Islam (SDI) Nahjul Huda", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
-        { id: 2, name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", curriculum: "Kurikulum Kemenag", extracurricular: "Qiroah, Pramuka, Futsal", facilities: "Lab Komputer, Mushola", wa_number: "+6281234567890" },
-        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Lab IPA, Lab Bahasa, Perpustakaan", wa_number: "+6281234567890" },
-        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Lab Terpadu, Asrama (bagi yang mondok)", wa_number: "+6281234567890" },
-        { id: 5, name: "Pondok Pesantren Assurur", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+6281234567890" }
+        { id: 1, name: "SD Islam (SDI) Nahjul Huda", image_url: "/images/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
+        { id: 2, name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", image_url: "/images/MI.jpg", description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", curriculum: "Kurikulum Kemenag", extracurricular: "Qiroah, Pramuka, Futsal", facilities: "Lab Komputer, Mushola", wa_number: "+6281234567890" },
+        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Lab IPA, Lab Bahasa, Perpustakaan", wa_number: "+6281234567890" },
+        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Lab Terpadu, Asrama (bagi yang mondok)", wa_number: "+6281234567890" },
+        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+6281234567890" }
     ],
     news: [
         { id: 1, title: "Penerimaan Santri Baru Telah Dibuka", content: "Segera daftarkan putra-putri Anda ke Yayasan Nahjul Huda...", date: "2023-10-01", image_url: null },
@@ -57,6 +57,25 @@ const fallbackData = {
 // Helper function to simulate network delay for fallback
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
+export const getUnitImage = (unit) => {
+    if (!unit) return '/images/SDI.jpg';
+    if (unit.image_url) return unit.image_url;
+    const name = (unit.name || '').toLowerCase();
+    if (name.includes('(sdi)') || name.includes('sd islam') || /\bsdi\b/i.test(name) || /\bsd\b/i.test(name)) return '/images/SDI.jpg';
+    if (name.includes('(mi)') || name.includes('ibtidaiyah') || /\bmi\b/i.test(name)) return '/images/MI.jpg';
+    if (name.includes('(mts)') || name.includes('tsanawiyah') || /\bmts\b/i.test(name)) return '/images/MTs.jpg';
+    if (name.includes('(ma)') || name.includes('aliyah') || /\bma\b/i.test(name)) return '/images/MA.jpg';
+    if (name.includes('pesantren') || name.includes('ponpes') || name.includes('assurur')) return '/images/Ponpes.jpg';
+    
+    if (unit.id === 1) return '/images/SDI.jpg';
+    if (unit.id === 2) return '/images/MI.jpg';
+    if (unit.id === 3) return '/images/MTs.jpg';
+    if (unit.id === 4) return '/images/MA.jpg';
+    if (unit.id === 5) return '/images/Ponpes.jpg';
+    
+    return '/images/SDI.jpg';
+};
+
 export const api = {
     isSupabaseConnected: () => supabase !== null,
     
@@ -81,13 +100,18 @@ export const api = {
     },
 
     async getEducationUnits() {
+        let list = fallbackData.education_units;
         if (supabase) {
             const { data, error } = await supabase.from('education_units').select('*').order('id');
             if (error) console.error(error);
-            return data && data.length > 0 ? data : fallbackData.education_units;
+            if (data && data.length > 0) list = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.education_units;
+        return list.map(u => ({
+            ...u,
+            image_url: u.image_url || getUnitImage(u)
+        }));
     },
 
     async getNews() {
