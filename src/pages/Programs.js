@@ -11,7 +11,7 @@ export const renderPrograms = (units) => {
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
                 <div class="aspect-video md:aspect-square bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm flex items-center justify-center p-4 sm:p-6 group">
-                    <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300">
+                    <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto group-hover:scale-105 transition duration-300">
                 </div>
             </div>
             <div class="w-full md:w-2/3">

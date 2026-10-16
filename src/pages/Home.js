@@ -8,12 +8,12 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
-            <div class="w-full h-48 flex items-center justify-center bg-white p-4 border-b border-slate-100 relative overflow-hidden">
-                <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300">
+            <div class="w-full h-48 flex-shrink-0 flex items-center justify-center bg-white p-4 border-b border-slate-100 overflow-hidden">
+                <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5 text-center flex-grow flex flex-col justify-between bg-white">
                 <div>
-                    <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">${unitName}</h3>
+                    <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2 h-14 flex items-center justify-center">${unitName}</h3>
                     <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
                 </div>
                 <div>
@@ -34,7 +34,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                 </div>
                 <div class="p-6 overflow-y-auto">
                     <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
-                        <img src="${imageUrl}" alt="${unitName}" class="max-h-full max-w-full object-contain">
+                        <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto">
                     </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
@@ -157,10 +157,10 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             
             <div class="bg-emerald-800/50 backdrop-blur border border-emerald-700 p-8 rounded-2xl hover:bg-emerald-800 transition">
               <div class="w-14 h-14 bg-gold-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-gold-500/30">
-                <i class="fas fa-hands-helping"></i>
+                <i class="fas fa-calendar-alt"></i>
               </div>
-              <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Pembinaan Anak Yatim</h3>
-              <p class="text-emerald-100 leading-relaxed">Program santunan, beasiswa pendidikan penuh, dan pendampingan sosial ekonomi bagi anak-anak yatim piatu agar tetap mendapatkan hak pendidikan yang layak.</p>
+              <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Pengajian Rutin Bulanan</h3>
+              <p class="text-emerald-100 leading-relaxed">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</p>
             </div>
           </div>
         </div>
