@@ -5,7 +5,7 @@ export const renderNavbar = () => {
           <div class="flex justify-between h-20">
             <div class="flex items-center">
               <a href="/" data-navigo class="flex-shrink-0 flex items-center">
-                <img class="h-12 w-auto mr-3" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <img class="h-14 md:h-16 w-auto mr-3 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
                 <span class="font-playfair font-bold text-xl text-emerald-800">Yayasan Nahjul Huda</span>
               </a>
             </div>
