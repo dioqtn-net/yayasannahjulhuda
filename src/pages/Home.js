@@ -55,22 +55,22 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                         <h4 class="font-playfair font-bold text-emerald-800 mb-3 flex items-center">
                             <i class="fas fa-landmark mr-2.5 text-emerald-600"></i> Sejarah & Profil MTs
                         </h4>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
                             Awal pendirian MTs Nahjul Huda adalah kelanjutan dari proses penghimpunan anak-anak yatim dan dhuafa yang diselenggarakan oleh Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur yang beralamat di Jl. HH No.63 Rt.08 Rw.01 Kebon Jeruk Jakarta Barat.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
                             Pada perkembangannya tokoh masyarakat, ulama dan pemerintah daerah saling bergotong-royong untuk membangun gedung asrama dan madrasah bagi anak-anak yatim dan dhuafa selanjutnya memikirkan bagaimana memberikan bekal ilmu kepada mereka baik formal maupun non formal.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
                             Dengan biaya swadaya murni dari masyarakat setempat maka dibangunlah gedung asrama dan madrasah. Untuk tahap awal Yayasan Nahjul Huda membangun gedung madrasah untuk tingkat Ibtidaiyah (MI sederajat dengan SD) sebanyak 6 lokal. Kemudian seiring dengan berkembangnya Yayasan Nahjul Huda didirikanlah lagi gedung tiga lantai dengan pembagian: lantai pertama untuk pelaksanaan pendidikan berupa madrasah untuk tingkat tsanawiyah (MTs sederajat dengan SMP), lantai dua untuk asrama puteri, dan lantai ketiga untuk asrama putera. Madrasah tersebut kemudian diberi nama "MTs Nahjul Huda" atas usulan dari segenap masyarakat yang tinggal di Kebon Jeruk pada tahun 1985. Mengapa namanya MTs Nahjul Huda? Karena mengikuti nama yayasan sebagai induk lembaga madrasah yakni Yayasan Nahjul Huda.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
                             Sehubungan MTs Nahjul Huda bernaung di bawah Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur, maka dalam proses penerimaan siswanya pun lebih mengupayakan kepada santri Pondok Pesantren yang diasramakan agar anak-anak yatim dan dhuafa bisa bersekolah dan mendapatkan ilmu serta STTB resmi dari pemerintah sehingga bisa melanjutkan pendidikan ke jenjang berikutnya yaitu SMA/MA kemudian Perguruan Tinggi.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
                             MTs Nahjul Huda pada awal berdirinya tahun 1985 dipimpin oleh kepala madrasah Bapak Drs. H. Nurohim. Selanjutnya MTs Nahjul Huda sempat mengalami kefakuman pada tahun 1986 s.d 1998 sehingga kegiatan belajar mengajar dihentikan sementara waktu sambil merancang ke depan bagaimana untuk membangunkan kembali pendidikan di madrasah ini.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed">
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">
                             Maka pada tahun 1999 barulah MTs Nahjul Huda bangkit kembali dengan semangat dan tenaga baru untuk mulai mengembangkan pendidikan di wilayah Kebon Jeruk dan sekitarnya, sehingga sampai saat ini siswa di MTs Nahjul Huda mencapai lebih dari 70 siswa dari berbagai daerah.
                         </p>
                     </div>
