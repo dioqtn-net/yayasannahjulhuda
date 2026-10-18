@@ -1,13 +1,13 @@
 export const renderFacilities = (facilities) => {
     return `
       <!-- Header Fasilitas -->
-      <section class="bg-emerald-900 text-white py-20 relative overflow-hidden">
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-800 opacity-40 blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-950 opacity-50 blur-3xl pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400">Fasilitas Yayasan</h1>
+      <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+        <!-- Dark Overlay Wrapper -->
+        <div class="absolute inset-0 bg-black/70 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-lg max-w-2xl mx-auto">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi santri/siswa.</p>
+          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi santri/siswa.</p>
         </div>
       </section>
 

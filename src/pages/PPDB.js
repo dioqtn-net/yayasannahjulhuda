@@ -3,16 +3,16 @@ export const renderPPDB = (ppdb) => {
 
     return `
       <!-- Header PPDB -->
-      <section class="bg-emerald-900 text-white py-20 relative overflow-hidden">
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-800 opacity-40 blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-950 opacity-50 blur-3xl pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span class="inline-block px-5 py-1.5 rounded-full text-sm font-bold mb-4 ${isBuka ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30' : 'bg-red-500 text-white shadow-lg shadow-red-500/30'}">
+      <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+        <!-- Dark Overlay Wrapper -->
+        <div class="absolute inset-0 bg-black/70 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span class="inline-block px-5 py-1.5 rounded-full text-sm font-bold mb-4 shadow-lg ${isBuka ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-red-500 text-white shadow-red-500/30'}">
             STATUS PENDAFTARAN: ${ppdb?.status || 'TUTUP'}
           </span>
-          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400">Penerimaan Peserta Didik Baru</h1>
+          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Penerimaan Peserta Didik Baru</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-xl font-medium">Tahun Ajaran ${ppdb?.academic_year || '2024/2025'}</p>
+          <p class="text-white text-xl font-medium drop-shadow">Tahun Ajaran ${ppdb?.academic_year || '2024/2025'}</p>
         </div>
       </section>
 
