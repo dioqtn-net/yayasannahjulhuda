@@ -34,9 +34,21 @@ export const renderContact = (profile) => {
                             <i class="fas fa-phone-alt text-xl"></i>
                         </div>
                         <div class="ml-4">
-                            <h4 class="text-lg font-bold text-slate-800">Nomor Telepon / WhatsApp</h4>
-                            <p class="text-slate-600 leading-relaxed">${profile.phone}</p>
-                            <a href="https://wa.me/${(profile.phone||'').replace(/\D/g,'')}" target="_blank" class="inline-block mt-2 text-emerald-600 font-medium hover:text-emerald-700 transition"><i class="fab fa-whatsapp mr-1"></i> Hubungi via WhatsApp</a>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Nomor Telepon & WhatsApp</h4>
+                            <div class="space-y-2 text-slate-600">
+                                <div>
+                                    <span class="font-semibold text-slate-800">Telepon Yayasan:</span>
+                                    <a href="tel:02153654830" class="hover:text-emerald-700 font-medium transition ml-1">(021) 53654830</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-whatsapp text-emerald-600 mr-2 text-lg"></i>
+                                    <span class="font-semibold text-slate-800 mr-1.5">WhatsApp:</span>
+                                    <a href="https://wa.me/6281234567890" target="_blank" class="hover:text-emerald-700 font-medium transition">+62 812 3456 7890</a>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center mt-3 text-emerald-600 font-medium hover:text-emerald-700 transition">
+                                <i class="fab fa-whatsapp mr-1.5 text-lg"></i> Hubungi via WhatsApp
+                            </a>
                         </div>
                     </div>
                     
@@ -45,9 +57,13 @@ export const renderContact = (profile) => {
                             <i class="fas fa-envelope text-xl"></i>
                         </div>
                         <div class="ml-4">
-                            <h4 class="text-lg font-bold text-slate-800">Email Resmi</h4>
-                            <p class="text-slate-600 leading-relaxed">${profile.email}</p>
-                            <a href="mailto:${profile.email}" class="inline-block mt-2 text-emerald-600 font-medium hover:text-emerald-700 transition">Kirim Email</a>
+                            <h4 class="text-lg font-bold text-slate-800 mb-1">Email Resmi</h4>
+                            <p class="text-slate-600 leading-relaxed mt-1">
+                                <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-emerald-700 font-medium transition">nahjulhuda74@gmail.com</a>
+                            </p>
+                            <a href="mailto:nahjulhuda74@gmail.com" class="inline-block mt-2 text-emerald-600 font-medium hover:text-emerald-700 transition">
+                                <i class="fas fa-paper-plane mr-1 text-sm"></i> Kirim Email
+                            </a>
                         </div>
                     </div>
                     

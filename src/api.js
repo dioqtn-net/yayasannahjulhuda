@@ -20,7 +20,8 @@ const fallbackData = {
         vision_mission: "Visi: Menjadi lembaga pendidikan Islam terdepan yang mencetak generasi unggul, berakhlak mulia, dan berwawasan global.\nMisi:\n1. Menyelenggarakan pendidikan berkualitas.\n2. Menanamkan nilai-nilai keislaman.\n3. Mengembangkan potensi peserta didik.",
         address: "Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530",
         phone: "+6281234567890",
-        email: "info@nahjulhuda.or.id",
+        telephone: "(021) 53654830",
+        email: "nahjulhuda74@gmail.com",
         operational_hours: "Senin - Jumat: 07:00 - 15:00 WIB"
     },
     education_units: [

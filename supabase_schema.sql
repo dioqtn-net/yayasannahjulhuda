@@ -126,7 +126,7 @@ Misi:
 3. Mengembangkan potensi dan bakat peserta didik.
 4. Membangun kemandirian santri.', 
 'Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530', 
-'+6281234567890', 'info@nahjulhuda.or.id', 'Senin - Jumat: 07:00 - 15:00 WIB
+'+6281234567890', 'nahjulhuda74@gmail.com', 'Senin - Jumat: 07:00 - 15:00 WIB
 Sabtu: 07:00 - 12:00 WIB')
 ON CONFLICT (id) DO NOTHING;
 

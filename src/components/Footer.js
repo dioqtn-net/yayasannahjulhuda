@@ -34,13 +34,23 @@ export const renderFooter = () => {
                   <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
                   <span>Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
                 </li>
-                <li class="flex items-center">
-                  <i class="fas fa-phone-alt mr-3 text-gold-500"></i>
-                  <span>+62 812 3456 7890</span>
+                <li class="flex items-start">
+                  <i class="fas fa-phone-alt mt-1 mr-3 text-gold-500"></i>
+                  <div class="space-y-1">
+                    <div>
+                      <span class="text-emerald-200">Telepon:</span>
+                      <a href="tel:02153654830" class="hover:text-gold-400 transition ml-1 text-white font-medium">(021) 53654830</a>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fab fa-whatsapp mr-1 text-emerald-400 text-sm"></i>
+                      <span class="text-emerald-200 mr-1">WhatsApp:</span>
+                      <a href="https://wa.me/6281234567890" target="_blank" class="hover:text-gold-400 transition text-white font-medium">+62 812 3456 7890</a>
+                    </div>
+                  </div>
                 </li>
                 <li class="flex items-center">
                   <i class="fas fa-envelope mr-3 text-gold-500"></i>
-                  <span>info@nahjulhuda.or.id</span>
+                  <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
                 </li>
               </ul>
             </div>
