@@ -112,9 +112,7 @@ export const renderPPDB = (ppdb) => {
           <!-- Banner Pengantar MTs -->
           <div class="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <div class="w-14 h-14 rounded-2xl bg-gold-500/20 border border-gold-400/40 flex items-center justify-center text-gold-400 text-2xl flex-shrink-0">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
+              <img src="./images/MTs.jpg" onerror="this.onerror=null;this.src='/images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-500 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi PPDB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
