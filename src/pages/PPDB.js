@@ -3,15 +3,18 @@ export const renderPPDB = (ppdb) => {
 
     return `
       <!-- Header PPDB -->
-      <div class="bg-emerald-800 text-white py-16">
+      <section class="bg-emerald-900 text-white py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-800 opacity-40 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-950 opacity-50 blur-3xl pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span class="inline-block px-4 py-1 rounded-full text-sm font-bold mb-4 ${isBuka ? 'bg-green-500 text-white shadow-lg shadow-green-500/30' : 'bg-red-500 text-white shadow-lg shadow-red-500/30'}">
+          <span class="inline-block px-5 py-1.5 rounded-full text-sm font-bold mb-4 ${isBuka ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30' : 'bg-red-500 text-white shadow-lg shadow-red-500/30'}">
             STATUS PENDAFTARAN: ${ppdb?.status || 'TUTUP'}
           </span>
           <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400">Penerimaan Peserta Didik Baru</h1>
-          <p class="text-emerald-100 text-xl font-bold">Tahun Ajaran ${ppdb?.academic_year || '2024/2025'}</p>
+          <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
+          <p class="text-white text-xl font-medium">Tahun Ajaran ${ppdb?.academic_year || '2024/2025'}</p>
         </div>
-      </div>
+      </section>
 
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-slate-800">
         

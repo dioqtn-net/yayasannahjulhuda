@@ -1,12 +1,15 @@
 export const renderProfile = (profile) => {
     return `
       <!-- Header Profile -->
-      <div class="bg-emerald-800 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section class="bg-emerald-900 text-white py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-800 opacity-40 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-950 opacity-50 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400">Profil Yayasan</h1>
-          <p class="text-emerald-100 text-lg max-w-2xl mx-auto">Mengenal lebih dekat sejarah, visi, misi, dan struktur kepengurusan Yayasan Nahjul Huda.</p>
+          <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
+          <p class="text-white text-lg max-w-2xl mx-auto">Mengenal lebih dekat sejarah, visi, misi, dan struktur kepengurusan Yayasan Nahjul Huda.</p>
         </div>
-      </div>
+      </section>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
