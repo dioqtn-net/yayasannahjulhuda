@@ -74,6 +74,21 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                             Maka pada tahun 1999 barulah MTs Nahjul Huda bangkit kembali dengan semangat dan tenaga baru untuk mulai mengembangkan pendidikan di wilayah Kebon Jeruk dan sekitarnya, sehingga sampai saat ini siswa di MTs Nahjul Huda mencapai lebih dari 70 siswa dari berbagai daerah.
                         </p>
                     </div>
+
+                    <!-- Kontak Khusus MTs -->
+                    <div class="mt-4 p-4 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-slate-700 shadow-sm">
+                        <div class="flex items-center font-bold text-emerald-800">
+                            <i class="fas fa-id-card text-gold-500 mr-2 text-base"></i> Kontak MTs:
+                        </div>
+                        <a href="mailto:mtsnahjulhuda@yahoo.co.id" class="flex items-center text-slate-700 hover:text-emerald-700 font-medium transition">
+                            <i class="fas fa-envelope text-emerald-600 mr-2"></i>
+                            <span>mtsnahjulhuda@yahoo.co.id</span>
+                        </a>
+                        <a href="tel:02153654830" class="flex items-center text-slate-700 hover:text-emerald-700 font-medium transition">
+                            <i class="fas fa-phone-alt text-emerald-600 mr-2"></i>
+                            <span>(021) 53654830</span>
+                        </a>
+                    </div>
                     ` : ''}
                 </div>
                 <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
