@@ -9,10 +9,11 @@ export const renderFooter = () => {
                 <span class="font-playfair font-bold text-xl text-white">Yayasan Nahjul Huda</span>
               </div>
               <p class="text-emerald-200 text-sm mb-4">Mencetak generasi unggul, berakhlak mulia, dan berwawasan global berlandaskan nilai-nilai Islam.</p>
-              <div class="flex space-x-4">
-                <a href="#" class="text-emerald-200 hover:text-gold-400 transition"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-emerald-200 hover:text-gold-400 transition"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-emerald-200 hover:text-gold-400 transition"><i class="fab fa-youtube"></i></a>
+              <div class="flex items-center">
+                <a href="https://www.instagram.com/nahda_media?mdxt=cHRvN2dvNjUxNW05" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-emerald-200 hover:text-yellow-400 transition-colors">
+                  <i class="fab fa-instagram text-lg"></i>
+                  <span class="text-sm font-medium">@nahda_media</span>
+                </a>
               </div>
             </div>
             
