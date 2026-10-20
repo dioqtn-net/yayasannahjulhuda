@@ -1,6 +1,7 @@
 export default {
   content: [
     "./index.html",
+    "./kelola.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
