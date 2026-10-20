@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Galeri Dokumentasi - Yayasan Nahjul Huda</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
+    <div id="app" class="flex-grow flex flex-col">
+      
+      <!-- Navbar -->
+      <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-2 md:py-3">
+            <div class="flex items-center">
+              <a href="/" class="flex-shrink-0 flex items-center">
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
+              </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+              <a href="/" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Beranda</a>
+              <a href="/profil" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Profil</a>
+              <a href="/program" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Program</a>
+              <a href="/fasilitas" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Fasilitas</a>
+              <a href="/berita" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Berita</a>
+              <a href="/galeri" class="text-green-700 font-semibold border-b-2 border-green-700 pb-1 transition-colors duration-300">Galeri</a>
+              <a href="/kontak" class="text-slate-600 hover:text-green-700 font-medium transition-colors duration-300">Kontak</a>
+              <a href="/ppdb" class="bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300 text-white px-5 py-2 rounded-full font-semibold shadow-sm inline-block transform">Info PPDB</a>
+            </div>
+            <div class="-mr-2 flex items-center md:hidden">
+              <button id="toggleMobileBtn" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Beranda</a>
+            <a href="/profil" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Profil</a>
+            <a href="/program" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Program</a>
+            <a href="/fasilitas" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Fasilitas</a>
+            <a href="/berita" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Berita</a>
+            <a href="/galeri" class="block px-3 py-2 rounded-md text-base font-semibold text-green-700 bg-slate-50">Galeri</a>
+            <a href="/kontak" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-green-700 hover:bg-slate-50">Kontak</a>
+            <a href="/ppdb" class="block px-3 py-2 rounded-md text-base font-bold text-white bg-orange-500 hover:bg-orange-600 text-center">Info PPDB</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="flex-grow">
+        <!-- Header Galeri -->
+        <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+          <div class="absolute inset-0 bg-black/75 z-0"></div>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-900/80 border border-emerald-500/40 rounded-full text-xs font-semibold text-emerald-300 mb-3">
+              <i class="fas fa-images text-emerald-400"></i>
+              <span>Dokumentasi Resmi Yayasan</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Galeri Dokumentasi</h1>
+            <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
+            <p class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
+              Momen berharga dan potret kegiatan keseharian santri serta fasilitas di lingkungan Yayasan Nahjul Huda.
+            </p>
+          </div>
+        </section>
+
+        <!-- Main Content Container -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          
+          <!-- 1. Filter Jenjang Pendidikan (Tabs) -->
+          <div class="mb-10 text-center">
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Pilih Jenjang Pendidikan</div>
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+              <button onclick="switchJenjang('Semua')" data-jenjang="Semua" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+                Semua
+              </button>
+              <button onclick="switchJenjang('SDI')" data-jenjang="SDI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+                SDI
+              </button>
+              <button onclick="switchJenjang('MI')" data-jenjang="MI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+                MI
+              </button>
+              <!-- MTs Set as Active by Default -->
+              <button onclick="switchJenjang('MTs')" data-jenjang="MTs" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-700 text-white ring-2 ring-emerald-500/30">
+                MTs
+              </button>
+              <button onclick="switchJenjang('MA')" data-jenjang="MA" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+                MA
+              </button>
+              <button onclick="switchJenjang('Ponpes')" data-jenjang="Ponpes" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+                Ponpes
+              </button>
+            </div>
+
+            <!-- Active Filter Indicator -->
+            <div class="mt-4 text-xs text-slate-500">
+              Menampilkan galeri: <span id="active-jenjang-badge" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">MTs</span>
+            </div>
+          </div>
+
+          <!-- 2 & 3. AREA KONTEN GALERI MTs (Aktif) -->
+          <div id="gallery-content-mts" class="space-y-16">
+            
+            <!-- KATEGORI 1: KEGIATAN -->
+            <section>
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-book-reader"></i>
+                    </span>
+                    Kegiatan
+                  </h2>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  3 Dokumentasi
+                </span>
+              </div>
+
+              <!-- Grid 3 Kolom Kegiatan -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Contoh Kegiatan MTs -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Pembiasaan Shalat & Dzikir Bersama')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                        <i class="fas fa-mosque text-2xl text-emerald-300"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
+                      MTs Nahjul Huda
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Contoh Kegiatan MTs
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Dokumentasi pembiasaan shalat dhuha berjamaah dan tadarus Al-Qur'an sebelum jam pembelajaran dimulai.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                      <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Ibadah</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2: Contoh Kegiatan MTs -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Pembelajaran Interaktif di Kelas')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                        <i class="fas fa-chalkboard-teacher text-2xl text-emerald-300"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
+                      MTs Nahjul Huda
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Contoh Kegiatan MTs
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Suasana belajar mengajar interaktif berbasis kurikulum terpadu antara ilmu agama dan sains di kelas.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Jam Akademik</span>
+                      <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Akademik</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3: Contoh Kegiatan MTs -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Bimbingan Tahfidz & Kitab Kuning')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                        <i class="fas fa-quran text-2xl text-emerald-300"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
+                      MTs Nahjul Huda
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Contoh Kegiatan MTs
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Sesi setoran hafalan Al-Qur'an (tahfidz) serta halaqah pembacaan kitab salaf santri madrasah tsanawiyah.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Sore Hari</span>
+                      <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Tahfidz</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: EKSTRAKURIKULER -->
+            <section>
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-medal"></i>
+                    </span>
+                    Ekstrakurikuler
+                  </h2>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas santri MTs.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 border border-sky-200">
+                  3 Dokumentasi
+                </span>
+              </div>
+
+              <!-- Grid 3 Kolom Ekstrakurikuler -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Latihan Paskibra -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Latihan Paskibra')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-red-500/20 backdrop-blur-sm border border-red-400/30 flex items-center justify-center">
+                        <i class="fas fa-flag text-2xl text-red-400"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-slate-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-slate-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-red-900/80 backdrop-blur-sm text-red-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-red-600/40">
+                      Paskibra
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Latihan Paskibra
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Pembinaan kedisiplinan baris-berbaris, formasi pengibaran bendera, dan penanaman rasa cinta tanah air santri MTs.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-clock mr-1"></i> Sabtu Sore</span>
+                      <span class="text-sky-700 font-medium"><i class="fas fa-shield-alt mr-1"></i> Kedisiplinan</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2: Pramuka -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-amber-900 to-amber-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Pramuka')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 flex items-center justify-center">
+                        <i class="fas fa-campground text-2xl text-amber-300"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-amber-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-amber-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-amber-950 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-amber-900/80 backdrop-blur-sm text-amber-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-amber-600/40">
+                      Pramuka
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Pramuka
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Latihan kepanduan, sandi, pioneering tali-temali, penjelajahan alam, dan kemandirian regu penggalang.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-clock mr-1"></i> Jumat Siang</span>
+                      <span class="text-amber-700 font-medium"><i class="fas fa-compass mr-1"></i> Kepanduan</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3: Hadroh & Seni Musik Islami -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div class="relative aspect-video bg-gradient-to-br from-emerald-900 to-teal-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Hadroh & Seni Musik Islami')">
+                    <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
+                      <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-teal-500/20 backdrop-blur-sm border border-teal-400/30 flex items-center justify-center">
+                        <i class="fas fa-drum text-2xl text-teal-300"></i>
+                      </div>
+                      <span class="text-xs uppercase tracking-wider font-semibold text-teal-300">Foto / Video</span>
+                    </div>
+                    <div class="absolute inset-0 bg-teal-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="bg-white text-teal-950 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
+                        <i class="fas fa-search-plus mr-1.5"></i> Perbesar
+                      </span>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-teal-900/80 backdrop-blur-sm text-teal-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-teal-600/40">
+                      Hadroh
+                    </span>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Hadroh & Seni Musik Islami
+                      </h3>
+                      <p class="text-xs text-slate-500 leading-relaxed">
+                        Pelatihan tabuhan rebana, kasidah, vokal shalawat nabi, serta penampilan pada agenda perayaan hari besar Islam.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-clock mr-1"></i> Ahad Pagi</span>
+                      <span class="text-teal-700 font-medium"><i class="fas fa-music mr-1"></i> Kesenian</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- KATEGORI 3: FASILITAS -->
+            <section>
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-building"></i>
+                    </span>
+                    Fasilitas
+                  </h2>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Sarana dan prasarana penunjang kegiatan belajar mengajar santri MTs Nahjul Huda.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
+                  Dalam Proses
+                </span>
+              </div>
+
+              <!-- Kotak Kosong / Placeholder: Dokumentasi Fasilitas Segera Hadir -->
+              <div class="border-2 border-dashed border-slate-300 rounded-2xl p-10 sm:p-14 text-center bg-slate-50/70 hover:bg-slate-50 transition-colors">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-200/70 flex items-center justify-center text-slate-400 text-2xl">
+                  <i class="fas fa-camera-retro"></i>
+                </div>
+                <h3 class="text-lg sm:text-xl font-bold font-playfair text-slate-700 mb-2">
+                  Dokumentasi fasilitas segera hadir
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                  Foto sarana ruang kelas, laboratorium komputer & IPA, perpustakaan madrasah, dan lapangan olahraga sedang dalam proses dokumentasi.
+                </p>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- EMPTY STATE UNTUK JENJANG LAIN (SDI, MI, MA, Ponpes) -->
+          <div id="gallery-content-empty" class="hidden py-16 text-center">
+            <div class="max-w-md mx-auto bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl">
+                <i class="fas fa-folder-open"></i>
+              </div>
+              <h3 class="text-xl font-bold font-playfair text-slate-800 mb-2">
+                Galeri <span id="empty-jenjang-name">Jenjang</span> Sedang Disiapkan
+              </h3>
+              <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                Dokumentasi foto dan video untuk jenjang ini sedang dalam proses inventarisasi dan akan segera diunggah.
+              </p>
+              <button onclick="switchJenjang('MTs')" class="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-xs font-semibold transition shadow-sm">
+                <i class="fas fa-arrow-left mr-1.5"></i> Lihat Galeri MTs
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-emerald-900 text-emerald-100 pt-12 pb-8 border-t-4 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img src="/logo.png" alt="Logo" class="h-10 w-auto mr-3 bg-white p-1 rounded">
+                <span class="font-playfair font-bold text-xl text-white">Yayasan Nahjul Huda</span>
+              </div>
+              <p class="text-emerald-200 text-sm mb-4">Mencetak generasi unggul, berakhlak mulia, dan berwawasan global berlandaskan nilai-nilai Islam.</p>
+              <div class="flex items-center">
+                <a href="https://www.instagram.com/nahda_media?mdxt=cHRvN2dvNjUxNW05" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-emerald-200 hover:text-yellow-400 transition-colors">
+                  <i class="fab fa-instagram text-lg"></i>
+                  <span class="text-sm font-medium">@nahda_media</span>
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-playfair font-bold text-lg text-white mb-4">Tautan Cepat</h3>
+              <ul class="space-y-2 text-sm">
+                <li><a href="/profil" class="hover:text-gold-400 transition">Profil Yayasan</a></li>
+                <li><a href="/program" class="hover:text-gold-400 transition">Program Pendidikan</a></li>
+                <li><a href="/ppdb" class="hover:text-gold-400 transition">Informasi PPDB</a></li>
+                <li><a href="/berita" class="hover:text-gold-400 transition">Berita & Pengumuman</a></li>
+                <li><a href="/galeri" class="hover:text-gold-400 transition">Galeri Kegiatan</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="font-playfair font-bold text-lg text-white mb-4">Kontak Kami</h3>
+              <ul class="space-y-3 text-sm">
+                <li class="flex items-start">
+                  <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
+                  <span>Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-phone-alt mt-1 mr-3 text-gold-500"></i>
+                  <div class="space-y-1">
+                    <div>
+                      <span class="text-emerald-200">Telepon:</span>
+                      <a href="tel:02153654830" class="hover:text-gold-400 transition ml-1 text-white font-medium">(021) 53654830</a>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fab fa-whatsapp mr-1 text-emerald-400 text-sm"></i>
+                      <span class="text-emerald-200 mr-1">WhatsApp:</span>
+                      <a href="https://wa.me/6281234567890" target="_blank" class="hover:text-gold-400 transition text-white font-medium">+62 812 3456 7890</a>
+                    </div>
+                  </div>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-envelope mr-3 text-gold-500"></i>
+                  <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="border-t border-emerald-800 pt-8 mt-8 text-center text-sm text-emerald-400">
+            <p>&copy; 2026 Yayasan Nahjul Huda. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 text-white/70 hover:text-white p-2">
+        <i class="fas fa-times text-3xl"></i>
+      </button>
+      <div class="max-w-4xl w-full mx-auto flex flex-col items-center">
+        <img id="lightbox-img" src="" alt="" class="max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/10">
+        <h3 id="lightbox-title" class="text-white text-base sm:text-lg font-bold mt-4 text-center"></h3>
+      </div>
+    </div>
+
+    <!-- Client Scripts -->
+    <script>
+      // Tab switcher function
+      function switchJenjang(jenjang) {
+        const tabs = document.querySelectorAll('.jenjang-tab-btn');
+        tabs.forEach(btn => {
+          const isSelected = btn.getAttribute('data-jenjang') === jenjang;
+          if (isSelected) {
+            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-700 text-white ring-2 ring-emerald-500/30";
+          } else {
+            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700";
+          }
+        });
+
+        const contentMTs = document.getElementById('gallery-content-mts');
+        const contentEmpty = document.getElementById('gallery-content-empty');
+        const emptyJenjangName = document.getElementById('empty-jenjang-name');
+        const activeJenjangBadge = document.getElementById('active-jenjang-badge');
+
+        if (activeJenjangBadge) {
+          activeJenjangBadge.textContent = jenjang === 'Semua' ? 'Semua Jenjang' : jenjang;
+        }
+
+        if (jenjang === 'MTs' || jenjang === 'Semua') {
+          if (contentMTs) contentMTs.classList.remove('hidden');
+          if (contentEmpty) contentEmpty.classList.add('hidden');
+        } else {
+          if (contentMTs) contentMTs.classList.add('hidden');
+          if (contentEmpty) {
+            contentEmpty.classList.remove('hidden');
+            if (emptyJenjangName) emptyJenjangName.textContent = jenjang;
+          }
+        }
+      }
+
+      // Lightbox functions
+      function openLightbox(url, title) {
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbTitle = document.getElementById('lightbox-title');
+        if (lb && lbImg && lbTitle) {
+          lbImg.src = url;
+          lbTitle.textContent = title || '';
+          lb.classList.remove('hidden');
+          document.body.classList.add('modal-open');
+        }
+      }
+
+      function closeLightbox() {
+        const lb = document.getElementById('lightbox');
+        if (lb) {
+          lb.classList.add('hidden');
+          document.body.classList.remove('modal-open');
+          document.getElementById('lightbox-img').src = '';
+        }
+      }
+
+      // Mobile Menu Toggle
+      const toggleMobileBtn = document.getElementById('toggleMobileBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (toggleMobileBtn && mobileMenu) {
+        toggleMobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html>

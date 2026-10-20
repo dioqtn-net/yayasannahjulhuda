@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         kelola: resolve(__dirname, 'kelola.html'),
+        galeri: resolve(__dirname, 'galeri.html'),
       },
     },
   },
