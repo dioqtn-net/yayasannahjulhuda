@@ -136,10 +136,10 @@ export const renderGallery = (galleries) => {
               <!-- 1. Futsal (SLIDER) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
-                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg', 'Futsal MTs Nahjul Huda')">
-                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg', 'Futsal MTs Nahjul Huda')">
-                    <video controls class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg', 'Futsal MTs Nahjul Huda')">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg', 'Futsal MTs Nahjul Huda')">
+                    <video controls class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg">
                       <source src="./images/images_video_MTs/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
                       Browser Anda tidak mendukung tag video.
                     </video>
@@ -220,9 +220,9 @@ export const renderGallery = (galleries) => {
               <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
-                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
-                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
                   </div>
                   <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                     <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
@@ -274,9 +274,9 @@ export const renderGallery = (galleries) => {
               <!-- 3. Pemilihan OSIS 2026/2027 (SLIDER) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
-                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
-                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
                   </div>
                   <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                     <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
