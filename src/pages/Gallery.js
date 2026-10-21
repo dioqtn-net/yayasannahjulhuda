@@ -1,26 +1,25 @@
 export const renderGallery = (galleries) => {
     
-    // Lightbox logic
-    if (!window.openLightbox) {
-        window.openLightbox = (url, title) => {
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
-            const lbTitle = document.getElementById('lightbox-title');
-            if (lb && lbImg && lbTitle) {
-                lbImg.src = url;
-                lbTitle.textContent = title || '';
-                lb.classList.remove('hidden');
-                document.body.classList.add('modal-open');
+    // Image Modal / Lightbox logic
+    if (!window.openModal) {
+        window.openModal = (imageSrc) => {
+            const modalImg = document.getElementById('modalImage');
+            const modal = document.getElementById('imageModal');
+            if (modalImg && modal) {
+                modalImg.src = imageSrc;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             }
         };
-        window.closeLightbox = () => {
-            const lb = document.getElementById('lightbox');
-            if (lb) {
-                lb.classList.add('hidden');
-                document.body.classList.remove('modal-open');
-                document.getElementById('lightbox-img').src = '';
+        window.closeModal = () => {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
             }
         };
+        window.openLightbox = (url) => window.openModal(url);
+        window.closeLightbox = () => window.closeModal();
     }
 
     // Switch Jenjang Tab Handler
@@ -137,8 +136,8 @@ export const renderGallery = (galleries) => {
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg', 'Futsal MTs Nahjul Huda')">
-                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg', 'Futsal MTs Nahjul Huda')">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
                     <video controls class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg">
                       <source src="./images/images_video_MTs/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
                       Browser Anda tidak mendukung tag video.
@@ -221,8 +220,8 @@ export const renderGallery = (galleries) => {
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
-                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
                   </div>
                   <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                     <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
@@ -250,7 +249,7 @@ export const renderGallery = (galleries) => {
               <!-- 2. Pembiasaan Sholat Dhuha (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="./images/images_video_MTs/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sholat_dhuha_sebelum_KBM_di_mulai.jpg', 'Pembiasaan Sholat Dhuha Sebelum KBM')">
+                  <img src="./images/images_video_MTs/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
                   <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
                     Foto
                   </span>
@@ -275,8 +274,8 @@ export const renderGallery = (galleries) => {
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
-                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
                   </div>
                   <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                     <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
@@ -304,7 +303,7 @@ export const renderGallery = (galleries) => {
               <!-- 4. Olimpiade Madrasah Indonesia (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg', 'Olimpiade Madrasah Indonesia (OMI)')">
+                  <img src="./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
                   <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
                     Foto
                   </span>
@@ -328,7 +327,7 @@ export const renderGallery = (galleries) => {
               <!-- 5. Edukasi Polsek Kebon Jeruk (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg', 'Sosialisasi Pencegahan Kenakalan Remaja - Polsek')">
+                  <img src="./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
                   <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
                     Foto
                   </span>
@@ -352,7 +351,7 @@ export const renderGallery = (galleries) => {
               <!-- 6. Edukasi Kesehatan Puskesmas (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="./images/images_video_MTs/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg', 'Sosialisasi Kesehatan Remaja Putri - Puskesmas')">
+                  <img src="./images/images_video_MTs/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
                   <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
                     Foto
                   </span>
@@ -377,9 +376,9 @@ export const renderGallery = (galleries) => {
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full">
-                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg" alt="Damkar 1" class="w-full flex-shrink-0 snap-center object-cover h-48">
-                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_2.jpg" alt="Damkar 2" class="w-full flex-shrink-0 snap-center object-cover h-48">
-                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_3.jpg" alt="Damkar 3" class="w-full flex-shrink-0 snap-center object-cover h-48">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg" alt="Damkar 1" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_2.jpg" alt="Damkar 2" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_3.jpg" alt="Damkar 3" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
                   </div>
                   <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                     <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
@@ -407,7 +406,7 @@ export const renderGallery = (galleries) => {
               <!-- 8. Kunjungan Perpusnas (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="./images/images_video_MTs/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg', 'Kunjungan Edukatif ke Perpustakaan Nasional')">
+                  <img src="./images/images_video_MTs/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
                   <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
                     Foto
                   </span>
@@ -511,15 +510,10 @@ export const renderGallery = (galleries) => {
 
       </div>
 
-      <!-- Lightbox Modal -->
-      <div id="lightbox" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 text-white/70 hover:text-white p-2">
-            <i class="fas fa-times text-3xl"></i>
-        </button>
-        <div class="max-w-4xl w-full mx-auto flex flex-col items-center">
-            <img id="lightbox-img" src="" alt="" class="max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/10">
-            <h3 id="lightbox-title" class="text-white text-base sm:text-lg font-bold mt-4 text-center"></h3>
-        </div>
+      <!-- Image Modal / Lightbox -->
+      <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4" onclick="if (event.target === this) closeModal()">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 z-50">&times;</button>
+        <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded-lg">
       </div>
     `;
 };
