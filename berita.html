@@ -132,24 +132,23 @@
             </div>
           </div>
 
-          <!-- 3 Card Berita Sorotan (Grid 3 Kolom) -->
+          <!-- 3 Card Berita Sorotan (Grid 3 Kolom - Hanya Teks) -->
           <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <!-- Card 1: Prestasi Siswa MTs di Ajang OMI -->
             <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="relative overflow-hidden rounded-t-xl bg-slate-100">
-                <img src="./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Prestasi Siswa MTs di Ajang OMI" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                  Prestasi
-                </span>
-              </div>
               <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center gap-2 mb-3 text-xs text-slate-400">
-                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      Akademik
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                      Prestasi
                     </span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                    <div class="flex items-center gap-2 text-slate-400">
+                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        Akademik
+                      </span>
+                      <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                    </div>
                   </div>
                   <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
                     Prestasi Siswa MTs di Ajang OMI
@@ -162,7 +161,7 @@
                   <span class="text-xs text-slate-400 flex items-center">
                     <i class="far fa-user mr-1 text-emerald-600"></i> Humas MTs
                   </span>
-                  <button onclick="openNewsModal('Prestasi Siswa MTs di Ajang OMI', 'Siswa-siswi MTs Nahjul Huda berhasil menorehkan capaian gemilang dalam ajang bergengsi Olimpiade Madrasah Indonesia (OMI). Keikutsertaan ini membuktikan kualitas pembinaan akademik madrasah yang konsisten melahirkan santri berprestasi dan berdaya saing tinggi.', './images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg', 'MTs Nahjul Huda', 'Prestasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
+                  <button onclick="openNewsModal('Prestasi Siswa MTs di Ajang OMI', 'Siswa-siswi MTs Nahjul Huda berhasil menorehkan capaian gemilang dalam ajang bergengsi Olimpiade Madrasah Indonesia (OMI). Keikutsertaan ini membuktikan kualitas pembinaan akademik madrasah yang konsisten melahirkan santri berprestasi dan berdaya saing tinggi.', '', 'MTs Nahjul Huda', 'Prestasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
                     Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
                   </button>
                 </div>
@@ -171,19 +170,18 @@
 
             <!-- Card 2: Pelatihan Kesiapsiagaan Bencana bersama Damkar -->
             <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="relative overflow-hidden rounded-t-xl bg-slate-100">
-                <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg" alt="Pelatihan Kesiapsiagaan Bencana bersama Damkar" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                  Pelatihan
-                </span>
-              </div>
               <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center gap-2 mb-3 text-xs text-slate-400">
-                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      Tanggap Bencana
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                      Pelatihan
                     </span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> Damkar Sektor 5</span>
+                    <div class="flex items-center gap-2 text-slate-400">
+                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        Tanggap Bencana
+                      </span>
+                      <span><i class="far fa-calendar-alt mr-1"></i> Damkar Sektor 5</span>
+                    </div>
                   </div>
                   <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
                     Pelatihan Kesiapsiagaan Bencana bersama Damkar
@@ -196,7 +194,7 @@
                   <span class="text-xs text-slate-400 flex items-center">
                     <i class="far fa-user mr-1 text-emerald-600"></i> Kesiswaan MTs
                   </span>
-                  <button onclick="openNewsModal('Pelatihan Kesiapsiagaan Bencana bersama Damkar', 'Pelatihan mitigasi risiko kebakaran diselenggarakan bersama jajaran Petugas Damkar. Santri MTs dan dewan guru dibekali teori serta praktik pemadaman api menggunakan APAR, cara evakuasi darurat, dan langkah tanggap bencana.', './images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg', 'Damkar Sektor 5', 'Pelatihan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
+                  <button onclick="openNewsModal('Pelatihan Kesiapsiagaan Bencana bersama Damkar', 'Pelatihan mitigasi risiko kebakaran diselenggarakan bersama jajaran Petugas Damkar. Santri MTs dan dewan guru dibekali teori serta praktik pemadaman api menggunakan APAR, cara evakuasi darurat, dan langkah tanggap bencana.', '', 'Damkar Sektor 5', 'Pelatihan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
                     Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
                   </button>
                 </div>
@@ -205,19 +203,18 @@
 
             <!-- Card 3: Edukasi Keamanan oleh Polsek Kebon Jeruk -->
             <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="relative overflow-hidden rounded-t-xl bg-slate-100">
-                <img src="./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Keamanan oleh Polsek Kebon Jeruk" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                  Penyuluhan
-                </span>
-              </div>
               <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center gap-2 mb-3 text-xs text-slate-400">
-                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      Kamtibmas
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                      Penyuluhan
                     </span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> Polsek Kebon Jeruk</span>
+                    <div class="flex items-center gap-2 text-slate-400">
+                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        Kamtibmas
+                      </span>
+                      <span><i class="far fa-calendar-alt mr-1"></i> Polsek Kebon Jeruk</span>
+                    </div>
                   </div>
                   <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
                     Edukasi Keamanan oleh Polsek Kebon Jeruk
@@ -230,7 +227,7 @@
                   <span class="text-xs text-slate-400 flex items-center">
                     <i class="far fa-user mr-1 text-emerald-600"></i> Polsek & MTs
                   </span>
-                  <button onclick="openNewsModal('Edukasi Keamanan oleh Polsek Kebon Jeruk', 'Kegiatan sosialisasi oleh Kepolisian Sektor Kebon Jeruk mengedukasi para pelajar tentang bahaya kenakalan remaja, pencegahan perundungan (bullying), serta pentingnya menjaga keamanan dan ketertiban di lingkungan sekolah.', './images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg', 'Polsek Kebon Jeruk', 'Penyuluhan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
+                  <button onclick="openNewsModal('Edukasi Keamanan oleh Polsek Kebon Jeruk', 'Kegiatan sosialisasi oleh Kepolisian Sektor Kebon Jeruk mengedukasi para pelajar tentang bahaya kenakalan remaja, pencegahan perundungan (bullying), serta pentingnya menjaga keamanan dan ketertiban di lingkungan sekolah.', '', 'Polsek Kebon Jeruk', 'Penyuluhan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
                     Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
                   </button>
                 </div>
@@ -265,22 +262,22 @@
 
       <!-- Modal Baca Berita Selengkapnya -->
       <div id="newsDetailModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col">
-          <div class="relative">
-            <img id="modalNewsImg" src="" alt="Thumbnail Berita" class="w-full h-64 object-cover rounded-t-2xl">
-            <button onclick="closeNewsModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 text-white hover:bg-black/80 flex items-center justify-center transition">
-              <i class="fas fa-times"></i>
-            </button>
-            <span id="modalNewsBadge" class="absolute bottom-4 left-4 bg-emerald-800 text-emerald-100 text-xs font-semibold px-3 py-1 rounded-full shadow">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col relative">
+          <!-- Header Bar Modal -->
+          <div class="flex items-center justify-between p-6 pb-0">
+            <span id="modalNewsBadge" class="bg-emerald-800 text-emerald-100 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
               Kategori
             </span>
+            <button onclick="closeNewsModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 flex items-center justify-center transition">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
-          <div class="p-6 sm:p-8">
+          <div class="p-6 sm:p-8 pt-4">
             <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
               <i class="far fa-calendar-alt text-emerald-600"></i>
               <span id="modalNewsDate">Tanggal Berita</span>
             </div>
-            <h2 id="modalNewsTitle" class="text-2xl font-playfair font-bold text-slate-800 mb-4 leading-snug">
+            <h2 id="modalNewsTitle" class="text-2xl font-playfair font-bold text-slate-800 mb-3 leading-snug">
               Judul Berita
             </h2>
             <div class="w-16 h-1 bg-emerald-600 rounded-full mb-4"></div>
