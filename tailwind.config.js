@@ -3,6 +3,7 @@ export default {
     "./index.html",
     "./kelola.html",
     "./galeri.html",
+    "./berita.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {

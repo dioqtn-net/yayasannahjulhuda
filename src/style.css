@@ -45,3 +45,13 @@
 .netlify-badge, #netlify-badge, a[title="Powered by Netlify"], a[href^="https://www.netlify.com"] {
     display: none !important;
 }
+
+/* Hide scrollbar for Chrome, Safari, Opera, Edge, and Firefox */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

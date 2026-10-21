@@ -8,6 +8,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         kelola: resolve(__dirname, 'kelola.html'),
         galeri: resolve(__dirname, 'galeri.html'),
+        berita: resolve(__dirname, 'berita.html'),
       },
     },
   },
