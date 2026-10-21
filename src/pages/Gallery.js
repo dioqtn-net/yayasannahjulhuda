@@ -113,132 +113,7 @@ export const renderGallery = (galleries) => {
         <!-- AREA KONTEN GALERI MTs (Aktif) -->
         <div id="gallery-content-mts" class="space-y-16">
           
-          <!-- KATEGORI 1: KEGIATAN -->
-          <section>
-            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
-                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
-                    <i class="fas fa-book-reader"></i>
-                  </span>
-                  Kegiatan
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
-              </div>
-              <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                3 Dokumentasi
-              </span>
-            </div>
-
-            <!-- Grid 3 Kolom Kegiatan -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <!-- Card 1: Contoh Kegiatan MTs -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Pembiasaan Shalat & Dzikir Bersama')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                      <i class="fas fa-mosque text-2xl text-emerald-300"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
-                  </div>
-                  <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
-                    MTs Nahjul Huda
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Contoh Kegiatan MTs
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Dokumentasi pembiasaan shalat dhuha berjamaah dan tadarus Al-Qur'an sebelum jam pembelajaran dimulai.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Ibadah</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 2: Contoh Kegiatan MTs -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Pembelajaran Interaktif di Kelas')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                      <i class="fas fa-chalkboard-teacher text-2xl text-emerald-300"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
-                  </div>
-                  <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
-                    MTs Nahjul Huda
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Contoh Kegiatan MTs
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Suasana belajar mengajar interaktif berbasis kurikulum terpadu antara ilmu agama dan sains di kelas.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Jam Akademik</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Akademik</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 3: Contoh Kegiatan MTs -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-emerald-800 to-emerald-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Contoh Kegiatan MTs - Bimbingan Tahfidz & Kitab Kuning')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                      <i class="fas fa-quran text-2xl text-emerald-300"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-emerald-300">Foto / Video</span>
-                  </div>
-                  <div class="absolute inset-0 bg-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-emerald-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-emerald-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40">
-                    MTs Nahjul Huda
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Contoh Kegiatan MTs
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Sesi setoran hafalan Al-Qur'an (tahfidz) serta halaqah pembacaan kitab salaf santri madrasah tsanawiyah.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Sore Hari</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Tahfidz</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </section>
-
-          <!-- KATEGORI 2: EKSTRAKURIKULER -->
+          <!-- KATEGORI 1: EKSTRAKURIKULER -->
           <section>
             <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
               <div>
@@ -251,111 +126,331 @@ export const renderGallery = (galleries) => {
                 <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas santri MTs.</p>
               </div>
               <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 border border-sky-200">
-                3 Dokumentasi
+                2 Dokumentasi
               </span>
             </div>
 
-            <!-- Grid 3 Kolom Ekstrakurikuler -->
+            <!-- Grid 2 Kolom Ekstrakurikuler -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- 1. Futsal (SLIDER) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_1.jpg', 'Futsal MTs Nahjul Huda')">
+                    <img src="./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/ekstrakurikuler_futsal_2.jpg', 'Futsal MTs Nahjul Huda')">
+                    <video controls class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg">
+                      <source src="./images/images_video_MTs/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
+                      Browser Anda tidak mendukung tag video.
+                    </video>
+                  </div>
+                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
+                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                  </div>
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Slider Media
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Futsal
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                    <span class="text-sky-700 font-medium"><i class="fas fa-futbol mr-1"></i> Olahraga</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Drum Band (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <video controls class="w-full h-48 object-cover rounded-t-lg">
+                    <source src="./images/images_video_MTs/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                  </video>
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Video
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Drum Band
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Melatih kedisiplinan dan kreativitas seni bermusik santri MTs.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                    <span class="text-sky-700 font-medium"><i class="fas fa-drum mr-1"></i> Seni Musik</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- KATEGORI 2: KEGIATAN -->
+          <section>
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+              <div>
+                <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
+                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
+                    <i class="fas fa-book-reader"></i>
+                  </span>
+                  Kegiatan
+                </h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
+              </div>
+              <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                9 Dokumentasi
+              </span>
+            </div>
+
+            <!-- Grid 3 Kolom Kegiatan (9 Item) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              <!-- Card 1: Latihan Paskibra -->
+              <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Latihan Paskibra')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-red-500/20 backdrop-blur-sm border border-red-400/30 flex items-center justify-center">
-                      <i class="fas fa-flag text-2xl text-red-400"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-slate-300">Foto / Video</span>
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
+                    <img src="./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg', 'Peringatan Isra Mi\'raj - Ustadz Maulana')">
                   </div>
-                  <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-slate-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
+                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
+                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
                   </div>
-                  <span class="absolute top-3 left-3 bg-red-900/80 backdrop-blur-sm text-red-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-red-600/40">
-                    Paskibra
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Slider Media
                   </span>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Latihan Paskibra
+                      Peringatan Isra Mi'raj
                     </h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
-                      Pembinaan kedisiplinan baris-berbaris, formasi pengibaran bendera, dan penanaman rasa cinta tanah air santri MTs.
+                      Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
                     </p>
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-clock mr-1"></i> Sabtu Sore</span>
-                    <span class="text-sky-700 font-medium"><i class="fas fa-shield-alt mr-1"></i> Kedisiplinan</span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Keagamaan</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Card 2: Pramuka -->
+              <!-- 2. Pembiasaan Sholat Dhuha (SINGLE) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-amber-900 to-amber-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Pramuka')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 flex items-center justify-center">
-                      <i class="fas fa-campground text-2xl text-amber-300"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-amber-300">Foto / Video</span>
-                  </div>
-                  <div class="absolute inset-0 bg-amber-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-amber-950 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
-                  </div>
-                  <span class="absolute top-3 left-3 bg-amber-900/80 backdrop-blur-sm text-amber-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-amber-600/40">
-                    Pramuka
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <img src="./images/images_video_MTs/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sholat_dhuha_sebelum_KBM_di_mulai.jpg', 'Pembiasaan Sholat Dhuha Sebelum KBM')">
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Foto
                   </span>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Pramuka
+                      Pembiasaan Sholat Dhuha
                     </h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
-                      Latihan kepanduan, sandi, pioneering tali-temali, penjelajahan alam, dan kemandirian regu penggalang.
+                      Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
                     </p>
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-clock mr-1"></i> Jumat Siang</span>
-                    <span class="text-amber-700 font-medium"><i class="fas fa-compass mr-1"></i> Kepanduan</span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Ibadah</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Card 3: Hadroh & Seni Musik Islami -->
+              <!-- 3. Pemilihan OSIS 2026/2027 (SLIDER) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative aspect-video bg-gradient-to-br from-emerald-900 to-teal-950 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openLightbox('/images/MTs.jpg', 'Ekstrakurikuler MTs - Hadroh & Seni Musik Islami')">
-                  <div class="text-center p-6 text-white group-hover:scale-105 transition-transform duration-300">
-                    <div class="w-14 h-14 mx-auto mb-2 rounded-full bg-teal-500/20 backdrop-blur-sm border border-teal-400/30 flex items-center justify-center">
-                      <i class="fas fa-drum text-2xl text-teal-300"></i>
-                    </div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-teal-300">Foto / Video</span>
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_1.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
+                    <img src="./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/pemilihan_ketua_osis_periode_2026-2027_2.jpg', 'Pemilihan Ketua OSIS 2026/2027')">
                   </div>
-                  <div class="absolute inset-0 bg-teal-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="bg-white text-teal-950 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center">
-                      <i class="fas fa-search-plus mr-1.5"></i> Perbesar
-                    </span>
+                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
+                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
                   </div>
-                  <span class="absolute top-3 left-3 bg-teal-900/80 backdrop-blur-sm text-teal-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-teal-600/40">
-                    Hadroh
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Slider Media
                   </span>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Hadroh & Seni Musik Islami
+                      Pemilihan OSIS 2026/2027
                     </h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
-                      Pelatihan tabuhan rebana, kasidah, vokal shalawat nabi, serta penampilan pada agenda perayaan hari besar Islam.
+                      Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
                     </p>
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-clock mr-1"></i> Ahad Pagi</span>
-                    <span class="text-teal-700 font-medium"><i class="fas fa-music mr-1"></i> Kesenian</span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Kesiswaan</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Olimpiade Madrasah Indonesia (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <img src="./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg', 'Olimpiade Madrasah Indonesia (OMI)')">
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Foto
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Olimpiade Madrasah Indonesia
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Partisipasi siswa MTs dalam mengasah kemampuan akademik.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Ajang Nasional</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Prestasi</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Edukasi Polsek Kebon Jeruk (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <img src="./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg', 'Sosialisasi Pencegahan Kenakalan Remaja - Polsek')">
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Foto
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Edukasi Polsek Kebon Jeruk
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Sosialisasi pencegahan kenakalan remaja.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Polsek Kebon Jeruk</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Penyuluhan</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Edukasi Kesehatan Puskesmas (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <img src="./images/images_video_MTs/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg', 'Sosialisasi Kesehatan Remaja Putri - Puskesmas')">
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Foto
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Edukasi Kesehatan Puskesmas
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Sosialisasi kesehatan reproduksi oleh nakes.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Puskesmas Kebon Jeruk</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Kesehatan</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Simulasi Pemadam Kebakaran (SLIDER) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg" alt="Simulasi Damkar 1" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_penanganan_kebakaran_1.jpg', 'Simulasi Pemadam Kebakaran - Damkar Sektor 5')">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_2.jpg" alt="Simulasi Damkar 2" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_penanganan_kebakaran_2.jpg', 'Simulasi Pemadam Kebakaran - Damkar Sektor 5')">
+                    <img src="./images/images_video_MTs/sosialisasi_penanganan_kebakaran_3.jpg" alt="Simulasi Damkar 3" class="flex-shrink-0 w-full snap-center object-cover h-48 rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/sosialisasi_penanganan_kebakaran_3.jpg', 'Simulasi Pemadam Kebakaran - Damkar Sektor 5')">
+                  </div>
+                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
+                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                  </div>
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Slider Media
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Simulasi Pemadam Kebakaran
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Pelatihan kesiapsiagaan bencana bersama Damkar.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Damkar Sektor 5</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Tanggap Bencana</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Kunjungan Perpusnas (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <img src="./images/images_video_MTs/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-48 object-cover rounded-t-lg cursor-pointer" onclick="openLightbox('./images/images_video_MTs/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg', 'Kunjungan Edukatif ke Perpustakaan Nasional')">
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Foto
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Kunjungan Perpusnas
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Kunjungan belajar kelas 9 ke Perpustakaan Nasional.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Kelas 9 MTs</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Literasi</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9. Testimoni Yayasan (SINGLE VIDEO) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <video controls class="w-full h-48 object-cover rounded-t-lg">
+                    <source src="./images/images_video_MTs/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                  </video>
+                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    Video
+                  </span>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Testimoni Yayasan & Ponpes As-Surur
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Testimoni inspiratif Ustadz Maulana tentang dedikasi Yayasan & Ponpes As-Surur.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Ustadz Maulana</span>
+                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Testimoni</span>
                   </div>
                 </div>
               </div>
