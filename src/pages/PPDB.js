@@ -4,6 +4,10 @@ export const renderPPDB = (ppdb) => {
     // Global switcher function for PPDB tabs
     if (typeof window !== 'undefined') {
         window.switchPPDBTab = function(key) {
+            if (key === 'mts' || key === 'ma') {
+                key = 'mts-ma';
+            }
+
             const panels = document.querySelectorAll('.ppdb-panel');
             panels.forEach(p => p.classList.add('hidden'));
 
@@ -16,7 +20,7 @@ export const renderPPDB = (ppdb) => {
             tabBtns.forEach(btn => {
                 const btnKey = btn.getAttribute('data-ppdb-tab');
                 const icon = btn.querySelector('i');
-                if (btnKey === key) {
+                if (btnKey === key || (btnKey === 'mts-ma' && (key === 'mts' || key === 'ma'))) {
                     btn.className = 'ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2';
                     if (icon) {
                         icon.classList.remove('text-slate-400');
@@ -36,16 +40,24 @@ export const renderPPDB = (ppdb) => {
                 select.value = key;
             }
         };
+
+        // Handle URL hash on load
+        setTimeout(() => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                window.switchPPDBTab(hash);
+            }
+        }, 50);
     }
 
     return `
       <!-- Header PPDB -->
       <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
-        <div class="absolute inset-0 bg-black/70 z-0"></div>
+        <div class="absolute inset-0 bg-black/75 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span class="inline-block px-5 py-1.5 rounded-full text-sm font-bold mb-4 shadow-lg ${isBuka ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-red-500 text-white shadow-red-500/30'}">
-            STATUS PENDAFTARAN: ${ppdb?.status || 'BUKA'}
+            STATUS PENDAFTARAN: ${ppdb?.status || 'DIBUKA'}
           </span>
           <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Penerimaan Peserta Didik Baru</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
@@ -62,18 +74,17 @@ export const renderPPDB = (ppdb) => {
           <div class="text-center mb-6">
             <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Papan Informasi Jenjang</span>
             <h2 class="text-2xl md:text-3xl font-playfair font-bold text-slate-900 mt-2">Pilih Jenjang Pendidikan</h2>
-            <p class="text-slate-500 text-sm mt-1">Pilih jenjang untuk melihat informasi jadwal, berkas persyaratan, dan ketentuan pendaftaran.</p>
+            <p class="text-slate-500 text-sm mt-1">Pilih jenjang untuk melihat informasi jadwal, berkas persyaratan, dan kontak pendaftaran.</p>
           </div>
 
           <!-- Dropdown untuk Layar Kecil (Mobile) -->
           <div class="block lg:hidden max-w-md mx-auto mb-4">
             <div class="relative">
               <select id="ppdb-select-jenjang" onchange="window.switchPPDBTab(this.value)" class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none appearance-none">
-                <option value="sdi">SD Islam (SDI) AL KINDY</option>
+                <option value="mts-ma" selected>MTs & MA (Tsanawiyah & Aliyah)</option>
                 <option value="mi">Madrasah Ibtidaiyah (MI)</option>
-                <option value="mts" selected>Madrasah Tsanawiyah (MTs)</option>
-                <option value="ma">Madrasah Aliyah (MA)</option>
                 <option value="ponpes">Pondok Pesantren Assurur</option>
+                <option value="sdi">SD Islam (SDI) AL KINDY</option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                 <i class="fas fa-chevron-down"></i>
@@ -83,124 +94,135 @@ export const renderPPDB = (ppdb) => {
 
           <!-- Tabs untuk Layar Besar (Desktop / Tablet) -->
           <div class="hidden lg:flex flex-wrap justify-center gap-3">
-            <button type="button" data-ppdb-tab="sdi" onclick="window.switchPPDBTab('sdi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-school text-slate-400"></i>
-              <span>SD Islam (SDI) AL KINDY</span>
+            <button type="button" data-ppdb-tab="mts-ma" onclick="window.switchPPDBTab('mts-ma')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2">
+              <i class="fas fa-graduation-cap text-gold-400"></i>
+              <span>MTs & MA</span>
             </button>
             <button type="button" data-ppdb-tab="mi" onclick="window.switchPPDBTab('mi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
               <i class="fas fa-book-reader text-slate-400"></i>
               <span>Madrasah Ibtidaiyah (MI)</span>
             </button>
-            <button type="button" data-ppdb-tab="mts" onclick="window.switchPPDBTab('mts')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2">
-              <i class="fas fa-graduation-cap text-gold-400"></i>
-              <span>Madrasah Tsanawiyah (MTs)</span>
-            </button>
-            <button type="button" data-ppdb-tab="ma" onclick="window.switchPPDBTab('ma')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-university text-slate-400"></i>
-              <span>Madrasah Aliyah (MA)</span>
-            </button>
             <button type="button" data-ppdb-tab="ponpes" onclick="window.switchPPDBTab('ponpes')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
               <i class="fas fa-mosque text-slate-400"></i>
               <span>Pondok Pesantren Assurur</span>
             </button>
+            <button type="button" data-ppdb-tab="sdi" onclick="window.switchPPDBTab('sdi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
+              <i class="fas fa-school text-slate-400"></i>
+              <span>SD Islam (SDI) AL KINDY</span>
+            </button>
           </div>
         </div>
 
-        <!-- ================= PANEL MTs (ACTIVE DEFAULT) ================= -->
-        <div id="ppdb-panel-mts" class="ppdb-panel space-y-8">
+        <!-- ================= 1. PANEL MTs & MA (ACTIVE DEFAULT) ================= -->
+        <div id="ppdb-panel-mts-ma" class="ppdb-panel space-y-8">
           
-          <!-- Banner Pengantar MTs -->
-          <div class="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
+          <!-- Banner Pengantar MTs & MA -->
+          <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <img src="./images/MTs.jpg" onerror="this.onerror=null;this.src='/images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-500 shadow-md flex-shrink-0 bg-white">
+              <div class="flex -space-x-4 overflow-hidden flex-shrink-0">
+                <img src="/images/MTs.jpg" onerror="this.onerror=null;this.src='./images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="inline-block w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md bg-white">
+                <img src="/images/MA.jpg" onerror="this.onerror=null;this.src='./images/MA.jpg';" alt="Logo MA Nahjul Huda" class="inline-block w-16 h-16 object-cover rounded-full border-2 border-emerald-400 shadow-md bg-white">
+              </div>
               <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi PPDB</span>
-                <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
-                <p class="text-emerald-100 text-sm">Akreditasi Resmi Kemenag & Kemendikbud - Kampus Kebon Jeruk, Jakarta Barat</p>
+                <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
+                <h3 class="text-xl md:text-2xl font-playfair font-bold">MTs & MA Nahjul Huda</h3>
+                <p class="text-emerald-100 text-sm">Madrasah Tsanawiyah & Madrasah Aliyah - Kampus Kebon Jeruk, Jakarta Barat</p>
               </div>
             </div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
               <i class="fas fa-check-circle"></i> Pendaftaran Terbuka
             </div>
           </div>
 
-          <!-- Grid Kartu Informasi MTs: KARTU 1 & KARTU 3 -->
+          <!-- Label / Keterangan Spesial SPMB MTs/MA -->
+          <div class="p-5 md:p-6 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 rounded-2xl shadow-md border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-slate-950 text-gold-400 rounded-xl flex items-center justify-center text-xl shadow flex-shrink-0">
+                <i class="fas fa-gift text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[11px] font-black uppercase tracking-wider bg-slate-950 text-gold-300 px-3 py-0.5 rounded-full inline-block mb-1">
+                  PROGRAM UNGGULAN
+                </span>
+                <h4 class="text-lg sm:text-xl font-bold font-playfair tracking-tight text-slate-950 leading-snug">
+                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs/MA - GRATIS UANG PANGKAL
+                </h4>
+              </div>
+            </div>
+            <div class="flex-shrink-0">
+              <span class="px-4 py-2 bg-slate-950 text-gold-300 font-extrabold text-xs sm:text-sm rounded-xl shadow inline-flex items-center gap-2">
+                <i class="fas fa-award text-yellow-400"></i> Bebas Uang Pangkal 100%
+              </span>
+            </div>
+          </div>
+
+          <!-- Grid 2 Kolom: Syarat Pendaftaran & Biaya Bebas Pangkal -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- KARTU 1: JADWAL KEGIATAN PPDB MTs NAHJUL HUDA -->
+            <!-- KARTU SYARAT PENDAFTARAN MTs & MA -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
               <div>
                 <div class="flex items-center justify-between mb-4">
-                  <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl shadow-sm border border-amber-100">
-                    <i class="far fa-calendar-alt"></i>
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-clipboard-check"></i>
                   </div>
-                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-                    Jadwal Kegiatan
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    5 Persyaratan Berkas
                   </span>
                 </div>
-                
-                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-4">
-                  Jadwal Kegiatan PPDB MTs Nahjul Huda
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
+                  Syarat Pendaftaran MTs & MA
                 </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Calon murid baru tingkat MTs maupun MA wajib menyerahkan kelengkapan berkas administrasi berikut:
+                </p>
 
-                <!-- Highlight Banner -->
-                <div class="mb-6 p-3.5 bg-red-50 border-l-4 border-red-500 rounded-r-xl flex items-center gap-3 shadow-sm">
-                  <i class="fas fa-bullhorn text-red-600 text-lg flex-shrink-0"></i>
-                  <span class="text-xs md:text-sm font-extrabold text-red-700 tracking-wide">
-                    DAFTAR SECEPATNYA JANGAN SAMPAI TERLAMBAT!
-                  </span>
-                </div>
-
-                <!-- Timeline / List Jadwal -->
-                <div class="space-y-3.5">
-                  <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                <div class="space-y-3">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
                       1
                     </div>
-                    <div>
-                      <div class="text-xs font-semibold uppercase text-emerald-700">Pendaftaran Peserta Didik Baru</div>
-                      <div class="text-base font-bold text-slate-800">01 Juni s.d 08 Juli 2026</div>
-                      <div class="text-xs text-slate-500 mt-0.5">Pengambilan dan pengisian formulir pendaftaran</div>
-                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Mengisi formulir pendaftaran</span>
                   </div>
 
-                  <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
                       2
                     </div>
-                    <div>
-                      <div class="text-xs font-semibold uppercase text-emerald-700">Pengembalian Formulir Pendaftaran</div>
-                      <div class="text-base font-bold text-slate-800">09 Juli 2026</div>
-                      <div class="text-xs text-slate-500 mt-0.5">Penyerahan formulir beserta kelengkapan berkas</div>
-                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Kartu Keluarga & KTP Orang Tua/Wali</span>
                   </div>
 
-                  <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
                       3
                     </div>
-                    <div>
-                      <div class="text-xs font-semibold uppercase text-emerald-700">MOPD (Masa Orientasi Peserta Didik)</div>
-                      <div class="text-base font-bold text-slate-800">11 s.d 13 Juli 2026</div>
-                      <div class="text-xs text-slate-500 mt-0.5">Pengenalan lingkungan madrasah, guru, dan santri</div>
-                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Akta Kelahiran</span>
                   </div>
 
-                  <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
                       4
                     </div>
-                    <div>
-                      <div class="text-xs font-semibold uppercase text-emerald-700">Belajar Efektif</div>
-                      <div class="text-base font-bold text-slate-800">14 Juli 2026</div>
-                      <div class="text-xs text-slate-500 mt-0.5">Hari pertama dimulainya kegiatan belajar mengajar</div>
+                    <span class="text-slate-700 text-sm font-medium">Pas Foto 3x4 (4 lembar)</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      5
                     </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Ijazah (2 lembar)</span>
                   </div>
                 </div>
               </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-3">
+                <i class="fas fa-info-circle text-emerald-700 text-base flex-shrink-0"></i>
+                <span>Persyaratan berlaku seragam untuk calon murid baru tingkat MTs maupun MA Nahjul Huda.</span>
+              </div>
             </div>
 
-            <!-- KARTU 3: BIAYA PENDAFTARAN (GRATIS) -->
+            <!-- KARTU BIAYA & KEUNGGULAN (GRATIS UANG PANGKAL) -->
             <div class="bg-gradient-to-br from-emerald-50 via-white to-amber-50/40 rounded-2xl shadow-sm border-2 border-emerald-200/80 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition relative overflow-hidden">
               <div class="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/10 rounded-full pointer-events-none"></div>
 
@@ -210,16 +232,16 @@ export const renderPPDB = (ppdb) => {
                     <i class="fas fa-hand-holding-heart"></i>
                   </div>
                   <span class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white shadow-sm">
-                    100% BEBAS BIAYA
+                    GRATIS UANG PANGKAL
                   </span>
                 </div>
 
                 <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
-                  Biaya Pendaftaran (GRATIS)
+                  Keringanan Biaya Pendidikan
                 </h3>
                 
                 <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                  Biaya pendaftaran <strong class="text-emerald-800 font-bold uppercase underline">GRATIS</strong>, sudah termasuk di dalamnya:
+                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs/MA memberikan kemudahan akses pendidikan berkualitas:
                 </p>
 
                 <div class="space-y-3.5">
@@ -228,8 +250,8 @@ export const renderPPDB = (ppdb) => {
                       <i class="fas fa-check"></i>
                     </div>
                     <div>
-                      <h4 class="font-bold text-slate-800 text-base">1. Formulir Pendaftaran</h4>
-                      <p class="text-xs text-slate-500">Gratis tanpa dipungut biaya berkas pendaftaran</p>
+                      <h4 class="font-bold text-slate-800 text-base">Bebas Uang Pangkal</h4>
+                      <p class="text-xs text-slate-500">Gratis uang pangkal masuk untuk seluruh calon murid baru MTs & MA</p>
                     </div>
                   </div>
 
@@ -238,8 +260,8 @@ export const renderPPDB = (ppdb) => {
                       <i class="fas fa-check"></i>
                     </div>
                     <div>
-                      <h4 class="font-bold text-slate-800 text-base">2. Uang Bangunan</h4>
-                      <p class="text-xs text-slate-500">Bebas uang pembangunan gedung dan sarana madrasah</p>
+                      <h4 class="font-bold text-slate-800 text-base">Formulir Pendaftaran</h4>
+                      <p class="text-xs text-slate-500">Disediakan secara langsung oleh panitia pendaftaran</p>
                     </div>
                   </div>
 
@@ -248,195 +270,434 @@ export const renderPPDB = (ppdb) => {
                       <i class="fas fa-check"></i>
                     </div>
                     <div>
-                      <h4 class="font-bold text-slate-800 text-base">3. Biaya Pendidikan</h4>
-                      <p class="text-xs text-slate-500">Dukungan pendidikan berkelanjutan untuk seluruh santri</p>
+                      <h4 class="font-bold text-slate-800 text-base">Pendidikan Berorientasi Sosial & Dakwah</h4>
+                      <p class="text-xs text-slate-500">Membantu santri yatim dan dhuafa mendapatkan pendidikan bermutu</p>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <!-- Catatan Tambahan -->
-                <div class="mt-6 p-4 rounded-xl bg-emerald-800 text-white text-xs leading-relaxed flex items-start gap-3">
-                  <i class="fas fa-info-circle text-gold-400 text-base mt-0.5 flex-shrink-0"></i>
-                  <div>
-                    Pendidikan di MTs Nahjul Huda berorientasi sosial dan dakwah untuk memastikan setiap anak, terutama santri yatim dan dhuafa, mendapatkan akses pendidikan yang layak dan bermutu.
-                  </div>
+              <div class="mt-6 p-4 rounded-xl bg-emerald-800 text-white text-xs leading-relaxed flex items-start gap-3">
+                <i class="fas fa-school text-gold-400 text-base mt-0.5 flex-shrink-0"></i>
+                <div>
+                  Pendidikan di MTs & MA Nahjul Huda berorientasi pada pembinaan akhlak mulia, penguasaan ilmu agama, serta kesiapan akademik lanjutan.
                 </div>
               </div>
             </div>
 
           </div>
 
-          <!-- KARTU 2: SYARAT PENDAFTARAN -->
-          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 hover:shadow-md transition">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-slate-100">
+          <!-- KARTU KONTAK PENDAFTARAN WHATSAPP (MTs & MA) -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
-                  <i class="fas fa-clipboard-list"></i>
+                  <i class="fab fa-whatsapp text-2xl"></i>
                 </div>
                 <div>
                   <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900">
-                    Syarat Pendaftaran MTs Nahjul Huda
+                    Kontak Pendaftaran MTs & MA (WhatsApp)
                   </h3>
-                  <p class="text-slate-500 text-xs md:text-sm">Calon peserta didik wajib menyerahkan kelengkapan berkas administrasi berikut:</p>
+                  <p class="text-slate-500 text-xs sm:text-sm">Klik salah satu narahubung panitia berikut untuk terhubung langsung via WhatsApp:</p>
                 </div>
               </div>
-              <span class="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 w-fit">
-                <i class="fas fa-check-double text-emerald-600 mr-1.5"></i> 11 Persyaratan Berkas
+              <span class="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 w-fit">
+                <i class="fas fa-headset mr-1.5"></i> Layanan Konsultasi
               </span>
             </div>
 
-            <!-- List 11 Syarat dalam 2 Kolom -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3.5">
-              
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                <span class="text-slate-700 text-sm font-medium">Mengisi formulir pendaftaran</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Kontak 1: Umi Hj. Dahlia, M.Pd. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Umi Hj. Dahlia, M.Pd.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs & MA</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0858-8068-2115</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/6285880682115" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Umi Hj. Dahlia, M.Pd.</span>
+                </a>
               </div>
 
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                <span class="text-slate-700 text-sm font-medium">Menyerahkan foto ukuran 3x4 (4 lembar)</span>
+              <!-- Kontak 2: Abu Jalaluddin, S.Ag. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Abu Jalaluddin, S.Ag.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs & MA</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0815-8316-436</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/628158316436" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Abu Jalaluddin, S.Ag.</span>
+                </a>
               </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy ijazah dan SKHU (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy Kartu Keluarga (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy akte kelahiran (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">6</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy kartu peserta UN (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">7</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy KTP orangtua/wali (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">8</span>
-                <span class="text-slate-700 text-sm font-medium">Fotocopy surat kematian bagi siswa yatim (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">9</span>
-                <span class="text-slate-700 text-sm font-medium">SKTM bagi siswa tidak mampu (2 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">10</span>
-                <span class="text-slate-700 text-sm font-medium">SKKB dari sekolah SD/MI (1 lembar)</span>
-              </div>
-
-              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100 md:col-span-2">
-                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">11</span>
-                <span class="text-slate-700 text-sm font-medium">Memiliki NISN (Nomor Induk Siswa Nasional)</span>
-              </div>
-
             </div>
           </div>
 
         </div>
 
-        <!-- ================= PANEL JENJANG LAIN (PLACEHOLDER) ================= -->
-        
-        <!-- Panel SDI AL KINDY -->
+        <!-- ================= 2. PANEL MI (MADRASAH IBTIDAIYAH) ================= -->
+        <div id="ppdb-panel-mi" class="ppdb-panel hidden space-y-8">
+          
+          <!-- Banner Pengantar MI -->
+          <div class="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
+            <div class="flex items-center gap-4">
+              <img src="/images/MI.jpg" onerror="this.onerror=null;this.src='./images/MI.jpg';" alt="Logo MI Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi PPDB</span>
+                <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+                <p class="text-emerald-100 text-sm">Pendidikan Dasar Islam Berkualitas & Berakhlakul Karimah - Kebon Jeruk, Jakarta Barat</p>
+              </div>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
+              <i class="fas fa-check-circle"></i> Pendaftaran Terbuka
+            </div>
+          </div>
+
+          <!-- Grid 2 Kolom: Waktu Pendaftaran & Syarat Pendaftaran MI -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- KARTU WAKTU PENDAFTARAN MI -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl shadow-sm border border-amber-100">
+                    <i class="far fa-clock"></i>
+                  </div>
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+                    Jadwal Pelayanan
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-3">
+                  Waktu Pendaftaran
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Pelayanan pendaftaran dan penerimaan berkas murid baru jenjang Madrasah Ibtidaiyah (MI) dibuka pada:
+                </p>
+
+                <!-- Highlight Waktu Pendaftaran MI -->
+                <div class="p-5 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50/40 border-2 border-amber-200 shadow-sm space-y-4">
+                  <div class="flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                      <i class="far fa-calendar-check"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold uppercase text-amber-800 tracking-wider">Hari Pelayanan:</span>
+                      <div class="text-base sm:text-lg font-bold text-slate-900">Hari Senin s/d Jumat</div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3.5 pt-3 border-t border-amber-200/70">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                      <i class="far fa-clock"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold uppercase text-amber-800 tracking-wider">Jam Operasional:</span>
+                      <div class="text-base sm:text-lg font-bold text-slate-900">Pukul 08.00 WIB s/d 12.00 WIB</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs flex items-center gap-3">
+                <i class="fas fa-map-marker-alt text-emerald-600 text-base flex-shrink-0"></i>
+                <span>Silakan datang ke ruang sekretariat MI Nahjul Huda pada jam operasional di atas untuk menyerahkan formulir dan berkas.</span>
+              </div>
+            </div>
+
+            <!-- KARTU SYARAT PENDAFTARAN MI -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-clipboard-list"></i>
+                  </div>
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    5 Persyaratan Berkas
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
+                  Syarat Pendaftaran MI Nahjul Huda
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Calon murid baru Madrasah Ibtidaiyah wajib melengkapi berkas administrasi berikut:
+                </p>
+
+                <div class="space-y-3">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      1
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Formulir Pendaftaran</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      2
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Akta Kelahiran</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      3
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Kartu Keluarga</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      4
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Pas Foto Terbaru</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      5
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Surat Keterangan Sehat dari Dokter</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-3">
+                <i class="fas fa-check-circle text-emerald-700 text-base flex-shrink-0"></i>
+                <span>Pastikan seluruh berkas dimasukkan ke dalam map rapi saat diserahkan ke loket pendaftaran.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- KARTU KONTAK PENDAFTARAN WHATSAPP (MI) -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                  <i class="fab fa-whatsapp text-2xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900">
+                    Kontak Pendaftaran MI (WhatsApp)
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm">Klik salah satu narahubung panitia berikut untuk terhubung langsung via WhatsApp:</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 w-fit">
+                <i class="fas fa-headset mr-1.5"></i> Layanan Konsultasi
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Kontak 1: Abi Subhan, SPd. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Abi Subhan, SPd.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MI</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0899-1168-301</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/628991168301" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Abi Subhan, SPd.</span>
+                </a>
+              </div>
+
+              <!-- Kontak 2: Abi Fahri, SPd. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Abi Fahri, SPd.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MI</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0856-9542-6904</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/6285695426904" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Abi Fahri, SPd.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= 3. PANEL PONPES (PONDOK PESANTREN ASSURUR) ================= -->
+        <div id="ppdb-panel-ponpes" class="ppdb-panel hidden space-y-8">
+          
+          <!-- Banner Pengantar Ponpes -->
+          <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
+            <div class="flex items-center gap-4">
+              <img src="/images/Ponpes.jpg" onerror="this.onerror=null;this.src='./images/Ponpes.jpg';" alt="Logo Pondok Pesantren Assurur" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Penerimaan Santri Baru</span>
+                <h3 class="text-xl md:text-2xl font-playfair font-bold">Pondok Pesantren Assurur</h3>
+                <p class="text-emerald-100 text-sm">Membina Generasi Qur'ani, Berakhlak Mulia, dan Mandiri - Kebon Jeruk, Jakarta Barat</p>
+              </div>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
+              <i class="fas fa-check-circle"></i> Pendaftaran Santri Baru
+            </div>
+          </div>
+
+          <!-- Grid 2 Kolom: Jadwal Pendaftaran & Syarat Pendaftaran Ponpes -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- KARTU JADWAL PENDAFTARAN PONPES -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl shadow-sm border border-amber-100">
+                    <i class="far fa-calendar-alt"></i>
+                  </div>
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+                    Jadwal Pendaftaran
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-3">
+                  Jadwal Penerimaan Santri
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Informasi periode dan waktu pendaftaran santri baru Pondok Pesantren Assurur:
+                </p>
+
+                <div class="p-5 rounded-2xl bg-gradient-to-br from-amber-50 via-white to-orange-50/40 border-2 border-amber-200 shadow-sm space-y-4">
+                  <div class="flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                      <i class="far fa-calendar-check"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold uppercase text-emerald-800 tracking-wider">Masa Pendaftaran:</span>
+                      <div class="text-base sm:text-lg font-bold text-slate-900">Desember 2024 - Juni 2025</div>
+                      <div class="text-xs font-semibold text-red-600 mt-1 flex items-center gap-1.5">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Pendaftaran ditutup jika kuota terpenuhi</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3.5 pt-3 border-t border-amber-200/70">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                      <i class="far fa-clock"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold uppercase text-emerald-800 tracking-wider">Waktu Pelayanan:</span>
+                      <div class="text-base sm:text-lg font-bold text-slate-900">Senin - Jum'at, 08.00 - 12.30</div>
+                      <div class="text-xs text-slate-500 mt-0.5">Hari kerja sekretariat pondok pesantren</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-3">
+                <i class="fas fa-bullhorn text-amber-600 text-base flex-shrink-0"></i>
+                <span>Mengingat kuota terbatas, calon santri disarankan untuk mendaftar lebih awal sebelum kuota terpenuhi.</span>
+              </div>
+            </div>
+
+            <!-- KARTU SYARAT PENDAFTARAN PONPES -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                    Informasi Persyaratan
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-3">
+                  Syarat Pendaftaran Santri Baru
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Ketentuan dan rincian berkas persyaratan penerimaan santri baru Pondok Pesantren Assurur:
+                </p>
+
+                <div class="p-6 rounded-2xl bg-emerald-50/70 border-2 border-dashed border-emerald-300 text-center space-y-4">
+                  <div class="w-14 h-14 bg-emerald-700 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <div class="space-y-2">
+                    <h4 class="text-lg font-bold text-emerald-950 font-playfair">Kunjungan Langsung ke Lokasi</h4>
+                    <p class="text-slate-700 text-sm font-semibold leading-relaxed">
+                      Silakan datang langsung ke lokasi untuk informasi persyaratan lebih rinci.
+                    </p>
+                    <p class="text-xs text-slate-500 leading-relaxed max-w-sm mx-auto">
+                      Panitia penerimaan santri baru Pondok Pesantren Assurur akan memberikan lembar formulir, panduan tata tertib, dan penjelasan berkas secara langsung di sekretariat pondok.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs space-y-1">
+                <div class="font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fas fa-location-dot text-emerald-600"></i>
+                  <span>Alamat Sekretariat Pondok:</span>
+                </div>
+                <div class="pl-5 text-slate-600">
+                  Pondok Pesantren Assurur / Yayasan Nahjul Huda, Jl. HH No.63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= 4. PANEL SDI AL KINDY ================= -->
         <div id="ppdb-panel-sdi" class="ppdb-panel hidden space-y-8">
-          <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-2xl mx-auto shadow-sm">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-10 md:p-14 text-center max-w-2xl mx-auto shadow-sm">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
               <i class="fas fa-school"></i>
             </div>
             <h3 class="text-2xl font-playfair font-bold text-slate-800 mb-2">SD Islam (SDI) AL KINDY</h3>
-            <span class="inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-4">
+            <span class="inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-4 border border-amber-200">
               Informasi PPDB Segera Hadir
             </span>
             <p class="text-slate-600 text-sm leading-relaxed mb-6">
-              Rincian jadwal, persyaratan, dan alur pendaftaran untuk SD Islam (SDI) AL KINDY sedang dalam tahap persiapan. Silakan hubungi Panitia PPDB kami via WhatsApp untuk mendapatkan informasi awal.
+              Rincian jadwal, persyaratan, dan alur pendaftaran untuk SD Islam (SDI) AL KINDY sedang dalam tahap persiapan panitia. Silakan datang langsung ke kantor sekretariat Yayasan Nahjul Huda pada jam kerja untuk mendapatkan informasi awal.
             </p>
-            <a href="https://wa.me/6281234567890?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20informasi%20PPDB%20untuk%20SD%20Islam%20(SDI)%20AL%20KINDY" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition shadow-sm">
-              <i class="fab fa-whatsapp text-lg"></i> Tanya PPDB SDI via WA
-            </a>
-          </div>
-        </div>
-
-        <!-- Panel MI -->
-        <div id="ppdb-panel-mi" class="ppdb-panel hidden space-y-8">
-          <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-2xl mx-auto shadow-sm">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
-              <i class="fas fa-book-reader"></i>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 inline-block text-left">
+              <i class="fas fa-map-marker-alt text-emerald-600 mr-1.5"></i>
+              <strong>Sekretariat:</strong> Jl. HH No.63 Kebon Jeruk, Jakarta Barat (Senin - Jumat 08.00 - 12.00 WIB)
             </div>
-            <h3 class="text-2xl font-playfair font-bold text-slate-800 mb-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
-            <span class="inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-4">
-              Informasi PPDB Segera Hadir
-            </span>
-            <p class="text-slate-600 text-sm leading-relaxed mb-6">
-              Rincian jadwal, persyaratan, dan alur pendaftaran untuk Madrasah Ibtidaiyah (MI) sedang dalam tahap persiapan. Silakan hubungi Panitia PPDB kami via WhatsApp untuk mendapatkan informasi awal.
-            </p>
-            <a href="https://wa.me/6281234567890?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20informasi%20PPDB%20untuk%20MI%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition shadow-sm">
-              <i class="fab fa-whatsapp text-lg"></i> Tanya PPDB MI via WA
-            </a>
           </div>
         </div>
 
-        <!-- Panel MA -->
-        <div id="ppdb-panel-ma" class="ppdb-panel hidden space-y-8">
-          <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-2xl mx-auto shadow-sm">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
-              <i class="fas fa-university"></i>
-            </div>
-            <h3 class="text-2xl font-playfair font-bold text-slate-800 mb-2">Madrasah Aliyah (MA) Nahjul Huda</h3>
-            <span class="inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-4">
-              Informasi PPDB Segera Hadir
-            </span>
-            <p class="text-slate-600 text-sm leading-relaxed mb-6">
-              Rincian jadwal, persyaratan, dan alur pendaftaran untuk Madrasah Aliyah (MA) sedang dalam tahap persiapan. Silakan hubungi Panitia PPDB kami via WhatsApp untuk mendapatkan informasi awal.
+        <!-- Informasi Alamat Sekretariat Bersama di Bawah -->
+        <div class="mt-14 pt-8 border-t border-slate-200 text-center max-w-3xl mx-auto">
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-center">
+            <h4 class="font-playfair font-bold text-lg text-emerald-950 mb-2">Sekretariat Pendaftaran Yayasan Nahjul Huda</h4>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
+              <i class="fas fa-map-marker-alt text-emerald-600 mr-1.5"></i>
+              Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530.
             </p>
-            <a href="https://wa.me/6281234567890?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20informasi%20PPDB%20untuk%20MA%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition shadow-sm">
-              <i class="fab fa-whatsapp text-lg"></i> Tanya PPDB MA via WA
-            </a>
-          </div>
-        </div>
-
-        <!-- Panel Ponpes -->
-        <div id="ppdb-panel-ponpes" class="ppdb-panel hidden space-y-8">
-          <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-2xl mx-auto shadow-sm">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
-              <i class="fas fa-mosque"></i>
-            </div>
-            <h3 class="text-2xl font-playfair font-bold text-slate-800 mb-2">Pondok Pesantren Assurur</h3>
-            <span class="inline-block px-4 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-4">
-              Informasi PPDB Segera Hadir
-            </span>
-            <p class="text-slate-600 text-sm leading-relaxed mb-6">
-              Rincian jadwal, persyaratan, dan alur pendaftaran santri baru Pondok Pesantren Assurur sedang dalam tahap persiapan. Silakan hubungi Panitia PPDB kami via WhatsApp untuk mendapatkan informasi awal.
+            <p class="text-xs text-slate-500 mt-2">
+              Untuk pertanyaan dan penyerahan berkas, silakan hubungi narahubung WhatsApp pada masing-masing tab jenjang di atas atau kunjungi kantor sekretariat pada jam kerja.
             </p>
-            <a href="https://wa.me/6281234567890?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20informasi%20penerimaan%20santri%20baru%20Pondok%20Pesantren%20Assurur" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition shadow-sm">
-              <i class="fab fa-whatsapp text-lg"></i> Tanya PPDB Ponpes via WA
-            </a>
           </div>
-        </div>
-
-        <!-- ================= 3. CALL TO ACTION (CTA) DI BAWAH INFORMASI ================= -->
-        <div class="mt-14 pt-10 border-t border-slate-200 text-center max-w-3xl mx-auto">
-          <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center justify-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg md:text-xl px-8 py-5 rounded-2xl shadow-xl hover:shadow-orange-500/30 transition transform hover:-translate-y-1 w-full sm:w-auto">
-            <i class="fab fa-whatsapp text-2xl md:text-3xl"></i>
-            <span>Tanya Panitia PPDB via WA</span>
-          </a>
-          
-          <p class="mt-4 text-xs md:text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
-            <i class="fas fa-map-marker-alt text-orange-500 mr-1.5"></i>
-            <strong>Contact Center:</strong> (021) 53654830 - 53654931 atau datang langsung ke Jl. HH No.63 Kebon Jeruk, Jakarta Barat.
-          </p>
         </div>
 
       </div>

@@ -9,6 +9,7 @@ export default defineConfig({
         kelola: resolve(__dirname, 'kelola.html'),
         galeri: resolve(__dirname, 'galeri.html'),
         berita: resolve(__dirname, 'berita.html'),
+        ppdb: resolve(__dirname, 'ppdb.html'),
       },
     },
   },
