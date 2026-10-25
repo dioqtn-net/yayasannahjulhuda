@@ -53,48 +53,63 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-open mr-2 text-gold-500"></i> Kurikulum & Program Unggulan</h4>
-                        <p class="text-slate-600">${unit.curriculum || '-'}</p>
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                        <p class="text-slate-600 text-sm">${unit.curriculum || '-'}</p>
                     </div>
+                    ${unit.featured_program ? `
+                    <div class="mb-4">
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                        <p class="text-slate-600 text-sm">${unit.featured_program}</p>
+                    </div>
+                    ` : ''}
                     ${unit.intracurricular ? `
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
-                        <p class="text-slate-600">${unit.intracurricular}</p>
+                        <p class="text-slate-600 text-sm">${unit.intracurricular}</p>
                     </div>
                     ` : ''}
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                        <p class="text-slate-600">${unit.extracurricular || '-'}</p>
+                        <p class="text-slate-600 text-sm">${unit.extracurricular || '-'}</p>
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                        <p class="text-slate-600">${unit.facilities || '-'}</p>
-                    </div>
-                    ${isMTs ? `
-                    <div class="mb-6 bg-emerald-50/60 rounded-xl p-5 border border-emerald-100/90 shadow-sm">
-                        <h4 class="font-playfair font-bold text-emerald-800 mb-3 flex items-center">
-                            <i class="fas fa-landmark mr-2.5 text-emerald-600"></i> Sejarah & Profil MTs
-                        </h4>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
-                            Awal pendirian MTs Nahjul Huda adalah kelanjutan dari proses penghimpunan anak-anak yatim dan dhuafa yang diselenggarakan oleh Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur yang beralamat di Jl. HH No.63 Rt.08 Rw.01 Kebon Jeruk Jakarta Barat.
-                        </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
-                            Pada perkembangannya tokoh masyarakat, ulama dan pemerintah daerah saling bergotong-royong untuk membangun gedung asrama dan madrasah bagi anak-anak yatim dan dhuafa selanjutnya memikirkan bagaimana memberikan bekal ilmu kepada mereka baik formal maupun non formal.
-                        </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
-                            Dengan biaya swadaya murni dari masyarakat setempat maka dibangunlah gedung asrama dan madrasah. Untuk tahap awal Yayasan Nahjul Huda membangun gedung madrasah untuk tingkat Ibtidaiyah (MI sederajat dengan SD) sebanyak 6 lokal. Kemudian seiring dengan berkembangnya Yayasan Nahjul Huda didirikanlah lagi gedung tiga lantai dengan pembagian: lantai pertama untuk pelaksanaan pendidikan berupa madrasah untuk tingkat tsanawiyah (MTs sederajat dengan SMP), lantai dua untuk asrama puteri, dan lantai ketiga untuk asrama putera. Madrasah tersebut kemudian diberi nama "MTs Nahjul Huda" atas usulan dari segenap masyarakat yang tinggal di Kebon Jeruk pada tahun 1985. Mengapa namanya MTs Nahjul Huda? Karena mengikuti nama yayasan sebagai induk lembaga madrasah yakni Yayasan Nahjul Huda.
-                        </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
-                            Sehubungan MTs Nahjul Huda bernaung di bawah Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur, maka dalam proses penerimaan siswanya pun lebih mengupayakan kepada santri Pondok Pesantren yang diasramakan agar anak-anak yatim dan dhuafa bisa bersekolah dan mendapatkan ilmu serta STTB resmi dari pemerintah sehingga bisa melanjutkan pendidikan ke jenjang berikutnya yaitu SMA/MA kemudian Perguruan Tinggi.
-                        </p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
-                            MTs Nahjul Huda pada awal berdirinya tahun 1985 dipimpin oleh kepala madrasah Bapak Drs. H. Nurohim. Selanjutnya MTs Nahjul Huda sempat mengalami kefakuman pada tahun 1986 s.d 1998 sehingga kegiatan belajar mengajar dihentikan sementara waktu sambil merancang ke depan bagaimana untuk membangunkan kembali pendidikan di madrasah ini.
-                        </p>
-                        <p class="text-slate-600 text-sm leading-relaxed text-justify">
-                            Maka pada tahun 1999 barulah MTs Nahjul Huda bangkit kembali dengan semangat dan tenaga baru untuk mulai mengembangkan pendidikan di wilayah Kebon Jeruk dan sekitarnya, sehingga sampai saat ini siswa di MTs Nahjul Huda mencapai lebih dari 70 siswa dari berbagai daerah.
-                        </p>
+                        <p class="text-slate-600 text-sm">${unit.facilities || '-'}</p>
                     </div>
 
+                    ${(isMTs || isMA) ? `
+                    <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
+                            <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
+                            <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                            <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                            <li>Berwawasan Luas</li>
+                            <li>Mencetak Generasi Global</li>
+                        </ul>
+                    </div>
+                    ` : ''}
+
+                    ${isPonpes ? `
+                    <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                        <div class="mb-2">
+                            <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                            <p class="italic text-slate-700 text-sm">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                            <ol class="list-decimal ml-5 space-y-1 text-sm text-slate-600">
+                                <li>Penanaman Aqidah Sholihah</li>
+                                <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
+                                <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
+                                <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
+                            </ol>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    ${isMTs ? `
                     <!-- Kontak Khusus MTs -->
                     <div class="mt-4 p-4 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-slate-700 shadow-sm">
                         <div class="flex items-center font-bold text-emerald-800">
@@ -113,7 +128,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                 </div>
                 <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
                     <a href="${programHref}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
-                        Lihat Detail Program &rarr;
+                        Lihat Program Lengkap &rarr;
                     </a>
                 </div>
             </div>
