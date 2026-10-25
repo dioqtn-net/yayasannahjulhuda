@@ -152,7 +152,7 @@ ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO education_units (id, name, description, curriculum, extracurricular, facilities, wa_number) VALUES 
 (1, 'SD Islam (SDI) Nahjul Huda', 'Pendidikan dasar dengan pondasi nilai-nilai keislaman yang kuat.', 'Kurikulum Merdeka Terintegrasi Kemenag', 'Pramuka, Marawis, Tahfidz Qur''an', 'Ruang Kelas Nyaman, Perpustakaan, Lapangan Olahraga', '+6281234567890'),
-(2, 'Madrasah Ibtidaiyah (MI) Nahjul Huda', 'Mencetak siswa-siswi berprestasi dengan penekanan pada ilmu agama dasar.', 'Kurikulum Kemenag', 'Pramuka, Qiroah, Futsal', 'Lab Komputer, Mushola, Perpustakaan', '+6281234567890'),
+(2, 'Madrasah Ibtidaiyah (MI) Nahjul Huda', 'Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.', 'Kurikulum Kemenag', 'Futsal, Menari, Pramuka', 'Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan', '+6281234567890'),
 (3, 'Madrasah Tsanawiyah (MTs) Nahjul Huda', 'Pendidikan menengah pertama dengan lingkungan yang Islami dan disiplin.', 'Kurikulum Merdeka & Kemenag', 'Paskibra, PMR, Rohis, Hadroh', 'Lab IPA, Lab Bahasa, Sarana Olahraga', '+6281234567890'),
 (4, 'Madrasah Aliyah (MA) Nahjul Huda', 'Mempersiapkan generasi unggul menuju jenjang pendidikan tinggi.', 'Kurikulum Kemenag (IPA/IPS/Agama)', 'Karya Ilmiah Remaja, Jurnalistik, Bahasa Arab & Inggris', 'Lab Terpadu, Perpustakaan Digital', '+6281234567890'),
 (5, 'Pondok Pesantren Assurur', 'Pendidikan asrama 24 jam dengan kajian kitab kuning dan tahfidz.', 'Salafiyah, Modern, & Tahfidz', 'Muhadharah, Bahtsul Masail, Kaligrafi', 'Asrama Putra/Putri, Masjid As-Surur, Ruang Aula', '+6281234567890')

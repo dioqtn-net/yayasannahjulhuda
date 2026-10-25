@@ -10,6 +10,7 @@ export default defineConfig({
         galeri: resolve(__dirname, 'galeri.html'),
         berita: resolve(__dirname, 'berita.html'),
         ppdb: resolve(__dirname, 'ppdb.html'),
+        program: resolve(__dirname, 'program.html'),
       },
     },
   },

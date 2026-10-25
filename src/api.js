@@ -26,7 +26,17 @@ const fallbackData = {
     },
     education_units: [
         { id: 1, name: "SD Islam (SDI) AL KINDY", image_url: "/images/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
-        { id: 2, name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", image_url: "/images/MI.jpg", description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", curriculum: "Kurikulum Kemenag", extracurricular: "Qiroah, Pramuka, Futsal", facilities: "Lab Komputer, Mushola", wa_number: "+6281234567890" },
+        { 
+            id: 2, 
+            name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", 
+            image_url: "/images/MI.jpg", 
+            description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", 
+            curriculum: "Kurikulum Kemenag", 
+            intracurricular: "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
+            extracurricular: "Futsal, Menari, Pramuka", 
+            facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan", 
+            wa_number: "+6281234567890" 
+        },
         { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Lab IPA, Lab Bahasa, Perpustakaan", wa_number: "+6281234567890" },
         { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Lab Terpadu, Asrama (bagi yang mondok)", wa_number: "+6281234567890" },
         { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+6281234567890" }
@@ -111,10 +121,16 @@ export const api = {
         }
         return list.map(u => {
             const isSDI = u.id === 1 || (u.name && (u.name.includes('SD Islam') || u.name.includes('SDI') || u.name.toLowerCase().includes('al kindy')));
+            const isMI = u.id === 2 || (u.name && (u.name.includes('Ibtidaiyah') || u.name.includes('(MI)')));
             return {
                 ...u,
                 name: isSDI ? 'SD Islam (SDI) AL KINDY' : u.name,
-                image_url: u.image_url || getUnitImage(u)
+                image_url: u.image_url || getUnitImage(u),
+                ...(isMI ? {
+                    intracurricular: u.intracurricular || "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
+                    extracurricular: "Futsal, Menari, Pramuka",
+                    facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan"
+                } : {})
             };
         });
     },

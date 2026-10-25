@@ -42,6 +42,12 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-open mr-2 text-gold-500"></i> Kurikulum & Program Unggulan</h4>
                         <p class="text-slate-600">${unit.curriculum || '-'}</p>
                     </div>
+                    ${unit.intracurricular ? `
+                    <div class="mb-4">
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
+                        <p class="text-slate-600">${unit.intracurricular}</p>
+                    </div>
+                    ` : ''}
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
                         <p class="text-slate-600">${unit.extracurricular || '-'}</p>

@@ -8,6 +8,7 @@ export const renderPrograms = (units) => {
         const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
         const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
+        const hasIntracurricular = Boolean(unit.intracurricular);
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
@@ -19,18 +20,32 @@ export const renderPrograms = (units) => {
                 <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${unitName}</h2>
                 <p class="text-slate-600 text-lg mb-6 leading-relaxed">${unit.description}</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                        <p class="text-sm text-slate-600">${unit.curriculum || '-'}</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                            <p class="text-sm text-slate-600">${unit.curriculum || '-'}</p>
+                        </div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                        <p class="text-sm text-slate-600">${unit.extracurricular || '-'}</p>
+                    ${hasIntracurricular ? `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
+                            <p class="text-sm text-slate-600">${unit.intracurricular}</p>
+                        </div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 md:col-span-2">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                        <p class="text-sm text-slate-600">${unit.facilities || '-'}</p>
+                    ` : ''}
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                            <p class="text-sm text-slate-600">${unit.extracurricular || '-'}</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between ${hasIntracurricular ? '' : 'md:col-span-2'}">
+                        <div>
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                            <p class="text-sm text-slate-600">${unit.facilities || '-'}</p>
+                        </div>
                     </div>
                 </div>
 
