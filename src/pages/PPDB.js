@@ -4,10 +4,6 @@ export const renderPPDB = (ppdb) => {
     // Global switcher function for PPDB tabs
     if (typeof window !== 'undefined') {
         window.switchPPDBTab = function(key) {
-            if (key === 'mts' || key === 'ma') {
-                key = 'mts-ma';
-            }
-
             const panels = document.querySelectorAll('.ppdb-panel');
             panels.forEach(p => p.classList.add('hidden'));
 
@@ -20,7 +16,7 @@ export const renderPPDB = (ppdb) => {
             tabBtns.forEach(btn => {
                 const btnKey = btn.getAttribute('data-ppdb-tab');
                 const icon = btn.querySelector('i');
-                if (btnKey === key || (btnKey === 'mts-ma' && (key === 'mts' || key === 'ma'))) {
+                if (btnKey === key) {
                     btn.className = 'ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2';
                     if (icon) {
                         icon.classList.remove('text-slate-400');
@@ -44,7 +40,7 @@ export const renderPPDB = (ppdb) => {
         // Handle URL hash on load
         setTimeout(() => {
             const hash = window.location.hash.replace('#', '');
-            if (hash) {
+            if (hash && (hash === 'mi' || hash === 'mts' || hash === 'ma' || hash === 'ponpes' || hash === 'sdi')) {
                 window.switchPPDBTab(hash);
             }
         }, 50);
@@ -69,7 +65,7 @@ export const renderPPDB = (ppdb) => {
 
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-slate-800">
         
-        <!-- Navigation Tabs / Dropdown Pilihan Jenjang Pendidikan -->
+        <!-- Navigation Tabs / Dropdown Pilihan Jenjang Pendidikan (5 Tab Terpisah) -->
         <div class="mb-10">
           <div class="text-center mb-6">
             <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Papan Informasi Jenjang</span>
@@ -81,10 +77,11 @@ export const renderPPDB = (ppdb) => {
           <div class="block lg:hidden max-w-md mx-auto mb-4">
             <div class="relative">
               <select id="ppdb-select-jenjang" onchange="window.switchPPDBTab(this.value)" class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none appearance-none">
-                <option value="mts-ma" selected>MTs & MA (Tsanawiyah & Aliyah)</option>
-                <option value="mi">Madrasah Ibtidaiyah (MI)</option>
-                <option value="ponpes">Pondok Pesantren Assurur</option>
                 <option value="sdi">SD Islam (SDI) AL KINDY</option>
+                <option value="mi">Madrasah Ibtidaiyah (MI)</option>
+                <option value="mts" selected>Madrasah Tsanawiyah (MTs)</option>
+                <option value="ma">Madrasah Aliyah (MA)</option>
+                <option value="ponpes">Pondok Pesantren Assurur</option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                 <i class="fas fa-chevron-down"></i>
@@ -92,41 +89,42 @@ export const renderPPDB = (ppdb) => {
             </div>
           </div>
 
-          <!-- Tabs untuk Layar Besar (Desktop / Tablet) -->
+          <!-- Tabs untuk Layar Besar (Desktop / Tablet) - 5 Tab Mandiri -->
           <div class="hidden lg:flex flex-wrap justify-center gap-3">
-            <button type="button" data-ppdb-tab="mts-ma" onclick="window.switchPPDBTab('mts-ma')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2">
-              <i class="fas fa-graduation-cap text-gold-400"></i>
-              <span>MTs & MA</span>
+            <button type="button" data-ppdb-tab="sdi" onclick="window.switchPPDBTab('sdi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
+              <i class="fas fa-school text-slate-400"></i>
+              <span>SD Islam (SDI) AL KINDY</span>
             </button>
             <button type="button" data-ppdb-tab="mi" onclick="window.switchPPDBTab('mi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
               <i class="fas fa-book-reader text-slate-400"></i>
               <span>Madrasah Ibtidaiyah (MI)</span>
             </button>
+            <button type="button" data-ppdb-tab="mts" onclick="window.switchPPDBTab('mts')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2">
+              <i class="fas fa-graduation-cap text-gold-400"></i>
+              <span>Madrasah Tsanawiyah (MTs)</span>
+            </button>
+            <button type="button" data-ppdb-tab="ma" onclick="window.switchPPDBTab('ma')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
+              <i class="fas fa-university text-slate-400"></i>
+              <span>Madrasah Aliyah (MA)</span>
+            </button>
             <button type="button" data-ppdb-tab="ponpes" onclick="window.switchPPDBTab('ponpes')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
               <i class="fas fa-mosque text-slate-400"></i>
               <span>Pondok Pesantren Assurur</span>
             </button>
-            <button type="button" data-ppdb-tab="sdi" onclick="window.switchPPDBTab('sdi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-school text-slate-400"></i>
-              <span>SD Islam (SDI) AL KINDY</span>
-            </button>
           </div>
         </div>
 
-        <!-- ================= 1. PANEL MTs & MA (ACTIVE DEFAULT) ================= -->
-        <div id="ppdb-panel-mts-ma" class="ppdb-panel space-y-8">
+        <!-- ================= 1. PANEL MTs (ACTIVE DEFAULT) ================= -->
+        <div id="ppdb-panel-mts" class="ppdb-panel space-y-8">
           
-          <!-- Banner Pengantar MTs & MA -->
+          <!-- Banner Pengantar MTs -->
           <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <div class="flex -space-x-4 overflow-hidden flex-shrink-0">
-                <img src="/images/MTs.jpg" onerror="this.onerror=null;this.src='./images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="inline-block w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md bg-white">
-                <img src="/images/MA.jpg" onerror="this.onerror=null;this.src='./images/MA.jpg';" alt="Logo MA Nahjul Huda" class="inline-block w-16 h-16 object-cover rounded-full border-2 border-emerald-400 shadow-md bg-white">
-              </div>
+              <img src="/images/MTs.jpg" onerror="this.onerror=null;this.src='./images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
-                <h3 class="text-xl md:text-2xl font-playfair font-bold">MTs & MA Nahjul Huda</h3>
-                <p class="text-emerald-100 text-sm">Madrasah Tsanawiyah & Madrasah Aliyah - Kampus Kebon Jeruk, Jakarta Barat</p>
+                <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+                <p class="text-emerald-100 text-sm">Pendidikan Menengah Pertama Berkarakter Islami - Kampus Kebon Jeruk, Jakarta Barat</p>
               </div>
             </div>
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
@@ -134,7 +132,7 @@ export const renderPPDB = (ppdb) => {
             </div>
           </div>
 
-          <!-- Label / Keterangan Spesial SPMB MTs/MA -->
+          <!-- Label / Keterangan Spesial SPMB MTs -->
           <div class="p-5 md:p-6 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 rounded-2xl shadow-md border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-slate-950 text-gold-400 rounded-xl flex items-center justify-center text-xl shadow flex-shrink-0">
@@ -145,7 +143,7 @@ export const renderPPDB = (ppdb) => {
                   PROGRAM UNGGULAN
                 </span>
                 <h4 class="text-lg sm:text-xl font-bold font-playfair tracking-tight text-slate-950 leading-snug">
-                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs/MA - GRATIS UANG PANGKAL
+                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs - GRATIS UANG PANGKAL
                 </h4>
               </div>
             </div>
@@ -156,10 +154,10 @@ export const renderPPDB = (ppdb) => {
             </div>
           </div>
 
-          <!-- Grid 2 Kolom: Syarat Pendaftaran & Biaya Bebas Pangkal -->
+          <!-- Grid 2 Kolom: Syarat Pendaftaran & Biaya MTs -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- KARTU SYARAT PENDAFTARAN MTs & MA -->
+            <!-- KARTU SYARAT PENDAFTARAN MTs -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
               <div>
                 <div class="flex items-center justify-between mb-4">
@@ -172,10 +170,10 @@ export const renderPPDB = (ppdb) => {
                 </div>
 
                 <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
-                  Syarat Pendaftaran MTs & MA
+                  Syarat Pendaftaran MTs Nahjul Huda
                 </h3>
                 <p class="text-slate-500 text-xs sm:text-sm mb-6">
-                  Calon murid baru tingkat MTs maupun MA wajib menyerahkan kelengkapan berkas administrasi berikut:
+                  Calon murid baru tingkat Madrasah Tsanawiyah (MTs) wajib menyerahkan kelengkapan berkas administrasi berikut:
                 </p>
 
                 <div class="space-y-3">
@@ -218,76 +216,76 @@ export const renderPPDB = (ppdb) => {
 
               <div class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-3">
                 <i class="fas fa-info-circle text-emerald-700 text-base flex-shrink-0"></i>
-                <span>Persyaratan berlaku seragam untuk calon murid baru tingkat MTs maupun MA Nahjul Huda.</span>
+                <span>Seluruh berkas diserahkan ke ruang sekretariat pendaftaran MTs Nahjul Huda.</span>
               </div>
             </div>
 
-            <!-- KARTU BIAYA & KEUNGGULAN (GRATIS UANG PANGKAL) -->
+            <!-- KARTU BIAYA MTs (GRATIS UANG PANGKAL) -->
             <div class="bg-gradient-to-br from-emerald-50 via-white to-amber-50/40 rounded-2xl shadow-sm border-2 border-emerald-200/80 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition relative overflow-hidden">
               <div class="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/10 rounded-full pointer-events-none"></div>
 
-              <div>
-                <div class="flex items-center justify-between mb-4">
-                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
-                    <i class="fas fa-hand-holding-heart"></i>
-                  </div>
-                  <span class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white shadow-sm">
-                    GRATIS UANG PANGKAL
-                  </span>
-                </div>
-
-                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
-                  Keringanan Biaya Pendidikan
-                </h3>
-                
-                <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs/MA memberikan kemudahan akses pendidikan berkualitas:
-                </p>
-
-                <div class="space-y-3.5">
-                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
-                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                      <i class="fas fa-check"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-bold text-slate-800 text-base">Bebas Uang Pangkal</h4>
-                      <p class="text-xs text-slate-500">Gratis uang pangkal masuk untuk seluruh calon murid baru MTs & MA</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
-                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                      <i class="fas fa-check"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-bold text-slate-800 text-base">Formulir Pendaftaran</h4>
-                      <p class="text-xs text-slate-500">Disediakan secara langsung oleh panitia pendaftaran</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
-                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                      <i class="fas fa-check"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-bold text-slate-800 text-base">Pendidikan Berorientasi Sosial & Dakwah</h4>
-                      <p class="text-xs text-slate-500">Membantu santri yatim dan dhuafa mendapatkan pendidikan bermutu</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-6 p-4 rounded-xl bg-emerald-800 text-white text-xs leading-relaxed flex items-start gap-3">
-                <i class="fas fa-school text-gold-400 text-base mt-0.5 flex-shrink-0"></i>
                 <div>
-                  Pendidikan di MTs & MA Nahjul Huda berorientasi pada pembinaan akhlak mulia, penguasaan ilmu agama, serta kesiapan akademik lanjutan.
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                      <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white shadow-sm">
+                      GRATIS UANG PANGKAL
+                    </span>
+                  </div>
+
+                  <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
+                    Keringanan Biaya Pendidikan MTs
+                  </h3>
+                  
+                  <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                    Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs memberikan kemudahan akses pendidikan berkualitas:
+                  </p>
+
+                  <div class="space-y-3.5">
+                    <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                      <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        <i class="fas fa-check"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-bold text-slate-800 text-base">Bebas Uang Pangkal</h4>
+                        <p class="text-xs text-slate-500">Gratis uang pangkal masuk untuk seluruh calon murid baru MTs</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                      <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        <i class="fas fa-check"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-bold text-slate-800 text-base">Formulir Pendaftaran</h4>
+                        <p class="text-xs text-slate-500">Disediakan secara langsung oleh panitia pendaftaran</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                      <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        <i class="fas fa-check"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-bold text-slate-800 text-base">Pendidikan Berorientasi Dakwah & Sosial</h4>
+                        <p class="text-xs text-slate-500">Membantu santri yatim dan dhuafa mendapatkan akses pendidikan bermutu</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <div class="mt-6 p-4 rounded-xl bg-emerald-800 text-white text-xs leading-relaxed flex items-start gap-3">
+                  <i class="fas fa-school text-gold-400 text-base mt-0.5 flex-shrink-0"></i>
+                  <div>
+                    Pendidikan di MTs Nahjul Huda berorientasi pada pembinaan karakter akhlakul karimah, penguasaan ilmu agama, serta kesiapan akademik lanjutan.
+                  </div>
+                </div>
             </div>
 
           </div>
 
-          <!-- KARTU KONTAK PENDAFTARAN WHATSAPP (MTs & MA) -->
+          <!-- KARTU KONTAK PENDAFTARAN WHATSAPP (MTs) -->
           <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
               <div class="flex items-center gap-3">
@@ -296,7 +294,7 @@ export const renderPPDB = (ppdb) => {
                 </div>
                 <div>
                   <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900">
-                    Kontak Pendaftaran MTs & MA (WhatsApp)
+                    Kontak Pendaftaran MTs (WhatsApp)
                   </h3>
                   <p class="text-slate-500 text-xs sm:text-sm">Klik salah satu narahubung panitia berikut untuk terhubung langsung via WhatsApp:</p>
                 </div>
@@ -315,7 +313,7 @@ export const renderPPDB = (ppdb) => {
                   </div>
                   <div>
                     <h4 class="font-bold text-slate-900 text-base sm:text-lg">Umi Hj. Dahlia, M.Pd.</h4>
-                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs & MA</p>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs</p>
                     <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0858-8068-2115</p>
                   </div>
                 </div>
@@ -333,7 +331,7 @@ export const renderPPDB = (ppdb) => {
                   </div>
                   <div>
                     <h4 class="font-bold text-slate-900 text-base sm:text-lg">Abu Jalaluddin, S.Ag.</h4>
-                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs & MA</p>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MTs</p>
                     <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0815-8316-436</p>
                   </div>
                 </div>
@@ -347,7 +345,238 @@ export const renderPPDB = (ppdb) => {
 
         </div>
 
-        <!-- ================= 2. PANEL MI (MADRASAH IBTIDAIYAH) ================= -->
+        <!-- ================= 2. PANEL MA ================= -->
+        <div id="ppdb-panel-ma" class="ppdb-panel hidden space-y-8">
+          
+          <!-- Banner Pengantar MA -->
+          <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
+            <div class="flex items-center gap-4">
+              <img src="/images/MA.jpg" onerror="this.onerror=null;this.src='./images/MA.jpg';" alt="Logo MA Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-emerald-400 shadow-md flex-shrink-0 bg-white">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
+                <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Aliyah (MA) Nahjul Huda</h3>
+                <p class="text-emerald-100 text-sm">Pendidikan Menengah Atas Berkarakter Islami & Unggul - Kampus Kebon Jeruk, Jakarta Barat</p>
+              </div>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
+              <i class="fas fa-check-circle"></i> Pendaftaran Terbuka
+            </div>
+          </div>
+
+          <!-- Label / Keterangan Spesial SPMB MA -->
+          <div class="p-5 md:p-6 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 rounded-2xl shadow-md border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-slate-950 text-gold-400 rounded-xl flex items-center justify-center text-xl shadow flex-shrink-0">
+                <i class="fas fa-gift text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-[11px] font-black uppercase tracking-wider bg-slate-950 text-gold-300 px-3 py-0.5 rounded-full inline-block mb-1">
+                  PROGRAM UNGGULAN
+                </span>
+                <h4 class="text-lg sm:text-xl font-bold font-playfair tracking-tight text-slate-950 leading-snug">
+                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MA - GRATIS UANG PANGKAL
+                </h4>
+              </div>
+            </div>
+            <div class="flex-shrink-0">
+              <span class="px-4 py-2 bg-slate-950 text-gold-300 font-extrabold text-xs sm:text-sm rounded-xl shadow inline-flex items-center gap-2">
+                <i class="fas fa-award text-yellow-400"></i> Bebas Uang Pangkal 100%
+              </span>
+            </div>
+          </div>
+
+          <!-- Grid 2 Kolom: Syarat Pendaftaran & Biaya MA -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- KARTU SYARAT PENDAFTARAN MA (SAMA PERSIS DENGAN MTs) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-clipboard-check"></i>
+                  </div>
+                  <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    5 Persyaratan Berkas
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
+                  Syarat Pendaftaran MA Nahjul Huda
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                  Calon murid baru tingkat Madrasah Aliyah (MA) wajib menyerahkan kelengkapan berkas administrasi berikut:
+                </p>
+
+                <div class="space-y-3">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      1
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Mengisi formulir pendaftaran</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      2
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Kartu Keluarga & KTP Orang Tua/Wali</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      3
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Akta Kelahiran</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      4
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Pas Foto 3x4 (4 lembar)</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      5
+                    </div>
+                    <span class="text-slate-700 text-sm font-medium">Fotokopi Ijazah (2 lembar)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-3">
+                <i class="fas fa-info-circle text-emerald-700 text-base flex-shrink-0"></i>
+                <span>Seluruh berkas diserahkan ke ruang sekretariat pendaftaran MA Nahjul Huda.</span>
+              </div>
+            </div>
+
+            <!-- KARTU BIAYA MA (GRATIS UANG PANGKAL) -->
+            <div class="bg-gradient-to-br from-emerald-50 via-white to-amber-50/40 rounded-2xl shadow-sm border-2 border-emerald-200/80 p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition relative overflow-hidden">
+              <div class="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/10 rounded-full pointer-events-none"></div>
+
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-hand-holding-heart"></i>
+                  </div>
+                  <span class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white shadow-sm">
+                    GRATIS UANG PANGKAL
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-2">
+                  Keringanan Biaya Pendidikan MA
+                </h3>
+                
+                <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MA memberikan kemudahan akses pendidikan berkualitas:
+                </p>
+
+                <div class="space-y-3.5">
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-slate-800 text-base">Bebas Uang Pangkal</h4>
+                      <p class="text-xs text-slate-500">Gratis uang pangkal masuk untuk seluruh calon murid baru MA</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-slate-800 text-base">Formulir Pendaftaran</h4>
+                      <p class="text-xs text-slate-500">Disediakan secara langsung oleh panitia pendaftaran</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-emerald-200/70 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-slate-800 text-base">Pendidikan Berorientasi Dakwah & Sosial</h4>
+                      <p class="text-xs text-slate-500">Membantu santri yatim dan dhuafa mendapatkan akses pendidikan bermutu</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-emerald-800 text-white text-xs leading-relaxed flex items-start gap-3">
+                <i class="fas fa-school text-gold-400 text-base mt-0.5 flex-shrink-0"></i>
+                <div>
+                  Pendidikan di MA Nahjul Huda berorientasi pada pembinaan keilmuan mendalam, persiapan perguruan tinggi, serta nilai akhlakul karimah.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- KARTU KONTAK PENDAFTARAN WHATSAPP (MA - SAMA PERSIS DENGAN MTs) -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                  <i class="fab fa-whatsapp text-2xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900">
+                    Kontak Pendaftaran MA (WhatsApp)
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm">Klik salah satu narahubung panitia berikut untuk terhubung langsung via WhatsApp:</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 w-fit">
+                <i class="fas fa-headset mr-1.5"></i> Layanan Konsultasi
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Kontak 1: Umi Hj. Dahlia, M.Pd. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Umi Hj. Dahlia, M.Pd.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MA</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0858-8068-2115</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/6285880682115" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Umi Hj. Dahlia, M.Pd.</span>
+                </a>
+              </div>
+
+              <!-- Kontak 2: Abu Jalaluddin, S.Ag. -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-400 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">Abu Jalaluddin, S.Ag.</h4>
+                    <p class="text-xs text-emerald-700 font-semibold">Panitia PPDB MA</p>
+                    <p class="text-xs text-slate-500 mt-0.5">WhatsApp: 0815-8316-436</p>
+                  </div>
+                </div>
+                <a href="https://wa.me/628158316436" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  <span>Hubungi Abu Jalaluddin, S.Ag.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= 3. PANEL MI (MADRASAH IBTIDAIYAH) ================= -->
         <div id="ppdb-panel-mi" class="ppdb-panel hidden space-y-8">
           
           <!-- Banner Pengantar MI -->
@@ -542,7 +771,7 @@ export const renderPPDB = (ppdb) => {
 
         </div>
 
-        <!-- ================= 3. PANEL PONPES (PONDOK PESANTREN ASSURUR) ================= -->
+        <!-- ================= 4. PANEL PONPES (PONDOK PESANTREN ASSURUR) ================= -->
         <div id="ppdb-panel-ponpes" class="ppdb-panel hidden space-y-8">
           
           <!-- Banner Pengantar Ponpes -->
@@ -666,7 +895,7 @@ export const renderPPDB = (ppdb) => {
 
         </div>
 
-        <!-- ================= 4. PANEL SDI AL KINDY ================= -->
+        <!-- ================= 5. PANEL SDI AL KINDY ================= -->
         <div id="ppdb-panel-sdi" class="ppdb-panel hidden space-y-8">
           <div class="bg-white rounded-2xl border border-slate-200 p-10 md:p-14 text-center max-w-2xl mx-auto shadow-sm">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
