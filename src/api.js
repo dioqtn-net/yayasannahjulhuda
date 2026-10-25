@@ -37,8 +37,8 @@ const fallbackData = {
             facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan", 
             wa_number: "+628991168301" 
         },
-        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Lab IPA, Lab Bahasa, Perpustakaan", wa_number: "+6281234567890" },
-        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Lab Terpadu, Asrama (bagi yang mondok)", wa_number: "+6281234567890" },
+        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+6285880682115" },
+        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+628158316436" },
         { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+6281234567890" }
     ],
     news: [
@@ -122,6 +122,8 @@ export const api = {
         return list.map(u => {
             const isSDI = u.id === 1 || (u.name && (u.name.includes('SD Islam') || u.name.includes('SDI') || u.name.toLowerCase().includes('al kindy')));
             const isMI = u.id === 2 || (u.name && (u.name.includes('Ibtidaiyah') || u.name.includes('(MI)')));
+            const isMTs = u.id === 3 || (u.name && (u.name.includes('MTs') || u.name.toLowerCase().includes('tsanawiyah')));
+            const isMA = u.id === 4 || (u.name && (u.name.includes('MA') || u.name.toLowerCase().includes('aliyah')));
             return {
                 ...u,
                 name: isSDI ? 'SD Islam (SDI) AL KINDY' : u.name,
@@ -131,6 +133,14 @@ export const api = {
                     extracurricular: "Futsal, Menari, Pramuka",
                     facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan",
                     wa_number: "+628991168301"
+                } : {}),
+                ...(isMTs ? {
+                    facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
+                    wa_number: "+6285880682115"
+                } : {}),
+                ...(isMA ? {
+                    facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
+                    wa_number: "+628158316436"
                 } : {})
             };
         });

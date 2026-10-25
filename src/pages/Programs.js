@@ -6,9 +6,17 @@ export const renderPrograms = (units) => {
         const isEven = index % 2 !== 0;
         const imageUrl = unit.image_url || getUnitImage(unit);
         const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const isMI = unit.id === 2 || (unit.name && (unit.name.includes('Ibtidaiyah') || unit.name.includes('(MI)')));
         const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
+        const isMA = unit.id === 4 || (unit.name && (unit.name.includes('MA') || unit.name.toLowerCase().includes('aliyah')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         const hasIntracurricular = Boolean(unit.intracurricular);
+
+        let waLink = `https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unit.name)}`;
+        if (isMI) waLink = 'https://wa.me/628991168301';
+        if (isMTs) waLink = 'https://wa.me/6285880682115';
+        if (isMA) waLink = 'https://wa.me/628158316436';
+
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
@@ -47,6 +55,18 @@ export const renderPrograms = (units) => {
                             <p class="text-sm text-slate-600">${unit.facilities || '-'}</p>
                         </div>
                     </div>
+                    ${(isMTs || isMA) ? `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 col-span-full md:col-span-2">
+                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
+                            <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
+                            <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                            <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                            <li>Berwawasan Luas</li>
+                            <li>Mencetak Generasi Global</li>
+                        </ul>
+                    </div>
+                    ` : ''}
                 </div>
 
                 ${isMTs ? `
@@ -91,7 +111,7 @@ export const renderPrograms = (units) => {
                 </div>
                 ` : ''}
                 
-                <a href="${isMI ? 'https://wa.me/628991168301' : `https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unit.name)}`}" target="_blank" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition group">
+                <a href="${waLink}" target="_blank" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition group">
                     Tanya PPDB via WhatsApp <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i>
                 </a>
             </div>
