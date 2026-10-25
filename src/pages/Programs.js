@@ -9,6 +9,7 @@ export const renderPrograms = (units) => {
         const isMI = unit.id === 2 || (unit.name && (unit.name.includes('Ibtidaiyah') || unit.name.includes('(MI)')));
         const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
         const isMA = unit.id === 4 || (unit.name && (unit.name.includes('MA') || unit.name.toLowerCase().includes('aliyah')));
+        const isPonpes = unit.id === 5 || (unit.name && (unit.name.toLowerCase().includes('pesantren') || unit.name.toLowerCase().includes('ponpes') || unit.name.toLowerCase().includes('assurur')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         const hasIntracurricular = Boolean(unit.intracurricular);
 
@@ -16,6 +17,7 @@ export const renderPrograms = (units) => {
         if (isMI) waLink = 'https://wa.me/628991168301';
         if (isMTs) waLink = 'https://wa.me/6285880682115';
         if (isMA) waLink = 'https://wa.me/628158316436';
+        if (isPonpes) waLink = 'https://wa.me/628569010538';
 
         return `
         <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
@@ -43,13 +45,21 @@ export const renderPrograms = (units) => {
                         </div>
                     </div>
                     ` : ''}
+                    ${isPonpes ? `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                            <p class="text-sm text-slate-600">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
+                        </div>
+                    </div>
+                    ` : ''}
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
                             <p class="text-sm text-slate-600">${unit.extracurricular || '-'}</p>
                         </div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between ${hasIntracurricular ? '' : 'md:col-span-2'}">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between ${hasIntracurricular || isPonpes ? '' : 'md:col-span-2'}">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
                             <p class="text-sm text-slate-600">${unit.facilities || '-'}</p>
@@ -65,6 +75,28 @@ export const renderPrograms = (units) => {
                             <li>Berwawasan Luas</li>
                             <li>Mencetak Generasi Global</li>
                         </ul>
+                    </div>
+                    ` : ''}
+                    ${isPonpes ? `
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-100 col-span-full md:col-span-2">
+                        <h4 class="font-bold text-emerald-700 mb-3 flex items-center text-base">
+                            <i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi Pondok Pesantren
+                        </h4>
+                        <div class="mb-4 bg-white/70 p-3 rounded-lg border border-slate-200/60">
+                            <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
+                            <p class="italic text-slate-700 text-sm leading-relaxed">
+                                "Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"
+                            </p>
+                        </div>
+                        <div class="bg-white/70 p-3 rounded-lg border border-slate-200/60">
+                            <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1.5">Misi:</span>
+                            <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600">
+                                <li>Penanaman Aqidah Sholihah</li>
+                                <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
+                                <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
+                                <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
+                            </ol>
+                        </div>
                     </div>
                     ` : ''}
                 </div>

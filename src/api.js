@@ -39,7 +39,7 @@ const fallbackData = {
         },
         { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+6285880682115" },
         { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+628158316436" },
-        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+6281234567890" }
+        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Mengkaji kitab kuning dan pembinaan karakter Islami selama 24 jam.", curriculum: "Salafiyah & Modern", featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+628569010538" }
     ],
     news: [
         { id: 1, title: "Penerimaan Santri Baru Telah Dibuka", content: "Segera daftarkan putra-putri Anda ke Yayasan Nahjul Huda...", date: "2023-10-01", image_url: null },
@@ -124,6 +124,7 @@ export const api = {
             const isMI = u.id === 2 || (u.name && (u.name.includes('Ibtidaiyah') || u.name.includes('(MI)')));
             const isMTs = u.id === 3 || (u.name && (u.name.includes('MTs') || u.name.toLowerCase().includes('tsanawiyah')));
             const isMA = u.id === 4 || (u.name && (u.name.includes('MA') || u.name.toLowerCase().includes('aliyah')));
+            const isPonpes = u.id === 5 || (u.name && (u.name.toLowerCase().includes('pesantren') || u.name.toLowerCase().includes('ponpes') || u.name.toLowerCase().includes('assurur')));
             return {
                 ...u,
                 name: isSDI ? 'SD Islam (SDI) AL KINDY' : u.name,
@@ -141,6 +142,10 @@ export const api = {
                 ...(isMA ? {
                     facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
                     wa_number: "+628158316436"
+                } : {}),
+                ...(isPonpes ? {
+                    featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah",
+                    wa_number: "+628569010538"
                 } : {})
             };
         });
