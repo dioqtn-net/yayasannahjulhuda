@@ -17,10 +17,14 @@ export const renderPrograms = (units) => {
         if (isMI) waLink = 'https://wa.me/628991168301';
         if (isMTs) waLink = 'https://wa.me/6285880682115';
         if (isMA) waLink = 'https://wa.me/628158316436';
-        if (isPonpes) waLink = 'https://wa.me/628569010538';
+        let anchorId = 'program-sdi';
+        if (isMI) anchorId = 'program-mi';
+        else if (isMTs) anchorId = 'program-mts';
+        else if (isMA) anchorId = 'program-ma';
+        else if (isPonpes) anchorId = 'program-ponpes';
 
         return `
-        <div class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
+        <div id="${anchorId}" class="flex flex-col md:flex-row ${isEven ? 'md:flex-row-reverse' : ''} gap-8 items-center bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-12 hover:shadow-md transition">
             <div class="w-full md:w-1/3">
                 <div class="aspect-video md:aspect-square bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm flex items-center justify-center p-4 sm:p-6 group">
                     <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto group-hover:scale-105 transition duration-300">

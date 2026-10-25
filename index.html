@@ -12,7 +12,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
-    <div id="app" class="flex-grow flex flex-col"></div>
+    <div id="app" class="flex-grow flex flex-col">
+      <!-- Jenjang Pendidikan (Fallback/Pre-render) -->
+      <section id="jenjang" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid-5-centered">
+            <!-- Card SDI -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
+              <div>
+                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">SD Islam (SDI) AL KINDY</h3>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
+              </div>
+              <div>
+                <a href="program.html#program-sdi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                  Lihat Detail Program &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Card MI -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
+              <div>
+                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
+              </div>
+              <div>
+                <a href="program.html#program-mi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                  Lihat Detail Program &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Card MTs -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
+              <div>
+                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
+              </div>
+              <div>
+                <a href="program.html#program-mts" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                  Lihat Detail Program &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Card MA -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
+              <div>
+                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Aliyah (MA) Nahjul Huda</h3>
+                <p class="text-slate-600 text-sm mb-4">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
+              </div>
+              <div>
+                <a href="program.html#program-ma" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                  Lihat Detail Program &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Card Ponpes -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
+              <div>
+                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Pondok Pesantren Assurur</h3>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
+              </div>
+              <div>
+                <a href="program.html#program-ponpes" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                  Lihat Detail Program &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -5,8 +5,20 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
         const isSDI = unit.id === 1 || (unit.name && (unit.name.includes('SD Islam') || unit.name.includes('SDI') || unit.name.toLowerCase().includes('al kindy')));
+        const isMI = unit.id === 2 || (unit.name && (unit.name.includes('Ibtidaiyah') || unit.name.includes('(MI)')));
         const isMTs = unit.id === 3 || (unit.name && (unit.name.includes('MTs') || unit.name.toLowerCase().includes('tsanawiyah')));
+        const isMA = unit.id === 4 || (unit.name && (unit.name.includes('MA') || unit.name.toLowerCase().includes('aliyah')));
+        const isPonpes = unit.id === 5 || (unit.name && (unit.name.toLowerCase().includes('pesantren') || unit.name.toLowerCase().includes('ponpes') || unit.name.toLowerCase().includes('assurur')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
+
+        let programAnchor = 'program-sdi';
+        if (isMI) programAnchor = 'program-mi';
+        else if (isMTs) programAnchor = 'program-mts';
+        else if (isMA) programAnchor = 'program-ma';
+        else if (isPonpes) programAnchor = 'program-ponpes';
+
+        const programHref = `program.html#${programAnchor}`;
+
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
             <div class="w-full h-48 flex-shrink-0 flex items-center justify-center bg-white p-4 border-b border-slate-100 overflow-hidden">
@@ -18,7 +30,9 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
                 </div>
                 <div>
-                    <span class="inline-block border border-gold-500 text-gold-600 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gold-50 transition">Detail Lengkap</span>
+                    <a href="${programHref}" onclick="event.stopPropagation()" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                        Lihat Detail Program &rarr;
+                    </a>
                 </div>
             </div>
         </div>
@@ -98,8 +112,8 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     ` : ''}
                 </div>
                 <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
-                    <a href="https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unitName)}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
-                        <i class="fab fa-whatsapp text-lg mr-2"></i> Tanya PPDB via WhatsApp
+                    <a href="${programHref}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
+                        Lihat Detail Program &rarr;
                     </a>
                 </div>
             </div>
