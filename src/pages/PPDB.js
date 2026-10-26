@@ -877,7 +877,7 @@ export const renderPPDB = (ppdb) => {
 
                   <div class="w-full h-48 md:h-64 rounded-lg overflow-hidden relative shadow-sm border border-emerald-200">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5290947702425!2d106.76288631476903!3d-6.193693495516086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f7004f2f9c8f%3A0x6d8f8a846c48316!2sYayasan%20Nahdlatul%20Ulama%20Nahjul%20Huda!5e0!3m2!1sen!2sid!4v1698240000000!5m2!1sen!2sid" 
+                      src="https://maps.google.com/maps?q=Pondok%20Pesantren%20Assurur%2C%20Kebon%20Jeruk&t=&z=17&ie=UTF8&iwloc=&output=embed" 
                       width="100%" 
                       height="100%" 
                       style="border:0; position:absolute; top:0; left:0;" 
@@ -885,6 +885,13 @@ export const renderPPDB = (ppdb) => {
                       loading="lazy" 
                       referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
+                  </div>
+
+                  <div class="mt-3 text-center">
+                    <a href="https://maps.app.goo.gl/TCHeSziQZrqFz8nYA" target="_blank" class="text-green-700 text-sm font-semibold hover:text-green-800 hover:underline inline-flex items-center">
+                      <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+                      Buka di Aplikasi Google Maps
+                    </a>
                   </div>
                 </div>
               </div>
