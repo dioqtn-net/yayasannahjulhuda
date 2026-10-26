@@ -44,7 +44,16 @@ export const renderNews = (newsList) => {
             if (!modal) return;
             document.getElementById('modalNewsTitle').textContent = title;
             document.getElementById('modalNewsBody').textContent = desc;
-            document.getElementById('modalNewsImg').src = imgSrc;
+            const modalImg = document.getElementById('modalNewsImg');
+            if (modalImg) {
+                if (imgSrc) {
+                    modalImg.src = imgSrc;
+                    modalImg.classList.remove('hidden');
+                } else {
+                    modalImg.src = '';
+                    modalImg.classList.add('hidden');
+                }
+            }
             document.getElementById('modalNewsDate').textContent = date;
             document.getElementById('modalNewsBadge').textContent = badge;
             modal.classList.remove('hidden');
@@ -159,8 +168,55 @@ export const renderNews = (newsList) => {
           </div>
         </div>
 
-        <!-- 3 Card Berita Sorotan (Grid 3 Kolom - Hanya Teks) -->
+        <!-- Card Berita Sorotan MTs -->
         <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Card Baru: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <!-- Image Slider (Carousel) Sederhana dengan CSS -->
+            <div class="relative w-full h-48 mb-4 overflow-hidden rounded-t-2xl group">
+              <div class="flex overflow-x-auto snap-x snap-mandatory h-full w-full scroll-smooth" style="scrollbar-width: none;">
+                <!-- Foto 1 -->
+                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="w-full h-full object-cover shrink-0 snap-center">
+                <!-- Foto 2 -->
+                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="w-full h-full object-cover shrink-0 snap-center">
+              </div>
+              <!-- Indikator visual agar pengunjung tahu gambar bisa digeser -->
+              <div class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none">
+                <i class="fas fa-chevron-left text-[10px]"></i> Geser <i class="fas fa-chevron-right text-[10px]"></i>
+              </div>
+            </div>
+
+            <div class="px-6 pb-6 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-teal-800 bg-teal-100/90 px-2.5 py-0.5 rounded-full border border-teal-200 text-[11px]">
+                    Akreditasi
+                  </span>
+                  <div class="flex items-center gap-2 text-slate-400">
+                    <span class="font-medium text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
+                      BAN-PDM
+                    </span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
+                  Visitasi Akreditasi MTs Nahjul Huda 2026/2027
+                </h3>
+                <p class="news-desc text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                  MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.
+                </p>
+              </div>
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Humas MTs
+                </span>
+                <button onclick="openNewsModal('Visitasi Akreditasi MTs Nahjul Huda 2026/2027', 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah. Seluruh dewan guru, staf, serta santri menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.', '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg', 'MTs Nahjul Huda', 'Akreditasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
 
           <!-- Card 1: Prestasi Siswa MTs di Ajang OMI -->
           <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
@@ -307,6 +363,8 @@ export const renderNews = (newsList) => {
               Judul Berita
             </h2>
             <div class="w-16 h-1 bg-emerald-600 rounded-full mb-4"></div>
+            <!-- Foto Berita di Modal jika ada -->
+            <img id="modalNewsImg" src="" alt="Foto Berita" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-4 hidden shadow-sm border border-slate-100">
             <p id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line mb-6">
               Isi berita lengkap...
             </p>
