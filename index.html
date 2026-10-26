@@ -13,6 +13,49 @@
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
     <div id="app" class="flex-grow flex flex-col">
+      <!-- Navbar -->
+      <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-2 md:py-3">
+            <div class="flex items-center">
+              <a href="/" class="flex-shrink-0 flex items-center">
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
+              </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+              <a href="/" class="text-green-800 font-bold border-b-2 border-green-600 pb-1">Beranda</a>
+              <a href="/profil" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Profil</a>
+              <a href="/program" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Program</a>
+              <a href="/fasilitas" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Fasilitas</a>
+              <a href="/berita" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Berita</a>
+              <a href="/galeri" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Galeri</a>
+              <a href="/kontak" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Kontak</a>
+              <a href="/ppdb" class="bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300 text-white px-5 py-2 rounded-full font-semibold shadow-sm inline-block transform">Info PPDB</a>
+            </div>
+            <div class="-mr-2 flex items-center md:hidden">
+              <button id="toggleMobileBtn" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full z-50">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/" class="block px-3 py-2 rounded-md text-base font-bold text-green-800 bg-green-50">Beranda</a>
+            <a href="/profil" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Profil</a>
+            <a href="/program" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Program</a>
+            <a href="/fasilitas" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Fasilitas</a>
+            <a href="/berita" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Berita</a>
+            <a href="/galeri" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Galeri</a>
+            <a href="/kontak" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Kontak</a>
+            <a href="/ppdb" class="block px-3 py-2 rounded-md text-base font-bold text-white bg-orange-500 hover:bg-orange-600 text-center">Info PPDB</a>
+          </div>
+        </div>
+      </nav>
+
       <!-- Jenjang Pendidikan (Fallback/Pre-render) -->
       <section id="jenjang" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

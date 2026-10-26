@@ -20,10 +20,10 @@ import { renderAdmin } from './pages/Admin';
 const router = new Navigo('/');
 const appDiv = document.getElementById('app');
 
-const renderLayout = (contentHTML, isPublic = true) => {
+const renderLayout = (contentHTML, isPublic = true, activePage = '') => {
     if (isPublic) {
         return `
-            ${renderNavbar()}
+            ${renderNavbar(activePage)}
             <main class="flex-grow">${contentHTML}</main>
             ${renderFooter()}
         `;
@@ -44,44 +44,44 @@ router
     const facilities = await api.getFacilities();
     const galleries = await api.getGalleries();
     const ppdb = await api.getPPDB();
-    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb));
+    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb), true, 'beranda');
     setupHomeEvents();
   })
   .on('/profil', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();
-    appDiv.innerHTML = renderLayout(renderProfile(profile));
+    appDiv.innerHTML = renderLayout(renderProfile(profile), true, 'profil');
   })
   .on('/program', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const units = await api.getEducationUnits();
-    appDiv.innerHTML = renderLayout(renderPrograms(units));
+    appDiv.innerHTML = renderLayout(renderPrograms(units), true, 'program');
     setupProgramEvents();
   })
   .on('/fasilitas', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const facilities = await api.getFacilities();
-    appDiv.innerHTML = renderLayout(renderFacilities(facilities));
+    appDiv.innerHTML = renderLayout(renderFacilities(facilities), true, 'fasilitas');
   })
   .on('/ppdb', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const ppdb = await api.getPPDB();
-    appDiv.innerHTML = renderLayout(renderPPDB(ppdb));
+    appDiv.innerHTML = renderLayout(renderPPDB(ppdb), true, 'ppdb');
   })
   .on('/berita', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const news = await api.getNews();
-    appDiv.innerHTML = renderLayout(renderNews(news));
+    appDiv.innerHTML = renderLayout(renderNews(news), true, 'berita');
   })
   .on('/galeri', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const galleries = await api.getGalleries();
-    appDiv.innerHTML = renderLayout(renderGallery(galleries));
+    appDiv.innerHTML = renderLayout(renderGallery(galleries), true, 'galeri');
   })
   .on('/kontak', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();
-    appDiv.innerHTML = renderLayout(renderContact(profile));
+    appDiv.innerHTML = renderLayout(renderContact(profile), true, 'kontak');
   })
   .on('/kelola', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';

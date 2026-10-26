@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Fasilitas Yayasan - Yayasan Nahjul Huda</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
+    <div id="app" class="flex-grow flex flex-col">
+      
+      <!-- Navbar -->
+      <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-2 md:py-3">
+            <div class="flex items-center">
+              <a href="/" class="flex-shrink-0 flex items-center">
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
+              </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+              <a href="/" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Beranda</a>
+              <a href="/profil" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Profil</a>
+              <a href="/program" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Program</a>
+              <a href="/fasilitas" class="text-green-800 font-bold border-b-2 border-green-600 pb-1">Fasilitas</a>
+              <a href="/berita" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Berita</a>
+              <a href="/galeri" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Galeri</a>
+              <a href="/kontak" class="text-gray-600 font-medium hover:text-green-600 transition-colors border-b-2 border-transparent">Kontak</a>
+              <a href="/ppdb" class="bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300 text-white px-5 py-2 rounded-full font-semibold shadow-sm inline-block transform">Info PPDB</a>
+            </div>
+            <div class="-mr-2 flex items-center md:hidden">
+              <button id="toggleMobileBtn" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full z-50">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Beranda</a>
+            <a href="/profil" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Profil</a>
+            <a href="/program" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Program</a>
+            <a href="/fasilitas" class="block px-3 py-2 rounded-md text-base font-bold text-green-800 bg-green-50">Fasilitas</a>
+            <a href="/berita" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Berita</a>
+            <a href="/galeri" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Galeri</a>
+            <a href="/kontak" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-green-600 hover:bg-slate-50">Kontak</a>
+            <a href="/ppdb" class="block px-3 py-2 rounded-md text-base font-bold text-white bg-orange-500 hover:bg-orange-600 text-center">Info PPDB</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="flex-grow">
+        <!-- Header Fasilitas -->
+        <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+          <!-- Dark Overlay Wrapper -->
+          <div class="absolute inset-0 bg-black/70 z-0"></div>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
+            <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
+            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi santri/siswa.</p>
+          </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Fasilitas 1: Masjid As-Surur -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-mosque text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Masjid As-Surur</h3>
+                <p class="text-slate-600 text-sm">Pusat ibadah sholat berjamaah, pengajian kitab kuning, kajian tafsir, dan kegiatan keagamaan seluruh civitas madrasah &amp; santri.</p>
+              </div>
+            </div>
+
+            <!-- Fasilitas 2: Gedung Representatif -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-school text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Gedung Pembelajaran 3 Lantai</h3>
+                <p class="text-slate-600 text-sm">Ruang kelas ber-AC yang nyaman, bersih, representatif, serta dilengkapi sarana belajar modern untuk mendukung efektivitas KBM.</p>
+              </div>
+            </div>
+
+            <!-- Fasilitas 3: Laboratorium Komputer -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-desktop text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Laboratorium Komputer &amp; IT</h3>
+                <p class="text-slate-600 text-sm">Dilengkapi puluhan perangkat PC terhubung internet berkecepatan tinggi untuk ujian berbasis komputer (CBT) dan praktek TIK.</p>
+              </div>
+            </div>
+
+            <!-- Fasilitas 4: Lapangan Olahraga -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-futbol text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Lapangan Olahraga &amp; Futsal</h3>
+                <p class="text-slate-600 text-sm">Area terbuka serbaguna untuk upacara bendera, olahraga futsal, bulu tangkis, bola voli, dan kegiatan ekstrakurikuler.</p>
+              </div>
+            </div>
+
+            <!-- Fasilitas 5: Asrama Santri -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-hotel text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Asrama Santri Putra &amp; Putri</h3>
+                <p class="text-slate-600 text-sm">Hunian santri pesantren yang aman, bersih, dan terpantau dengan bimbingan ustadz/ustadzah selama 24 jam penuh.</p>
+              </div>
+            </div>
+
+            <!-- Fasilitas 6: Perpustakaan -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
+              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
+                <i class="fas fa-book-reader text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Perpustakaan Madrasah</h3>
+                <p class="text-slate-600 text-sm">Koleksi referensi kitab salafiyah, buku teks kurikulum merdeka/Kemenag, ensiklopedia, serta literatur umum penunjang riset siswa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-emerald-950 text-white pt-12 pb-8 border-t border-emerald-900 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img src="/logo.png" alt="Logo" class="h-10 w-auto mr-3 bg-white p-1 rounded">
+                <span class="font-playfair font-bold text-xl text-white">Yayasan Nahjul Huda</span>
+              </div>
+              <p class="text-emerald-200 text-sm mb-4">Mencetak generasi unggul, berakhlak mulia, dan berwawasan global berlandaskan nilai-nilai Islam.</p>
+              <div class="flex items-center">
+                <a href="https://www.instagram.com/nahda_media?mdxt=cHRvN2dvNjUxNW05" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-emerald-200 hover:text-yellow-400 transition-colors">
+                  <i class="fab fa-instagram text-lg"></i>
+                  <span class="text-sm font-medium">@nahda_media</span>
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-playfair font-bold text-lg text-white mb-4">Tautan Cepat</h3>
+              <ul class="space-y-2 text-sm">
+                <li><a href="/profil" class="hover:text-gold-400 transition">Profil Yayasan</a></li>
+                <li><a href="/program" class="hover:text-gold-400 transition">Program Pendidikan</a></li>
+                <li><a href="/ppdb" class="hover:text-gold-400 transition">Informasi PPDB</a></li>
+                <li><a href="/berita" class="hover:text-gold-400 transition">Berita &amp; Pengumuman</a></li>
+                <li><a href="/galeri" class="hover:text-gold-400 transition">Galeri Kegiatan</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="font-playfair font-bold text-lg text-white mb-4">Kontak Kami</h3>
+              <ul class="space-y-3 text-sm">
+                <li class="flex items-start">
+                  <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
+                  <span>Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-3 mt-1 text-orange-400">
+                    <i class="fas fa-phone-alt"></i>
+                  </span>
+                  <div>
+                    <p class="text-gray-300">Telepon: <span class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300 flex items-center mt-1">
+                      <i class="fab fa-whatsapp text-green-400 mr-2"></i> WhatsApp: <span class="font-semibold text-white ml-1">+62 812 3456 7890</span>
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-envelope mr-3 text-gold-500"></i>
+                  <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="border-t border-emerald-800 pt-8 mt-8 text-center text-sm text-emerald-400">
+            <p>&copy; 2026 Yayasan Nahjul Huda. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Client Scripts -->
+    <script>
+      // Mobile Menu Toggle
+      const toggleMobileBtn = document.getElementById('toggleMobileBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (toggleMobileBtn && mobileMenu) {
+        toggleMobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html>
