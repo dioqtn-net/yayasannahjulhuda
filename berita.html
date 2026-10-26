@@ -16,6 +16,26 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css">
+    <style>
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 9999px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+        border-radius: 9999px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #94a3b8 #f1f5f9;
+      }
+    </style>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
     <div id="app" class="flex-grow flex flex-col">
@@ -135,19 +155,18 @@
           <!-- Card Berita Sorotan MTs -->
           <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- Card Baru: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 -->
+            <!-- Card Berita: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 -->
             <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <!-- Image Slider (Carousel) Sederhana dengan CSS -->
-              <div class="relative w-full h-48 mb-4 overflow-hidden rounded-t-2xl group">
-                <div class="flex overflow-x-auto snap-x snap-mandatory h-full w-full scroll-smooth" style="scrollbar-width: none;">
+              <!-- Image Slider (Carousel) dengan Custom Scrollbar -->
+              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200">
+                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
                   <!-- Foto 1 -->
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="w-full h-full object-cover shrink-0 snap-center">
+                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover shrink-0 snap-center">
                   <!-- Foto 2 -->
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="w-full h-full object-cover shrink-0 snap-center">
+                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover shrink-0 snap-center">
                 </div>
-                <!-- Indikator visual agar pengunjung tahu gambar bisa digeser -->
-                <div class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none">
-                  <i class="fas fa-chevron-left text-[10px]"></i> Geser <i class="fas fa-chevron-right text-[10px]"></i>
+                <div class="absolute bottom-6 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded shadow pointer-events-none">
+                  <i class="fas fa-arrows-alt-h"></i> Geser Scroll
                 </div>
               </div>
 
@@ -177,105 +196,6 @@
                   </span>
                   <button onclick="openNewsModal('Visitasi Akreditasi MTs Nahjul Huda 2026/2027', 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah. Seluruh dewan guru, staf, serta santri menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.', '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg', 'MTs Nahjul Huda', 'Akreditasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
                     Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 1: Prestasi Siswa MTs di Ajang OMI -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between mb-3 text-xs">
-                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
-                      Prestasi
-                    </span>
-                    <div class="flex items-center gap-2 text-slate-400">
-                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        Akademik
-                      </span>
-                      <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
-                    </div>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
-                    Prestasi Siswa MTs di Ajang OMI
-                  </h3>
-                  <p class="news-desc text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan pada ajang Olimpiade Madrasah Indonesia (OMI) dalam mengasah dan membuktikan kemampuan akademik santri.
-                  </p>
-                </div>
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs text-slate-400 flex items-center">
-                    <i class="far fa-user mr-1 text-emerald-600"></i> Humas MTs
-                  </span>
-                  <button onclick="openNewsModal('Prestasi Siswa MTs di Ajang OMI', 'Siswa-siswi MTs Nahjul Huda berhasil menorehkan capaian gemilang dalam ajang bergengsi Olimpiade Madrasah Indonesia (OMI). Keikutsertaan ini membuktikan kualitas pembinaan akademik madrasah yang konsisten melahirkan santri berprestasi dan berdaya saing tinggi.', '', 'MTs Nahjul Huda', 'Prestasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
-                    Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 2: Pelatihan Kesiapsiagaan Bencana bersama Damkar -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between mb-3 text-xs">
-                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
-                      Pelatihan
-                    </span>
-                    <div class="flex items-center gap-2 text-slate-400">
-                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        Tanggap Bencana
-                      </span>
-                      <span><i class="far fa-calendar-alt mr-1"></i> Damkar Sektor 5</span>
-                    </div>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
-                    Pelatihan Kesiapsiagaan Bencana bersama Damkar
-                  </h3>
-                  <p class="news-desc text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    Edukasi mitigasi kebakaran serta simulasi pemadaman api secara langsung bersama petugas Damkar untuk melatih kesiapsiagaan dan ketanggapan seluruh warga sekolah.
-                  </p>
-                </div>
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs text-slate-400 flex items-center">
-                    <i class="far fa-user mr-1 text-emerald-600"></i> Kesiswaan MTs
-                  </span>
-                  <button onclick="openNewsModal('Pelatihan Kesiapsiagaan Bencana bersama Damkar', 'Pelatihan mitigasi risiko kebakaran diselenggarakan bersama jajaran Petugas Damkar. Santri MTs dan dewan guru dibekali teori serta praktik pemadaman api menggunakan APAR, cara evakuasi darurat, dan langkah tanggap bencana.', '', 'Damkar Sektor 5', 'Pelatihan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
-                    Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 3: Edukasi Keamanan oleh Polsek Kebon Jeruk -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
-              <div class="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between mb-3 text-xs">
-                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
-                      Penyuluhan
-                    </span>
-                    <div class="flex items-center gap-2 text-slate-400">
-                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        Kamtibmas
-                      </span>
-                      <span><i class="far fa-calendar-alt mr-1"></i> Polsek Kebon Jeruk</span>
-                    </div>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
-                    Edukasi Keamanan oleh Polsek Kebon Jeruk
-                  </h3>
-                  <p class="news-desc text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    Sosialisasi pencegahan kenakalan remaja, bahaya obat terlarang, serta penanaman kesadaran tertib hukum dan etika bermasyarakat bersama aparat kepolisian.
-                  </p>
-                </div>
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs text-slate-400 flex items-center">
-                    <i class="far fa-user mr-1 text-emerald-600"></i> Polsek & MTs
-                  </span>
-                  <button onclick="openNewsModal('Edukasi Keamanan oleh Polsek Kebon Jeruk', 'Kegiatan sosialisasi oleh Kepolisian Sektor Kebon Jeruk mengedukasi para pelajar tentang bahaya kenakalan remaja, pencegahan perundungan (bullying), serta pentingnya menjaga keamanan dan ketertiban di lingkungan sekolah.', '', 'Polsek Kebon Jeruk', 'Penyuluhan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
-                    Baca Selengkapnya <i class="fas fa-arrow-right text-[11px]"></i>
                   </button>
                 </div>
               </div>
@@ -328,8 +248,18 @@
               Judul Berita
             </h2>
             <div class="w-16 h-1 bg-emerald-600 rounded-full mb-4"></div>
-            <!-- Foto Berita di Modal jika ada -->
-            <img id="modalNewsImg" src="" alt="Foto Berita" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-4 hidden shadow-sm border border-slate-100">
+            <!-- Slider Foto di Modal Berita (Template Standar) -->
+            <div class="relative w-full h-[300px] md:h-[400px] mb-6 bg-gray-100 rounded-xl border border-gray-200">
+              <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
+                <!-- Foto 1 -->
+                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover shrink-0 snap-center">
+                <!-- Foto 2 -->
+                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover shrink-0 snap-center">
+              </div>
+              <div class="absolute bottom-6 right-2 bg-black/60 text-white text-xs px-2.5 py-1 rounded shadow pointer-events-none">
+                <i class="fas fa-arrows-alt-h"></i> Geser Scroll
+              </div>
+            </div>
             <p id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line mb-6">
               Isi berita lengkap...
             </p>
