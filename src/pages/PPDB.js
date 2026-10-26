@@ -124,33 +124,11 @@ export const renderPPDB = (ppdb) => {
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
-                <p class="text-emerald-100 text-sm">Pendidikan Menengah Pertama Berkarakter Islami - Kampus Kebon Jeruk, Jakarta Barat</p>
+                <p class="text-emerald-100 text-sm">Pendidikan Menengah Pertama Berkarakter Islami & Unggul. Dapatkan Promo SPMB <span class="font-bold text-yellow-400">GRATIS UANG PANGKAL!</span></p>
               </div>
             </div>
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
               <i class="fas fa-check-circle"></i> Pendaftaran Terbuka
-            </div>
-          </div>
-
-          <!-- Label / Keterangan Spesial SPMB MTs -->
-          <div class="p-5 md:p-6 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 rounded-2xl shadow-md border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-slate-950 text-gold-400 rounded-xl flex items-center justify-center text-xl shadow flex-shrink-0">
-                <i class="fas fa-gift text-2xl"></i>
-              </div>
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider bg-slate-950 text-gold-300 px-3 py-0.5 rounded-full inline-block mb-1">
-                  PROGRAM UNGGULAN
-                </span>
-                <h4 class="text-lg sm:text-xl font-bold font-playfair tracking-tight text-slate-950 leading-snug">
-                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MTs - GRATIS UANG PANGKAL
-                </h4>
-              </div>
-            </div>
-            <div class="flex-shrink-0">
-              <span class="px-4 py-2 bg-slate-950 text-gold-300 font-extrabold text-xs sm:text-sm rounded-xl shadow inline-flex items-center gap-2">
-                <i class="fas fa-award text-yellow-400"></i> Bebas Uang Pangkal 100%
-              </span>
             </div>
           </div>
 
@@ -355,33 +333,11 @@ export const renderPPDB = (ppdb) => {
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Aliyah (MA) Nahjul Huda</h3>
-                <p class="text-emerald-100 text-sm">Pendidikan Menengah Atas Berkarakter Islami & Unggul - Kampus Kebon Jeruk, Jakarta Barat</p>
+                <p class="text-emerald-100 text-sm">Pendidikan Menengah Atas Berkarakter Islami & Unggul. Dapatkan Promo SPMB <span class="font-bold text-yellow-400">GRATIS UANG PANGKAL!</span></p>
               </div>
             </div>
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500 text-slate-900 font-bold text-sm shadow flex-shrink-0">
               <i class="fas fa-check-circle"></i> Pendaftaran Terbuka
-            </div>
-          </div>
-
-          <!-- Label / Keterangan Spesial SPMB MA -->
-          <div class="p-5 md:p-6 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 rounded-2xl shadow-md border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-slate-950 text-gold-400 rounded-xl flex items-center justify-center text-xl shadow flex-shrink-0">
-                <i class="fas fa-gift text-2xl"></i>
-              </div>
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider bg-slate-950 text-gold-300 px-3 py-0.5 rounded-full inline-block mb-1">
-                  PROGRAM UNGGULAN
-                </span>
-                <h4 class="text-lg sm:text-xl font-bold font-playfair tracking-tight text-slate-950 leading-snug">
-                  Sistem Penerimaan Murid Baru (SPMB) Tingkat MA - GRATIS UANG PANGKAL
-                </h4>
-              </div>
-            </div>
-            <div class="flex-shrink-0">
-              <span class="px-4 py-2 bg-slate-950 text-gold-300 font-extrabold text-xs sm:text-sm rounded-xl shadow inline-flex items-center gap-2">
-                <i class="fas fa-award text-yellow-400"></i> Bebas Uang Pangkal 100%
-              </span>
             </div>
           </div>
 
