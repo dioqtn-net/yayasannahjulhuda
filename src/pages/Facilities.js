@@ -1,7 +1,7 @@
 export const renderFacilities = (facilities) => {
     return `
       <!-- Header Fasilitas -->
-      <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+      <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

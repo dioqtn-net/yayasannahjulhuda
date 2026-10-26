@@ -48,7 +48,7 @@ export const renderPPDB = (ppdb) => {
 
     return `
       <!-- Header PPDB -->
-      <section class="relative bg-[url('/images/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
+      <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/75 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -120,7 +120,7 @@ export const renderPPDB = (ppdb) => {
           <!-- Banner Pengantar MTs -->
           <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <img src="/images/MTs.jpg" onerror="this.onerror=null;this.src='./images/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
+              <img src="/media/logo/MTs.jpg" onerror="this.onerror=null;this.src='./media/logo/MTs.jpg';" alt="Logo MTs Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -296,7 +296,7 @@ export const renderPPDB = (ppdb) => {
           <!-- Banner Pengantar MA -->
           <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <img src="/images/MA.jpg" onerror="this.onerror=null;this.src='./images/MA.jpg';" alt="Logo MA Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-emerald-400 shadow-md flex-shrink-0 bg-white">
+              <img src="/media/logo/MA.jpg" onerror="this.onerror=null;this.src='./media/logo/MA.jpg';" alt="Logo MA Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-emerald-400 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi SPMB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -472,7 +472,7 @@ export const renderPPDB = (ppdb) => {
           <!-- Banner Pengantar MI -->
           <div class="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <img src="/images/MI.jpg" onerror="this.onerror=null;this.src='./images/MI.jpg';" alt="Logo MI Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
+              <img src="/media/logo/MI.jpg" onerror="this.onerror=null;this.src='./media/logo/MI.jpg';" alt="Logo MI Nahjul Huda" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Papan Informasi PPDB</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -634,7 +634,7 @@ export const renderPPDB = (ppdb) => {
           <!-- Banner Pengantar Ponpes -->
           <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-700">
             <div class="flex items-center gap-4">
-              <img src="/images/Ponpes.jpg" onerror="this.onerror=null;this.src='./images/Ponpes.jpg';" alt="Logo Pondok Pesantren Assurur" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
+              <img src="/media/logo/Ponpes.jpg" onerror="this.onerror=null;this.src='./media/logo/Ponpes.jpg';" alt="Logo Pondok Pesantren Assurur" class="w-16 h-16 object-cover rounded-full border-2 border-yellow-400 shadow-md flex-shrink-0 bg-white">
               <div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gold-300">Penerimaan Santri Baru</span>
                 <h3 class="text-xl md:text-2xl font-playfair font-bold">Pondok Pesantren Assurur</h3>

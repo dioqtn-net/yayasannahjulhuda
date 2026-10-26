@@ -25,11 +25,11 @@ const fallbackData = {
         operational_hours: "Senin - Jumat: 07:00 - 15:00 WIB"
     },
     education_units: [
-        { id: 1, name: "SD Islam (SDI) AL KINDY", image_url: "/images/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
+        { id: 1, name: "SD Islam (SDI) AL KINDY", image_url: "/media/logo/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
         { 
             id: 2, 
             name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", 
-            image_url: "/images/MI.jpg", 
+            image_url: "/media/logo/MI.jpg", 
             description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", 
             curriculum: "Kurikulum Kemenag", 
             intracurricular: "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
@@ -37,9 +37,9 @@ const fallbackData = {
             facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan", 
             wa_number: "+628991168301" 
         },
-        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/images/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+6285880682115" },
-        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/images/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+628158316436" },
-        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/images/Ponpes.jpg", description: "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.", curriculum: "Salafiyah & Modern", featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+628569010538" }
+        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/media/logo/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+6285880682115" },
+        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/media/logo/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+628158316436" },
+        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/media/logo/Ponpes.jpg", description: "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.", curriculum: "Salafiyah & Modern", featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+628569010538" }
     ],
     news: [
         { id: 1, title: "Penerimaan Santri Baru Telah Dibuka", content: "Segera daftarkan putra-putri Anda ke Yayasan Nahjul Huda...", date: "2023-10-01", image_url: null },
@@ -69,22 +69,22 @@ const fallbackData = {
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 export const getUnitImage = (unit) => {
-    if (!unit) return '/images/SDI.jpg';
+    if (!unit) return '/media/logo/SDI.jpg';
     if (unit.image_url) return unit.image_url;
     const name = (unit.name || '').toLowerCase();
-    if (name.includes('(sdi)') || name.includes('sd islam') || name.includes('al kindy') || /\bsdi\b/i.test(name) || /\bsd\b/i.test(name)) return '/images/SDI.jpg';
-    if (name.includes('(mi)') || name.includes('ibtidaiyah') || /\bmi\b/i.test(name)) return '/images/MI.jpg';
-    if (name.includes('(mts)') || name.includes('tsanawiyah') || /\bmts\b/i.test(name)) return '/images/MTs.jpg';
-    if (name.includes('(ma)') || name.includes('aliyah') || /\bma\b/i.test(name)) return '/images/MA.jpg';
-    if (name.includes('pesantren') || name.includes('ponpes') || name.includes('assurur')) return '/images/Ponpes.jpg';
+    if (name.includes('(sdi)') || name.includes('sd islam') || name.includes('al kindy') || /\bsdi\b/i.test(name) || /\bsd\b/i.test(name)) return '/media/logo/SDI.jpg';
+    if (name.includes('(mi)') || name.includes('ibtidaiyah') || /\bmi\b/i.test(name)) return '/media/logo/MI.jpg';
+    if (name.includes('(mts)') || name.includes('tsanawiyah') || /\bmts\b/i.test(name)) return '/media/logo/MTs.jpg';
+    if (name.includes('(ma)') || name.includes('aliyah') || /\bma\b/i.test(name)) return '/media/logo/MA.jpg';
+    if (name.includes('pesantren') || name.includes('ponpes') || name.includes('assurur')) return '/media/logo/Ponpes.jpg';
     
-    if (unit.id === 1) return '/images/SDI.jpg';
-    if (unit.id === 2) return '/images/MI.jpg';
-    if (unit.id === 3) return '/images/MTs.jpg';
-    if (unit.id === 4) return '/images/MA.jpg';
-    if (unit.id === 5) return '/images/Ponpes.jpg';
+    if (unit.id === 1) return '/media/logo/SDI.jpg';
+    if (unit.id === 2) return '/media/logo/MI.jpg';
+    if (unit.id === 3) return '/media/logo/MTs.jpg';
+    if (unit.id === 4) return '/media/logo/MA.jpg';
+    if (unit.id === 5) return '/media/logo/Ponpes.jpg';
     
-    return '/images/SDI.jpg';
+    return '/media/logo/SDI.jpg';
 };
 
 export const api = {
