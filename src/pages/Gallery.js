@@ -457,36 +457,6 @@ export const renderGallery = (galleries) => {
             </div>
           </section>
 
-          <!-- KATEGORI 3: FASILITAS -->
-          <section>
-            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
-                  <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-base">
-                    <i class="fas fa-building"></i>
-                  </span>
-                  Fasilitas
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-1">Sarana dan prasarana penunjang kegiatan belajar mengajar santri MTs Nahjul Huda.</p>
-              </div>
-              <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
-                Dalam Proses
-              </span>
-            </div>
-
-            <!-- Kotak Kosong / Placeholder: Dokumentasi Fasilitas Segera Hadir -->
-            <div class="border-2 border-dashed border-slate-300 rounded-2xl p-10 sm:p-14 text-center bg-slate-50/70 hover:bg-slate-50 transition-colors">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-200/70 flex items-center justify-center text-slate-400 text-2xl">
-                <i class="fas fa-camera-retro"></i>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold font-playfair text-slate-700 mb-2">
-                Dokumentasi fasilitas segera hadir
-              </h3>
-              <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                Foto sarana ruang kelas, laboratorium komputer & IPA, perpustakaan madrasah, dan lapangan olahraga sedang dalam proses dokumentasi.
-              </p>
-            </div>
-          </section>
 
         </div>
 
