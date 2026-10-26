@@ -862,25 +862,27 @@ export const renderPPDB = (ppdb) => {
                 </div>
               </div>
 
-              <!-- Kontak WhatsApp Bunda Dahlia -->
-              <div class="mt-4 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
-                <h4 class="text-sm font-semibold text-emerald-800 mb-2 flex items-center gap-1.5">
-                  <i class="fab fa-whatsapp text-emerald-600"></i>
-                  <span>Informasi Pendaftaran:</span>
-                </h4>
-                <div class="flex items-center justify-between flex-wrap gap-2">
-                  <div class="flex items-center">
-                    <span class="text-emerald-600 mr-2.5 text-xl"><i class="fab fa-whatsapp"></i></span>
-                    <div>
-                      <p class="text-sm font-medium text-slate-700">Bunda Dahlia</p>
-                      <a href="https://wa.me/628589010538" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
-                        0858 9010 538
-                      </a>
+              <!-- Kontak WhatsApp Bunda Dahlia (Banner Konsultasi) -->
+              <div class="mt-6 p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 shadow-sm flex flex-col md:flex-row items-center md:justify-between gap-6">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="bg-green-600 text-white p-2.5 rounded-full flex items-center justify-center">
+                      <i class="fas fa-headset text-lg"></i>
                     </div>
+                    <h4 class="text-lg font-bold text-green-900">Pusat Layanan Konsultasi PPDB</h4>
                   </div>
-                  <a href="https://wa.me/628589010538" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition">
-                    <i class="fab fa-whatsapp text-sm"></i>
-                    <span>Hubungi WhatsApp</span>
+                  <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas mondok? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.
+                  </p>
+                  <div class="flex items-center gap-3 text-sm text-green-800 font-semibold bg-white w-fit px-4 py-2 rounded-lg border border-green-100">
+                    <span class="flex items-center gap-1"><i class="fas fa-user-circle text-gray-400 text-lg"></i> Bunda Dahlia</span>
+                    <span class="text-green-300">|</span>
+                    <span class="flex items-center gap-1"><i class="fab fa-whatsapp text-green-500 text-lg"></i> 0858 9010 538</span>
+                  </div>
+                </div>
+                <div class="w-full md:w-auto">
+                  <a href="https://wa.me/628589010538?text=Halo%20Bunda%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20santri%20baru%20di%20Pondok%20Pesantren%20Assurur." target="_blank" rel="noopener noreferrer" class="block w-full md:w-auto text-center bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-lg transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap">
+                    <i class="fab fa-whatsapp text-xl"></i> Tanya via WhatsApp
                   </a>
                 </div>
               </div>
