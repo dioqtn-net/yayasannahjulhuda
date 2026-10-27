@@ -402,6 +402,42 @@ export const renderNews = (newsList) => {
             </div>
           </article>
 
+          <!-- Card Berita 6: Olimpiade Madrasah Indonesia (SINGLE) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                    Prestasi
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                      Juara OMI
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Olimpiade Madrasah Indonesia
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan dengan meraih juara pada ajang Olimpiade Madrasah Indonesia tingkat Kota Jakarta Barat.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Tim Prestasi
+                </span>
+                <button onclick="openNewsModal('Olimpiade Madrasah Indonesia', 'Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan dengan meraih juara pada ajang Olimpiade Madrasah Indonesia tingkat Kota Jakarta Barat. Keberhasilan ini menjadi bukti dedikasi para santri dan bimbingan intensif dewan guru dalam mengasah kemampuan akademik di kancah kompetisi bergengsi.', '/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg', 'Jakarta Barat', 'Prestasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
         </div>
         <!-- [CMS_BERITA_END] -->
 

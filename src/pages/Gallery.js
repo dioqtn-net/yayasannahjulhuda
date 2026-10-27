@@ -217,11 +217,11 @@ export const renderGallery = (galleries) => {
                 <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
               </div>
               <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                5 Dokumentasi
+                4 Dokumentasi
               </span>
             </div>
 
-            <!-- Grid 3 Kolom Kegiatan (5 Item) -->
+            <!-- Grid 3 Kolom Kegiatan (4 Item) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
@@ -308,31 +308,7 @@ export const renderGallery = (galleries) => {
                 </div>
               </div>
 
-              <!-- 4. Olimpiade Madrasah Indonesia (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Foto
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Olimpiade Madrasah Indonesia
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Partisipasi siswa MTs dalam mengasah kemampuan akademik.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Ajang Nasional</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Prestasi</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 5. Testimoni Yayasan (SINGLE VIDEO) -->
+              <!-- 4. Testimoni Yayasan (SINGLE VIDEO) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <video controls class="w-full h-48 object-cover rounded-t-lg">
