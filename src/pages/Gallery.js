@@ -217,11 +217,11 @@ export const renderGallery = (galleries) => {
                 <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
               </div>
               <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                9 Dokumentasi
+                5 Dokumentasi
               </span>
             </div>
 
-            <!-- Grid 3 Kolom Kegiatan (9 Item) -->
+            <!-- Grid 3 Kolom Kegiatan (5 Item) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
@@ -332,110 +332,7 @@ export const renderGallery = (galleries) => {
                 </div>
               </div>
 
-              <!-- 5. Edukasi Polsek Kebon Jeruk (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Foto
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Edukasi Polsek Kebon Jeruk
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Sosialisasi pencegahan kenakalan remaja.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Polsek Kebon Jeruk</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Penyuluhan</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 6. Edukasi Kesehatan Puskesmas (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Foto
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Edukasi Kesehatan Puskesmas
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Sosialisasi kesehatan reproduksi oleh nakes.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Puskesmas Kebon Jeruk</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Kesehatan</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 7. Simulasi Pemadam Kebakaran (SLIDER) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full">
-                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" alt="Damkar 1" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
-                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" alt="Damkar 2" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
-                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" alt="Damkar 3" onclick="openModal(this.src)" class="w-full flex-shrink-0 snap-center object-cover h-48 cursor-pointer hover:opacity-90 transition-opacity">
-                  </div>
-                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
-                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Slider Media
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Simulasi Pemadam Kebakaran
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Pelatihan kesiapsiagaan bencana bersama Damkar.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Damkar Sektor 5</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Tanggap Bencana</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 8. Kunjungan Perpusnas (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Foto
-                  </span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
-                      Kunjungan Perpusnas
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                      Kunjungan belajar kelas 9 ke Perpustakaan Nasional.
-                    </p>
-                  </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="far fa-calendar-alt mr-1"></i> Kelas 9 MTs</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Literasi</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 9. Testimoni Yayasan (SINGLE VIDEO) -->
+              <!-- 5. Testimoni Yayasan (SINGLE VIDEO) -->
               <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                   <video controls class="w-full h-48 object-cover rounded-t-lg">

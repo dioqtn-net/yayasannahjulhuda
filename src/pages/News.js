@@ -23,6 +23,10 @@ export const renderNews = (newsList) => {
 
             if (activeBadge) activeBadge.textContent = jenjang;
 
+            // Hide all jenjang grids first
+            const allGrids = document.querySelectorAll('.news-jenjang-grid');
+            allGrids.forEach(g => g.classList.add('hidden'));
+
             if (jenjang === 'MTs' || jenjang === 'Semua') {
                 if (newsGrid) newsGrid.classList.remove('hidden');
                 if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
@@ -30,11 +34,22 @@ export const renderNews = (newsList) => {
                     sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang === 'Semua' ? 'Yayasan' : 'MTs'}`;
                 }
             } else {
-                if (newsGrid) newsGrid.classList.add('hidden');
-                if (otherJenjangMsg) {
-                    otherJenjangMsg.classList.remove('hidden');
-                    if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
-                    if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab MTs untuk melihat kabar kegiatan terbaru.`;
+                const targetGridId = 'newsGrid-' + jenjang.toLowerCase();
+                const targetGrid = document.getElementById(targetGridId);
+                const hasCards = targetGrid && targetGrid.querySelectorAll('.news-card').length > 0;
+
+                if (hasCards) {
+                    targetGrid.classList.remove('hidden');
+                    if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
+                } else {
+                    if (otherJenjangMsg) {
+                        otherJenjangMsg.classList.remove('hidden');
+                        if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
+                        if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab MTs untuk melihat kabar kegiatan terbaru.`;
+                    }
+                }
+                if (sectionTitle) {
+                    sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang}`;
                 }
             }
         };
@@ -168,17 +183,36 @@ export const renderNews = (newsList) => {
           </div>
         </div>
 
-        <!-- Card Berita Sorotan MTs -->
-        <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- ========================================== -->
+        <!-- 1. GRID BERITA SDI -->
+        <!-- ========================================== -->
+        <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+        <div id="newsGrid-sdi" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Data berita SDI akan dirender dinamis dari database di sini -->
+        </div>
+        <!-- [CMS_BERITA_END] -->
 
-          <!-- Card Berita: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 -->
+        <!-- ========================================== -->
+        <!-- 2. GRID BERITA MI -->
+        <!-- ========================================== -->
+        <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+        <div id="newsGrid-mi" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Data berita MI akan dirender dinamis dari database di sini -->
+        </div>
+        <!-- [CMS_BERITA_END] -->
+
+        <!-- ========================================== -->
+        <!-- 3. GRID BERITA MTS -->
+        <!-- ========================================== -->
+        <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+        <div id="newsGrid" class="news-jenjang-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Card Berita 1: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
           <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
             <!-- Image Slider (Carousel) dengan Custom Scrollbar -->
             <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200">
               <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
-                <!-- Foto 1 -->
                 <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover shrink-0 snap-center">
-                <!-- Foto 2 -->
                 <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover shrink-0 snap-center">
               </div>
               <div class="absolute bottom-6 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded shadow pointer-events-none">
@@ -186,31 +220,182 @@ export const renderNews = (newsList) => {
               </div>
             </div>
 
-            <div class="px-6 pb-6 flex-1 flex flex-col justify-between">
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between mb-3 text-xs">
                   <span class="font-semibold text-teal-800 bg-teal-100/90 px-2.5 py-0.5 rounded-full border border-teal-200 text-[11px]">
                     Akreditasi
                   </span>
-                  <div class="flex items-center gap-2 text-slate-400">
-                    <span class="font-medium text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200 text-[10px]">
                       BAN-PDM
                     </span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
                   </div>
                 </div>
-                <h3 class="news-title font-playfair font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2.5">
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Visitasi Akreditasi MTs Nahjul Huda 2026/2027
                 </h3>
-                <p class="news-desc text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
                   MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.
                 </p>
               </div>
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span class="text-xs text-slate-400 flex items-center">
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
                   <i class="far fa-user mr-1 text-emerald-600"></i> Humas MTs
                 </span>
-                <button onclick="openNewsModal('Visitasi Akreditasi MTs Nahjul Huda 2026/2027', 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah. Seluruh dewan guru, staf, serta santri menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.', '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg', 'MTs Nahjul Huda', 'Akreditasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-emerald-50 transition">
+                <button onclick="openNewsModal('Visitasi Akreditasi MTs Nahjul Huda 2026/2027', 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah. Seluruh dewan guru, staf, serta santri menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.', '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg', 'MTs Nahjul Huda', 'Akreditasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Berita 2: Edukasi Polsek Kebon Jeruk (SINGLE) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-blue-800 bg-blue-100/90 px-2.5 py-0.5 rounded-full border border-blue-200 text-[11px]">
+                    Penyuluhan
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 text-[10px]">
+                      Polsek
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Edukasi Polsek Kebon Jeruk
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Sosialisasi pencegahan kenakalan remaja, tata tertib hukum, dan pembinaan karakter generasi muda oleh jajaran Polsek Kebon Jeruk.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Polsek Kebon Jeruk
+                </span>
+                <button onclick="openNewsModal('Edukasi Polsek Kebon Jeruk', 'Kegiatan sosialisasi dan edukasi pencegahan kenakalan remaja yang disampaikan langsung oleh jajaran kepolisian Polsek Kebon Jeruk kepada para santri MTs Nahjul Huda. Materi mencakup pemahaman hukum, bahaya perundungan (bullying), serta pembinaan disiplin dan karakter positif generasi muda.', '/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg', 'Polsek Kebon Jeruk', 'Penyuluhan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Berita 3: Edukasi Kesehatan Puskesmas (SINGLE) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                    Kesehatan
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                      Puskesmas
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Edukasi Kesehatan Puskesmas
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Sosialisasi edukasi kesehatan reproduksi dan pola hidup bersih sehat bagi santri putri oleh tenaga medis Puskesmas Kebon Jeruk.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Puskesmas
+                </span>
+                <button onclick="openNewsModal('Edukasi Kesehatan Puskesmas', 'Penyuluhan kesehatan reproduksi remaja dan sosialisasi perilaku hidup bersih dan sehat (PHBS) bagi santri putri MTs Nahjul Huda. Menghadirkan dokter dan tenaga medis dari Puskesmas Kecamatan Kebon Jeruk guna memberikan pemahaman komprehensif mengenai kesehatan santri.', '/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg', 'Puskesmas Kebon Jeruk', 'Kesehatan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Berita 4: Simulasi Pemadam Kebakaran (SLIDER) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <!-- Image Slider (Carousel) dengan Custom Scrollbar -->
+            <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200">
+              <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
+                <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" alt="Simulasi Damkar 1" class="h-full w-full object-cover shrink-0 snap-center">
+                <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" alt="Simulasi Damkar 2" class="h-full w-full object-cover shrink-0 snap-center">
+                <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" alt="Simulasi Damkar 3" class="h-full w-full object-cover shrink-0 snap-center">
+              </div>
+              <div class="absolute bottom-6 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded shadow pointer-events-none">
+                <i class="fas fa-arrows-alt-h"></i> Geser Scroll
+              </div>
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-amber-800 bg-amber-100/90 px-2.5 py-0.5 rounded-full border border-amber-200 text-[11px]">
+                    Tanggap Bencana
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200 text-[10px]">
+                      Damkar
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Simulasi Pemadam Kebakaran
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Pelatihan kesiapsiagaan mitigasi bencana dan simulasi pemadaman kebakaran bersama petugas Damkar Sektor 5 Kebon Jeruk.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Damkar Sektor 5
+                </span>
+                <button onclick="openNewsModal('Simulasi Pemadam Kebakaran', 'Pelatihan mitigasi tanggap darurat bencana kebakaran yang diselenggarakan bekerjasama dengan Suku Dinas Penanggulangan Kebakaran dan Penyelamatan (Damkar) Sektor 5 Kebon Jeruk. Seluruh santri dan dewan guru mempraktikkan langsung teknik pemadaman api menggunakan APAR dan karung basah secara sigap.', '/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg', 'Damkar Sektor 5', 'Tanggap Bencana')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Berita 5: Kunjungan Perpusnas (SINGLE) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-purple-800 bg-purple-100/90 px-2.5 py-0.5 rounded-full border border-purple-200 text-[11px]">
+                    Literasi
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200 text-[10px]">
+                      Edukasi
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Kunjungan Perpusnas
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Kunjungan edukatif dan riset literasi santri kelas 9 MTs Nahjul Huda ke Perpustakaan Nasional Republik Indonesia.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Humas MTs
+                </span>
+                <button onclick="openNewsModal('Kunjungan Perpusnas', 'Santri kelas 9 MTs Nahjul Huda mengadakan kunjungan edukatif ke Perpustakaan Nasional Republik Indonesia (Perpusnas) di Jalan Medan Merdeka Selatan. Kegiatan ini bertujuan memperluas wawasan literasi, mengenalkan fasilitas riset modern, serta meningkatkan minat baca para santri.', '/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg', 'Perpustakaan Nasional', 'Literasi')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
                   Baca Selengkapnya &rarr;
                 </button>
               </div>
@@ -218,6 +403,25 @@ export const renderNews = (newsList) => {
           </article>
 
         </div>
+        <!-- [CMS_BERITA_END] -->
+
+        <!-- ========================================== -->
+        <!-- 4. GRID BERITA MA -->
+        <!-- ========================================== -->
+        <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+        <div id="newsGrid-ma" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Data berita MA akan dirender dinamis dari database di sini -->
+        </div>
+        <!-- [CMS_BERITA_END] -->
+
+        <!-- ========================================== -->
+        <!-- 5. GRID BERITA PONPES -->
+        <!-- ========================================== -->
+        <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+        <div id="newsGrid-ponpes" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Data berita Ponpes akan dirender dinamis dari database di sini -->
+        </div>
+        <!-- [CMS_BERITA_END] -->
 
         <!-- Empty State (untuk jenjang selain MTs/Semua) -->
         <div id="otherJenjangMsg" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 max-w-xl mx-auto shadow-sm">
