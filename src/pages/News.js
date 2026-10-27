@@ -438,6 +438,45 @@ export const renderNews = (newsList) => {
             </div>
           </article>
 
+          <!-- Card Berita 7: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <video controls class="w-full h-full object-cover">
+                <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+              </video>
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                    Testimoni
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                      Ustadz Maulana
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Testimoni Yayasan & Ponpes As-Surur
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Humas Yayasan
+                </span>
+                <button onclick="openNewsModal('Testimoni Yayasan & Ponpes As-Surur', 'Untaian pesan inspiratif dan apresiasi hangat dari Ustadz Maulana atas kiprah dan dedikasi Yayasan Nahjul Huda serta Pondok Pesantren As-Surur dalam mendidik santri berakhlak mulia dan berwawasan luas. Beliau menyampaikan dorongan semangat bagi seluruh santri, dewan guru, dan pengurus agar senantiasa istiqomah menebarkan syiar Islam.', '', 'Ustadz Maulana', 'Testimoni')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
         </div>
         <!-- [CMS_BERITA_END] -->
 
@@ -455,7 +494,44 @@ export const renderNews = (newsList) => {
         <!-- ========================================== -->
         <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
         <div id="newsGrid-ponpes" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Data berita Ponpes akan dirender dinamis dari database di sini -->
+          <!-- Card Berita: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
+          <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <video controls class="w-full h-full object-cover">
+                <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+              </video>
+            </div>
+
+            <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 text-xs">
+                  <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                    Testimoni
+                  </span>
+                  <div class="flex items-center gap-1.5 text-slate-400">
+                    <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                      Ustadz Maulana
+                    </span>
+                  </div>
+                </div>
+                <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                  Testimoni Yayasan & Ponpes As-Surur
+                </h3>
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                  <i class="far fa-user mr-1 text-emerald-600"></i> Humas Ponpes
+                </span>
+                <button onclick="openNewsModal('Testimoni Yayasan & Ponpes As-Surur', 'Untaian pesan inspiratif dan apresiasi hangat dari Ustadz Maulana atas kiprah dan dedikasi Yayasan Nahjul Huda serta Pondok Pesantren As-Surur dalam mendidik santri berakhlak mulia dan berwawasan luas. Beliau menyampaikan dorongan semangat bagi seluruh santri, dewan guru, dan pengurus agar senantiasa istiqomah menebarkan syiar Islam.', '', 'Ustadz Maulana', 'Testimoni')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                  Baca Selengkapnya &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
         </div>
         <!-- [CMS_BERITA_END] -->
 
