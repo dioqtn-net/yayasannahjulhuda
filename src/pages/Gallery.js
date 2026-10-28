@@ -316,44 +316,6 @@ export const renderGallery = (galleries) => {
         <!-- AREA KONTEN GALERI PONPES -->
         <div id="gallery-content-ponpes" class="hidden">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Card Album: Hari Santri Nasional -->
-            <div class="bg-white rounded-2xl shadow-sm border border-green-100 overflow-hidden group hover:shadow-md transition-shadow">
-              
-              <!-- Bagian Slider Gambar -->
-              <div class="relative w-full h-[220px] bg-gray-100 border-b border-gray-200">
-                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
-                  <!-- Foto 1 -->
-                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="Hari Santri 1" onclick="openModal(this.src)" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:opacity-90 transition-opacity">
-                  <!-- Foto 2 -->
-                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" alt="Hari Santri 2" onclick="openModal(this.src)" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:opacity-90 transition-opacity">
-                  <!-- Foto 3 -->
-                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" alt="Hari Santri 3" onclick="openModal(this.src)" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:opacity-90 transition-opacity">
-                  <!-- Foto 4 -->
-                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" alt="Hari Santri 4" onclick="openModal(this.src)" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:opacity-90 transition-opacity">
-                </div>
-                
-                <!-- Indikator Slider & Label -->
-                <div class="absolute top-3 left-3 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded shadow">
-                  4 Foto
-                </div>
-                <div class="absolute bottom-6 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded shadow pointer-events-none">
-                  <i class="fas fa-arrows-alt-h"></i> Geser
-                </div>
-              </div>
-              
-              <!-- Teks Deskripsi Card -->
-              <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-green-700 transition-colors">Upacara Hari Santri Nasional</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
-                  Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional tanggal 22 Oktober 2026 yang diselenggarakan di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur.
-                </p>
-                <div class="flex items-center justify-between text-xs font-medium text-gray-500 border-t border-gray-100 pt-3">
-                  <span class="flex items-center gap-1.5"><i class="far fa-building text-green-600"></i> Ponpes Assurur</span>
-                  <span class="flex items-center gap-1.5 text-green-700 bg-green-50 px-2 py-1 rounded-full"><i class="fas fa-tags"></i> Kegiatan Besar</span>
-                </div>
-              </div>
-
-            </div>
           </div>
         </div>
 

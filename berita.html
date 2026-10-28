@@ -461,9 +461,59 @@
           <!-- ========================================== -->
           <!-- 5. GRID BERITA PONPES -->
           <!-- ========================================== -->
-          <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
+          <!-- [CMS_BERITA_PONPES_START] -->
           <div id="newsGrid-ponpes" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Card Berita: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
+
+            <!-- Card Berita 1: Upacara Hari Santri Nasional (SLIDER) -->
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+              <!-- Image Slider (Carousel) dengan Custom Scrollbar -->
+              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200">
+                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory h-full w-full custom-scrollbar pb-2">
+                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="Hari Santri 1" class="h-full w-full object-cover shrink-0 snap-center">
+                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" alt="Hari Santri 2" class="h-full w-full object-cover shrink-0 snap-center">
+                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" alt="Hari Santri 3" class="h-full w-full object-cover shrink-0 snap-center">
+                  <img src="/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" alt="Hari Santri 4" class="h-full w-full object-cover shrink-0 snap-center">
+                </div>
+                <!-- Indikator Slider & Label -->
+                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                  4 Foto
+                </div>
+                <div class="absolute bottom-6 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded shadow pointer-events-none">
+                  <i class="fas fa-arrows-alt-h"></i> Geser Scroll
+                </div>
+              </div>
+
+              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                      Hari Santri
+                    </span>
+                    <div class="flex items-center gap-1.5 text-slate-400">
+                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                        22 Okt 2026
+                      </span>
+                    </div>
+                  </div>
+                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                    Upacara Hari Santri Nasional
+                  </h3>
+                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                    Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional 2026 di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur dengan khidmat.
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                    <i class="far fa-user mr-1 text-emerald-600"></i> Humas Ponpes
+                  </span>
+                  <button onclick="openNewsModal('Upacara Hari Santri Nasional', 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional tanggal 22 Oktober 2026 yang diselenggarakan di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur. Seluruh santri dan asatidz mengikuti rangkaian upacara dengan khidmat sebagai wujud penghormatan atas peran besar santri dalam perjuangan dan pembangunan bangsa.', '/media/galeri/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg', '22 Oktober 2026', 'Hari Santri')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                    Baca Selengkapnya &rarr;
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card Berita 2: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
             <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
               <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <video controls class="w-full h-full object-cover">
@@ -501,8 +551,9 @@
                 </div>
               </div>
             </article>
+
           </div>
-          <!-- [CMS_BERITA_END] -->
+          <!-- [CMS_BERITA_PONPES_END] -->
 
           <!-- Empty State (untuk jenjang selain MTs/Semua) -->
           <div id="otherJenjangMsg" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 max-w-xl mx-auto shadow-sm">
