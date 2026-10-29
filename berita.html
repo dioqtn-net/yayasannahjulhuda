@@ -109,7 +109,7 @@
           <div class="mb-10 text-center">
             <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Pilih Jenjang Pendidikan</div>
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3" id="jenjangTabs">
-              <button onclick="switchNewsJenjang('Semua')" data-jenjang="Semua" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+              <button onclick="switchNewsJenjang('Semua')" data-jenjang="Semua" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30">
                 Semua
               </button>
               <button onclick="switchNewsJenjang('SDI')" data-jenjang="SDI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
@@ -118,8 +118,7 @@
               <button onclick="switchNewsJenjang('MI')" data-jenjang="MI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
                 MI
               </button>
-              <!-- MTs Set as Active by Default (Background hijau gelap, teks putih) -->
-              <button onclick="switchNewsJenjang('MTs')" data-jenjang="MTs" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30">
+              <button onclick="switchNewsJenjang('MTs')" data-jenjang="MTs" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
                 MTs
               </button>
               <button onclick="switchNewsJenjang('MA')" data-jenjang="MA" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
@@ -132,7 +131,7 @@
 
             <!-- Active Filter Indicator -->
             <div class="mt-4 text-xs text-slate-500">
-              Menampilkan berita: <span id="active-jenjang-badge" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">MTs</span>
+              Menampilkan berita: <span id="active-jenjang-badge" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Semua</span>
             </div>
           </div>
 
@@ -143,7 +142,7 @@
                 <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
                   <i class="fas fa-newspaper"></i>
                 </span>
-                Berita Sorotan MTs
+                Berita Sorotan Semua Jenjang
               </h2>
               <p class="text-slate-500 text-xs sm:text-sm mt-1">Kabar prestasi, agenda pelatihan, dan kegiatan edukatif terkini.</p>
             </div>
@@ -154,15 +153,14 @@
           </div>
 
           <!-- ========================================== -->
-          <!-- 1. GRID BERITA SDI -->
+          <!-- KONTEN BERITA SOROTAN SEMUA JENJANG -->
           <!-- ========================================== -->
-          <!-- [CMS_BERITA_SDI_START] -->
-          <div id="newsGrid-sdi" class="news-jenjang-grid hidden">
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- [CMS_BERITA_START] -->
+          <div id="newsScrollWrapper" class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar w-full">
+            <div id="newsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Card Berita 1: Khatam Hafalan 30 Juz (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
@@ -214,7 +212,7 @@
             </article>
 
             <!-- Card Berita 2: Juara 1 Plate Champion (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" alt="Juara 1 Plate Champion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -250,7 +248,7 @@
             </article>
 
             <!-- Card Berita 3: Juara 2 Kategori Bantalan (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" alt="Juara 2 Kategori Bantalan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -286,7 +284,7 @@
             </article>
 
             <!-- Card Berita 4: Hari Anak Nasional (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -321,34 +319,8 @@
               </div>
             </article>
 
-              </div>
-            </div>
-          </div>
-          <!-- [CMS_BERITA_SDI_END] -->
-
-          <!-- ========================================== -->
-          <!-- 2. GRID BERITA MI -->
-          <!-- ========================================== -->
-          <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid-mi" class="news-jenjang-grid hidden">
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Data berita MI akan dirender dinamis dari database di sini -->
-              </div>
-            </div>
-          </div>
-          <!-- [CMS_BERITA_END] -->
-
-          <!-- ========================================== -->
-          <!-- 3. GRID BERITA MTS -->
-          <!-- ========================================== -->
-          <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid" class="news-jenjang-grid">
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <!-- Card Berita 1: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 5: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
@@ -397,8 +369,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 2: Edukasi Polsek Kebon Jeruk (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 6: Edukasi Polsek Kebon Jeruk (SINGLE) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -433,8 +405,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 3: Edukasi Kesehatan Puskesmas (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 7: Edukasi Kesehatan Puskesmas (SINGLE) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -469,8 +441,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 4: Simulasi Pemadam Kebakaran (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 8: Simulasi Pemadam Kebakaran (SLIDER) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
@@ -520,8 +492,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 5: Kunjungan Perpusnas (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 9: Kunjungan Perpusnas (SINGLE) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -556,8 +528,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 6: Olimpiade Madrasah Indonesia (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 10: Olimpiade Madrasah Indonesia (SINGLE) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -592,8 +564,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 7: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 11: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
+            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
                   <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
@@ -631,34 +603,8 @@
               </div>
             </article>
 
-              </div>
-            </div>
-          </div>
-          <!-- [CMS_BERITA_END] -->
-
-          <!-- ========================================== -->
-          <!-- 4. GRID BERITA MA -->
-          <!-- ========================================== -->
-          <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid-ma" class="news-jenjang-grid hidden">
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Data berita MA akan dirender dinamis dari database di sini -->
-              </div>
-            </div>
-          </div>
-          <!-- [CMS_BERITA_END] -->
-
-          <!-- ========================================== -->
-          <!-- 5. GRID BERITA PONPES -->
-          <!-- ========================================== -->
-          <!-- [CMS_BERITA_PONPES_START] -->
-          <div id="newsGrid-ponpes" class="news-jenjang-grid hidden">
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <!-- Card Berita 1: Upacara Hari Santri Nasional (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 12: Upacara Hari Santri Nasional (SLIDER) -->
+            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
@@ -710,8 +656,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 2: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 13: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
+            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
                   <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
@@ -749,8 +695,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 3: Juara 2 Lomba Cerdas Cermat -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 14: Juara 2 Lomba Cerdas Cermat -->
+            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/ponpes/PEMENANG LOMBA.JPG" alt="Juara 2 Lomba Cerdas Cermat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -785,8 +731,8 @@
               </div>
             </article>
 
-            <!-- Card Berita 4: Juara Lomba Pesantren Tingkat Jakarta Barat -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+            <!-- Card Berita 15: Juara Lomba Pesantren Tingkat Jakarta Barat -->
+            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" alt="Juara Lomba Pesantren Tingkat Jakarta Barat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -821,10 +767,9 @@
               </div>
             </article>
 
-              </div>
             </div>
           </div>
-          <!-- [CMS_BERITA_PONPES_END] -->
+          <!-- [CMS_BERITA_END] -->
 
           <!-- Empty State (untuk jenjang selain MTs/Semua) -->
           <div id="otherJenjangMsg" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 max-w-xl mx-auto shadow-sm">
@@ -974,14 +919,16 @@
       function switchNewsJenjang(jenjang) {
         const tabs = document.querySelectorAll('.jenjang-tab-btn');
         const activeBadge = document.getElementById('active-jenjang-badge');
-        const newsGrid = document.getElementById('newsGrid');
+        const newsScrollWrapper = document.getElementById('newsScrollWrapper');
         const otherJenjangMsg = document.getElementById('otherJenjangMsg');
         const sectionTitle = document.getElementById('newsSectionTitle');
         const emptyStateTitle = document.getElementById('emptyStateTitle');
         const emptyStateDesc = document.getElementById('emptyStateDesc');
         const noResultsMsg = document.getElementById('noResultsMsg');
+        const searchInput = document.getElementById('searchNewsInput');
 
         if (noResultsMsg) noResultsMsg.classList.add('hidden');
+        if (searchInput) searchInput.value = '';
 
         tabs.forEach(btn => {
           if (btn.getAttribute('data-jenjang') === jenjang) {
@@ -993,44 +940,33 @@
 
         if (activeBadge) activeBadge.textContent = jenjang;
 
-        // Hide all jenjang grids first
-        const allGrids = document.querySelectorAll('.news-jenjang-grid');
-        allGrids.forEach(g => g.classList.add('hidden'));
+        const allCards = document.querySelectorAll('.news-card');
+        let visibleCount = 0;
 
-        if (jenjang === 'Semua') {
-          allGrids.forEach(g => {
-            if (g.querySelectorAll('.news-card').length > 0) {
-              g.classList.remove('hidden');
-            }
-          });
-          if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
-          if (sectionTitle) {
-            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan Semua Jenjang`;
-          }
-        } else if (jenjang === 'MTs') {
-          if (newsGrid) newsGrid.classList.remove('hidden');
-          if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
-          if (sectionTitle) {
-            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan MTs`;
-          }
-        } else {
-          const targetGridId = 'newsGrid-' + jenjang.toLowerCase();
-          const targetGrid = document.getElementById(targetGridId);
-          const hasCards = targetGrid && targetGrid.querySelectorAll('.news-card').length > 0;
-
-          if (hasCards) {
-            targetGrid.classList.remove('hidden');
-            if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
+        allCards.forEach(card => {
+          const cardJenjang = card.getAttribute('data-jenjang');
+          if (jenjang === 'Semua' || cardJenjang === jenjang) {
+            card.classList.remove('hidden');
+            visibleCount++;
           } else {
-            if (otherJenjangMsg) {
-              otherJenjangMsg.classList.remove('hidden');
-              if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
-              if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab MTs untuk melihat kabar kegiatan terbaru.`;
-            }
+            card.classList.add('hidden');
           }
-          if (sectionTitle) {
-            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang}`;
+        });
+
+        if (visibleCount > 0) {
+          if (newsScrollWrapper) newsScrollWrapper.classList.remove('hidden');
+          if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
+        } else {
+          if (newsScrollWrapper) newsScrollWrapper.classList.add('hidden');
+          if (otherJenjangMsg) {
+            otherJenjangMsg.classList.remove('hidden');
+            if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
+            if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab MTs atau Semua untuk melihat kabar kegiatan terbaru.`;
           }
+        }
+
+        if (sectionTitle) {
+          sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
         }
       }
 
@@ -1075,13 +1011,17 @@
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           const query = e.target.value.toLowerCase().trim();
+          const activeBadge = document.getElementById('active-jenjang-badge');
+          const currentJenjang = activeBadge ? activeBadge.textContent.trim() : 'Semua';
           let visibleCount = 0;
 
           newsCards.forEach(card => {
+            const cardJenjang = card.getAttribute('data-jenjang');
+            const matchesJenjang = currentJenjang === 'Semua' || cardJenjang === currentJenjang;
             const title = card.querySelector('.news-title')?.textContent.toLowerCase() || '';
             const desc = card.querySelector('.news-desc')?.textContent.toLowerCase() || '';
             
-            if (title.includes(query) || desc.includes(query)) {
+            if (matchesJenjang && (title.includes(query) || desc.includes(query))) {
               card.classList.remove('hidden');
               visibleCount++;
             } else {
