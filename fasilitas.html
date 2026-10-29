@@ -77,72 +77,119 @@
         </section>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Fasilitas 1: Masjid As-Surur -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-mosque text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Card 1: Masjid Jami' Assurur (Slider) -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
+              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" alt="Masjid Jami' Assurur 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" alt="Masjid Jami' Assurur 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                </div>
+                <!-- Nav Buttons -->
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
+                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                </div>
               </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Masjid As-Surur</h3>
-                <p class="text-slate-600 text-sm">Pusat ibadah sholat berjamaah, pengajian kitab kuning, kajian tafsir, dan kegiatan keagamaan seluruh civitas madrasah &amp; santri.</p>
-              </div>
-            </div>
-
-            <!-- Fasilitas 2: Gedung Representatif -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-school text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Gedung Pembelajaran 3 Lantai</h3>
-                <p class="text-slate-600 text-sm">Ruang kelas ber-AC yang nyaman, bersih, representatif, serta dilengkapi sarana belajar modern untuk mendukung efektivitas KBM.</p>
-              </div>
-            </div>
-
-            <!-- Fasilitas 3: Laboratorium Komputer -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-desktop text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Laboratorium Komputer &amp; IT</h3>
-                <p class="text-slate-600 text-sm">Dilengkapi puluhan perangkat PC terhubung internet berkecepatan tinggi untuk ujian berbasis komputer (CBT) dan praktek TIK.</p>
+              <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    Masjid Jami' Assurur
+                  </h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">
+                    Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan &amp; santri.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Fasilitas 4: Lapangan Olahraga -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-futbol text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+            <!-- Card 2: Lapangan Upacara (Slider) -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
+              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                  <img src="/media/fasilitas/umum/lapangan_upacara_umum.jpg" alt="Lapangan Upacara 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                  <img src="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" alt="Lapangan Upacara 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                </div>
+                <!-- Nav Buttons -->
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
+                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                </div>
               </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Lapangan Olahraga &amp; Futsal</h3>
-                <p class="text-slate-600 text-sm">Area terbuka serbaguna untuk upacara bendera, olahraga futsal, bulu tangkis, bola voli, dan kegiatan ekstrakurikuler.</p>
+              <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    Lapangan Upacara
+                  </h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">
+                    Area terbuka serbaguna untuk upacara bendera, apel santri, dan berbagai kegiatan luar ruangan.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Fasilitas 5: Asrama Santri -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-hotel text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+            <!-- Card 3: Laboratorium Komputer (Slider) -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
+              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum.jpg" alt="Laboratorium Komputer 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum_1.jpg" alt="Laboratorium Komputer 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum_2.jpg" alt="Laboratorium Komputer 3" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+                </div>
+                <!-- Nav Buttons -->
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
+                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                </div>
               </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Asrama Santri Putra &amp; Putri</h3>
-                <p class="text-slate-600 text-sm">Hunian santri pesantren yang aman, bersih, dan terpantau dengan bimbingan ustadz/ustadzah selama 24 jam penuh.</p>
+              <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    Laboratorium Komputer
+                  </h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">
+                    Fasilitas komputer modern terhubung internet untuk praktikum TIK dan asesmen berbasis komputer.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Fasilitas 6: Perpustakaan -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group">
-              <div class="h-48 bg-emerald-100 relative overflow-hidden flex items-center justify-center">
-                <i class="fas fa-book-reader text-5xl text-emerald-600 group-hover:scale-110 transition duration-500"></i>
+            <!-- Card 4: Lapangan Bola Basket (Single Image) -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
+              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
+                <img src="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" alt="Lapangan Bola Basket" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg group-hover:scale-105 transition duration-500">
+                <div class="text-[10px] text-slate-400 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
+                  <i class="fas fa-camera text-[10px] text-emerald-600"></i> Dokumentasi fasilitas
+                </div>
               </div>
-              <div class="p-6">
-                <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">Perpustakaan Madrasah</h3>
-                <p class="text-slate-600 text-sm">Koleksi referensi kitab salafiyah, buku teks kurikulum merdeka/Kemenag, ensiklopedia, serta literatur umum penunjang riset siswa.</p>
+              <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    Lapangan Bola Basket
+                  </h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">
+                    Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa.
+                  </p>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </main>
