@@ -155,11 +155,99 @@
           <!-- ========================================== -->
           <!-- 1. GRID BERITA SDI -->
           <!-- ========================================== -->
-          <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid-sdi" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Data berita SDI akan dirender dinamis dari database di sini -->
+          <!-- [CMS_BERITA_SDI_START] -->
+          <div id="newsGrid-sdi" class="news-jenjang-grid hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Card Berita 1: Khatam Hafalan 30 Juz (SLIDER) -->
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+              <!-- Image Slider (Carousel) dengan Navigasi -->
+              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
+                  <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="Khatam Hafalan 30 Juz 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/berita/sdi/selesai_30_juz_2.jpg" alt="Khatam Hafalan 30 Juz 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/berita/sdi/selesai_30_juz_3.jpg" alt="Khatam Hafalan 30 Juz 3" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                </div>
+                <!-- Tombol Navigasi Slider -->
+                <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <!-- Indikator Slider & Label -->
+                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                  3 Foto
+                </div>
+              </div>
+
+              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-200 text-[11px]">
+                      Tahfidz
+                    </span>
+                    <div class="flex items-center gap-1.5 text-slate-400">
+                      <span class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[10px]">
+                        28 Oktober 2026
+                      </span>
+                    </div>
+                  </div>
+                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                    Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz
+                  </h3>
+                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                    Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur'an 30 Juz dengan predikat mumtaz. Kegiatan ini menjadi wujud nyata komitmen sekolah dalam mencetak generasi Qur'ani yang cerdas dan berakhlak mulia. Selamat kepada para hafizh dan hafizhah cilik kita!
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                    <i class="far fa-user mr-1 text-emerald-600"></i> Humas SDI
+                  </span>
+                  <button onclick="openNewsModal('Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz', 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz. Kegiatan ini menjadi wujud nyata komitmen sekolah dalam mencetak generasi Qur\'ani yang cerdas dan berakhlak mulia. Selamat kepada para hafizh dan hafizhah cilik kita!', '/media/berita/sdi/selesai_30_juz_1.jpg', '28 Oktober 2026', 'Tahfidz')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                    Baca Selengkapnya &rarr;
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card Berita 2: Hari Anak Nasional (SINGLE) -->
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              </div>
+
+              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3 text-xs">
+                    <span class="font-semibold text-blue-800 bg-blue-100/90 px-2.5 py-0.5 rounded-full border border-blue-200 text-[11px]">
+                      Kegiatan
+                    </span>
+                    <div class="flex items-center gap-1.5 text-slate-400">
+                      <span class="font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 text-[10px]">
+                        23 Juli 2026
+                      </span>
+                    </div>
+                  </div>
+                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                    Semarak Hari Anak Nasional: Wujudkan Generasi Penerus yang Ceria dan Berkarakter
+                  </h3>
+                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                    SDI Al Kindy turut memeriahkan peringatan Hari Anak Nasional dengan berbagai kegiatan edukatif dan menyenangkan. Melalui momen ini, kami berharap setiap anak dapat terus belajar, bermain, dan berkembang dalam lingkungan yang positif dan mendukung potensi terbaik mereka.
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs text-slate-400 flex items-center truncate max-w-[110px]">
+                    <i class="far fa-user mr-1 text-emerald-600"></i> Humas SDI
+                  </span>
+                  <button onclick="openNewsModal('Semarak Hari Anak Nasional: Wujudkan Generasi Penerus yang Ceria dan Berkarakter', 'SDI Al Kindy turut memeriahkan peringatan Hari Anak Nasional dengan berbagai kegiatan edukatif dan menyenangkan. Melalui momen ini, kami berharap setiap anak dapat terus belajar, bermain, dan berkembang dalam lingkungan yang positif dan mendukung potensi terbaik mereka.', '/media/berita/sdi/selamat_hari_anak_nasional.jpg', '23 Juli 2026', 'Kegiatan')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
+                    Baca Selengkapnya &rarr;
+                  </button>
+                </div>
+              </div>
+            </article>
+
           </div>
-          <!-- [CMS_BERITA_END] -->
+          <!-- [CMS_BERITA_SDI_END] -->
 
           <!-- ========================================== -->
           <!-- 2. GRID BERITA MI -->
@@ -816,11 +904,21 @@
         const allGrids = document.querySelectorAll('.news-jenjang-grid');
         allGrids.forEach(g => g.classList.add('hidden'));
 
-        if (jenjang === 'MTs' || jenjang === 'Semua') {
+        if (jenjang === 'Semua') {
+          allGrids.forEach(g => {
+            if (g.querySelectorAll('.news-card').length > 0) {
+              g.classList.remove('hidden');
+            }
+          });
+          if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
+          if (sectionTitle) {
+            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan Semua Jenjang`;
+          }
+        } else if (jenjang === 'MTs') {
           if (newsGrid) newsGrid.classList.remove('hidden');
           if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
           if (sectionTitle) {
-            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang === 'Semua' ? 'Yayasan' : 'MTs'}`;
+            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan MTs`;
           }
         } else {
           const targetGridId = 'newsGrid-' + jenjang.toLowerCase();
