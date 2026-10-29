@@ -161,18 +161,25 @@
                 <!-- 1. Futsal (SLIDER) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2 custom-scrollbar">
-                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                      <video controls class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <video class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                         <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
                         Browser Anda tidak mendukung tag video.
                       </video>
                     </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
                     <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
-                      <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
+                      <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat media lain
                     </div>
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Slider Media
                     </span>
                   </div>
@@ -195,13 +202,18 @@
                 <!-- 2. Drum Band (SINGLE) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <video controls class="w-full h-48 object-cover rounded-t-lg">
+                    <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                       <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
                       Browser Anda tidak mendukung tag video.
                     </video>
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Video
                     </span>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
+                        <i class="fas fa-play ml-0.5"></i>
+                      </span>
+                    </div>
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
@@ -245,14 +257,21 @@
                 <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2 custom-scrollbar">
-                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
                     <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                       <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
                     </div>
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Slider Media
                     </span>
                   </div>
@@ -275,8 +294,8 @@
                 <!-- 2. Pembiasaan Sholat Dhuha (SINGLE) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Foto
                     </span>
                   </div>
@@ -299,14 +318,21 @@
                 <!-- 3. Pemilihan OSIS 2026/2027 (SLIDER) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2 custom-scrollbar">
-                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
                     <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                       <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
                     </div>
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Slider Media
                     </span>
                   </div>
@@ -357,20 +383,27 @@
                 <!-- 1. Lomba Cerdas Cermat (SLIDER) -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full h-48 custom-scrollbar">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <!-- Foto 1 -->
-                      <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover shrink-0 snap-center">
+                      <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       
                       <!-- Foto 2 -->
-                      <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover shrink-0 snap-center">
+                      <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       
                       <!-- Foto 3 -->
-                      <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover shrink-0 snap-center">
+                      <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
                     <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
                       <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
                     </div>
-                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                       Slider Media
                     </span>
                   </div>
@@ -528,47 +561,113 @@
         });
       }
 
-      function openModal(imageSrc) {
-        document.getElementById('modalImage').src = imageSrc;
-        document.getElementById('imageModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // cegah background scroll
-      }
-      function closeModal() {
-        document.getElementById('imageModal').classList.add('hidden');
-        document.body.style.overflow = 'auto'; // kembalikan scroll
-      }
-      // Tutup modal jika area gelap di luar gambar diklik
-      document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('imageModal');
-        if (modal) {
-          modal.addEventListener('click', function(e) {
-            if (e.target === this) { closeModal(); }
-          });
+      // Universal Lightbox Modal Logic
+      const imageModal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalVideo = document.getElementById('modalVideo');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+
+      function openMediaModal(element) {
+        if (!imageModal) return;
+        const tagName = element.tagName.toLowerCase();
+        if (tagName === 'img') {
+          if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = '';
+            modalVideo.classList.add('hidden');
+          }
+          if (modalImage) {
+            modalImage.src = element.src;
+            modalImage.alt = element.alt || 'Pratinjau Foto';
+            modalImage.classList.remove('hidden');
+          }
+        } else if (tagName === 'video') {
+          if (modalImage) {
+            modalImage.src = '';
+            modalImage.classList.add('hidden');
+          }
+          if (modalVideo) {
+            const videoSrc = element.currentSrc || element.querySelector('source')?.src || element.src;
+            modalVideo.src = videoSrc;
+            modalVideo.classList.remove('hidden');
+            modalVideo.play().catch(() => {});
+          }
         }
-        document.querySelectorAll('#gallery-content-ponpes img').forEach(img => {
-          img.classList.add('cursor-pointer');
-          img.addEventListener('click', () => openModal(img.src));
+        imageModal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeModal() {
+        if (!imageModal) return;
+        imageModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        if (modalImage) {
+          modalImage.src = '';
+          modalImage.classList.add('hidden');
+        }
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.src = '';
+          modalVideo.classList.add('hidden');
+        }
+      }
+
+      function openModal(imageSrc) {
+        if (!imageModal) return;
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.src = '';
+          modalVideo.classList.add('hidden');
+        }
+        if (modalImage) {
+          modalImage.src = imageSrc;
+          modalImage.classList.remove('hidden');
+        }
+        imageModal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function openLightbox(url) { openModal(url); }
+      function closeLightbox() { closeModal(); }
+
+      // Attach click listeners to all media in main content
+      document.querySelectorAll('main img, main video').forEach((media) => {
+        media.addEventListener('click', () => {
+          openMediaModal(media);
         });
       });
-      if (document.getElementById('imageModal')) {
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-          if (e.target === this) { closeModal(); }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+      }
+
+      if (imageModal) {
+        imageModal.addEventListener('click', (e) => {
+          if (e.target === imageModal || e.target.id === 'imageModal') {
+            closeModal();
+          }
         });
       }
 
-      // Backward compatibility for openLightbox
-      function openLightbox(url) {
-        openModal(url);
-      }
-      function closeLightbox() {
-        closeModal();
-      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal && !imageModal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
     </script>
-  </body>
 
-  <!-- Image Modal / Lightbox -->
-  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
-    <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 z-50">&times;</button>
-    <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded-lg">
-  </div>
+    <!-- Universal Lightbox Modal -->
+    <div id="imageModal" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-xs">
+      <!-- Close Button -->
+      <button id="closeModalBtn" type="button" aria-label="Tutup" class="absolute top-4 right-4 text-white hover:text-gold-400 text-3xl font-bold p-2 transition focus:outline-none z-50">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <!-- Media Container -->
+      <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+        <img id="modalImage" src="" alt="Pratinjau Media" class="hidden max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
+      </div>
+    </div>
+  </body>
 </html>

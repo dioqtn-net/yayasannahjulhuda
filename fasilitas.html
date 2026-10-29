@@ -72,7 +72,7 @@
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi santri/siswa.</p>
+            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
           </div>
         </section>
 
@@ -81,21 +81,18 @@
             
             <!-- Card 1: Masjid Jami' Assurur (Slider) -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
-              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
-                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
-                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" alt="Masjid Jami' Assurur 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
-                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" alt="Masjid Jami' Assurur 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+              <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" alt="Masjid Jami' Assurur 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" alt="Masjid Jami' Assurur 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
                 </div>
                 <!-- Nav Buttons -->
-                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-left"></i>
                 </button>
-                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-right"></i>
                 </button>
-                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
-                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                </div>
               </div>
               <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                 <div>
@@ -103,7 +100,7 @@
                     Masjid Jami' Assurur
                   </h3>
                   <p class="text-slate-600 text-sm leading-relaxed">
-                    Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan &amp; santri.
+                    Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.
                   </p>
                 </div>
               </div>
@@ -111,21 +108,18 @@
 
             <!-- Card 2: Lapangan Upacara (Slider) -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
-              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
-                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
-                  <img src="/media/fasilitas/umum/lapangan_upacara_umum.jpg" alt="Lapangan Upacara 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
-                  <img src="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" alt="Lapangan Upacara 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+              <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                  <img src="/media/fasilitas/umum/lapangan_upacara_umum.jpg" alt="Lapangan Upacara 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" alt="Lapangan Upacara 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
                 </div>
                 <!-- Nav Buttons -->
-                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-left"></i>
                 </button>
-                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-right"></i>
                 </button>
-                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
-                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                </div>
               </div>
               <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                 <div>
@@ -133,7 +127,7 @@
                     Lapangan Upacara
                   </h3>
                   <p class="text-slate-600 text-sm leading-relaxed">
-                    Area terbuka serbaguna untuk upacara bendera, apel santri, dan berbagai kegiatan luar ruangan.
+                    Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.
                   </p>
                 </div>
               </div>
@@ -141,22 +135,19 @@
 
             <!-- Card 3: Laboratorium Komputer (Slider) -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
-              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
-                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
-                  <img src="/media/fasilitas/umum/lab_komputer_umum.jpg" alt="Laboratorium Komputer 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
-                  <img src="/media/fasilitas/umum/lab_komputer_umum_1.jpg" alt="Laboratorium Komputer 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
-                  <img src="/media/fasilitas/umum/lab_komputer_umum_2.jpg" alt="Laboratorium Komputer 3" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg">
+              <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum.jpg" alt="Laboratorium Komputer 1" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum_1.jpg" alt="Laboratorium Komputer 2" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                  <img src="/media/fasilitas/umum/lab_komputer_umum_2.jpg" alt="Laboratorium Komputer 3" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
                 </div>
                 <!-- Nav Buttons -->
-                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -260, behavior: 'smooth'})" class="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-left"></i>
                 </button>
-                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: 260, behavior: 'smooth'})" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow">
+                <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
                   <i class="fas fa-chevron-right"></i>
                 </button>
-                <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
-                  <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                </div>
               </div>
               <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                 <div>
@@ -164,7 +155,7 @@
                     Laboratorium Komputer
                   </h3>
                   <p class="text-slate-600 text-sm leading-relaxed">
-                    Fasilitas komputer modern terhubung internet untuk praktikum TIK dan asesmen berbasis komputer.
+                    Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.
                   </p>
                 </div>
               </div>
@@ -172,11 +163,8 @@
 
             <!-- Card 4: Lapangan Bola Basket (Single Image) -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col">
-              <div class="relative overflow-hidden rounded-t-lg bg-slate-100">
-                <img src="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" alt="Lapangan Bola Basket" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg group-hover:scale-105 transition duration-500">
-                <div class="text-[10px] text-slate-400 py-1 px-3 bg-slate-50 text-center border-t border-slate-100 flex items-center justify-center gap-1 font-medium">
-                  <i class="fas fa-camera text-[10px] text-emerald-600"></i> Dokumentasi fasilitas
-                </div>
+              <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <img src="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" alt="Lapangan Bola Basket" class="w-full h-48 object-cover shrink-0 snap-center rounded-t-lg cursor-pointer hover:brightness-90 transition">
               </div>
               <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                 <div>
@@ -184,7 +172,7 @@
                     Lapangan Bola Basket
                   </h3>
                   <p class="text-slate-600 text-sm leading-relaxed">
-                    Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa.
+                    Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.
                   </p>
                 </div>
               </div>
@@ -254,6 +242,20 @@
 
     </div>
 
+    <!-- Universal Lightbox Modal -->
+    <div id="mediaModal" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-xs">
+      <!-- Close Button -->
+      <button id="closeMediaModalBtn" type="button" aria-label="Tutup" class="absolute top-4 right-4 text-white hover:text-gold-400 text-3xl font-bold p-2 transition focus:outline-none z-50">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <!-- Media Container -->
+      <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+        <img id="modalImage" src="" alt="Pratinjau Media" class="hidden max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
+      </div>
+    </div>
+
     <!-- Client Scripts -->
     <script>
       // Mobile Menu Toggle
@@ -264,6 +266,82 @@
           mobileMenu.classList.toggle('hidden');
         });
       }
+
+      // Universal Lightbox Modal Logic
+      const mediaModal = document.getElementById('mediaModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalVideo = document.getElementById('modalVideo');
+      const closeMediaModalBtn = document.getElementById('closeMediaModalBtn');
+
+      function openMediaModal(element) {
+        if (!mediaModal) return;
+        const tagName = element.tagName.toLowerCase();
+        if (tagName === 'img') {
+          if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = '';
+            modalVideo.classList.add('hidden');
+          }
+          if (modalImage) {
+            modalImage.src = element.src;
+            modalImage.alt = element.alt || 'Pratinjau Foto';
+            modalImage.classList.remove('hidden');
+          }
+        } else if (tagName === 'video') {
+          if (modalImage) {
+            modalImage.src = '';
+            modalImage.classList.add('hidden');
+          }
+          if (modalVideo) {
+            const videoSrc = element.currentSrc || element.querySelector('source')?.src || element.src;
+            modalVideo.src = videoSrc;
+            modalVideo.classList.remove('hidden');
+            modalVideo.play().catch(() => {});
+          }
+        }
+        mediaModal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeMediaModal() {
+        if (!mediaModal) return;
+        mediaModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        if (modalImage) {
+          modalImage.src = '';
+          modalImage.classList.add('hidden');
+        }
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.src = '';
+          modalVideo.classList.add('hidden');
+        }
+      }
+
+      // Attach click listeners to all media in main content
+      document.querySelectorAll('main img, main video').forEach((media) => {
+        media.addEventListener('click', () => {
+          openMediaModal(media);
+        });
+      });
+
+      if (closeMediaModalBtn) {
+        closeMediaModalBtn.addEventListener('click', closeMediaModal);
+      }
+
+      if (mediaModal) {
+        mediaModal.addEventListener('click', (e) => {
+          if (e.target === mediaModal || e.target.id === 'mediaModal') {
+            closeMediaModal();
+          }
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mediaModal && !mediaModal.classList.contains('hidden')) {
+          closeMediaModal();
+        }
+      });
     </script>
   </body>
 </html>
