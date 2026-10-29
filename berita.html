@@ -18,22 +18,23 @@
     <link rel="stylesheet" href="/src/style.css">
     <style>
       .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
         height: 8px;
       }
       .custom-scrollbar::-webkit-scrollbar-track {
-        background: #f1f5f9;
-        border-radius: 9999px;
+        background: #f1f1f1;
+        border-radius: 8px;
       }
       .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #94a3b8;
-        border-radius: 9999px;
+        background: #888;
+        border-radius: 4px;
       }
       .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #64748b;
+        background: #555;
       }
       .custom-scrollbar {
         scrollbar-width: thin;
-        scrollbar-color: #94a3b8 #f1f5f9;
+        scrollbar-color: #888 #f1f1f1;
       }
     </style>
   </head>
@@ -156,10 +157,12 @@
           <!-- 1. GRID BERITA SDI -->
           <!-- ========================================== -->
           <!-- [CMS_BERITA_SDI_START] -->
-          <div id="newsGrid-sdi" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div id="newsGrid-sdi" class="news-jenjang-grid hidden">
+            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Card Berita 1: Khatam Hafalan 30 Juz (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
@@ -211,7 +214,7 @@
             </article>
 
             <!-- Card Berita 2: Juara 1 Plate Champion (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" alt="Juara 1 Plate Champion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -247,7 +250,7 @@
             </article>
 
             <!-- Card Berita 3: Juara 2 Kategori Bantalan (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" alt="Juara 2 Kategori Bantalan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -283,7 +286,7 @@
             </article>
 
             <!-- Card Berita 4: Hari Anak Nasional (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -318,6 +321,8 @@
               </div>
             </article>
 
+              </div>
+            </div>
           </div>
           <!-- [CMS_BERITA_SDI_END] -->
 
@@ -325,8 +330,12 @@
           <!-- 2. GRID BERITA MI -->
           <!-- ========================================== -->
           <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid-mi" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Data berita MI akan dirender dinamis dari database di sini -->
+          <div id="newsGrid-mi" class="news-jenjang-grid hidden">
+            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Data berita MI akan dirender dinamis dari database di sini -->
+              </div>
+            </div>
           </div>
           <!-- [CMS_BERITA_END] -->
 
@@ -334,10 +343,12 @@
           <!-- 3. GRID BERITA MTS -->
           <!-- ========================================== -->
           <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid" class="news-jenjang-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div id="newsGrid" class="news-jenjang-grid">
+            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Card Berita 1: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
@@ -387,7 +398,7 @@
             </article>
 
             <!-- Card Berita 2: Edukasi Polsek Kebon Jeruk (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -423,7 +434,7 @@
             </article>
 
             <!-- Card Berita 3: Edukasi Kesehatan Puskesmas (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -459,7 +470,7 @@
             </article>
 
             <!-- Card Berita 4: Simulasi Pemadam Kebakaran (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
@@ -510,7 +521,7 @@
             </article>
 
             <!-- Card Berita 5: Kunjungan Perpusnas (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -546,7 +557,7 @@
             </article>
 
             <!-- Card Berita 6: Olimpiade Madrasah Indonesia (SINGLE) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -582,7 +593,7 @@
             </article>
 
             <!-- Card Berita 7: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
                   <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
@@ -620,6 +631,8 @@
               </div>
             </article>
 
+              </div>
+            </div>
           </div>
           <!-- [CMS_BERITA_END] -->
 
@@ -627,8 +640,12 @@
           <!-- 4. GRID BERITA MA -->
           <!-- ========================================== -->
           <!-- [CMS_BERITA_START] Loop data berita dari database akan dirender di dalam grid ini -->
-          <div id="newsGrid-ma" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Data berita MA akan dirender dinamis dari database di sini -->
+          <div id="newsGrid-ma" class="news-jenjang-grid hidden">
+            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Data berita MA akan dirender dinamis dari database di sini -->
+              </div>
+            </div>
           </div>
           <!-- [CMS_BERITA_END] -->
 
@@ -636,10 +653,12 @@
           <!-- 5. GRID BERITA PONPES -->
           <!-- ========================================== -->
           <!-- [CMS_BERITA_PONPES_START] -->
-          <div id="newsGrid-ponpes" class="news-jenjang-grid hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div id="newsGrid-ponpes" class="news-jenjang-grid hidden">
+            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Card Berita 1: Upacara Hari Santri Nasional (SLIDER) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
@@ -692,7 +711,7 @@
             </article>
 
             <!-- Card Berita 2: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
                   <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
@@ -731,7 +750,7 @@
             </article>
 
             <!-- Card Berita 3: Juara 2 Lomba Cerdas Cermat -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/ponpes/PEMENANG LOMBA.JPG" alt="Juara 2 Lomba Cerdas Cermat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -767,7 +786,7 @@
             </article>
 
             <!-- Card Berita 4: Juara Lomba Pesantren Tingkat Jakarta Barat -->
-            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+            <article class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <img src="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" alt="Juara Lomba Pesantren Tingkat Jakarta Barat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
               </div>
@@ -802,6 +821,8 @@
               </div>
             </article>
 
+              </div>
+            </div>
           </div>
           <!-- [CMS_BERITA_PONPES_END] -->
 
