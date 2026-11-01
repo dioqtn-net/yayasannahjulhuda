@@ -120,15 +120,21 @@
             </div>
           </div>
 
-          <!-- Section Title -->
-          <div class="mb-8 pb-4 border-b border-slate-200">
-            <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
-              <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
-                <i class="fas fa-images"></i>
-              </span>
-              Dokumentasi Galeri Semua Jenjang
-            </h2>
-            <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
+          <!-- Section Title & Search Bar Tab Semua -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-200">
+            <div>
+              <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
+                  <i class="fas fa-images"></i>
+                </span>
+                Dokumentasi Galeri Semua Jenjang
+              </h2>
+              <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
+            </div>
+            <div id="searchSemuaWrapper" class="relative w-full sm:w-72 shrink-0">
+              <input type="text" id="searchGalleryAllInput" placeholder="Cari dokumentasi..." class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+              <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+            </div>
           </div>
 
           <!-- ========================================== -->
@@ -818,6 +824,17 @@
         // Reset visibility of all cards and clear search inputs
         document.querySelectorAll('.gallery-card').forEach(card => card.classList.remove('hidden'));
         document.querySelectorAll('.category-search-input').forEach(input => input.value = '');
+        const searchSemuaWrapper = document.getElementById('searchSemuaWrapper');
+        const searchAllInput = document.getElementById('searchGalleryAllInput');
+        if (searchAllInput) searchAllInput.value = '';
+
+        if (searchSemuaWrapper) {
+          if (jenjang === 'Semua') {
+            searchSemuaWrapper.classList.remove('hidden');
+          } else {
+            searchSemuaWrapper.classList.add('hidden');
+          }
+        }
 
         tabs.forEach(btn => {
           const isSelected = btn.getAttribute('data-jenjang') === jenjang;
@@ -878,6 +895,26 @@
           });
         });
       });
+
+      // Search Handler for Tab Semua
+      const searchGalleryAllInput = document.getElementById('searchGalleryAllInput');
+      if (searchGalleryAllInput) {
+        searchGalleryAllInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const semuaContainer = document.getElementById('gallery-content-semua');
+          if (!semuaContainer) return;
+          const cards = semuaContainer.querySelectorAll('.gallery-card');
+          cards.forEach(card => {
+            const title = card.querySelector('.gallery-title')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.gallery-desc')?.textContent.toLowerCase() || '';
+            if (title.includes(query) || desc.includes(query)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      }
 
       // Mobile Menu Toggle
       const toggleMobileBtn = document.getElementById('toggleMobileBtn');
