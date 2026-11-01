@@ -93,8 +93,8 @@
           <!-- 1. Filter Jenjang Pendidikan (Tabs) -->
           <div class="mb-10 text-center">
             <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Pilih Jenjang Pendidikan</div>
-            <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
-              <button onclick="switchJenjang('Semua')" data-jenjang="Semua" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3" id="jenjangTabs">
+              <button onclick="switchJenjang('Semua')" data-jenjang="Semua" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30">
                 Semua
               </button>
               <button onclick="switchJenjang('SDI')" data-jenjang="SDI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
@@ -103,8 +103,7 @@
               <button onclick="switchJenjang('MI')" data-jenjang="MI" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
                 MI
               </button>
-              <!-- MTs Set as Active by Default -->
-              <button onclick="switchJenjang('MTs')" data-jenjang="MTs" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-700 text-white ring-2 ring-emerald-500/30">
+              <button onclick="switchJenjang('MTs')" data-jenjang="MTs" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
                 MTs
               </button>
               <button onclick="switchJenjang('MA')" data-jenjang="MA" class="jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700">
@@ -117,18 +116,45 @@
 
             <!-- Active Filter Indicator -->
             <div class="mt-4 text-xs text-slate-500">
-              Menampilkan galeri: <span id="active-jenjang-badge" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">MTs</span>
+              Menampilkan galeri: <span id="active-jenjang-badge" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Semua</span>
             </div>
           </div>
 
-          <!-- 2 & 3. AREA KONTEN GALERI MTs (Aktif) -->
-          <div id="gallery-content-mts">
-            <!-- Grid 4 Kolom Galeri MTs -->
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+          <!-- Section Title & Search Bar -->
+          <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 pb-4 border-b border-slate-200">
+            <div>
+              <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
+                  <i class="fas fa-images"></i>
+                </span>
+                Dokumentasi Galeri Semua Jenjang
+              </h2>
+              <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
+            </div>
+            <div class="relative w-full md:w-72">
+              <input type="text" id="searchGalleryInput" placeholder="Cari dokumentasi..." class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-sm transition">
+              <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+            </div>
+          </div>
+
+          <!-- No Results State (Search) -->
+          <div id="noResultsMsg" class="hidden text-center py-12 px-4 bg-white rounded-2xl border border-slate-200 max-w-md mx-auto shadow-sm my-6">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xl">
+              <i class="fas fa-search"></i>
+            </div>
+            <h4 class="font-bold text-slate-700 text-base mb-1">Dokumentasi Tidak Ditemukan</h4>
+            <p class="text-xs text-slate-500">Tidak ada dokumentasi yang sesuai dengan kata kunci pencarian Anda.</p>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB SEMUA JENJANG -->
+          <!-- ========================================== -->
+          <div id="gallery-content-semua" class="w-full">
+            <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
+
                 <!-- 1. Futsal (SLIDER) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
@@ -148,21 +174,22 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Futsal
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- 2. Drum Band (SINGLE) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                       <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
@@ -176,21 +203,22 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Drum Band
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
@@ -206,41 +234,43 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Peringatan Isra Mi'raj
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Pembiasaan Sholat Dhuha
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
@@ -256,31 +286,22 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Pemilihan OSIS 2026/2027
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
                     </div>
                   </div>
                 </div>
 
-              </div>
-            </div>
-          </div>
-
-          <!-- AREA KONTEN GALERI PONPES -->
-          <div id="gallery-content-ponpes" class="hidden">
-            <!-- Grid 4 Kolom Galeri Ponpes -->
-            <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- 1. Lomba Cerdas Cermat (SLIDER) -->
-                <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
+                <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                   <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <!-- Foto 1 -->
@@ -302,21 +323,295 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Lomba Cerdas Cermat
                       </h3>
-                      <p class="text-xs text-slate-500 leading-relaxed">
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
                         Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
                       </p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                       <span><i class="far fa-calendar-alt mr-1"></i> Ponpes Assurur</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-amber-100 text-amber-800 border border-amber-200">Ponpes</span>
                     </div>
                   </div>
                 </div>
 
               </div>
             </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB MTs -->
+          <!-- ========================================== -->
+          <div id="gallery-content-mts" class="hidden space-y-12">
+            
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-medal"></i>
+                    </span>
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas siswa/siswi MTs.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 border border-sky-200">
+                  2 Dokumentasi
+                </span>
+              </div>
+
+              <!-- Grid 4 Kolom Ekstrakurikuler (Max 2 Baris Scroll) -->
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 1. Futsal (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <video class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                          <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
+                          Browser Anda tidak mendukung tag video.
+                        </video>
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Futsal
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Drum Band (SINGLE) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                        <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                      </video>
+                      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
+                          <i class="fas fa-play ml-0.5"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Drum Band
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-book-reader"></i>
+                    </span>
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MTs.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  3 Dokumentasi
+                </span>
+              </div>
+
+              <!-- Grid 4 Kolom Kegiatan (Max 2 Baris Scroll) -->
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Peringatan Isra Mi'raj
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Pembiasaan Sholat Dhuha
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Pemilihan OSIS 2026/2027
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 border border-emerald-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB PONPES -->
+          <!-- ========================================== -->
+          <div id="gallery-content-ponpes" class="hidden space-y-12">
+            
+            <!-- KATEGORI: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900 flex items-center">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
+                      <i class="fas fa-book-reader"></i>
+                    </span>
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, perlombaan, dan agenda santri Pondok Pesantren.</p>
+                </div>
+                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  1 Dokumentasi
+                </span>
+              </div>
+
+              <!-- Grid 4 Kolom Kegiatan (Max 2 Baris Scroll) -->
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
+                  <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <!-- Foto 1 -->
+                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        
+                        <!-- Foto 2 -->
+                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        
+                        <!-- Foto 3 -->
+                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Lomba Cerdas Cermat
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Ponpes Assurur</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-amber-100 text-amber-800 border border-amber-200">Ponpes</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
           </div>
 
           <!-- EMPTY STATE UNTUK JENJANG LAIN (SDI, MI, MA) -->
@@ -331,8 +626,8 @@
               <p class="text-slate-500 text-sm leading-relaxed mb-6">
                 Dokumentasi foto dan video untuk jenjang ini sedang dalam proses inventarisasi dan akan segera diunggah.
               </p>
-              <button onclick="switchJenjang('MTs')" class="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-xs font-semibold transition shadow-sm">
-                <i class="fas fa-arrow-left mr-1.5"></i> Lihat Galeri MTs
+              <button onclick="switchJenjang('Semua')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-full text-xs font-semibold transition shadow-sm">
+                <i class="fas fa-arrow-left mr-1.5"></i> Lihat Semua Galeri
               </button>
             </div>
           </div>
@@ -394,32 +689,47 @@
       // Tab switcher function
       function switchJenjang(jenjang) {
         const tabs = document.querySelectorAll('.jenjang-tab-btn');
+        const activeBadge = document.getElementById('active-jenjang-badge');
+        const contentSemua = document.getElementById('gallery-content-semua');
+        const contentMTs = document.getElementById('gallery-content-mts');
+        const contentPonpes = document.getElementById('gallery-content-ponpes');
+        const contentEmpty = document.getElementById('gallery-content-empty');
+        const emptyJenjangName = document.getElementById('empty-jenjang-name');
+        const sectionTitle = document.getElementById('gallerySectionTitle');
+        const searchInput = document.getElementById('searchGalleryInput');
+        const noResultsMsg = document.getElementById('noResultsMsg');
+
+        if (noResultsMsg) noResultsMsg.classList.add('hidden');
+        if (searchInput) searchInput.value = '';
+
+        // Reset visibility of all cards and category sections
+        document.querySelectorAll('.gallery-card').forEach(card => card.classList.remove('hidden'));
+        document.querySelectorAll('.gallery-category-section').forEach(sec => sec.classList.remove('hidden'));
+
         tabs.forEach(btn => {
           const isSelected = btn.getAttribute('data-jenjang') === jenjang;
           if (isSelected) {
-            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-700 text-white ring-2 ring-emerald-500/30";
+            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30";
           } else {
             btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700";
           }
         });
 
-        const contentMTs = document.getElementById('gallery-content-mts');
-        const contentPonpes = document.getElementById('gallery-content-ponpes');
-        const contentEmpty = document.getElementById('gallery-content-empty');
-        const emptyJenjangName = document.getElementById('empty-jenjang-name');
-        const activeJenjangBadge = document.getElementById('active-jenjang-badge');
-
-        if (activeJenjangBadge) {
-          activeJenjangBadge.textContent = jenjang === 'Semua' ? 'Semua Jenjang' : jenjang;
+        if (activeBadge) {
+          activeBadge.textContent = jenjang;
         }
 
+        if (sectionTitle) {
+          sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-images"></i></span> Dokumentasi Galeri ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
+        }
+
+        if (contentSemua) contentSemua.classList.add('hidden');
         if (contentMTs) contentMTs.classList.add('hidden');
         if (contentPonpes) contentPonpes.classList.add('hidden');
         if (contentEmpty) contentEmpty.classList.add('hidden');
 
         if (jenjang === 'Semua') {
-          if (contentMTs) contentMTs.classList.remove('hidden');
-          if (contentPonpes) contentPonpes.classList.remove('hidden');
+          if (contentSemua) contentSemua.classList.remove('hidden');
         } else if (jenjang === 'MTs') {
           if (contentMTs) contentMTs.classList.remove('hidden');
         } else if (jenjang === 'Ponpes') {
@@ -430,6 +740,66 @@
             if (emptyJenjangName) emptyJenjangName.textContent = jenjang;
           }
         }
+      }
+
+      // Live search filter
+      const searchGalleryInput = document.getElementById('searchGalleryInput');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+
+      if (searchGalleryInput) {
+        searchGalleryInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const activeBadge = document.getElementById('active-jenjang-badge');
+          const currentJenjang = activeBadge ? activeBadge.textContent.trim() : 'Semua';
+
+          let activeContainer = null;
+          if (currentJenjang === 'Semua') {
+            activeContainer = document.getElementById('gallery-content-semua');
+          } else if (currentJenjang === 'MTs') {
+            activeContainer = document.getElementById('gallery-content-mts');
+          } else if (currentJenjang === 'Ponpes') {
+            activeContainer = document.getElementById('gallery-content-ponpes');
+          }
+
+          if (!activeContainer) {
+            if (noResultsMsg) noResultsMsg.classList.add('hidden');
+            return;
+          }
+
+          const cards = activeContainer.querySelectorAll('.gallery-card');
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const title = card.querySelector('.gallery-title')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.gallery-desc')?.textContent.toLowerCase() || '';
+
+            if (title.includes(query) || desc.includes(query)) {
+              card.classList.remove('hidden');
+              visibleCount++;
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+
+          // Check category sections in activeContainer if any
+          const categorySections = activeContainer.querySelectorAll('.gallery-category-section');
+          categorySections.forEach(sec => {
+            const visibleInSec = sec.querySelectorAll('.gallery-card:not(.hidden)').length;
+            if (visibleInSec === 0) {
+              sec.classList.add('hidden');
+            } else {
+              sec.classList.remove('hidden');
+            }
+          });
+
+          if (noResultsMsg) {
+            if (visibleCount === 0) {
+              noResultsMsg.classList.remove('hidden');
+            } else {
+              noResultsMsg.classList.add('hidden');
+            }
+          }
+        });
       }
 
       // Mobile Menu Toggle
