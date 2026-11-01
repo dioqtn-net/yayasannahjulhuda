@@ -142,7 +142,6 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/60 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left fade-in">
-          <span class="inline-block py-1 px-3 rounded-full bg-gold-500/20 text-gold-400 font-semibold text-sm mb-4 border border-gold-500/30">Lembaga Pendidikan Islam</span>
           <h1 class="text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
             Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>
           </h1>

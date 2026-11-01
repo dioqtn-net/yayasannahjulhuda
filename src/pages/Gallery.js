@@ -78,7 +78,7 @@ export const renderGallery = (galleries) => {
           <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Galeri Dokumentasi</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
           <p class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
-            Momen berharga dan potret kegiatan keseharian santri serta fasilitas di lingkungan Yayasan Nahjul Huda.
+            Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.
           </p>
         </div>
       </section>
@@ -118,45 +118,29 @@ export const renderGallery = (galleries) => {
         </div>
 
         <!-- AREA KONTEN GALERI MTs (Aktif) -->
-        <div id="gallery-content-mts" class="space-y-16">
-          
-          <!-- KATEGORI 1: EKSTRAKURIKULER -->
-          <section>
-            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
-                  <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center mr-3 text-base">
-                    <i class="fas fa-medal"></i>
-                  </span>
-                  Ekstrakurikuler
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas santri MTs.</p>
-              </div>
-              <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 border border-sky-200">
-                2 Dokumentasi
-              </span>
-            </div>
-
-            <!-- Grid 2 Kolom Ekstrakurikuler -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div id="gallery-content-mts">
+          <!-- Grid 4 Kolom Galeri MTs -->
+          <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <!-- 1. Futsal (SLIDER) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                    <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                    <video controls class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                    <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    <video class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
                       Browser Anda tidak mendukung tag video.
                     </video>
                   </div>
-                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
-                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Slider Media
-                  </span>
+                  <!-- Nav Buttons -->
+                  <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
@@ -169,21 +153,22 @@ export const renderGallery = (galleries) => {
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                     <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
-                    <span class="text-sky-700 font-medium"><i class="fas fa-futbol mr-1"></i> Olahraga</span>
                   </div>
                 </div>
               </div>
 
               <!-- 2. Drum Band (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <video controls class="w-full h-48 object-cover rounded-t-lg">
+                  <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                     <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
                     Browser Anda tidak mendukung tag video.
                   </video>
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Video
-                  </span>
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
+                      <i class="fas fa-play ml-0.5"></i>
+                    </span>
+                  </div>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
@@ -191,52 +176,29 @@ export const renderGallery = (galleries) => {
                       Drum Band
                     </h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
-                      Melatih kedisiplinan dan kreativitas seni bermusik santri MTs.
+                      Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
                     </p>
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                     <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
-                    <span class="text-sky-700 font-medium"><i class="fas fa-drum mr-1"></i> Seni Musik</span>
                   </div>
                 </div>
               </div>
 
-            </div>
-          </section>
-
-          <!-- KATEGORI 2: KEGIATAN -->
-          <section>
-            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-900 flex items-center">
-                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base">
-                    <i class="fas fa-book-reader"></i>
-                  </span>
-                  Kegiatan
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda santri MTs.</p>
-              </div>
-              <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                3 Dokumentasi
-              </span>
-            </div>
-
-            <!-- Grid 3 Kolom Kegiatan (3 Item) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <!-- 1. Peringatan Isra Mi'raj (SLIDER) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                    <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                    <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                   </div>
-                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
-                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Slider Media
-                  </span>
+                  <!-- Nav Buttons -->
+                  <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
@@ -249,18 +211,14 @@ export const renderGallery = (galleries) => {
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                     <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Keagamaan</span>
                   </div>
                 </div>
               </div>
 
-              <!-- 2. Pembiasaan Sholat Dhuha (SINGLE) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:opacity-90 transition-opacity">
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Foto
-                  </span>
+                  <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" onclick="openModal(this.src)" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
@@ -273,24 +231,24 @@ export const renderGallery = (galleries) => {
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                     <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Ibadah</span>
                   </div>
                 </div>
               </div>
 
-              <!-- 3. Pemilihan OSIS 2026/2027 (SLIDER) -->
-              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
-                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full space-x-4 pb-2">
-                    <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                    <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" onclick="openModal(this.src)" class="flex-shrink-0 w-[90%] md:w-full snap-center object-cover h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                    <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                   </div>
-                  <div class="text-[10px] text-slate-500 py-1 px-3 bg-slate-100 text-center border-t border-slate-200 flex items-center justify-center gap-1 font-medium">
-                    <i class="fas fa-arrows-left-right text-[10px] text-emerald-600"></i> Geser untuk melihat foto lain
-                  </div>
-                  <span class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                    Slider Media
-                  </span>
+                  <!-- Nav Buttons -->
+                  <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
                   <div>
@@ -303,19 +261,57 @@ export const renderGallery = (galleries) => {
                   </div>
                   <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                     <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
-                    <span class="text-emerald-600 font-medium"><i class="fas fa-tag mr-1"></i> Kesiswaan</span>
                   </div>
                 </div>
               </div>
+
             </div>
-          </section>
-
-
+          </div>
         </div>
 
         <!-- AREA KONTEN GALERI PONPES -->
         <div id="gallery-content-ponpes" class="hidden">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Grid 4 Kolom Galeri Ponpes -->
+          <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              
+              <!-- 1. Lomba Cerdas Cermat (SLIDER) -->
+              <div class="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                    <!-- Foto 1 -->
+                    <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    
+                    <!-- Foto 2 -->
+                    <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                    
+                    <!-- Foto 3 -->
+                    <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" onclick="openModal(this.src)" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                  </div>
+                  <!-- Nav Buttons -->
+                  <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                      Lomba Cerdas Cermat
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
+                    </p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="far fa-calendar-alt mr-1"></i> Ponpes Assurur</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
