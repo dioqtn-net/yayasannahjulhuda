@@ -120,30 +120,15 @@
             </div>
           </div>
 
-          <!-- Section Title & Search Bar -->
-          <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 pb-4 border-b border-slate-200">
-            <div>
-              <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
-                  <i class="fas fa-images"></i>
-                </span>
-                Dokumentasi Galeri Semua Jenjang
-              </h2>
-              <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
-            </div>
-            <div class="relative w-full md:w-72">
-              <input type="text" id="searchGalleryInput" placeholder="Cari dokumentasi..." class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-sm transition">
-              <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
-            </div>
-          </div>
-
-          <!-- No Results State (Search) -->
-          <div id="noResultsMsg" class="hidden text-center py-12 px-4 bg-white rounded-2xl border border-slate-200 max-w-md mx-auto shadow-sm my-6">
-            <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xl">
-              <i class="fas fa-search"></i>
-            </div>
-            <h4 class="font-bold text-slate-700 text-base mb-1">Dokumentasi Tidak Ditemukan</h4>
-            <p class="text-xs text-slate-500">Tidak ada dokumentasi yang sesuai dengan kata kunci pencarian Anda.</p>
+          <!-- Section Title -->
+          <div class="mb-8 pb-4 border-b border-slate-200">
+            <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+              <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
+                <i class="fas fa-images"></i>
+              </span>
+              Dokumentasi Galeri Semua Jenjang
+            </h2>
+            <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
           </div>
 
           <!-- ========================================== -->
@@ -336,22 +321,109 @@
           </div>
 
           <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB SDI -->
+          <!-- ========================================== -->
+          <div id="gallery-content-sdi" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kreativitas siswa/siswi SDI Al Kindy.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi SDI Al Kindy.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB MI -->
+          <!-- ========================================== -->
+          <div id="gallery-content-mi" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kreativitas siswa/siswi MI Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MI Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ========================================== -->
           <!-- KONTEN GALERI TAB MTs -->
           <!-- ========================================== -->
           <div id="gallery-content-mts" class="hidden space-y-12">
             
             <!-- KATEGORI 1: EKSTRAKURIKULER -->
             <section class="gallery-category-section">
-              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
                 <div>
                   <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
                     Ekstrakurikuler
                   </h3>
                   <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas siswa/siswi MTs.</p>
                 </div>
-                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 border border-sky-200">
-                  2 Dokumentasi
-                </span>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
 
               <!-- Grid 4 Kolom Ekstrakurikuler (Max 2 Baris Scroll) -->
@@ -426,16 +498,17 @@
 
             <!-- KATEGORI 2: KEGIATAN -->
             <section class="gallery-category-section">
-              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
                 <div>
                   <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
                     Kegiatan
                   </h3>
                   <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MTs.</p>
                 </div>
-                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  3 Dokumentasi
-                </span>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
 
               <!-- Grid 4 Kolom Kegiatan (Max 2 Baris Scroll) -->
@@ -529,22 +602,85 @@
           </div>
 
           <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB MA -->
+          <!-- ========================================== -->
+          <div id="gallery-content-ma" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, kepemimpinan, dan kreativitas siswa/siswi MA Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MA Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ========================================== -->
           <!-- KONTEN GALERI TAB PONPES -->
           <!-- ========================================== -->
           <div id="gallery-content-ponpes" class="hidden space-y-12">
             
-            <!-- KATEGORI: KEGIATAN -->
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
             <section class="gallery-category-section">
-              <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kemandirian santri Pondok Pesantren.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
                 <div>
                   <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-900">
                     Kegiatan
                   </h3>
                   <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, perlombaan, dan agenda santri Pondok Pesantren.</p>
                 </div>
-                <span class="hidden sm:inline-flex text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  1 Dokumentasi
-                </span>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
 
               <!-- Grid 4 Kolom Kegiatan (Max 2 Baris Scroll) -->
@@ -670,20 +806,18 @@
         const tabs = document.querySelectorAll('.jenjang-tab-btn');
         const activeBadge = document.getElementById('active-jenjang-badge');
         const contentSemua = document.getElementById('gallery-content-semua');
+        const contentSDI = document.getElementById('gallery-content-sdi');
+        const contentMI = document.getElementById('gallery-content-mi');
         const contentMTs = document.getElementById('gallery-content-mts');
+        const contentMA = document.getElementById('gallery-content-ma');
         const contentPonpes = document.getElementById('gallery-content-ponpes');
         const contentEmpty = document.getElementById('gallery-content-empty');
         const emptyJenjangName = document.getElementById('empty-jenjang-name');
         const sectionTitle = document.getElementById('gallerySectionTitle');
-        const searchInput = document.getElementById('searchGalleryInput');
-        const noResultsMsg = document.getElementById('noResultsMsg');
 
-        if (noResultsMsg) noResultsMsg.classList.add('hidden');
-        if (searchInput) searchInput.value = '';
-
-        // Reset visibility of all cards and category sections
+        // Reset visibility of all cards and clear search inputs
         document.querySelectorAll('.gallery-card').forEach(card => card.classList.remove('hidden'));
-        document.querySelectorAll('.gallery-category-section').forEach(sec => sec.classList.remove('hidden'));
+        document.querySelectorAll('.category-search-input').forEach(input => input.value = '');
 
         tabs.forEach(btn => {
           const isSelected = btn.getAttribute('data-jenjang') === jenjang;
@@ -702,15 +836,19 @@
           sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-images"></i></span> Dokumentasi Galeri ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
         }
 
-        if (contentSemua) contentSemua.classList.add('hidden');
-        if (contentMTs) contentMTs.classList.add('hidden');
-        if (contentPonpes) contentPonpes.classList.add('hidden');
-        if (contentEmpty) contentEmpty.classList.add('hidden');
+        const allContainers = [contentSemua, contentSDI, contentMI, contentMTs, contentMA, contentPonpes, contentEmpty];
+        allContainers.forEach(c => { if (c) c.classList.add('hidden'); });
 
         if (jenjang === 'Semua') {
           if (contentSemua) contentSemua.classList.remove('hidden');
+        } else if (jenjang === 'SDI') {
+          if (contentSDI) contentSDI.classList.remove('hidden');
+        } else if (jenjang === 'MI') {
+          if (contentMI) contentMI.classList.remove('hidden');
         } else if (jenjang === 'MTs') {
           if (contentMTs) contentMTs.classList.remove('hidden');
+        } else if (jenjang === 'MA') {
+          if (contentMA) contentMA.classList.remove('hidden');
         } else if (jenjang === 'Ponpes') {
           if (contentPonpes) contentPonpes.classList.remove('hidden');
         } else {
@@ -721,65 +859,25 @@
         }
       }
 
-      // Live search filter
-      const searchGalleryInput = document.getElementById('searchGalleryInput');
-      const noResultsMsg = document.getElementById('noResultsMsg');
-
-      if (searchGalleryInput) {
-        searchGalleryInput.addEventListener('input', (e) => {
+      // Sub-category Live Search Handler
+      document.querySelectorAll('.category-search-input').forEach(input => {
+        input.addEventListener('input', (e) => {
           const query = e.target.value.toLowerCase().trim();
-          const activeBadge = document.getElementById('active-jenjang-badge');
-          const currentJenjang = activeBadge ? activeBadge.textContent.trim() : 'Semua';
+          const categorySection = e.target.closest('.gallery-category-section');
+          if (!categorySection) return;
 
-          let activeContainer = null;
-          if (currentJenjang === 'Semua') {
-            activeContainer = document.getElementById('gallery-content-semua');
-          } else if (currentJenjang === 'MTs') {
-            activeContainer = document.getElementById('gallery-content-mts');
-          } else if (currentJenjang === 'Ponpes') {
-            activeContainer = document.getElementById('gallery-content-ponpes');
-          }
-
-          if (!activeContainer) {
-            if (noResultsMsg) noResultsMsg.classList.add('hidden');
-            return;
-          }
-
-          const cards = activeContainer.querySelectorAll('.gallery-card');
-          let visibleCount = 0;
-
+          const cards = categorySection.querySelectorAll('.gallery-card');
           cards.forEach(card => {
             const title = card.querySelector('.gallery-title')?.textContent.toLowerCase() || '';
             const desc = card.querySelector('.gallery-desc')?.textContent.toLowerCase() || '';
-
             if (title.includes(query) || desc.includes(query)) {
               card.classList.remove('hidden');
-              visibleCount++;
             } else {
               card.classList.add('hidden');
             }
           });
-
-          // Check category sections in activeContainer if any
-          const categorySections = activeContainer.querySelectorAll('.gallery-category-section');
-          categorySections.forEach(sec => {
-            const visibleInSec = sec.querySelectorAll('.gallery-card:not(.hidden)').length;
-            if (visibleInSec === 0) {
-              sec.classList.add('hidden');
-            } else {
-              sec.classList.remove('hidden');
-            }
-          });
-
-          if (noResultsMsg) {
-            if (visibleCount === 0) {
-              noResultsMsg.classList.remove('hidden');
-            } else {
-              noResultsMsg.classList.add('hidden');
-            }
-          }
         });
-      }
+      });
 
       // Mobile Menu Toggle
       const toggleMobileBtn = document.getElementById('toggleMobileBtn');
