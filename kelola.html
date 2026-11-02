@@ -50,7 +50,7 @@
             </div>
 
             <!-- Dashboard (Active) -->
-            <a href="kelola.html" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all bg-emerald-800 text-white shadow-sm shadow-emerald-950/40">
+            <a href="#dashboard" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all bg-emerald-800 text-white shadow-sm shadow-emerald-950/40">
               <i class="fas fa-chart-pie w-6 text-emerald-300"></i>
               <span>Dashboard</span>
             </a>
@@ -126,7 +126,11 @@
         <!-- Area Konten Utama -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8 bg-slate-100">
           
-          <!-- Banner Ucapan Selamat Datang -->
+          <!-- ========================================== -->
+          <!-- SECTION 1: DASHBOARD UTAMA -->
+          <!-- ========================================== -->
+          <section id="dashboard" class="admin-section">
+            <!-- Banner Ucapan Selamat Datang -->
           <div class="mb-8 bg-white border border-slate-200/70 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
             <div class="max-w-2xl relative z-10">
               <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs font-semibold text-emerald-800 mb-3">
@@ -207,32 +211,373 @@
               Aksi Cepat &amp; Panduan Pengelolaan
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 transition">
-                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800">
+              <a href="#ppdb" class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 hover:bg-emerald-50/40 transition block group">
+                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800 group-hover:text-emerald-700">
                   <i class="fas fa-user-plus mr-2 text-xs"></i> Verifikasi Data PPDB
                 </div>
                 <p class="text-slate-600 text-xs leading-relaxed">
                   Periksa kelengkapan berkas dan konfirmasi calon santri yang telah mendaftar melalui formulir online.
                 </p>
-              </div>
-              <div class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 transition">
-                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800">
+              </a>
+              <a href="#berita" class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 hover:bg-emerald-50/40 transition block group">
+                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800 group-hover:text-emerald-700">
                   <i class="fas fa-pen-to-square mr-2 text-xs"></i> Tulis Berita / Kegiatan
                 </div>
                 <p class="text-slate-600 text-xs leading-relaxed">
                   Publikasikan informasi kegiatan harian santri, pengumuman yayasan, dan artikel keagamaan.
                 </p>
-              </div>
-              <div class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 transition">
-                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800">
+              </a>
+              <a href="#pengaturan" class="p-4 rounded-lg bg-slate-50 border border-slate-200/60 hover:border-emerald-300 hover:bg-emerald-50/40 transition block group">
+                <div class="font-semibold text-slate-800 mb-1 flex items-center text-emerald-800 group-hover:text-emerald-700">
                   <i class="fas fa-sliders mr-2 text-xs"></i> Konfigurasi Yayasan
                 </div>
                 <p class="text-slate-600 text-xs leading-relaxed">
                   Perbarui nomor kontak WhatsApp, alamat, jadwal operasional, dan visi misi lembaga.
                 </p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 2: KELOLA PPDB -->
+        <!-- ========================================== -->
+        <section id="ppdb" class="admin-section hidden">
+          <!-- Header Section -->
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-user-graduate"></i>
+                </span>
+                Kelola Pendaftaran PPDB
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Data pendaftar calon santri baru tahun ajaran 2026/2027.</p>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <button type="button" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+                <i class="fas fa-file-excel text-emerald-600"></i>
+                <span>Ekspor Excel</span>
+              </button>
+              <a href="/ppdb.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Buka Form PPDB</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm mb-6 flex flex-col md:flex-row gap-3 items-center justify-between">
+            <div class="relative w-full md:w-80">
+              <input type="text" placeholder="Cari nama, nomor daftar, atau NISN..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition">
+              <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">Semua Jenjang</option>
+                <option value="SDI">SDI Al Kindy</option>
+                <option value="MTs">MTs Nahjul Huda</option>
+                <option value="MA">MA Nahjul Huda</option>
+                <option value="Ponpes">Ponpes As-Surur</option>
+              </select>
+              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">Status Verifikasi</option>
+                <option value="verified">Diterima</option>
+                <option value="pending">Menunggu Verifikasi</option>
+                <option value="incomplete">Berkas Belum Lengkap</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Table Card -->
+          <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-semibold">
+                  <tr>
+                    <th class="px-4 py-3.5">No. Daftar</th>
+                    <th class="px-4 py-3.5">Nama Calon Santri</th>
+                    <th class="px-4 py-3.5">Jenjang</th>
+                    <th class="px-4 py-3.5">Asal Sekolah</th>
+                    <th class="px-4 py-3.5">Tanggal</th>
+                    <th class="px-4 py-3.5">Status</th>
+                    <th class="px-4 py-3.5 text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-001</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">Muhammad Rizky Pratama</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">MTs</span></td>
+                    <td class="px-4 py-3 text-slate-500">SD Negeri 05 Kebon Jeruk</td>
+                    <td class="px-4 py-3 text-slate-500">28 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200"><i class="fas fa-check-circle text-[10px]"></i> Diterima</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-002</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">Siti Aisyah Humaira</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">SDI</span></td>
+                    <td class="px-4 py-3 text-slate-500">TK Islam Terpadu Al-Ikhlas</td>
+                    <td class="px-4 py-3 text-slate-500">29 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fas fa-clock text-[10px]"></i> Menunggu</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-003</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">Ahmad Fauzan Kamil</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Ponpes</span></td>
+                    <td class="px-4 py-3 text-slate-500">SMP Muhammadiyah 1 Jakarta</td>
+                    <td class="px-4 py-3 text-slate-500">30 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200"><i class="fas fa-check-circle text-[10px]"></i> Diterima</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-004</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">Zahra Nur Latifah</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-sky-100 text-sky-800">MA</span></td>
+                    <td class="px-4 py-3 text-slate-500">MTs Negeri 10 Jakarta Barat</td>
+                    <td class="px-4 py-3 text-slate-500">01 Nov 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fas fa-clock text-[10px]"></i> Menunggu</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+              <span>Menampilkan 4 dari 128 pendaftar</span>
+              <div class="flex items-center gap-1">
+                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">Sebelumnya</button>
+                <button class="px-2.5 py-1 bg-emerald-800 text-white rounded font-semibold">1</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">2</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">Berikutnya</button>
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 3: KELOLA BERITA -->
+        <!-- ========================================== -->
+        <section id="berita" class="admin-section hidden">
+          <!-- Header Section -->
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+                <span class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-base">
+                  <i class="fas fa-newspaper"></i>
+                </span>
+                Kelola Berita &amp; Publikasi
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Manajemen publikasi artikel, sorotan kegiatan, dan pengumuman yayasan.</p>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <a href="/berita.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Halaman Berita</span>
+              </a>
+              <button type="button" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+                <i class="fas fa-plus"></i>
+                <span>Tambah Berita Baru</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar Pencarian & Filter -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm mb-6 flex flex-col md:flex-row gap-3 items-center justify-between">
+            <div class="relative w-full md:w-80">
+              <input type="text" placeholder="Cari judul berita atau kata kunci..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition">
+              <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">Semua Kategori</option>
+                <option value="SDI">SDI Al Kindy</option>
+                <option value="MTs">MTs Nahjul Huda</option>
+                <option value="MA">MA Nahjul Huda</option>
+                <option value="Ponpes">Ponpes As-Surur</option>
+              </select>
+              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">Semua Status</option>
+                <option value="published">Diterbitkan</option>
+                <option value="draft">Draf</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- List Berita Table -->
+          <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-semibold">
+                  <tr>
+                    <th class="px-4 py-3.5">Artikel / Berita</th>
+                    <th class="px-4 py-3.5">Jenjang</th>
+                    <th class="px-4 py-3.5">Tanggal</th>
+                    <th class="px-4 py-3.5">Status</th>
+                    <th class="px-4 py-3.5 text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
+                        <div>
+                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz</div>
+                          <div class="text-[11px] text-slate-400">Oleh: Humas SDI &bull; 3 Foto Terlampir</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">SDI</span></td>
+                    <td class="px-4 py-3 text-slate-500">28 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
+                        <div>
+                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Visitasi Akreditasi MTs Nahjul Huda 2026/2027</div>
+                          <div class="text-[11px] text-slate-400">Oleh: Tim IT MTs &bull; 2 Foto Terlampir</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">MTs</span></td>
+                    <td class="px-4 py-3 text-slate-500">24 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
+                        <div>
+                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Upacara Hari Santri Nasional di Kemenag</div>
+                          <div class="text-[11px] text-slate-400">Oleh: Pengurus Ponpes &bull; 4 Foto Terlampir</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Ponpes</span></td>
+                    <td class="px-4 py-3 text-slate-500">22 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 4: PENGATURAN -->
+        <!-- ========================================== -->
+        <section id="pengaturan" class="admin-section hidden">
+          <!-- Header Section -->
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+                <span class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-base">
+                  <i class="fas fa-cog"></i>
+                </span>
+                Pengaturan Yayasan
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Konfigurasi informasi umum, kontak operasional, dan akun administrator.</p>
+            </div>
+          </div>
+
+          <!-- Settings Forms Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Card 1: Informasi Kontak & Profil Yayasan -->
+            <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+              <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
+                <i class="fas fa-building text-emerald-700"></i> Profil &amp; Kontak Yayasan
+              </h3>
+              <form class="space-y-4 text-xs">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Nama Yayasan</label>
+                  <input type="text" value="Yayasan Pendidikan Nahjul Huda" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">WhatsApp / Call Center</label>
+                  <input type="text" value="+62 812-3456-7890" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Email Resmi</label>
+                  <input type="email" value="info@nahjulhuda.sch.id" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap</label>
+                  <textarea rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560</textarea>
+                </div>
+                <div class="pt-2">
+                  <button type="button" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold transition shadow-sm">
+                    Simpan Perubahan
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Card 2: Pengaturan Gelombang PPDB & Akun -->
+            <div class="space-y-6">
+              <!-- PPDB Config -->
+              <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
+                  <i class="fas fa-calendar-check text-emerald-700"></i> Konfigurasi Gelombang PPDB
+                </h3>
+                <div class="space-y-3 text-xs">
+                  <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200/60">
+                    <div>
+                      <div class="font-semibold text-slate-800">Pendaftaran Gelombang 1</div>
+                      <div class="text-[11px] text-slate-500">Tahun Ajaran 2026 / 2027</div>
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Aktif</span>
+                  </div>
+                  <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200/60">
+                    <div>
+                      <div class="font-semibold text-slate-800">Notifikasi WhatsApp Otomatis</div>
+                      <div class="text-[11px] text-slate-500">Kirim konfirmasi ke nomor pendaftar</div>
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Aktif</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Admin Security -->
+              <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
+                  <i class="fas fa-lock text-emerald-700"></i> Keamanan Akun
+                </h3>
+                <p class="text-xs text-slate-600 mb-3">Terakhir login: Hari ini, 17:40 WIB dari IP Lokal</p>
+                <button type="button" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition border border-slate-200">
+                  Ganti Password Admin
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
 
         </main>
       </div>
@@ -258,6 +603,52 @@
       if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
       if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
       if (backdrop) backdrop.addEventListener('click', closeSidebar);
+    </script>
+
+    <!-- Script Navigasi Sidebar Admin Panel (Hash Routing) -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Seleksi semua link di sidebar yang memiliki href dengan awalan "#"
+        const sidebarLinks = document.querySelectorAll('aside a[href^="#"]');
+        const sections = document.querySelectorAll('.admin-section');
+
+        function switchTab(hash) {
+          if (!hash) hash = '#dashboard'; // Default ke dashboard jika kosong
+
+          // 1. Sembunyikan semua section
+          sections.forEach(sec => sec.classList.add('hidden'));
+
+          // 2. Tampilkan section yang aktif
+          const activeSection = document.querySelector(hash);
+          if (activeSection) {
+            activeSection.classList.remove('hidden');
+          }
+
+          // 3. Update styling aktif pada sidebar menu
+          sidebarLinks.forEach(link => {
+            if (link.getAttribute('href') === hash) {
+              // Tambahkan class aktif (sesuai tema emerald Tailwind)
+              link.classList.add('bg-emerald-800', 'text-white');
+              link.classList.remove('text-emerald-200', 'hover:bg-emerald-900/80'); // hapus class pasif
+            } else {
+              // Kembalikan ke class pasif
+              link.classList.remove('bg-emerald-800', 'text-white');
+              link.classList.add('text-emerald-200', 'hover:bg-emerald-900/80');
+            }
+          });
+
+          // Tutup sidebar di tampilan mobile jika terbuka
+          if (window.innerWidth < 1024 && typeof closeSidebar === 'function') {
+            closeSidebar();
+          }
+        }
+
+        // Jalankan saat hash di URL berubah (user klik menu)
+        window.addEventListener('hashchange', () => switchTab(window.location.hash));
+
+        // Jalankan saat halaman pertama kali dimuat
+        switchTab(window.location.hash || '#dashboard');
+      });
     </script>
   </body>
 </html>
