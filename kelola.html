@@ -548,7 +548,7 @@
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+                      <button type="button" id="btnSimpanProfil" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
                           Simpan Perubahan Profil
                       </button>
                   </div>
@@ -1090,7 +1090,7 @@
           }
         }
 
-        const btnSaveProfil = document.querySelector('#formProfil button');
+        const btnSaveProfil = document.getElementById('btnSimpanProfil');
         if (btnSaveProfil) {
           btnSaveProfil.addEventListener('click', async (e) => {
             e.preventDefault();
