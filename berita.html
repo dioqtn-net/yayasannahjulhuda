@@ -932,21 +932,27 @@
       const mediaModal = document.getElementById('mediaModal');
       const modalImage = document.getElementById('modalImage');
       const modalVideo = document.getElementById('modalVideo');
-      const closeMediaModalBtn = document.getElementById('closeMediaModalBtn');
+      const closeModal = document.getElementById('closeModal');
 
       function openMediaModal(element) {
         if (!mediaModal) return;
-        const tagName = element.tagName.toLowerCase();
+        const tagName = element.tagName ? element.tagName.toLowerCase() : 'img';
         if (tagName === 'img') {
           if (modalVideo) {
             modalVideo.pause();
             modalVideo.src = '';
+            const srcEl = modalVideo.querySelector('source');
+            if (srcEl) srcEl.src = '';
             modalVideo.classList.add('hidden');
           }
           if (modalImage) {
             modalImage.src = element.src;
-            modalImage.alt = element.alt || 'Pratinjau Foto';
+            modalImage.alt = element.alt || 'Zoomed Media';
             modalImage.classList.remove('hidden');
+            setTimeout(() => {
+              modalImage.classList.remove('scale-95');
+              modalImage.classList.add('scale-100');
+            }, 10);
           }
         } else if (tagName === 'video') {
           if (modalImage) {
@@ -955,40 +961,60 @@
           }
           if (modalVideo) {
             const videoSrc = element.currentSrc || element.querySelector('source')?.src || element.src;
+            const srcEl = modalVideo.querySelector('source');
+            if (srcEl) srcEl.src = videoSrc;
             modalVideo.src = videoSrc;
             modalVideo.classList.remove('hidden');
+            modalVideo.load();
             modalVideo.play().catch(() => {});
           }
         }
         mediaModal.classList.remove('hidden');
+        mediaModal.classList.add('flex');
+        setTimeout(() => {
+          mediaModal.classList.remove('opacity-0');
+          mediaModal.classList.add('opacity-100');
+        }, 10);
         document.body.classList.add('overflow-hidden');
       }
 
       function closeMediaModal() {
         if (!mediaModal) return;
-        mediaModal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
+        mediaModal.classList.remove('opacity-100');
+        mediaModal.classList.add('opacity-0');
         if (modalImage) {
-          modalImage.src = '';
-          modalImage.classList.add('hidden');
+          modalImage.classList.remove('scale-100');
+          modalImage.classList.add('scale-95');
         }
-        if (modalVideo) {
-          modalVideo.pause();
-          modalVideo.src = '';
-          modalVideo.classList.add('hidden');
-        }
+        setTimeout(() => {
+          mediaModal.classList.add('hidden');
+          mediaModal.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
+          if (modalImage) {
+            modalImage.src = '';
+            modalImage.classList.add('hidden');
+          }
+          if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = '';
+            const srcEl = modalVideo.querySelector('source');
+            if (srcEl) srcEl.src = '';
+            modalVideo.classList.add('hidden');
+          }
+        }, 300);
       }
 
       // Attach click listeners to all media in main content and news detail modal
       document.querySelectorAll('main img, main video, #newsDetailModal img').forEach((media) => {
+        media.classList.add('cursor-pointer');
         media.addEventListener('click', (e) => {
           e.stopPropagation();
           openMediaModal(media);
         });
       });
 
-      if (closeMediaModalBtn) {
-        closeMediaModalBtn.addEventListener('click', closeMediaModal);
+      if (closeModal) {
+        closeModal.addEventListener('click', closeMediaModal);
       }
 
       if (mediaModal) {
@@ -1006,18 +1032,20 @@
       });
     </script>
 
-    <!-- Universal Lightbox Modal -->
-    <div id="mediaModal" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-xs">
-      <!-- Close Button -->
-      <button id="closeMediaModalBtn" type="button" aria-label="Tutup" class="absolute top-4 right-4 text-white hover:text-gold-400 text-3xl font-bold p-2 transition focus:outline-none z-50">
-        <i class="fas fa-times"></i>
-      </button>
-      
-      <!-- Media Container -->
-      <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
-        <img id="modalImage" src="" alt="Pratinjau Media" class="hidden max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-        <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
-      </div>
+    <!-- Universal Modal Lightbox -->
+    <div id="mediaModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4 transition-opacity duration-300 opacity-0 backdrop-blur-sm">
+        <button id="closeModal" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white hover:text-green-400 transition-colors p-2 z-10" aria-label="Tutup">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <div class="relative w-full max-w-5xl mx-auto flex items-center justify-center h-full max-h-[90vh]">
+            <!-- Container Image -->
+            <img id="modalImage" src="" alt="Zoomed Media" class="hidden max-h-full max-w-full object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+            <!-- Container Video -->
+            <video id="modalVideo" class="hidden w-full max-h-full rounded-lg shadow-2xl bg-black" controls controlsList="nodownload">
+                <source src="" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+        </div>
     </div>
   </body>
 </html>
