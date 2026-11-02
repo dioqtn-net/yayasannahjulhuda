@@ -142,29 +142,18 @@
           <!-- ========================================== -->
           <div id="gallery-content-semua" class="w-full">
             <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- 1. Futsal (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
-                          <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
-                          Browser Anda tidak mendukung tag video.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
-                          <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                            <i class="fas fa-play ml-0.5"></i>
-                          </span>
-                        </div>
-                      </a>
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <video class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                      </video>
                     </div>
                     <!-- Nav Buttons -->
                     <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -192,18 +181,16 @@
 
                 <!-- 2. Drum Band (SINGLE) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 overflow-hidden rounded-t-lg">
-                      <video class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition pointer-events-none">
-                        <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                      </video>
-                      <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
-                        <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                          <i class="fas fa-play ml-0.5"></i>
-                        </span>
-                      </div>
-                    </a>
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                      <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                      Browser Anda tidak mendukung tag video.
+                    </video>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
+                        <i class="fas fa-play ml-0.5"></i>
+                      </span>
+                    </div>
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
@@ -223,14 +210,10 @@
 
                 <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
-                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
                     <!-- Nav Buttons -->
                     <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -258,10 +241,8 @@
 
                 <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 overflow-hidden rounded-t-lg">
-                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105">
-                    </a>
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
@@ -281,14 +262,10 @@
 
                 <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
-                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
                     <!-- Nav Buttons -->
                     <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -316,20 +293,16 @@
 
                 <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
                 <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                       <!-- Foto 1 -->
-                      <a href="/media/galeri/ponpes/juri_lomba.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
+                      <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      
                       <!-- Foto 2 -->
-                      <a href="/media/galeri/ponpes/JURI.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
+                      <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                      
                       <!-- Foto 3 -->
-                      <a href="/media/galeri/ponpes/PESERTA.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                      </a>
+                      <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                     </div>
                     <!-- Nav Buttons -->
                     <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -378,7 +351,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -398,7 +371,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -423,7 +396,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -443,7 +416,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -470,29 +443,18 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 1. Futsal (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
-                            <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                          </video>
-                          <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
-                            <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                              <i class="fas fa-play ml-0.5"></i>
-                            </span>
-                          </div>
-                        </a>
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <video class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                          <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
+                          Browser Anda tidak mendukung tag video.
+                        </video>
                       </div>
                       <!-- Nav Buttons -->
                       <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -520,18 +482,16 @@
 
                   <!-- 2. Drum Band (SINGLE) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 overflow-hidden rounded-t-lg">
-                        <video class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition pointer-events-none">
-                          <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
-                          Browser Anda tidak mendukung tag video.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
-                          <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                            <i class="fas fa-play ml-0.5"></i>
-                          </span>
-                        </div>
-                      </a>
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <video class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
+                        <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                      </video>
+                      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
+                          <i class="fas fa-play ml-0.5"></i>
+                        </span>
+                      </div>
                     </div>
                     <div class="p-5 flex-1 flex flex-col justify-between">
                       <div>
@@ -569,18 +529,14 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
-                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       </div>
                       <!-- Nav Buttons -->
                       <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -608,10 +564,8 @@
 
                   <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 overflow-hidden rounded-t-lg">
-                        <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105">
-                      </a>
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg cursor-pointer hover:brightness-90 transition">
                     </div>
                     <div class="p-5 flex-1 flex flex-col justify-between">
                       <div>
@@ -631,14 +585,10 @@
 
                   <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
-                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       </div>
                       <!-- Nav Buttons -->
                       <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -689,7 +639,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -709,7 +659,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -735,7 +685,7 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -756,24 +706,20 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
                   <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48 md:h-56">
-                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-48">
                         <!-- Foto 1 -->
-                        <a href="/media/galeri/ponpes/juri_lomba.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
+                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        
                         <!-- Foto 2 -->
-                        <a href="/media/galeri/ponpes/JURI.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
+                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                        
                         <!-- Foto 3 -->
-                        <a href="/media/galeri/ponpes/PESERTA.jpg" class="custom-lightbox-trigger block relative w-full h-48 md:h-56 shrink-0 snap-center overflow-hidden">
-                          <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                        </a>
+                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
                       </div>
                       <!-- Nav Buttons -->
                       <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -996,12 +942,10 @@
       }
 
       // Universal Lightbox Modal Logic
-      const mediaModal = document.getElementById('mediaModal') || document.getElementById('imageModal');
-      const imageModal = mediaModal;
+      const imageModal = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
       const modalVideo = document.getElementById('modalVideo');
-      const closeMediaModalBtn = document.getElementById('closeMediaModalBtn') || document.getElementById('closeModalBtn');
-      const closeModalBtn = closeMediaModalBtn;
+      const closeModalBtn = document.getElementById('closeModalBtn');
 
       function openMediaModal(element) {
         if (!imageModal) return;
@@ -1068,9 +1012,7 @@
 
       // Attach click listeners to all media in main content
       document.querySelectorAll('main img, main video').forEach((media) => {
-        if (media.closest('.custom-lightbox-trigger')) return;
-        media.addEventListener('click', (e) => {
-          e.stopPropagation();
+        media.addEventListener('click', () => {
           openMediaModal(media);
         });
       });
@@ -1081,7 +1023,7 @@
 
       if (imageModal) {
         imageModal.addEventListener('click', (e) => {
-          if (e.target === imageModal || e.target.id === 'mediaModal' || e.target.id === 'imageModal') {
+          if (e.target === imageModal || e.target.id === 'imageModal') {
             closeModal();
           }
         });
@@ -1095,9 +1037,9 @@
     </script>
 
     <!-- Universal Lightbox Modal -->
-    <div id="mediaModal" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-xs">
+    <div id="imageModal" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-xs">
       <!-- Close Button -->
-      <button id="closeMediaModalBtn" type="button" aria-label="Tutup" class="absolute top-4 right-4 text-white hover:text-gold-400 text-3xl font-bold p-2 transition focus:outline-none z-50">
+      <button id="closeModalBtn" type="button" aria-label="Tutup" class="absolute top-4 right-4 text-white hover:text-gold-400 text-3xl font-bold p-2 transition focus:outline-none z-50">
         <i class="fas fa-times"></i>
       </button>
       
@@ -1107,20 +1049,5 @@
         <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
       </div>
     </div>
-  
-    <!-- Include GLightbox CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          // Inisialisasi GLightbox khusus untuk class kita
-          const lightbox = GLightbox({
-              selector: '.custom-lightbox-trigger',
-              touchNavigation: true,
-              loop: true,
-              autoplayVideos: true
-          });
-      });
-    </script>
   </body>
 </html>
