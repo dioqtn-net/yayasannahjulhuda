@@ -461,8 +461,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoKetua').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoKetua').value=''; document.getElementById('fotoKetua').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -476,8 +476,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoSDI').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoSDI').value=''; document.getElementById('fotoSDI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -491,8 +491,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMI').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMI').value=''; document.getElementById('fotoMI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -506,8 +506,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMTs').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMTs').value=''; document.getElementById('fotoMTs').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -521,8 +521,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMA').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMA').value=''; document.getElementById('fotoMA').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -536,8 +536,8 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMudir').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMudir').value=''; document.getElementById('fotoMudir').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -1101,6 +1101,11 @@
             const readFile = (inputId, prevVal) => {
               return new Promise((resolve) => {
                 const input = document.getElementById(inputId);
+                // Jika ditandai hapus, kosongkan data foto
+                if (input && input.getAttribute('data-hapus') === 'true') {
+                  resolve('');
+                  return;
+                }
                 if (input && input.files && input.files[0]) {
                   const reader = new FileReader();
                   reader.onload = (event) => resolve(event.target.result);
@@ -1142,6 +1147,13 @@
             };
 
             localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
+
+            // Reset atribut penanda hapus setelah berhasil disimpan
+            ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.setAttribute('data-hapus', 'false');
+            });
+
             alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
           });
         }

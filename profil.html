@@ -477,13 +477,28 @@
             const imgEl = document.getElementById(`publicFoto${role}`);
             const placeholderEl = document.getElementById(`publicFoto${role}Placeholder`);
             const nameEl = document.getElementById(`publicNama${role}`);
-            if (name && nameEl) {
-              nameEl.textContent = name;
+            if (nameEl) {
+              nameEl.textContent = name || '-';
             }
-            if (photo && imgEl && placeholderEl) {
-              imgEl.src = photo;
-              imgEl.classList.remove('hidden');
-              placeholderEl.classList.add('hidden');
+            if (photo && typeof photo === 'string' && photo.trim() !== '') {
+              if (imgEl) {
+                imgEl.src = photo;
+                imgEl.classList.remove('hidden');
+              }
+              if (placeholderEl) {
+                placeholderEl.classList.add('hidden');
+              }
+            } else {
+              if (imgEl) {
+                imgEl.removeAttribute('src');
+                imgEl.classList.add('hidden');
+              }
+              if (placeholderEl) {
+                placeholderEl.classList.remove('hidden');
+                if (!placeholderEl.querySelector('i')) {
+                  placeholderEl.innerHTML = '<i class="fas fa-user-tie"></i>';
+                }
+              }
             }
           };
 
