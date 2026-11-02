@@ -142,27 +142,26 @@
           <!-- ========================================== -->
           <div id="gallery-content-semua" class="w-full">
             <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
+                          <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- 1. Futsal (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
-                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in relative">
-                        <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
-                          <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
-                          Browser Anda tidak mendukung tag video.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                            <i class="fas fa-play ml-0.5"></i>
-                          </span>
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <video src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                          <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
                         </div>
                       </a>
                     </div>
@@ -192,19 +191,12 @@
 
                 <!-- 2. Drum Band (SINGLE) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
-                    <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="glightbox block w-full h-full cursor-zoom-in relative">
-                      <video class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition pointer-events-none">
-                        <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                      </video>
-                      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                          <i class="fas fa-play ml-0.5"></i>
-                        </span>
-                      </div>
-                    </a>
-                  </div>
+                  <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                    <video src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                      <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                    </div>
+                  </a>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
@@ -223,13 +215,13 @@
 
                 <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
-                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
                     </div>
                     <!-- Nav Buttons -->
@@ -258,11 +250,9 @@
 
                 <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
-                    <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block w-full h-full cursor-zoom-in">
-                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
-                    </a>
-                  </div>
+                  <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                    <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                  </a>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
@@ -281,13 +271,13 @@
 
                 <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
                 <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
-                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
                     </div>
                     <!-- Nav Buttons -->
@@ -316,19 +306,19 @@
 
                 <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
                 <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                  <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
                       <!-- Foto 1 -->
-                      <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
                       <!-- Foto 2 -->
-                      <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
                       <!-- Foto 3 -->
-                      <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover hover:brightness-90 transition">
+                      <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                       </a>
                     </div>
                     <!-- Nav Buttons -->
@@ -378,7 +368,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -398,7 +392,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -423,7 +421,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -443,7 +445,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -470,27 +476,26 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 1. Futsal (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                       <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
-                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in relative">
-                          <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
-                            <source src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                          </video>
-                          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                              <i class="fas fa-play ml-0.5"></i>
-                            </span>
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <video src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                          <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                            <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
                           </div>
                         </a>
                       </div>
@@ -520,19 +525,12 @@
 
                   <!-- 2. Drum Band (SINGLE) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
-                      <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="glightbox block w-full h-full cursor-zoom-in relative">
-                        <video class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition pointer-events-none">
-                          <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
-                          Browser Anda tidak mendukung tag video.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <span class="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center text-sm shadow">
-                            <i class="fas fa-play ml-0.5"></i>
-                          </span>
-                        </div>
-                      </a>
-                    </div>
+                    <a href="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                      <video src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                      <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                        <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                      </div>
+                    </a>
                     <div class="p-5 flex-1 flex flex-col justify-between">
                       <div>
                         <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
@@ -569,17 +567,21 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                       <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
-                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
                       </div>
                       <!-- Nav Buttons -->
@@ -608,11 +610,9 @@
 
                   <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
-                      <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block w-full h-full cursor-zoom-in">
-                        <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
-                      </a>
-                    </div>
+                    <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </a>
                     <div class="p-5 flex-1 flex flex-col justify-between">
                       <div>
                         <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
@@ -631,13 +631,13 @@
 
                   <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
                   <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                       <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
-                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
                       </div>
                       <!-- Nav Buttons -->
@@ -689,7 +689,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -709,7 +713,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -735,7 +743,11 @@
                 </div>
               </div>
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 </div>
               </div>
             </section>
@@ -756,23 +768,27 @@
               </div>
 
               <div class="max-h-[650px] overflow-y-auto pr-2 custom-scrollbar w-full">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   
                   <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
                   <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
-                    <div class="relative overflow-hidden rounded-t-lg bg-slate-900 w-full h-48">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                       <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
                         <!-- Foto 1 -->
-                        <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
                         <!-- Foto 2 -->
-                        <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
                         <!-- Foto 3 -->
-                        <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                          <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover hover:brightness-90 transition">
+                        <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                         </a>
                       </div>
                       <!-- Nav Buttons -->

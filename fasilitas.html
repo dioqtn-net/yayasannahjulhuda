@@ -84,17 +84,21 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <!-- Card 1: Masjid Jami' Assurur (Slider) -->
               <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
-                <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="relative w-full aspect-video overflow-hidden rounded-t-xl bg-slate-100">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                    <a href="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" alt="Masjid Jami' Assurur 1" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg" alt="Masjid Jami' Assurur 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
-                    <a href="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" alt="Masjid Jami' Assurur 2" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg" alt="Masjid Jami' Assurur 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
                   </div>
                   <!-- Nav Buttons -->
@@ -119,13 +123,13 @@
 
               <!-- Card 2: Lapangan Upacara (Slider) -->
               <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
-                <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="relative w-full aspect-video overflow-hidden rounded-t-xl bg-slate-100">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                    <a href="/media/fasilitas/umum/lapangan_upacara_umum.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/lapangan_upacara_umum.jpg" alt="Lapangan Upacara 1" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/lapangan_upacara_umum.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/lapangan_upacara_umum.jpg" alt="Lapangan Upacara 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
-                    <a href="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" alt="Lapangan Upacara 2" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/lapangan_upacara_umum_1.jpg" alt="Lapangan Upacara 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
                   </div>
                   <!-- Nav Buttons -->
@@ -150,16 +154,16 @@
 
               <!-- Card 3: Laboratorium Komputer (Slider) -->
               <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
-                <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
+                <div class="relative w-full aspect-video overflow-hidden rounded-t-xl bg-slate-100">
                   <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                    <a href="/media/fasilitas/umum/lab_komputer_umum.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/lab_komputer_umum.jpg" alt="Laboratorium Komputer 1" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/lab_komputer_umum.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/lab_komputer_umum.jpg" alt="Laboratorium Komputer 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
-                    <a href="/media/fasilitas/umum/lab_komputer_umum_1.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/lab_komputer_umum_1.jpg" alt="Laboratorium Komputer 2" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/lab_komputer_umum_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/lab_komputer_umum_1.jpg" alt="Laboratorium Komputer 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
-                    <a href="/media/fasilitas/umum/lab_komputer_umum_2.jpg" class="glightbox shrink-0 snap-center block w-full h-full cursor-zoom-in">
-                      <img src="/media/fasilitas/umum/lab_komputer_umum_2.jpg" alt="Laboratorium Komputer 3" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
+                    <a href="/media/fasilitas/umum/lab_komputer_umum_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                      <img src="/media/fasilitas/umum/lab_komputer_umum_2.jpg" alt="Laboratorium Komputer 3" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                     </a>
                   </div>
                   <!-- Nav Buttons -->
@@ -183,12 +187,10 @@
               </div>
 
               <!-- Card 4: Lapangan Bola Basket (Single Image) -->
-              <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
-                <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-slate-100">
-                  <a href="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" class="glightbox block w-full h-full cursor-zoom-in">
-                    <img src="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" alt="Lapangan Bola Basket" class="w-full h-full object-cover rounded-t-lg hover:brightness-90 transition">
-                  </a>
-                </div>
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full min-w-0">
+                <a href="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                  <img src="/media/fasilitas/umum/lapangan_bola_basket_umum.jpg" alt="Lapangan Bola Basket" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                </a>
                 <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
                     <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
