@@ -70,9 +70,9 @@
           <!-- Dark Overlay Wrapper -->
           <div class="absolute inset-0 bg-black/70 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Program & Jenjang Pendidikan</h1>
+            <h1 id="publicProgBannerTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Program &amp; Jenjang Pendidikan</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.</p>
+            <p id="publicProgBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.</p>
           </div>
         </section>
 
@@ -90,10 +90,10 @@
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-800">SD Islam (SDI) AL KINDY</h2>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                  <i class="fas fa-certificate text-emerald-600"></i> Akreditasi A
+                  <i class="fas fa-certificate text-emerald-600"></i> <span id="publicSdiAkreditasiText">Akreditasi A</span>
                 </span>
               </div>
-              <p class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan dasar berciri khas Islam yang berfokus pada pembentukan karakter Qur'ani dan keunggulan akademik.</p>
+              <p id="publicSdiDesc" class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan dasar berciri khas Islam yang berfokus pada pembentukan karakter Qur'ani dan keunggulan akademik.</p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Visi & Misi SDI Al Kindy -->
@@ -103,20 +103,22 @@
                   </h4>
                   <div class="mb-3">
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
-                    <p class="italic text-slate-700 text-sm leading-relaxed">
+                    <p id="publicSdiVisi" class="italic text-slate-700 text-sm leading-relaxed">
                       "Terwujudnya Generasi Qur'ani yang Berakhlak Mulia, Berkarakter, Kreatif, Berprestasi, Mampu Berkompetisi, Serta Mandiri Melalui Pembelajaran Mendalam di Era Global."
                     </p>
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                      <li>Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.</li>
-                      <li>Mengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.</li>
-                      <li>Menerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).</li>
-                      <li>Mengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.</li>
-                      <li>Menciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.</li>
-                      <li>Mendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.</li>
-                    </ul>
+                    <div id="publicSdiMisi">
+                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                        <li>Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.</li>
+                        <li>Mengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.</li>
+                        <li>Menerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).</li>
+                        <li>Mengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.</li>
+                        <li>Menciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.</li>
+                        <li>Mendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -126,7 +128,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
+                    <p id="publicSdiKurikulum" class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
                   </div>
                 </div>
 
@@ -136,7 +138,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Qira'ati, Tahfidz Al-Qur'an (Juz 30), dan KTIQ.</p>
+                    <p id="publicSdiUnggulan" class="text-sm text-slate-600 leading-relaxed">Qira'ati, Tahfidz Al-Qur'an (Juz 30), dan KTIQ.</p>
                   </div>
                 </div>
 
@@ -146,7 +148,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Pramuka, Futsal, Tari</p>
+                    <p id="publicSdiEkskul" class="text-sm text-slate-600 leading-relaxed">Pramuka, Futsal, Tari</p>
                   </div>
                 </div>
 
@@ -156,7 +158,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Ruang AC, CCTV, Kantin, Lapangan Olahraga, Laboratorium Komputer</p>
+                    <p id="publicSdiFasilitas" class="text-sm text-slate-600 leading-relaxed">Ruang AC, CCTV, Kantin, Lapangan Olahraga, Laboratorium Komputer</p>
                   </div>
                 </div>
               </div>
@@ -174,10 +176,10 @@
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-800">Madrasah Ibtidaiyah (MI) Nahjul Huda</h2>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                  <i class="fas fa-certificate text-emerald-600"></i> Akreditasi -
+                  <i class="fas fa-certificate text-emerald-600"></i> <span id="publicMiAkreditasiText">Akreditasi -</span>
                 </span>
               </div>
-              <p class="text-slate-600 text-base mb-6 leading-relaxed">Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.</p>
+              <p id="publicMiDesc" class="text-slate-600 text-base mb-6 leading-relaxed">Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.</p>
               
               <!-- Grid Kurikulum, Program Unggulan, Ekstrakurikuler, Fasilitas (Rapi & Sejajar) -->
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -188,11 +190,13 @@
                   </h4>
                   <div class="mb-3">
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
-                    <p class="italic text-slate-700 text-sm leading-relaxed">-</p>
+                    <p id="publicMiVisi" class="italic text-slate-700 text-sm leading-relaxed">-</p>
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <p class="text-sm text-slate-600 mt-1 leading-relaxed">-</p>
+                    <div id="publicMiMisi">
+                      <p class="text-sm text-slate-600 mt-1 leading-relaxed">-</p>
+                    </div>
                   </div>
                 </div>
 
@@ -202,7 +206,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
+                    <p id="publicMiKurikulum" class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
                   </div>
                 </div>
 
@@ -212,7 +216,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik &amp; Non Akademik</p>
+                    <p id="publicMiUnggulan" class="text-sm text-slate-600 leading-relaxed">Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik &amp; Non Akademik</p>
                   </div>
                 </div>
 
@@ -222,7 +226,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Futsal, Menari, Pramuka</p>
+                    <p id="publicMiEkskul" class="text-sm text-slate-600 leading-relaxed">Futsal, Menari, Pramuka</p>
                   </div>
                 </div>
 
@@ -232,7 +236,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan</p>
+                    <p id="publicMiFasilitas" class="text-sm text-slate-600 leading-relaxed">Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan</p>
                   </div>
                 </div>
               </div>
@@ -250,10 +254,10 @@
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-800">Madrasah Tsanawiyah (MTs) Nahjul Huda</h2>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                  <i class="fas fa-certificate text-emerald-600"></i> Akreditasi A
+                  <i class="fas fa-certificate text-emerald-600"></i> <span id="publicMtsAkreditasiText">Akreditasi A</span>
                 </span>
               </div>
-              <p class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
+              <p id="publicMtsDesc" class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Visi & Misi MTs -->
@@ -261,13 +265,21 @@
                   <h4 class="font-bold text-emerald-700 mb-2 flex items-center">
                     <i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi
                   </h4>
-                  <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                    <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
-                    <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                    <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                    <li>Berwawasan Luas</li>
-                    <li>Mencetak Generasi Global</li>
-                  </ul>
+                  <div class="mb-3">
+                    <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
+                    <p id="publicMtsVisi" class="italic text-slate-700 text-sm leading-relaxed">"Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak"</p>
+                  </div>
+                  <div>
+                    <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
+                    <div id="publicMtsMisi">
+                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                        <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                        <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                        <li>Berwawasan Luas</li>
+                        <li>Mencetak Generasi Global</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Kurikulum -->
@@ -276,7 +288,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
+                    <p id="publicMtsKurikulum" class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
                   </div>
                 </div>
 
@@ -286,7 +298,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">-</p>
+                    <p id="publicMtsUnggulan" class="text-sm text-slate-600 leading-relaxed">-</p>
                   </div>
                 </div>
 
@@ -296,7 +308,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
+                    <p id="publicMtsEkskul" class="text-sm text-slate-600 leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
                   </div>
                 </div>
 
@@ -306,7 +318,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
+                    <p id="publicMtsFasilitas" class="text-sm text-slate-600 leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
                   </div>
                 </div>
               </div>
@@ -324,10 +336,10 @@
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-800">Madrasah Aliyah (MA) Nahjul Huda</h2>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                  <i class="fas fa-certificate text-emerald-600"></i> Akreditasi -
+                  <i class="fas fa-certificate text-emerald-600"></i> <span id="publicMaAkreditasiText">Akreditasi -</span>
                 </span>
               </div>
-              <p class="text-slate-600 text-base mb-6 leading-relaxed">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
+              <p id="publicMaDesc" class="text-slate-600 text-base mb-6 leading-relaxed">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Visi & Misi MA -->
@@ -335,13 +347,21 @@
                   <h4 class="font-bold text-emerald-700 mb-2 flex items-center">
                     <i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi
                   </h4>
-                  <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                    <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
-                    <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                    <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                    <li>Berwawasan Luas</li>
-                    <li>Mencetak Generasi Global</li>
-                  </ul>
+                  <div class="mb-3">
+                    <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
+                    <p id="publicMaVisi" class="italic text-slate-700 text-sm leading-relaxed">"Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak"</p>
+                  </div>
+                  <div>
+                    <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
+                    <div id="publicMaMisi">
+                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                        <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                        <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                        <li>Berwawasan Luas</li>
+                        <li>Mencetak Generasi Global</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Kurikulum -->
@@ -350,7 +370,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
+                    <p id="publicMaKurikulum" class="text-sm text-slate-600 leading-relaxed">Kedinasan : Kementerian Pendidikan</p>
                   </div>
                 </div>
 
@@ -360,7 +380,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">-</p>
+                    <p id="publicMaUnggulan" class="text-sm text-slate-600 leading-relaxed">-</p>
                   </div>
                 </div>
 
@@ -370,7 +390,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
+                    <p id="publicMaEkskul" class="text-sm text-slate-600 leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
                   </div>
                 </div>
 
@@ -380,7 +400,7 @@
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                       <i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas
                     </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
+                    <p id="publicMaFasilitas" class="text-sm text-slate-600 leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
                   </div>
                 </div>
               </div>
@@ -398,10 +418,10 @@
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-emerald-800">Pondok Pesantren Assurur</h2>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                  <i class="fas fa-certificate text-emerald-600"></i> Akreditasi -
+                  <i class="fas fa-certificate text-emerald-600"></i> <span id="publicPonpesAkreditasiText">Akreditasi -</span>
                 </span>
               </div>
-              <p class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
+              <p id="publicPonpesDesc" class="text-slate-600 text-base mb-6 leading-relaxed">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <!-- Kotak Visi & Misi Pondok Pesantren (Full Width) -->
@@ -411,18 +431,20 @@
                   </h4>
                   <div class="mb-3">
                     <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
-                    <p class="italic text-slate-700 text-sm leading-relaxed">
+                    <p id="publicPonpesVisi" class="italic text-slate-700 text-sm leading-relaxed">
                       "Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"
                     </p>
                   </div>
                   <div>
                     <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                      <li>Penanaman Aqidah Sholihah</li>
-                      <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
-                      <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
-                      <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
-                    </ul>
+                    <div id="publicPonpesMisi">
+                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                        <li>Penanaman Aqidah Sholihah</li>
+                        <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
+                        <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
+                        <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -430,7 +452,7 @@
                 <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                   <div>
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                    <p class="text-sm text-slate-600">Salafiyah &amp; Modern</p>
+                    <p id="publicPonpesKurikulum" class="text-sm text-slate-600">Salafiyah &amp; Modern</p>
                   </div>
                 </div>
 
@@ -438,7 +460,7 @@
                 <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                   <div>
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                    <p class="text-sm text-slate-600">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
+                    <p id="publicPonpesUnggulan" class="text-sm text-slate-600">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
                   </div>
                 </div>
 
@@ -446,7 +468,7 @@
                 <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                   <div>
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                    <p class="text-sm text-slate-600">-</p>
+                    <p id="publicPonpesEkskul" class="text-sm text-slate-600">-</p>
                   </div>
                 </div>
 
@@ -454,7 +476,7 @@
                 <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                   <div>
                     <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                    <p class="text-sm text-slate-600">Asrama Putra/Putri, Masjid As-Surur</p>
+                    <p id="publicPonpesFasilitas" class="text-sm text-slate-600">Asrama Putra/Putri, Masjid As-Surur</p>
                   </div>
                 </div>
               </div>
@@ -523,6 +545,98 @@
           mobileMenu.classList.toggle('hidden');
         });
       }
+
+      // Synchronize Program Content from CMS (localStorage)
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedProgData = localStorage.getItem('cmsData_program');
+        if (!savedProgData) return;
+
+        try {
+          const data = JSON.parse(savedProgData);
+
+          // 1. Banner Utama
+          if (data.progBannerTitle && data.progBannerTitle.trim()) {
+            const el = document.getElementById('publicProgBannerTitle');
+            if (el) el.textContent = data.progBannerTitle;
+          }
+          if (data.progBannerDesc && data.progBannerDesc.trim()) {
+            const el = document.getElementById('publicProgBannerDesc');
+            if (el) el.textContent = data.progBannerDesc;
+          }
+
+          // Format Akreditasi Helper
+          const formatAkreditasi = (val) => {
+            if (!val) return 'Akreditasi -';
+            const clean = val.trim();
+            if (clean.toLowerCase().startsWith('akreditasi')) return clean;
+            if (clean === '-') return 'Akreditasi -';
+            return 'Akreditasi ' + clean;
+          };
+
+          // 2. Data Jenjang Pendidikan
+          const units = [
+            { key: 'sdi', prefix: 'Sdi' },
+            { key: 'mi', prefix: 'Mi' },
+            { key: 'mts', prefix: 'Mts' },
+            { key: 'ma', prefix: 'Ma' },
+            { key: 'ponpes', prefix: 'Ponpes' }
+          ];
+
+          units.forEach((u) => {
+            // Status Akreditasi
+            const akreditasiVal = data[u.key + 'Akreditasi'];
+            if (akreditasiVal !== undefined && akreditasiVal !== null) {
+              const el = document.getElementById(`public${u.prefix}AkreditasiText`);
+              if (el) el.textContent = formatAkreditasi(akreditasiVal);
+            }
+
+            // Text fields
+            const mapFields = [
+              { key: 'Desc', id: `public${u.prefix}Desc` },
+              { key: 'Kurikulum', id: `public${u.prefix}Kurikulum` },
+              { key: 'Visi', id: `public${u.prefix}Visi` },
+              { key: 'Unggulan', id: `public${u.prefix}Unggulan` },
+              { key: 'Ekskul', id: `public${u.prefix}Ekskul` },
+              { key: 'Fasilitas', id: `public${u.prefix}Fasilitas` }
+            ];
+
+            mapFields.forEach((f) => {
+              const val = data[u.key + f.key];
+              if (val !== undefined && val !== null) {
+                const el = document.getElementById(f.id);
+                if (el) el.textContent = val.trim() === '' ? '-' : val;
+              }
+            });
+
+            // Misi (List format vs plain paragraph)
+            const misiRaw = data[u.key + 'Misi'];
+            if (misiRaw !== undefined && misiRaw !== null) {
+              const elMisi = document.getElementById(`public${u.prefix}Misi`);
+              if (elMisi) {
+                const lines = misiRaw
+                  .split('\n')
+                  .map((l) => l.trim())
+                  .filter((l) => l.length > 0 && l !== '-');
+
+                if (lines.length === 0) {
+                  elMisi.innerHTML = '<p class="text-sm text-slate-600 mt-1 leading-relaxed">-</p>';
+                } else {
+                  const items = lines
+                    .map((line) => {
+                      const div = document.createElement('div');
+                      div.textContent = line;
+                      return `<li>${div.innerHTML}</li>`;
+                    })
+                    .join('');
+                  elMisi.innerHTML = `<ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">${items}</ul>`;
+                }
+              }
+            }
+          });
+        } catch (e) {
+          console.error('Error synchronizing cmsData_program:', e);
+        }
+      });
     </script>
   </body>
 </html>
