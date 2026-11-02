@@ -450,43 +450,97 @@
                               <textarea id="strukturDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.</textarea>
                           </div>
                           <div class="mt-4 border-t pt-4">
-                              <h4 class="font-medium text-gray-700 mb-3">Foto & Nama Pengurus (Format Foto: JPG/PNG)</h4>
+                              <h4 class="font-medium text-gray-700 mb-3">Foto & Nama Pengurus</h4>
                               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <!-- Ketua Yayasan -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Ketua Yayasan</label>
                                       <input type="text" id="namaKetua" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Ketua" value="-">
-                                      <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoKetua').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                                   <!-- Kepala SDI -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Kepala SDI</label>
                                       <input type="text" id="namaSDI" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala SDI" value="-">
-                                      <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoSDI').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                                   <!-- Kepala MI -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MI</label>
                                       <input type="text" id="namaMI" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MI" value="-">
-                                      <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMI').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                                   <!-- Kepala MTs -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MTs</label>
                                       <input type="text" id="namaMTs" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MTs" value="-">
-                                      <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMTs').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                                   <!-- Kepala MA -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MA</label>
                                       <input type="text" id="namaMA" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MA" value="-">
-                                      <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMA').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                                   <!-- Mudir Ponpes -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
                                       <label class="block text-xs font-bold text-gray-700 mb-1">Mudir Ponpes</label>
                                       <input type="text" id="namaMudir" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Mudir" value="-">
-                                      <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" class="w-full text-xs">
+                                      
+                                      <div class="mt-1">
+                                          <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
+                                          <div class="flex items-center gap-2">
+                                              <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
+                                              <button type="button" onclick="document.getElementById('fotoMudir').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                              </button>
+                                          </div>
+                                      </div>
                                   </div>
                               </div>
                           </div>
