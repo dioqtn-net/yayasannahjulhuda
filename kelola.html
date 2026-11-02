@@ -55,16 +55,52 @@
               <span>Dashboard</span>
             </a>
 
-            <!-- Kelola PPDB -->
-            <a href="#ppdb" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
-              <i class="fas fa-user-graduate w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
-              <span>Kelola PPDB</span>
+            <!-- 1. Kelola Beranda -->
+            <a href="#beranda" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-home w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Beranda</span>
             </a>
 
-            <!-- Kelola Berita -->
+            <!-- 2. Kelola Profil -->
+            <a href="#profil" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-landmark w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Profil</span>
+            </a>
+
+            <!-- 3. Kelola Program -->
+            <a href="#program" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-graduation-cap w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Program</span>
+            </a>
+
+            <!-- 4. Kelola Fasilitas -->
+            <a href="#fasilitas" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-building w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Fasilitas</span>
+            </a>
+
+            <!-- 5. Kelola Berita -->
             <a href="#berita" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
               <i class="fas fa-newspaper w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
               <span>Kelola Berita</span>
+            </a>
+
+            <!-- 6. Kelola Galeri -->
+            <a href="#galeri" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-images w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Galeri</span>
+            </a>
+
+            <!-- 7. Kelola Kontak -->
+            <a href="#kontak" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-phone-alt w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Kontak</span>
+            </a>
+
+            <!-- 8. Info PPDB -->
+            <a href="#ppdb" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-user-graduate w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Info PPDB</span>
             </a>
 
             <!-- Pengaturan -->
@@ -240,30 +276,470 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- SECTION 2: KELOLA PPDB -->
+        <!-- 1. SECTION: KELOLA BERANDA -->
         <!-- ========================================== -->
-        <section id="ppdb" class="admin-section hidden">
-          <!-- Header Section -->
+        <section id="beranda" class="admin-section hidden">
           <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-home"></i>
+                </span>
+                Kelola Konten Beranda
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui judul utama, teks pengantar, dan banner hero halaman beranda.</p>
+            </div>
+            <a href="/" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Beranda</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Beranda berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Pendidikan Islam Terpadu &amp; Berkarakter Qur'ani" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Pengantar</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi pengantar...">Membina generasi berilmu, bertakwa, dan berakhlak mulia melalui jenjang SDI Al Kindy, MTs Nahjul Huda, MA Nahjul Huda, dan Pondok Pesantren Tahfidz Qur'an As-Surur.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Thumbnail</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 2. SECTION: KELOLA PROFIL -->
+        <!-- ========================================== -->
+        <section id="profil" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-landmark"></i>
+                </span>
+                Kelola Konten Profil
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui sejarah, visi misi, dan informasi profil lembaga.</p>
+            </div>
+            <a href="/profil.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Profil</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Profil berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Profil &amp; Sejarah Yayasan Nahjul Huda" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Profil &amp; Visi Misi</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi profil...">Menelusuri jejak dedikasi Yayasan Nahjul Huda sejak awal berdiri dalam mencetak generasi penerus bangsa yang unggul dalam ilmu pengetahuan dan teguh dalam akidah Islam yang rahmatan lil 'alamin.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Struktur Organisasi</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 3. SECTION: KELOLA PROGRAM -->
+        <!-- ========================================== -->
+        <section id="program" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-graduation-cap"></i>
+                </span>
+                Kelola Konten Program
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui kurikulum terpadu, program unggulan, dan bimbingan tahfidz.</p>
+            </div>
+            <a href="/program.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Program</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Program berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Program Unggulan Akademik &amp; Tahfidz Qur'an" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Program</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi program...">Kurikulum terpadu memadukan standar nasional Kemendikbudristek dan Kemenag dengan muatan kepesantrenan intensif, pembinaan akhlak karimah, serta target hafalan 30 Juz bersanad.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Ilustrasi Program</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. SECTION: KELOLA FASILITAS -->
+        <!-- ========================================== -->
+        <section id="fasilitas" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-building"></i>
+                </span>
+                Kelola Konten Fasilitas
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui sarana, prasarana, laboratorium, dan lingkungan belajar santri.</p>
+            </div>
+            <a href="/fasilitas.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Fasilitas</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Fasilitas berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Sarana &amp; Prasarana Pembelajaran Modern" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Fasilitas</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi fasilitas...">Lingkungan belajar kondusif dengan laboratorium komputer modern, perpustakaan digital, masjid agung, ruang kelas ber-AC, asrama santri yang bersih dan asri, serta lapangan olahraga multifungsi.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Foto Utama Fasilitas</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. SECTION: KELOLA BERITA -->
+        <!-- ========================================== -->
+        <section id="berita" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-base">
+                  <i class="fas fa-newspaper"></i>
+                </span>
+                Kelola Konten Berita
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Manajemen publikasi artikel, warta kegiatan, dan sorotan seluruh jenjang.</p>
+            </div>
+            <a href="/berita.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Berita</span>
+            </a>
+          </div>
+
+          <!-- Form Edit Header / Banner Berita -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl mb-8">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Berita berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Warta &amp; Informasi Terkini Yayasan" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Pengantar Berita</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi berita...">Kabar prestasi siswa/santri, agenda kegiatan edukatif, pelatihan keterampilan, dan informasi resmi seputar Yayasan Nahjul Huda serta pondok pesantren.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Thumbnail Berita</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Toolbar & Data Tabel Publikasi Berita -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm mb-6 flex flex-col md:flex-row gap-3 items-center justify-between">
+            <div class="relative w-full md:w-80">
+              <input type="text" placeholder="Cari judul berita..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition">
+              <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">Semua Kategori</option>
+                <option value="SDI">SDI Al Kindy</option>
+                <option value="MTs">MTs Nahjul Huda</option>
+                <option value="MA">MA Nahjul Huda</option>
+                <option value="Ponpes">Ponpes As-Surur</option>
+              </select>
+              <button type="button" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+                <i class="fas fa-plus"></i>
+                <span>Tulis Berita Baru</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- List Berita Table -->
+          <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-semibold">
+                  <tr>
+                    <th class="px-4 py-3.5">Artikel / Berita</th>
+                    <th class="px-4 py-3.5">Jenjang</th>
+                    <th class="px-4 py-3.5">Tanggal</th>
+                    <th class="px-4 py-3.5">Status</th>
+                    <th class="px-4 py-3.5 text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
+                        <div>
+                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz</div>
+                          <div class="text-[11px] text-slate-400">Oleh: Humas SDI &bull; 3 Foto Terlampir</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">SDI</span></td>
+                    <td class="px-4 py-3 text-slate-500">28 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
+                        <div>
+                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Visitasi Akreditasi MTs Nahjul Huda 2026/2027</div>
+                          <div class="text-[11px] text-slate-400">Oleh: Tim IT MTs &bull; 2 Foto Terlampir</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">MTs</span></td>
+                    <td class="px-4 py-3 text-slate-500">24 Okt 2026</td>
+                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
+                    <td class="px-4 py-3 text-center">
+                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 6. SECTION: KELOLA GALERI -->
+        <!-- ========================================== -->
+        <section id="galeri" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center text-base">
+                  <i class="fas fa-images"></i>
+                </span>
+                Kelola Konten Galeri
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Unggah dokumentasi foto dan video kegiatan santri di seluruh jenjang.</p>
+            </div>
+            <a href="/galeri.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Galeri</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Galeri berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Dokumentasi &amp; Potret Kegiatan Santri" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul galeri...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Pengantar Galeri</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi galeri...">Koleksi foto dan video rekaman momen kebersamaan, peringatan hari besar Islam, kegiatan ekstrakurikuler, dan suasana asrama santri Pondok Pesantren Tahfidz As-Surur.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Unggah Foto / Video Dokumentasi Baru</label>
+                <input type="file" accept="image/*,video/*" multiple class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, MP4 (Maksimal 25 MB per media).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 7. SECTION: KELOLA KONTAK -->
+        <!-- ========================================== -->
+        <section id="kontak" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
+                  <i class="fas fa-phone-alt"></i>
+                </span>
+                Kelola Konten Kontak
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui nomor telepon, WhatsApp, surel resmi, dan panduan kunjungan.</p>
+            </div>
+            <a href="/kontak.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <i class="fas fa-external-link-alt"></i>
+              <span>Lihat Halaman Kontak</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Kontak berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Pusat Layanan Informasi &amp; Kontak Yayasan" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul kontak...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Kontak</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi kontak...">Hubungi sekretariat Yayasan Nahjul Huda untuk konsultasi penerimaan santri baru, jadwal survei lokasi pondok pesantren, kemitraan pendidikan, atau pertanyaan umum.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Banner Peta Kontak</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 8. SECTION: INFO PPDB -->
+        <!-- ========================================== -->
+        <section id="ppdb" class="admin-section hidden">
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
                 <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
                   <i class="fas fa-user-graduate"></i>
                 </span>
-                Kelola Pendaftaran PPDB
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">Data pendaftar calon santri baru tahun ajaran 2026/2027.</p>
+                Info PPDB &amp; Formulir Pendaftaran
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Konfigurasi teks hero PPDB serta pantauan data calon santri baru.</p>
             </div>
             <div class="flex items-center gap-2.5">
-              <button type="button" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
+              <button type="button" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
                 <i class="fas fa-file-excel text-emerald-600"></i>
                 <span>Ekspor Excel</span>
               </button>
-              <a href="/ppdb.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+              <a href="/ppdb.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
                 <i class="fas fa-external-link-alt"></i>
                 <span>Buka Form PPDB</span>
               </a>
             </div>
+          </div>
+
+          <!-- Form Edit Header / Banner PPDB -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl mb-8">
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten PPDB berhasil disimpan!');">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
+                <input type="text" value="Penerimaan Peserta Didik Baru (PPDB) 2026/2027" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul PPDB...">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Informasi PPDB</label>
+                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi PPDB...">Pendaftaran santri baru telah dibuka untuk jenjang SDI Al Kindy, MTs Nahjul Huda, MA Nahjul Huda, dan Pondok Pesantren Tahfidz Qur'an As-Surur. Dapatkan beasiswa prestasi dan keringanan infaq formulir.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Brosur PPDB</label>
+                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
+                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan</span>
+                </button>
+              </div>
+            </form>
           </div>
 
           <!-- Filter & Search Toolbar -->
@@ -329,162 +805,6 @@
                       <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
                     </td>
                   </tr>
-                  <tr class="hover:bg-slate-50/80 transition">
-                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-003</td>
-                    <td class="px-4 py-3 font-semibold text-slate-800">Ahmad Fauzan Kamil</td>
-                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Ponpes</span></td>
-                    <td class="px-4 py-3 text-slate-500">SMP Muhammadiyah 1 Jakarta</td>
-                    <td class="px-4 py-3 text-slate-500">30 Okt 2026</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200"><i class="fas fa-check-circle text-[10px]"></i> Diterima</span></td>
-                    <td class="px-4 py-3 text-center">
-                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
-                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50/80 transition">
-                    <td class="px-4 py-3 font-mono text-emerald-800 font-bold">#REG-2026-004</td>
-                    <td class="px-4 py-3 font-semibold text-slate-800">Zahra Nur Latifah</td>
-                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-sky-100 text-sky-800">MA</span></td>
-                    <td class="px-4 py-3 text-slate-500">MTs Negeri 10 Jakarta Barat</td>
-                    <td class="px-4 py-3 text-slate-500">01 Nov 2026</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fas fa-clock text-[10px]"></i> Menunggu</span></td>
-                    <td class="px-4 py-3 text-center">
-                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Lihat Berkas"><i class="fas fa-eye"></i></button>
-                      <button class="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-slate-100 rounded transition ml-1" title="Cetak"><i class="fas fa-print"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-              <span>Menampilkan 4 dari 128 pendaftar</span>
-              <div class="flex items-center gap-1">
-                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">Sebelumnya</button>
-                <button class="px-2.5 py-1 bg-emerald-800 text-white rounded font-semibold">1</button>
-                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">2</button>
-                <button class="px-2.5 py-1 bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-100">Berikutnya</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ========================================== -->
-        <!-- SECTION 3: KELOLA BERITA -->
-        <!-- ========================================== -->
-        <section id="berita" class="admin-section hidden">
-          <!-- Header Section -->
-          <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
-                <span class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-base">
-                  <i class="fas fa-newspaper"></i>
-                </span>
-                Kelola Berita &amp; Publikasi
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">Manajemen publikasi artikel, sorotan kegiatan, dan pengumuman yayasan.</p>
-            </div>
-            <div class="flex items-center gap-2.5">
-              <a href="/berita.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
-                <i class="fas fa-external-link-alt"></i>
-                <span>Halaman Berita</span>
-              </a>
-              <button type="button" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold shadow-sm transition">
-                <i class="fas fa-plus"></i>
-                <span>Tambah Berita Baru</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Toolbar Pencarian & Filter -->
-          <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm mb-6 flex flex-col md:flex-row gap-3 items-center justify-between">
-            <div class="relative w-full md:w-80">
-              <input type="text" placeholder="Cari judul berita atau kata kunci..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition">
-              <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-            </div>
-            <div class="flex items-center gap-2 w-full md:w-auto">
-              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">Semua Kategori</option>
-                <option value="SDI">SDI Al Kindy</option>
-                <option value="MTs">MTs Nahjul Huda</option>
-                <option value="MA">MA Nahjul Huda</option>
-                <option value="Ponpes">Ponpes As-Surur</option>
-              </select>
-              <select class="px-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">Semua Status</option>
-                <option value="published">Diterbitkan</option>
-                <option value="draft">Draf</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- List Berita Table -->
-          <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-semibold">
-                  <tr>
-                    <th class="px-4 py-3.5">Artikel / Berita</th>
-                    <th class="px-4 py-3.5">Jenjang</th>
-                    <th class="px-4 py-3.5">Tanggal</th>
-                    <th class="px-4 py-3.5">Status</th>
-                    <th class="px-4 py-3.5 text-center">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
-                  <tr class="hover:bg-slate-50/80 transition">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center gap-3">
-                        <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
-                        <div>
-                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz</div>
-                          <div class="text-[11px] text-slate-400">Oleh: Humas SDI &bull; 3 Foto Terlampir</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">SDI</span></td>
-                    <td class="px-4 py-3 text-slate-500">28 Okt 2026</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
-                    <td class="px-4 py-3 text-center">
-                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50/80 transition">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center gap-3">
-                        <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
-                        <div>
-                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Visitasi Akreditasi MTs Nahjul Huda 2026/2027</div>
-                          <div class="text-[11px] text-slate-400">Oleh: Tim IT MTs &bull; 2 Foto Terlampir</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">MTs</span></td>
-                    <td class="px-4 py-3 text-slate-500">24 Okt 2026</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
-                    <td class="px-4 py-3 text-center">
-                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50/80 transition">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center gap-3">
-                        <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="" class="w-12 h-10 rounded-lg object-cover flex-shrink-0 border border-slate-200">
-                        <div>
-                          <div class="font-bold text-slate-800 hover:text-emerald-800 transition line-clamp-1">Upacara Hari Santri Nasional di Kemenag</div>
-                          <div class="text-[11px] text-slate-400">Oleh: Pengurus Ponpes &bull; 4 Foto Terlampir</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Ponpes</span></td>
-                    <td class="px-4 py-3 text-slate-500">22 Okt 2026</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-green-50 text-green-700 border border-green-200">Diterbitkan</span></td>
-                    <td class="px-4 py-3 text-center">
-                      <button class="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-slate-100 rounded transition" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                      <button class="p-1.5 text-slate-500 hover:text-red-700 hover:bg-slate-100 rounded transition ml-1" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -492,18 +812,17 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- SECTION 4: PENGATURAN -->
+        <!-- 9. SECTION: PENGATURAN -->
         <!-- ========================================== -->
         <section id="pengaturan" class="admin-section hidden">
-          <!-- Header Section -->
           <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2">
+              <h2 class="text-2xl font-bold font-playfair text-slate-800 flex items-center gap-2.5">
                 <span class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-base">
                   <i class="fas fa-cog"></i>
                 </span>
                 Pengaturan Yayasan
-              </h1>
+              </h2>
               <p class="text-xs sm:text-sm text-slate-500 mt-1">Konfigurasi informasi umum, kontak operasional, dan akun administrator.</p>
             </div>
           </div>
@@ -577,9 +896,7 @@
               </div>
             </div>
           </div>
-        </section>
-
-        </main>
+        </section>        </main>
       </div>
     </div>
 
