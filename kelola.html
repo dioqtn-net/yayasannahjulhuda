@@ -330,17 +330,29 @@
                       </div>
                   </div>
 
-                  <!-- Bagian 3: Jenjang Pendidikan -->
+                  <!-- Bagian 3: Statistik Yayasan -->
                   <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">3. Bagian Jenjang Pendidikan</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Seksi Jenjang</label>
-                              <input type="text" id="jenjangTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Jenjang Pendidikan">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">3. Statistik Yayasan</h3>
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div class="space-y-2">
+                              <label class="block text-xs font-medium text-gray-600">Kolom 1</label>
+                              <input type="text" id="stat1Num" class="w-full px-3 py-2 border rounded-lg font-bold" value="5">
+                              <input type="text" id="stat1Text" class="w-full px-3 py-2 border rounded-lg text-sm text-gray-600" value="JENJANG PENDIDIKAN">
                           </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Seksi Jenjang</label>
-                              <textarea id="jenjangDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.</textarea>
+                          <div class="space-y-2">
+                              <label class="block text-xs font-medium text-gray-600">Kolom 2</label>
+                              <input type="text" id="stat2Num" class="w-full px-3 py-2 border rounded-lg font-bold" value="100+">
+                              <input type="text" id="stat2Text" class="w-full px-3 py-2 border rounded-lg text-sm text-gray-600" value="TENAGA PENDIDIK">
+                          </div>
+                          <div class="space-y-2">
+                              <label class="block text-xs font-medium text-gray-600">Kolom 3</label>
+                              <input type="text" id="stat3Num" class="w-full px-3 py-2 border rounded-lg font-bold" value="1000+">
+                              <input type="text" id="stat3Text" class="w-full px-3 py-2 border rounded-lg text-sm text-gray-600" value="SANTRI & SISWA">
+                          </div>
+                          <div class="space-y-2">
+                              <label class="block text-xs font-medium text-gray-600">Kolom 4</label>
+                              <input type="text" id="stat4Num" class="w-full px-3 py-2 border rounded-lg font-bold" value="1980">
+                              <input type="text" id="stat4Text" class="w-full px-3 py-2 border rounded-lg text-sm text-gray-600" value="TAHUN BERDIRI">
                           </div>
                       </div>
                   </div>
@@ -884,8 +896,14 @@
             if (data.heroDesc && document.getElementById('heroDesc')) document.getElementById('heroDesc').value = data.heroDesc;
             if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
             if (data.taglineDesc && document.getElementById('taglineDesc')) document.getElementById('taglineDesc').value = data.taglineDesc;
-            if (data.jenjangTitle && document.getElementById('jenjangTitle')) document.getElementById('jenjangTitle').value = data.jenjangTitle;
-            if (data.jenjangDesc && document.getElementById('jenjangDesc')) document.getElementById('jenjangDesc').value = data.jenjangDesc;
+            if (data.stat1Num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = data.stat1Num;
+            if (data.stat1Text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = data.stat1Text;
+            if (data.stat2Num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = data.stat2Num;
+            if (data.stat2Text && document.getElementById('stat2Text')) document.getElementById('stat2Text').value = data.stat2Text;
+            if (data.stat3Num && document.getElementById('stat3Num')) document.getElementById('stat3Num').value = data.stat3Num;
+            if (data.stat3Text && document.getElementById('stat3Text')) document.getElementById('stat3Text').value = data.stat3Text;
+            if (data.stat4Num && document.getElementById('stat4Num')) document.getElementById('stat4Num').value = data.stat4Num;
+            if (data.stat4Text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = data.stat4Text;
             if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
             if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
           } catch (e) {
@@ -902,8 +920,14 @@
               heroDesc: document.getElementById('heroDesc').value,
               taglineTitle: document.getElementById('taglineTitle').value,
               taglineDesc: document.getElementById('taglineDesc').value,
-              jenjangTitle: document.getElementById('jenjangTitle').value,
-              jenjangDesc: document.getElementById('jenjangDesc').value,
+              stat1Num: document.getElementById('stat1Num').value,
+              stat1Text: document.getElementById('stat1Text').value,
+              stat2Num: document.getElementById('stat2Num').value,
+              stat2Text: document.getElementById('stat2Text').value,
+              stat3Num: document.getElementById('stat3Num').value,
+              stat3Text: document.getElementById('stat3Text').value,
+              stat4Num: document.getElementById('stat4Num').value,
+              stat4Text: document.getElementById('stat4Text').value,
               ppdbYear: document.getElementById('ppdbYear').value,
               ppdbStatus: document.getElementById('ppdbStatus').value
             };

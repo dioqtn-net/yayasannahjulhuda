@@ -22,8 +22,14 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
     const taglineDescContent = cmsData?.taglineDesc 
         ? (cmsData.taglineDesc.startsWith('"') ? cmsData.taglineDesc : `"${cmsData.taglineDesc}"`)
         : `"${profile.history}"`;
-    const jenjangTitleContent = cmsData?.jenjangTitle || 'Jenjang Pendidikan';
-    const jenjangDescContent = cmsData?.jenjangDesc || 'Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.';
+    const stat1Num = cmsData?.stat1Num || '5';
+    const stat1Text = cmsData?.stat1Text || 'JENJANG PENDIDIKAN';
+    const stat2Num = cmsData?.stat2Num || '100+';
+    const stat2Text = cmsData?.stat2Text || 'TENAGA PENDIDIK';
+    const stat3Num = cmsData?.stat3Num || '1000+';
+    const stat3Text = cmsData?.stat3Text || 'SANTRI & SISWA';
+    const stat4Num = cmsData?.stat4Num || '1980';
+    const stat4Text = cmsData?.stat4Text || 'TAHUN BERDIRI';
     const ppdbYearContent = cmsData?.ppdbYear || ppdb?.academic_year || '2024/2025';
     const ppdbStatusContent = cmsData?.ppdbStatus || ppdb?.status || 'BUKA';
 
@@ -188,20 +194,20 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <section class="py-12 bg-white border-b border-slate-100 relative z-20 -mt-10 mx-4 md:mx-auto max-w-5xl rounded-2xl shadow-xl">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-100">
           <div class="p-4">
-            <div class="text-3xl font-bold text-emerald-600 mb-1">5</div>
-            <div class="text-slate-500 text-sm font-medium uppercase tracking-wide">Jenjang Pendidikan</div>
+            <div id="stat1NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">${stat1Num}</div>
+            <div id="stat1TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">${stat1Text}</div>
           </div>
           <div class="p-4">
-            <div class="text-3xl font-bold text-emerald-600 mb-1">100+</div>
-            <div class="text-slate-500 text-sm font-medium uppercase tracking-wide">Tenaga Pendidik</div>
+            <div id="stat2NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">${stat2Num}</div>
+            <div id="stat2TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">${stat2Text}</div>
           </div>
           <div class="p-4">
-            <div class="text-3xl font-bold text-emerald-600 mb-1">1000+</div>
-            <div class="text-slate-500 text-sm font-medium uppercase tracking-wide">Santri & Siswa</div>
+            <div id="stat3NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">${stat3Num}</div>
+            <div id="stat3TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">${stat3Text}</div>
           </div>
           <div class="p-4">
-            <div class="text-3xl font-bold text-emerald-600 mb-1">1980</div>
-            <div class="text-slate-500 text-sm font-medium uppercase tracking-wide">Tahun Berdiri</div>
+            <div id="stat4NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">${stat4Num}</div>
+            <div id="stat4TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">${stat4Text}</div>
           </div>
         </div>
       </section>
@@ -221,9 +227,9 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <section id="jenjang" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2 id="jenjangTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">${jenjangTitleContent}</h2>
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">Jenjang Pendidikan</h2>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
-            <p id="jenjangDescPublic" class="mt-4 text-slate-600 max-w-2xl mx-auto">${jenjangDescContent}</p>
+            <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.</p>
           </div>
           
           <div class="grid-5-centered">
