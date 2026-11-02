@@ -295,31 +295,83 @@
             </a>
           </div>
 
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Beranda berhasil disimpan!');">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
-                <input type="text" value="Pendidikan Islam Terpadu &amp; Berkarakter Qur'ani" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
-              </div>
+          <!-- Form Kelola Beranda -->
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+              <h2 class="text-xl font-bold text-green-900 mb-6">Kelola Konten Beranda</h2>
+              <form id="formBeranda" class="space-y-6" onsubmit="event.preventDefault(); alert('Perubahan Beranda berhasil disimpan!');">
+                  
+                  <!-- Bagian 1: Hero Banner -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">1. Banner Utama (Hero)</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Utama</label>
+                              <input type="text" id="heroTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Selamat Datang di Yayasan Nahjul Huda">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Sub-judul / Deskripsi Singkat</label>
+                              <textarea id="heroDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.</textarea>
+                          </div>
+                      </div>
+                  </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Pengantar</label>
-                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi pengantar...">Membina generasi berilmu, bertakwa, dan berakhlak mulia melalui jenjang SDI Al Kindy, MTs Nahjul Huda, MA Nahjul Huda, dan Pondok Pesantren Tahfidz Qur'an As-Surur.</textarea>
-              </div>
+                  <!-- Bagian 2: Tagline Yayasan -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">2. Bagian Tagline (Mencetak Generasi)</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Tagline</label>
+                              <input type="text" id="taglineTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Mencetak Generasi Rabbani">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Paragraf / Kutipan Tagline</label>
+                              <textarea id="taglineDesc" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">"Yayasan Nahjul Huda berdiri dengan semangat untuk memajukan pendidikan Islam di Kebon Jeruk, Jakarta Barat. Sejak awal berdirinya, yayasan ini telah berkomitmen untuk mencetak generasi yang tidak hanya unggul secara akademik, namun juga memiliki akhlakul karimah dan pemahaman agama yang mendalam."</textarea>
+                          </div>
+                      </div>
+                  </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Thumbnail</label>
-                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
-                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
-              </div>
+                  <!-- Bagian 3: Jenjang Pendidikan -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">3. Bagian Jenjang Pendidikan</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Seksi Jenjang</label>
+                              <input type="text" id="jenjangTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Jenjang Pendidikan">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Seksi Jenjang</label>
+                              <textarea id="jenjangDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.</textarea>
+                          </div>
+                      </div>
+                  </div>
 
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
-                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
-                  <i class="fas fa-save"></i>
-                  <span>Simpan Perubahan</span>
-                </button>
-              </div>
-            </form>
+                  <!-- Bagian 4: Banner Info PPDB -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">4. Banner Info PPDB (Bawah)</h3>
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Tahun Ajaran PPDB</label>
+                              <input type="text" id="ppdbYear" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="2024/2025">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Status PPDB</label>
+                              <select id="ppdbStatus" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                                  <option value="BUKA" selected>BUKA</option>
+                                  <option value="TUTUP">TUTUP</option>
+                                  <option value="SEGERA">SEGERA</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Tombol Simpan -->
+                  <div class="flex justify-end pt-4">
+                      <button type="button" onclick="alert('Perubahan Beranda berhasil disimpan!');" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                          Simpan Perubahan Beranda
+                      </button>
+                  </div>
+              </form>
           </div>
         </section>
 
