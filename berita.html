@@ -158,11 +158,17 @@
             <!-- Card Berita 1: Khatam Hafalan 30 Juz (SLIDER) -->
             <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                  <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="Khatam Hafalan 30 Juz 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/sdi/selesai_30_juz_2.jpg" alt="Khatam Hafalan 30 Juz 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/sdi/selesai_30_juz_3.jpg" alt="Khatam Hafalan 30 Juz 3" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                  <a href="/media/berita/sdi/selesai_30_juz_1.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="Khatam Hafalan 30 Juz 1" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/sdi/selesai_30_juz_2.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/sdi/selesai_30_juz_2.jpg" alt="Khatam Hafalan 30 Juz 2" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/sdi/selesai_30_juz_3.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/sdi/selesai_30_juz_3.jpg" alt="Khatam Hafalan 30 Juz 3" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
                 </div>
                 <!-- Tombol Navigasi Slider -->
                 <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -172,7 +178,7 @@
                   <i class="fas fa-chevron-right"></i>
                 </button>
                 <!-- Indikator Slider & Label -->
-                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none z-10">
                   3 Foto
                 </div>
               </div>
@@ -203,8 +209,10 @@
 
             <!-- Card Berita 2: Juara 1 Plate Champion (SINGLE) -->
             <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" alt="Juara 1 Plate Champion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" alt="Juara 1 Plate Champion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -233,8 +241,10 @@
 
             <!-- Card Berita 3: Juara 2 Kategori Bantalan (SINGLE) -->
             <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" alt="Juara 2 Kategori Bantalan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" alt="Juara 2 Kategori Bantalan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -263,8 +273,10 @@
 
             <!-- Card Berita 4: Hari Anak Nasional (SINGLE) -->
             <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/berita/sdi/selamat_hari_anak_nasional.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -294,10 +306,14 @@
             <!-- Card Berita 5: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar">
+                  <a href="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
                 </div>
                 <!-- Nav Buttons -->
                 <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -307,13 +323,6 @@
                   <i class="fas fa-chevron-right"></i>
                 </button>
               </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">24 Oktober 2026</span>
-                  </div>
                   <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                     Visitasi Akreditasi MTs Nahjul Huda 2026/2027
                   </h3>
@@ -334,8 +343,10 @@
 
             <!-- Card Berita 6: Edukasi Polsek Kebon Jeruk (SINGLE) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -364,8 +375,10 @@
 
             <!-- Card Berita 7: Edukasi Kesehatan Puskesmas (SINGLE) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -395,11 +408,17 @@
             <!-- Card Berita 8: Simulasi Pemadam Kebakaran (SLIDER) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi Panah -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" alt="Simulasi Damkar 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" alt="Simulasi Damkar 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" alt="Simulasi Damkar 3" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar">
+                  <a href="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" alt="Simulasi Damkar 1" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" alt="Simulasi Damkar 2" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" alt="Simulasi Damkar 3" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
                 </div>
                 <!-- Nav Buttons -->
                 <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -409,13 +428,6 @@
                   <i class="fas fa-chevron-right"></i>
                 </button>
               </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">15 Oktober 2026</span>
-                  </div>
                   <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                     Simulasi Pemadam Kebakaran
                   </h3>
@@ -436,8 +448,10 @@
 
             <!-- Card Berita 9: Kunjungan Perpusnas (SINGLE) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -466,8 +480,10 @@
 
             <!-- Card Berita 10: Olimpiade Madrasah Indonesia (SINGLE) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -496,11 +512,18 @@
 
             <!-- Card Berita 11: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
             <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
-                  <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
-                  Browser Anda tidak mendukung tag video.
-                </video>
+              <div class="relative w-full aspect-video mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
+                    <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                  </video>
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
+                    <span class="w-12 h-12 rounded-full bg-emerald-600/90 text-white flex items-center justify-center shadow-lg transition">
+                      <i class="fas fa-play text-lg ml-0.5"></i>
+                    </span>
+                  </div>
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -530,12 +553,20 @@
             <!-- Card Berita 12: Upacara Hari Santri Nasional (SLIDER) -->
             <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
               <!-- Image Slider (Carousel) dengan Navigasi -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
                 <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="Hari Santri 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" alt="Hari Santri 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" alt="Hari Santri 3" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" alt="Hari Santri 4" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                  <a href="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="Hari Santri 1" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" alt="Hari Santri 2" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" alt="Hari Santri 3" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
+                  <a href="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                    <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" alt="Hari Santri 4" class="h-full w-full object-cover hover:brightness-90 transition">
+                  </a>
                 </div>
                 <!-- Tombol Navigasi Slider -->
                 <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -545,7 +576,7 @@
                   <i class="fas fa-chevron-right"></i>
                 </button>
                 <!-- Indikator Slider & Label -->
-                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none z-10">
                   4 Foto
                 </div>
               </div>
@@ -576,11 +607,18 @@
 
             <!-- Card Berita 13: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
             <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
-                  <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
-                  Browser Anda tidak mendukung tag video.
-                </video>
+              <div class="relative w-full aspect-video mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <video class="w-full h-full object-cover hover:brightness-90 transition pointer-events-none">
+                    <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                  </video>
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition pointer-events-none">
+                    <span class="w-12 h-12 rounded-full bg-emerald-600/90 text-white flex items-center justify-center shadow-lg transition">
+                      <i class="fas fa-play text-lg ml-0.5"></i>
+                    </span>
+                  </div>
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -609,8 +647,10 @@
 
             <!-- Card Berita 14: Juara 2 Lomba Cerdas Cermat -->
             <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/ponpes/PEMENANG LOMBA.JPG" alt="Juara 2 Lomba Cerdas Cermat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/berita/ponpes/PEMENANG%20LOMBA.JPG" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/berita/ponpes/PEMENANG LOMBA.JPG" alt="Juara 2 Lomba Cerdas Cermat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -639,8 +679,10 @@
 
             <!-- Card Berita 15: Juara Lomba Pesantren Tingkat Jakarta Barat -->
             <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" alt="Juara Lomba Pesantren Tingkat Jakarta Barat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
+              <div class="relative w-full aspect-video mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                <a href="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full">
+                  <img src="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" alt="Juara Lomba Pesantren Tingkat Jakarta Barat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 hover:brightness-90">
+                </a>
               </div>
 
               <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
@@ -717,12 +759,16 @@
             </h2>
             <div class="w-16 h-1 bg-emerald-600 rounded-full mb-4"></div>
             <!-- Slider Foto di Modal Berita (Template Standar) -->
-            <div class="relative w-full h-[300px] md:h-[400px] mb-6 bg-gray-100 rounded-xl border border-gray-200 overflow-hidden">
+            <div class="relative w-full aspect-video mb-6 bg-gray-100 rounded-xl border border-gray-200 overflow-hidden">
               <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
                 <!-- Foto 1 -->
-                <img id="modalNewsImg" src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                <a href="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                  <img id="modalNewsImg" src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="h-full w-full object-cover hover:brightness-90 transition">
+                </a>
                 <!-- Foto 2 -->
-                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                <a href="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" class="custom-lightbox-trigger cursor-zoom-in block relative w-full h-full shrink-0 snap-center">
+                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="h-full w-full object-cover hover:brightness-90 transition">
+                </a>
               </div>
               <!-- Tombol Navigasi Slider -->
               <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
@@ -869,6 +915,9 @@
         if (modalImg) {
           if (imgSrc) {
             modalImg.src = imgSrc;
+            if (modalImg.parentElement && modalImg.parentElement.tagName === 'A') {
+              modalImg.parentElement.href = imgSrc;
+            }
             modalImg.classList.remove('hidden');
           } else {
             modalImg.src = '';
@@ -981,6 +1030,7 @@
 
       // Attach click listeners to all media in main content and news detail modal
       document.querySelectorAll('main img, main video, #newsDetailModal img').forEach((media) => {
+        if (media.closest('.custom-lightbox-trigger')) return;
         media.addEventListener('click', (e) => {
           e.stopPropagation();
           openMediaModal(media);
@@ -1019,5 +1069,20 @@
         <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
       </div>
     </div>
+  
+    <!-- Include GLightbox CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          // Inisialisasi GLightbox khusus untuk class kita
+          const lightbox = GLightbox({
+              selector: '.custom-lightbox-trigger',
+              touchNavigation: true,
+              loop: true,
+              autoplayVideos: true
+          });
+      });
+    </script>
   </body>
 </html>
