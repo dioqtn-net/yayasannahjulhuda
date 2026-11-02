@@ -12,7 +12,18 @@ export const renderProfile = (profile) => {
     const sejarahText = cmsData?.sejarahText || (profile?.history ? profile.history.replace(/\n/g, '<br>') : '-');
     const strukturTitle = cmsData?.strukturTitle || 'Struktur Organisasi';
     const strukturDesc = cmsData?.strukturDesc || 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.';
+    const namaKetua = cmsData?.namaKetua || '-';
     const fotoKetua = cmsData?.fotoKetua || '';
+    const namaSDI = cmsData?.namaSDI || '-';
+    const fotoSDI = cmsData?.fotoSDI || '';
+    const namaMI = cmsData?.namaMI || '-';
+    const fotoMI = cmsData?.fotoMI || '';
+    const namaMTs = cmsData?.namaMTs || '-';
+    const fotoMTs = cmsData?.fotoMTs || '';
+    const namaMA = cmsData?.namaMA || '-';
+    const fotoMA = cmsData?.fotoMA || '';
+    const namaMudir = cmsData?.namaMudir || '-';
+    const fotoMudir = cmsData?.fotoMudir || '';
 
     return `
       <!-- Header Profile -->
@@ -101,38 +112,64 @@ export const renderProfile = (profile) => {
           <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
             <p class="text-slate-600 italic mb-8">${strukturDesc}</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="p-6 border border-slate-100 rounded-xl bg-slate-50">
-                <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-slate-100 border-2 border-emerald-200 flex items-center justify-center">
-                  ${fotoKetua ? `<img src="${fotoKetua}" alt="Ketua Yayasan" class="w-full h-full object-cover">` : `<i class="fas fa-user-tie text-emerald-700 text-3xl"></i>`}
-                </div>
-                <h4 class="font-bold text-slate-800">Ketua Yayasan</h4>
-                <p class="text-sm text-slate-500">Pengurus Utama</p>
+            <div class="max-w-xs mx-auto mb-8 p-6 border border-slate-100 rounded-2xl bg-white shadow-sm text-center">
+              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 overflow-hidden bg-slate-100 border-4 border-emerald-100 flex items-center justify-center shadow-md">
+                ${fotoKetua ? `<img src="${fotoKetua}" alt="Ketua Yayasan" class="w-full h-full object-cover">` : `<i class="fas fa-user-tie text-emerald-800 text-4xl sm:text-5xl"></i>`}
               </div>
-              <div class="p-6 border border-slate-100 rounded-xl bg-slate-50">
-                <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                  <i class="fas fa-user-tie"></i>
-                </div>
-                <h4 class="font-bold text-slate-800">Sekretaris Yayasan</h4>
-                <p class="text-sm text-slate-500">Administrasi & Kesekretariatan</p>
-              </div>
-              <div class="p-6 border border-slate-100 rounded-xl bg-slate-50">
-                <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                  <i class="fas fa-user-tie"></i>
-                </div>
-                <h4 class="font-bold text-slate-800">Bendahara Yayasan</h4>
-                <p class="text-sm text-slate-500">Keuangan & Aset</p>
-              </div>
+              <h4 class="font-bold text-slate-800 text-lg">Ketua Yayasan</h4>
+              <p class="text-sm font-semibold text-emerald-800 mt-1">${namaKetua}</p>
+              <p class="text-xs text-slate-400 mt-0.5">Pengurus Utama</p>
             </div>
             
             <div class="mt-8 pt-8 border-t border-slate-100">
-               <h4 class="font-bold text-slate-800 mb-4 text-lg">Kepala Unit Pendidikan</h4>
-               <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  <div class="text-sm bg-white border border-slate-200 p-3 rounded-lg">Kepala SDI</div>
-                  <div class="text-sm bg-white border border-slate-200 p-3 rounded-lg">Kepala MI</div>
-                  <div class="text-sm bg-white border border-slate-200 p-3 rounded-lg">Kepala MTs</div>
-                  <div class="text-sm bg-white border border-slate-200 p-3 rounded-lg">Kepala MA</div>
-                  <div class="text-sm bg-white border border-slate-200 p-3 rounded-lg">Mudir Ponpes</div>
+               <h4 class="font-bold text-slate-800 mb-6 text-lg text-center">Kepala Unit Pendidikan</h4>
+               <div class="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl mx-auto">
+                  
+                  <!-- Kepala SDI -->
+                  <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden">
+                        ${fotoSDI ? `<img src="${fotoSDI}" alt="Kepala SDI" class="w-full h-full object-cover">` : `<i class="fas fa-user-graduate text-emerald-700 text-3xl"></i>`}
+                     </div>
+                     <h5 class="font-bold text-slate-800 text-sm">Kepala SDI</h5>
+                     <p class="text-xs text-slate-600 font-medium mt-1">${namaSDI}</p>
+                  </div>
+
+                  <!-- Kepala MI -->
+                  <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden">
+                        ${fotoMI ? `<img src="${fotoMI}" alt="Kepala MI" class="w-full h-full object-cover">` : `<i class="fas fa-user-graduate text-emerald-700 text-3xl"></i>`}
+                     </div>
+                     <h5 class="font-bold text-slate-800 text-sm">Kepala MI</h5>
+                     <p class="text-xs text-slate-600 font-medium mt-1">${namaMI}</p>
+                  </div>
+
+                  <!-- Kepala MTs -->
+                  <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden">
+                        ${fotoMTs ? `<img src="${fotoMTs}" alt="Kepala MTs" class="w-full h-full object-cover">` : `<i class="fas fa-user-graduate text-emerald-700 text-3xl"></i>`}
+                     </div>
+                     <h5 class="font-bold text-slate-800 text-sm">Kepala MTs</h5>
+                     <p class="text-xs text-slate-600 font-medium mt-1">${namaMTs}</p>
+                  </div>
+
+                  <!-- Kepala MA -->
+                  <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden">
+                        ${fotoMA ? `<img src="${fotoMA}" alt="Kepala MA" class="w-full h-full object-cover">` : `<i class="fas fa-user-graduate text-emerald-700 text-3xl"></i>`}
+                     </div>
+                     <h5 class="font-bold text-slate-800 text-sm">Kepala MA</h5>
+                     <p class="text-xs text-slate-600 font-medium mt-1">${namaMA}</p>
+                  </div>
+
+                  <!-- Mudir Ponpes -->
+                  <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden">
+                        ${fotoMudir ? `<img src="${fotoMudir}" alt="Mudir Ponpes" class="w-full h-full object-cover">` : `<i class="fas fa-user-tie text-emerald-700 text-3xl"></i>`}
+                     </div>
+                     <h5 class="font-bold text-slate-800 text-sm">Mudir Ponpes</h5>
+                     <p class="text-xs text-slate-600 font-medium mt-1">${namaMudir}</p>
+                  </div>
+
                </div>
             </div>
 

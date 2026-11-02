@@ -289,9 +289,9 @@
 
             <!-- Ketua Yayasan (Puncak Hierarki) -->
             <div
-              class="max-w-sm mx-auto bg-white shadow-sm border border-gray-100 rounded-2xl p-6 text-center hover:shadow-md transition-shadow">
+              class="max-w-xs mx-auto bg-white shadow-sm border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition">
               <div
-                class="w-32 h-32 mx-auto rounded-full overflow-hidden bg-slate-100 border-4 border-emerald-100 shadow-md mb-4 flex items-center justify-center relative">
+                class="w-32 h-32 sm:w-36 sm:h-36 mx-auto rounded-full overflow-hidden bg-slate-100 border-4 border-emerald-100 shadow-md mb-4 flex items-center justify-center relative">
                 <img id="publicFotoKetua" src="" alt="Foto Ketua Yayasan"
                   class="w-full h-full object-cover hidden">
                 <div id="publicFotoKetuaPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-800 text-5xl">
@@ -299,64 +299,80 @@
                 </div>
               </div>
               <h4 class="font-bold text-slate-800 text-lg">Ketua Yayasan</h4>
-              <p class="text-sm text-slate-500 mt-1">Pengurus Utama</p>
+              <p id="publicNamaKetua" class="text-sm font-semibold text-emerald-800 mt-1">-</p>
+              <p class="text-xs text-slate-400 mt-0.5">Pengurus Utama</p>
             </div>
 
             <!-- Divider Balok Proporsional -->
             <div class="w-full h-8 bg-slate-800 my-8 rounded-md opacity-90 mx-auto max-w-4xl"></div>
 
             <div>
-              <h4 class="font-bold text-slate-800 text-lg text-center">Kepala Unit Pendidikan</h4>
-              <div class="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 mt-8 max-w-5xl mx-auto">
+              <h4 class="font-bold text-slate-800 text-lg text-center mb-2">Kepala Unit Pendidikan</h4>
+              <div class="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 mt-6 max-w-5xl mx-auto">
 
                 <!-- Kepala SDI -->
-                <div class="flex flex-col items-center text-center w-32 sm:w-40">
+                <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-md transition">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
-                    <i class="fas fa-user-graduate"></i>
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden relative mx-auto">
+                    <img id="publicFotoSDI" src="" alt="Foto Kepala SDI" class="w-full h-full object-cover hidden">
+                    <div id="publicFotoSDIPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-700 text-3xl">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala SDI</h5>
-                  <p class="text-xs text-slate-500 mt-1">-</p>
+                  <p id="publicNamaSDI" class="text-xs text-slate-600 font-medium mt-1">-</p>
                 </div>
 
                 <!-- Kepala MI -->
-                <div class="flex flex-col items-center text-center w-32 sm:w-40">
+                <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-md transition">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
-                    <i class="fas fa-user-graduate"></i>
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden relative mx-auto">
+                    <img id="publicFotoMI" src="" alt="Foto Kepala MI" class="w-full h-full object-cover hidden">
+                    <div id="publicFotoMIPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-700 text-3xl">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MI</h5>
-                  <p class="text-xs text-slate-500 mt-1">-</p>
+                  <p id="publicNamaMI" class="text-xs text-slate-600 font-medium mt-1">-</p>
                 </div>
 
                 <!-- Kepala MTs -->
-                <div class="flex flex-col items-center text-center w-32 sm:w-40">
+                <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-md transition">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
-                    <i class="fas fa-user-graduate"></i>
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden relative mx-auto">
+                    <img id="publicFotoMTs" src="" alt="Foto Kepala MTs" class="w-full h-full object-cover hidden">
+                    <div id="publicFotoMTsPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-700 text-3xl">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MTs</h5>
-                  <p class="text-xs text-slate-500 mt-1">-</p>
+                  <p id="publicNamaMTs" class="text-xs text-slate-600 font-medium mt-1">-</p>
                 </div>
 
                 <!-- Kepala MA -->
-                <div class="flex flex-col items-center text-center w-32 sm:w-40">
+                <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-md transition">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
-                    <i class="fas fa-user-graduate"></i>
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden relative mx-auto">
+                    <img id="publicFotoMA" src="" alt="Foto Kepala MA" class="w-full h-full object-cover hidden">
+                    <div id="publicFotoMAPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-700 text-3xl">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MA</h5>
-                  <p class="text-xs text-slate-500 mt-1">-</p>
+                  <p id="publicNamaMA" class="text-xs text-slate-600 font-medium mt-1">-</p>
                 </div>
 
                 <!-- Mudir Ponpes -->
-                <div class="flex flex-col items-center text-center w-32 sm:w-40">
+                <div class="flex flex-col items-center text-center w-36 sm:w-44 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-md transition">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
-                    <i class="fas fa-user-tie"></i>
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-4 border-emerald-50 overflow-hidden relative mx-auto">
+                    <img id="publicFotoMudir" src="" alt="Foto Mudir Ponpes" class="w-full h-full object-cover hidden">
+                    <div id="publicFotoMudirPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-700 text-3xl">
+                      <i class="fas fa-user-tie"></i>
+                    </div>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Mudir Ponpes</h5>
-                  <p class="text-xs text-slate-500 mt-1">-</p>
+                  <p id="publicNamaMudir" class="text-xs text-slate-600 font-medium mt-1">-</p>
                 </div>
 
               </div>
@@ -457,15 +473,27 @@
             const el = document.getElementById('publicStrukturDesc');
             if (el) el.textContent = data.strukturDesc;
           }
-          if (data.fotoKetua) {
-            const img = document.getElementById('publicFotoKetua');
-            const placeholder = document.getElementById('publicFotoKetuaPlaceholder');
-            if (img && placeholder) {
-              img.src = data.fotoKetua;
-              img.classList.remove('hidden');
-              placeholder.classList.add('hidden');
+
+          const applyPerson = (role, photo, name) => {
+            const imgEl = document.getElementById(`publicFoto${role}`);
+            const placeholderEl = document.getElementById(`publicFoto${role}Placeholder`);
+            const nameEl = document.getElementById(`publicNama${role}`);
+            if (name && nameEl) {
+              nameEl.textContent = name;
             }
-          }
+            if (photo && imgEl && placeholderEl) {
+              imgEl.src = photo;
+              imgEl.classList.remove('hidden');
+              placeholderEl.classList.add('hidden');
+            }
+          };
+
+          applyPerson('Ketua', data.fotoKetua, data.namaKetua);
+          applyPerson('SDI', data.fotoSDI, data.namaSDI);
+          applyPerson('MI', data.fotoMI, data.namaMI);
+          applyPerson('MTs', data.fotoMTs, data.namaMTs);
+          applyPerson('MA', data.fotoMA, data.namaMA);
+          applyPerson('Mudir', data.fotoMudir, data.namaMudir);
         }
       } catch (e) {
         console.error('Error loading cmsData_profil:', e);
