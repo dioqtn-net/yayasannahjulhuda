@@ -407,31 +407,62 @@
             </a>
           </div>
 
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Profil berhasil disimpan!');">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
-                <input type="text" value="Profil &amp; Sejarah Yayasan Nahjul Huda" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul utama...">
-              </div>
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+              <h2 class="text-xl font-bold text-green-900 mb-6">Kelola Konten Profil</h2>
+              <form id="formProfil" class="space-y-6">
+                  
+                  <!-- Bagian 1: Banner Profil -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">1. Banner Profil Yayasan</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Banner</label>
+                              <input type="text" id="profilTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Profil Yayasan">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Banner</label>
+                              <textarea id="profilDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.</textarea>
+                          </div>
+                      </div>
+                  </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Profil &amp; Visi Misi</label>
-                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi profil...">Menelusuri jejak dedikasi Yayasan Nahjul Huda sejak awal berdiri dalam mencetak generasi penerus bangsa yang unggul dalam ilmu pengetahuan dan teguh dalam akidah Islam yang rahmatan lil 'alamin.</textarea>
-              </div>
+                  <!-- Bagian 2: Sejarah -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">2. Sejarah Berdirinya</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Teks Sejarah</label>
+                              <textarea id="sejarahText" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">-</textarea>
+                          </div>
+                      </div>
+                  </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Struktur Organisasi</label>
-                <input type="file" accept="image/*" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
-                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, WEBP (Maksimal 2 MB).</p>
-              </div>
+                  <!-- Bagian 3: Struktur Organisasi (Teks & Upload Foto) -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">3. Struktur Organisasi</h3>
+                      <div class="space-y-4">
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Struktur</label>
+                              <input type="text" id="strukturTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Struktur Organisasi">
+                          </div>
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Struktur</label>
+                              <textarea id="strukturDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.</textarea>
+                          </div>
+                          <!-- Persiapan Upload Foto Ketua Yayasan -->
+                          <div>
+                              <label class="block text-sm font-medium text-gray-700 mb-1">Foto Ketua Yayasan (Format: JPG/PNG)</label>
+                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                          </div>
+                      </div>
+                  </div>
 
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
-                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
-                  <i class="fas fa-save"></i>
-                  <span>Simpan Perubahan</span>
-                </button>
-              </div>
-            </form>
+                  <div class="flex justify-end pt-4">
+                      <button type="button" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+                          Simpan Perubahan Profil
+                      </button>
+                  </div>
+              </form>
           </div>
         </section>
 
@@ -934,6 +965,58 @@
             // Simpan ke memori browser
             localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
             alert('Sukses! Perubahan Beranda berhasil disimpan. Silakan cek halaman Beranda.');
+          });
+        }
+      });
+    </script>
+
+    <!-- Script Penyimpan CMS Data Profil (localStorage) -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Muat data Profil dari localStorage jika sebelumnya pernah disimpan
+        const savedProfil = localStorage.getItem('cmsData_profil');
+        if (savedProfil) {
+          try {
+            const dataP = JSON.parse(savedProfil);
+            if (dataP.profilTitle && document.getElementById('profilTitle')) document.getElementById('profilTitle').value = dataP.profilTitle;
+            if (dataP.profilDesc && document.getElementById('profilDesc')) document.getElementById('profilDesc').value = dataP.profilDesc;
+            if (dataP.sejarahText && document.getElementById('sejarahText')) document.getElementById('sejarahText').value = dataP.sejarahText;
+            if (dataP.strukturTitle && document.getElementById('strukturTitle')) document.getElementById('strukturTitle').value = dataP.strukturTitle;
+            if (dataP.strukturDesc && document.getElementById('strukturDesc')) document.getElementById('strukturDesc').value = dataP.strukturDesc;
+          } catch (e) {
+            console.error('Error parsing cmsData_profil:', e);
+          }
+        }
+
+        const btnSaveProfil = document.querySelector('#formProfil button');
+        if (btnSaveProfil) {
+          btnSaveProfil.addEventListener('click', (e) => {
+            e.preventDefault();
+            const fotoInput = document.getElementById('fotoKetua');
+
+            const saveProfilData = (fotoKetuaBase64) => {
+              const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
+              const dataProfil = {
+                profilTitle: document.getElementById('profilTitle').value,
+                profilDesc: document.getElementById('profilDesc').value,
+                sejarahText: document.getElementById('sejarahText').value,
+                strukturTitle: document.getElementById('strukturTitle').value,
+                strukturDesc: document.getElementById('strukturDesc').value,
+                fotoKetua: fotoKetuaBase64 !== undefined ? fotoKetuaBase64 : (prevData.fotoKetua || '')
+              };
+              localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
+              alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
+            };
+
+            if (fotoInput && fotoInput.files && fotoInput.files[0]) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                saveProfilData(event.target.result);
+              };
+              reader.readAsDataURL(fotoInput.files[0]);
+            } else {
+              saveProfilData();
+            }
           });
         }
       });

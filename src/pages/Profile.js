@@ -1,13 +1,28 @@
 export const renderProfile = (profile) => {
+    let cmsData = null;
+    try {
+        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_profil') : null;
+        if (stored) cmsData = JSON.parse(stored);
+    } catch (e) {
+        console.error('Error reading cmsData_profil in renderProfile:', e);
+    }
+
+    const profilTitle = cmsData?.profilTitle || 'Profil Yayasan';
+    const profilDesc = cmsData?.profilDesc || 'Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.';
+    const sejarahText = cmsData?.sejarahText || (profile?.history ? profile.history.replace(/\n/g, '<br>') : '-');
+    const strukturTitle = cmsData?.strukturTitle || 'Struktur Organisasi';
+    const strukturDesc = cmsData?.strukturDesc || 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.';
+    const fotoKetua = cmsData?.fotoKetua || '';
+
     return `
       <!-- Header Profile -->
       <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Profil Yayasan</h1>
+          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">${profilTitle}</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Mengenal lebih dekat sejarah, visi, misi, dan struktur kepengurusan Yayasan Nahjul Huda.</p>
+          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">${profilDesc}</p>
         </div>
       </section>
 
@@ -25,7 +40,7 @@ export const renderProfile = (profile) => {
               <i class="fas fa-history text-gold-500 mr-4"></i> Sejarah Berdirinya
             </h2>
             <div class="prose prose-emerald max-w-none text-slate-600 leading-relaxed">
-              <p>${profile.history.replace(/\n/g, '<br>')}</p>
+              <p class="whitespace-pre-line">${sejarahText}</p>
             </div>
           </div>
         </div>
@@ -80,16 +95,16 @@ export const renderProfile = (profile) => {
 
         <!-- Struktur Organisasi -->
         <div class="text-center">
-          <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">Struktur Organisasi</h2>
+          <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${strukturTitle}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-12"></div>
           
           <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-            <p class="text-slate-600 italic mb-8">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.</p>
+            <p class="text-slate-600 italic mb-8">${strukturDesc}</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div class="p-6 border border-slate-100 rounded-xl bg-slate-50">
-                <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                  <i class="fas fa-user-tie"></i>
+                <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-slate-100 border-2 border-emerald-200 flex items-center justify-center">
+                  ${fotoKetua ? `<img src="${fotoKetua}" alt="Ketua Yayasan" class="w-full h-full object-cover">` : `<i class="fas fa-user-tie text-emerald-700 text-3xl"></i>`}
                 </div>
                 <h4 class="font-bold text-slate-800">Ketua Yayasan</h4>
                 <p class="text-sm text-slate-500">Pengurus Utama</p>

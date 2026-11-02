@@ -95,9 +95,9 @@
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Profil Yayasan</h1>
+          <h1 id="publicProfilTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Profil Yayasan</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Mengenal lebih dekat sejarah,
+          <p id="publicProfilDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Mengenal lebih dekat sejarah,
             visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.</p>
         </div>
       </section>
@@ -118,7 +118,7 @@
               <i class="fas fa-history text-gold-500 mr-4"></i> Sejarah Berdirinya
             </h2>
             <div class="prose prose-emerald max-w-none text-slate-600 leading-relaxed">
-              <p class="text-justify">-</p>
+              <p id="publicSejarahText" class="text-justify whitespace-pre-line leading-relaxed">-</p>
             </div>
           </div>
         </div>
@@ -280,20 +280,23 @@
 
         <!-- Struktur Organisasi -->
         <div class="text-center">
-          <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">Struktur Organisasi</h2>
+          <h2 id="publicStrukturTitle" class="text-3xl font-playfair font-bold text-emerald-800 mb-4">Struktur Organisasi</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-12"></div>
 
           <div class="max-w-5xl mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
-            <p class="text-slate-600 italic mb-8">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk
+            <p id="publicStrukturDesc" class="text-slate-600 italic mb-8">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk
               memajukan lembaga tercinta.</p>
 
             <!-- Ketua Yayasan (Puncak Hierarki) -->
             <div
               class="max-w-sm mx-auto bg-white shadow-sm border border-gray-100 rounded-2xl p-6 text-center hover:shadow-md transition-shadow">
               <div
-                class="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-lg mb-4 flex items-center justify-center">
-                <img src="" alt="Foto Ketua Yayasan"
-                  class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                class="w-32 h-32 mx-auto rounded-full overflow-hidden bg-slate-100 border-4 border-emerald-100 shadow-md mb-4 flex items-center justify-center relative">
+                <img id="publicFotoKetua" src="" alt="Foto Ketua Yayasan"
+                  class="w-full h-full object-cover hidden">
+                <div id="publicFotoKetuaPlaceholder" class="w-full h-full flex items-center justify-center text-emerald-800 text-5xl">
+                  <i class="fas fa-user-tie"></i>
+                </div>
               </div>
               <h4 class="font-bold text-slate-800 text-lg">Ketua Yayasan</h4>
               <p class="text-sm text-slate-500 mt-1">Pengurus Utama</p>
@@ -309,9 +312,8 @@
                 <!-- Kepala SDI -->
                 <div class="flex flex-col items-center text-center w-32 sm:w-40">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden">
-                    <img src="" alt="Foto Kepala SDI"
-                      class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
+                    <i class="fas fa-user-graduate"></i>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala SDI</h5>
                   <p class="text-xs text-slate-500 mt-1">-</p>
@@ -320,9 +322,8 @@
                 <!-- Kepala MI -->
                 <div class="flex flex-col items-center text-center w-32 sm:w-40">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden">
-                    <img src="" alt="Foto Kepala MI"
-                      class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
+                    <i class="fas fa-user-graduate"></i>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MI</h5>
                   <p class="text-xs text-slate-500 mt-1">-</p>
@@ -331,9 +332,8 @@
                 <!-- Kepala MTs -->
                 <div class="flex flex-col items-center text-center w-32 sm:w-40">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden">
-                    <img src="" alt="Foto Kepala MTs"
-                      class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
+                    <i class="fas fa-user-graduate"></i>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MTs</h5>
                   <p class="text-xs text-slate-500 mt-1">-</p>
@@ -342,9 +342,8 @@
                 <!-- Kepala MA -->
                 <div class="flex flex-col items-center text-center w-32 sm:w-40">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden">
-                    <img src="" alt="Foto Kepala MA"
-                      class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
+                    <i class="fas fa-user-graduate"></i>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Kepala MA</h5>
                   <p class="text-xs text-slate-500 mt-1">-</p>
@@ -353,9 +352,8 @@
                 <!-- Mudir Ponpes -->
                 <div class="flex flex-col items-center text-center w-32 sm:w-40">
                   <div
-                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden">
-                    <img src="" alt="Foto Mudir Ponpes"
-                      class="w-full h-full object-cover text-xs text-gray-400 text-center">
+                    class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-100 shadow-md flex items-center justify-center mb-3 border-2 border-white overflow-hidden text-emerald-700 text-3xl">
+                    <i class="fas fa-user-tie"></i>
                   </div>
                   <h5 class="font-bold text-slate-800 text-sm">Mudir Ponpes</h5>
                   <p class="text-xs text-slate-500 mt-1">-</p>
@@ -432,6 +430,47 @@
         mobileMenu.classList.toggle('hidden');
       });
     }
+
+    // Sinkronisasi CMS Data Profil dari localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved = localStorage.getItem('cmsData_profil');
+        if (saved) {
+          const data = JSON.parse(saved);
+          if (data.profilTitle) {
+            const el = document.getElementById('publicProfilTitle');
+            if (el) el.textContent = data.profilTitle;
+          }
+          if (data.profilDesc) {
+            const el = document.getElementById('publicProfilDesc');
+            if (el) el.textContent = data.profilDesc;
+          }
+          if (data.sejarahText) {
+            const el = document.getElementById('publicSejarahText');
+            if (el) el.textContent = data.sejarahText;
+          }
+          if (data.strukturTitle) {
+            const el = document.getElementById('publicStrukturTitle');
+            if (el) el.textContent = data.strukturTitle;
+          }
+          if (data.strukturDesc) {
+            const el = document.getElementById('publicStrukturDesc');
+            if (el) el.textContent = data.strukturDesc;
+          }
+          if (data.fotoKetua) {
+            const img = document.getElementById('publicFotoKetua');
+            const placeholder = document.getElementById('publicFotoKetuaPlaceholder');
+            if (img && placeholder) {
+              img.src = data.fotoKetua;
+              img.classList.remove('hidden');
+              placeholder.classList.add('hidden');
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error loading cmsData_profil:', e);
+      }
+    });
   </script>
 </body>
 
