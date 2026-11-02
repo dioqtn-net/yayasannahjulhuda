@@ -298,7 +298,7 @@
           <!-- Form Kelola Beranda -->
           <div class="bg-white rounded-xl shadow border p-6 mb-6">
               <h2 class="text-xl font-bold text-green-900 mb-6">Kelola Konten Beranda</h2>
-              <form id="formBeranda" class="space-y-6" onsubmit="event.preventDefault(); alert('Perubahan Beranda berhasil disimpan!');">
+              <form id="formBeranda" class="space-y-6">
                   
                   <!-- Bagian 1: Hero Banner -->
                   <div class="p-4 border rounded-lg bg-gray-50">
@@ -366,7 +366,7 @@
 
                   <!-- Tombol Simpan -->
                   <div class="flex justify-end pt-4">
-                      <button type="button" onclick="alert('Perubahan Beranda berhasil disimpan!');" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Beranda
                       </button>
@@ -869,6 +869,49 @@
 
         // Jalankan saat halaman pertama kali dimuat
         switchTab(window.location.hash || '#dashboard');
+      });
+    </script>
+
+    <!-- Script Penyimpan CMS Data Beranda (localStorage) -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Muat data dari localStorage jika sebelumnya pernah disimpan
+        const savedData = localStorage.getItem('cmsData_beranda');
+        if (savedData) {
+          try {
+            const data = JSON.parse(savedData);
+            if (data.heroTitle && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = data.heroTitle;
+            if (data.heroDesc && document.getElementById('heroDesc')) document.getElementById('heroDesc').value = data.heroDesc;
+            if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
+            if (data.taglineDesc && document.getElementById('taglineDesc')) document.getElementById('taglineDesc').value = data.taglineDesc;
+            if (data.jenjangTitle && document.getElementById('jenjangTitle')) document.getElementById('jenjangTitle').value = data.jenjangTitle;
+            if (data.jenjangDesc && document.getElementById('jenjangDesc')) document.getElementById('jenjangDesc').value = data.jenjangDesc;
+            if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
+            if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
+          } catch (e) {
+            console.error('Error parsing cmsData_beranda:', e);
+          }
+        }
+
+        const btnSaveBeranda = document.querySelector('#formBeranda button');
+        if (btnSaveBeranda) {
+          btnSaveBeranda.addEventListener('click', (e) => {
+            e.preventDefault();
+            const dataBeranda = {
+              heroTitle: document.getElementById('heroTitle').value,
+              heroDesc: document.getElementById('heroDesc').value,
+              taglineTitle: document.getElementById('taglineTitle').value,
+              taglineDesc: document.getElementById('taglineDesc').value,
+              jenjangTitle: document.getElementById('jenjangTitle').value,
+              jenjangDesc: document.getElementById('jenjangDesc').value,
+              ppdbYear: document.getElementById('ppdbYear').value,
+              ppdbStatus: document.getElementById('ppdbStatus').value
+            };
+            // Simpan ke memori browser
+            localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
+            alert('Sukses! Perubahan Beranda berhasil disimpan. Silakan cek halaman Beranda.');
+          });
+        }
       });
     </script>
   </body>

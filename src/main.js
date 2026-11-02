@@ -34,9 +34,7 @@ const renderLayout = (contentHTML, isPublic = true, activePage = '') => {
 
 const navigate = (path) => router.navigate(path);
 
-// Setup Routing
-router
-  .on('/', async () => {
+const loadHome = async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();
     const units = await api.getEducationUnits();
@@ -46,7 +44,14 @@ router
     const ppdb = await api.getPPDB();
     appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb), true, 'beranda');
     setupHomeEvents();
-  })
+};
+
+// Setup Routing
+router
+  .on('/', loadHome)
+  .on('/beranda', loadHome)
+  .on('/beranda.html', loadHome)
+  .on('/index.html', loadHome)
   .on('/profil', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();

@@ -1,6 +1,31 @@
 import { getUnitImage } from '../api';
 
 export const renderHome = (profile, units, news, facilities, galleries, ppdb) => {
+    let cmsData = null;
+    try {
+        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
+        if (stored) {
+            cmsData = JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error('Error reading cmsData_beranda in renderHome:', e);
+    }
+
+    const heroTitleContent = cmsData?.heroTitle
+        ? (cmsData.heroTitle.includes('Yayasan Nahjul Huda')
+            ? cmsData.heroTitle.replace('Yayasan Nahjul Huda', '<br><span class="text-gold-400">Yayasan Nahjul Huda</span>')
+            : cmsData.heroTitle)
+        : `Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>`;
+
+    const heroDescContent = cmsData?.heroDesc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
+    const taglineTitleContent = cmsData?.taglineTitle || 'Mencetak Generasi Rabbani';
+    const taglineDescContent = cmsData?.taglineDesc 
+        ? (cmsData.taglineDesc.startsWith('"') ? cmsData.taglineDesc : `"${cmsData.taglineDesc}"`)
+        : `"${profile.history}"`;
+    const jenjangTitleContent = cmsData?.jenjangTitle || 'Jenjang Pendidikan';
+    const jenjangDescContent = cmsData?.jenjangDesc || 'Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.';
+    const ppdbYearContent = cmsData?.ppdbYear || ppdb?.academic_year || '2024/2025';
+    const ppdbStatusContent = cmsData?.ppdbStatus || ppdb?.status || 'BUKA';
 
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
@@ -142,11 +167,11 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/60 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left fade-in">
-          <h1 class="text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
-            Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>
+          <h1 id="heroTitlePublic" class="text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
+            ${heroTitleContent}
           </h1>
-          <p class="text-lg md:text-xl text-emerald-100 max-w-2xl mb-8 leading-relaxed drop-shadow">
-            Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.
+          <p id="heroDescPublic" class="text-lg md:text-xl text-emerald-100 max-w-2xl mb-8 leading-relaxed drop-shadow">
+            ${heroDescContent}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a href="/ppdb" data-navigo class="bg-gold-500 hover:bg-gold-400 text-slate-900 px-8 py-3 rounded-full font-bold transition shadow-lg flex items-center justify-center">
@@ -184,10 +209,10 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <!-- Sambutan -->
       <section class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6">Mencetak Generasi Rabbani</h2>
+          <h2 id="taglineTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6">${taglineTitleContent}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto mb-8 rounded-full"></div>
-          <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            "${profile.history}"
+          <p id="taglineDescPublic" class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            ${taglineDescContent}
           </p>
         </div>
       </section>
@@ -196,9 +221,9 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <section id="jenjang" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">Jenjang Pendidikan</h2>
+            <h2 id="jenjangTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">${jenjangTitleContent}</h2>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
-            <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Sistem pendidikan komprehensif mulai dari tingkat dasar hingga menengah atas dan kepesantrenan.</p>
+            <p id="jenjangDescPublic" class="mt-4 text-slate-600 max-w-2xl mx-auto">${jenjangDescContent}</p>
           </div>
           
           <div class="grid-5-centered">
@@ -243,7 +268,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <section class="py-16 bg-gold-500">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">Penerimaan Peserta Didik Baru (PPDB)</h2>
-          <p class="text-emerald-900/80 text-lg mb-8">Tahun Ajaran ${ppdb?.academic_year || '2024/2025'} - Status: <span class="font-bold bg-white px-3 py-1 rounded-full text-emerald-700 text-sm ml-2">${ppdb?.status || 'BUKA'}</span></p>
+          <p class="text-emerald-900/80 text-lg mb-8">Tahun Ajaran <span id="ppdbYearPublic">${ppdbYearContent}</span> - Status: <span id="ppdbStatusPublic" class="font-bold bg-white px-3 py-1 rounded-full text-emerald-700 text-sm ml-2">${ppdbStatusContent}</span></p>
           <a href="/ppdb" data-navigo class="inline-block bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-3.5 rounded-full font-bold text-lg transition shadow-xl hover:-translate-y-1 transform">
             Lihat Informasi Pendaftaran
           </a>
