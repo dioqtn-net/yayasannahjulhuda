@@ -76,9 +76,9 @@
           <!-- Dark Overlay Wrapper -->
           <div class="absolute inset-0 bg-black/70 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
+            <h1 id="publicFasBannerTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
+            <p id="publicFasBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
           </div>
         </section>
 
@@ -111,10 +111,10 @@
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    <h3 id="publicFas1Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Masjid Jami' Assurur
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
+                    <p id="publicFas1Desc" class="text-slate-600 text-sm leading-relaxed">
                       Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.
                     </p>
                   </div>
@@ -142,10 +142,10 @@
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    <h3 id="publicFas2Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Lapangan Upacara
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
+                    <p id="publicFas2Desc" class="text-slate-600 text-sm leading-relaxed">
                       Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.
                     </p>
                   </div>
@@ -176,10 +176,10 @@
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    <h3 id="publicFas3Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Laboratorium Komputer
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
+                    <p id="publicFas3Desc" class="text-slate-600 text-sm leading-relaxed">
                       Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.
                     </p>
                   </div>
@@ -193,10 +193,10 @@
                 </a>
                 <div class="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    <h3 id="publicFas4Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Lapangan Bola Basket
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
+                    <p id="publicFas4Desc" class="text-slate-600 text-sm leading-relaxed">
                       Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.
                     </p>
                   </div>
@@ -267,6 +267,43 @@
           mobileMenu.classList.toggle('hidden');
         });
       }
+
+      // Synchronize Fasilitas Content from CMS (localStorage)
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedFasData = localStorage.getItem('cmsData_fasilitas');
+        if (!savedFasData) return;
+
+        try {
+          const data = JSON.parse(savedFasData);
+
+          // 1. Banner Utama
+          if (data.fasBannerTitle && data.fasBannerTitle.trim()) {
+            const el = document.getElementById('publicFasBannerTitle');
+            if (el) el.textContent = data.fasBannerTitle;
+          }
+          if (data.fasBannerDesc && data.fasBannerDesc.trim()) {
+            const el = document.getElementById('publicFasBannerDesc');
+            if (el) el.textContent = data.fasBannerDesc;
+          }
+
+          // 2. Card Fasilitas 1 - 4
+          for (let i = 1; i <= 4; i++) {
+            const titleVal = data[`fas${i}Title`];
+            if (titleVal !== undefined && titleVal !== null) {
+              const elTitle = document.getElementById(`publicFas${i}Title`);
+              if (elTitle) elTitle.textContent = titleVal.trim() === '' ? '-' : titleVal;
+            }
+
+            const descVal = data[`fas${i}Desc`];
+            if (descVal !== undefined && descVal !== null) {
+              const elDesc = document.getElementById(`publicFas${i}Desc`);
+              if (elDesc) elDesc.textContent = descVal.trim() === '' ? '-' : descVal;
+            }
+          }
+        } catch (e) {
+          console.error('Error synchronizing cmsData_fasilitas:', e);
+        }
+      });
     </script>
 
     <!-- GLightbox CDN & Initialization -->
