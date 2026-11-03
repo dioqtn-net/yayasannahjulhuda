@@ -90,9 +90,9 @@
         <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
           <div class="absolute inset-0 bg-black/75 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Berita & Pengumuman</h1>
+            <h1 id="pubBeritaBannerTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Berita & Pengumuman</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
+            <p id="pubBeritaBannerDesc" class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
               Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.
             </p>
           </div>
@@ -153,520 +153,8 @@
           <!-- ========================================== -->
           <!-- [CMS_BERITA_START] -->
           <div id="newsScrollWrapper" class="max-h-[850px] overflow-y-auto pr-2 custom-scrollbar w-full">
-            <div id="newsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <!-- Card Berita 1: Khatam Hafalan 30 Juz (SLIDER) -->
-            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <!-- Image Slider (Carousel) dengan Navigasi -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
-                  <img src="/media/berita/sdi/selesai_30_juz_1.jpg" alt="Khatam Hafalan 30 Juz 1" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/sdi/selesai_30_juz_2.jpg" alt="Khatam Hafalan 30 Juz 2" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/sdi/selesai_30_juz_3.jpg" alt="Khatam Hafalan 30 Juz 3" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                </div>
-                <!-- Tombol Navigasi Slider -->
-                <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-                <!-- Indikator Slider & Label -->
-                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                  3 Foto
-                </div>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">28 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur'an 30 Juz dengan predikat mumtaz.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    SDI
-                  </span>
-                  <button onclick="openNewsModal('Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz', 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz.', '/media/berita/sdi/selesai_30_juz_1.jpg', '28 Oktober 2026', 'SDI')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 2: Juara 1 Plate Champion (SINGLE) -->
-            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg" alt="Juara 1 Plate Champion" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">28 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Selamat! SDI Al Kindy Sabet Juara 1 Plate Champion Kategori U-12
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    SDI
-                  </span>
-                  <button onclick="openNewsModal('Selamat! SDI Al Kindy Sabet Juara 1 Plate Champion Kategori U-12', 'Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.', '/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg', '28 Oktober 2026', 'SDI')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 3: Juara 2 Kategori Bantalan (SINGLE) -->
-            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg" alt="Juara 2 Kategori Bantalan" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">28 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Prestasi Gemilang: Juara 2 Kategori Bantalan Babak Kualifikasi
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Satu lagi prestasi diraih oleh siswa berbakat SDI Al Kindy yang sukses mengamankan posisi Juara 2 pada Kategori Bantalan di Babak Kualifikasi. Ini adalah langkah awal yang luar biasa untuk terus mengukir prestasi.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    SDI
-                  </span>
-                  <button onclick="openNewsModal('Prestasi Gemilang: Juara 2 Kategori Bantalan Babak Kualifikasi', 'Satu lagi prestasi diraih oleh siswa berbakat SDI Al Kindy yang sukses mengamankan posisi Juara 2 pada Kategori Bantalan di Babak Kualifikasi. Ini adalah langkah awal yang luar biasa untuk terus mengukir prestasi.', '/media/berita/sdi/juara_2_bantalan_babak_kualifikasi.jpg', '28 Oktober 2026', 'SDI')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 4: Hari Anak Nasional (SINGLE) -->
-            <article data-jenjang="SDI" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/sdi/selamat_hari_anak_nasional.jpg" alt="Semarak Hari Anak Nasional" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">23 Juli 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Semarak Hari Anak Nasional: Wujudkan Generasi Penerus yang Ceria
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    SDI Al Kindy turut memeriahkan peringatan Hari Anak Nasional dengan berbagai kegiatan edukatif dan menyenangkan. Kami berharap setiap anak dapat terus belajar dan berkembang dalam lingkungan yang positif.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    SDI
-                  </span>
-                  <button onclick="openNewsModal('Semarak Hari Anak Nasional: Wujudkan Generasi Penerus yang Ceria', 'SDI Al Kindy turut memeriahkan peringatan Hari Anak Nasional dengan berbagai kegiatan edukatif dan menyenangkan. Kami berharap setiap anak dapat terus belajar dan berkembang dalam lingkungan yang positif.', '/media/berita/sdi/selamat_hari_anak_nasional.jpg', '23 Juli 2026', 'SDI')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 5: Visitasi Akreditasi MTs Nahjul Huda 2026/2027 (SLIDER) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <!-- Image Slider (Carousel) dengan Navigasi Panah -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                </div>
-                <!-- Nav Buttons -->
-                <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">24 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Visitasi Akreditasi MTs Nahjul Huda 2026/2027
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Visitasi Akreditasi MTs Nahjul Huda 2026/2027', 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah. Seluruh dewan guru, staf, serta siswa/siswi menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.', '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg', '24 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 6: Edukasi Polsek Kebon Jeruk (SINGLE) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg" alt="Edukasi Polsek Kebon Jeruk" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">20 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Edukasi Polsek Kebon Jeruk
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Sosialisasi pencegahan kenakalan remaja, tata tertib hukum, dan pembinaan karakter generasi muda oleh jajaran Polsek Kebon Jeruk.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Edukasi Polsek Kebon Jeruk', 'Kegiatan sosialisasi dan edukasi pencegahan kenakalan remaja yang disampaikan langsung oleh jajaran kepolisian Polsek Kebon Jeruk kepada para siswa/siswi MTs Nahjul Huda. Materi mencakup pemahaman hukum, bahaya perundungan (bullying), serta pembinaan disiplin dan karakter positif generasi muda.', '/media/galeri/mts/sosialisasi_pencegahan_kenakalan_remaja_oleh_polsek_kebun_jeruk.jpg', '20 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 7: Edukasi Kesehatan Puskesmas (SINGLE) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg" alt="Edukasi Kesehatan Puskesmas" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">18 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Edukasi Kesehatan Puskesmas
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Sosialisasi edukasi kesehatan reproduksi dan pola hidup bersih sehat bagi siswi oleh tenaga medis Puskesmas Kebon Jeruk.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Edukasi Kesehatan Puskesmas', 'Penyuluhan kesehatan reproduksi remaja dan sosialisasi perilaku hidup bersih dan sehat (PHBS) bagi siswi MTs Nahjul Huda. Menghadirkan dokter dan tenaga medis dari Puskesmas Kecamatan Kebon Jeruk guna memberikan pemahaman komprehensif mengenai kesehatan siswa/siswi.', '/media/galeri/mts/sosialisasi_kewanitaan_oleh_tenaga_kesehatan_puskesmas_kebun_jeruk.jpg', '18 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 8: Simulasi Pemadam Kebakaran (SLIDER) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <!-- Image Slider (Carousel) dengan Navigasi Panah -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth h-full w-full hide-scrollbar pb-2">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg" alt="Simulasi Damkar 1" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg" alt="Simulasi Damkar 2" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg" alt="Simulasi Damkar 3" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                </div>
-                <!-- Nav Buttons -->
-                <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">15 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Simulasi Pemadam Kebakaran
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Pelatihan kesiapsiagaan mitigasi bencana dan simulasi pemadaman kebakaran bersama petugas Damkar Sektor 5 Kebon Jeruk.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Simulasi Pemadam Kebakaran', 'Pelatihan mitigasi tanggap darurat bencana kebakaran yang diselenggarakan bekerjasama dengan Suku Dinas Penanggulangan Kebakaran dan Penyelamatan (Damkar) Sektor 5 Kebon Jeruk. Seluruh siswa/siswi dan dewan guru mempraktikkan langsung teknik pemadaman api menggunakan APAR dan karung basah secara sigap.', '/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg', '15 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 9: Kunjungan Perpusnas (SINGLE) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg" alt="Kunjungan Perpusnas" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">12 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Kunjungan Perpusnas
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Kunjungan edukatif dan riset literasi siswa/siswi kelas 9 MTs Nahjul Huda ke Perpustakaan Nasional Republik Indonesia.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Kunjungan Perpusnas', 'Siswa/siswi kelas 9 MTs Nahjul Huda mengadakan kunjungan edukatif ke Perpustakaan Nasional Republik Indonesia (Perpusnas) di Jalan Medan Merdeka Selatan. Kegiatan ini bertujuan memperluas wawasan literasi, mengenalkan fasilitas riset modern, serta meningkatkan minat baca para siswa/siswi.', '/media/galeri/mts/kunjungan_kelas_9_ke_perpus_nasional_jakarta.jpg', '12 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 10: Olimpiade Madrasah Indonesia (SINGLE) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg" alt="Olimpiade Madrasah Indonesia" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">10 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Olimpiade Madrasah Indonesia
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan dengan meraih juara pada ajang Olimpiade Madrasah Indonesia tingkat Kota Jakarta Barat.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Olimpiade Madrasah Indonesia', 'Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan dengan meraih juara pada ajang Olimpiade Madrasah Indonesia tingkat Kota Jakarta Barat. Keberhasilan ini menjadi bukti dedikasi para siswa/siswi dan bimbingan intensif dewan guru dalam mengasah kemampuan akademik di kancah kompetisi bergengsi.', '/media/galeri/mts/olimpiade_madrasah_indonesia_(OMI)_MTs_Nahjul_Huda.jpg', '10 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 11: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article data-jenjang="MTs" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
-                  <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
-                  Browser Anda tidak mendukung tag video.
-                </video>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">5 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Testimoni Yayasan & Ponpes As-Surur
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    MTs
-                  </span>
-                  <button onclick="openNewsModal('Testimoni Yayasan & Ponpes As-Surur', 'Untaian pesan inspiratif dan apresiasi hangat dari Ustadz Maulana atas kiprah dan dedikasi Yayasan Nahjul Huda serta Pondok Pesantren As-Surur dalam mendidik siswa/siswi dan santri berakhlak mulia dan berwawasan luas. Beliau menyampaikan dorongan semangat bagi seluruh siswa/siswi, santri, dewan guru, dan pengurus agar senantiasa istiqomah menebarkan syiar Islam.', '', '5 Oktober 2026', 'MTs')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 12: Upacara Hari Santri Nasional (SLIDER) -->
-            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <!-- Image Slider (Carousel) dengan Navigasi -->
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg" alt="Hari Santri 1" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg" alt="Hari Santri 2" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg" alt="Hari Santri 3" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                  <img src="/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_4.jpg" alt="Hari Santri 4" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                </div>
-                <!-- Tombol Navigasi Slider -->
-                <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-                <!-- Indikator Slider & Label -->
-                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
-                  4 Foto
-                </div>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">22 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Upacara Hari Santri Nasional
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional 2026 di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur dengan khidmat.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    Ponpes
-                  </span>
-                  <button onclick="openNewsModal('Upacara Hari Santri Nasional', 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional tanggal 22 Oktober 2026 yang diselenggarakan di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur. Seluruh santri dan asatidz mengikuti rangkaian upacara dengan khidmat sebagai wujud penghormatan atas peran besar santri dalam perjuangan dan pembangunan bangsa.', '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg', '22 Oktober 2026', 'Ponpes')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 13: Testimoni Yayasan & Ponpes As-Surur (VIDEO) -->
-            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-slate-900 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <video controls class="w-full h-full object-cover cursor-pointer hover:brightness-90 transition">
-                  <source src="/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4" type="video/mp4">
-                  Browser Anda tidak mendukung tag video.
-                </video>
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">5 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Testimoni Yayasan & Ponpes As-Surur
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    Ponpes
-                  </span>
-                  <button onclick="openNewsModal('Testimoni Yayasan & Ponpes As-Surur', 'Untaian pesan inspiratif dan apresiasi hangat dari Ustadz Maulana atas kiprah dan dedikasi Yayasan Nahjul Huda serta Pondok Pesantren As-Surur dalam mendidik santri berakhlak mulia dan berwawasan luas. Beliau menyampaikan dorongan semangat bagi seluruh santri, dewan guru, dan pengurus agar senantiasa istiqomah menebarkan syiar Islam.', '', '5 Oktober 2026', 'Ponpes')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 14: Juara 2 Lomba Cerdas Cermat -->
-            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/ponpes/PEMENANG LOMBA.JPG" alt="Juara 2 Lomba Cerdas Cermat" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">28 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Juara 2 Lomba Cerdas Cermat
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    Ponpes
-                  </span>
-                  <button onclick="openNewsModal('Juara 2 Lomba Cerdas Cermat', 'Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.', '/media/berita/ponpes/PEMENANG LOMBA.JPG', '28 Oktober 2026', 'Ponpes')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card Berita 15: Juara Lomba Pesantren Tingkat Jakarta Barat -->
-            <article data-jenjang="Ponpes" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
-              <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                <img src="/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg" alt="Juara Lomba Pesantren Tingkat Jakarta Barat" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90 transition">
-              </div>
-
-              <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
-                    <i class="far fa-calendar-alt text-emerald-600"></i>
-                    <span class="text-xs text-slate-500 font-medium">28 Oktober 2026</span>
-                  </div>
-                  <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
-                    Juara Lomba Pesantren Tingkat Jakarta Barat
-                  </h3>
-                  <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    Satu lagi pencapaian membanggakan dari santri Pondok Pesantren Assurur yang berhasil meraih gelar juara pada ajang kompetisi pesantren tingkat Jakarta Barat.
-                  </p>
-                </div>
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-                    Ponpes
-                  </span>
-                  <button onclick="openNewsModal('Juara Lomba Pesantren Tingkat Jakarta Barat', 'Satu lagi pencapaian membanggakan dari santri Pondok Pesantren Assurur yang berhasil meraih gelar juara pada ajang kompetisi pesantren tingkat Jakarta Barat.', '/media/berita/ponpes/pemenang_lomba_pesantren_se_jakbar.jpg', '28 Oktober 2026', 'Ponpes')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0">
-                    Baca Selengkapnya &rarr;
-                  </button>
-                </div>
-              </div>
-            </article>
-
+            <div id="pubContainerBerita" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Berita akan dirender secara dinamis oleh JavaScript -->
             </div>
           </div>
           <!-- [CMS_BERITA_END] -->
@@ -697,13 +185,13 @@
 
       <!-- Modal Baca Berita Selengkapnya -->
       <div id="newsDetailModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col relative">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col relative" onclick="event.stopPropagation()">
           <!-- Header Bar Modal -->
           <div class="flex items-center justify-between p-6 pb-0">
             <span id="modalNewsBadge" class="bg-emerald-800 text-emerald-100 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
               Jenjang
             </span>
-            <button onclick="closeNewsModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 flex items-center justify-center transition">
+            <button onclick="closeNewsModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 flex items-center justify-center transition cursor-pointer" title="Tutup">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -716,19 +204,16 @@
               Judul Berita
             </h2>
             <div class="w-16 h-1 bg-emerald-600 rounded-full mb-4"></div>
-            <!-- Slider Foto di Modal Berita (Template Standar) -->
-            <div class="relative w-full h-[300px] md:h-[400px] mb-6 bg-gray-100 rounded-xl border border-gray-200 overflow-hidden">
-              <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
-                <!-- Foto 1 -->
-                <img id="modalNewsImg" src="/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg" alt="Akreditasi MTs 1" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
-                <!-- Foto 2 -->
-                <img src="/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg" alt="Akreditasi MTs 2" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+            <!-- Slider Foto di Modal Berita -->
+            <div id="modalNewsSliderContainer" class="relative w-full h-[300px] md:h-[400px] mb-6 bg-gray-100 rounded-xl border border-gray-200 overflow-hidden">
+              <div id="modalNewsSlider" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar h-full w-full">
+                <!-- Foto-foto modal dirender via JS -->
               </div>
               <!-- Tombol Navigasi Slider -->
-              <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+              <button id="modalNewsPrev" type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('#modalNewsSlider').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none cursor-pointer">
                 <i class="fas fa-chevron-left"></i>
               </button>
-              <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+              <button id="modalNewsNext" type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('#modalNewsSlider').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none cursor-pointer">
                 <i class="fas fa-chevron-right"></i>
               </button>
             </div>
@@ -736,7 +221,7 @@
               Isi berita lengkap...
             </p>
             <div class="pt-4 border-t border-slate-100 flex justify-end">
-              <button onclick="closeNewsModal()" class="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+              <button onclick="closeNewsModal()" class="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition cursor-pointer">
                 Tutup
               </button>
             </div>
@@ -795,122 +280,254 @@
 
     <!-- Client Scripts -->
     <script>
-      // Mobile Menu Toggle
-      const toggleMobileBtn = document.getElementById('toggleMobileBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      if (toggleMobileBtn && mobileMenu) {
-        toggleMobileBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
+      (function() {
+        // Mobile Menu Toggle
+        const toggleMobileBtn = document.getElementById('toggleMobileBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (toggleMobileBtn && mobileMenu) {
+          toggleMobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
 
-      // Switch Jenjang Filter
-      function switchNewsJenjang(jenjang) {
-        const tabs = document.querySelectorAll('.jenjang-tab-btn');
-        const activeBadge = document.getElementById('active-jenjang-badge');
-        const newsScrollWrapper = document.getElementById('newsScrollWrapper');
-        const otherJenjangMsg = document.getElementById('otherJenjangMsg');
-        const sectionTitle = document.getElementById('newsSectionTitle');
-        const emptyStateTitle = document.getElementById('emptyStateTitle');
-        const emptyStateDesc = document.getElementById('emptyStateDesc');
-        const noResultsMsg = document.getElementById('noResultsMsg');
-        const searchInput = document.getElementById('searchNewsInput');
+        const STORAGE_KEY_BERITA = 'cmsData_listBerita';
+        const STORAGE_KEY_BANNER = 'cmsData_beritaBanner';
 
-        if (noResultsMsg) noResultsMsg.classList.add('hidden');
-        if (searchInput) searchInput.value = '';
-
-        tabs.forEach(btn => {
-          if (btn.getAttribute('data-jenjang') === jenjang) {
-            btn.className = 'jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30';
-          } else {
-            btn.className = 'jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700';
+        const defaultBerita = [
+          {
+            id: 'berita-1',
+            judul: 'Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz',
+            tanggal: '2026-10-28',
+            jenjang: 'SDI',
+            deskripsiSingkat: 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz.',
+            deskripsiLengkap: 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz.\n\nSemoga pencapaian mulia ini menjadi inspirasi dan motivasi bagi seluruh peserta didik lainnya dalam menumbuhkan kecintaan terhadap Al-Qur\'an serta mengamalkan nilai-nilainya dalam kehidupan sehari-hari.',
+            images: [
+              '/media/berita/sdi/selesai_30_juz_1.jpg',
+              '/media/berita/sdi/selesai_30_juz_2.jpg',
+              '/media/berita/sdi/selesai_30_juz_3.jpg'
+            ]
+          },
+          {
+            id: 'berita-2',
+            judul: 'Selamat! SDI Al Kindy Sabet Juara 1 Plate Champion Kategori U-12',
+            tanggal: '2026-10-28',
+            jenjang: 'SDI',
+            deskripsiSingkat: 'Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.',
+            deskripsiLengkap: 'Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.\n\nSelamat atas kerja keras dan semangat pantang menyerah tim! Prestasi ini membanggakan seluruh civitas Yayasan Nahjul Huda.',
+            images: [
+              '/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg'
+            ]
+          },
+          {
+            id: 'berita-3',
+            judul: 'Visitasi Akreditasi MTs Nahjul Huda 2026/2027',
+            tanggal: '2026-10-24',
+            jenjang: 'MTs',
+            deskripsiSingkat: 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.',
+            deskripsiLengkap: 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.\n\nSeluruh dewan guru, staf, serta siswa/siswi menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.',
+            images: [
+              '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg',
+              '/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg'
+            ]
+          },
+          {
+            id: 'berita-4',
+            judul: 'Simulasi Pemadam Kebakaran Bersama Damkar Sektor 5',
+            tanggal: '2026-10-15',
+            jenjang: 'MTs',
+            deskripsiSingkat: 'Pelatihan kesiapsiagaan mitigasi bencana dan simulasi pemadaman kebakaran bersama petugas Damkar Sektor 5 Kebon Jeruk.',
+            deskripsiLengkap: 'Pelatihan mitigasi tanggap darurat bencana kebakaran yang diselenggarakan bekerjasama dengan Suku Dinas Penanggulangan Kebakaran dan Penyelamatan (Damkar) Sektor 5 Kebon Jeruk.\n\nSeluruh siswa/siswi dan dewan guru mempraktikkan langsung teknik pemadaman api menggunakan APAR dan karung basah secara sigap dan aman.',
+            images: [
+              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg',
+              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg',
+              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg'
+            ]
+          },
+          {
+            id: 'berita-5',
+            judul: 'Upacara Peringatan Hari Santri Nasional 2026',
+            tanggal: '2026-10-22',
+            jenjang: 'Ponpes',
+            deskripsiSingkat: 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional 2026 di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur dengan khidmat.',
+            deskripsiLengkap: 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional tanggal 22 Oktober 2026 yang diselenggarakan di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur.\n\nSeluruh santri dan asatidz mengikuti rangkaian upacara dengan khidmat sebagai wujud penghormatan atas peran besar santri dalam perjuangan dan pembangunan bangsa.',
+            images: [
+              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg',
+              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg',
+              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg'
+            ]
+          },
+          {
+            id: 'berita-6',
+            judul: 'Juara 2 Lomba Cerdas Cermat Antar Pesantren',
+            tanggal: '2026-10-28',
+            jenjang: 'Ponpes',
+            deskripsiSingkat: 'Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.',
+            deskripsiLengkap: 'Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.\n\nPembinaan intensif di bidang qawaid, ilmu agama, dan wawasan umum membuktikan kualitas santri kita di tingkat wilayah.',
+            images: [
+              '/media/berita/ponpes/PEMENANG%20LOMBA.JPG'
+            ]
           }
-        });
+        ];
 
-        if (activeBadge) activeBadge.textContent = jenjang;
-
-        const allCards = document.querySelectorAll('.news-card');
-        let visibleCount = 0;
-
-        allCards.forEach(card => {
-          const cardJenjang = card.getAttribute('data-jenjang');
-          if (jenjang === 'Semua' || cardJenjang === jenjang) {
-            card.classList.remove('hidden');
-            visibleCount++;
-          } else {
-            card.classList.add('hidden');
+        function getBeritaList() {
+          const raw = localStorage.getItem(STORAGE_KEY_BERITA);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(defaultBerita));
+            return defaultBerita;
           }
-        });
-
-        if (visibleCount > 0) {
-          if (newsScrollWrapper) newsScrollWrapper.classList.remove('hidden');
-          if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
-        } else {
-          if (newsScrollWrapper) newsScrollWrapper.classList.add('hidden');
-          if (otherJenjangMsg) {
-            otherJenjangMsg.classList.remove('hidden');
-            if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
-            if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab MTs atau Semua untuk melihat kabar kegiatan terbaru.`;
+          try {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            return defaultBerita;
+          } catch(e) {
+            return defaultBerita;
           }
         }
 
-        if (sectionTitle) {
-          sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
+        function formatIndoDate(dateStr) {
+          if (!dateStr) return '';
+          try {
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+              const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+              const year = parts[0];
+              const month = months[parseInt(parts[1], 10) - 1] || parts[1];
+              const day = parseInt(parts[2], 10);
+              return `${day} ${month} ${year}`;
+            }
+          } catch (e) {}
+          return dateStr;
         }
-      }
 
-      // News Modal handlers
-      function openNewsModal(title, desc, imgSrc, date, badge) {
-        const modal = document.getElementById('newsDetailModal');
-        if (!modal) return;
-        document.getElementById('modalNewsTitle').textContent = title;
-        document.getElementById('modalNewsBody').textContent = desc;
-        const modalImg = document.getElementById('modalNewsImg');
-        if (modalImg) {
-          if (imgSrc) {
-            modalImg.src = imgSrc;
-            modalImg.classList.remove('hidden');
-          } else {
-            modalImg.src = '';
-            modalImg.classList.add('hidden');
-          }
+        const escapeHtml = (text) => {
+          const div = document.createElement('div');
+          div.textContent = text || '';
+          return div.innerHTML;
+        };
+
+        const badgeClasses = {
+          'SDI': 'bg-blue-100 text-blue-800 border border-blue-200',
+          'MI': 'bg-emerald-100 text-emerald-800 border border-emerald-200',
+          'MTs': 'bg-green-100 text-green-800 border border-green-200',
+          'MA': 'bg-indigo-100 text-indigo-800 border border-indigo-200',
+          'Ponpes': 'bg-purple-100 text-purple-800 border border-purple-200'
+        };
+
+        let currentBeritaData = [];
+        let activeJenjang = 'Semua';
+
+        // Render News Cards
+        function renderBeritaCards() {
+          const container = document.getElementById('pubContainerBerita');
+          if (!container) return;
+
+          currentBeritaData = getBeritaList();
+
+          container.innerHTML = currentBeritaData.map(item => {
+            const bClass = badgeClasses[item.jenjang] || 'bg-gray-100 text-gray-800 border border-gray-200';
+            const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
+            const images = (item.images && item.images.length > 0) ? item.images : ['/media/background/wallpaper_yayasan.jpg'];
+
+            let mediaMarkup = '';
+            if (images.length > 1) {
+              const imgsHtml = images.map((img, i) => `
+                <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+              `).join('');
+
+              mediaMarkup = `
+                <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                    ${imgsHtml}
+                  </div>
+                  <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none cursor-pointer">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none cursor-pointer">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                    ${images.length} Foto
+                  </div>
+                </div>
+              `;
+            } else {
+              mediaMarkup = `
+                <div class="relative w-full h-[220px] mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
+                  <img src="${images[0]}" alt="${escapeHtml(item.judul)}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90">
+                </div>
+              `;
+            }
+
+            return `
+              <article data-jenjang="${escapeHtml(item.jenjang)}" class="news-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group h-full">
+                ${mediaMarkup}
+                <div class="px-5 pb-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-1.5 text-slate-400 mb-3 text-xs">
+                      <i class="far fa-calendar-alt text-emerald-600"></i>
+                      <span class="text-xs text-slate-500 font-medium">${escapeHtml(tgl)}</span>
+                    </div>
+                    <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                      ${escapeHtml(item.judul)}
+                    </h3>
+                    <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                      ${escapeHtml(item.deskripsiSingkat)}
+                    </p>
+                  </div>
+                  <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${bClass}">
+                      ${escapeHtml(item.jenjang)}
+                    </span>
+                    <button type="button" onclick="openNewsModalById('${item.id}')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0 cursor-pointer">
+                      Baca Selengkapnya &rarr;
+                    </button>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+
+          // Reattach media click listeners for universal lightbox
+          container.querySelectorAll('img, video').forEach((media) => {
+            media.addEventListener('click', (e) => {
+              e.stopPropagation();
+              window.openMediaModal(media);
+            });
+          });
         }
-        document.getElementById('modalNewsDate').textContent = date;
-        document.getElementById('modalNewsBadge').textContent = badge;
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }
 
-      function closeNewsModal() {
-        const modal = document.getElementById('newsDetailModal');
-        if (!modal) return;
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeNewsModal();
-      });
-
-      // Live search filter
-      const searchInput = document.getElementById('searchNewsInput');
-      const newsCards = document.querySelectorAll('.news-card');
-      const noResultsMsg = document.getElementById('noResultsMsg');
-
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.toLowerCase().trim();
+        // Switch Jenjang Filter
+        window.switchNewsJenjang = function(jenjang) {
+          activeJenjang = jenjang;
+          const tabs = document.querySelectorAll('.jenjang-tab-btn');
           const activeBadge = document.getElementById('active-jenjang-badge');
-          const currentJenjang = activeBadge ? activeBadge.textContent.trim() : 'Semua';
+          const newsScrollWrapper = document.getElementById('newsScrollWrapper');
+          const otherJenjangMsg = document.getElementById('otherJenjangMsg');
+          const sectionTitle = document.getElementById('newsSectionTitle');
+          const emptyStateTitle = document.getElementById('emptyStateTitle');
+          const emptyStateDesc = document.getElementById('emptyStateDesc');
+          const noResultsMsg = document.getElementById('noResultsMsg');
+          const searchInput = document.getElementById('searchNewsInput');
+
+          if (noResultsMsg) noResultsMsg.classList.add('hidden');
+          if (searchInput) searchInput.value = '';
+
+          tabs.forEach(btn => {
+            if (btn.getAttribute('data-jenjang') === jenjang) {
+              btn.className = 'jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30';
+            } else {
+              btn.className = 'jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700';
+            }
+          });
+
+          if (activeBadge) activeBadge.textContent = jenjang;
+
+          const allCards = document.querySelectorAll('.news-card');
           let visibleCount = 0;
 
-          newsCards.forEach(card => {
+          allCards.forEach(card => {
             const cardJenjang = card.getAttribute('data-jenjang');
-            const matchesJenjang = currentJenjang === 'Semua' || cardJenjang === currentJenjang;
-            const title = card.querySelector('.news-title')?.textContent.toLowerCase() || '';
-            const desc = card.querySelector('.news-desc')?.textContent.toLowerCase() || '';
-            
-            if (matchesJenjang && (title.includes(query) || desc.includes(query))) {
+            if (jenjang === 'Semua' || cardJenjang === jenjang) {
               card.classList.remove('hidden');
               visibleCount++;
             } else {
@@ -918,15 +535,158 @@
             }
           });
 
-          if (noResultsMsg) {
-            if (visibleCount === 0) {
-              noResultsMsg.classList.remove('hidden');
-            } else {
-              noResultsMsg.classList.add('hidden');
+          if (visibleCount > 0) {
+            if (newsScrollWrapper) newsScrollWrapper.classList.remove('hidden');
+            if (otherJenjangMsg) otherJenjangMsg.classList.add('hidden');
+          } else {
+            if (newsScrollWrapper) newsScrollWrapper.classList.add('hidden');
+            if (otherJenjangMsg) {
+              otherJenjangMsg.classList.remove('hidden');
+              if (emptyStateTitle) emptyStateTitle.textContent = `Belum Ada Berita Terbaru (${jenjang})`;
+              if (emptyStateDesc) emptyStateDesc.textContent = `Warta kegiatan untuk jenjang ${jenjang} sedang dalam proses kurasi. Silakan beralih ke tab Semua untuk melihat kabar kegiatan lainnya.`;
             }
           }
+
+          if (sectionTitle) {
+            sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-newspaper"></i></span> Berita Sorotan ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
+          }
+        };
+
+        // News Modal by ID
+        window.openNewsModalById = function(id) {
+          const list = currentBeritaData.length > 0 ? currentBeritaData : getBeritaList();
+          const item = list.find(b => b.id === id);
+          if (!item) return;
+
+          const modal = document.getElementById('newsDetailModal');
+          if (!modal) return;
+
+          const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
+          document.getElementById('modalNewsTitle').textContent = item.judul;
+          document.getElementById('modalNewsDate').textContent = tgl;
+          document.getElementById('modalNewsBadge').textContent = item.jenjang;
+
+          const bClass = badgeClasses[item.jenjang] || 'bg-emerald-800 text-emerald-100';
+          document.getElementById('modalNewsBadge').className = `text-xs font-semibold px-3 py-1 rounded-full shadow-sm ${bClass}`;
+
+          document.getElementById('modalNewsBody').textContent = item.deskripsiLengkap || item.deskripsiSingkat;
+
+          // Render Slider Images in Modal
+          const sliderContainer = document.getElementById('modalNewsSliderContainer');
+          const slider = document.getElementById('modalNewsSlider');
+          const prevBtn = document.getElementById('modalNewsPrev');
+          const nextBtn = document.getElementById('modalNewsNext');
+
+          const images = (item.images && item.images.length > 0) ? item.images : ['/media/background/wallpaper_yayasan.jpg'];
+
+          if (slider) {
+            slider.innerHTML = images.map((img, i) => `
+              <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="w-full h-full object-cover object-top shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+            `).join('');
+
+            // Attach click listeners to modal slider images for lightbox
+            slider.querySelectorAll('img').forEach((img) => {
+              img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.openMediaModal(img);
+              });
+            });
+          }
+
+          if (sliderContainer) {
+            sliderContainer.classList.remove('hidden');
+          }
+
+          if (prevBtn && nextBtn) {
+            if (images.length > 1) {
+              prevBtn.classList.remove('hidden');
+              nextBtn.classList.remove('hidden');
+            } else {
+              prevBtn.classList.add('hidden');
+              nextBtn.classList.add('hidden');
+            }
+          }
+
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        };
+
+        window.closeNewsModal = function() {
+          const modal = document.getElementById('newsDetailModal');
+          if (!modal) return;
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        };
+
+        // Close modal on background click
+        const modalEl = document.getElementById('newsDetailModal');
+        if (modalEl) {
+          modalEl.addEventListener('click', (e) => {
+            if (e.target === modalEl) closeNewsModal();
+          });
+        }
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeNewsModal();
         });
-      }
+
+        // Live Search Input Listener
+        const searchInput = document.getElementById('searchNewsInput');
+        const noResultsMsg = document.getElementById('noResultsMsg');
+
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const currentCards = document.querySelectorAll('.news-card');
+            let visibleCount = 0;
+
+            currentCards.forEach(card => {
+              const cardJenjang = card.getAttribute('data-jenjang');
+              const matchesJenjang = activeJenjang === 'Semua' || cardJenjang === activeJenjang;
+              const title = card.querySelector('.news-title')?.textContent.toLowerCase() || '';
+              const desc = card.querySelector('.news-desc')?.textContent.toLowerCase() || '';
+
+              if (matchesJenjang && (title.includes(query) || desc.includes(query))) {
+                card.classList.remove('hidden');
+                visibleCount++;
+              } else {
+                card.classList.add('hidden');
+              }
+            });
+
+            if (noResultsMsg) {
+              if (visibleCount === 0) {
+                noResultsMsg.classList.remove('hidden');
+              } else {
+                noResultsMsg.classList.add('hidden');
+              }
+            }
+          });
+        }
+
+        // Initialize Banner & Content on Load
+        document.addEventListener('DOMContentLoaded', () => {
+          // 1. Sync Banner
+          const savedBanner = localStorage.getItem(STORAGE_KEY_BANNER);
+          if (savedBanner) {
+            try {
+              const bData = JSON.parse(savedBanner);
+              const titleEl = document.getElementById('pubBeritaBannerTitle');
+              const descEl = document.getElementById('pubBeritaBannerDesc');
+              if (titleEl && bData.title) titleEl.textContent = bData.title;
+              if (descEl && bData.desc) descEl.textContent = bData.desc;
+            } catch (e) {
+              console.error('Error parsing saved berita banner:', e);
+            }
+          }
+
+          // 2. Render News Cards
+          renderBeritaCards();
+
+          // 3. Default to active 'Semua'
+          switchNewsJenjang('Semua');
+        });
+      })();
 
       // Universal Lightbox Modal Logic
       const mediaModal = document.getElementById('mediaModal');
@@ -934,7 +694,7 @@
       const modalVideo = document.getElementById('modalVideo');
       const closeMediaModalBtn = document.getElementById('closeMediaModalBtn');
 
-      function openMediaModal(element) {
+      window.openMediaModal = function(element) {
         if (!mediaModal) return;
         const tagName = element.tagName.toLowerCase();
         if (tagName === 'img') {
@@ -962,9 +722,9 @@
         }
         mediaModal.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
-      }
+      };
 
-      function closeMediaModal() {
+      window.closeMediaModal = function() {
         if (!mediaModal) return;
         mediaModal.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
@@ -977,15 +737,7 @@
           modalVideo.src = '';
           modalVideo.classList.add('hidden');
         }
-      }
-
-      // Attach click listeners to all media in main content and news detail modal
-      document.querySelectorAll('main img, main video, #newsDetailModal img').forEach((media) => {
-        media.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openMediaModal(media);
-        });
-      });
+      };
 
       if (closeMediaModalBtn) {
         closeMediaModalBtn.addEventListener('click', closeMediaModal);
