@@ -897,11 +897,12 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                       
                       <!-- Uploader Mockup (Hanya mencatat nama file lokal sementara) -->
                       <div>
-                          <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto (Maks 3)</label>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto (Maks 3)</label>
+                          <p class="text-[10px] text-gray-500 mb-2">*Format: JPG/PNG. Agar tidak terpotong, gunakan foto dengan rasio 16:9 (Landscape) atau resolusi minimal 800x450 piksel.</p>
                           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                              <input type="file" id="fasImg1" class="text-xs border p-1 rounded bg-white">
-                              <input type="file" id="fasImg2" class="text-xs border p-1 rounded bg-white">
-                              <input type="file" id="fasImg3" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg1" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg2" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg3" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
                           </div>
                           <p class="text-xs text-gray-500 mt-1">*Catatan Lokal: Gunakan nama file yang sama dengan di folder /assets/images/fasilitas/</p>
                       </div>
@@ -1027,18 +1028,19 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto Berita (Maksimal 3 Foto)</label>
+                  <p class="text-[10px] text-gray-500 mb-2">*Format: JPG/PNG. Agar tidak terpotong, gunakan foto dengan rasio 16:9 (Landscape) atau resolusi minimal 800x450 piksel.</p>
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
                       <span class="block text-xs text-gray-500 mb-1">Foto Utama (1)</span>
-                      <input type="file" id="beritaImg1" accept="image/*" class="text-xs border p-1.5 rounded bg-white w-full">
+                      <input type="file" id="beritaImg1" accept=".jpg, .jpeg, .png" class="text-xs border p-1.5 rounded bg-white w-full">
                     </div>
                     <div>
                       <span class="block text-xs text-gray-500 mb-1">Foto Tambahan (2)</span>
-                      <input type="file" id="beritaImg2" accept="image/*" class="text-xs border p-1.5 rounded bg-white w-full">
+                      <input type="file" id="beritaImg2" accept=".jpg, .jpeg, .png" class="text-xs border p-1.5 rounded bg-white w-full">
                     </div>
                     <div>
                       <span class="block text-xs text-gray-500 mb-1">Foto Tambahan (3)</span>
-                      <input type="file" id="beritaImg3" accept="image/*" class="text-xs border p-1.5 rounded bg-white w-full">
+                      <input type="file" id="beritaImg3" accept=".jpg, .jpeg, .png" class="text-xs border p-1.5 rounded bg-white w-full">
                     </div>
                   </div>
                   <p class="text-xs text-gray-500 mt-1.5">*Mendukung format JPG, PNG, WEBP. Jika sedang mengedit dan tidak memilih file baru, foto sebelumnya tetap tersimpan.</p>
