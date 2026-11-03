@@ -838,216 +838,60 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
 
           <div class="bg-white rounded-xl shadow border p-6 mb-6">
-              <h2 class="text-xl font-bold text-green-900 mb-6">Kelola Konten Fasilitas Yayasan</h2>
-              <form id="formFasilitas" class="space-y-6">
-                  
-                  <!-- 1. Banner Fasilitas -->
-                  <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">1. Banner Utama Fasilitas</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Judul Banner</label>
-                              <input type="text" id="fasBannerTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" value="Fasilitas Yayasan">
+              <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-bold text-green-900">Kelola Fasilitas Yayasan</h2>
+                  <button type="button" id="btnTambahFasilitas" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 text-sm font-medium">
+                      + Tambah Fasilitas Baru
+                  </button>
+              </div>
+
+              <!-- Tabel List Fasilitas -->
+              <div class="overflow-x-auto border rounded-lg mb-6">
+                  <table class="min-w-full text-sm text-left">
+                      <thead class="bg-gray-50 border-b">
+                          <tr>
+                              <th class="px-4 py-3 font-semibold text-gray-700">Nama Fasilitas</th>
+                              <th class="px-4 py-3 font-semibold text-gray-700">Deskripsi Singkat</th>
+                              <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody id="adminListFasilitas">
+                          <!-- List akan dirender oleh JavaScript -->
+                      </tbody>
+                  </table>
+              </div>
+
+              <!-- Form Tambah/Edit (Sembunyikan by default) -->
+              <div id="areaFormFasilitas" class="hidden p-4 border rounded-lg bg-gray-50">
+                  <h3 id="formFasTitle" class="font-semibold text-gray-800 mb-4 border-b pb-2">Tambah Fasilitas Baru</h3>
+                  <input type="hidden" id="fasId"> <!-- Untuk mode Edit -->
+                  <div class="space-y-4">
+                      <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
+                          <input type="text" id="fasNama" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500">
+                      </div>
+                      <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Lengkap</label>
+                          <textarea id="fasDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500"></textarea>
+                      </div>
+                      
+                      <!-- Uploader Mockup (Hanya mencatat nama file lokal sementara) -->
+                      <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto (Maks 3)</label>
+                          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                              <input type="file" id="fasImg1" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg2" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg3" class="text-xs border p-1 rounded bg-white">
                           </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Banner</label>
-                              <textarea id="fasBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</textarea>
-                          </div>
+                          <p class="text-xs text-gray-500 mt-1">*Catatan Lokal: Gunakan nama file yang sama dengan di folder /assets/images/fasilitas/</p>
+                      </div>
+                      
+                      <div class="flex justify-end gap-2 pt-2">
+                          <button type="button" id="btnBatalFasilitas" class="px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-100">Batal</button>
+                          <button type="button" id="btnSimpanCardFasilitas" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">Simpan Fasilitas</button>
                       </div>
                   </div>
-
-                  <!-- 2. Card Fasilitas (Fasilitas 1, 2, 3, dan 4) -->
-                  <!-- Fasilitas 1 -->
-                  <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">Fasilitas 1 (Card 1)</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
-                              <input type="text" id="fas1Title" class="w-full px-4 py-2 border rounded-lg text-sm" value="Masjid Jami' Assurur">
-                          </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Fasilitas</label>
-                              <textarea id="fas1Desc" rows="2" class="w-full px-4 py-2 border rounded-lg text-sm">Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.</textarea>
-                          </div>
-                          
-                          <!-- Slider Uploaders -->
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto Slider (Maks 3 Foto per Fasilitas)</label>
-                              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                  <!-- Foto 1 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 1 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas1Img1" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas1Img1').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 2 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 2 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas1Img2" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas1Img2').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 3 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 3 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas1Img3" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas1Img3').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Fasilitas 2 -->
-                  <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">Fasilitas 2 (Card 2)</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
-                              <input type="text" id="fas2Title" class="w-full px-4 py-2 border rounded-lg text-sm" value="Lapangan Upacara">
-                          </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Fasilitas</label>
-                              <textarea id="fas2Desc" rows="2" class="w-full px-4 py-2 border rounded-lg text-sm">Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.</textarea>
-                          </div>
-                          
-                          <!-- Slider Uploaders -->
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto Slider (Maks 3 Foto per Fasilitas)</label>
-                              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                  <!-- Foto 1 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 1 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas2Img1" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas2Img1').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 2 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 2 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas2Img2" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas2Img2').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 3 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 3 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas2Img3" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas2Img3').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Fasilitas 3 -->
-                  <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">Fasilitas 3 (Card 3)</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
-                              <input type="text" id="fas3Title" class="w-full px-4 py-2 border rounded-lg text-sm" value="Laboratorium Komputer">
-                          </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Fasilitas</label>
-                              <textarea id="fas3Desc" rows="2" class="w-full px-4 py-2 border rounded-lg text-sm">Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.</textarea>
-                          </div>
-                          
-                          <!-- Slider Uploaders -->
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto Slider (Maks 3 Foto per Fasilitas)</label>
-                              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                  <!-- Foto 1 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 1 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas3Img1" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas3Img1').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 2 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 2 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas3Img2" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas3Img2').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 3 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 3 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas3Img3" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas3Img3').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Fasilitas 4 -->
-                  <div class="p-4 border rounded-lg bg-gray-50">
-                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">Fasilitas 4 (Card 4)</h3>
-                      <div class="space-y-4">
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
-                              <input type="text" id="fas4Title" class="w-full px-4 py-2 border rounded-lg text-sm" value="Lapangan Bola Basket">
-                          </div>
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Fasilitas</label>
-                              <textarea id="fas4Desc" rows="2" class="w-full px-4 py-2 border rounded-lg text-sm">Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.</textarea>
-                          </div>
-                          
-                          <!-- Slider Uploaders -->
-                          <div>
-                              <label class="block text-sm font-medium text-gray-700 mb-2">Upload Foto Slider (Maks 3 Foto per Fasilitas)</label>
-                              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                  <!-- Foto 1 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 1 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas4Img1" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas4Img1').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 2 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 2 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas4Img2" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas4Img2').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                                  <!-- Foto 3 -->
-                                  <div class="border p-2 rounded bg-white">
-                                      <label class="block text-[10px] text-gray-500 mb-1">Slide 3 (JPG/PNG)</label>
-                                      <div class="flex items-center gap-2">
-                                          <input type="file" id="fas4Img3" accept=".jpg, .jpeg, .png" class="flex-1 text-xs border p-1 rounded">
-                                          <button type="button" onclick="document.getElementById('fas4Img3').value=''" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200" title="Hapus Foto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanFasilitas" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                          Simpan Perubahan Fasilitas
-                      </button>
-                  </div>
-              </form>
+              </div>
           </div>
         </section>
 
@@ -1649,61 +1493,251 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
       });
     </script>
 
-    <!-- Script Penyimpan CMS Data Fasilitas (localStorage) -->
+    <!-- Script CRUD CMS Data Fasilitas (localStorage) -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const setVal = (id, val) => {
-          const el = document.getElementById(id);
-          if (el && val !== undefined && val !== null) el.value = val;
-        };
+      (function() {
+        const STORAGE_KEY = 'cmsData_fasilitas_list';
 
-        // Muat data Fasilitas dari localStorage jika ada
-        const savedFasilitas = localStorage.getItem('cmsData_fasilitas');
-        if (savedFasilitas) {
+        const defaultFasilitas = [
+          {
+            id: 'fas-1',
+            nama: "Masjid Jami' Assurur",
+            deskripsi: "Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.",
+            images: [
+              "/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg",
+              "/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg"
+            ]
+          },
+          {
+            id: 'fas-2',
+            nama: "Lapangan Upacara",
+            deskripsi: "Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.",
+            images: [
+              "/media/fasilitas/umum/lapangan_upacara_umum.jpg",
+              "/media/fasilitas/umum/lapangan_upacara_umum_1.jpg"
+            ]
+          },
+          {
+            id: 'fas-3',
+            nama: "Laboratorium Komputer",
+            deskripsi: "Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.",
+            images: [
+              "/media/fasilitas/umum/lab_komputer_umum.jpg",
+              "/media/fasilitas/umum/lab_komputer_umum_1.jpg",
+              "/media/fasilitas/umum/lab_komputer_umum_2.jpg"
+            ]
+          },
+          {
+            id: 'fas-4',
+            nama: "Lapangan Bola Basket",
+            deskripsi: "Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.",
+            images: [
+              "/media/fasilitas/umum/lapangan_bola_basket_umum.jpg"
+            ]
+          }
+        ];
+
+        function getFasilitasList() {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultFasilitas));
+            return defaultFasilitas;
+          }
           try {
-            const dataFas = JSON.parse(savedFasilitas);
-            const fields = [
-              'fasBannerTitle', 'fasBannerDesc',
-              'fas1Title', 'fas1Desc',
-              'fas2Title', 'fas2Desc',
-              'fas3Title', 'fas3Desc',
-              'fas4Title', 'fas4Desc'
-            ];
-            fields.forEach(field => setVal(field, dataFas[field]));
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            return defaultFasilitas;
           } catch (e) {
-            console.error('Error parsing cmsData_fasilitas:', e);
+            console.error('Error parsing fasilitas list:', e);
+            return defaultFasilitas;
           }
         }
 
-        const btnSaveFasilitas = document.getElementById('btnSimpanFasilitas');
-        if (btnSaveFasilitas) {
-          btnSaveFasilitas.addEventListener('click', (e) => {
-            e.preventDefault();
+        function saveFasilitasList(list) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
 
-            const getVal = (id) => document.getElementById(id)?.value || '';
+        let editingImages = [];
 
-            const dataFasilitas = {
-              fasBannerTitle: getVal('fasBannerTitle'),
-              fasBannerDesc: getVal('fasBannerDesc'),
+        function renderAdminTable() {
+          const tbody = document.getElementById('adminListFasilitas');
+          if (!tbody) return;
 
-              fas1Title: getVal('fas1Title'),
-              fas1Desc: getVal('fas1Desc'),
+          const list = getFasilitasList();
+          if (!list || list.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="3" class="px-4 py-8 text-center text-gray-400">
+                  Belum ada data fasilitas. Silakan klik tombol <strong>+ Tambah Fasilitas Baru</strong>.
+                </td>
+              </tr>
+            `;
+            return;
+          }
 
-              fas2Title: getVal('fas2Title'),
-              fas2Desc: getVal('fas2Desc'),
+          const escapeHtml = (text) => {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+          };
 
-              fas3Title: getVal('fas3Title'),
-              fas3Desc: getVal('fas3Desc'),
+          tbody.innerHTML = list.map((item) => {
+            return `
+              <tr class="border-b hover:bg-gray-50 transition">
+                <td class="px-4 py-3 font-semibold text-gray-800">
+                  ${escapeHtml(item.nama)}
+                  <span class="block text-xs text-gray-400 font-normal">Foto: ${(item.images || []).length} file</span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 max-w-md">
+                  <p class="line-clamp-2 text-xs sm:text-sm leading-relaxed">${escapeHtml(item.deskripsi)}</p>
+                </td>
+                <td class="px-4 py-3 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <button type="button" onclick="window.cmsEditFasilitas('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50 transition" title="Edit Fasilitas">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </button>
+                    <button type="button" onclick="window.cmsHapusFasilitas('${item.id}')" class="text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50 transition" title="Hapus Fasilitas">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
 
-              fas4Title: getVal('fas4Title'),
-              fas4Desc: getVal('fas4Desc')
-            };
+        window.cmsEditFasilitas = function(id) {
+          const list = getFasilitasList();
+          const item = list.find(f => f.id === id);
+          if (!item) return;
 
-            localStorage.setItem('cmsData_fasilitas', JSON.stringify(dataFasilitas));
-            alert('Sukses! Perubahan Konten Fasilitas berhasil disimpan. Silakan cek halaman Fasilitas.');
+          document.getElementById('fasId').value = item.id;
+          document.getElementById('fasNama').value = item.nama;
+          document.getElementById('fasDeskripsi').value = item.deskripsi;
+          document.getElementById('fasImg1').value = '';
+          document.getElementById('fasImg2').value = '';
+          document.getElementById('fasImg3').value = '';
+
+          editingImages = item.images ? [...item.images] : [];
+
+          document.getElementById('formFasTitle').textContent = `Edit Fasilitas: ${item.nama}`;
+          const area = document.getElementById('areaFormFasilitas');
+          area.classList.remove('hidden');
+          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+
+        window.cmsHapusFasilitas = function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus data fasilitas ini?')) return;
+          const list = getFasilitasList().filter(f => f.id !== id);
+          saveFasilitasList(list);
+          renderAdminTable();
+        };
+
+        function readFileOrName(input, fallback) {
+          return new Promise((resolve) => {
+            if (input && input.files && input.files[0]) {
+              const file = input.files[0];
+              const reader = new FileReader();
+              reader.onload = (e) => resolve(e.target.result);
+              reader.onerror = () => resolve(`/assets/images/fasilitas/${file.name}`);
+              reader.readAsDataURL(file);
+            } else {
+              resolve(fallback || '');
+            }
           });
         }
-      });
+
+        document.addEventListener('DOMContentLoaded', () => {
+          renderAdminTable();
+
+          const btnTambah = document.getElementById('btnTambahFasilitas');
+          const btnBatal = document.getElementById('btnBatalFasilitas');
+          const btnSimpan = document.getElementById('btnSimpanCardFasilitas');
+          const areaForm = document.getElementById('areaFormFasilitas');
+
+          if (btnTambah) {
+            btnTambah.addEventListener('click', () => {
+              document.getElementById('fasId').value = '';
+              document.getElementById('fasNama').value = '';
+              document.getElementById('fasDeskripsi').value = '';
+              document.getElementById('fasImg1').value = '';
+              document.getElementById('fasImg2').value = '';
+              document.getElementById('fasImg3').value = '';
+              editingImages = [];
+
+              document.getElementById('formFasTitle').textContent = 'Tambah Fasilitas Baru';
+              areaForm.classList.remove('hidden');
+              areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          }
+
+          if (btnBatal) {
+            btnBatal.addEventListener('click', () => {
+              areaForm.classList.add('hidden');
+            });
+          }
+
+          if (btnSimpan) {
+            btnSimpan.addEventListener('click', async () => {
+              const nama = document.getElementById('fasNama').value.trim();
+              const deskripsi = document.getElementById('fasDeskripsi').value.trim();
+              const fasId = document.getElementById('fasId').value.trim();
+
+              if (!nama) {
+                alert('Nama fasilitas wajib diisi!');
+                document.getElementById('fasNama').focus();
+                return;
+              }
+
+              const inp1 = document.getElementById('fasImg1');
+              const inp2 = document.getElementById('fasImg2');
+              const inp3 = document.getElementById('fasImg3');
+
+              const [img1, img2, img3] = await Promise.all([
+                readFileOrName(inp1, editingImages[0]),
+                readFileOrName(inp2, editingImages[1]),
+                readFileOrName(inp3, editingImages[2])
+              ]);
+
+              const images = [img1, img2, img3].filter(img => img && img.trim() !== '');
+
+              // Fallback image if none specified
+              if (images.length === 0) {
+                images.push('/media/background/wallpaper_yayasan.jpg');
+              }
+
+              const list = getFasilitasList();
+
+              if (fasId) {
+                // Mode Update
+                const idx = list.findIndex(f => f.id === fasId);
+                if (idx !== -1) {
+                  list[idx] = {
+                    ...list[idx],
+                    nama: nama,
+                    deskripsi: deskripsi,
+                    images: images
+                  };
+                }
+              } else {
+                // Mode Create
+                const newFas = {
+                  id: 'fas-' + Date.now(),
+                  nama: nama,
+                  deskripsi: deskripsi,
+                  images: images
+                };
+                list.push(newFas);
+              }
+
+              saveFasilitasList(list);
+              renderAdminTable();
+              areaForm.classList.add('hidden');
+              alert('Sukses! Data fasilitas berhasil disimpan.');
+            });
+          }
+        });
+      })();
     </script>
   </body>
 </html>

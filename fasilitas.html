@@ -88,7 +88,7 @@
                  Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
                  Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
                  Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div id="gridFasilitas" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <!-- Card 1: Masjid Jami' Assurur (Slider) -->
               <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
@@ -257,6 +257,10 @@
 
     </div>
 
+    <!-- GLightbox CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
     <!-- Client Scripts -->
     <script>
       // Mobile Menu Toggle
@@ -268,55 +272,143 @@
         });
       }
 
-      // Synchronize Fasilitas Content from CMS (localStorage)
+      // Render Dynamic Fasilitas Cards from CMS (localStorage)
       document.addEventListener('DOMContentLoaded', () => {
-        const savedFasData = localStorage.getItem('cmsData_fasilitas');
-        if (!savedFasData) return;
+        const grid = document.getElementById('gridFasilitas');
+        if (!grid) return;
 
-        try {
-          const data = JSON.parse(savedFasData);
-
-          // 1. Banner Utama
-          if (data.fasBannerTitle && data.fasBannerTitle.trim()) {
-            const el = document.getElementById('publicFasBannerTitle');
-            if (el) el.textContent = data.fasBannerTitle;
+        const STORAGE_KEY = 'cmsData_fasilitas_list';
+        const defaultFasilitas = [
+          {
+            id: 'fas-1',
+            nama: "Masjid Jami' Assurur",
+            deskripsi: "Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.",
+            images: [
+              "/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg",
+              "/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg"
+            ]
+          },
+          {
+            id: 'fas-2',
+            nama: "Lapangan Upacara",
+            deskripsi: "Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.",
+            images: [
+              "/media/fasilitas/umum/lapangan_upacara_umum.jpg",
+              "/media/fasilitas/umum/lapangan_upacara_umum_1.jpg"
+            ]
+          },
+          {
+            id: 'fas-3',
+            nama: "Laboratorium Komputer",
+            deskripsi: "Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.",
+            images: [
+              "/media/fasilitas/umum/lab_komputer_umum.jpg",
+              "/media/fasilitas/umum/lab_komputer_umum_1.jpg",
+              "/media/fasilitas/umum/lab_komputer_umum_2.jpg"
+            ]
+          },
+          {
+            id: 'fas-4',
+            nama: "Lapangan Bola Basket",
+            deskripsi: "Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.",
+            images: [
+              "/media/fasilitas/umum/lapangan_bola_basket_umum.jpg"
+            ]
           }
-          if (data.fasBannerDesc && data.fasBannerDesc.trim()) {
-            const el = document.getElementById('publicFasBannerDesc');
-            if (el) el.textContent = data.fasBannerDesc;
-          }
+        ];
 
-          // 2. Card Fasilitas 1 - 4
-          for (let i = 1; i <= 4; i++) {
-            const titleVal = data[`fas${i}Title`];
-            if (titleVal !== undefined && titleVal !== null) {
-              const elTitle = document.getElementById(`publicFas${i}Title`);
-              if (elTitle) elTitle.textContent = titleVal.trim() === '' ? '-' : titleVal;
+        let list = defaultFasilitas;
+        const savedData = localStorage.getItem(STORAGE_KEY);
+        if (savedData) {
+          try {
+            const parsed = JSON.parse(savedData);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              list = parsed;
             }
-
-            const descVal = data[`fas${i}Desc`];
-            if (descVal !== undefined && descVal !== null) {
-              const elDesc = document.getElementById(`publicFas${i}Desc`);
-              if (elDesc) elDesc.textContent = descVal.trim() === '' ? '-' : descVal;
-            }
+          } catch (e) {
+            console.error('Error parsing cmsData_fasilitas_list:', e);
           }
-        } catch (e) {
-          console.error('Error synchronizing cmsData_fasilitas:', e);
         }
-      });
-    </script>
 
-    <!-- GLightbox CDN & Initialization -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const lightbox = GLightbox({ 
-              selector: '.glightbox', 
-              touchNavigation: true, 
-              loop: true, 
-              autoplayVideos: true 
+        const escapeHtml = (text) => {
+          const div = document.createElement('div');
+          div.textContent = text || '';
+          return div.innerHTML;
+        };
+
+        const renderCard = (item) => {
+          const images = (item.images && item.images.length > 0)
+            ? item.images
+            : ['/media/background/wallpaper_yayasan.jpg'];
+
+          const safeTitle = escapeHtml(item.nama);
+          const safeDesc = escapeHtml(item.deskripsi);
+
+          if (images.length > 1) {
+            const slidesHtml = images.map((img, idx) => `
+              <a href="${img}" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                <img src="${img}" alt="${safeTitle} ${idx + 1}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+              </a>
+            `).join('');
+
+            return `
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full">
+                <div class="relative w-full aspect-video overflow-hidden rounded-t-xl bg-slate-100">
+                  <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                    ${slidesHtml}
+                  </div>
+                  <!-- Nav Buttons -->
+                  <button type="button" aria-label="Foto sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button type="button" aria-label="Foto berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                  <div>
+                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                      ${safeTitle}
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                      ${safeDesc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            return `
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition group flex flex-col h-full min-w-0">
+                <a href="${images[0]}" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                  <img src="${images[0]}" alt="${safeTitle}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                </a>
+                <div class="p-5 flex-1 flex flex-col justify-between bg-white">
+                  <div>
+                    <h3 class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                      ${safeTitle}
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                      ${safeDesc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        };
+
+        grid.innerHTML = list.map(renderCard).join('');
+
+        // Initialize GLightbox on newly rendered elements
+        if (typeof GLightbox !== 'undefined') {
+          GLightbox({ 
+            selector: '.glightbox', 
+            touchNavigation: true, 
+            loop: true, 
+            autoplayVideos: true 
           });
+        }
       });
     </script>
   </body>
