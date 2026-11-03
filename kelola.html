@@ -1055,7 +1055,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
         </section>
 
-        <!-- ========================================== -->
+                <!-- ========================================== -->
         <!-- 6. SECTION: KELOLA GALERI -->
         <!-- ========================================== -->
         <section id="galeri" class="admin-section hidden">
@@ -1075,31 +1075,128 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </a>
           </div>
 
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Galeri berhasil disimpan!');">
+          <!-- 1. Form Kelola Banner Galeri -->
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+            <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2 flex items-center gap-2">
+              <i class="fas fa-heading text-emerald-700 text-sm"></i>
+              Kelola Banner Galeri
+            </h3>
+            <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
-                <input type="text" value="Dokumentasi &amp; Potret Kegiatan Santri" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul galeri...">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Judul Banner</label>
+                <input type="text" id="galeriBannerTitle" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500" value="Galeri Dokumentasi">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Pengantar Galeri</label>
-                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi galeri...">Koleksi foto dan video rekaman momen kebersamaan, peringatan hari besar Islam, kegiatan ekstrakurikuler, dan suasana asrama santri Pondok Pesantren Tahfidz As-Surur.</textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Banner</label>
+                <textarea id="galeriBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.</textarea>
               </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Unggah Foto / Video Dokumentasi Baru</label>
-                <input type="file" accept="image/*,video/*" multiple class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
-                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG, MP4 (Maksimal 25 MB per media).</p>
-              </div>
-
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
-                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
-                  <i class="fas fa-save"></i>
-                  <span>Simpan Perubahan</span>
+              <div class="flex justify-end pt-2">
+                <button type="button" id="btnSimpanBannerGaleri" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                  Simpan Banner Galeri
                 </button>
               </div>
-            </form>
+            </div>
+          </div>
+
+          <!-- 2. Kelola Daftar Dokumentasi Galeri (CRUD) -->
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">Daftar Dokumentasi & Video Galeri</h3>
+                <p class="text-xs text-gray-500">Koleksi foto dan video momen kebersamaan santri/siswa Yayasan Nahjul Huda.</p>
+              </div>
+              <button type="button" id="btnTambahGaleri" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
+                <i class="fas fa-plus"></i>
+                <span>+ Tambah Galeri Baru</span>
+              </button>
+            </div>
+
+            <!-- Tabel List Galeri -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Dokumentasi</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-32">Tipe Konten</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListGaleri">
+                  <!-- List akan dirender oleh JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Form Tambah/Edit Galeri (Hidden by default) -->
+            <div id="areaFormGaleri" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
+              <h3 id="formGaleriTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Galeri Baru</h3>
+              <input type="hidden" id="galeriId">
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul Dokumentasi <span class="text-red-500">*</span></label>
+                    <input type="text" id="galeriJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Ekstrakurikuler Futsal...">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
+                    <input type="date" id="galeriTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
+                    <select id="galeriJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                      <option value="Semua">Semua Jenjang</option>
+                      <option value="SDI">SDI Al Kindy</option>
+                      <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                      <option value="MTs">MTs Nahjul Huda</option>
+                      <option value="MA">Madrasah Aliyah (MA)</option>
+                      <option value="Ponpes">Pondok Pesantren Assurur</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tipe Konten <span class="text-red-500">*</span></label>
+                    <select id="galeriTipe" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                      <option value="Dokumentasi">Dokumentasi</option>
+                      <option value="Ekstrakurikuler">Ekstrakurikuler</option>
+                      <option value="Kegiatan">Kegiatan</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
+                  <textarea id="galeriDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat momen dokumentasi..."></textarea>
+                </div>
+
+                <div class="p-4 border rounded-lg bg-white space-y-3">
+                  <label class="block text-sm font-semibold text-gray-800">Unggah Media (Pilih Foto ATAU Video MP4)</label>
+                  <p class="text-[10px] text-gray-500 mt-1">*Format Foto: JPG/PNG (Maks 2MB), Format Video: MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi minimal 800x450 piksel.</p>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="border p-3 rounded-lg bg-slate-50">
+                      <label class="block text-xs font-semibold text-gray-700 mb-1">Upload Foto</label>
+                      <input type="file" id="galeriFoto" accept=".jpg, .jpeg, .png" class="text-xs border p-1.5 rounded bg-white w-full">
+                      <span class="block text-[11px] text-gray-400 mt-1">Gunakan format .jpg, .jpeg, .png</span>
+                    </div>
+                    <div class="border p-3 rounded-lg bg-slate-50">
+                      <label class="block text-xs font-semibold text-gray-700 mb-1">Upload Video MP4</label>
+                      <input type="file" id="galeriVideo" accept=".mp4" class="text-xs border p-1.5 rounded bg-white w-full">
+                      <span class="block text-[11px] text-gray-400 mt-1">Gunakan format file .mp4</span>
+                    </div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">*Jika sedang mengedit dan tidak memilih file baru, media sebelumnya tetap tersimpan.</p>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                  <button type="button" id="btnBatalGaleri" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
+                  <button type="button" id="btnSimpanCardGaleri" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Galeri</button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2017,16 +2114,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             return div.innerHTML;
           };
 
-          const badgeClasses = {
-            'SDI': 'bg-blue-100 text-blue-800 border-blue-200',
-            'MI': 'bg-emerald-100 text-emerald-800 border-emerald-200',
-            'MTs': 'bg-green-100 text-green-800 border-green-200',
-            'MA': 'bg-indigo-100 text-indigo-800 border-indigo-200',
-            'Ponpes': 'bg-purple-100 text-purple-800 border-purple-200'
-          };
-
           tbody.innerHTML = list.map((item) => {
-            const bClass = badgeClasses[item.jenjang] || 'bg-gray-100 text-gray-800 border-gray-200';
             const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
             const imgCount = (item.images || []).length;
 
@@ -2037,7 +2125,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   <span class="block text-xs text-gray-400 font-normal mt-0.5">Foto: ${imgCount} file</span>
                 </td>
                 <td class="px-4 py-3">
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold border ${bClass}">
+                  <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
                     ${escapeHtml(item.jenjang)}
                   </span>
                 </td>
@@ -2246,5 +2334,392 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         });
       })();
     </script>
+      <!-- Script CRUD Galeri (localStorage) -->
+    <script>
+      (function() {
+        const STORAGE_KEY_GALERI = 'cmsData_listGaleri';
+        const STORAGE_KEY_BANNER_GALERI = 'cmsData_galeriBanner';
+
+        const defaultGaleri = [
+          {
+            id: 'galeri-1',
+            judul: 'Latihan Rutin Ekstrakurikuler Futsal',
+            tipe: 'Ekstrakurikuler',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Siswa MTs giat berlatih teknik dasar, kerja sama tim, dan ketahanan fisik dalam latihan mingguan futsal di lapangan yayasan.',
+            media: '/media/galeri/mts/ekstrakurikuler_futsal_1.jpg',
+            mediaType: 'image'
+          },
+          {
+            id: 'galeri-2',
+            judul: 'Penampilan Marching Band Gema Nahjul Huda',
+            tipe: 'Ekstrakurikuler',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Aksi memukau tim drum band siswa MTs saat unjuk kebolehan membawakan lagu-lagu mars dan sholawat penuh semangat.',
+            media: '/media/galeri/mts/ekstrakurikuler_drum_band.mp4',
+            mediaType: 'video'
+          },
+          {
+            id: 'galeri-3',
+            judul: 'Tausiyah Isra Mi'raj Bersama Ustadz Maulana',
+            tipe: 'Kegiatan',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Peringatan Isra Mi'raj Nabi Muhammad SAW penuh hikmah dan antusiasme santri bersama pendakwah nasional.',
+            media: '/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg',
+            mediaType: 'image'
+          },
+          {
+            id: 'galeri-4',
+            judul: 'Pembiasaan Sholat Dhuha Berjamaah Sebelum KBM',
+            tipe: 'Kegiatan',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Kegiatan pembiasaan ibadah sholat dhuha berjamaah dan tadarus Al-Qur'an setiap pagi di masjid yayasan.',
+            media: '/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg',
+            mediaType: 'image'
+          },
+          {
+            id: 'galeri-5',
+            judul: 'Pesta Demokrasi Pemilihan Ketua OSIS MTs',
+            tipe: 'Kegiatan',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Edukasi demokrasi santun dan pemungutan suara pemilihan ketua serta wakil ketua OSIS periode 2026/2027.',
+            media: '/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg',
+            mediaType: 'image'
+          },
+          {
+            id: 'galeri-6',
+            judul: 'Delegasi Santri Lomba Cerdas Cermat Antar Pesantren',
+            tipe: 'Dokumentasi',
+            jenjang: 'Ponpes',
+            tanggal: '2026-10-28',
+            deskripsi: 'Momen perjuangan dan kebersamaan santri Ponpes Assurur dalam ajang kejuaraan cerdas cermat keagamaan.',
+            media: '/media/galeri/ponpes/PESERTA.jpg',
+            mediaType: 'image'
+          },
+          {
+            id: 'galeri-7',
+            judul: 'Testimoni & Doa Keberkahan oleh Ustadz Maulana',
+            tipe: 'Dokumentasi',
+            jenjang: 'Semua',
+            tanggal: '2026-10-21',
+            deskripsi: 'Ungkapan apresiasi dan doa tulus Ustadz Maulana untuk kemajuan dakwah dan pendidikan Yayasan Nahjul Huda.',
+            media: '/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4',
+            mediaType: 'video'
+          }
+        ];
+
+        function getGaleriList() {
+          const raw = localStorage.getItem(STORAGE_KEY_GALERI);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_GALERI, JSON.stringify(defaultGaleri));
+            return defaultGaleri;
+          }
+          try {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            return defaultGaleri;
+          } catch (e) {
+            console.error('Error parsing galeri list:', e);
+            return defaultGaleri;
+          }
+        }
+
+        function saveGaleriList(list) {
+          localStorage.setItem(STORAGE_KEY_GALERI, JSON.stringify(list));
+        }
+
+        function formatIndoDate(dateStr) {
+          if (!dateStr) return '';
+          try {
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+              const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+              const year = parts[0];
+              const month = months[parseInt(parts[1], 10) - 1] || parts[1];
+              const day = parseInt(parts[2], 10);
+              return `${day} ${month} ${year}`;
+            }
+          } catch (e) {}
+          return dateStr;
+        }
+
+        let editingGaleriMedia = '';
+        let editingGaleriMediaType = 'image';
+
+        function renderAdminTableGaleri() {
+          const tbody = document.getElementById('adminListGaleri');
+          if (!tbody) return;
+
+          const list = getGaleriList();
+          if (!list || list.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="5" class="px-4 py-8 text-center text-gray-400">
+                  Belum ada data galeri. Silakan klik tombol <strong>+ Tambah Galeri Baru</strong>.
+                </td>
+              </tr>
+            `;
+            return;
+          }
+
+          const escapeHtml = (text) => {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+          };
+
+          tbody.innerHTML = list.map((item) => {
+            const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
+            const isVideo = item.mediaType === 'video' || (item.media && item.media.endsWith('.mp4'));
+            const mediaTag = isVideo 
+              ? '<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
+              : '<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200"><i class="fas fa-image"></i> Foto</span>';
+
+            return `
+              <tr class="border-b hover:bg-gray-50 transition">
+                <td class="px-4 py-3 font-semibold text-gray-800">
+                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="mt-1">${mediaTag}</div>
+                </td>
+                <td class="px-4 py-3 text-xs text-gray-700 whitespace-nowrap">
+                  ${escapeHtml(item.tipe || 'Dokumentasi')}
+                </td>
+                <td class="px-4 py-3">
+                  <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    ${escapeHtml(item.jenjang)}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
+                  ${escapeHtml(tgl)}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <button type="button" onclick="window.cmsEditGaleri('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50 transition" title="Edit Galeri">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </button>
+                    <button type="button" onclick="window.cmsHapusGaleri('${item.id}')" class="text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50 transition" title="Hapus Galeri">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        window.cmsEditGaleri = function(id) {
+          const list = getGaleriList();
+          const item = list.find(g => g.id === id);
+          if (!item) return;
+
+          document.getElementById('galeriId').value = item.id;
+          document.getElementById('galeriJudul').value = item.judul || '';
+          document.getElementById('galeriTanggal').value = item.tanggal || '';
+          document.getElementById('galeriJenjang').value = item.jenjang || 'Semua';
+          document.getElementById('galeriTipe').value = item.tipe || 'Dokumentasi';
+          document.getElementById('galeriDeskripsi').value = item.deskripsi || '';
+
+          document.getElementById('galeriFoto').value = '';
+          document.getElementById('galeriVideo').value = '';
+
+          editingGaleriMedia = item.media || '';
+          editingGaleriMediaType = item.mediaType || (item.media && item.media.endsWith('.mp4') ? 'video' : 'image');
+
+          document.getElementById('formGaleriTitle').textContent = `Edit Galeri: ${item.judul}`;
+          const area = document.getElementById('areaFormGaleri');
+          area.classList.remove('hidden');
+          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+
+        window.cmsHapusGaleri = function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus dokumentasi galeri ini?')) return;
+          const list = getGaleriList().filter(g => g.id !== id);
+          saveGaleriList(list);
+          renderAdminTableGaleri();
+        };
+
+        function readMediaFile(fotoInput, videoInput, fallbackMedia, fallbackType) {
+          return new Promise((resolve) => {
+            // Prioritaskan file video jika dipilih
+            if (videoInput && videoInput.files && videoInput.files[0]) {
+              const file = videoInput.files[0];
+              if (file.size > 2 * 1024 * 1024) {
+                resolve({ media: `/media/galeri/${file.name}`, mediaType: 'video' });
+              } else {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve({ media: e.target.result, mediaType: 'video' });
+                reader.onerror = () => resolve({ media: `/media/galeri/${file.name}`, mediaType: 'video' });
+                reader.readAsDataURL(file);
+              }
+              return;
+            }
+
+            // Cek file foto jika dipilih
+            if (fotoInput && fotoInput.files && fotoInput.files[0]) {
+              const file = fotoInput.files[0];
+              if (file.size > 2 * 1024 * 1024) {
+                resolve({ media: `/media/galeri/${file.name}`, mediaType: 'image' });
+              } else {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve({ media: e.target.result, mediaType: 'image' });
+                reader.onerror = () => resolve({ media: `/media/galeri/${file.name}`, mediaType: 'image' });
+                reader.readAsDataURL(file);
+              }
+              return;
+            }
+
+            // Fallback
+            if (fallbackMedia) {
+              resolve({
+                media: fallbackMedia,
+                mediaType: fallbackType || (fallbackMedia.endsWith('.mp4') ? 'video' : 'image')
+              });
+              return;
+            }
+
+            resolve({ media: '/media/background/wallpaper_yayasan.jpg', mediaType: 'image' });
+          });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          renderAdminTableGaleri();
+
+          const btnTambah = document.getElementById('btnTambahGaleri');
+          const btnBatal = document.getElementById('btnBatalGaleri');
+          const btnSimpan = document.getElementById('btnSimpanCardGaleri');
+          const areaForm = document.getElementById('areaFormGaleri');
+
+          if (btnTambah) {
+            btnTambah.addEventListener('click', () => {
+              document.getElementById('galeriId').value = '';
+              document.getElementById('galeriJudul').value = '';
+              document.getElementById('galeriJenjang').value = 'Semua';
+              document.getElementById('galeriTipe').value = 'Dokumentasi';
+              const today = new Date().toISOString().split('T')[0];
+              document.getElementById('galeriTanggal').value = today;
+              document.getElementById('galeriDeskripsi').value = '';
+              document.getElementById('galeriFoto').value = '';
+              document.getElementById('galeriVideo').value = '';
+              editingGaleriMedia = '';
+              editingGaleriMediaType = 'image';
+
+              document.getElementById('formGaleriTitle').textContent = 'Tambah Galeri Baru';
+              areaForm.classList.remove('hidden');
+              areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          }
+
+          if (btnBatal) {
+            btnBatal.addEventListener('click', () => {
+              areaForm.classList.add('hidden');
+            });
+          }
+
+          if (btnSimpan) {
+            btnSimpan.addEventListener('click', async () => {
+              const judul = document.getElementById('galeriJudul').value.trim();
+              const jenjang = document.getElementById('galeriJenjang').value;
+              const tipe = document.getElementById('galeriTipe').value;
+              const tanggal = document.getElementById('galeriTanggal').value;
+              const deskripsi = document.getElementById('galeriDeskripsi').value.trim();
+              const galeriId = document.getElementById('galeriId').value.trim();
+
+              if (!judul) {
+                alert('Judul dokumentasi wajib diisi!');
+                document.getElementById('galeriJudul').focus();
+                return;
+              }
+
+              if (!tanggal) {
+                alert('Tanggal dokumentasi wajib diisi!');
+                document.getElementById('galeriTanggal').focus();
+                return;
+              }
+
+              if (!deskripsi) {
+                alert('Deskripsi singkat wajib diisi!');
+                document.getElementById('galeriDeskripsi').focus();
+                return;
+              }
+
+              const inpFoto = document.getElementById('galeriFoto');
+              const inpVideo = document.getElementById('galeriVideo');
+
+              const { media, mediaType } = await readMediaFile(inpFoto, inpVideo, editingGaleriMedia, editingGaleriMediaType);
+
+              const list = getGaleriList();
+
+              if (galeriId) {
+                // Mode Update
+                const idx = list.findIndex(g => g.id === galeriId);
+                if (idx !== -1) {
+                  list[idx] = {
+                    ...list[idx],
+                    judul,
+                    jenjang,
+                    tipe,
+                    tanggal,
+                    tanggalFormatted: formatIndoDate(tanggal),
+                    deskripsi,
+                    media,
+                    mediaType
+                  };
+                }
+              } else {
+                // Mode Create
+                const newGaleri = {
+                  id: 'galeri-' + Date.now(),
+                  judul,
+                  jenjang,
+                  tipe,
+                  tanggal,
+                  tanggalFormatted: formatIndoDate(tanggal),
+                  deskripsi,
+                  media,
+                  mediaType
+                };
+                list.unshift(newGaleri);
+              }
+
+              saveGaleriList(list);
+              renderAdminTableGaleri();
+              areaForm.classList.add('hidden');
+              alert('Sukses! Data galeri berhasil disimpan.');
+            });
+          }
+
+          // Logika Banner Galeri
+          const btnSimpanBannerGaleri = document.getElementById('btnSimpanBannerGaleri');
+          if (btnSimpanBannerGaleri) {
+            btnSimpanBannerGaleri.addEventListener('click', () => {
+              const bannerData = {
+                title: document.getElementById('galeriBannerTitle').value,
+                desc: document.getElementById('galeriBannerDesc').value
+              };
+              localStorage.setItem(STORAGE_KEY_BANNER_GALERI, JSON.stringify(bannerData));
+              alert('Teks banner galeri berhasil disimpan!');
+            });
+          }
+
+          // Load data banner galeri saat halaman kelola dibuka
+          const savedBannerGaleri = localStorage.getItem(STORAGE_KEY_BANNER_GALERI);
+          if (savedBannerGaleri) {
+            try {
+              const data = JSON.parse(savedBannerGaleri);
+              if (document.getElementById('galeriBannerTitle') && data.title) document.getElementById('galeriBannerTitle').value = data.title;
+              if (document.getElementById('galeriBannerDesc') && data.desc) document.getElementById('galeriBannerDesc').value = data.desc;
+            } catch (e) {
+              console.error('Error parsing cmsData_galeriBanner:', e);
+            }
+          }
+        });
+      })();
+    </script>
+
   </body>
 </html>
