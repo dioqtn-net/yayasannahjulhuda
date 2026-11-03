@@ -76,9 +76,9 @@
           <!-- Dark Overlay Wrapper -->
           <div class="absolute inset-0 bg-black/70 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="publicFasBannerTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
+            <h1 id="pubFasBannerTitle" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p id="publicFasBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
+            <p id="pubFasBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
           </div>
         </section>
 
@@ -274,6 +274,18 @@
 
       // Render Dynamic Fasilitas Cards from CMS (localStorage)
       document.addEventListener('DOMContentLoaded', () => {
+        // Render Teks Banner
+        const savedBannerFas = localStorage.getItem('cmsData_fasBanner');
+        if (savedBannerFas) {
+          try {
+            const data = JSON.parse(savedBannerFas);
+            if (document.getElementById('pubFasBannerTitle') && data.title) document.getElementById('pubFasBannerTitle').textContent = data.title;
+            if (document.getElementById('pubFasBannerDesc') && data.desc) document.getElementById('pubFasBannerDesc').textContent = data.desc;
+          } catch (e) {
+            console.error('Error parsing cmsData_fasBanner:', e);
+          }
+        }
+
         const grid = document.getElementById('gridFasilitas');
         if (!grid) return;
 
