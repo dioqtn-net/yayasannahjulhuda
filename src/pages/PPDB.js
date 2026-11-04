@@ -263,24 +263,41 @@ export const renderPPDB = (ppdb) => {
 
           </div>
 
-          <!-- Banner Konsultasi PPDB MTs -->
-          <div class="col-span-full mt-6 p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 shadow-sm flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 w-full">
-            <div class="flex-1 w-full text-left">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-headset"></i></div>
-                <h4 class="text-lg font-bold text-green-900 m-0">Pusat Layanan Konsultasi PPDB</h4>
-              </div>
-              <p class="text-gray-600 text-sm mb-4 leading-relaxed max-w-3xl">
-                Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.
-              </p>
-              <div class="inline-flex flex-wrap items-center gap-2 text-sm text-green-800 font-semibold">
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Umi Hj. Dahlia <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0858 8068 2115
+          <!-- STRUKTUR FINAL: CSS GRID 2 KOLOM (KIRI: Teks & Kontak Berjajar, KANAN: Tombol WA Rata Kanan) -->
+            <div id="ppdb-mts-konsultasi" class="ppdb-grid-konsultasi" style="background-color: #f0fdf4; border: 1px solid #d1fae5; border-radius: 12px; padding: 24px; margin-top: 32px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; width: 100%; box-sizing: border-box;">
+                
+                <!-- KOLOM KIRI -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg style="width: 20px; height: 20px; color: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
+                    </div>
+                    
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    
+                    <!-- Kotak Kontak Berjajar Horizontal -->
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-1">Umi Hj. Dahlia</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-1">085880682115</span>
+                        </div>
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-2">Abu Jalaluddin</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-2">08158316436</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Abu Jalaluddin <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0815 8316 436
+
+                <!-- KOLOM KANAN: Tombol WA Rata Kanan -->
+                <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; justify-self: end;">
+                    <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="btn-wa-1" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Umi Dahlia</a>
+                    <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
                 </div>
-              </div>
+            </div>
             </div>
             <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
               <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Umi Dahlia</a>
@@ -439,24 +456,41 @@ export const renderPPDB = (ppdb) => {
 
           </div>
 
-          <!-- Banner Konsultasi PPDB MA -->
-          <div class="col-span-full mt-6 p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 shadow-sm flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 w-full">
-            <div class="flex-1 w-full text-left">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-headset"></i></div>
-                <h4 class="text-lg font-bold text-green-900 m-0">Pusat Layanan Konsultasi PPDB</h4>
-              </div>
-              <p class="text-gray-600 text-sm mb-4 leading-relaxed max-w-3xl">
-                Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.
-              </p>
-              <div class="inline-flex flex-wrap items-center gap-2 text-sm text-green-800 font-semibold">
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Umi Hj. Dahlia <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0858 8068 2115
+          <!-- STRUKTUR FINAL: CSS GRID 2 KOLOM (KIRI: Teks & Kontak Berjajar, KANAN: Tombol WA Rata Kanan) -->
+            <div id="ppdb-ma-konsultasi" class="ppdb-grid-konsultasi" style="background-color: #f0fdf4; border: 1px solid #d1fae5; border-radius: 12px; padding: 24px; margin-top: 32px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; width: 100%; box-sizing: border-box;">
+                
+                <!-- KOLOM KIRI -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg style="width: 20px; height: 20px; color: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
+                    </div>
+                    
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    
+                    <!-- Kotak Kontak Berjajar Horizontal -->
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-1">Umi Hj. Dahlia</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-1">085880682115</span>
+                        </div>
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-2">Abu Jalaluddin</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-2">08158316436</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Abu Jalaluddin <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0815 8316 436
+
+                <!-- KOLOM KANAN: Tombol WA Rata Kanan -->
+                <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; justify-self: end;">
+                    <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="btn-wa-1" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Umi Dahlia</a>
+                    <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
                 </div>
-              </div>
+            </div>
             </div>
             <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
               <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Umi Dahlia</a>
@@ -601,24 +635,41 @@ export const renderPPDB = (ppdb) => {
 
           </div>
 
-          <!-- Banner Konsultasi PPDB MI -->
-          <div class="col-span-full mt-6 p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 shadow-sm flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 w-full">
-            <div class="flex-1 w-full text-left">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-headset"></i></div>
-                <h4 class="text-lg font-bold text-green-900 m-0">Pusat Layanan Konsultasi PPDB</h4>
-              </div>
-              <p class="text-gray-600 text-sm mb-4 leading-relaxed max-w-3xl">
-                Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.
-              </p>
-              <div class="inline-flex flex-wrap items-center gap-2 text-sm text-green-800 font-semibold">
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Abi Subhan, SPd. <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0899 1168 301
+          <!-- STRUKTUR FINAL: CSS GRID 2 KOLOM (KIRI: Teks & Kontak Berjajar, KANAN: Tombol WA Rata Kanan) -->
+            <div id="ppdb-mi-konsultasi" class="ppdb-grid-konsultasi" style="background-color: #f0fdf4; border: 1px solid #d1fae5; border-radius: 12px; padding: 24px; margin-top: 32px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; width: 100%; box-sizing: border-box;">
+                
+                <!-- KOLOM KIRI -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg style="width: 20px; height: 20px; color: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
+                    </div>
+                    
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    
+                    <!-- Kotak Kontak Berjajar Horizontal -->
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-1">Abi Subhan, SPd.</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-1">08991168301</span>
+                        </div>
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-2">Abi Fahri, SPd.</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-2">085695426904</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white px-3 py-1.5 rounded border border-green-100 flex items-center gap-2">
-                  <i class="fas fa-user-circle text-gray-400"></i> Abi Fahri, SPd. <span class="text-green-300">|</span> <i class="fab fa-whatsapp text-green-500"></i> 0856 9542 6904
+
+                <!-- KOLOM KANAN: Tombol WA Rata Kanan -->
+                <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; justify-self: end;">
+                    <a href="https://wa.me/628991168301?text=Halo%20Abi%20Subhan,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="btn-wa-1" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abi Subhan</a>
+                    <a href="https://wa.me/6285695426904?text=Halo%20Abi%20Fahri,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abi Fahri</a>
                 </div>
-              </div>
+            </div>
             </div>
             <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
               <a href="https://wa.me/628991168301?text=Halo%20Abi%20Subhan,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Abi Subhan</a>
@@ -764,28 +815,41 @@ export const renderPPDB = (ppdb) => {
               </div>
             </div>
 
-            <!-- Banner Konsultasi PPDB Ponpes -->
-            <div class="col-span-full mt-6 p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 w-full">
-              
-              <!-- Bagian Kiri: Teks -->
-              <div class="flex-1 w-full text-left">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0">
-                    <i class="fas fa-headset"></i>
-                  </div>
-                  <h4 class="text-lg font-bold text-green-900 m-0">Pusat Layanan Konsultasi PPDB</h4>
-                </div>
+            <!-- STRUKTUR FINAL: CSS GRID 2 KOLOM (KIRI: Teks & Kontak Berjajar, KANAN: Tombol WA Rata Kanan) -->
+            <div id="ppdb-ponpes-konsultasi" class="ppdb-grid-konsultasi" style="background-color: #f0fdf4; border: 1px solid #d1fae5; border-radius: 12px; padding: 24px; margin-top: 32px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; width: 100%; box-sizing: border-box;">
                 
-                <p class="text-gray-600 text-sm mb-4 leading-relaxed max-w-3xl">
-                  Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas mondok? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.
-                </p>
-                
-                <div class="inline-flex flex-wrap items-center gap-2 text-sm text-green-800 font-semibold bg-white px-4 py-2 rounded-lg border border-green-100">
-                  <span class="flex items-center gap-1 whitespace-nowrap"><i class="fas fa-user-circle text-gray-400"></i> Bunda Dahlia</span>
-                  <span class="text-green-300 hidden sm:inline">|</span>
-                  <span class="flex items-center gap-1 whitespace-nowrap"><i class="fab fa-whatsapp text-green-500"></i> 0858 9010 538</span>
+                <!-- KOLOM KIRI -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg style="width: 20px; height: 20px; color: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
+                    </div>
+                    
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    
+                    <!-- Kotak Kontak Berjajar Horizontal -->
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-1">Bunda Dahlia</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-1">08589010538</span>
+                        </div>
+                        <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #374151; white-space: nowrap;">
+                            <span style="font-weight: 500;" class="nama-panitia-2">Abu Jalaluddin</span>
+                            <span style="color: #d1d5db;">|</span>
+                            <span class="no-panitia-2">08158316436</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <!-- KOLOM KANAN: Tombol WA Rata Kanan -->
+                <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; justify-self: end;">
+                    <a href="https://wa.me/628589010538?text=Halo%20Bunda%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20Ponpes." target="_blank" rel="noopener noreferrer" class="btn-wa-1" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Bunda Dahlia</a>
+                    <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20Ponpes." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
+                </div>
+            </div>
 
               <!-- Bagian Kanan: Tombol -->
               <div class="w-full lg:w-auto shrink-0 mt-2 lg:mt-0">
