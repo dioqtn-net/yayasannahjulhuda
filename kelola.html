@@ -1067,7 +1067,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </span>
                 Kelola Konten Galeri
               </h2>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">Unggah dokumentasi foto dan video kegiatan santri di seluruh jenjang pendidikan.</p>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Unggah dokumentasi foto dan video kegiatan siswa/siswi dan santri di seluruh jenjang pendidikan.</p>
             </div>
             <a href="/galeri.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
               <i class="fas fa-external-link-alt"></i>
@@ -1107,7 +1107,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                   Ekstrakurikuler
                 </h3>
-                <p class="text-xs text-gray-500">Dokumentasi kegiatan minat bakat, marching band, futsal, dan olahraga santri.</p>
+                <p class="text-xs text-gray-500">Dokumentasi kegiatan minat bakat, marching band, futsal, dan olahraga siswa/siswi dan santri.</p>
               </div>
               <button type="button" id="btnTambahEskul" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">+ Tambah Ekstrakurikuler Baru</button>
             </div>
@@ -1185,7 +1185,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                   Kegiatan & Pembiasaan Santri
                 </h3>
-                <p class="text-xs text-gray-500">Dokumentasi agenda ibadah harian, peringatan hari besar Islam (PHBI), dan kegiatan sekolah.</p>
+                <p class="text-xs text-gray-500">Dokumentasi agenda ibadah harian, peringatan hari besar Islam (PHBI), dan kegiatan sekolah siswa/siswi dan santri.</p>
               </div>
               <button type="button" id="btnTambahKegiatan" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">+ Tambah Kegiatan Baru</button>
             </div>
@@ -1313,9 +1313,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">
                   <i class="fas fa-user-graduate"></i>
                 </span>
-                Info PPDB &amp; Syarat Pendaftaran
+                Kelola Info PPDB &amp; Syarat Pendaftaran
               </h2>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui judul hero, rincian alur penerimaan santri baru, dan brosur PPDB.</p>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Perbarui jadwal pelayanan, rincian syarat pendaftaran, dan kontak WhatsApp layanan PPDB untuk setiap jenjang.</p>
             </div>
             <div class="flex items-center gap-2.5">
               <a href="/ppdb.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
@@ -1325,32 +1325,422 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
           </div>
 
-          <!-- Form Edit Header / Banner PPDB -->
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Perubahan konten Info PPDB berhasil disimpan!');">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Utama / Teks Hero</label>
-                <input type="text" value="Penerimaan Peserta Didik Baru (PPDB) 2026/2027" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan judul PPDB...">
+          <!-- Navigasi Tab Jenjang PPDB Admin -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-2 shadow-sm mb-6 flex flex-wrap gap-2">
+            <button type="button" onclick="switchPPDBAdminTab('sdi')" data-ppdb-admin-tab="sdi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+              <i class="fas fa-school text-slate-400"></i>
+              <span>SDI Al Kindy</span>
+            </button>
+            <button type="button" onclick="switchPPDBAdminTab('mi')" data-ppdb-admin-tab="mi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+              <i class="fas fa-book-reader text-slate-400"></i>
+              <span>MI Nahjul Huda</span>
+            </button>
+            <button type="button" onclick="switchPPDBAdminTab('mts')" data-ppdb-admin-tab="mts" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2">
+              <i class="fas fa-graduation-cap text-gold-400"></i>
+              <span>MTs Nahjul Huda</span>
+            </button>
+            <button type="button" onclick="switchPPDBAdminTab('ma')" data-ppdb-admin-tab="ma" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+              <i class="fas fa-university text-slate-400"></i>
+              <span>MA Nahjul Huda</span>
+            </button>
+            <button type="button" onclick="switchPPDBAdminTab('ponpes')" data-ppdb-admin-tab="ponpes" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+              <i class="fas fa-mosque text-slate-400"></i>
+              <span>Ponpes Assurur</span>
+            </button>
+          </div>
+
+          <!-- Container Panel Form Masing-Masing Jenjang -->
+          <div id="ppdb-admin-panels-container">
+            <!-- Panels dynamically rendered or embedded -->
+            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+              <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: SD Islam (SDI) AL KINDY</h3>
+                  <p class="text-xs text-slate-500">Kelola informasi jadwal pelayanan, berkas syarat, dan kontak konsultasi.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">SDI</span>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Deskripsi / Paragraf Informasi PPDB</label>
-                <textarea rows="4" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50/50 focus:bg-white text-slate-800 transition" placeholder="Masukkan deskripsi PPDB...">Pendaftaran santri baru telah dibuka untuk jenjang SDI Al Kindy, MTs Nahjul Huda, MA Nahjul Huda, dan Pondok Pesantren Tahfidz Qur'an As-Surur. Dapatkan beasiswa prestasi dan informasi alur pendaftaran secara lengkap.</textarea>
+              <!-- 1. Waktu Pendaftaran -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-calendar-alt text-emerald-600"></i> Waktu Pendaftaran
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Hari Pelayanan</label>
+                    <input type="text" id="ppdbAdmin_sdi_hari" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Senin s/d Jumat">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Jam Operasional</label>
+                    <input type="text" id="ppdbAdmin_sdi_jam" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: 08.00 - 14.00 WIB">
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ganti Gambar Header / Brosur PPDB</label>
-                <input type="file" accept=".jpg, .jpeg, .png" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/50">
-                <p class="text-[11px] text-slate-400 mt-1.5">Format didukung: JPG, PNG (Maksimal 2 MB).</p>
+              <!-- 2. Syarat Pendaftaran -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-clipboard-list text-emerald-600"></i> Syarat Pendaftaran
+                </h4>
+                <p class="text-xs text-slate-500">Ketik setiap poin persyaratan pada baris baru (tekan Enter). Sistem otomatis menyusun nomor urut di website.</p>
+                <textarea id="ppdbAdmin_sdi_syarat" rows="5" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Mengisi formulir pendaftaran&#10;Fotokopi Akta Kelahiran&#10;Fotokopi Kartu Keluarga (KK)"></textarea>
               </div>
 
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
-                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+              <!-- 3. Pusat Layanan Konsultasi PPDB -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fas fa-headset text-emerald-600"></i> Pusat Layanan Konsultasi PPDB
+                  </h4>
+                  <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <!-- Kontak 1 -->
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 1</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_sdi_k1_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50" placeholder="Contoh: Ibu Fatimah">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_sdi_k1_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50" placeholder="Contoh: 081234567890">
+                    </div>
+                  </div>
+
+                  <!-- Kontak 2 -->
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 2</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_sdi_k2_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50" placeholder="Contoh: Bapak Ahmad">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_sdi_k2_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50" placeholder="Contoh: 081298765432">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="savePPDBAdminJenjang('sdi')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Perubahan</span>
+                  <span>Simpan Data PPDB SDI</span>
                 </button>
               </div>
-            </form>
+            </div>
+
+            <!-- Panel MI -->
+            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+              <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+                  <p class="text-xs text-slate-500">Kelola informasi jadwal pelayanan, berkas syarat, dan kontak konsultasi.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">MI</span>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-calendar-alt text-emerald-600"></i> Waktu Pendaftaran
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Hari Pelayanan</label>
+                    <input type="text" id="ppdbAdmin_mi_hari" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Senin s/d Sabtu">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Jam Operasional</label>
+                    <input type="text" id="ppdbAdmin_mi_jam" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: 07.30 - 14.30 WIB">
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-clipboard-list text-emerald-600"></i> Syarat Pendaftaran
+                </h4>
+                <p class="text-xs text-slate-500">Ketik setiap poin persyaratan pada baris baru (tekan Enter).</p>
+                <textarea id="ppdbAdmin_mi_syarat" rows="5" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white"></textarea>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fas fa-headset text-emerald-600"></i> Pusat Layanan Konsultasi PPDB
+                  </h4>
+                  <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 1</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_mi_k1_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_mi_k1_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 2</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_mi_k2_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_mi_k2_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="savePPDBAdminJenjang('mi')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Data PPDB MI</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Panel MTs (Default Aktif) -->
+            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+              <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+                  <p class="text-xs text-slate-500">Kelola informasi jadwal pelayanan, berkas syarat, dan kontak konsultasi.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">MTs</span>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-calendar-alt text-emerald-600"></i> Waktu Pendaftaran
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Hari Pelayanan</label>
+                    <input type="text" id="ppdbAdmin_mts_hari" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Senin s/d Sabtu">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Jam Operasional</label>
+                    <input type="text" id="ppdbAdmin_mts_jam" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: 08.00 - 14.00 WIB">
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-clipboard-list text-emerald-600"></i> Syarat Pendaftaran
+                </h4>
+                <p class="text-xs text-slate-500">Ketik setiap poin persyaratan pada baris baru (tekan Enter).</p>
+                <textarea id="ppdbAdmin_mts_syarat" rows="5" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white"></textarea>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fas fa-headset text-emerald-600"></i> Pusat Layanan Konsultasi PPDB
+                  </h4>
+                  <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 1</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_mts_k1_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_mts_k1_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 2</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_mts_k2_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_mts_k2_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="savePPDBAdminJenjang('mts')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Data PPDB MTs</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Panel MA -->
+            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+              <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Aliyah (MA) Nahjul Huda</h3>
+                  <p class="text-xs text-slate-500">Kelola informasi jadwal pelayanan, berkas syarat, dan kontak konsultasi.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">MA</span>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-calendar-alt text-emerald-600"></i> Waktu Pendaftaran
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Hari Pelayanan</label>
+                    <input type="text" id="ppdbAdmin_ma_hari" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Senin s/d Sabtu">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Jam Operasional</label>
+                    <input type="text" id="ppdbAdmin_ma_jam" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: 08.00 - 14.00 WIB">
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-clipboard-list text-emerald-600"></i> Syarat Pendaftaran
+                </h4>
+                <p class="text-xs text-slate-500">Ketik setiap poin persyaratan pada baris baru (tekan Enter).</p>
+                <textarea id="ppdbAdmin_ma_syarat" rows="5" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white"></textarea>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fas fa-headset text-emerald-600"></i> Pusat Layanan Konsultasi PPDB
+                  </h4>
+                  <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 1</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_ma_k1_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_ma_k1_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 2</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_ma_k2_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_ma_k2_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="savePPDBAdminJenjang('ma')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Data PPDB MA</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Panel Ponpes -->
+            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+              <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Pondok Pesantren Assurur</h3>
+                  <p class="text-xs text-slate-500">Kelola informasi jadwal pelayanan, berkas syarat, dan kontak konsultasi.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">Ponpes</span>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-calendar-alt text-emerald-600"></i> Waktu Pendaftaran
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Hari Pelayanan</label>
+                    <input type="text" id="ppdbAdmin_ponpes_hari" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Setiap Hari (Senin - Ahad)">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Jam Operasional</label>
+                    <input type="text" id="ppdbAdmin_ponpes_jam" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: 08.00 - 17.00 WIB">
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-clipboard-list text-emerald-600"></i> Syarat Pendaftaran
+                </h4>
+                <p class="text-xs text-slate-500">Ketik setiap poin persyaratan pada baris baru (tekan Enter).</p>
+                <textarea id="ppdbAdmin_ponpes_syarat" rows="5" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white"></textarea>
+              </div>
+
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fas fa-headset text-emerald-600"></i> Pusat Layanan Konsultasi PPDB
+                  </h4>
+                  <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 1</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_ponpes_k1_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_ponpes_k1_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
+                    <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Kontak Layanan 2</h5>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Petugas / Panitia</label>
+                      <input type="text" id="ppdbAdmin_ponpes_k2_nama" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                      <input type="text" id="ppdbAdmin_ponpes_k2_wa" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="savePPDBAdminJenjang('ponpes')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Data PPDB Ponpes</span>
+                </button>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -2785,5 +3175,159 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         });
       })();
     </script>
-  </body>
+  
+    <!-- Script CRUD Kelola PPDB (localStorage) -->
+    <script>
+      (function() {
+        const KEY_PPDB = 'cmsData_ppdb';
+
+        const defaultPPDB = {
+          sdi: {
+            jenjangName: 'SD Islam (SDI) AL KINDY',
+            hari: 'Senin s/d Jumat',
+            jam: '08.00 - 14.00 WIB',
+            syarat: "Mengisi formulir pendaftaran\nFotokopi Akta Kelahiran (2 lembar)\nFotokopi Kartu Keluarga (KK) & KTP Orang Tua\nPas Foto 3x4 (4 lembar)\nSurat Keterangan Lulus TK / RA (jika ada)",
+            kontak1_nama: 'Ibu Fatimah',
+            kontak1_wa: '081234567890',
+            kontak2_nama: 'Bapak Ahmad',
+            kontak2_wa: '081298765432'
+          },
+          mi: {
+            jenjangName: 'Madrasah Ibtidaiyah (MI) Nahjul Huda',
+            hari: 'Senin s/d Sabtu',
+            jam: '07.30 - 14.30 WIB',
+            syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah / Sertifikat RA/TK",
+            kontak1_nama: 'Abi Subhan, SPd.',
+            kontak1_wa: '08991168301',
+            kontak2_nama: 'Abi Fahri, SPd.',
+            kontak2_wa: '085695426904'
+          },
+          mts: {
+            jenjangName: 'Madrasah Tsanawiyah (MTs) Nahjul Huda',
+            hari: 'Senin s/d Sabtu',
+            jam: '08.00 - 14.00 WIB',
+            syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah SD/MI (2 lembar legalisir)",
+            kontak1_nama: 'Umi Hj. Dahlia',
+            kontak1_wa: '085880682115',
+            kontak2_nama: 'Abu Jalaluddin',
+            kontak2_wa: '08158316436'
+          },
+          ma: {
+            jenjangName: 'Madrasah Aliyah (MA) Nahjul Huda',
+            hari: 'Senin s/d Sabtu',
+            jam: '08.00 - 14.00 WIB',
+            syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah / SKL SMP/MTs (2 lembar)",
+            kontak1_nama: 'Umi Hj. Dahlia',
+            kontak1_wa: '085880682115',
+            kontak2_nama: 'Abu Jalaluddin',
+            kontak2_wa: '08158316436'
+          },
+          ponpes: {
+            jenjangName: 'Pondok Pesantren Assurur',
+            hari: 'Setiap Hari (Senin - Ahad)',
+            jam: '08.00 - 17.00 WIB',
+            syarat: "Mengisi formulir pendaftaran santri baru\nFotokopi Akta Kelahiran & Kartu Keluarga (KK)\nFotokopi KTP Orang Tua / Wali\nSurat Keterangan Sehat dari Dokter\nPas Foto 3x4 berpakaian muslim/muslimah (5 lembar)\nMengikuti tes penempatan (baca Al-Qur'an & wawancara)",
+            kontak1_nama: 'Bunda Dahlia',
+            kontak1_wa: '08589010538',
+            kontak2_nama: 'Abu Jalaluddin',
+            kontak2_wa: '08158316436'
+          }
+        };
+
+        function getPPDBData() {
+          const raw = localStorage.getItem(KEY_PPDB);
+          if (!raw) {
+            localStorage.setItem(KEY_PPDB, JSON.stringify(defaultPPDB));
+            return defaultPPDB;
+          }
+          try {
+            const parsed = JSON.parse(raw);
+            return { ...defaultPPDB, ...parsed };
+          } catch (e) {
+            return defaultPPDB;
+          }
+        }
+
+        window.switchPPDBAdminTab = function(jenjangKey) {
+          const tabBtns = document.querySelectorAll('.ppdb-admin-tab-btn');
+          tabBtns.forEach(btn => {
+            const key = btn.getAttribute('data-ppdb-admin-tab');
+            if (key === jenjangKey) {
+              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2";
+              const icon = btn.querySelector('i');
+              if (icon) icon.className = icon.className.replace('text-slate-400', 'text-gold-400');
+            } else {
+              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2";
+              const icon = btn.querySelector('i');
+              if (icon) icon.className = icon.className.replace('text-gold-400', 'text-slate-400');
+            }
+          });
+
+          const panels = document.querySelectorAll('.ppdb-admin-panel');
+          panels.forEach(p => p.classList.add('hidden'));
+
+          const activePanel = document.getElementById(`ppdbAdminPanel_${jenjangKey}`);
+          if (activePanel) {
+            activePanel.classList.remove('hidden');
+          }
+        };
+
+        function loadPPDBFields() {
+          const data = getPPDBData();
+          ['sdi', 'mi', 'mts', 'ma', 'ponpes'].forEach(k => {
+            const item = data[k] || defaultPPDB[k];
+            if (!item) return;
+
+            const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
+            const elJam = document.getElementById(`ppdbAdmin_${k}_jam`);
+            const elSyarat = document.getElementById(`ppdbAdmin_${k}_syarat`);
+            const elK1Nama = document.getElementById(`ppdbAdmin_${k}_k1_nama`);
+            const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
+            const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
+            const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
+
+            if (elHari) elHari.value = item.hari || '';
+            if (elJam) elJam.value = item.jam || '';
+            if (elSyarat) elSyarat.value = item.syarat || '';
+            if (elK1Nama) elK1Nama.value = item.kontak1_nama || '';
+            if (elK1Wa) elK1Wa.value = item.kontak1_wa || '';
+            if (elK2Nama) elK2Nama.value = item.kontak2_nama || '';
+            if (elK2Wa) elK2Wa.value = item.kontak2_wa || '';
+          });
+        }
+
+        window.savePPDBAdminJenjang = function(k) {
+          const data = getPPDBData();
+          const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
+          const elJam = document.getElementById(`ppdbAdmin_${k}_jam`);
+          const elSyarat = document.getElementById(`ppdbAdmin_${k}_syarat`);
+          const elK1Nama = document.getElementById(`ppdbAdmin_${k}_k1_nama`);
+          const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
+          const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
+          const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
+
+          const jName = defaultPPDB[k] ? defaultPPDB[k].jenjangName : k.toUpperCase();
+
+          data[k] = {
+            jenjangName: jName,
+            hari: elHari ? elHari.value.trim() : '',
+            jam: elJam ? elJam.value.trim() : '',
+            syarat: elSyarat ? elSyarat.value.trim() : '',
+            kontak1_nama: elK1Nama ? elK1Nama.value.trim() : '',
+            kontak1_wa: elK1Wa ? elK1Wa.value.trim() : '',
+            kontak2_nama: elK2Nama ? elK2Nama.value.trim() : '',
+            kontak2_wa: elK2Wa ? elK2Wa.value.trim() : ''
+          };
+
+          localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+          alert('Sukses! Data PPDB untuk ' + jName + ' berhasil disimpan.');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          loadPPDBFields();
+        });
+      })();
+    </script>
+
+</body>
 </html>
