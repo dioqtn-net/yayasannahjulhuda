@@ -120,93 +120,718 @@
             </div>
           </div>
 
-                    <!-- ========================================== -->
-          <!-- 1. SECTION: DOKUMENTASI -->
-          <!-- ========================================== -->
-          <div class="mb-14">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-xl sm:text-2xl font-bold font-playfair text-gray-900 flex items-center gap-2">
-                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
-                    <i class="fas fa-camera"></i>
-                  </span>
-                  Dokumentasi Yayasan
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Potret kenangan, visitasi, dan dokumentasi kelembagaan.</p>
-              </div>
-              <!-- Search Bar dengan icon rata tengah vertikal -->
-              <div class="relative w-full sm:w-80 shrink-0">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </div>
-                <input type="text" id="searchDokumentasi" placeholder="Cari dokumentasi (ex: Kunjungan, Lomba)..." class="w-full pl-10 pr-4 py-2 border rounded-full focus:ring-emerald-500 focus:border-emerald-500 shadow-sm text-sm">
-              </div>
+          <!-- Section Title & Search Bar Tab Semua -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-200">
+            <div>
+              <h2 id="gallerySectionTitle" class="text-2xl font-bold font-playfair text-gray-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
+                  <i class="fas fa-images"></i>
+                </span>
+                Dokumentasi Galeri Semua Jenjang
+              </h2>
+              <p id="gallerySectionSubtitle" class="text-slate-500 text-xs sm:text-sm mt-1">Dokumentasi momen kegiatan, pembiasaan, dan prestasi siswa/siswi serta santri.</p>
             </div>
+            <div id="searchSemuaWrapper" class="relative w-full sm:w-72 shrink-0">
+              <input type="text" id="searchGalleryAllInput" placeholder="Cari dokumentasi..." class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+              <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+            </div>
+          </div>
 
-            <div class="max-h-[550px] overflow-y-scroll custom-scrollbar pr-2">
-              <div id="pubContainerDokumentasi" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dirender secara dinamis oleh JavaScript -->
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB SEMUA JENJANG -->
+          <!-- ========================================== -->
+          <div id="gallery-content-semua" class="w-full">
+            <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+              <div id="grid-semua" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- 1. Futsal (SLIDER) -->
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <video src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                          <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                        </div>
+                      </a>
+                    </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Futsal
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Drum Band (SINGLE) -->
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                    <video controls class="w-full h-48 object-cover rounded-t-lg">
+                      <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                      Browser Anda tidak mendukung tag video.
+                    </video>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Drum Band
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                    </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Peringatan Isra Mi'raj
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                    <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 hover:scale-105">
+                  </a>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Pembiasaan Sholat Dhuha
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
+                <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                    </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Pemilihan OSIS 2026/2027
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
+                <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                  <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                      <!-- Foto 1 -->
+                      <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <!-- Foto 2 -->
+                      <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                      <!-- Foto 3 -->
+                      <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                        <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                      </a>
+                    </div>
+                    <!-- Nav Buttons -->
+                    <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                        Lomba Cerdas Cermat
+                      </h3>
+                      <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                        Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
+                      </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                      <span><i class="far fa-calendar-alt mr-1"></i> Ponpes Assurur</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">Ponpes</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
 
           <!-- ========================================== -->
-          <!-- 2. SECTION: EKSTRAKURIKULER -->
+          <!-- KONTEN GALERI TAB SDI -->
           <!-- ========================================== -->
-          <div class="mb-14">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-xl sm:text-2xl font-bold font-playfair text-gray-900 flex items-center gap-2">
-                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
-                    <i class="fas fa-futbol"></i>
-                  </span>
-                  Ekstrakurikuler & Minat Bakat
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Pengembangan minat, olahraga, seni musik, dan ketangkasan santri.</p>
-              </div>
-              <!-- Search Bar dengan icon rata tengah vertikal -->
-              <div class="relative w-full sm:w-80 shrink-0">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <div id="gallery-content-sdi" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kreativitas siswa/siswi SDI Al Kindy.</p>
                 </div>
-                <input type="text" id="searchEskul" placeholder="Cari ekstrakurikuler (ex: Futsal, Drum Band)..." class="w-full pl-10 pr-4 py-2 border rounded-full focus:ring-emerald-500 focus:border-emerald-500 shadow-sm text-sm">
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
-            </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-sdi-eskul" id="grid-sdi-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
 
-            <div class="max-h-[550px] overflow-y-scroll custom-scrollbar pr-2">
-              <div id="pubContainerEskul" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dirender secara dinamis oleh JavaScript -->
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi SDI Al Kindy.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
-            </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-sdi-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
           </div>
 
           <!-- ========================================== -->
-          <!-- 3. SECTION: KEGIATAN -->
+          <!-- KONTEN GALERI TAB MI -->
           <!-- ========================================== -->
-          <div class="mb-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-xl sm:text-2xl font-bold font-playfair text-gray-900 flex items-center gap-2">
-                  <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm">
-                    <i class="fas fa-calendar-check"></i>
-                  </span>
-                  Kegiatan & Pembiasaan Santri
-                </h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Rangkaian acara keagamaan, hari besar Islam, dan aktivitas harian santri.</p>
-              </div>
-              <!-- Search Bar dengan icon rata tengah vertikal -->
-              <div class="relative w-full sm:w-80 shrink-0">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <div id="gallery-content-mi" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kreativitas siswa/siswi MI Nahjul Huda.</p>
                 </div>
-                <input type="text" id="searchKegiatan" placeholder="Cari kegiatan (ex: Isra Mi'raj, Sholat)..." class="w-full pl-10 pr-4 py-2 border rounded-full focus:ring-emerald-500 focus:border-emerald-500 shadow-sm text-sm">
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
-            </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-mi-eskul" id="grid-mi-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
 
-            <div class="max-h-[550px] overflow-y-scroll custom-scrollbar pr-2">
-              <div id="pubContainerKegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dirender secara dinamis oleh JavaScript -->
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MI Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
               </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-mi-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB MTs -->
+          <!-- ========================================== -->
+          <div id="gallery-content-mts" class="hidden space-y-12">
+            
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, kedisiplinan, kemandirian, dan kreativitas siswa/siswi MTs.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-mts-eskul" id="grid-mts-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 1. Futsal (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_1.jpg" alt="Futsal 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/ekstrakurikuler_futsal_2.jpg" alt="Futsal 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <a href="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <video src="/media/galeri/mts/ekstrakurikuler_futsal_3.mp4" class="w-full h-full object-cover pointer-events-none" muted playsinline></video>
+                          <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all">
+                            <svg class="w-14 h-14 text-white opacity-90" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                          </div>
+                        </a>
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Futsal
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Drum Band (SINGLE) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                      <video controls class="w-full h-48 object-cover rounded-t-lg">
+                        <source src="/media/galeri/mts/ekstrakurikuler_drum_band.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                      </video>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Drum Band
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MTs.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-mts-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 3. Peringatan Isra Mi'raj (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg" alt="Peringatan Isra Mi'raj 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <a href="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_2.jpg" alt="Peringatan Isra Mi'raj 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Peringatan Isra Mi'raj
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> MTs Nahjul Huda</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Pembiasaan Sholat Dhuha (SINGLE) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <a href="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                      <img src="/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg" alt="Pembiasaan Sholat Dhuha" class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 hover:scale-105">
+                    </a>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Pembiasaan Sholat Dhuha
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Rutin Pagi</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5. Pemilihan OSIS 2026/2027 (SLIDER) -->
+                  <div data-jenjang="MTs" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg" alt="Pemilihan OSIS 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <a href="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_2.jpg" alt="Pemilihan OSIS 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Pemilihan OSIS 2026/2027
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Periode 2026/2027</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">MTs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB MA -->
+          <!-- ========================================== -->
+          <div id="gallery-content-ma" class="hidden space-y-12">
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, kepemimpinan, dan kreativitas siswa/siswi MA Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-ma-eskul" id="grid-ma-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, pembiasaan ibadah, dan agenda siswa/siswi MA Nahjul Huda.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div id="grid-ma-kegiatan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- KONTEN GALERI TAB PONPES -->
+          <!-- ========================================== -->
+          <div id="gallery-content-ponpes" class="hidden space-y-12">
+            
+            <!-- KATEGORI 1: EKSTRAKURIKULER -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Ekstrakurikuler
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Kegiatan pengembangan bakat, minat, dan kemandirian santri Pondok Pesantren.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+              </div>
+            </section>
+
+            <!-- KATEGORI 2: KEGIATAN -->
+            <section class="gallery-category-section">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-3 border-b border-slate-200">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-playfair font-bold text-gray-900">
+                    Kegiatan
+                  </h3>
+                  <p class="text-slate-500 text-xs sm:text-sm mt-1">Potret rutinitas pembelajaran formal, perlombaan, dan agenda santri Pondok Pesantren.</p>
+                </div>
+                <div class="relative w-full sm:w-64 shrink-0">
+                  <input type="text" placeholder="Cari dokumentasi..." class="category-search-input w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-xs transition">
+                  <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+
+              <div class="overflow-y-scroll max-h-[600px] custom-scrollbar pr-2 w-full">
+                            <!-- PANDUAN CMS & UPDATE MEDIA: 
+                 Setiap penambahan media baru WAJIB dibungkus tag <a> dengan class "glightbox block relative aspect-video overflow-hidden rounded-t-xl". 
+                 Tag <img> atau <video> di dalamnya WAJIB menggunakan class "w-full h-full object-cover". 
+                 Aturan ini mutlak untuk mencegah gambar beresolusi besar merusak/menjebol layout grid kolom. -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  
+                  <!-- 6. Lomba Cerdas Cermat (SLIDER) -->
+                  <div data-jenjang="Ponpes" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
+                    <div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
+                      <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar w-full h-full">
+                        <!-- Foto 1 -->
+                        <a href="/media/galeri/ponpes/juri_lomba.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/juri_lomba.jpg" alt="Juri Lomba 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <!-- Foto 2 -->
+                        <a href="/media/galeri/ponpes/JURI.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/JURI.jpg" alt="Juri Lomba 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                        <!-- Foto 3 -->
+                        <a href="/media/galeri/ponpes/PESERTA.jpg" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl shrink-0 snap-center w-full">
+                          <img src="/media/galeri/ponpes/PESERTA.jpg" alt="Peserta Lomba" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </a>
+                      </div>
+                      <!-- Nav Buttons -->
+                      <button type="button" aria-label="Media sebelumnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                          Lomba Cerdas Cermat
+                        </h3>
+                        <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                          Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="far fa-calendar-alt mr-1"></i> Ponpes Assurur</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">Ponpes</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- EMPTY STATE UNTUK JENJANG LAIN (SDI, MI, MA) -->
+          <div id="gallery-content-empty" class="hidden py-16 text-center">
+            <div class="max-w-md mx-auto bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl">
+                <i class="fas fa-folder-open"></i>
+              </div>
+              <h3 class="text-xl font-bold font-playfair text-gray-900 mb-2">
+                Galeri <span id="empty-jenjang-name">Jenjang</span> Sedang Disiapkan
+              </h3>
+              <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                Dokumentasi foto dan video untuk jenjang ini sedang dalam proses inventarisasi dan akan segera diunggah.
+              </p>
+              <button onclick="switchJenjang('Semua')" class="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-full text-xs font-semibold transition shadow-sm">
+                <i class="fas fa-arrow-left mr-1.5"></i> Lihat Semua Galeri
+              </button>
             </div>
           </div>
 
@@ -264,88 +889,150 @@
 
         <!-- Client Scripts -->
     <script>
-      (function() {
-        const STORAGE_KEY_GALERI = 'cmsData_listGaleri';
-        const STORAGE_KEY_BANNER_GALERI = 'cmsData_galeriBanner';
+      // Tab switcher function
+      function switchJenjang(jenjang) {
+        const tabs = document.querySelectorAll('.jenjang-tab-btn');
+        const activeBadge = document.getElementById('active-jenjang-badge');
+        const contentSemua = document.getElementById('gallery-content-semua');
+        const contentSDI = document.getElementById('gallery-content-sdi');
+        const contentMI = document.getElementById('gallery-content-mi');
+        const contentMTs = document.getElementById('gallery-content-mts');
+        const contentMA = document.getElementById('gallery-content-ma');
+        const contentPonpes = document.getElementById('gallery-content-ponpes');
+        const contentEmpty = document.getElementById('gallery-content-empty');
+        const emptyJenjangName = document.getElementById('empty-jenjang-name');
+        const sectionTitle = document.getElementById('gallerySectionTitle');
 
-        const defaultGaleri = [
-          {
-            id: 'galeri-1',
-            judul: 'Latihan Rutin Ekstrakurikuler Futsal',
-            tipe: 'Ekstrakurikuler',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Siswa MTs giat berlatih teknik dasar, kerja sama tim, dan ketahanan fisik dalam latihan mingguan futsal di lapangan yayasan.',
-            media: '/media/galeri/mts/ekstrakurikuler_futsal_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-2',
-            judul: 'Penampilan Marching Band Gema Nahjul Huda',
-            tipe: 'Ekstrakurikuler',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Aksi memukau tim drum band siswa MTs saat unjuk kebolehan membawakan lagu-lagu mars dan sholawat penuh semangat.',
-            media: '/media/galeri/mts/ekstrakurikuler_drum_band.mp4',
-            mediaType: 'video'
-          },
-          {
-            id: 'galeri-3',
-            judul: 'Tausiyah Isra Mi'raj Bersama Ustadz Maulana',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Peringatan Isra Mi'raj Nabi Muhammad SAW penuh hikmah dan antusiasme santri bersama pendakwah nasional.',
-            media: '/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-4',
-            judul: 'Pembiasaan Sholat Dhuha Berjamaah Sebelum KBM',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Kegiatan pembiasaan ibadah sholat dhuha berjamaah dan tadarus Al-Qur'an setiap pagi di masjid yayasan.',
-            media: '/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-5',
-            judul: 'Pesta Demokrasi Pemilihan Ketua OSIS MTs',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Edukasi demokrasi santun dan pemungutan suara pemilihan ketua serta wakil ketua OSIS periode 2026/2027.',
-            media: '/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-6',
-            judul: 'Delegasi Santri Lomba Cerdas Cermat Antar Pesantren',
-            tipe: 'Dokumentasi',
-            jenjang: 'Ponpes',
-            tanggal: '2026-10-28',
-            deskripsi: 'Momen perjuangan dan kebersamaan santri Ponpes Assurur dalam ajang kejuaraan cerdas cermat keagamaan.',
-            media: '/media/galeri/ponpes/PESERTA.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-7',
-            judul: 'Testimoni & Doa Keberkahan oleh Ustadz Maulana',
-            tipe: 'Dokumentasi',
-            jenjang: 'Semua',
-            tanggal: '2026-10-21',
-            deskripsi: 'Ungkapan apresiasi dan doa tulus Ustadz Maulana untuk kemajuan dakwah dan pendidikan Yayasan Nahjul Huda.',
-            media: '/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4',
-            mediaType: 'video'
+        // Reset visibility of all cards and clear search inputs
+        document.querySelectorAll('.gallery-card').forEach(card => card.classList.remove('hidden'));
+        document.querySelectorAll('.category-search-input').forEach(input => input.value = '');
+        const searchSemuaWrapper = document.getElementById('searchSemuaWrapper');
+        const searchAllInput = document.getElementById('searchGalleryAllInput');
+        if (searchAllInput) searchAllInput.value = '';
+
+        if (searchSemuaWrapper) {
+          if (jenjang === 'Semua') {
+            searchSemuaWrapper.classList.remove('hidden');
+          } else {
+            searchSemuaWrapper.classList.add('hidden');
           }
-        ];
+        }
 
-        let selectedJenjang = 'Semua';
-        let searchDokumentasiVal = '';
-        let searchEskulVal = '';
-        let searchKegiatanVal = '';
-        let lightboxInstance = null;
+        tabs.forEach(btn => {
+          const isSelected = btn.getAttribute('data-jenjang') === jenjang;
+          if (isSelected) {
+            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30";
+          } else {
+            btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700";
+          }
+        });
+
+        if (activeBadge) {
+          activeBadge.textContent = jenjang;
+        }
+
+        if (sectionTitle) {
+          sectionTitle.innerHTML = `<span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm"><i class="fas fa-images"></i></span> Dokumentasi Galeri ${jenjang === 'Semua' ? 'Semua Jenjang' : jenjang}`;
+        }
+
+        const allContainers = [contentSemua, contentSDI, contentMI, contentMTs, contentMA, contentPonpes, contentEmpty];
+        allContainers.forEach(c => { if (c) c.classList.add('hidden'); });
+
+        function containerHasCards(el) {
+          if (!el) return false;
+          return el.querySelectorAll('.gallery-card').length > 0;
+        }
+
+        if (jenjang === 'Semua') {
+          if (contentSemua) contentSemua.classList.remove('hidden');
+        } else if (jenjang === 'SDI') {
+          if (containerHasCards(contentSDI)) {
+            contentSDI.classList.remove('hidden');
+          } else if (contentEmpty) {
+            contentEmpty.classList.remove('hidden');
+            if (emptyJenjangName) emptyJenjangName.textContent = 'SDI Al Kindy';
+          }
+        } else if (jenjang === 'MI') {
+          if (containerHasCards(contentMI)) {
+            contentMI.classList.remove('hidden');
+          } else if (contentEmpty) {
+            contentEmpty.classList.remove('hidden');
+            if (emptyJenjangName) emptyJenjangName.textContent = 'MI Nahjul Huda';
+          }
+        } else if (jenjang === 'MTs') {
+          if (contentMTs) contentMTs.classList.remove('hidden');
+        } else if (jenjang === 'MA') {
+          if (containerHasCards(contentMA)) {
+            contentMA.classList.remove('hidden');
+          } else if (contentEmpty) {
+            contentEmpty.classList.remove('hidden');
+            if (emptyJenjangName) emptyJenjangName.textContent = 'MA Nahjul Huda';
+          }
+        } else if (jenjang === 'Ponpes') {
+          if (contentPonpes) contentPonpes.classList.remove('hidden');
+        } else {
+          if (contentEmpty) {
+            contentEmpty.classList.remove('hidden');
+            if (emptyJenjangName) emptyJenjangName.textContent = jenjang;
+          }
+        }
+      }
+
+      // Sub-category Live Search Handler
+      document.querySelectorAll('.category-search-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const categorySection = e.target.closest('.gallery-category-section');
+          if (!categorySection) return;
+
+          const cards = categorySection.querySelectorAll('.gallery-card');
+          cards.forEach(card => {
+            const title = card.querySelector('.gallery-title')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.gallery-desc')?.textContent.toLowerCase() || '';
+            if (title.includes(query) || desc.includes(query)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // Search Handler for Tab Semua
+      const searchGalleryAllInput = document.getElementById('searchGalleryAllInput');
+      if (searchGalleryAllInput) {
+        searchGalleryAllInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const semuaContainer = document.getElementById('gallery-content-semua');
+          if (!semuaContainer) return;
+          const cards = semuaContainer.querySelectorAll('.gallery-card');
+          cards.forEach(card => {
+            const title = card.querySelector('.gallery-title')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.gallery-desc')?.textContent.toLowerCase() || '';
+            if (title.includes(query) || desc.includes(query)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      }
+
+      // Mobile Menu Toggle
+      const toggleMobileBtn = document.getElementById('toggleMobileBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (toggleMobileBtn && mobileMenu) {
+        toggleMobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Dynamic CMS Data Synchronizer
+      (function() {
+        const KEY_DOK = 'cmsData_listGaleri';
+        const KEY_ESKUL = 'cmsData_listEskul';
+        const KEY_KEGIATAN = 'cmsData_listKegiatan';
+        const KEY_BANNER = 'cmsData_galeriBanner';
 
         function escapeHtml(text) {
           const div = document.createElement('div');
@@ -368,210 +1055,116 @@
           return dateStr;
         }
 
-        function getGaleriList() {
-          const raw = localStorage.getItem(STORAGE_KEY_GALERI);
-          if (!raw) {
-            localStorage.setItem(STORAGE_KEY_GALERI, JSON.stringify(defaultGaleri));
-            return defaultGaleri;
-          }
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaultGaleri;
-          } catch (e) {
-            console.error('Error parsing galeri data:', e);
-            return defaultGaleri;
-          }
-        }
-
-        function renderCard(item) {
-          const isVideo = item.mediaType === 'video' || (item.media && item.media.endsWith('.mp4'));
-          const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
-          const mediaSrc = item.media || '/media/background/wallpaper_yayasan.jpg';
-
+        function createCard(item) {
+          const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
           const mediaHtml = isVideo
             ? `<div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
                  <video controls class="w-full h-48 object-cover rounded-t-lg">
-                   <source src="${escapeHtml(mediaSrc)}" type="video/mp4">
+                   <source src="${escapeHtml(item.media)}" type="video/mp4">
                    Browser Anda tidak mendukung tag video.
                  </video>
                </div>`
             : `<div class="relative overflow-hidden rounded-t-xl bg-slate-100 w-full aspect-video">
-                 <a href="${escapeHtml(mediaSrc)}" class="glightbox block w-full h-full">
-                   <img src="${escapeHtml(mediaSrc)}" alt="${escapeHtml(item.judul)}" class="w-full h-48 object-cover rounded-t-lg hover:scale-105 transition-transform duration-300">
+                 <a href="${escapeHtml(item.media)}" class="glightbox block relative aspect-video overflow-hidden rounded-t-xl">
+                   <img src="${escapeHtml(item.media)}" alt="${escapeHtml(item.judul)}" class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 hover:scale-105">
                  </a>
                </div>`;
 
           return `
-            <div class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0" data-jenjang="${escapeHtml(item.jenjang)}">
+            <div data-jenjang="${escapeHtml(item.jenjang)}" data-cms="true" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
               ${mediaHtml}
-              <div class="p-5 flex flex-col flex-1">
-                <div class="flex items-center justify-between gap-2 mb-2">
-                  <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    ${escapeHtml(item.jenjang)}
-                  </span>
-                  <span class="text-xs text-gray-500">
-                    <i class="far fa-calendar-alt mr-1"></i>${escapeHtml(tgl)}
-                  </span>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
+                    ${escapeHtml(item.judul)}
+                  </h3>
+                  <p class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                    ${escapeHtml(item.deskripsi)}
+                  </p>
                 </div>
-                <h3 class="font-bold text-gray-900 text-base mb-2 line-clamp-2 group-hover:text-emerald-700 transition">
-                  ${escapeHtml(item.judul)}
-                </h3>
-                <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed flex-1">
-                  ${escapeHtml(item.deskripsi)}
-                </p>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                  <span><i class="far fa-calendar-alt mr-1"></i> ${escapeHtml(formatIndoDate(item.tanggal))}</span>
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">${escapeHtml(item.jenjang)}</span>
+                </div>
               </div>
             </div>
           `;
         }
 
-        function filterAndRender(containerId, tipeTarget, searchQuery) {
-          const container = document.getElementById(containerId);
-          if (!container) return;
-
-          const allItems = getGaleriList();
-          const query = (searchQuery || '').toLowerCase().trim();
-
-          const filtered = allItems.filter(item => {
-            // Filter tipe
-            const tipeMatch = (item.tipe || 'Dokumentasi').toLowerCase() === tipeTarget.toLowerCase();
-            if (!tipeMatch) return false;
-
-            // Filter jenjang
-            if (selectedJenjang !== 'Semua') {
-              const itemJenjang = item.jenjang || 'Semua';
-              if (itemJenjang !== 'Semua' && itemJenjang !== selectedJenjang) {
-                return false;
-              }
-            }
-
-            // Filter search query
-            if (query) {
-              const judul = (item.judul || '').toLowerCase();
-              const desc = (item.deskripsi || '').toLowerCase();
-              if (!judul.includes(query) && !desc.includes(query)) {
-                return false;
-              }
-            }
-
-            return true;
-          });
-
-          if (filtered.length === 0) {
-            container.innerHTML = `
-              <div class="col-span-full py-12 text-center text-slate-400">
-                <i class="far fa-folder-open text-3xl mb-2 block"></i>
-                <p class="text-sm">Belum ada dokumentasi untuk kriteria ini.</p>
-              </div>
-            `;
-          } else {
-            container.innerHTML = filtered.map(renderCard).join('');
-          }
-        }
-
-        function renderAllGalleries() {
-          filterAndRender('pubContainerDokumentasi', 'Dokumentasi', searchDokumentasiVal);
-          filterAndRender('pubContainerEskul', 'Ekstrakurikuler', searchEskulVal);
-          filterAndRender('pubContainerKegiatan', 'Kegiatan', searchKegiatanVal);
-
-          // Refresh GLightbox
-          if (typeof GLightbox !== 'undefined') {
-            try {
-              if (lightboxInstance) lightboxInstance.destroy();
-              lightboxInstance = GLightbox({
-                selector: '.glightbox',
-                touchNavigation: true,
-                loop: true,
-                autoplayVideos: true
-              });
-            } catch (e) {
-              console.error('Error init GLightbox:', e);
-            }
-          }
-        }
-
-        window.switchJenjang = function(jenjang) {
-          selectedJenjang = jenjang;
-          const tabs = document.querySelectorAll('.jenjang-tab-btn');
-          const activeBadge = document.getElementById('active-jenjang-badge');
-
-          tabs.forEach(btn => {
-            const isSelected = btn.getAttribute('data-jenjang') === jenjang;
-            if (isSelected) {
-              btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md bg-emerald-800 text-white ring-2 ring-emerald-500/30";
-            } else {
-              btn.className = "jenjang-tab-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-emerald-700";
-            }
-          });
-
-          if (activeBadge) {
-            activeBadge.textContent = jenjang;
-          }
-
-          renderAllGalleries();
-        };
-
         function syncBanner() {
-          const saved = localStorage.getItem(STORAGE_KEY_BANNER_GALERI);
-          if (saved) {
+          const raw = localStorage.getItem(KEY_BANNER);
+          if (raw) {
             try {
-              const data = JSON.parse(saved);
+              const b = JSON.parse(raw);
               const titleEl = document.getElementById('pubGaleriBannerTitle');
               const descEl = document.getElementById('pubGaleriBannerDesc');
-              if (titleEl && data.title) titleEl.textContent = data.title;
-              if (descEl && data.desc) descEl.textContent = data.desc;
-            } catch (e) {
-              console.error('Error parsing cmsData_galeriBanner:', e);
-            }
+              if (titleEl && b.title) titleEl.textContent = b.title;
+              if (descEl && b.desc) descEl.textContent = b.desc;
+            } catch (e) {}
           }
+        }
+
+        function syncDynamicCards() {
+          // Remove previously injected dynamic CMS cards
+          document.querySelectorAll('.gallery-card[data-cms="true"]').forEach(el => el.remove());
+
+          let dokList = [];
+          let eskulList = [];
+          let kegList = [];
+
+          try { dokList = JSON.parse(localStorage.getItem(KEY_DOK) || '[]'); } catch (e) {}
+          try { eskulList = JSON.parse(localStorage.getItem(KEY_ESKUL) || '[]'); } catch (e) {}
+          try { kegList = JSON.parse(localStorage.getItem(KEY_KEGIATAN) || '[]'); } catch (e) {}
+
+          const gridSemua = document.getElementById('grid-semua');
+          const allItems = [...dokList, ...eskulList, ...kegList];
+
+          // Insert into Tab Semua
+          if (gridSemua) {
+            allItems.forEach(item => {
+              gridSemua.insertAdjacentHTML('afterbegin', createCard(item));
+            });
+          }
+
+          // Insert into specific category grids by jenjang
+          function insertByJenjang(list, targetMap) {
+            list.forEach(item => {
+              const j = (item.jenjang || 'Semua').toLowerCase();
+              const targetId = targetMap[j] || targetMap['semua'];
+              if (targetId) {
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) targetEl.insertAdjacentHTML('afterbegin', createCard(item));
+              }
+            });
+          }
+
+          insertByJenjang(eskulList, {
+            'sdi': 'grid-sdi-eskul',
+            'mi': 'grid-mi-eskul',
+            'mts': 'grid-mts-eskul',
+            'ma': 'grid-ma-eskul'
+          });
+
+          insertByJenjang(kegList, {
+            'sdi': 'grid-sdi-kegiatan',
+            'mi': 'grid-mi-kegiatan',
+            'mts': 'grid-mts-kegiatan',
+            'ma': 'grid-ma-kegiatan',
+            'ponpes': 'grid-ponpes-kegiatan'
+          });
+
+          insertByJenjang(dokList, {
+            'ponpes': 'grid-ponpes-dok'
+          });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
           syncBanner();
-          renderAllGalleries();
+          syncDynamicCards();
 
-          // Search inputs
-          const inpDok = document.getElementById('searchDokumentasi');
-          if (inpDok) {
-            inpDok.addEventListener('input', (e) => {
-              searchDokumentasiVal = e.target.value;
-              filterAndRender('pubContainerDokumentasi', 'Dokumentasi', searchDokumentasiVal);
-            });
-          }
-
-          const inpEskul = document.getElementById('searchEskul');
-          if (inpEskul) {
-            inpEskul.addEventListener('input', (e) => {
-              searchEskulVal = e.target.value;
-              filterAndRender('pubContainerEskul', 'Ekstrakurikuler', searchEskulVal);
-            });
-          }
-
-          const inpKeg = document.getElementById('searchKegiatan');
-          if (inpKeg) {
-            inpKeg.addEventListener('input', (e) => {
-              searchKegiatanVal = e.target.value;
-              filterAndRender('pubContainerKegiatan', 'Kegiatan', searchKegiatanVal);
-            });
-          }
-
-          // Mobile menu
-          const toggleMobileBtn = document.getElementById('toggleMobileBtn');
-          const mobileMenu = document.getElementById('mobileMenu');
-          if (toggleMobileBtn && mobileMenu) {
-            toggleMobileBtn.addEventListener('click', () => {
-              mobileMenu.classList.toggle('hidden');
-            });
-          }
-
-          // Sinkronisasi lintas tab
-          window.addEventListener('storage', (e) => {
-            if (e.key === STORAGE_KEY_GALERI) {
-              renderAllGalleries();
-            }
-            if (e.key === STORAGE_KEY_BANNER_GALERI) {
-              syncBanner();
-            }
+          window.addEventListener('storage', () => {
+            syncBanner();
+            syncDynamicCards();
           });
         });
       })();
@@ -580,5 +1173,15 @@
     <!-- GLightbox CDN & Initialization -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const lightbox = GLightbox({ 
+              selector: '.glightbox', 
+              touchNavigation: true, 
+              loop: true, 
+              autoplayVideos: true 
+          });
+      });
+    </script>
   </body>
 </html>

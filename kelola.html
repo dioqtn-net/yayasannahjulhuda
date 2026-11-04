@@ -1055,7 +1055,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
         </section>
 
-                <!-- ========================================== -->
+                        <!-- ========================================== -->
         <!-- 6. SECTION: KELOLA GALERI -->
         <!-- ========================================== -->
         <section id="galeri" class="admin-section hidden">
@@ -1067,7 +1067,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </span>
                 Kelola Konten Galeri
               </h2>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">Unggah dokumentasi foto dan video kegiatan santri di seluruh jenjang.</p>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Unggah dokumentasi foto dan video kegiatan santri di seluruh jenjang pendidikan.</p>
             </div>
             <a href="/galeri.html" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-800 shadow-sm transition">
               <i class="fas fa-external-link-alt"></i>
@@ -1075,7 +1075,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </a>
           </div>
 
-          <!-- 1. Form Kelola Banner Galeri -->
+          <!-- Banner Galeri Form -->
           <div class="bg-white rounded-xl shadow border p-6 mb-6">
             <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2 flex items-center gap-2">
               <i class="fas fa-heading text-emerald-700 text-sm"></i>
@@ -1098,102 +1098,247 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
           </div>
 
-          <!-- 2. Kelola Daftar Dokumentasi Galeri (CRUD) -->
+          <!-- ========================================== -->
+          <!-- BLOK A: DOKUMENTASI GALERI -->
+          <!-- ========================================== -->
           <div class="bg-white rounded-xl shadow border p-6 mb-6">
             <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
               <div>
-                <h3 class="text-xl font-bold text-gray-900">Daftar Dokumentasi & Video Galeri</h3>
-                <p class="text-xs text-gray-500">Koleksi foto dan video momen kebersamaan santri/siswa Yayasan Nahjul Huda.</p>
+                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">A</span>
+                  Dokumentasi Galeri
+                </h3>
+                <p class="text-xs text-gray-500">Koleksi foto dan video momen kelembagaan, visitasi, dan acara resmi yayasan.</p>
               </div>
-              <button type="button" id="btnTambahGaleri" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
+              <button type="button" id="btnTambahDok" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
                 <i class="fas fa-plus"></i>
-                <span>+ Tambah Galeri Baru</span>
+                <span>+ Tambah Dokumentasi Baru</span>
               </button>
             </div>
 
-            <!-- Tabel List Galeri -->
+            <!-- Tabel List Dokumentasi -->
             <div class="overflow-x-auto border rounded-lg mb-6">
               <table class="min-w-full text-sm text-left">
                 <thead class="bg-gray-50 border-b">
                   <tr>
                     <th class="px-4 py-3 font-semibold text-gray-700">Judul Dokumentasi</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-32">Tipe Konten</th>
                     <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
                     <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
                     <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
                   </tr>
                 </thead>
-                <tbody id="adminListGaleri">
-                  <!-- List akan dirender oleh JavaScript -->
+                <tbody id="adminListDok">
+                  <!-- Rendered via JS -->
                 </tbody>
               </table>
             </div>
 
-            <!-- Form Tambah/Edit Galeri (Hidden by default) -->
-            <div id="areaFormGaleri" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
-              <h3 id="formGaleriTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Galeri Baru</h3>
-              <input type="hidden" id="galeriId">
+            <!-- Form Tambah/Edit Dokumentasi -->
+            <div id="areaFormDok" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
+              <h4 id="formDokTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Dokumentasi Baru</h4>
+              <input type="hidden" id="dokId">
               <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul Dokumentasi <span class="text-red-500">*</span></label>
-                    <input type="text" id="galeriJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Ekstrakurikuler Futsal...">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
+                    <input type="text" id="dokJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Kunjungan Perpustakaan Nasional...">
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
-                    <input type="date" id="galeriTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
-                    <select id="galeriJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                      <option value="Semua">Semua Jenjang</option>
-                      <option value="SDI">SDI Al Kindy</option>
-                      <option value="MI">Madrasah Ibtidaiyah (MI)</option>
-                      <option value="MTs">MTs Nahjul Huda</option>
-                      <option value="MA">Madrasah Aliyah (MA)</option>
-                      <option value="Ponpes">Pondok Pesantren Assurur</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tipe Konten <span class="text-red-500">*</span></label>
-                    <select id="galeriTipe" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                      <option value="Dokumentasi">Dokumentasi</option>
-                      <option value="Ekstrakurikuler">Ekstrakurikuler</option>
-                      <option value="Kegiatan">Kegiatan</option>
-                    </select>
+                    <input type="date" id="dokTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
-                  <textarea id="galeriDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat momen dokumentasi..."></textarea>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
+                  <select id="dokJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                    <option value="Semua">Semua Jenjang</option>
+                    <option value="SDI">SDI Al Kindy</option>
+                    <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                    <option value="MTs">MTs Nahjul Huda</option>
+                    <option value="MA">Madrasah Aliyah (MA)</option>
+                    <option value="Ponpes">Pondok Pesantren Assurur</option>
+                  </select>
                 </div>
 
-                <div class="p-4 border rounded-lg bg-white space-y-3">
-                  <label class="block text-sm font-semibold text-gray-800">Unggah Media (Pilih Foto ATAU Video MP4)</label>
-                  <p class="text-[10px] text-gray-500 mt-1">*Format Foto: JPG/PNG (Maks 2MB), Format Video: MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi minimal 800x450 piksel.</p>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
+                  <textarea id="dokDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat dokumentasi..."></textarea>
+                </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                    <div class="border p-3 rounded-lg bg-slate-50">
-                      <label class="block text-xs font-semibold text-gray-700 mb-1">Upload Foto</label>
-                      <input type="file" id="galeriFoto" accept=".jpg, .jpeg, .png" class="text-xs border p-1.5 rounded bg-white w-full">
-                      <span class="block text-[11px] text-gray-400 mt-1">Gunakan format .jpg, .jpeg, .png</span>
-                    </div>
-                    <div class="border p-3 rounded-lg bg-slate-50">
-                      <label class="block text-xs font-semibold text-gray-700 mb-1">Upload Video MP4</label>
-                      <input type="file" id="galeriVideo" accept=".mp4" class="text-xs border p-1.5 rounded bg-white w-full">
-                      <span class="block text-[11px] text-gray-400 mt-1">Gunakan format file .mp4</span>
-                    </div>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1">*Jika sedang mengedit dan tidak memilih file baru, media sebelumnya tetap tersimpan.</p>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto/Video</label>
+                  <input type="file" id="dokMedia" accept=".jpg, .jpeg, .png, .mp4" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-lg bg-white">
+                  <p class="text-[10px] text-gray-500 mt-1">*Format: JPG/PNG (Maks 2MB), Video MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi min 800x450 piksel.</p>
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalGaleri" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanCardGaleri" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Galeri</button>
+                  <button type="button" id="btnBatalDok" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
+                  <button type="button" id="btnSimpanDok" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Dokumentasi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- BLOK B: EKSTRAKURIKULER -->
+          <!-- ========================================== -->
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">B</span>
+                  Ekstrakurikuler
+                </h3>
+                <p class="text-xs text-gray-500">Dokumentasi kegiatan minat bakat, marching band, futsal, dan olahraga santri.</p>
+              </div>
+              <button type="button" id="btnTambahEskul" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
+                <i class="fas fa-plus"></i>
+                <span>+ Tambah Ekstrakurikuler Baru</span>
+              </button>
+            </div>
+
+            <!-- Tabel List Ekstrakurikuler -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Ekstrakurikuler</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListEskul">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Form Tambah/Edit Ekstrakurikuler -->
+            <div id="areaFormEskul" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
+              <h4 id="formEskulTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Ekstrakurikuler Baru</h4>
+              <input type="hidden" id="eskulId">
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
+                    <input type="text" id="eskulJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Marching Band Gema Nahjul Huda...">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
+                    <input type="date" id="eskulTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
+                  <select id="eskulJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                    <option value="Semua">Semua Jenjang</option>
+                    <option value="SDI">SDI Al Kindy</option>
+                    <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                    <option value="MTs">MTs Nahjul Huda</option>
+                    <option value="MA">Madrasah Aliyah (MA)</option>
+                    <option value="Ponpes">Pondok Pesantren Assurur</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
+                  <textarea id="eskulDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat kegiatan ekstrakurikuler..."></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto/Video</label>
+                  <input type="file" id="eskulMedia" accept=".jpg, .jpeg, .png, .mp4" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-lg bg-white">
+                  <p class="text-[10px] text-gray-500 mt-1">*Format: JPG/PNG (Maks 2MB), Video MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi min 800x450 piksel.</p>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                  <button type="button" id="btnBatalEskul" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
+                  <button type="button" id="btnSimpanEskul" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- BLOK C: KEGIATAN -->
+          <!-- ========================================== -->
+          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">C</span>
+                  Kegiatan & Pembiasaan Santri
+                </h3>
+                <p class="text-xs text-gray-500">Dokumentasi agenda ibadah harian, peringatan hari besar Islam (PHBI), dan kegiatan sekolah.</p>
+              </div>
+              <button type="button" id="btnTambahKegiatan" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
+                <i class="fas fa-plus"></i>
+                <span>+ Tambah Kegiatan Baru</span>
+              </button>
+            </div>
+
+            <!-- Tabel List Kegiatan -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Kegiatan</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListKegiatan">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Form Tambah/Edit Kegiatan -->
+            <div id="areaFormKegiatan" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
+              <h4 id="formKegiatanTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Kegiatan Baru</h4>
+              <input type="hidden" id="kegiatanId">
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
+                    <input type="text" id="kegiatanJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Peringatan Isra Mi'raj...">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
+                    <input type="date" id="kegiatanTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
+                  <select id="kegiatanJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                    <option value="Semua">Semua Jenjang</option>
+                    <option value="SDI">SDI Al Kindy</option>
+                    <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                    <option value="MTs">MTs Nahjul Huda</option>
+                    <option value="MA">Madrasah Aliyah (MA)</option>
+                    <option value="Ponpes">Pondok Pesantren Assurur</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
+                  <textarea id="kegiatanDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat agenda kegiatan..."></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto/Video</label>
+                  <input type="file" id="kegiatanMedia" accept=".jpg, .jpeg, .png, .mp4" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-lg bg-white">
+                  <p class="text-[10px] text-gray-500 mt-1">*Format: JPG/PNG (Maks 2MB), Video MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi min 800x450 piksel.</p>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                  <button type="button" id="btnBatalKegiatan" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
+                  <button type="button" id="btnSimpanKegiatan" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
                 </div>
               </div>
             </div>
@@ -2334,103 +2479,96 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         });
       })();
     </script>
-      <!-- Script CRUD Galeri (localStorage) -->
+          <!-- Script CRUD 3 Blok Galeri (localStorage) -->
     <script>
       (function() {
-        const STORAGE_KEY_GALERI = 'cmsData_listGaleri';
-        const STORAGE_KEY_BANNER_GALERI = 'cmsData_galeriBanner';
+        const KEY_DOK = 'cmsData_listGaleri';
+        const KEY_ESKUL = 'cmsData_listEskul';
+        const KEY_KEGIATAN = 'cmsData_listKegiatan';
+        const KEY_BANNER = 'cmsData_galeriBanner';
 
-        const defaultGaleri = [
+        const defaultDok = [
           {
-            id: 'galeri-1',
-            judul: 'Latihan Rutin Ekstrakurikuler Futsal',
-            tipe: 'Ekstrakurikuler',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Siswa MTs giat berlatih teknik dasar, kerja sama tim, dan ketahanan fisik dalam latihan mingguan futsal di lapangan yayasan.',
-            media: '/media/galeri/mts/ekstrakurikuler_futsal_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-2',
-            judul: 'Penampilan Marching Band Gema Nahjul Huda',
-            tipe: 'Ekstrakurikuler',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Aksi memukau tim drum band siswa MTs saat unjuk kebolehan membawakan lagu-lagu mars dan sholawat penuh semangat.',
-            media: '/media/galeri/mts/ekstrakurikuler_drum_band.mp4',
-            mediaType: 'video'
-          },
-          {
-            id: 'galeri-3',
-            judul: 'Tausiyah Isra Mi'raj Bersama Ustadz Maulana',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Peringatan Isra Mi'raj Nabi Muhammad SAW penuh hikmah dan antusiasme santri bersama pendakwah nasional.',
-            media: '/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-4',
-            judul: 'Pembiasaan Sholat Dhuha Berjamaah Sebelum KBM',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Kegiatan pembiasaan ibadah sholat dhuha berjamaah dan tadarus Al-Qur'an setiap pagi di masjid yayasan.',
-            media: '/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-5',
-            judul: 'Pesta Demokrasi Pemilihan Ketua OSIS MTs',
-            tipe: 'Kegiatan',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Edukasi demokrasi santun dan pemungutan suara pemilihan ketua serta wakil ketua OSIS periode 2026/2027.',
-            media: '/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg',
-            mediaType: 'image'
-          },
-          {
-            id: 'galeri-6',
+            id: 'dok-1',
             judul: 'Delegasi Santri Lomba Cerdas Cermat Antar Pesantren',
-            tipe: 'Dokumentasi',
             jenjang: 'Ponpes',
             tanggal: '2026-10-28',
             deskripsi: 'Momen perjuangan dan kebersamaan santri Ponpes Assurur dalam ajang kejuaraan cerdas cermat keagamaan.',
-            media: '/media/galeri/ponpes/PESERTA.jpg',
-            mediaType: 'image'
+            media: '/media/galeri/ponpes/PESERTA.jpg'
           },
           {
-            id: 'galeri-7',
+            id: 'dok-2',
             judul: 'Testimoni & Doa Keberkahan oleh Ustadz Maulana',
-            tipe: 'Dokumentasi',
             jenjang: 'Semua',
             tanggal: '2026-10-21',
             deskripsi: 'Ungkapan apresiasi dan doa tulus Ustadz Maulana untuk kemajuan dakwah dan pendidikan Yayasan Nahjul Huda.',
-            media: '/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4',
-            mediaType: 'video'
+            media: '/media/galeri/mts/testimoni_yayasan_nahjul_huda_ponpes_as-surur_oleh_ustadz_maulana.mp4'
           }
         ];
 
-        function getGaleriList() {
-          const raw = localStorage.getItem(STORAGE_KEY_GALERI);
+        const defaultEskul = [
+          {
+            id: 'eskul-1',
+            judul: 'Latihan Rutin Ekstrakurikuler Futsal',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Wadah penyaluran bakat olahraga untuk membentuk karakter sportif santri dan siswa.',
+            media: '/media/galeri/mts/ekstrakurikuler_futsal_1.jpg'
+          },
+          {
+            id: 'eskul-2',
+            judul: 'Marching Band Gema Nahjul Huda',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.',
+            media: '/media/galeri/mts/ekstrakurikuler_drum_band.mp4'
+          }
+        ];
+
+        const defaultKegiatan = [
+          {
+            id: 'kegiatan-1',
+            judul: 'Peringatan Isra Mi'raj Bersama Ustadz Maulana',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Momen khidmat menghadirkan tausiyah dan nasihat kebaikan dari Ustadz Maulana.',
+            media: '/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg'
+          },
+          {
+            id: 'kegiatan-2',
+            judul: 'Pembiasaan Sholat Dhuha Berjamaah Sebelum KBM',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Rutinitas pembiasaan sholat sunnah dhuha dan tadarus Al-Qur'an sebelum proses belajar mengajar.',
+            media: '/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg'
+          },
+          {
+            id: 'kegiatan-3',
+            judul: 'Pemilihan Ketua & Wakil Ketua OSIS MTs Periode 2026/2027',
+            jenjang: 'MTs',
+            tanggal: '2026-10-21',
+            deskripsi: 'Pesta demokrasi sekolah untuk melatih kepemimpinan dan integritas berorganisasi siswa.',
+            media: '/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg'
+          }
+        ];
+
+        function getItems(key, defaults) {
+          const raw = localStorage.getItem(key);
           if (!raw) {
-            localStorage.setItem(STORAGE_KEY_GALERI, JSON.stringify(defaultGaleri));
-            return defaultGaleri;
+            localStorage.setItem(key, JSON.stringify(defaults));
+            return defaults;
           }
           try {
             const parsed = JSON.parse(raw);
             if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaultGaleri;
+            return defaults;
           } catch (e) {
-            console.error('Error parsing galeri list:', e);
-            return defaultGaleri;
+            return defaults;
           }
         }
 
-        function saveGaleriList(list) {
-          localStorage.setItem(STORAGE_KEY_GALERI, JSON.stringify(list));
+        function saveItems(key, list) {
+          localStorage.setItem(key, JSON.stringify(list));
         }
 
         function formatIndoDate(dateStr) {
@@ -2448,46 +2586,53 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           return dateStr;
         }
 
-        let editingGaleriMedia = '';
-        let editingGaleriMediaType = 'image';
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text || '';
+          return div.innerHTML;
+        }
 
-        function renderAdminTableGaleri() {
-          const tbody = document.getElementById('adminListGaleri');
+        function readMediaFile(input, fallbackMedia) {
+          return new Promise((resolve) => {
+            if (input && input.files && input.files[0]) {
+              const file = input.files[0];
+              if (file.size > 2 * 1024 * 1024 || file.name.toLowerCase().endsWith('.mp4')) {
+                resolve(`/media/galeri/${file.name}`);
+              } else {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = () => resolve(`/media/galeri/${file.name}`);
+                reader.readAsDataURL(file);
+              }
+            } else {
+              resolve(fallbackMedia || '/media/background/wallpaper_yayasan.jpg');
+            }
+          });
+        }
+
+        let editingDokMedia = '';
+        let editingEskulMedia = '';
+        let editingKegiatanMedia = '';
+
+        // 1. Render Blok A: Dokumentasi
+        function renderTableDok() {
+          const tbody = document.getElementById('adminListDok');
           if (!tbody) return;
-
-          const list = getGaleriList();
-          if (!list || list.length === 0) {
-            tbody.innerHTML = `
-              <tr>
-                <td colspan="5" class="px-4 py-8 text-center text-gray-400">
-                  Belum ada data galeri. Silakan klik tombol <strong>+ Tambah Galeri Baru</strong>.
-                </td>
-              </tr>
-            `;
+          const list = getItems(KEY_DOK, defaultDok);
+          if (list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Belum ada dokumentasi.</td></tr>';
             return;
           }
-
-          const escapeHtml = (text) => {
-            const div = document.createElement('div');
-            div.textContent = text || '';
-            return div.innerHTML;
-          };
-
-          tbody.innerHTML = list.map((item) => {
-            const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
-            const isVideo = item.mediaType === 'video' || (item.media && item.media.endsWith('.mp4'));
-            const mediaTag = isVideo 
-              ? '<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
-              : '<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200"><i class="fas fa-image"></i> Foto</span>';
-
+          tbody.innerHTML = list.map(item => {
+            const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
+            const mediaBadge = isVideo
+              ? '<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
+              : '<span class="inline-flex items-center gap-1 text-[11px] text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200"><i class="fas fa-image"></i> Foto</span>';
             return `
               <tr class="border-b hover:bg-gray-50 transition">
                 <td class="px-4 py-3 font-semibold text-gray-800">
                   <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
-                  <div class="mt-1">${mediaTag}</div>
-                </td>
-                <td class="px-4 py-3 text-xs text-gray-700 whitespace-nowrap">
-                  ${escapeHtml(item.tipe || 'Dokumentasi')}
+                  <div class="mt-1">${mediaBadge}</div>
                 </td>
                 <td class="px-4 py-3">
                   <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
@@ -2495,14 +2640,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
-                  ${escapeHtml(tgl)}
+                  ${escapeHtml(formatIndoDate(item.tanggal))}
                 </td>
                 <td class="px-4 py-3 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <button type="button" onclick="window.cmsEditGaleri('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50 transition" title="Edit Galeri">
+                    <button type="button" onclick="window.cmsEditDok('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1 rounded" title="Edit">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </button>
-                    <button type="button" onclick="window.cmsHapusGaleri('${item.id}')" class="text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50 transition" title="Hapus Galeri">
+                    <button type="button" onclick="window.cmsHapusDok('${item.id}')" class="text-red-600 hover:text-red-800 p-1 rounded" title="Hapus">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
                   </div>
@@ -2512,188 +2657,338 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }).join('');
         }
 
-        window.cmsEditGaleri = function(id) {
-          const list = getGaleriList();
-          const item = list.find(g => g.id === id);
+        window.cmsEditDok = function(id) {
+          const list = getItems(KEY_DOK, defaultDok);
+          const item = list.find(d => d.id === id);
           if (!item) return;
-
-          document.getElementById('galeriId').value = item.id;
-          document.getElementById('galeriJudul').value = item.judul || '';
-          document.getElementById('galeriTanggal').value = item.tanggal || '';
-          document.getElementById('galeriJenjang').value = item.jenjang || 'Semua';
-          document.getElementById('galeriTipe').value = item.tipe || 'Dokumentasi';
-          document.getElementById('galeriDeskripsi').value = item.deskripsi || '';
-
-          document.getElementById('galeriFoto').value = '';
-          document.getElementById('galeriVideo').value = '';
-
-          editingGaleriMedia = item.media || '';
-          editingGaleriMediaType = item.mediaType || (item.media && item.media.endsWith('.mp4') ? 'video' : 'image');
-
-          document.getElementById('formGaleriTitle').textContent = `Edit Galeri: ${item.judul}`;
-          const area = document.getElementById('areaFormGaleri');
+          document.getElementById('dokId').value = item.id;
+          document.getElementById('dokJudul').value = item.judul || '';
+          document.getElementById('dokTanggal').value = item.tanggal || '';
+          document.getElementById('dokJenjang').value = item.jenjang || 'Semua';
+          document.getElementById('dokDeskripsi').value = item.deskripsi || '';
+          document.getElementById('dokMedia').value = '';
+          editingDokMedia = item.media || '';
+          document.getElementById('formDokTitle').textContent = `Edit Dokumentasi: ${item.judul}`;
+          const area = document.getElementById('areaFormDok');
           area.classList.remove('hidden');
           area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
 
-        window.cmsHapusGaleri = function(id) {
-          if (!confirm('Apakah Anda yakin ingin menghapus dokumentasi galeri ini?')) return;
-          const list = getGaleriList().filter(g => g.id !== id);
-          saveGaleriList(list);
-          renderAdminTableGaleri();
+        window.cmsHapusDok = function(id) {
+          if (!confirm('Hapus dokumentasi ini?')) return;
+          const list = getItems(KEY_DOK, defaultDok).filter(d => d.id !== id);
+          saveItems(KEY_DOK, list);
+          renderTableDok();
         };
 
-        function readMediaFile(fotoInput, videoInput, fallbackMedia, fallbackType) {
-          return new Promise((resolve) => {
-            // Prioritaskan file video jika dipilih
-            if (videoInput && videoInput.files && videoInput.files[0]) {
-              const file = videoInput.files[0];
-              if (file.size > 2 * 1024 * 1024) {
-                resolve({ media: `/media/galeri/${file.name}`, mediaType: 'video' });
-              } else {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve({ media: e.target.result, mediaType: 'video' });
-                reader.onerror = () => resolve({ media: `/media/galeri/${file.name}`, mediaType: 'video' });
-                reader.readAsDataURL(file);
-              }
-              return;
-            }
-
-            // Cek file foto jika dipilih
-            if (fotoInput && fotoInput.files && fotoInput.files[0]) {
-              const file = fotoInput.files[0];
-              if (file.size > 2 * 1024 * 1024) {
-                resolve({ media: `/media/galeri/${file.name}`, mediaType: 'image' });
-              } else {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve({ media: e.target.result, mediaType: 'image' });
-                reader.onerror = () => resolve({ media: `/media/galeri/${file.name}`, mediaType: 'image' });
-                reader.readAsDataURL(file);
-              }
-              return;
-            }
-
-            // Fallback
-            if (fallbackMedia) {
-              resolve({
-                media: fallbackMedia,
-                mediaType: fallbackType || (fallbackMedia.endsWith('.mp4') ? 'video' : 'image')
-              });
-              return;
-            }
-
-            resolve({ media: '/media/background/wallpaper_yayasan.jpg', mediaType: 'image' });
-          });
+        // 2. Render Blok B: Ekstrakurikuler
+        function renderTableEskul() {
+          const tbody = document.getElementById('adminListEskul');
+          if (!tbody) return;
+          const list = getItems(KEY_ESKUL, defaultEskul);
+          if (list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Belum ada ekstrakurikuler.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = list.map(item => {
+            const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
+            const mediaBadge = isVideo
+              ? '<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
+              : '<span class="inline-flex items-center gap-1 text-[11px] text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200"><i class="fas fa-image"></i> Foto</span>';
+            return `
+              <tr class="border-b hover:bg-gray-50 transition">
+                <td class="px-4 py-3 font-semibold text-gray-800">
+                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="mt-1">${mediaBadge}</div>
+                </td>
+                <td class="px-4 py-3">
+                  <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    ${escapeHtml(item.jenjang)}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
+                  ${escapeHtml(formatIndoDate(item.tanggal))}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <button type="button" onclick="window.cmsEditEskul('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1 rounded" title="Edit">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </button>
+                    <button type="button" onclick="window.cmsHapusEskul('${item.id}')" class="text-red-600 hover:text-red-800 p-1 rounded" title="Hapus">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
         }
 
+        window.cmsEditEskul = function(id) {
+          const list = getItems(KEY_ESKUL, defaultEskul);
+          const item = list.find(e => e.id === id);
+          if (!item) return;
+          document.getElementById('eskulId').value = item.id;
+          document.getElementById('eskulJudul').value = item.judul || '';
+          document.getElementById('eskulTanggal').value = item.tanggal || '';
+          document.getElementById('eskulJenjang').value = item.jenjang || 'Semua';
+          document.getElementById('eskulDeskripsi').value = item.deskripsi || '';
+          document.getElementById('eskulMedia').value = '';
+          editingEskulMedia = item.media || '';
+          document.getElementById('formEskulTitle').textContent = `Edit Ekstrakurikuler: ${item.judul}`;
+          const area = document.getElementById('areaFormEskul');
+          area.classList.remove('hidden');
+          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+
+        window.cmsHapusEskul = function(id) {
+          if (!confirm('Hapus ekstrakurikuler ini?')) return;
+          const list = getItems(KEY_ESKUL, defaultEskul).filter(e => e.id !== id);
+          saveItems(KEY_ESKUL, list);
+          renderTableEskul();
+        };
+
+        // 3. Render Blok C: Kegiatan
+        function renderTableKegiatan() {
+          const tbody = document.getElementById('adminListKegiatan');
+          if (!tbody) return;
+          const list = getItems(KEY_KEGIATAN, defaultKegiatan);
+          if (list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Belum ada kegiatan.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = list.map(item => {
+            const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
+            const mediaBadge = isVideo
+              ? '<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
+              : '<span class="inline-flex items-center gap-1 text-[11px] text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200"><i class="fas fa-image"></i> Foto</span>';
+            return `
+              <tr class="border-b hover:bg-gray-50 transition">
+                <td class="px-4 py-3 font-semibold text-gray-800">
+                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="mt-1">${mediaBadge}</div>
+                </td>
+                <td class="px-4 py-3">
+                  <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    ${escapeHtml(item.jenjang)}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
+                  ${escapeHtml(formatIndoDate(item.tanggal))}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <button type="button" onclick="window.cmsEditKegiatan('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1 rounded" title="Edit">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </button>
+                    <button type="button" onclick="window.cmsHapusKegiatan('${item.id}')" class="text-red-600 hover:text-red-800 p-1 rounded" title="Hapus">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        window.cmsEditKegiatan = function(id) {
+          const list = getItems(KEY_KEGIATAN, defaultKegiatan);
+          const item = list.find(k => k.id === id);
+          if (!item) return;
+          document.getElementById('kegiatanId').value = item.id;
+          document.getElementById('kegiatanJudul').value = item.judul || '';
+          document.getElementById('kegiatanTanggal').value = item.tanggal || '';
+          document.getElementById('kegiatanJenjang').value = item.jenjang || 'Semua';
+          document.getElementById('kegiatanDeskripsi').value = item.deskripsi || '';
+          document.getElementById('kegiatanMedia').value = '';
+          editingKegiatanMedia = item.media || '';
+          document.getElementById('formKegiatanTitle').textContent = `Edit Kegiatan: ${item.judul}`;
+          const area = document.getElementById('areaFormKegiatan');
+          area.classList.remove('hidden');
+          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+
+        window.cmsHapusKegiatan = function(id) {
+          if (!confirm('Hapus kegiatan ini?')) return;
+          const list = getItems(KEY_KEGIATAN, defaultKegiatan).filter(k => k.id !== id);
+          saveItems(KEY_KEGIATAN, list);
+          renderTableKegiatan();
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-          renderAdminTableGaleri();
+          renderTableDok();
+          renderTableEskul();
+          renderTableKegiatan();
 
-          const btnTambah = document.getElementById('btnTambahGaleri');
-          const btnBatal = document.getElementById('btnBatalGaleri');
-          const btnSimpan = document.getElementById('btnSimpanCardGaleri');
-          const areaForm = document.getElementById('areaFormGaleri');
+          // Handler Blok A: Dokumentasi
+          const btnTambahDok = document.getElementById('btnTambahDok');
+          const btnBatalDok = document.getElementById('btnBatalDok');
+          const btnSimpanDok = document.getElementById('btnSimpanDok');
+          const areaDok = document.getElementById('areaFormDok');
 
-          if (btnTambah) {
-            btnTambah.addEventListener('click', () => {
-              document.getElementById('galeriId').value = '';
-              document.getElementById('galeriJudul').value = '';
-              document.getElementById('galeriJenjang').value = 'Semua';
-              document.getElementById('galeriTipe').value = 'Dokumentasi';
-              const today = new Date().toISOString().split('T')[0];
-              document.getElementById('galeriTanggal').value = today;
-              document.getElementById('galeriDeskripsi').value = '';
-              document.getElementById('galeriFoto').value = '';
-              document.getElementById('galeriVideo').value = '';
-              editingGaleriMedia = '';
-              editingGaleriMediaType = 'image';
-
-              document.getElementById('formGaleriTitle').textContent = 'Tambah Galeri Baru';
-              areaForm.classList.remove('hidden');
-              areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (btnTambahDok) {
+            btnTambahDok.addEventListener('click', () => {
+              document.getElementById('dokId').value = '';
+              document.getElementById('dokJudul').value = '';
+              document.getElementById('dokJenjang').value = 'Semua';
+              document.getElementById('dokTanggal').value = new Date().toISOString().split('T')[0];
+              document.getElementById('dokDeskripsi').value = '';
+              document.getElementById('dokMedia').value = '';
+              editingDokMedia = '';
+              document.getElementById('formDokTitle').textContent = 'Tambah Dokumentasi Baru';
+              areaDok.classList.remove('hidden');
+              areaDok.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             });
           }
 
-          if (btnBatal) {
-            btnBatal.addEventListener('click', () => {
-              areaForm.classList.add('hidden');
-            });
+          if (btnBatalDok) {
+            btnBatalDok.addEventListener('click', () => areaDok.classList.add('hidden'));
           }
 
-          if (btnSimpan) {
-            btnSimpan.addEventListener('click', async () => {
-              const judul = document.getElementById('galeriJudul').value.trim();
-              const jenjang = document.getElementById('galeriJenjang').value;
-              const tipe = document.getElementById('galeriTipe').value;
-              const tanggal = document.getElementById('galeriTanggal').value;
-              const deskripsi = document.getElementById('galeriDeskripsi').value.trim();
-              const galeriId = document.getElementById('galeriId').value.trim();
+          if (btnSimpanDok) {
+            btnSimpanDok.addEventListener('click', async () => {
+              const judul = document.getElementById('dokJudul').value.trim();
+              const jenjang = document.getElementById('dokJenjang').value;
+              const tanggal = document.getElementById('dokTanggal').value;
+              const deskripsi = document.getElementById('dokDeskripsi').value.trim();
+              const dokId = document.getElementById('dokId').value.trim();
 
-              if (!judul) {
-                alert('Judul dokumentasi wajib diisi!');
-                document.getElementById('galeriJudul').focus();
-                return;
-              }
+              if (!judul) { alert('Judul wajib diisi!'); return; }
+              if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
+              if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
 
-              if (!tanggal) {
-                alert('Tanggal dokumentasi wajib diisi!');
-                document.getElementById('galeriTanggal').focus();
-                return;
-              }
+              const media = await readMediaFile(document.getElementById('dokMedia'), editingDokMedia);
+              const list = getItems(KEY_DOK, defaultDok);
 
-              if (!deskripsi) {
-                alert('Deskripsi singkat wajib diisi!');
-                document.getElementById('galeriDeskripsi').focus();
-                return;
-              }
-
-              const inpFoto = document.getElementById('galeriFoto');
-              const inpVideo = document.getElementById('galeriVideo');
-
-              const { media, mediaType } = await readMediaFile(inpFoto, inpVideo, editingGaleriMedia, editingGaleriMediaType);
-
-              const list = getGaleriList();
-
-              if (galeriId) {
-                // Mode Update
-                const idx = list.findIndex(g => g.id === galeriId);
+              if (dokId) {
+                const idx = list.findIndex(d => d.id === dokId);
                 if (idx !== -1) {
-                  list[idx] = {
-                    ...list[idx],
-                    judul,
-                    jenjang,
-                    tipe,
-                    tanggal,
-                    tanggalFormatted: formatIndoDate(tanggal),
-                    deskripsi,
-                    media,
-                    mediaType
-                  };
+                  list[idx] = { ...list[idx], judul, jenjang, tanggal, deskripsi, media };
                 }
               } else {
-                // Mode Create
-                const newGaleri = {
-                  id: 'galeri-' + Date.now(),
-                  judul,
-                  jenjang,
-                  tipe,
-                  tanggal,
-                  tanggalFormatted: formatIndoDate(tanggal),
-                  deskripsi,
-                  media,
-                  mediaType
-                };
-                list.unshift(newGaleri);
+                list.unshift({ id: 'dok-' + Date.now(), judul, jenjang, tanggal, deskripsi, media });
               }
 
-              saveGaleriList(list);
-              renderAdminTableGaleri();
-              areaForm.classList.add('hidden');
-              alert('Sukses! Data galeri berhasil disimpan.');
+              saveItems(KEY_DOK, list);
+              renderTableDok();
+              areaDok.classList.add('hidden');
+              alert('Sukses! Dokumentasi berhasil disimpan.');
             });
           }
 
-          // Logika Banner Galeri
+          // Handler Blok B: Ekstrakurikuler
+          const btnTambahEskul = document.getElementById('btnTambahEskul');
+          const btnBatalEskul = document.getElementById('btnBatalEskul');
+          const btnSimpanEskul = document.getElementById('btnSimpanEskul');
+          const areaEskul = document.getElementById('areaFormEskul');
+
+          if (btnTambahEskul) {
+            btnTambahEskul.addEventListener('click', () => {
+              document.getElementById('eskulId').value = '';
+              document.getElementById('eskulJudul').value = '';
+              document.getElementById('eskulJenjang').value = 'Semua';
+              document.getElementById('eskulTanggal').value = new Date().toISOString().split('T')[0];
+              document.getElementById('eskulDeskripsi').value = '';
+              document.getElementById('eskulMedia').value = '';
+              editingEskulMedia = '';
+              document.getElementById('formEskulTitle').textContent = 'Tambah Ekstrakurikuler Baru';
+              areaEskul.classList.remove('hidden');
+              areaEskul.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          }
+
+          if (btnBatalEskul) {
+            btnBatalEskul.addEventListener('click', () => areaEskul.classList.add('hidden'));
+          }
+
+          if (btnSimpanEskul) {
+            btnSimpanEskul.addEventListener('click', async () => {
+              const judul = document.getElementById('eskulJudul').value.trim();
+              const jenjang = document.getElementById('eskulJenjang').value;
+              const tanggal = document.getElementById('eskulTanggal').value;
+              const deskripsi = document.getElementById('eskulDeskripsi').value.trim();
+              const eskulId = document.getElementById('eskulId').value.trim();
+
+              if (!judul) { alert('Judul wajib diisi!'); return; }
+              if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
+              if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
+
+              const media = await readMediaFile(document.getElementById('eskulMedia'), editingEskulMedia);
+              const list = getItems(KEY_ESKUL, defaultEskul);
+
+              if (eskulId) {
+                const idx = list.findIndex(e => e.id === eskulId);
+                if (idx !== -1) {
+                  list[idx] = { ...list[idx], judul, jenjang, tanggal, deskripsi, media };
+                }
+              } else {
+                list.unshift({ id: 'eskul-' + Date.now(), judul, jenjang, tanggal, deskripsi, media });
+              }
+
+              saveItems(KEY_ESKUL, list);
+              renderTableEskul();
+              areaEskul.classList.add('hidden');
+              alert('Sukses! Ekstrakurikuler berhasil disimpan.');
+            });
+          }
+
+          // Handler Blok C: Kegiatan
+          const btnTambahKegiatan = document.getElementById('btnTambahKegiatan');
+          const btnBatalKegiatan = document.getElementById('btnBatalKegiatan');
+          const btnSimpanKegiatan = document.getElementById('btnSimpanKegiatan');
+          const areaKegiatan = document.getElementById('areaFormKegiatan');
+
+          if (btnTambahKegiatan) {
+            btnTambahKegiatan.addEventListener('click', () => {
+              document.getElementById('kegiatanId').value = '';
+              document.getElementById('kegiatanJudul').value = '';
+              document.getElementById('kegiatanJenjang').value = 'Semua';
+              document.getElementById('kegiatanTanggal').value = new Date().toISOString().split('T')[0];
+              document.getElementById('kegiatanDeskripsi').value = '';
+              document.getElementById('kegiatanMedia').value = '';
+              editingKegiatanMedia = '';
+              document.getElementById('formKegiatanTitle').textContent = 'Tambah Kegiatan Baru';
+              areaKegiatan.classList.remove('hidden');
+              areaKegiatan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          }
+
+          if (btnBatalKegiatan) {
+            btnBatalKegiatan.addEventListener('click', () => areaKegiatan.classList.add('hidden'));
+          }
+
+          if (btnSimpanKegiatan) {
+            btnSimpanKegiatan.addEventListener('click', async () => {
+              const judul = document.getElementById('kegiatanJudul').value.trim();
+              const jenjang = document.getElementById('kegiatanJenjang').value;
+              const tanggal = document.getElementById('kegiatanTanggal').value;
+              const deskripsi = document.getElementById('kegiatanDeskripsi').value.trim();
+              const kegiatanId = document.getElementById('kegiatanId').value.trim();
+
+              if (!judul) { alert('Judul wajib diisi!'); return; }
+              if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
+              if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
+
+              const media = await readMediaFile(document.getElementById('kegiatanMedia'), editingKegiatanMedia);
+              const list = getItems(KEY_KEGIATAN, defaultKegiatan);
+
+              if (kegiatanId) {
+                const idx = list.findIndex(k => k.id === kegiatanId);
+                if (idx !== -1) {
+                  list[idx] = { ...list[idx], judul, jenjang, tanggal, deskripsi, media };
+                }
+              } else {
+                list.unshift({ id: 'kegiatan-' + Date.now(), judul, jenjang, tanggal, deskripsi, media });
+              }
+
+              saveItems(KEY_KEGIATAN, list);
+              renderTableKegiatan();
+              areaKegiatan.classList.add('hidden');
+              alert('Sukses! Kegiatan berhasil disimpan.');
+            });
+          }
+
+          // Banner Galeri
           const btnSimpanBannerGaleri = document.getElementById('btnSimpanBannerGaleri');
           if (btnSimpanBannerGaleri) {
             btnSimpanBannerGaleri.addEventListener('click', () => {
@@ -2701,25 +2996,21 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 title: document.getElementById('galeriBannerTitle').value,
                 desc: document.getElementById('galeriBannerDesc').value
               };
-              localStorage.setItem(STORAGE_KEY_BANNER_GALERI, JSON.stringify(bannerData));
+              localStorage.setItem(KEY_BANNER, JSON.stringify(bannerData));
               alert('Teks banner galeri berhasil disimpan!');
             });
           }
 
-          // Load data banner galeri saat halaman kelola dibuka
-          const savedBannerGaleri = localStorage.getItem(STORAGE_KEY_BANNER_GALERI);
-          if (savedBannerGaleri) {
+          const savedBanner = localStorage.getItem(KEY_BANNER);
+          if (savedBanner) {
             try {
-              const data = JSON.parse(savedBannerGaleri);
-              if (document.getElementById('galeriBannerTitle') && data.title) document.getElementById('galeriBannerTitle').value = data.title;
-              if (document.getElementById('galeriBannerDesc') && data.desc) document.getElementById('galeriBannerDesc').value = data.desc;
-            } catch (e) {
-              console.error('Error parsing cmsData_galeriBanner:', e);
-            }
+              const b = JSON.parse(savedBanner);
+              if (document.getElementById('galeriBannerTitle') && b.title) document.getElementById('galeriBannerTitle').value = b.title;
+              if (document.getElementById('galeriBannerDesc') && b.desc) document.getElementById('galeriBannerDesc').value = b.desc;
+            } catch (e) {}
           }
         });
       })();
     </script>
-
   </body>
 </html>
