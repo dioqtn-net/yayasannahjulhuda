@@ -171,6 +171,7 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Ekstrakurikuler</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Futsal
                       </h3>
@@ -195,6 +196,7 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Ekstrakurikuler</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Drum Band
                       </h3>
@@ -230,6 +232,7 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Kegiatan</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Peringatan Isra Mi'raj
                       </h3>
@@ -251,6 +254,7 @@
                   </a>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Kegiatan</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Pembiasaan Sholat Dhuha
                       </h3>
@@ -286,6 +290,7 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Kegiatan</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Pemilihan OSIS 2026/2027
                       </h3>
@@ -327,6 +332,7 @@
                   </div>
                   <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
+                      <div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Kegiatan</span></div>
                       <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                         Lomba Cerdas Cermat
                       </h3>
@@ -1027,9 +1033,8 @@
         });
       }
 
-      // Dynamic CMS Data Synchronizer
+            // Dynamic CMS Data Synchronizer
       (function() {
-        const KEY_DOK = 'cmsData_listGaleri';
         const KEY_ESKUL = 'cmsData_listEskul';
         const KEY_KEGIATAN = 'cmsData_listKegiatan';
         const KEY_BANNER = 'cmsData_galeriBanner';
@@ -1055,7 +1060,7 @@
           return dateStr;
         }
 
-        function createCard(item) {
+        function createCard(item, tipe) {
           const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
           const mediaHtml = isVideo
             ? `<div class="relative overflow-hidden rounded-t-xl bg-slate-900 w-full aspect-video">
@@ -1070,11 +1075,17 @@
                  </a>
                </div>`;
 
+          // Conditional statement: sisipkan badge hitam teks putih sesuai array asalnya
+          const kategoriBadge = tipe
+            ? `<div class="mb-2"><span class="bg-gray-900 text-white text-xs font-semibold px-2.5 py-0.5 rounded">${escapeHtml(tipe)}</span></div>`
+            : '';
+
           return `
             <div data-jenjang="${escapeHtml(item.jenjang)}" data-cms="true" class="gallery-card group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full min-w-0">
               ${mediaHtml}
               <div class="p-5 flex-1 flex flex-col justify-between">
                 <div>
+                  ${kategoriBadge}
                   <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                     ${escapeHtml(item.judul)}
                   </h3>
@@ -1108,32 +1119,32 @@
           // Remove previously injected dynamic CMS cards
           document.querySelectorAll('.gallery-card[data-cms="true"]').forEach(el => el.remove());
 
-          let dokList = [];
           let eskulList = [];
           let kegList = [];
 
-          try { dokList = JSON.parse(localStorage.getItem(KEY_DOK) || '[]'); } catch (e) {}
           try { eskulList = JSON.parse(localStorage.getItem(KEY_ESKUL) || '[]'); } catch (e) {}
           try { kegList = JSON.parse(localStorage.getItem(KEY_KEGIATAN) || '[]'); } catch (e) {}
 
           const gridSemua = document.getElementById('grid-semua');
-          const allItems = [...dokList, ...eskulList, ...kegList];
 
-          // Insert into Tab Semua
+          // Insert into Tab Semua dengan label kategori hitam-putih
           if (gridSemua) {
-            allItems.forEach(item => {
-              gridSemua.insertAdjacentHTML('afterbegin', createCard(item));
+            eskulList.forEach(item => {
+              gridSemua.insertAdjacentHTML('afterbegin', createCard(item, 'Ekstrakurikuler'));
+            });
+            kegList.forEach(item => {
+              gridSemua.insertAdjacentHTML('afterbegin', createCard(item, 'Kegiatan'));
             });
           }
 
           // Insert into specific category grids by jenjang
-          function insertByJenjang(list, targetMap) {
+          function insertByJenjang(list, targetMap, tipeName) {
             list.forEach(item => {
               const j = (item.jenjang || 'Semua').toLowerCase();
               const targetId = targetMap[j] || targetMap['semua'];
               if (targetId) {
                 const targetEl = document.getElementById(targetId);
-                if (targetEl) targetEl.insertAdjacentHTML('afterbegin', createCard(item));
+                if (targetEl) targetEl.insertAdjacentHTML('afterbegin', createCard(item, tipeName));
               }
             });
           }
@@ -1143,7 +1154,7 @@
             'mi': 'grid-mi-eskul',
             'mts': 'grid-mts-eskul',
             'ma': 'grid-ma-eskul'
-          });
+          }, 'Ekstrakurikuler');
 
           insertByJenjang(kegList, {
             'sdi': 'grid-sdi-kegiatan',
@@ -1151,11 +1162,7 @@
             'mts': 'grid-mts-kegiatan',
             'ma': 'grid-ma-kegiatan',
             'ponpes': 'grid-ponpes-kegiatan'
-          });
-
-          insertByJenjang(dokList, {
-            'ponpes': 'grid-ponpes-dok'
-          });
+          }, 'Kegiatan');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
