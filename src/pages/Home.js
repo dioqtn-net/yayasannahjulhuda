@@ -73,12 +73,15 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(${unit.id})"></div>
             <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
                 <div class="flex justify-between items-center p-6 border-b border-slate-100">
-                    <h3 class="text-2xl font-playfair font-bold text-emerald-800">${unitName}</h3>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-${unit.id}">${unitName}</h3>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-${unit.id}">Akreditasi</span>
+                    </div>
                     <button onclick="closeModal(${unit.id})" class="text-slate-400 hover:text-red-500 transition">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                <div class="p-6 overflow-y-auto">
+                <div class="p-6 overflow-y-auto" id="modal-body-${unit.id}">
                     <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                         <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto">
                     </div>

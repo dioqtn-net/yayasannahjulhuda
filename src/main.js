@@ -1,6 +1,7 @@
 import './style.css';
 import Navigo from 'navigo';
 import { api } from './api';
+import { renderDynamicUnitModal } from './utils/modalRenderer';
 
 // Layout Components
 import { renderNavbar } from './components/Navbar';
@@ -128,16 +129,35 @@ document.body.addEventListener('click', (e) => {
 
 // Event Setups
 function setupHomeEvents() {
-    window.openModal = (id) => {
+    window.renderDynamicUnitModal = renderDynamicUnitModal;
+    window.openModal = async (id) => {
+        // Handle lightbox images from gallery
+        if (typeof id === 'string' && (id.startsWith('http') || id.startsWith('/') || id.includes('.'))) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            if (modal && modalImg) {
+                modalImg.src = id;
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+            }
+            return;
+        }
+
+        try {
+            await renderDynamicUnitModal(id);
+        } catch (e) {
+            console.error('Error rendering dynamic modal:', e);
+        }
+
         const modal = document.getElementById(`modal-${id}`);
-        if(modal) {
+        if (modal) {
             modal.classList.remove('hidden');
             document.body.classList.add('modal-open');
         }
     };
     window.closeModal = (id) => {
         const modal = document.getElementById(`modal-${id}`);
-        if(modal) {
+        if (modal) {
             modal.classList.add('hidden');
             document.body.classList.remove('modal-open');
         }

@@ -83,9 +83,9 @@
         <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
           <div class="absolute inset-0 bg-black/75 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Penerimaan Peserta Didik Baru</h1>
+            <h1 id="ppdb-header-title" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Penerimaan Peserta Didik Baru</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-white text-lg md:text-xl font-medium drop-shadow max-w-2xl mx-auto leading-relaxed">
+            <p id="ppdb-header-subtitle" class="text-white text-lg md:text-xl font-medium drop-shadow max-w-2xl mx-auto leading-relaxed">
               Papan Informasi Resmi Pendaftaran Peserta Didik Baru Yayasan Nahjul Huda
             </p>
           </div>
@@ -1004,6 +1004,8 @@
         const KEY_PPDB = 'cmsData_ppdb';
 
         const defaultPPDB = {
+          header_title: "Penerimaan Peserta Didik Baru",
+          header_subtitle: "Papan Informasi Resmi Pendaftaran Peserta Didik Baru Yayasan Nahjul Huda",
           sekretariat_alamat: "Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530.",
           sdi: {
             jenjangName: 'SD Islam (SDI) AL KINDY',
@@ -1124,6 +1126,16 @@
             ma: 'MA',
             ponpes: 'Ponpes'
           };
+
+          // 0. Header Teks Sambutan PPDB
+          const elHeaderTitle = document.getElementById('ppdb-header-title');
+          if (elHeaderTitle) {
+            elHeaderTitle.textContent = data.header_title || defaultPPDB.header_title;
+          }
+          const elHeaderSubtitle = document.getElementById('ppdb-header-subtitle');
+          if (elHeaderSubtitle) {
+            elHeaderSubtitle.textContent = data.header_subtitle || defaultPPDB.header_subtitle;
+          }
 
           // 1. Alamat Sekretariat Bersama di Bagian Bawah
           const elSekretariat = document.getElementById('ppdb-sekretariat-alamat');

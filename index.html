@@ -133,27 +133,71 @@
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(1)"></div>
           <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center p-6 border-b border-slate-100">
-              <h3 class="text-2xl font-playfair font-bold text-emerald-800">SD Islam (SDI) AL KINDY</h3>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-1">SD Islam (SDI) AL KINDY</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-1">Akreditasi -</span>
+              </div>
               <button onclick="closeModal(1)" class="text-slate-400 hover:text-red-500 transition">
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto" id="modal-body-1">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/SDI.jpg" alt="SD Islam (SDI) AL KINDY" class="object-contain max-h-full w-auto">
               </div>
-              <p class="text-slate-700 mb-6 leading-relaxed">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
+              <p class="text-slate-700 mb-6 leading-relaxed">Pendidikan dasar berciri khas Islam yang berfokus pada pembentukan karakter Qur'ani dan keunggulan akademik.</p>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                <p class="text-slate-600 text-sm">Kurikulum Merdeka &amp; Kurikulum Kemenag</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Kurikulum Merdeka &amp; Kurikulum Kemenag</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Pramuka, Marawis, Pencak Silat</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Qira'ati, Tahfidz Al-Qur'an (Juz 30), dan KTIQ.</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                <p class="text-slate-600 text-sm">Ruang Kelas Nyaman, Perpustakaan, Lapangan</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Pramuka, Futsal, Tari</p>
+              </div>
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Ruang AC, CCTV, Kantin, Lapangan Olahraga, Laboratorium Komputer</p>
+              </div>
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">"Terwujudnya Generasi Qur'ani yang Berakhlak Mulia, Berkarakter, Kreatif, Berprestasi, Mampu Berkompetisi, Serta Mandiri Melalui Pembelajaran Mendalam di Era Global."</p>
+                </div>
+                <div>
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                  <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                    <li>Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.</li>
+                    <li>Mengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.</li>
+                    <li>Menerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).</li>
+                    <li>Mengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.</li>
+                    <li>Menciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.</li>
+                    <li>Mendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- Kontak Layanan PPDB SDI -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB SDI:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="https://wa.me/6281234567890?text=Halo%20Ibu%20Fatimah,%20saya%20ingin%20bertanya%20seputar%20SDI%20Al%20Kindy" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Ibu Fatimah (081234567890)</span>
+                  </a>
+                  <a href="https://wa.me/6281298765432?text=Halo%20Bapak%20Ahmad,%20saya%20ingin%20bertanya%20seputar%20SDI%20Al%20Kindy" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Bapak Ahmad (081298765432)</span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
@@ -169,31 +213,68 @@
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(2)"></div>
           <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center p-6 border-b border-slate-100">
-              <h3 class="text-2xl font-playfair font-bold text-emerald-800">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-2">Akreditasi -</span>
+              </div>
               <button onclick="closeModal(2)" class="text-slate-400 hover:text-red-500 transition">
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto" id="modal-body-2">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MI.jpg" alt="Madrasah Ibtidaiyah (MI) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
-              <p class="text-slate-700 mb-6 leading-relaxed">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
+              <p class="text-slate-700 mb-6 leading-relaxed">Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.</p>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                <p class="text-slate-600 text-sm">Kurikulum Merdeka &amp; Kemenag</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Kedinasan : Kementerian Pendidikan / Kemenag</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik &amp; Non Akademik</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik &amp; Non Akademik</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Futsal, Menari, Pramuka</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Futsal, Menari, Pramuka</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                <p class="text-slate-600 text-sm">Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan</p>
+              </div>
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">Mewujudkan Generasi Muslim yang Berakhlakul Karimah, Unggul dalam Prestasi, dan Berwawasan Lingkungan.</p>
+                </div>
+                <div>
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                  <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                    <li>Menyelenggarakan pendidikan dasar Islam terpadu yang berkualitas.</li>
+                    <li>Menumbuhkan penghayatan dan pengamalan ajaran Islam dalam kehidupan sehari-hari.</li>
+                    <li>Mengembangkan potensi akademik dan non-akademik siswa secara optimal.</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- Kontak Layanan PPDB MI -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB MI:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="https://wa.me/628991168301?text=Halo%20Abi%20Subhan,%20saya%20ingin%20bertanya%20seputar%20MI%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Abi Subhan, SPd. (08991168301)</span>
+                  </a>
+                  <a href="https://wa.me/6285695426904?text=Halo%20Abi%20Fahri,%20saya%20ingin%20bertanya%20seputar%20MI%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Abi Fahri, SPd. (085695426904)</span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
@@ -209,51 +290,74 @@
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(3)"></div>
           <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center p-6 border-b border-slate-100">
-              <h3 class="text-2xl font-playfair font-bold text-emerald-800">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-3">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-3">Akreditasi A</span>
+              </div>
               <button onclick="closeModal(3)" class="text-slate-400 hover:text-red-500 transition">
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto" id="modal-body-3">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MTs.jpg" alt="Madrasah Tsanawiyah (MTs) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
               <p class="text-slate-700 mb-6 leading-relaxed">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                <p class="text-slate-600 text-sm">Kurikulum Merdeka &amp; Kemenag</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Kurikulum Merdeka &amp; Kemenag</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Paskibra, PMR, Rohis</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Tahfidz Al-Qur'an, Pembinaan Bahasa Arab &amp; Inggris, Kajian Kitab Dasar</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                <p class="text-slate-600 text-sm">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
               </div>
-              <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
-                  <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
-                  <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                  <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                  <li>Berwawasan Luas</li>
-                  <li>Mencetak Generasi Global</li>
-                </ul>
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
               </div>
-              <!-- Kontak Khusus MTs -->
-              <div class="mt-4 p-4 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-slate-700 shadow-sm">
-                <div class="flex items-center font-bold text-emerald-800">
-                  <i class="fas fa-id-card text-gold-500 mr-2 text-base"></i> Kontak MTs:
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">Terwujudnya Generasi yang Berilmu, Beriman, Berakhlak Mulia, dan Mandiri.</p>
                 </div>
-                <a href="mailto:mtsnahjulhuda@yahoo.co.id" class="flex items-center text-slate-700 hover:text-emerald-700 font-medium transition">
-                  <i class="fas fa-envelope text-emerald-600 mr-2"></i>
-                  <span>mtsnahjulhuda@yahoo.co.id</span>
-                </a>
-                <a href="tel:02153654830" class="flex items-center text-slate-700 hover:text-emerald-700 font-medium transition">
-                  <i class="fas fa-phone-alt text-emerald-600 mr-2"></i>
-                  <span>(021) 53654830</span>
-                </a>
+                <div>
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                  <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                    <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
+                    <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                    <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                    <li>Berwawasan Luas</li>
+                    <li>Mencetak Generasi Global</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- Kontak Layanan MTs & PPDB -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB MTs:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya%20seputar%20MTs%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Umi Hj. Dahlia (085880682115)</span>
+                  </a>
+                  <a href="mailto:mtsnahjulhuda@yahoo.co.id" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
+                    <i class="fas fa-envelope text-slate-500"></i>
+                    <span>mtsnahjulhuda@yahoo.co.id</span>
+                  </a>
+                  <a href="tel:02153654830" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
+                    <i class="fas fa-phone-alt text-slate-500"></i>
+                    <span>(021) 53654830</span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
@@ -269,37 +373,70 @@
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(4)"></div>
           <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center p-6 border-b border-slate-100">
-              <h3 class="text-2xl font-playfair font-bold text-emerald-800">Madrasah Aliyah (MA) Nahjul Huda</h3>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-4">Madrasah Aliyah (MA) Nahjul Huda</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-4">Akreditasi -</span>
+              </div>
               <button onclick="closeModal(4)" class="text-slate-400 hover:text-red-500 transition">
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto" id="modal-body-4">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MA.jpg" alt="Madrasah Aliyah (MA) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
               <p class="text-slate-700 mb-6 leading-relaxed">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                <p class="text-slate-600 text-sm">Kurikulum Kemenag</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Kurikulum Kemenag &amp; Nasional</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Karya Ilmiah Remaja, Jurnalistik</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Karya Ilmiah Remaja, Persiapan Masuk Perguruan Tinggi Negeri (PTN/PTKIN), Tahfidz Qur'an</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                <p class="text-slate-600 text-sm">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh</p>
               </div>
-              <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
-                  <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
-                  <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                  <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                  <li>Berwawasan Luas</li>
-                  <li>Mencetak Generasi Global</li>
-                </ul>
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih</p>
+              </div>
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">Mencetak Generasi Pemimpin Masa Depan yang Berwawasan Luas, Berilmu Tinggi, dan Berintegritas Islami.</p>
+                </div>
+                <div>
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                  <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                    <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
+                    <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                    <li>Mengembangkan kemampuan &amp; budi pekerti</li>
+                    <li>Berwawasan Luas</li>
+                    <li>Mencetak Generasi Global</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- Kontak Layanan MA & PPDB -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB MA:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya%20seputar%20MA%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Umi Hj. Dahlia (085880682115)</span>
+                  </a>
+                  <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya%20seputar%20MA%20Nahjul%20Huda" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Abu Jalaluddin (08158316436)</span>
+                  </a>
+                </div>
               </div>
             </div>
             <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
@@ -315,46 +452,68 @@
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(5)"></div>
           <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center p-6 border-b border-slate-100">
-              <h3 class="text-2xl font-playfair font-bold text-emerald-800">Pondok Pesantren Assurur</h3>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-5">Pondok Pesantren Assurur</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-5">Akreditasi -</span>
+              </div>
               <button onclick="closeModal(5)" class="text-slate-400 hover:text-red-500 transition">
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto" id="modal-body-5">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/Ponpes.jpg" alt="Pondok Pesantren Assurur" class="object-contain max-h-full w-auto">
               </div>
               <p class="text-slate-700 mb-6 leading-relaxed">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                <p class="text-slate-600 text-sm">Salafiyah &amp; Modern</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Salafiyah &amp; Modern</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                <p class="text-slate-600 text-sm">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                <p class="text-slate-600 text-sm">Muhadharah, Bahtsul Masail</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Muhadharah, Bahtsul Masail, Seni Hadroh, Olahraga Santri</p>
               </div>
               <div class="mb-4">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                <p class="text-slate-600 text-sm">Asrama Putra/Putri, Masjid As-Surur</p>
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">Asrama Putra/Putri, Masjid As-Surur, Perpustakaan Kitab, Dapur Santri, Ruang Kajian</p>
               </div>
-              <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                <div class="mb-2">
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
                   <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
-                  <p class="italic text-slate-700 text-sm">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
                 </div>
                 <div>
                   <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
-                  <ol class="list-decimal ml-5 space-y-1 text-sm text-slate-600">
+                  <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">
                     <li>Penanaman Aqidah Sholihah</li>
                     <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
                     <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
                     <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
                   </ol>
+                </div>
+              </div>
+              <!-- Kontak Layanan Ponpes & PPDB -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB Ponpes:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="https://wa.me/628589010538?text=Halo%20Bunda%20Dahlia,%20saya%20ingin%20bertanya%20seputar%20Pondok%20Pesantren%20Assurur" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Bunda Dahlia (08589010538)</span>
+                  </a>
+                  <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya%20seputar%20Pondok%20Pesantren%20Assurur" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                    <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Abu Jalaluddin (08158316436)</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -367,6 +526,291 @@
         </div>
       </section>
     </div>
+
+    <!-- Dynamic Modal Sync & Hydration Script for Standalone / Direct Mode -->
+    <script>
+      (function() {
+        const unitMeta = {
+          1: { key: 'sdi', name: 'SD Islam (SDI) AL KINDY', short: 'SDI', logo: '/media/logo/SDI.jpg', anchor: 'program-sdi' },
+          2: { key: 'mi', name: 'Madrasah Ibtidaiyah (MI) Nahjul Huda', short: 'MI', logo: '/media/logo/MI.jpg', anchor: 'program-mi' },
+          3: { key: 'mts', name: 'Madrasah Tsanawiyah (MTs) Nahjul Huda', short: 'MTs', logo: '/media/logo/MTs.jpg', anchor: 'program-mts' },
+          4: { key: 'ma', name: 'Madrasah Aliyah (MA) Nahjul Huda', short: 'MA', logo: '/media/logo/MA.jpg', anchor: 'program-ma' },
+          5: { key: 'ponpes', name: 'Pondok Pesantren Assurur', short: 'Ponpes', logo: '/media/logo/Ponpes.jpg', anchor: 'program-ponpes' }
+        };
+
+        const defaultProg = {
+          sdi: {
+            akreditasi: 'Akreditasi -',
+            desc: "Pendidikan dasar berciri khas Islam yang berfokus pada pembentukan karakter Qur'ani dan keunggulan akademik.",
+            kurikulum: 'Kurikulum Merdeka & Kurikulum Kemenag',
+            unggulan: "Qira'ati, Tahfidz Al-Qur'an (Juz 30), dan KTIQ.",
+            ekskul: 'Pramuka, Futsal, Tari',
+            fasilitas: 'Ruang AC, CCTV, Kantin, Lapangan Olahraga, Laboratorium Komputer',
+            visi: "Terwujudnya Generasi Qur'ani yang Berakhlak Mulia, Berkarakter, Kreatif, Berprestasi, Mampu Berkompetisi, Serta Mandiri Melalui Pembelajaran Mendalam di Era Global.",
+            misi: "Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.\nMengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.\nMenerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).\nMengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.\nMenciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.\nMendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan."
+          },
+          mi: {
+            akreditasi: 'Akreditasi -',
+            desc: 'Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.',
+            kurikulum: 'Kedinasan : Kementerian Pendidikan / Kemenag',
+            unggulan: "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
+            ekskul: 'Futsal, Menari, Pramuka',
+            fasilitas: 'Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan',
+            visi: 'Mewujudkan Generasi Muslim yang Berakhlakul Karimah, Unggul dalam Prestasi, dan Berwawasan Lingkungan.',
+            misi: "Menyelenggarakan pendidikan dasar Islam terpadu yang berkualitas.\nMenumbuhkan penghayatan dan pengamalan ajaran Islam dalam kehidupan sehari-hari.\nMengembangkan potensi akademik dan non-akademik siswa secara optimal."
+          },
+          mts: {
+            akreditasi: 'Akreditasi A',
+            desc: 'Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.',
+            kurikulum: 'Kurikulum Merdeka & Kemenag',
+            unggulan: "Tahfidz Al-Qur'an, Pembinaan Bahasa Arab & Inggris, Kajian Kitab Dasar",
+            ekskul: 'Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh',
+            fasilitas: 'Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih',
+            visi: 'Terwujudnya Generasi yang Berilmu, Beriman, Berakhlak Mulia, dan Mandiri.',
+            misi: "Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak\nMembentuk generasi yang berilmu, beriman, dan berakhlak mulia\nMengembangkan kemampuan & budi pekerti\nBerwawasan Luas\nMencetak Generasi Global",
+            email: 'mtsnahjulhuda@yahoo.co.id',
+            telp: '(021) 53654830'
+          },
+          ma: {
+            akreditasi: 'Akreditasi -',
+            desc: 'Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.',
+            kurikulum: 'Kurikulum Kemenag & Nasional',
+            unggulan: "Karya Ilmiah Remaja, Persiapan Masuk Perguruan Tinggi Negeri (PTN/PTKIN), Tahfidz Qur'an",
+            ekskul: 'Pramuka, Hadroh, Drumband, Tari Saman, Futsal, Muhadoroh',
+            fasilitas: 'Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih',
+            visi: 'Mencetak Generasi Pemimpin Masa Depan yang Berwawasan Luas, Berilmu Tinggi, dan Berintegritas Islami.',
+            misi: "Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak\nMembentuk generasi yang berilmu, beriman, dan berakhlak mulia\nMengembangkan kemampuan & budi pekerti\nBerwawasan Luas\nMencetak Generasi Global"
+          },
+          ponpes: {
+            akreditasi: 'Akreditasi -',
+            desc: 'Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.',
+            kurikulum: 'Salafiyah & Modern',
+            unggulan: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah",
+            ekskul: 'Muhadharah, Bahtsul Masail, Seni Hadroh, Olahraga Santri',
+            fasilitas: 'Asrama Putra/Putri, Masjid As-Surur, Perpustakaan Kitab, Dapur Santri, Ruang Kajian',
+            visi: '"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama\'ah (ASWAJA)"',
+            misi: "Penanaman Aqidah Sholihah\nBimbingan Ibadah Sesuai Al Qur'an & Hadits\nMembentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21\nMengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi"
+          }
+        };
+
+        function escapeHtml(str) {
+          if (!str) return '';
+          const div = document.createElement('div');
+          div.textContent = str;
+          return div.innerHTML;
+        }
+
+        async function updateUnitModalContent(id) {
+          let numId = Number(id);
+          let key = 'sdi';
+          if (numId >= 1 && numId <= 5) {
+            key = unitMeta[numId].key;
+          } else if (typeof id === 'string') {
+            const found = Object.entries(unitMeta).find(([k, v]) => v.key === id.toLowerCase());
+            if (found) {
+              numId = Number(found[0]);
+              key = found[1].key;
+            }
+          }
+
+          const meta = unitMeta[numId] || unitMeta[1];
+          const defaults = defaultProg[key] || defaultProg.sdi;
+
+          let cmsProg = {};
+          try {
+            const rawP = localStorage.getItem('cmsData_program');
+            if (rawP) cmsProg = JSON.parse(rawP);
+          } catch(e) {}
+
+          let cmsPPDB = {};
+          try {
+            const rawPPDB = localStorage.getItem('cmsData_ppdb');
+            if (rawPPDB) cmsPPDB = JSON.parse(rawPPDB);
+          } catch(e) {}
+
+          let cmsContact = {};
+          try {
+            const rawC = localStorage.getItem('cmsData_contact');
+            if (rawC) cmsContact = JSON.parse(rawC);
+          } catch(e) {}
+
+          const desc = cmsProg[key + 'Desc'] || defaults.desc;
+          const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum;
+          const unggulan = cmsProg[key + 'Unggulan'] || defaults.unggulan;
+          const ekskul = cmsProg[key + 'Ekskul'] || defaults.ekskul;
+          const fasilitas = cmsProg[key + 'Fasilitas'] || defaults.fasilitas;
+          const visi = cmsProg[key + 'Visi'] || defaults.visi;
+          const misi = cmsProg[key + 'Misi'] || defaults.misi;
+          let akreditasi = cmsProg[key + 'Akreditasi'] || defaults.akreditasi;
+          if (akreditasi && !akreditasi.toLowerCase().startsWith('akreditasi') && akreditasi !== '-') {
+            akreditasi = 'Akreditasi ' + akreditasi;
+          }
+
+          const elTitle = document.getElementById(`modal-title-${numId}`);
+          if (elTitle) elTitle.textContent = meta.name;
+          const elAkreditasi = document.getElementById(`modal-akreditasi-${numId}`);
+          if (elAkreditasi) elAkreditasi.textContent = akreditasi;
+
+          const modalBody = document.getElementById(`modal-body-${numId}`) || 
+                            (document.getElementById(`modal-${numId}`) ? document.getElementById(`modal-${numId}`).querySelector('.overflow-y-auto') : null);
+
+          if (modalBody) {
+            const linesMisi = (misi || '')
+              .split('\n')
+              .map(l => l.trim().replace(/^[-*•\d.]+\s*/, ''))
+              .filter(l => l.length > 0 && l !== '-');
+
+            const misiHTML = linesMisi.length > 0
+              ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
+              : '<p class="text-sm text-slate-500 italic">-</p>';
+
+            const makeWALink = (phone, name) => {
+              if (!phone) return '#';
+              let clean = phone.replace(/\D/g, '');
+              if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+              else if (clean.startsWith('8')) clean = '62' + clean;
+              const msg = `Halo ${name || 'Admin'}, saya ingin bertanya seputar ${meta.name}.`;
+              return `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
+            };
+
+            const ppdbUnit = (cmsPPDB && cmsPPDB[key]) ? cmsPPDB[key] : {};
+            const k1 = ppdbUnit.kontak1_nama && ppdbUnit.kontak1_wa ? { nama: ppdbUnit.kontak1_nama, wa: ppdbUnit.kontak1_wa } : null;
+            const k2 = ppdbUnit.kontak2_nama && ppdbUnit.kontak2_wa ? { nama: ppdbUnit.kontak2_nama, wa: ppdbUnit.kontak2_wa } : null;
+
+            let contactItemsHTML = '';
+            if (k1) {
+              contactItemsHTML += `
+                <a href="${makeWALink(k1.wa, k1.nama)}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                  <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                  <span>${escapeHtml(k1.nama)} (${escapeHtml(k1.wa)})</span>
+                </a>
+              `;
+            }
+            if (k2) {
+              contactItemsHTML += `
+                <a href="${makeWALink(k2.wa, k2.nama)}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                  <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                  <span>${escapeHtml(k2.nama)} (${escapeHtml(k2.wa)})</span>
+                </a>
+              `;
+            }
+            if (defaults.email) {
+              contactItemsHTML += `
+                <a href="mailto:${defaults.email}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
+                  <i class="fas fa-envelope text-slate-500"></i>
+                  <span>${defaults.email}</span>
+                </a>
+              `;
+            }
+            if (defaults.telp) {
+              contactItemsHTML += `
+                <a href="tel:${defaults.telp.replace(/\D/g, '')}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
+                  <i class="fas fa-phone-alt text-slate-500"></i>
+                  <span>${defaults.telp}</span>
+                </a>
+              `;
+            }
+            if (!contactItemsHTML) {
+              const genWA = cmsContact.wa1 || '081234567890';
+              contactItemsHTML = `
+                <a href="${makeWALink(genWA, 'Layanan Yayasan')}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
+                  <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
+                  <span>Layanan Yayasan (${escapeHtml(genWA)})</span>
+                </a>
+              `;
+            }
+
+            modalBody.innerHTML = `
+              <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
+                <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto">
+              </div>
+
+              <p class="text-slate-700 mb-6 leading-relaxed">${escapeHtml(desc)}</p>
+
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">${escapeHtml(kurikulum)}</p>
+              </div>
+
+              ${unggulan && unggulan !== '-' ? `
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">${escapeHtml(unggulan)}</p>
+              </div>
+              ` : ''}
+
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">${escapeHtml(ekskul)}</p>
+              </div>
+
+              <div class="mb-4">
+                <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">${escapeHtml(fasilitas)}</p>
+              </div>
+
+              <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
+                <div class="mb-3">
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
+                  <p class="italic text-slate-700 text-sm leading-relaxed">${escapeHtml(visi)}</p>
+                </div>
+                <div>
+                  <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
+                  ${misiHTML}
+                </div>
+              </div>
+
+              <!-- Kontak Layanan PPDB / Sekolah -->
+              <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
+                    <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB ${meta.short}:
+                  </h4>
+                  <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  ${contactItemsHTML}
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        window.openModal = async function(id) {
+          if (typeof id === 'string' && (id.startsWith('http') || id.startsWith('/') || id.includes('.'))) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            if (modal && modalImg) {
+              modalImg.src = id;
+              modal.classList.remove('hidden');
+              document.body.classList.add('modal-open');
+            }
+            return;
+          }
+
+          try {
+            await updateUnitModalContent(id);
+          } catch(e) {
+            console.error(e);
+          }
+
+          const modal = document.getElementById('modal-' + id);
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+          }
+        };
+
+        window.closeModal = function(id) {
+          const modal = document.getElementById('modal-' + id);
+          if (modal) {
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+          }
+        };
+      })();
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
