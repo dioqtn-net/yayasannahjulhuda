@@ -155,62 +155,6 @@ export async function renderDynamicUnitModal(id) {
       ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
       : '<p class="text-sm text-slate-500 italic">-</p>';
 
-    const makeWALink = (phone, name) => {
-      if (!phone) return '#';
-      let clean = phone.replace(/\D/g, '');
-      if (clean.startsWith('0')) clean = '62' + clean.slice(1);
-      else if (clean.startsWith('8')) clean = '62' + clean;
-      const msg = `Halo ${name || 'Admin'}, saya ingin bertanya seputar ${meta.name}.`;
-      return `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
-    };
-
-    const ppdbUnit = (cmsPPDB && cmsPPDB[key]) ? cmsPPDB[key] : {};
-    const k1 = ppdbUnit.kontak1_nama && ppdbUnit.kontak1_wa ? { nama: ppdbUnit.kontak1_nama, wa: ppdbUnit.kontak1_wa } : null;
-    const k2 = ppdbUnit.kontak2_nama && ppdbUnit.kontak2_wa ? { nama: ppdbUnit.kontak2_nama, wa: ppdbUnit.kontak2_wa } : null;
-
-    let contactItemsHTML = '';
-    if (k1) {
-      contactItemsHTML += `
-        <a href="${makeWALink(k1.wa, k1.nama)}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
-          <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
-          <span>${escapeHtml(k1.nama)} (${escapeHtml(k1.wa)})</span>
-        </a>
-      `;
-    }
-    if (k2) {
-      contactItemsHTML += `
-        <a href="${makeWALink(k2.wa, k2.nama)}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
-          <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
-          <span>${escapeHtml(k2.nama)} (${escapeHtml(k2.wa)})</span>
-        </a>
-      `;
-    }
-    if (defaults.email) {
-      contactItemsHTML += `
-        <a href="mailto:${defaults.email}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
-          <i class="fas fa-envelope text-slate-500"></i>
-          <span>${defaults.email}</span>
-        </a>
-      `;
-    }
-    if (defaults.telp) {
-      contactItemsHTML += `
-        <a href="tel:${defaults.telp.replace(/\D/g, '')}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition shadow-xs">
-          <i class="fas fa-phone-alt text-slate-500"></i>
-          <span>${defaults.telp}</span>
-        </a>
-      `;
-    }
-    if (!contactItemsHTML) {
-      const genWA = cmsContact.wa1 || '081234567890';
-      contactItemsHTML = `
-        <a href="${makeWALink(genWA, 'Layanan Yayasan')}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold border border-emerald-200 transition shadow-xs">
-          <i class="fab fa-whatsapp text-emerald-600 text-sm"></i>
-          <span>Layanan Yayasan (${escapeHtml(genWA)})</span>
-        </a>
-      `;
-    }
-
     modalBody.innerHTML = `
       <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
         <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto">
@@ -251,19 +195,7 @@ export async function renderDynamicUnitModal(id) {
           ${misiHTML}
         </div>
       </div>
-
-      <!-- Kontak Layanan PPDB / Sekolah -->
-      <div class="mt-5 p-4 bg-slate-50 border border-slate-200/80 rounded-xl space-y-2.5">
-        <div class="flex items-center justify-between">
-          <h4 class="font-bold text-emerald-800 text-xs uppercase tracking-wider flex items-center">
-            <i class="fas fa-id-card text-gold-500 mr-2 text-sm"></i> Kontak &amp; Layanan PPDB ${meta.short}:
-          </h4>
-          <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">Aktif</span>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 pt-1">
-          ${contactItemsHTML}
-        </div>
-      </div>
     `;
   }
 }
+
