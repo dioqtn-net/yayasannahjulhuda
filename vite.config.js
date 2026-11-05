@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         kelola: resolve(__dirname, 'kelola.html'),
+        dashboard: resolve(__dirname, 'dashboard.html'),
         kelolaKontak: resolve(__dirname, 'kelola-kontak.html'),
         kelolaInfoPpdb: resolve(__dirname, 'kelola-info-ppdb.html'),
         galeri: resolve(__dirname, 'galeri.html'),
