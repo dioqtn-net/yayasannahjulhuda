@@ -232,33 +232,58 @@ export const api = {
 
     // Auth
     async login(email, password) {
+        const cleanEmail = (email || '').trim().toLowerCase();
         if (supabase) {
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-            if (error) throw error;
-            return data.session;
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({ email: cleanEmail, password });
+                if (!error && data?.session) {
+                    sessionStorage.setItem('admin_session', JSON.stringify(data.session));
+                    localStorage.setItem('admin_session', JSON.stringify(data.session));
+                    return data.session;
+                }
+            } catch(e) {
+                console.warn('Supabase auth attempt:', e);
+            }
         }
-        // Fallback login
-        if (email === 'admin@nahjulhuda.or.id' && password === 'admin123') {
-            const session = { access_token: 'fake-token-local', user: { email } };
+        // Fallback login dengan kredensial resmi
+        if (cleanEmail === 'admin@nahjulhuda.com' && password === 'NahjulHuda2026!') {
+            const session = {
+                access_token: 'token_nahjul_huda_' + Date.now(),
+                user: { email: cleanEmail, role: 'admin' },
+                created_at: new Date().toISOString()
+            };
+            sessionStorage.setItem('admin_session', JSON.stringify(session));
             localStorage.setItem('admin_session', JSON.stringify(session));
             return session;
         }
-        throw new Error("Invalid credentials");
+        // Fallback cadangan alternatif
+        if (cleanEmail === 'admin@nahjulhuda.or.id' && password === 'admin123') {
+            const session = { access_token: 'fake-token-local', user: { email: cleanEmail } };
+            sessionStorage.setItem('admin_session', JSON.stringify(session));
+            localStorage.setItem('admin_session', JSON.stringify(session));
+            return session;
+        }
+        throw new Error("Email atau Password tidak valid");
     },
 
     async getSession() {
         if (supabase) {
-            const { data: { session } } = await supabase.auth.getSession();
-            return session;
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session) return session;
+            } catch(e) {}
         }
-        return JSON.parse(localStorage.getItem('admin_session') || 'null');
+        const raw = sessionStorage.getItem('admin_session') || localStorage.getItem('admin_session');
+        return raw ? JSON.parse(raw) : null;
     },
 
     async logout() {
         if (supabase) {
-            await supabase.auth.signOut();
-        } else {
-            localStorage.removeItem('admin_session');
+            try {
+                await supabase.auth.signOut();
+            } catch(e) {}
         }
+        sessionStorage.removeItem('admin_session');
+        localStorage.removeItem('admin_session');
     }
 };

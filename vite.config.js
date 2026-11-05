@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        login: resolve(__dirname, 'login.html'),
         kelola: resolve(__dirname, 'kelola.html'),
         dashboard: resolve(__dirname, 'dashboard.html'),
         kelolaKontak: resolve(__dirname, 'kelola-kontak.html'),

@@ -6,7 +6,7 @@ export const renderAdmin = async (appDiv, router) => {
     const session = await api.getSession();
     
     if (!session) {
-        renderLogin(appDiv, router);
+        window.location.replace('login.html');
         return;
     }
 
@@ -194,7 +194,7 @@ export const renderAdmin = async (appDiv, router) => {
 
         document.getElementById('btnLogout').addEventListener('click', async () => {
             await api.logout();
-            window.location.href = '/kelola';
+            window.location.href = 'login.html';
         });
 
         const formProfile = document.getElementById('formProfile');
