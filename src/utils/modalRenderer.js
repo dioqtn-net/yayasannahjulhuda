@@ -157,7 +157,7 @@ export async function renderDynamicUnitModal(id) {
 
     modalBody.innerHTML = `
       <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
-        <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto">
+        <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto max-w-full h-auto">
       </div>
 
       <p class="text-slate-700 mb-6 leading-relaxed">${escapeHtml(desc)}</p>

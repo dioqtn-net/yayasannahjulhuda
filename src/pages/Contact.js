@@ -5,7 +5,7 @@ export const renderContact = (profile) => {
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Kontak & Lokasi</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Kontak & Lokasi</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
           <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Silakan hubungi kami atau kunjungi langsung kampus Yayasan Nahjul Huda.</p>
         </div>

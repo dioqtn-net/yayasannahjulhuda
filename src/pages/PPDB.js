@@ -61,7 +61,7 @@ export const renderPPDB = (ppdb) => {
           <span class="inline-block px-5 py-1.5 rounded-full text-sm font-bold mb-4 shadow-lg ${isBuka ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-red-500 text-white shadow-red-500/30'}">
             STATUS PENDAFTARAN: ${ppdb?.status || 'DIBUKA'}
           </span>
-          <h1 id="ppdb-header-title" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">${headerTitle}</h1>
+          <h1 id="ppdb-header-title" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">${headerTitle}</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
           <p id="ppdb-header-subtitle" class="text-white text-lg md:text-xl font-medium drop-shadow max-w-2xl mx-auto leading-relaxed">
             ${headerSubtitle}

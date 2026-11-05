@@ -53,7 +53,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
             <div class="w-full h-48 flex-shrink-0 flex items-center justify-center bg-white p-4 border-b border-slate-100 overflow-hidden">
-                <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto group-hover:scale-105 transition duration-300">
+                <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5 text-center flex-grow flex flex-col justify-between bg-white">
                 <div>
@@ -71,7 +71,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <!-- Modal for ${unitName} -->
         <div id="modal-${unit.id}" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
             <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(${unit.id})"></div>
-            <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
                 <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
                     <div class="flex items-center gap-3">
                         <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-800" id="modal-title-${unit.id}">${unitName}</h3>
@@ -83,7 +83,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                 </div>
                 <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-${unit.id}">
                     <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
-                        <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto">
+                        <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto">
                     </div>
                     <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
                     <div class="mb-4">
@@ -159,7 +159,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/60 z-0"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left fade-in">
-          <h1 id="heroTitlePublic" class="text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
+          <h1 id="heroTitlePublic" class="text-2xl sm:text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
             ${heroTitleContent}
           </h1>
           <p id="heroDescPublic" class="text-lg md:text-xl text-emerald-100 max-w-2xl mb-8 leading-relaxed drop-shadow">

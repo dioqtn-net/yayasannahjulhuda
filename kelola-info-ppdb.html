@@ -66,7 +66,7 @@
           <div class="p-6 border-b border-emerald-800/80 flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <div class="h-10 w-10 bg-white rounded-lg p-1 shadow flex items-center justify-center flex-shrink-0">
-                <img src="/logo.png" alt="Logo Yayasan Nahjul Huda" class="h-8 w-8 object-contain">
+                <img src="/logo.png" alt="Logo Yayasan Nahjul Huda" class="h-8 w-8 object-contain max-w-full h-auto">
               </div>
               <div class="overflow-hidden">
                 <h1 class="font-playfair font-bold text-white text-base leading-tight truncate">Nahjul Huda</h1>
@@ -213,7 +213,7 @@
           </div>
 
           <!-- FORM TEKS SAMBUTAN UTAMA PPDB -->
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm mb-6 space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm mb-6 space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -271,7 +271,7 @@
                     <!-- Container Panel Form Masing-Masing Jenjang -->
           <div id="ppdb-admin-panels-container">
             <!-- Panel SDI -->
-            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: SD Islam (SDI) AL KINDY</h3>
@@ -292,7 +292,7 @@
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_sdi_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_sdi_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -407,7 +407,7 @@
             </div>
 
             <!-- Panel MI -->
-            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -428,7 +428,7 @@
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_mi_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_mi_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -543,7 +543,7 @@
             </div>
 
             <!-- Panel MTs -->
-            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -564,7 +564,7 @@
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_mts_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_mts_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -679,7 +679,7 @@
             </div>
 
             <!-- Panel MA -->
-            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -700,7 +700,7 @@
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_ma_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_ma_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -815,7 +815,7 @@
             </div>
 
             <!-- Panel Ponpes -->
-            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Pondok Pesantren Assurur</h3>
@@ -836,7 +836,7 @@
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_ponpes_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_ponpes_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -952,7 +952,7 @@
           </div>
 
           <!-- 5. Form Sekretariat Bersama Pendaftaran (Global untuk Halaman Info PPDB) -->
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm mt-6 space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm mt-6 space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
                 <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
@@ -1267,7 +1267,7 @@
               <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold flex items-center justify-center flex-shrink-0 border border-emerald-100">
                 ${idx + 1}
               </span>
-              <input type="text" value="${escapeHtml(text)}" oninput="updateSyaratItemText('${k}', ${idx}, this.value)" class="flex-grow px-3 py-1.5 text-xs sm:text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50/40 focus:bg-white text-slate-800" placeholder="Poin persyaratan berkas...">
+              <input type="text" value="${escapeHtml(text)}" oninput="updateSyaratItemText('${k}', ${idx}, this.value)" class="flex-grow w-full px-3 py-1.5 text-xs sm:text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50/40 focus:bg-white text-slate-800" placeholder="Poin persyaratan berkas...">
               <button type="button" onclick="removeSyaratItem('${k}', ${idx})" title="Hapus poin ini" class="w-8 h-8 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition flex items-center justify-center flex-shrink-0">
                 <i class="fas fa-trash-alt text-xs"></i>
               </button>

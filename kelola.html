@@ -70,7 +70,7 @@
           <div class="p-6 border-b border-emerald-800/80 flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <div class="h-10 w-10 bg-white rounded-lg p-1 shadow flex items-center justify-center flex-shrink-0">
-                <img src="/logo.png" alt="Logo Yayasan Nahjul Huda" class="h-8 w-8 object-contain">
+                <img src="/logo.png" alt="Logo Yayasan Nahjul Huda" class="h-8 w-8 object-contain max-w-full h-auto">
               </div>
               <div class="overflow-hidden">
                 <h1 class="font-playfair font-bold text-white text-base leading-tight truncate">Nahjul Huda</h1>
@@ -207,7 +207,7 @@
           <!-- ========================================== -->
           <section id="dashboard" class="admin-section">
           <!-- Banner Ucapan Selamat Datang -->
-          <div class="mb-8 bg-white rounded-xl p-8 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div class="mb-8 bg-white rounded-xl p-4 sm:p-6 md:p-8 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden">
               
               <!-- Bagian Teks (Kiri) -->
               <div class="max-w-2xl relative z-10">
@@ -215,13 +215,13 @@
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                       Dashboard Terhubung
                   </div>
-                  <h1 class="text-3xl font-bold text-gray-900 mb-3 font-serif leading-tight">Selamat Datang di Panel Admin Yayasan Nahjul Huda</h1>
+                  <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 font-serif leading-tight">Selamat Datang di Panel Admin Yayasan Nahjul Huda</h1>
                   <p class="text-gray-600 text-sm leading-relaxed">Kelola konten informasi, teks profil, kurikulum program, dokumentasi galeri, fasilitas, berita, serta informasi PPDB secara mudah dan terintegrasi.</p>
               </div>
 
               <!-- Bagian Logo (Kanan): Transparansi dihilangkan (opacity-100) dan margin aman -->
               <div class="hidden md:block relative z-10 pr-2 lg:pr-8 flex-shrink-0">
-                  <img src="assets/images/logo.png" alt="Logo Yayasan" class="w-32 h-32 object-contain drop-shadow-sm opacity-100">
+                  <img src="assets/images/logo.png" alt="Logo Yayasan" class="w-32 h-32 object-contain max-w-full h-auto drop-shadow-sm opacity-100">
               </div>
               
           </div>
@@ -280,14 +280,14 @@
           </div>
 
           <!-- Section Informasi Tambahan / Panduan Singkat -->
-          <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+          <div class="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
             <h3 class="font-playfair font-bold text-lg text-slate-800 mb-4 flex items-center">
               <i class="fas fa-info-circle text-emerald-700 mr-2"></i>
               Aksi Cepat &amp; Panduan Pengelolaan
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
                 <!-- Kotak 1: Beranda -->
-                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                <div class="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         <h4 class="font-bold text-gray-900 text-sm">Kelola Konten Beranda</h4>
@@ -296,7 +296,7 @@
                 </div>
 
                 <!-- Kotak 2: Berita -->
-                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                <div class="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         <h4 class="font-bold text-gray-900 text-sm">Kelola Konten Berita</h4>
@@ -305,7 +305,7 @@
                 </div>
 
                 <!-- Kotak 3: Galeri -->
-                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                <div class="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         <h4 class="font-bold text-gray-900 text-sm">Kelola Galeri</h4>
@@ -314,7 +314,7 @@
                 </div>
 
                 <!-- Kotak 4: PPDB -->
-                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                <div class="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422M12 7v10"></path></svg>
                         <h4 class="font-bold text-gray-900 text-sm">Kelola Info PPDB</h4>
@@ -511,7 +511,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoKetua').value=''; document.getElementById('fotoKetua').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -526,7 +526,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoSDI').value=''; document.getElementById('fotoSDI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -541,7 +541,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoMI').value=''; document.getElementById('fotoMI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -556,7 +556,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoMTs').value=''; document.getElementById('fotoMTs').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -571,7 +571,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoMA').value=''; document.getElementById('fotoMA').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -586,7 +586,7 @@
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
-                                              <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 text-xs border p-1 rounded">
+                                              <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
                                               <button type="button" onclick="document.getElementById('fotoMudir').value=''; document.getElementById('fotoMudir').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
@@ -950,9 +950,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                           <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto (Maks 3)</label>
                           <p class="text-[10px] text-gray-500 mb-2">*Format: JPG/PNG. Agar tidak terpotong, gunakan foto dengan rasio 16:9 (Landscape) atau resolusi minimal 800x450 piksel.</p>
                           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                              <input type="file" id="fasImg1" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
-                              <input type="file" id="fasImg2" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
-                              <input type="file" id="fasImg3" accept=".jpg, .jpeg, .png" class="text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg1" accept=".jpg, .jpeg, .png" class="w-full text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg2" accept=".jpg, .jpeg, .png" class="w-full text-xs border p-1 rounded bg-white">
+                              <input type="file" id="fasImg3" accept=".jpg, .jpeg, .png" class="w-full text-xs border p-1 rounded bg-white">
                           </div>
                           <p class="text-xs text-gray-500 mt-1">*Catatan Lokal: Gunakan nama file yang sama dengan di folder /assets/images/fasilitas/</p>
                       </div>
@@ -1328,7 +1328,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </a>
           </div>
 
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-4xl">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm max-w-4xl">
             <form id="formAdminKontak" class="space-y-6" onsubmit="event.preventDefault(); window.saveContactData();">
               
               <!-- 1. Alamat Lengkap -->
@@ -1418,7 +1418,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
 
           <!-- FORM TEKS SAMBUTAN UTAMA PPDB -->
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm mb-6 space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm mb-6 space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -1476,7 +1476,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                     <!-- Container Panel Form Masing-Masing Jenjang -->
           <div id="ppdb-admin-panels-container">
             <!-- Panel SDI -->
-            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: SD Islam (SDI) AL KINDY</h3>
@@ -1497,7 +1497,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_sdi_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_sdi_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -1612,7 +1612,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MI -->
-            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -1633,7 +1633,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_mi_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_mi_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -1748,7 +1748,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MTs -->
-            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -1769,7 +1769,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_mts_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_mts_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -1884,7 +1884,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MA -->
-            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -1905,7 +1905,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_ma_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_ma_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -2020,7 +2020,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel Ponpes -->
-            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Pondok Pesantren Assurur</h3>
@@ -2041,7 +2041,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
                   <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Rentang Tanggal Pelayanan (Opsional)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input type="date" id="ppdbAdmin_ponpes_tgl_mulai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Mulai">
                       <input type="date" id="ppdbAdmin_ponpes_tgl_selesai" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white text-slate-700" title="Tanggal Selesai">
                     </div>
@@ -2157,7 +2157,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
 
           <!-- 5. Form Sekretariat Bersama Pendaftaran (Global untuk Halaman Info PPDB) -->
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm mt-6 space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm mt-6 space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
               <div>
                 <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
@@ -2198,7 +2198,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           <!-- Settings Forms Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Card 1: Informasi Kontak & Profil Yayasan -->
-            <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+            <div class="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
               <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
                 <i class="fas fa-building text-emerald-700"></i> Profil &amp; Kontak Yayasan
               </h3>
@@ -2230,7 +2230,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             <!-- Card 2: Informasi Sistem & Keamanan Akun -->
             <div class="space-y-6">
               <!-- Info Status Web -->
-              <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+              <div class="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
                 <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
                   <i class="fas fa-info-circle text-emerald-700"></i> Informasi Website
                 </h3>
@@ -2253,7 +2253,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               </div>
 
               <!-- Admin Security -->
-              <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+              <div class="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
                 <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
                   <i class="fas fa-lock text-emerald-700"></i> Keamanan Akun
                 </h3>
@@ -3892,7 +3892,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold flex items-center justify-center flex-shrink-0 border border-emerald-100">
                 ${idx + 1}
               </span>
-              <input type="text" value="${escapeHtml(text)}" oninput="updateSyaratItemText('${k}', ${idx}, this.value)" class="flex-grow px-3 py-1.5 text-xs sm:text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50/40 focus:bg-white text-slate-800" placeholder="Poin persyaratan berkas...">
+              <input type="text" value="${escapeHtml(text)}" oninput="updateSyaratItemText('${k}', ${idx}, this.value)" class="flex-grow w-full px-3 py-1.5 text-xs sm:text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50/40 focus:bg-white text-slate-800" placeholder="Poin persyaratan berkas...">
               <button type="button" onclick="removeSyaratItem('${k}', ${idx})" title="Hapus poin ini" class="w-8 h-8 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition flex items-center justify-center flex-shrink-0">
                 <i class="fas fa-trash-alt text-xs"></i>
               </button>

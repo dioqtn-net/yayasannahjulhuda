@@ -22,7 +22,7 @@
           <div class="flex justify-between items-center py-2 md:py-3">
             <div class="flex items-center">
               <a href="/" class="flex-shrink-0 flex items-center">
-                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain max-w-full h-auto" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
                 <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
               </a>
             </div>
@@ -134,7 +134,7 @@
         <!-- Modal 1: SDI -->
         <div id="modal-1" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(1)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-1">SD Islam (SDI) AL KINDY</h3>
@@ -161,7 +161,7 @@
         <!-- Modal 2: MI -->
         <div id="modal-2" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(2)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -188,7 +188,7 @@
         <!-- Modal 3: MTs -->
         <div id="modal-3" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(3)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-3">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -215,7 +215,7 @@
         <!-- Modal 4: MA -->
         <div id="modal-4" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(4)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-4">Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -242,7 +242,7 @@
         <!-- Modal 5: Ponpes -->
         <div id="modal-5" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(5)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-5">Pondok Pesantren Assurur</h3>
@@ -407,7 +407,7 @@
 
             modalBody.innerHTML = `
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
-                <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto">
+                <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto max-w-full h-auto">
               </div>
 
               <p class="text-slate-700 mb-6 leading-relaxed">${escapeHtml(desc)}</p>
