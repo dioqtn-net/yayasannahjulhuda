@@ -5,7 +5,7 @@ export const renderFooter = () => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <div class="flex items-center mb-4">
-                <img src="/logo.png" alt="Logo" class="h-10 w-auto mr-3 bg-white p-1 rounded max-w-full h-auto object-contain">
+                <img src="/logo.png" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-contain flex-shrink-0 bg-white p-2 rounded-lg self-center md:self-start mr-4">
                 <span class="font-playfair font-bold text-xl text-white">Yayasan Nahjul Huda</span>
               </div>
               <p class="text-emerald-200 text-sm mb-4 max-w-md">Mencetak generasi unggul, berakhlak mulia, dan berwawasan global berlandaskan nilai-nilai Islam.</p>

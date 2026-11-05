@@ -22,7 +22,7 @@ export const renderNavbar = (active = '') => {
           <div class="flex justify-between items-center py-2 md:py-3">
             <div class="flex items-center">
               <a href="/" data-navigo class="flex-shrink-0 flex items-center">
-                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain max-w-full h-auto" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
+                <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain flex-shrink-0" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
                 <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
               </a>
             </div>
