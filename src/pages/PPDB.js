@@ -87,32 +87,33 @@ export const renderPPDB = (ppdb) => {
             </div>
           </div>
 
-          <!-- KONTAINER TAB JENJANG (DIKUNCI MATI 1 BARIS LURUS TANPA IKON) -->
-<div style="width: 100%; overflow-x: auto; text-align: center; padding-bottom: 16px; scrollbar-width: none;">
-    <div style="display: inline-flex; flex-wrap: nowrap; gap: 12px; justify-content: center; align-items: center;">
+          <!-- KONTAINER TAB JENJANG (ANTI-KEPOTONG & BISA DI-SCROLL) -->
+<div style="width: 100%; overflow-x: auto; padding-bottom: 16px; scrollbar-width: none; -ms-overflow-style: none;">
+    <!-- Rahasianya ada di width: max-content dan margin: 0 auto -->
+    <div style="display: flex; flex-wrap: nowrap; gap: 12px; width: max-content; margin: 0 auto; padding: 0 16px;">
         
         <!-- Tab 1: SDI -->
-        <button type="button" class="tab-btn-jenjang" data-target="tab-sdi" onclick="window.switchPPDBTab('sdi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+        <button type="button" class="tab-btn-jenjang" data-target="tab-sdi" onclick="window.switchPPDBTab('sdi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;">
             SD Islam (SDI) AL KINDY
         </button>
         
         <!-- Tab 2: MI -->
-        <button type="button" class="tab-btn-jenjang" data-target="tab-mi" onclick="window.switchPPDBTab('mi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+        <button type="button" class="tab-btn-jenjang" data-target="tab-mi" onclick="window.switchPPDBTab('mi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;">
             Madrasah Ibtidaiyah (MI)
         </button>
         
         <!-- Tab 3: MTs (Contoh Status Aktif) -->
-        <button type="button" class="tab-btn-jenjang active" data-target="tab-mts" onclick="window.switchPPDBTab('mts')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #047857; background-color: #047857; color: #ffffff; font-weight: 600; font-size: 14px; cursor: pointer;">
+        <button type="button" class="tab-btn-jenjang active" data-target="tab-mts" onclick="window.switchPPDBTab('mts')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #047857; background-color: #047857; color: #ffffff; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;">
             Madrasah Tsanawiyah (MTs)
         </button>
         
         <!-- Tab 4: MA -->
-        <button type="button" class="tab-btn-jenjang" data-target="tab-ma" onclick="window.switchPPDBTab('ma')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+        <button type="button" class="tab-btn-jenjang" data-target="tab-ma" onclick="window.switchPPDBTab('ma')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;">
             Madrasah Aliyah (MA)
         </button>
         
         <!-- Tab 5: Ponpes -->
-        <button type="button" class="tab-btn-jenjang" data-target="tab-ponpes" onclick="window.switchPPDBTab('ponpes')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+        <button type="button" class="tab-btn-jenjang" data-target="tab-ponpes" onclick="window.switchPPDBTab('ponpes')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;">
             Pondok Pesantren Assurur
         </button>
 
