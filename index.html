@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
     <title>Yayasan Nahjul Huda</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
-  <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen">
+  <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">
       <!-- Navbar -->
       <nav class="bg-white shadow-md sticky top-0 z-50">
@@ -129,10 +132,10 @@
 
         <!-- Modals Detail Jenjang Pendidikan -->
         <!-- Modal 1: SDI -->
-        <div id="modal-1" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
+        <div id="modal-1" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(1)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-1">SD Islam (SDI) AL KINDY</h3>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-1">Akreditasi -</span>
@@ -141,7 +144,7 @@
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto" id="modal-body-1">
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-1">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/SDI.jpg" alt="SD Islam (SDI) AL KINDY" class="object-contain max-h-full w-auto">
               </div>
@@ -181,7 +184,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+            <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
               <a href="program.html#program-sdi" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                 Lihat Program Lengkap &rarr;
               </a>
@@ -190,10 +193,10 @@
         </div>
 
         <!-- Modal 2: MI -->
-        <div id="modal-2" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
+        <div id="modal-2" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(2)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-2">Akreditasi -</span>
@@ -202,7 +205,7 @@
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto" id="modal-body-2">
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-2">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MI.jpg" alt="Madrasah Ibtidaiyah (MI) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
@@ -239,7 +242,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+            <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
               <a href="program.html#program-mi" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                 Lihat Program Lengkap &rarr;
               </a>
@@ -248,10 +251,10 @@
         </div>
 
         <!-- Modal 3: MTs -->
-        <div id="modal-3" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
+        <div id="modal-3" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(3)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-3">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-3">Akreditasi A</span>
@@ -260,7 +263,7 @@
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto" id="modal-body-3">
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-3">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MTs.jpg" alt="Madrasah Tsanawiyah (MTs) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
@@ -299,7 +302,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+            <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
               <a href="program.html#program-mts" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                 Lihat Program Lengkap &rarr;
               </a>
@@ -308,10 +311,10 @@
         </div>
 
         <!-- Modal 4: MA -->
-        <div id="modal-4" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
+        <div id="modal-4" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(4)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-4">Madrasah Aliyah (MA) Nahjul Huda</h3>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-4">Akreditasi -</span>
@@ -320,7 +323,7 @@
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto" id="modal-body-4">
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-4">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/MA.jpg" alt="Madrasah Aliyah (MA) Nahjul Huda" class="object-contain max-h-full w-auto">
               </div>
@@ -359,7 +362,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+            <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
               <a href="program.html#program-ma" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                 Lihat Program Lengkap &rarr;
               </a>
@@ -368,10 +371,10 @@
         </div>
 
         <!-- Modal 5: Ponpes -->
-        <div id="modal-5" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto pt-10 pb-10">
+        <div id="modal-5" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
           <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(5)"></div>
-          <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-6 border-b border-slate-100">
+          <div class="bg-white rounded-2xl max-w-2xl w-full mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
               <div class="flex items-center gap-3">
                 <h3 class="text-2xl font-playfair font-bold text-emerald-800" id="modal-title-5">Pondok Pesantren Assurur</h3>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-5">Akreditasi -</span>
@@ -380,7 +383,7 @@
                 <i class="fas fa-times text-xl"></i>
               </button>
             </div>
-            <div class="p-6 overflow-y-auto" id="modal-body-5">
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-5">
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                 <img src="/media/logo/Ponpes.jpg" alt="Pondok Pesantren Assurur" class="object-contain max-h-full w-auto">
               </div>
@@ -418,7 +421,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+            <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
               <a href="program.html#program-ponpes" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
                 Lihat Program Lengkap &rarr;
               </a>
@@ -535,14 +538,14 @@
             if (rawC) cmsContact = JSON.parse(rawC);
           } catch(e) {}
 
-          const desc = cmsProg[key + 'Desc'] || defaults.desc;
-          const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum;
-          const unggulan = cmsProg[key + 'Unggulan'] || defaults.unggulan;
-          const ekskul = cmsProg[key + 'Ekskul'] || defaults.ekskul;
-          const fasilitas = cmsProg[key + 'Fasilitas'] || defaults.fasilitas;
-          const visi = cmsProg[key + 'Visi'] || defaults.visi;
-          const misi = cmsProg[key + 'Misi'] || defaults.misi;
-          let akreditasi = cmsProg[key + 'Akreditasi'] || defaults.akreditasi;
+          const desc = cmsProg[key + 'Desc'] || defaults.desc || '-';
+          const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum || '-';
+          const unggulan = cmsProg[key + 'Unggulan'] || defaults.unggulan || '-';
+          const ekskul = cmsProg[key + 'Ekskul'] || defaults.ekskul || '-';
+          const fasilitas = cmsProg[key + 'Fasilitas'] || defaults.fasilitas || '-';
+          const visi = cmsProg[key + 'Visi'] || defaults.visi || '-';
+          const misi = cmsProg[key + 'Misi'] || defaults.misi || '-';
+          let akreditasi = cmsProg[key + 'Akreditasi'] || defaults.akreditasi || '-';
           if (akreditasi && !akreditasi.toLowerCase().startsWith('akreditasi') && akreditasi !== '-') {
             akreditasi = 'Akreditasi ' + akreditasi;
           }

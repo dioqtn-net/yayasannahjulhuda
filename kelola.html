@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>Dashboard Admin - Yayasan Nahjul Huda</title>
 
@@ -34,7 +37,19 @@
         var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
         if (typeof window.supabase !== 'undefined' && SUPABASE_ANON_KEY) {
           try {
-            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+              auth: { persistSession: true },
+              global: {
+                fetch: function(url, options) {
+                  options = options || {};
+                  options.cache = 'no-store';
+                  options.headers = options.headers || {};
+                  options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                  options.headers['Pragma'] = 'no-cache';
+                  return fetch(url, options);
+                }
+              }
+            });
           } catch(e) {
             console.warn('Supabase client init:', e);
           }
@@ -42,14 +57,14 @@
       })();
     </script>
   </head>
-  <body class="bg-slate-100 text-slate-800 font-inter antialiased min-h-screen">
+  <body class="bg-slate-100 text-slate-800 font-inter antialiased min-h-screen overflow-x-hidden">
     <div class="flex h-screen overflow-hidden">
       
       <!-- Backdrop for Mobile Sidebar -->
       <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 hidden lg:hidden transition-opacity"></div>
 
       <!-- SIDEBAR (Kiri - Background Hijau Gelap Khas Yayasan) -->
-      <aside id="adminSidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-64 bg-emerald-950 text-emerald-100 flex flex-col justify-between shadow-2xl transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-emerald-900/60">
+      <aside id="adminSidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-emerald-950 text-emerald-100 flex flex-col justify-between shadow-2xl transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-emerald-900/60">
         <!-- Sidebar Header / Logo -->
         <div>
           <div class="p-6 border-b border-emerald-800/80 flex items-center justify-between">
@@ -413,7 +428,7 @@
 
                   <!-- Tombol Simpan -->
                   <div class="flex justify-end pt-4">
-                      <button type="button" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Beranda
                       </button>
@@ -584,7 +599,7 @@
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProfil" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+                      <button type="button" id="btnSimpanProfil" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
                           Simpan Perubahan Profil
                       </button>
                   </div>
@@ -843,7 +858,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProgram" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanProgram" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Program
                       </button>
@@ -987,7 +1002,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="beritaBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerBerita" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
                   Simpan Banner Berita
                 </button>
               </div>
@@ -1083,7 +1098,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalBerita" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanCardBerita" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Berita</button>
+                  <button type="button" id="btnSimpanCardBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Berita</button>
                 </div>
               </div>
             </div>
@@ -1126,7 +1141,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="galeriBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerGaleri" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerGaleri" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
                   Simpan Banner Galeri
                 </button>
               </div>
@@ -1205,7 +1220,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalEskul" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanEskul" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
+                  <button type="button" id="btnSimpanEskul" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
                 </div>
               </div>
             </div>
@@ -1283,7 +1298,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalKegiatan" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanKegiatan" class="bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
+                  <button type="button" id="btnSimpanKegiatan" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
                 </div>
               </div>
             </div>
@@ -1542,8 +1557,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('sdi')" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
+                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
+                    <button type="button" onclick="simpanInfoPPDB('sdi')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Info PPDB SDI
                     </button>
@@ -1678,8 +1693,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('mi')" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
+                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
+                    <button type="button" onclick="simpanInfoPPDB('mi')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Info PPDB MI
                     </button>
@@ -1814,8 +1829,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('mts')" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
+                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
+                    <button type="button" onclick="simpanInfoPPDB('mts')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Info PPDB MTs
                     </button>
@@ -1950,8 +1965,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('ma')" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
+                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
+                    <button type="button" onclick="simpanInfoPPDB('ma')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Info PPDB MA
                     </button>
@@ -2086,8 +2101,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('ponpes')" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
+                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
+                    <button type="button" onclick="simpanInfoPPDB('ponpes')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Info PPDB Ponpes
                     </button>

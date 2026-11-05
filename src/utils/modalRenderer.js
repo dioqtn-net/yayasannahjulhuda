@@ -117,14 +117,14 @@ export async function renderDynamicUnitModal(id) {
     }
   }
 
-  const desc = cmsProg[key + 'Desc'] || defaults.desc;
-  const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum;
-  const unggulan = cmsProg[key + 'Unggulan'] || defaults.unggulan;
-  const ekskul = cmsProg[key + 'Ekskul'] || defaults.ekskul;
-  const fasilitas = cmsProg[key + 'Fasilitas'] || defaults.fasilitas;
-  const visi = cmsProg[key + 'Visi'] || defaults.visi;
-  const misi = cmsProg[key + 'Misi'] || defaults.misi;
-  let akreditasi = cmsProg[key + 'Akreditasi'] || defaults.akreditasi;
+  const desc = cmsProg[key + 'Desc'] || defaults.desc || '-';
+  const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum || '-';
+  const unggulan = cmsProg[key + 'Unggulan'] || defaults.unggulan || '-';
+  const ekskul = cmsProg[key + 'Ekskul'] || defaults.ekskul || '-';
+  const fasilitas = cmsProg[key + 'Fasilitas'] || defaults.fasilitas || '-';
+  const visi = cmsProg[key + 'Visi'] || defaults.visi || '-';
+  const misi = cmsProg[key + 'Misi'] || defaults.misi || '-';
+  let akreditasi = cmsProg[key + 'Akreditasi'] || defaults.akreditasi || '-';
   if (akreditasi && !akreditasi.toLowerCase().startsWith('akreditasi') && akreditasi !== '-') {
     akreditasi = 'Akreditasi ' + akreditasi;
   }

@@ -8,7 +8,23 @@ const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
 let supabase = null;
 
 if (SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== "") {
-    supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: true },
+        global: {
+            fetch: (url, options = {}) => {
+                const customOptions = {
+                    ...options,
+                    cache: 'no-store',
+                    headers: {
+                        ...(options.headers || {}),
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache'
+                    }
+                };
+                return fetch(url, customOptions);
+            }
+        }
+    });
 }
 
 // Fallback Data (Seeder)
@@ -91,13 +107,26 @@ export const api = {
     isSupabaseConnected: () => supabase !== null,
     
     async getProfile() {
+        let p = fallbackData.profile;
         if (supabase) {
             const { data, error } = await supabase.from('profile_settings').select('*').single();
             if (error && error.code !== 'PGRST116') console.error(error);
-            return data || fallbackData.profile;
+            if (data) p = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.profile;
+        return {
+            ...p,
+            id: p.id || 1,
+            name: p.name || 'Yayasan Nahjul Huda',
+            history: p.history || '-',
+            vision_mission: p.vision_mission || '-',
+            address: p.address || '-',
+            phone: p.phone || '-',
+            telephone: p.telephone || '-',
+            email: p.email || '-',
+            operational_hours: p.operational_hours || '-'
+        };
     },
 
     async updateProfile(profile) {
@@ -127,69 +156,103 @@ export const api = {
             const isPonpes = u.id === 5 || (u.name && (u.name.toLowerCase().includes('pesantren') || u.name.toLowerCase().includes('ponpes') || u.name.toLowerCase().includes('assurur')));
             return {
                 ...u,
-                name: isSDI ? 'SD Islam (SDI) AL KINDY' : u.name,
+                name: isSDI ? 'SD Islam (SDI) AL KINDY' : (u.name || '-'),
                 image_url: u.image_url || getUnitImage(u),
+                description: u.description || '-',
+                curriculum: u.curriculum || '-',
+                extracurricular: u.extracurricular || '-',
+                facilities: u.facilities || '-',
+                wa_number: u.wa_number || '-',
                 ...(isMI ? {
                     intracurricular: u.intracurricular || "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
-                    extracurricular: "Futsal, Menari, Pramuka",
-                    facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan",
-                    wa_number: "+628991168301"
+                    extracurricular: u.extracurricular || "Futsal, Menari, Pramuka",
+                    facilities: u.facilities || "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan",
+                    wa_number: u.wa_number || "+628991168301"
                 } : {}),
                 ...(isMTs ? {
-                    facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
-                    wa_number: "+6285880682115"
+                    facilities: u.facilities || "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
+                    wa_number: u.wa_number || "+6285880682115"
                 } : {}),
                 ...(isMA ? {
-                    facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
-                    wa_number: "+628158316436"
+                    facilities: u.facilities || "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
+                    wa_number: u.wa_number || "+628158316436"
                 } : {}),
                 ...(isPonpes ? {
-                    description: "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.",
-                    featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah",
-                    wa_number: "+628569010538"
+                    description: u.description || "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.",
+                    featured_program: u.featured_program || "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah",
+                    wa_number: u.wa_number || "+628569010538"
                 } : {})
             };
         });
     },
 
     async getNews() {
+        let list = fallbackData.news;
         if (supabase) {
             const { data, error } = await supabase.from('news_posts').select('*').order('date', { ascending: false });
             if (error) console.error(error);
-            return data && data.length > 0 ? data : fallbackData.news;
+            if (data && data.length > 0) list = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.news;
+        return list.map(n => ({
+            ...n,
+            title: n.title || '-',
+            content: n.content || '-',
+            date: n.date || '-'
+        }));
     },
 
     async getFacilities() {
+        let list = fallbackData.facilities;
         if (supabase) {
             const { data, error } = await supabase.from('facilities').select('*');
             if (error) console.error(error);
-            return data && data.length > 0 ? data : fallbackData.facilities;
+            if (data && data.length > 0) list = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.facilities;
+        return list.map(f => ({
+            ...f,
+            name: f.name || '-',
+            description: f.description || '-'
+        }));
     },
 
     async getPPDB() {
+        let p = fallbackData.ppdb;
         if (supabase) {
             const { data, error } = await supabase.from('ppdb_info').select('*').single();
             if (error && error.code !== 'PGRST116') console.error(error);
-            return data || fallbackData.ppdb;
+            if (data) p = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.ppdb;
+        return {
+            ...p,
+            academic_year: p.academic_year || '-',
+            status: p.status || 'BUKA',
+            schedule: p.schedule || '-',
+            requirements: p.requirements || '-',
+            flow: p.flow || '-',
+            fees: p.fees || '-',
+            wa_number: p.wa_number || '-'
+        };
     },
 
     async getGalleries() {
+        let list = fallbackData.galleries;
         if (supabase) {
             const { data, error } = await supabase.from('galleries').select('*').order('created_at', { ascending: false });
             if (error) console.error(error);
-            return data && data.length > 0 ? data : fallbackData.galleries;
+            if (data && data.length > 0) list = data;
+        } else {
+            await delay(300);
         }
-        await delay(300);
-        return fallbackData.galleries;
+        return list.map(g => ({
+            ...g,
+            title: g.title || '-'
+        }));
     },
 
     async uploadImage(file, pathName) {

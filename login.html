@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>Login Panel Admin - Yayasan Nahjul Huda</title>
 
@@ -35,7 +38,7 @@
       })();
     </script>
 </head>
-<body class="bg-gradient-to-br from-emerald-950 via-[#0a5c36] to-emerald-900 font-inter antialiased min-h-screen flex items-center justify-center p-4 sm:p-6 text-slate-800 relative overflow-hidden">
+<body class="bg-gradient-to-br from-emerald-950 via-[#0a5c36] to-emerald-900 font-inter antialiased min-h-screen flex items-center justify-center p-4 sm:p-6 text-slate-800 relative overflow-hidden overflow-x-hidden">
 
     <!-- Background Decorative Glow Rings -->
     <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -120,7 +123,19 @@
       let supa = null;
       if (typeof window.supabase !== 'undefined' && SUPABASE_ANON_KEY) {
         try {
-          supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: true },
+            global: {
+              fetch: function(url, options) {
+                options = options || {};
+                options.cache = 'no-store';
+                options.headers = options.headers || {};
+                options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                options.headers['Pragma'] = 'no-cache';
+                return fetch(url, options);
+              }
+            }
+          });
         } catch(e) {
           console.warn('Supabase init notice:', e);
         }
