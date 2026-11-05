@@ -89,7 +89,7 @@
                   </div>
                   <div class="ml-4">
                     <h4 class="text-lg font-bold text-slate-800">Alamat Lengkap</h4>
-                    <p class="text-slate-600 leading-relaxed">Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                    <p id="kontak-view-address" class="text-slate-600 leading-relaxed">Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
                   </div>
                 </div>
                 
@@ -102,16 +102,16 @@
                     <div class="space-y-3 text-slate-600">
                       <div>
                         <span class="font-semibold text-slate-800">Telepon Yayasan:</span>
-                        <a href="tel:02153654830" class="hover:text-emerald-700 font-medium transition ml-1">(021) 53654830</a>
+                        <a id="kontak-view-phone" href="tel:02153654830" class="hover:text-emerald-700 font-medium transition ml-1">(021) 53654830</a>
                       </div>
                       <div>
                         <span class="font-semibold text-slate-800 block mb-1">WhatsApp:</span>
                         <div class="space-y-1 pl-1 text-sm">
                           <div>
-                            1. <a href="https://wa.me/6285880682115" target="_blank" class="hover:text-emerald-700 font-medium transition">0858 8068 2115</a>
+                            1. <a id="kontak-view-wa1" href="https://wa.me/6285880682115" target="_blank" class="hover:text-emerald-700 font-medium transition">0858 8068 2115</a>
                           </div>
                           <div>
-                            2. <a href="https://wa.me/628158316436" target="_blank" class="hover:text-emerald-700 font-medium transition">0815 8316 436</a>
+                            2. <a id="kontak-view-wa2" href="https://wa.me/628158316436" target="_blank" class="hover:text-emerald-700 font-medium transition">0815 8316 436</a>
                           </div>
                         </div>
                       </div>
@@ -126,7 +126,7 @@
                   <div class="ml-4">
                     <h4 class="text-lg font-bold text-slate-800 mb-1">Email Resmi</h4>
                     <p class="text-slate-600 leading-relaxed mt-1">
-                      <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-emerald-700 font-medium transition">nahjulhuda74@gmail.com</a>
+                      <a id="kontak-view-email" href="mailto:nahjulhuda74@gmail.com" class="hover:text-emerald-700 font-medium transition">nahjulhuda74@gmail.com</a>
                     </p>
                     <a href="mailto:nahjulhuda74@gmail.com" class="inline-block mt-2 text-emerald-600 font-medium hover:text-emerald-700 transition">
                       <i class="fas fa-paper-plane mr-1 text-sm"></i> Kirim Email &rarr;
@@ -140,7 +140,7 @@
                   </div>
                   <div class="ml-4">
                     <h4 class="text-lg font-bold text-slate-800">Jam Operasional</h4>
-                    <p class="text-slate-600 leading-relaxed">Senin - Jumat: 07:00 - 15:00 WIB</p>
+                    <p id="kontak-view-hours" class="text-slate-600 leading-relaxed">Senin - Jumat: 07:00 - 15:00 WIB</p>
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@
             <!-- Maps -->
             <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-100 h-[400px] lg:h-auto min-h-[350px]">
               <iframe 
-                src="https://www.google.com/maps?q=Yayasan+Nahjul+Huda+Kebon+Jeruk&output=embed" 
+                id="kontak-view-maps" src="https://www.google.com/maps?q=Yayasan+Nahjul+Huda+Kebon+Jeruk&output=embed" 
                 width="100%" 
                 height="100%" 
                 style="border:0; border-radius: 12px; min-height: 350px;" 
@@ -222,5 +222,81 @@
         });
       }
     </script>
-  </body>
+  
+    <script>
+      (function() {
+        const KEY_CONTACT = 'cmsData_contact';
+        const KEY_PROFILE = 'cmsData_profile';
+
+        function renderContactPage() {
+          let data = null;
+          try {
+            const rawContact = localStorage.getItem(KEY_CONTACT);
+            if (rawContact) data = JSON.parse(rawContact);
+            else {
+              const rawProfile = localStorage.getItem(KEY_PROFILE);
+              if (rawProfile) data = JSON.parse(rawProfile);
+            }
+          } catch(e) {}
+
+          if (!data) return;
+
+          if (data.address) {
+            const el = document.getElementById('kontak-view-address');
+            if (el) el.textContent = data.address;
+          }
+          if (data.phone) {
+            const el = document.getElementById('kontak-view-phone');
+            if (el) {
+              el.textContent = data.phone;
+              el.href = 'tel:' + data.phone.replace(/\D/g, '');
+            }
+          }
+          if (data.wa1) {
+            const el = document.getElementById('kontak-view-wa1');
+            if (el) {
+              el.textContent = data.wa1;
+              let clean = data.wa1.replace(/\D/g, '');
+              if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+              el.href = 'https://wa.me/' + clean;
+            }
+          }
+          if (data.wa2) {
+            const el = document.getElementById('kontak-view-wa2');
+            if (el) {
+              el.textContent = data.wa2;
+              let clean = data.wa2.replace(/\D/g, '');
+              if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+              el.href = 'https://wa.me/' + clean;
+            }
+          }
+          if (data.email) {
+            const el = document.getElementById('kontak-view-email');
+            if (el) {
+              el.textContent = data.email;
+              el.href = 'mailto:' + data.email;
+            }
+          }
+          if (data.operational_hours) {
+            const el = document.getElementById('kontak-view-hours');
+            if (el) el.textContent = data.operational_hours;
+          }
+          if (data.maps_url) {
+            const el = document.getElementById('kontak-view-maps');
+            if (el) el.src = data.maps_url;
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          renderContactPage();
+          window.addEventListener('storage', (e) => {
+            if (!e.key || e.key === KEY_CONTACT || e.key === KEY_PROFILE) {
+              renderContactPage();
+            }
+          });
+        });
+      })();
+    </script>
+</body>
+
 </html>
