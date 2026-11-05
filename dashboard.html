@@ -1,20 +1,328 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Panel Admin Yayasan Nahjul Huda</title>
-  <link rel="icon" type="image/png" href="/logo.png">
-  <script>
-    // Langsung arahkan ke tab Dashboard di Panel Admin Utama
-    window.location.replace('kelola.html#dashboard');
-  </script>
-</head>
-<body style="font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f8fafc; color: #334155;">
-  <div style="text-align: center; padding: 24px;">
-    <h2>Membuka Dashboard Panel Admin...</h2>
-    <p>Jika tidak dialihkan secara otomatis, <a href="kelola.html#dashboard" style="color: #047857; font-weight: bold;">klik di sini untuk membuka Dashboard</a>.</p>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Dashboard Admin - Yayasan Nahjul Huda</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (via Vite style.css) -->
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+<body class="bg-slate-100 text-slate-800 font-inter antialiased min-h-screen">
+  <div class="flex h-screen overflow-hidden">
+    <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 hidden lg:hidden transition-opacity"></div>
+    <aside id="adminSidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-64 bg-emerald-950 text-emerald-100 flex flex-col justify-between shadow-2xl transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-emerald-900/60">
+        <!-- Sidebar Header / Logo -->
+        <div>
+          <div class="p-6 border-b border-emerald-800/80 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="h-10 w-10 bg-white rounded-lg p-1 shadow flex items-center justify-center flex-shrink-0">
+                <img src="/logo.png" alt="Logo Yayasan Nahjul Huda" class="h-8 w-8 object-contain">
+              </div>
+              <div class="overflow-hidden">
+                <h1 class="font-playfair font-bold text-white text-base leading-tight truncate">Nahjul Huda</h1>
+                <p class="text-xs text-emerald-300/80 font-medium tracking-wide">Panel Admin</p>
+              </div>
+            </div>
+            <!-- Mobile Close Button -->
+            <button id="closeSidebarBtn" class="lg:hidden text-emerald-300 hover:text-white p-1 rounded-md focus:outline-none">
+              <i class="fas fa-times text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Navigation Menus -->
+          <nav class="p-4 space-y-1.5 overflow-y-auto">
+            <div class="px-3 pb-2 text-[11px] font-semibold tracking-wider text-emerald-400/70 uppercase">
+              Menu Utama
+            </div>
+
+            <!-- Dashboard (Active) -->
+            <a href="dashboard.html" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all bg-emerald-800 text-white shadow-sm shadow-emerald-950/40">
+              <i class="fas fa-chart-pie w-6 text-emerald-300"></i>
+              <span>Dashboard</span>
+            </a>
+
+            <!-- 1. Kelola Beranda -->
+            <a href="kelola.html#beranda" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-home w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Beranda</span>
+            </a>
+
+            <!-- 2. Kelola Profil -->
+            <a href="kelola.html#profil" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-landmark w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Profil</span>
+            </a>
+
+            <!-- 3. Kelola Program -->
+            <a href="kelola.html#program" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-graduation-cap w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Program</span>
+            </a>
+
+            <!-- 4. Kelola Fasilitas -->
+            <a href="kelola.html#fasilitas" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-building w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Fasilitas</span>
+            </a>
+
+            <!-- 5. Kelola Berita -->
+            <a href="kelola.html#berita" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-newspaper w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Berita</span>
+            </a>
+
+            <!-- 6. Kelola Galeri -->
+            <a href="kelola.html#galeri" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-images w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Galeri</span>
+            </a>
+
+            <!-- 7. Kelola Kontak -->
+            <a href="kelola.html#kontak" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-phone-alt w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Kelola Kontak</span>
+            </a>
+
+            <!-- 8. Info PPDB -->
+            <a href="kelola.html#ppdb" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-user-graduate w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Info PPDB</span>
+            </a>
+
+            <!-- Pengaturan -->
+            <a href="kelola.html#pengaturan" class="nav-item flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-emerald-200 hover:bg-emerald-900/80 hover:text-white group">
+              <i class="fas fa-cog w-6 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i>
+              <span>Pengaturan</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Sidebar Footer / Keluar -->
+        <div class="p-4 border-t border-emerald-900/80 bg-emerald-950/80">
+          <a href="/" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-red-600/15 hover:bg-red-600 text-red-300 hover:text-white rounded-lg text-sm font-medium transition-all duration-200 border border-red-500/20 hover:border-transparent group">
+            <i class="fas fa-sign-out-alt text-red-400 group-hover:text-white transition-colors"></i>
+            <span>Keluar</span>
+          </a>
+        </div>
+      </aside>
+    <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <header class="bg-white border-b border-slate-200/80 sticky top-0 z-20 shadow-xs">
+          <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5">
+            <!-- Left: Mobile Toggle & Page Title -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+              <button id="toggleSidebarBtn" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 focus:outline-none">
+                <i class="fas fa-bars text-lg"></i>
+              </button>
+              <div>
+                <h2 class="text-lg sm:text-xl font-bold font-playfair text-slate-800">Panel Admin</h2>
+                <p class="text-xs text-slate-500 hidden sm:block">Yayasan Nahjul Huda &bull; Sistem Informasi & Kelola Konten</p>
+              </div>
+            </div>
+
+            <!-- Right: External Website Link & Admin Profile -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+              <!-- Link Lihat Website Publik -->
+              <a href="/" target="_blank" class="hidden sm:inline-flex items-center space-x-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-full transition">
+                <i class="fas fa-external-link-alt text-xs"></i>
+                <span>Lihat Website</span>
+              </a>
+
+              <!-- Admin Profile -->
+              <div class="flex items-center space-x-3 pl-3 sm:border-l sm:border-slate-200">
+                <div class="h-9 w-9 rounded-full bg-emerald-800 text-white flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-emerald-600/30">
+                  <i class="fas fa-user-shield text-xs"></i>
+                </div>
+                <div class="hidden md:block text-left">
+                  <div class="text-sm font-semibold text-slate-800 leading-tight">Admin Yayasan</div>
+                  <div class="text-[11px] font-medium text-emerald-700 bg-emerald-50 inline-block px-1.5 py-0.5 rounded">Super Admin</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+      <main class="flex-1 p-4 sm:p-6 lg:p-8 bg-slate-100">
+        <!-- SECTION 1: DASHBOARD UTAMA -->
+          <!-- ========================================== -->
+          <section id="dashboard" class="admin-section">
+          <!-- Banner Ucapan Selamat Datang -->
+          <div class="mb-8 bg-white rounded-xl p-8 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+              
+              <!-- Bagian Teks (Kiri) -->
+              <div class="max-w-2xl relative z-10">
+                  <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 text-[#0a5c36] text-xs font-bold rounded-full mb-4 border border-green-200">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                      Dashboard Terhubung
+                  </div>
+                  <h1 class="text-3xl font-bold text-gray-900 mb-3 font-serif leading-tight">Selamat Datang di Panel Admin Yayasan Nahjul Huda</h1>
+                  <p class="text-gray-600 text-sm leading-relaxed">Kelola konten informasi, teks profil, kurikulum program, dokumentasi galeri, fasilitas, berita, serta informasi PPDB secara mudah dan terintegrasi.</p>
+              </div>
+
+              <!-- Bagian Logo (Kanan): Transparansi dihilangkan (opacity-100) dan margin aman -->
+              <div class="hidden md:block relative z-10 pr-2 lg:pr-8 flex-shrink-0">
+                  <img src="assets/images/logo.png" alt="Logo Yayasan" class="w-32 h-32 object-contain drop-shadow-sm opacity-100">
+              </div>
+              
+          </div>
+
+          <!-- 3 Buah Kartu (Card) Statistik CMS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-8">
+            
+            <!-- Card 1: Total Halaman Website -->
+            <div class="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Struktur Website</span>
+                <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
+                  <i class="fas fa-layer-group"></i>
+                </div>
+              </div>
+              <div class="text-slate-600 text-sm font-medium mb-1">Total Halaman Utama</div>
+              <div class="text-3xl font-extrabold text-slate-800 mb-3">8</div>
+              <div class="flex items-center text-xs text-emerald-700 font-medium">
+                <i class="fas fa-check-double mr-1.5"></i>
+                <span>Semua halaman terintegrasi CMS</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Pengelolaan Publikasi Berita -->
+            <div class="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Publikasi Informasi</span>
+                <div class="w-11 h-11 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-lg">
+                  <i class="fas fa-newspaper"></i>
+                </div>
+              </div>
+              <div class="text-slate-600 text-sm font-medium mb-1">Kanal Berita &amp; Artikel</div>
+              <div class="text-3xl font-extrabold text-slate-800 mb-3">Aktif</div>
+              <div class="flex items-center text-xs text-sky-700 font-medium">
+                <i class="fas fa-rss mr-1.5"></i>
+                <span>Kabar kegiatan 4 jenjang pendidikan</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Status Company Profile -->
+            <div class="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Status Sistem</span>
+                <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
+              <div class="text-slate-600 text-sm font-medium mb-1">Company Profile Publik</div>
+              <div class="text-3xl font-extrabold text-emerald-800 mb-3">Online</div>
+              <div class="flex items-center text-xs text-emerald-700 font-medium">
+                <i class="fas fa-shield-alt mr-1.5"></i>
+                <span>Yayasan Nahjul Huda Jakarta</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section Informasi Tambahan / Panduan Singkat -->
+          <div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+            <h3 class="font-playfair font-bold text-lg text-slate-800 mb-4 flex items-center">
+              <i class="fas fa-info-circle text-emerald-700 mr-2"></i>
+              Aksi Cepat &amp; Panduan Pengelolaan
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
+                <!-- Kotak 1: Beranda -->
+                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <h4 class="font-bold text-gray-900 text-sm">Kelola Konten Beranda</h4>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed flex-grow">Perbarui teks hero, narasi pengantar, dan banner utama halaman depan website.</p>
+                </div>
+
+                <!-- Kotak 2: Berita -->
+                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <h4 class="font-bold text-gray-900 text-sm">Kelola Konten Berita</h4>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed flex-grow">Perbarui judul hero, pengantar warta kegiatan santri, dan foto sorotan yayasan.</p>
+                </div>
+
+                <!-- Kotak 3: Galeri -->
+                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <h4 class="font-bold text-gray-900 text-sm">Kelola Galeri</h4>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed flex-grow">Unggah foto dokumentasi kegiatan terbaru, hapus foto lama, dan kelola album kegiatan yayasan.</p>
+                </div>
+
+                <!-- Kotak 4: PPDB -->
+                <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg class="w-5 h-5 text-[#0a5c36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422M12 7v10"></path></svg>
+                        <h4 class="font-bold text-gray-900 text-sm">Kelola Info PPDB</h4>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed flex-grow">Perbarui informasi alur pendaftaran, syarat berkas santri baru, dan brosur PPDB.</p>
+                </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+      </main>
+    </div>
   </div>
+
+  <script>
+    // Toggle Mobile Sidebar
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+    const sidebar = document.getElementById('adminSidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+        if (backdrop) backdrop.classList.toggle('hidden');
+      });
+    }
+    if (closeBtn && sidebar) {
+      closeBtn.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        if (backdrop) backdrop.classList.add('hidden');
+      });
+    }
+    if (backdrop && sidebar) {
+      backdrop.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      });
+    }
+
+    // Navigasi Aksi Cepat Dashboard
+    const aksiCepatMap = {
+      'Kelola Konten Beranda': 'kelola.html#beranda',
+      'Kelola Konten Berita': 'kelola.html#berita',
+      'Kelola Galeri': 'kelola.html#galeri',
+      'Kelola Info PPDB': 'kelola-info-ppdb.html'
+    };
+    document.querySelectorAll('h4').forEach(h4 => {
+      const targetUrl = aksiCepatMap[h4.textContent.trim()];
+      if (targetUrl) {
+        const card = h4.closest('.hover\\:shadow-md');
+        if (card) {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', () => {
+            window.location.href = targetUrl;
+          });
+        }
+      }
+    });
+  </script>
 </body>
 </html>
-
