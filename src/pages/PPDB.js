@@ -12,24 +12,22 @@ export const renderPPDB = (ppdb) => {
                 targetPanel.classList.remove('hidden');
             }
 
-            const tabBtns = document.querySelectorAll('.ppdb-tab-btn');
-            tabBtns.forEach(btn => {
-                const btnKey = btn.getAttribute('data-ppdb-tab');
-                const icon = btn.querySelector('i');
-                if (btnKey === key) {
-                    btn.className = 'ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2';
-                    if (icon) {
-                        icon.classList.remove('text-slate-400');
-                        icon.classList.add('text-gold-400');
-                    }
-                } else {
-                    btn.className = 'ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2';
-                    if (icon) {
-                        icon.classList.remove('text-gold-400');
-                        icon.classList.add('text-slate-400');
-                    }
-                }
-            });
+            const tabBtns = document.querySelectorAll('.tab-btn-jenjang, .ppdb-tab-btn');
+        tabBtns.forEach(btn => {
+          const target = btn.getAttribute('data-target') || '';
+          const btnKey = target.replace('tab-', '') || btn.getAttribute('data-ppdb-tab') || '';
+          if (btnKey === key) {
+            btn.classList.add('active');
+            btn.style.backgroundColor = '#047857';
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = '#047857';
+          } else {
+            btn.classList.remove('active');
+            btn.style.backgroundColor = '#ffffff';
+            btn.style.color = '#374151';
+            btn.style.borderColor = '#e5e7eb';
+          }
+        });
 
             const select = document.getElementById('ppdb-select-jenjang');
             if (select && select.value !== key) {
@@ -89,30 +87,37 @@ export const renderPPDB = (ppdb) => {
             </div>
           </div>
 
-          <!-- Tabs untuk Layar Besar (Desktop / Tablet) - 5 Tab Mandiri -->
-          <div class="hidden lg:flex flex-wrap justify-center gap-3">
-            <button type="button" data-ppdb-tab="sdi" onclick="window.switchPPDBTab('sdi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-school text-slate-400"></i>
-              <span>SD Islam (SDI) AL KINDY</span>
-            </button>
-            <button type="button" data-ppdb-tab="mi" onclick="window.switchPPDBTab('mi')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-book-reader text-slate-400"></i>
-              <span>Madrasah Ibtidaiyah (MI)</span>
-            </button>
-            <button type="button" data-ppdb-tab="mts" onclick="window.switchPPDBTab('mts')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all bg-emerald-800 text-white shadow-md border-2 border-emerald-800 flex items-center justify-center gap-2">
-              <i class="fas fa-graduation-cap text-gold-400"></i>
-              <span>Madrasah Tsanawiyah (MTs)</span>
-            </button>
-            <button type="button" data-ppdb-tab="ma" onclick="window.switchPPDBTab('ma')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-university text-slate-400"></i>
-              <span>Madrasah Aliyah (MA)</span>
-            </button>
-            <button type="button" data-ppdb-tab="ponpes" onclick="window.switchPPDBTab('ponpes')" class="ppdb-tab-btn px-5 py-3 rounded-xl font-medium text-sm md:text-base transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 flex items-center justify-center gap-2">
-              <i class="fas fa-mosque text-slate-400"></i>
-              <span>Pondok Pesantren Assurur</span>
-            </button>
-          </div>
-        </div>
+          <!-- KONTAINER TAB JENJANG (DIKUNCI MATI 1 BARIS LURUS TANPA IKON) -->
+<div style="width: 100%; overflow-x: auto; text-align: center; padding-bottom: 16px; scrollbar-width: none;">
+    <div style="display: inline-flex; flex-wrap: nowrap; gap: 12px; justify-content: center; align-items: center;">
+        
+        <!-- Tab 1: SDI -->
+        <button type="button" class="tab-btn-jenjang" data-target="tab-sdi" onclick="window.switchPPDBTab('sdi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+            SD Islam (SDI) AL KINDY
+        </button>
+        
+        <!-- Tab 2: MI -->
+        <button type="button" class="tab-btn-jenjang" data-target="tab-mi" onclick="window.switchPPDBTab('mi')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+            Madrasah Ibtidaiyah (MI)
+        </button>
+        
+        <!-- Tab 3: MTs (Contoh Status Aktif) -->
+        <button type="button" class="tab-btn-jenjang active" data-target="tab-mts" onclick="window.switchPPDBTab('mts')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #047857; background-color: #047857; color: #ffffff; font-weight: 600; font-size: 14px; cursor: pointer;">
+            Madrasah Tsanawiyah (MTs)
+        </button>
+        
+        <!-- Tab 4: MA -->
+        <button type="button" class="tab-btn-jenjang" data-target="tab-ma" onclick="window.switchPPDBTab('ma')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+            Madrasah Aliyah (MA)
+        </button>
+        
+        <!-- Tab 5: Ponpes -->
+        <button type="button" class="tab-btn-jenjang" data-target="tab-ponpes" onclick="window.switchPPDBTab('ponpes')" style="white-space: nowrap; flex-shrink: 0; padding: 12px 24px; border-radius: 8px; border: 1px solid #e5e7eb; background-color: #ffffff; color: #374151; font-weight: 600; font-size: 14px; cursor: pointer;">
+            Pondok Pesantren Assurur
+        </button>
+
+    </div>
+</div>
 
         <!-- ================= 1. PANEL MTs (ACTIVE DEFAULT) ================= -->
         <div id="ppdb-panel-mts" class="ppdb-panel space-y-8">
