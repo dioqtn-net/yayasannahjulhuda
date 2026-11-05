@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.png?v=20261106_03" />
     <title>Informasi PPDB - Yayasan Nahjul Huda</title>
 
     <!-- Google Fonts -->
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/style.css?v=20261106_03">
     <!-- Custom Style for PPDB Consultation Section -->
     <style>
       @media (max-width: 900px) {
@@ -88,9 +88,7 @@
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 id="ppdb-header-title" class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Penerimaan Peserta Didik Baru</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p id="ppdb-header-subtitle" class="text-white text-lg md:text-xl font-medium drop-shadow max-w-2xl mx-auto leading-relaxed">
-              Papan Informasi Resmi Pendaftaran Peserta Didik Baru Yayasan Nahjul Huda
-            </p>
+            <p id="ppdb-header-subtitle" class="text-white text-lg md:text-xl font-medium drop-shadow max-w-2xl mx-auto leading-relaxed"><span class="animate-pulse">Tahun Ajaran Baru &bull; Yayasan Nahjul Huda</span></p>
           </div>
         </section>
 
@@ -194,14 +192,14 @@
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Hari Pelayanan</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-sdi">Senin s/d Sabtu</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-sdi"><span class="animate-pulse text-gray-400">Memuat jadwal pelayanan...</span></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Jam Operasional</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-sdi">08.00 - 14.00 WIB</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-sdi"><span class="animate-pulse text-gray-400">Memuat jam operasional...</span></p>
                     </div>
                 </div>
             </div>
@@ -210,7 +208,7 @@
                 <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span id="jadwal-lokasi-sdi" class="leading-relaxed w-full">Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.</span>
+                <span id="jadwal-lokasi-sdi" class="leading-relaxed w-full"><span class="animate-pulse text-emerald-100">Memuat lokasi pendaftaran...</span></span>
             </div>
         </div>
 
@@ -229,26 +227,7 @@
             <p class="text-gray-500 text-sm mb-6">Calon peserta didik baru wajib melengkapi berkas administrasi berikut:</p>
             
             <ul class="space-y-3 flex-grow" id="syarat-list-sdi">
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengisi formulir pendaftaran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Akta Kelahiran (2 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi KK & KTP Orang Tua</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Pas Foto 3x4 (4 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Surat Keterangan Lulus TK / RA (jika ada)</span>
-                </li>
+                <li class="p-4 text-center text-gray-400 animate-pulse text-sm">Memuat persyaratan berkas pendaftaran...</li>
             </ul>
 
             <div class="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-[#0a5c36] font-medium flex gap-3">
@@ -339,14 +318,14 @@
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Hari Pelayanan</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-mi">Senin s/d Sabtu</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-mi"><span class="animate-pulse text-gray-400">Memuat jadwal pelayanan...</span></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Jam Operasional</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-mi">07.30 - 14.30 WIB</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-mi"><span class="animate-pulse text-gray-400">Memuat jam operasional...</span></p>
                     </div>
                 </div>
             </div>
@@ -355,7 +334,7 @@
                 <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span id="jadwal-lokasi-mi" class="leading-relaxed w-full">Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.</span>
+                <span id="jadwal-lokasi-mi" class="leading-relaxed w-full"><span class="animate-pulse text-emerald-100">Memuat lokasi pendaftaran...</span></span>
             </div>
         </div>
 
@@ -374,26 +353,7 @@
             <p class="text-gray-500 text-sm mb-6">Calon peserta didik baru wajib melengkapi berkas administrasi berikut:</p>
             
             <ul class="space-y-3 flex-grow" id="syarat-list-mi">
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengisi formulir pendaftaran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Kartu Keluarga & KTP Orang Tua/Wali</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Akta Kelahiran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Pas Foto 3x4 (4 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Ijazah / Sertifikat RA/TK</span>
-                </li>
+                <li class="p-4 text-center text-gray-400 animate-pulse text-sm">Memuat persyaratan berkas pendaftaran...</li>
             </ul>
 
             <div class="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-[#0a5c36] font-medium flex gap-3">
@@ -484,14 +444,14 @@
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Hari Pelayanan</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-mts">Senin s/d Sabtu</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-mts"><span class="animate-pulse text-gray-400">Memuat jadwal pelayanan...</span></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Jam Operasional</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-mts">08.00 - 14.00 WIB</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-mts"><span class="animate-pulse text-gray-400">Memuat jam operasional...</span></p>
                     </div>
                 </div>
             </div>
@@ -500,7 +460,7 @@
                 <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span id="jadwal-lokasi-mts" class="leading-relaxed w-full">Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.</span>
+                <span id="jadwal-lokasi-mts" class="leading-relaxed w-full"><span class="animate-pulse text-emerald-100">Memuat lokasi pendaftaran...</span></span>
             </div>
         </div>
 
@@ -519,26 +479,7 @@
             <p class="text-gray-500 text-sm mb-6">Calon peserta didik baru wajib melengkapi berkas administrasi berikut:</p>
             
             <ul class="space-y-3 flex-grow" id="syarat-list-mts">
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengisi formulir pendaftaran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Kartu Keluarga & KTP Orang Tua/Wali</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Akta Kelahiran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Pas Foto 3x4 (4 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Ijazah SD/MI (2 lembar legalisir)</span>
-                </li>
+                <li class="p-4 text-center text-gray-400 animate-pulse text-sm">Memuat persyaratan berkas pendaftaran...</li>
             </ul>
 
             <div class="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-[#0a5c36] font-medium flex gap-3">
@@ -629,14 +570,14 @@
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Hari Pelayanan</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-ma">Senin s/d Sabtu</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-ma"><span class="animate-pulse text-gray-400">Memuat jadwal pelayanan...</span></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Jam Operasional</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-ma">08.00 - 14.00 WIB</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-ma"><span class="animate-pulse text-gray-400">Memuat jam operasional...</span></p>
                     </div>
                 </div>
             </div>
@@ -645,7 +586,7 @@
                 <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span id="jadwal-lokasi-ma" class="leading-relaxed w-full">Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.</span>
+                <span id="jadwal-lokasi-ma" class="leading-relaxed w-full"><span class="animate-pulse text-emerald-100">Memuat lokasi pendaftaran...</span></span>
             </div>
         </div>
 
@@ -664,26 +605,7 @@
             <p class="text-gray-500 text-sm mb-6">Calon peserta didik baru wajib melengkapi berkas administrasi berikut:</p>
             
             <ul class="space-y-3 flex-grow" id="syarat-list-ma">
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengisi formulir pendaftaran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Kartu Keluarga & KTP Orang Tua/Wali</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Akta Kelahiran</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Pas Foto 3x4 (4 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Ijazah / SKL SMP/MTs (2 lembar)</span>
-                </li>
+                <li class="p-4 text-center text-gray-400 animate-pulse text-sm">Memuat persyaratan berkas pendaftaran...</li>
             </ul>
 
             <div class="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-[#0a5c36] font-medium flex gap-3">
@@ -774,14 +696,14 @@
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Hari Pelayanan</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-ponpes">Setiap Hari (Senin - Ahad)</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-hari-ponpes"><span class="animate-pulse text-gray-400">Memuat jadwal pelayanan...</span></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="text-[#0a5c36] mt-0.5"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">Jam Operasional</p>
-                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-ponpes">08.00 - 17.00 WIB</p>
+                        <p class="text-gray-600 text-sm mt-1" id="jadwal-jam-ponpes"><span class="animate-pulse text-gray-400">Memuat jam operasional...</span></p>
                     </div>
                 </div>
             </div>
@@ -790,7 +712,7 @@
                 <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span id="jadwal-lokasi-ponpes" class="leading-relaxed w-full">Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Pondok Pesantren Assurur / Yayasan Nahjul Huda.</span>
+                <span id="jadwal-lokasi-ponpes" class="leading-relaxed w-full"><span class="animate-pulse text-emerald-100">Memuat lokasi pendaftaran...</span></span>
             </div>
         </div>
 
@@ -809,30 +731,7 @@
             <p class="text-gray-500 text-sm mb-6">Calon peserta didik baru wajib melengkapi berkas administrasi berikut:</p>
             
             <ul class="space-y-3 flex-grow" id="syarat-list-ponpes">
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengisi formulir pendaftaran santri baru</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi Akta Kelahiran & Kartu Keluarga (KK)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Fotokopi KTP Orang Tua / Wali</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Surat Keterangan Sehat dari Dokter</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Pas Foto 3x4 berpakaian muslim/muslimah (5 lembar)</span>
-                </li>
-                <li class="flex gap-3 items-start p-3 bg-white border border-gray-100 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                    <div class="w-6 h-6 rounded-full bg-green-100 text-[#0a5c36] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">6</div>
-                    <span class="text-gray-700 text-sm font-medium leading-snug pt-0.5">Mengikuti tes penempatan (baca Al-Qur'an & wawancara)</span>
-                </li>
+                <li class="p-4 text-center text-gray-400 animate-pulse text-sm">Memuat persyaratan berkas pendaftaran...</li>
             </ul>
 
             <div class="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-[#0a5c36] font-medium flex gap-3">
@@ -1246,5 +1145,13 @@
       })();
     </script>
 
+  <!-- Service Worker Killer (Anti-Cache Global) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) { registration.unregister(); }
+      });
+    }
+  </script>
 </body>
 </html>

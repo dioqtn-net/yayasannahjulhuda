@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.png?v=20261106_03" />
     <title>Dashboard Admin - Yayasan Nahjul Huda</title>
 
     <!-- Google Fonts -->
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS (via Vite style.css) -->
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/style.css?v=20261106_03">
     <!-- Auth Guard: Proteksi Akses Panel Admin -->
     <script>
       (function() {
@@ -1445,5 +1445,13 @@
         window.location.href = 'login.html';
       };
     </script>
+  <!-- Service Worker Killer (Anti-Cache Global) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) { registration.unregister(); }
+      });
+    }
+  </script>
 </body>
 </html>

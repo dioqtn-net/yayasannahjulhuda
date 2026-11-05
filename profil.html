@@ -7,7 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="icon" type="image/png" href="/logo.png?v=20261106_03" />
   <title>Profil Yayasan - Yayasan Nahjul Huda</title>
 
   <!-- Google Fonts -->
@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/style.css?v=20261106_03">
 </head>
 
 <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
@@ -121,7 +121,7 @@
               <i class="fas fa-history text-gold-500 mr-4"></i> Sejarah Berdirinya
             </h2>
             <div class="prose prose-emerald max-w-none text-slate-600 leading-relaxed">
-              <p id="publicSejarahText" class="text-justify whitespace-pre-line leading-relaxed">-</p>
+              <p id="publicSejarahText" class="text-justify whitespace-pre-line leading-relaxed"><span class="animate-pulse text-slate-400">Memuat sejarah berdirinya yayasan...</span></p>
             </div>
           </div>
         </div>
@@ -512,6 +512,14 @@
         console.error('Error loading cmsData_profil:', e);
       }
     });
+  </script>
+  <!-- Service Worker Killer (Anti-Cache Global) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) { registration.unregister(); }
+      });
+    }
   </script>
 </body>
 
