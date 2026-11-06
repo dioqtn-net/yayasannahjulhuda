@@ -1,3 +1,14 @@
+      function formatContentHtml(str, defaultAlign) {
+        if (!defaultAlign) defaultAlign = 'text-justify';
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<p class="${defaultAlign}">${trimmed}</p>`;
+      }
+
 export const unitModalMetadata = {
   1: { key: 'sdi', name: 'SD Islam (SDI) AL KINDY', short: 'SDI', logo: '/media/logo/SDI.jpg', anchor: 'program-sdi' },
   2: { key: 'mi', name: 'Madrasah Ibtidaiyah (MI) Nahjul Huda', short: 'MI', logo: '/media/logo/MI.jpg', anchor: 'program-mi' },

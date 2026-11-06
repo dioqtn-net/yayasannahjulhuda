@@ -1,3 +1,14 @@
+function formatContentHtml(str, defaultAlign) {
+    if (!defaultAlign) defaultAlign = 'text-justify';
+    if (str === null || str === undefined) return '-';
+    const trimmed = String(str).trim();
+    if (trimmed === '' || trimmed === '-') return '-';
+    if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        return trimmed;
+    }
+    return `<p class="${defaultAlign}">${trimmed}</p>`;
+}
+
 import { getUnitImage } from '../api';
 
 export const renderPrograms = (units) => {
@@ -32,20 +43,20 @@ export const renderPrograms = (units) => {
             </div>
             <div class="w-full md:w-2/3">
                 <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${unitName}</h2>
-                <p class="text-slate-600 text-lg mb-6 leading-relaxed text-justify">${unit.description}</p>
+                <div class="text-slate-600 text-lg mb-6 leading-relaxed">${formatContentHtml(unit.description)}</div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                            <p class="text-sm text-slate-600 text-justify">${unit.curriculum || '-'}</p>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.curriculum || "-")}</div>
                         </div>
                     </div>
                     ${hasIntracurricular ? `
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
-                            <p class="text-sm text-slate-600 text-justify">${unit.intracurricular}</p>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.intracurricular)}</div>
                         </div>
                     </div>
                     ` : ''}
@@ -60,13 +71,13 @@ export const renderPrograms = (units) => {
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                            <p class="text-sm text-slate-600 text-justify">${unit.extracurricular || '-'}</p>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.extracurricular || "-")}</div>
                         </div>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between ${hasIntracurricular || isPonpes ? '' : 'md:col-span-2'}">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                            <p class="text-sm text-slate-600 text-justify">${unit.facilities || '-'}</p>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.facilities || "-")}</div>
                         </div>
                     </div>
                     ${(isMTs || isMA) ? `

@@ -100,7 +100,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 id="publicProfilTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Profil Yayasan</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p id="publicProfilDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Mengenal lebih dekat sejarah,
+          <div id="publicProfilDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Mengenal lebih dekat sejarah,
             visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.</p>
         </div>
       </section>
@@ -121,7 +121,7 @@
               <i class="fas fa-history text-gold-500 mr-4"></i> Sejarah Berdirinya
             </h2>
             <div class="prose prose-emerald max-w-none text-slate-600 leading-relaxed">
-              <p id="publicSejarahText" class="text-justify whitespace-pre-line leading-relaxed"><span class="animate-pulse text-slate-400">Memuat sejarah berdirinya yayasan...</span></p>
+              <div id="publicSejarahText" class="text-justify whitespace-pre-line leading-relaxed"><span class="animate-pulse text-slate-400">Memuat sejarah berdirinya yayasan...</span></p>
             </div>
           </div>
         </div>
@@ -287,7 +287,7 @@
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-12"></div>
 
           <div class="max-w-5xl mx-auto bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
-            <p id="publicStrukturDesc" class="text-slate-600 italic mb-8">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk
+            <div id="publicStrukturDesc" class="text-slate-600 italic mb-8">Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk
               memajukan lembaga tercinta.</p>
 
             <!-- Ketua Yayasan (Puncak Hierarki) -->
@@ -462,11 +462,11 @@
           }
           if (data.profilDesc) {
             const el = document.getElementById('publicProfilDesc');
-            if (el) el.textContent = data.profilDesc;
+            if (el) el.innerHTML = formatContentHtml(data.profilDesc, 'text-center');
           }
           if (data.sejarahText) {
             const el = document.getElementById('publicSejarahText');
-            if (el) el.textContent = data.sejarahText;
+            if (el) el.innerHTML = formatContentHtml(data.sejarahText, 'text-justify');
           }
           if (data.strukturTitle) {
             const el = document.getElementById('publicStrukturTitle');
@@ -474,7 +474,7 @@
           }
           if (data.strukturDesc) {
             const el = document.getElementById('publicStrukturDesc');
-            if (el) el.textContent = data.strukturDesc;
+            if (el) el.innerHTML = formatContentHtml(data.strukturDesc, 'text-center');
           }
 
           const applyPerson = (role, photo, name) => {

@@ -1,3 +1,14 @@
+      function formatContentHtml(str, defaultAlign) {
+        if (!defaultAlign) defaultAlign = 'text-justify';
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<p class="${defaultAlign}">${trimmed}</p>`;
+      }
+
 export const renderFacilities = (facilities) => {
     return `
       <!-- Header Fasilitas -->
@@ -24,7 +35,7 @@ export const renderFacilities = (facilities) => {
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">${f.name}</h3>
-                            <p class="text-slate-600 text-sm text-justify">${f.description}</p>
+                            <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(f.description)}</div>
                         </div>
                     </div>
                 `).join('')}

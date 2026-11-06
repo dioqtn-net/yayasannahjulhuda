@@ -1,3 +1,14 @@
+      function formatContentHtml(str, defaultAlign) {
+        if (!defaultAlign) defaultAlign = 'text-justify';
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<p class="${defaultAlign}">${trimmed}</p>`;
+      }
+
 export const renderNews = (newsList) => {
     // Setup listeners and global handlers after render
     setTimeout(() => {
@@ -58,7 +69,7 @@ export const renderNews = (newsList) => {
             const modal = document.getElementById('newsDetailModal');
             if (!modal) return;
             document.getElementById('modalNewsTitle').textContent = title;
-            document.getElementById('modalNewsBody').textContent = desc;
+            document.getElementById('modalNewsBody').innerHTML = formatContentHtml(desc);
             const modalImg = document.getElementById('modalNewsImg');
             if (modalImg) {
                 if (imgSrc) {
@@ -642,7 +653,7 @@ export const renderNews = (newsList) => {
                 <i class="fas fa-arrows-alt-h"></i> Geser Scroll
               </div>
             </div>
-            <p id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line mb-6 text-justify">
+            <div id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
               Isi berita lengkap...
             </p>
             <div class="pt-4 border-t border-slate-100 flex justify-end">

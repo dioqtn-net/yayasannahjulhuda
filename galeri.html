@@ -84,7 +84,7 @@
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 id="pubGaleriBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Galeri Dokumentasi</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p id="pubGaleriBannerDesc" class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
+            <div id="pubGaleriBannerDesc" class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
               Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.
             </p>
           </div>
@@ -692,6 +692,17 @@
           return dateStr;
         }
 
+              function formatContentHtml(str, defaultAlign) {
+        if (!defaultAlign) defaultAlign = 'text-justify';
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<p class="${defaultAlign}">${trimmed}</p>`;
+      }
+
         function createCard(item, tipe) {
           const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
           const mediaHtml = isVideo
@@ -721,9 +732,9 @@
                   <h3 class="gallery-title font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                     ${escapeHtml(item.judul)}
                   </h3>
-                  <p class="gallery-desc text-xs text-slate-500 leading-relaxed text-justify">
-                    ${escapeHtml(item.deskripsi)}
-                  </p>
+                  <div class="gallery-desc text-xs text-slate-500 leading-relaxed">
+                    ${formatContentHtml(item.deskripsi)}
+                  </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                   <span><i class="far fa-calendar-alt mr-1"></i> ${escapeHtml(formatIndoDate(item.tanggal))}</span>
@@ -742,7 +753,7 @@
               const titleEl = document.getElementById('pubGaleriBannerTitle');
               const descEl = document.getElementById('pubGaleriBannerDesc');
               if (titleEl && b.title) titleEl.textContent = b.title;
-              if (descEl && b.desc) descEl.textContent = b.desc;
+              if (descEl && b.desc) descEl.innerHTML = formatContentHtml(b.desc, 'text-center');
             } catch (e) {}
           }
         }

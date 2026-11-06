@@ -1,3 +1,14 @@
+function formatContentHtml(str, defaultAlign) {
+    if (!defaultAlign) defaultAlign = 'text-justify';
+    if (str === null || str === undefined) return '-';
+    const trimmed = String(str).trim();
+    if (trimmed === '' || trimmed === '-') return '-';
+    if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        return trimmed;
+    }
+    return `<p class="${defaultAlign}">${trimmed}</p>`;
+}
+
 import { getUnitImage } from '../api';
 
 export const renderHome = (profile, units, news, facilities, galleries, ppdb) => {
@@ -85,15 +96,15 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                         <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto">
                     </div>
-                    <p class="text-slate-700 mb-6 leading-relaxed text-justify">${unit.description}</p>
+                    <div class="text-slate-700 mb-6 leading-relaxed">${formatContentHtml(unit.description)}</div>
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                        <p class="text-slate-600 text-sm text-justify">${unit.curriculum || '-'}</p>
+                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.curriculum || "-")}</div>
                     </div>
                     ${unit.featured_program ? `
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                        <p class="text-slate-600 text-sm text-justify">${unit.featured_program}</p>
+                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.featured_program)}</div>
                     </div>
                     ` : ''}
                     ${unit.intracurricular ? `
@@ -104,11 +115,11 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     ` : ''}
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                        <p class="text-slate-600 text-sm text-justify">${unit.extracurricular || '-'}</p>
+                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.extracurricular || "-")}</div>
                     </div>
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                        <p class="text-slate-600 text-sm text-justify">${unit.facilities || '-'}</p>
+                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.facilities || "-")}</div>
                     </div>
 
                     ${(isMTs || isMA) ? `

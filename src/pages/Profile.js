@@ -1,3 +1,14 @@
+function formatContentHtml(str, defaultAlign) {
+    if (!defaultAlign) defaultAlign = 'text-justify';
+    if (str === null || str === undefined) return '-';
+    const trimmed = String(str).trim();
+    if (trimmed === '' || trimmed === '-') return '-';
+    if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        return trimmed;
+    }
+    return `<p class="${defaultAlign}">${trimmed}</p>`;
+}
+
 export const renderProfile = (profile) => {
     let cmsData = null;
     try {
@@ -33,7 +44,7 @@ export const renderProfile = (profile) => {
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">${profilTitle}</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">${profilDesc}</p>
+          <div class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">${formatContentHtml(profilDesc, "text-center")}</div>
         </div>
       </section>
 
@@ -51,7 +62,7 @@ export const renderProfile = (profile) => {
               <i class="fas fa-history text-gold-500 mr-4"></i> Sejarah Berdirinya
             </h2>
             <div class="prose prose-emerald max-w-none text-slate-600 leading-relaxed">
-              <p class="whitespace-pre-line">${sejarahText}</p>
+              <div class="whitespace-pre-line">${formatContentHtml(sejarahText, "text-justify")}</div>
             </div>
           </div>
         </div>

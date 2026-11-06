@@ -1,10 +1,13 @@
 export default {
   content: [
-    "./index.html",
-    "./kelola.html",
-    "./galeri.html",
-    "./berita.html",
+    "./*.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  safelist: [
+    'text-left',
+    'text-center',
+    'text-right',
+    'text-justify',
   ],
   theme: {
     extend: {

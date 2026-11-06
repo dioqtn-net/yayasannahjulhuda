@@ -56,6 +56,134 @@
         }
       })();
     </script>
+      <!-- UNIVERSAL TEXTAREA ALIGNMENT ENGINE (CMS FITUR RATA KANAN-KIRI & PAYLOAD FORMATTER) -->
+    <script>
+      (function() {
+        window.unwrapAlignment = function(htmlOrText) {
+          if (!htmlOrText) return { text: '', align: 'text-justify' };
+          const str = String(htmlOrText).trim();
+          const match = str.match(/^<p\s+class=["']([^"']*)["']>([\s\S]*?)<\/p>$/i);
+          if (match) {
+            const classAttr = match[1];
+            const innerContent = match[2];
+            let align = 'text-justify';
+            if (classAttr.includes('text-left')) align = 'text-left';
+            else if (classAttr.includes('text-center')) align = 'text-center';
+            else if (classAttr.includes('text-right')) align = 'text-right';
+            else if (classAttr.includes('text-justify')) align = 'text-justify';
+            return { text: innerContent, align: align };
+          }
+          return { text: str, align: 'text-justify' };
+        };
+
+        window.wrapWithAlignment = function(text, alignmentClass) {
+          if (text === null || text === undefined) return '';
+          const trimmed = String(text).trim();
+          if (!trimmed) return '';
+          const unwrapped = window.unwrapAlignment(trimmed);
+          const align = alignmentClass || unwrapped.align || 'text-justify';
+          return `<p class="${align}">${unwrapped.text}</p>`;
+        };
+
+        window.getWrappedTextareaValue = function(textareaOrId) {
+          const ta = typeof textareaOrId === 'string' ? document.getElementById(textareaOrId) : textareaOrId;
+          if (!ta) return '';
+          const val = ta.value.trim();
+          if (!val) return '';
+          const align = ta.dataset.alignment || 'text-justify';
+          return `<p class="${align}">${val}</p>`;
+        };
+
+        window.setTextareaValueWithAlignment = function(textareaOrId, rawValue) {
+          const ta = typeof textareaOrId === 'string' ? document.getElementById(textareaOrId) : textareaOrId;
+          if (!ta) return;
+          const { text, align } = window.unwrapAlignment(rawValue);
+          ta.value = text;
+          ta.dataset.alignment = align;
+          ta.style.textAlign = align.replace('text-', '');
+          window.setToolbarActive(ta, align);
+        };
+
+        window.setToolbarActive = function(ta, align) {
+          const activeAlign = align || ta.dataset.alignment || 'text-justify';
+          const toolbar = ta.previousElementSibling && ta.previousElementSibling.classList.contains('textarea-align-toolbar')
+            ? ta.previousElementSibling
+            : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') : null);
+          
+          if (!toolbar) return;
+          const btns = toolbar.querySelectorAll('button[data-align]');
+          btns.forEach(btn => {
+            if (btn.getAttribute('data-align') === activeAlign) {
+              btn.className = 'px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs';
+            } else {
+              btn.className = 'px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition';
+            }
+          });
+        };
+
+        window.initTextareaAlignmentTools = function() {
+          const textareas = document.querySelectorAll('textarea');
+          textareas.forEach(ta => {
+            if (ta.dataset.alignInit === 'true') {
+              const align = ta.dataset.alignment || 'text-justify';
+              window.setToolbarActive(ta, align);
+              return;
+            }
+            ta.dataset.alignInit = 'true';
+
+            if (ta.value) {
+              const { text, align } = window.unwrapAlignment(ta.value);
+              ta.value = text;
+              ta.dataset.alignment = align;
+              ta.style.textAlign = align.replace('text-', '');
+            } else {
+              ta.dataset.alignment = ta.dataset.alignment || 'text-justify';
+              ta.style.textAlign = ta.dataset.alignment.replace('text-', '');
+            }
+
+            const parent = ta.parentElement;
+            if (!parent) return;
+
+            const toolbar = document.createElement('div');
+            toolbar.className = 'textarea-align-toolbar flex flex-wrap items-center justify-between gap-2 mb-1.5 pt-1';
+            toolbar.innerHTML = `
+              <div class="inline-flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                <button type="button" data-align="text-left" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
+                  <i class="fas fa-align-left"></i>
+                </button>
+                <button type="button" data-align="text-center" title="Rata Tengah" class="btn-align-center px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
+                  <i class="fas fa-align-center"></i>
+                </button>
+                <button type="button" data-align="text-right" title="Rata Kanan" class="btn-align-right px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
+                  <i class="fas fa-align-right"></i>
+                </button>
+                <button type="button" data-align="text-justify" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
+                  <i class="fas fa-align-justify"></i>
+                </button>
+              </div>
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                <i class="fas fa-align-justify text-[10px]"></i> Format Alignment Tersimpan Otomatis
+              </span>
+            `;
+
+            const btns = toolbar.querySelectorAll('button[data-align]');
+            btns.forEach(btn => {
+              btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const align = btn.getAttribute('data-align');
+                ta.dataset.alignment = align;
+                ta.style.textAlign = align.replace('text-', '');
+                window.setToolbarActive(ta, align);
+              });
+            });
+
+            parent.insertBefore(toolbar, ta);
+            window.setToolbarActive(ta, ta.dataset.alignment || 'text-justify');
+          });
+        };
+      })();
+    </script>
+
   </head>
   <body class="bg-slate-100 text-slate-800 font-inter antialiased min-h-screen overflow-x-hidden">
     <div class="flex h-screen overflow-hidden">
@@ -2450,9 +2578,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           try {
             const data = JSON.parse(savedData);
             if (data.heroTitle && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = data.heroTitle;
-            if (data.heroDesc && document.getElementById('heroDesc')) document.getElementById('heroDesc').value = data.heroDesc;
+            if (data.heroDesc && document.getElementById('heroDesc')) window.setTextareaValueWithAlignment('heroDesc', data.heroDesc);
             if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
-            if (data.taglineDesc && document.getElementById('taglineDesc')) document.getElementById('taglineDesc').value = data.taglineDesc;
+            if (data.taglineDesc && document.getElementById('taglineDesc')) window.setTextareaValueWithAlignment('taglineDesc', data.taglineDesc);
             if (data.stat1Num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = data.stat1Num;
             if (data.stat1Text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = data.stat1Text;
             if (data.stat2Num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = data.stat2Num;
@@ -2474,9 +2602,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             e.preventDefault();
             const dataBeranda = {
               heroTitle: document.getElementById('heroTitle').value,
-              heroDesc: document.getElementById('heroDesc').value,
+              heroDesc: window.getWrappedTextareaValue('heroDesc'),
               taglineTitle: document.getElementById('taglineTitle').value,
-              taglineDesc: document.getElementById('taglineDesc').value,
+              taglineDesc: window.getWrappedTextareaValue('taglineDesc'),
               stat1Num: document.getElementById('stat1Num').value,
               stat1Text: document.getElementById('stat1Text').value,
               stat2Num: document.getElementById('stat2Num').value,
@@ -2502,7 +2630,13 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         // Helper function to set input value safely
         const setVal = (id, val) => {
           const el = document.getElementById(id);
-          if (el && val !== undefined && val !== null) el.value = val;
+          if (el && val !== undefined && val !== null) {
+            if (el.tagName.toLowerCase() === 'textarea') {
+              window.setTextareaValueWithAlignment(el, val);
+            } else {
+              el.value = val;
+            }
+          }
         };
 
         // Muat data Profil dari localStorage jika sebelumnya pernah disimpan
@@ -2563,10 +2697,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
             const dataProfil = {
               profilTitle: document.getElementById('profilTitle')?.value || '',
-              profilDesc: document.getElementById('profilDesc')?.value || '',
-              sejarahText: document.getElementById('sejarahText')?.value || '',
+              profilDesc: window.getWrappedTextareaValue('profilDesc'),
+              sejarahText: window.getWrappedTextareaValue('sejarahText'),
               strukturTitle: document.getElementById('strukturTitle')?.value || '',
-              strukturDesc: document.getElementById('strukturDesc')?.value || '',
+              strukturDesc: window.getWrappedTextareaValue('strukturDesc'),
               namaKetua: document.getElementById('namaKetua')?.value || '-',
               fotoKetua: fotoKetua,
               namaSDI: document.getElementById('namaSDI')?.value || '-',
@@ -2600,7 +2734,13 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
       document.addEventListener('DOMContentLoaded', () => {
         const setVal = (id, val) => {
           const el = document.getElementById(id);
-          if (el && val !== undefined && val !== null) el.value = val;
+          if (el && val !== undefined && val !== null) {
+            if (el.tagName.toLowerCase() === 'textarea') {
+              window.setTextareaValueWithAlignment(el, val);
+            } else {
+              el.value = val;
+            }
+          }
         };
 
         // Muat data Program dari localStorage jika ada
@@ -2627,7 +2767,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           btnSaveProgram.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const getVal = (id) => document.getElementById(id)?.value || '';
+            const getVal = (id) => {
+              const el = document.getElementById(id);
+              if (!el) return '';
+              if (el.tagName.toLowerCase() === 'textarea') {
+                return window.getWrappedTextareaValue(el);
+              }
+              return el.value || '';
+            };
 
             const dataProgram = {
               progBannerTitle: getVal('progBannerTitle'),
@@ -2806,7 +2953,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
           document.getElementById('fasId').value = item.id;
           document.getElementById('fasNama').value = item.nama;
-          document.getElementById('fasDeskripsi').value = item.deskripsi;
+          window.setTextareaValueWithAlignment('fasDeskripsi', item.deskripsi);
           document.getElementById('fasImg1').value = '';
           document.getElementById('fasImg2').value = '';
           document.getElementById('fasImg3').value = '';
@@ -2852,7 +2999,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             btnTambah.addEventListener('click', () => {
               document.getElementById('fasId').value = '';
               document.getElementById('fasNama').value = '';
-              document.getElementById('fasDeskripsi').value = '';
+              window.setTextareaValueWithAlignment('fasDeskripsi', '');
               document.getElementById('fasImg1').value = '';
               document.getElementById('fasImg2').value = '';
               document.getElementById('fasImg3').value = '';
@@ -2873,7 +3020,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (btnSimpan) {
             btnSimpan.addEventListener('click', async () => {
               const nama = document.getElementById('fasNama').value.trim();
-              const deskripsi = document.getElementById('fasDeskripsi').value.trim();
+              const deskripsi = window.getWrappedTextareaValue('fasDeskripsi');
               const fasId = document.getElementById('fasId').value.trim();
 
               if (!nama) {
@@ -2936,7 +3083,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             btnSimpanBannerFas.addEventListener('click', () => {
               const bannerData = {
                 title: document.getElementById('fasBannerTitle').value,
-                desc: document.getElementById('fasBannerDesc').value
+                desc: window.getWrappedTextareaValue('fasBannerDesc')
               };
               localStorage.setItem('cmsData_fasBanner', JSON.stringify(bannerData));
               alert('Teks banner fasilitas berhasil disimpan!');
@@ -3141,8 +3288,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           document.getElementById('beritaJudul').value = item.judul || '';
           document.getElementById('beritaJenjang').value = item.jenjang || 'SDI';
           document.getElementById('beritaTanggal').value = item.tanggal || '';
-          document.getElementById('beritaDeskripsiSingkat').value = item.deskripsiSingkat || '';
-          document.getElementById('beritaDeskripsiLengkap').value = item.deskripsiLengkap || item.deskripsiSingkat || '';
+          window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', item.deskripsiSingkat || '');
+          window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', item.deskripsiLengkap || item.deskripsiSingkat || '');
 
           document.getElementById('beritaImg1').value = '';
           document.getElementById('beritaImg2').value = '';
@@ -3192,8 +3339,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('beritaJenjang').value = 'SDI';
               const today = new Date().toISOString().split('T')[0];
               document.getElementById('beritaTanggal').value = today;
-              document.getElementById('beritaDeskripsiSingkat').value = '';
-              document.getElementById('beritaDeskripsiLengkap').value = '';
+              window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', '');
+              window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', '');
               document.getElementById('beritaImg1').value = '';
               document.getElementById('beritaImg2').value = '';
               document.getElementById('beritaImg3').value = '';
@@ -3216,8 +3363,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               const judul = document.getElementById('beritaJudul').value.trim();
               const jenjang = document.getElementById('beritaJenjang').value;
               const tanggal = document.getElementById('beritaTanggal').value;
-              const deskripsiSingkat = document.getElementById('beritaDeskripsiSingkat').value.trim();
-              const deskripsiLengkap = document.getElementById('beritaDeskripsiLengkap').value.trim() || deskripsiSingkat;
+              const deskripsiSingkat = window.getWrappedTextareaValue('beritaDeskripsiSingkat');
+              const deskripsiLengkap = window.getWrappedTextareaValue('beritaDeskripsiLengkap') || deskripsiSingkat;
               const beritaId = document.getElementById('beritaId').value.trim();
 
               if (!judul) {
@@ -3298,7 +3445,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             btnSimpanBannerBerita.addEventListener('click', () => {
               const bannerData = {
                 title: document.getElementById('beritaBannerTitle').value,
-                desc: document.getElementById('beritaBannerDesc').value
+                desc: window.getWrappedTextareaValue('beritaBannerDesc')
               };
               localStorage.setItem(STORAGE_KEY_BANNER, JSON.stringify(bannerData));
               alert('Teks banner berita berhasil disimpan!');
@@ -3492,7 +3639,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           document.getElementById('eskulJudul').value = item.judul || '';
           document.getElementById('eskulTanggal').value = item.tanggal || '';
           document.getElementById('eskulJenjang').value = item.jenjang || 'Semua';
-          document.getElementById('eskulDeskripsi').value = item.deskripsi || '';
+          window.setTextareaValueWithAlignment('eskulDeskripsi', item.deskripsi || '');
           document.getElementById('eskulMedia').value = '';
           editingEskulMedia = item.media || '';
           document.getElementById('formEskulTitle').textContent = `Edit Ekstrakurikuler: ${item.judul}`;
@@ -3559,7 +3706,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           document.getElementById('kegiatanJudul').value = item.judul || '';
           document.getElementById('kegiatanTanggal').value = item.tanggal || '';
           document.getElementById('kegiatanJenjang').value = item.jenjang || 'Semua';
-          document.getElementById('kegiatanDeskripsi').value = item.deskripsi || '';
+          window.setTextareaValueWithAlignment('kegiatanDeskripsi', item.deskripsi || '');
           document.getElementById('kegiatanMedia').value = '';
           editingKegiatanMedia = item.media || '';
           document.getElementById('formKegiatanTitle').textContent = `Edit Kegiatan: ${item.judul}`;
@@ -3591,7 +3738,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('eskulJudul').value = '';
               document.getElementById('eskulJenjang').value = 'Semua';
               document.getElementById('eskulTanggal').value = new Date().toISOString().split('T')[0];
-              document.getElementById('eskulDeskripsi').value = '';
+              window.setTextareaValueWithAlignment('eskulDeskripsi', '');
               document.getElementById('eskulMedia').value = '';
               editingEskulMedia = '';
               document.getElementById('formEskulTitle').textContent = 'Tambah Ekstrakurikuler Baru';
@@ -3609,7 +3756,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               const judul = document.getElementById('eskulJudul').value.trim();
               const jenjang = document.getElementById('eskulJenjang').value;
               const tanggal = document.getElementById('eskulTanggal').value;
-              const deskripsi = document.getElementById('eskulDeskripsi').value.trim();
+              const deskripsi = window.getWrappedTextareaValue('eskulDeskripsi');
               const eskulId = document.getElementById('eskulId').value.trim();
 
               if (!judul) { alert('Judul ekstrakurikuler wajib diisi!'); return; }
@@ -3647,7 +3794,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('kegiatanJudul').value = '';
               document.getElementById('kegiatanJenjang').value = 'Semua';
               document.getElementById('kegiatanTanggal').value = new Date().toISOString().split('T')[0];
-              document.getElementById('kegiatanDeskripsi').value = '';
+              window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
               document.getElementById('kegiatanMedia').value = '';
               editingKegiatanMedia = '';
               document.getElementById('formKegiatanTitle').textContent = 'Tambah Kegiatan Baru';
@@ -3665,7 +3812,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               const judul = document.getElementById('kegiatanJudul').value.trim();
               const jenjang = document.getElementById('kegiatanJenjang').value;
               const tanggal = document.getElementById('kegiatanTanggal').value;
-              const deskripsi = document.getElementById('kegiatanDeskripsi').value.trim();
+              const deskripsi = window.getWrappedTextareaValue('kegiatanDeskripsi');
               const kegiatanId = document.getElementById('kegiatanId').value.trim();
 
               if (!judul) { alert('Judul kegiatan wajib diisi!'); return; }
@@ -3697,7 +3844,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             btnSimpanBannerGaleri.addEventListener('click', () => {
               const bannerData = {
                 title: document.getElementById('galeriBannerTitle').value,
-                desc: document.getElementById('galeriBannerDesc').value
+                desc: window.getWrappedTextareaValue('galeriBannerDesc')
               };
               localStorage.setItem(KEY_BANNER, JSON.stringify(bannerData));
               alert('Teks banner galeri berhasil disimpan!');
@@ -4027,12 +4174,12 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
           const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
           if (elHeaderTitle) elHeaderTitle.value = data.header_title || defaultPPDB.header_title || '';
-          if (elHeaderSubtitle) elHeaderSubtitle.value = data.header_subtitle || defaultPPDB.header_subtitle || '';
+          if (elHeaderSubtitle) window.setTextareaValueWithAlignment('ppdbAdmin_header_subtitle', data.header_subtitle || defaultPPDB.header_subtitle || '');
 
           // Alamat Sekretariat Bersama di Bawah
           const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
           if (elSekretariat) {
-            elSekretariat.value = data.sekretariat_alamat || defaultPPDB.sekretariat_alamat;
+            window.setTextareaValueWithAlignment('ppdbAdmin_sekretariat_alamat', data.sekretariat_alamat || defaultPPDB.sekretariat_alamat);
           }
 
           ['sdi', 'mi', 'mts', 'ma', 'ponpes'].forEach(k => {
@@ -4058,8 +4205,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             if (elTglSelesai) elTglSelesai.value = item.tgl_selesai || '';
             if (elJam) elJam.value = item.jam || '';
             if (elZona && item.zona) elZona.value = item.zona;
-            if (elLokasi) elLokasi.value = item.lokasi || '';
-            if (elSyaratCatatan) elSyaratCatatan.value = item.syarat_catatan || '';
+            if (elLokasi) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
+            if (elSyaratCatatan) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
             if (elK1Nama) elK1Nama.value = item.kontak1_nama || '';
             if (elK1Wa) elK1Wa.value = item.kontak1_wa || '';
             if (elK2Nama) elK2Nama.value = item.kontak2_nama || '';
@@ -4101,9 +4248,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             tgl_selesai: elTglSelesai ? elTglSelesai.value : '',
             jam: elJam ? elJam.value.trim() : '',
             zona: elZona ? elZona.value : 'WIB',
-            lokasi: elLokasi ? elLokasi.value.trim() : '',
+            lokasi: window.getWrappedTextareaValue(`ppdbAdmin_${k}_lokasi`) || (elLokasi ? elLokasi.value.trim() : ''),
             syarat: currentSyaratList.join('\n'),
-            syarat_catatan: elSyaratCatatan ? elSyaratCatatan.value.trim() : '',
+            syarat_catatan: window.getWrappedTextareaValue(`ppdbAdmin_${k}_syarat_catatan`) || (elSyaratCatatan ? elSyaratCatatan.value.trim() : ''),
             kontak1_nama: elK1Nama ? elK1Nama.value.trim() : '',
             kontak1_wa: elK1Wa ? elK1Wa.value.trim() : '',
             kontak2_nama: elK2Nama ? elK2Nama.value.trim() : '',
@@ -4136,7 +4283,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
           const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
           if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
-          if (elHeaderSubtitle) data.header_subtitle = elHeaderSubtitle.value.trim();
+          if (elHeaderSubtitle) data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
           localStorage.setItem(KEY_PPDB, JSON.stringify(data));
           alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
         };
@@ -4145,7 +4292,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const data = getPPDBData();
           const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
           if (elSekretariat) {
-            data.sekretariat_alamat = elSekretariat.value.trim();
+            data.sekretariat_alamat = window.getWrappedTextareaValue('ppdbAdmin_sekretariat_alamat') || elSekretariat.value.trim();
             localStorage.setItem(KEY_PPDB, JSON.stringify(data));
             alert('Sukses! Alamat Sekretariat Pendaftaran berhasil disimpan.');
           }
