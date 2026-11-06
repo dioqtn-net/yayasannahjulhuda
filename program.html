@@ -19,6 +19,15 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
+        if (event.persisted) {
+          // Paksa reload halaman dari server, bukan dari cache
+          window.location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">
@@ -112,16 +121,14 @@
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <div id="publicSdiMisi">
-                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                        <li>Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.</li>
-                        <li>Mengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.</li>
-                        <li>Menerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).</li>
-                        <li>Mengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.</li>
-                        <li>Menciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.</li>
-                        <li>Mendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.</li>
-                      </ul>
-                    </div>
+                    <ul id="publicSdiMisi" class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                      <li class="mb-1">Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.</li>
+                      <li class="mb-1">Mengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.</li>
+                      <li class="mb-1">Menerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).</li>
+                      <li class="mb-1">Mengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.</li>
+                      <li class="mb-1">Menciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.</li>
+                      <li class="mb-1">Mendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -197,9 +204,9 @@
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <div id="publicMiMisi">
-                      <p class="text-sm text-slate-600 mt-1 leading-relaxed">-</p>
-                    </div>
+                    <ul id="publicMiMisi" class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                      <li class="mb-1">-</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -274,14 +281,12 @@
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <div id="publicMtsMisi">
-                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                        <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                        <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                        <li>Berwawasan Luas</li>
-                        <li>Mencetak Generasi Global</li>
-                      </ul>
-                    </div>
+                    <ul id="publicMtsMisi" class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                      <li class="mb-1">Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                      <li class="mb-1">Mengembangkan kemampuan &amp; budi pekerti</li>
+                      <li class="mb-1">Berwawasan Luas</li>
+                      <li class="mb-1">Mencetak Generasi Global</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -356,14 +361,12 @@
                   </div>
                   <div>
                     <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <div id="publicMaMisi">
-                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                        <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                        <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                        <li>Berwawasan Luas</li>
-                        <li>Mencetak Generasi Global</li>
-                      </ul>
-                    </div>
+                    <ul id="publicMaMisi" class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                      <li class="mb-1">Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
+                      <li class="mb-1">Mengembangkan kemampuan &amp; budi pekerti</li>
+                      <li class="mb-1">Berwawasan Luas</li>
+                      <li class="mb-1">Mencetak Generasi Global</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -440,14 +443,12 @@
                   </div>
                   <div>
                     <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
-                    <div id="publicPonpesMisi">
-                      <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
-                        <li>Penanaman Aqidah Sholihah</li>
-                        <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
-                        <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
-                        <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
-                      </ul>
-                    </div>
+                    <ul id="publicPonpesMisi" class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                      <li class="mb-1">Penanaman Aqidah Sholihah</li>
+                      <li class="mb-1">Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
+                      <li class="mb-1">Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
+                      <li class="mb-1">Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -554,6 +555,53 @@
         });
       }
 
+      // Fungsi Pembantu untuk Merender Teks yang Mungkin Mengandung Bungkus <div> dari CMS
+      function renderTextOrList(containerElement, rawData, isList = false) {
+          if (!containerElement || !rawData) return;
+          
+          let cleanText = rawData;
+          let alignClass = 'text-justify'; // Default fallback
+          
+          // Periksa apakah string dibungkus tag <div> oleh CMS
+          if (rawData.trim().startsWith('<div')) {
+              const temp = document.createElement('div');
+              temp.innerHTML = rawData;
+              const wrapper = temp.firstElementChild;
+              if (wrapper && wrapper.tagName === 'DIV') {
+                  // Ambil class alignment (misal: text-center, text-right, text-justify)
+                  alignClass = wrapper.className.replace('whitespace-pre-wrap', '').trim();
+                  cleanText = wrapper.innerHTML; // Ambil teks bersih di dalamnya
+              }
+          }
+          
+          // Bersihkan class alignment lama pada container
+          containerElement.classList.remove('text-left', 'text-center', 'text-right', 'text-justify');
+          
+          // Terapkan class alignment yang baru ke container
+          if (alignClass) {
+              const classesToAdd = alignClass.split(' ').filter(c => c);
+              if(classesToAdd.length > 0) containerElement.classList.add(...classesToAdd);
+          }
+          
+          // Kosongkan container sebelum diisi (mencegah duplikasi)
+          containerElement.innerHTML = '';
+          
+          // Render sebagai List (<li>) atau Teks Biasa (<p>)
+          if (isList) {
+              // Pecah per baris murni teksnya
+              const barisArray = cleanText.split('\n');
+              barisArray.forEach(baris => {
+                  if (baris.trim() !== '') {
+                      containerElement.innerHTML += `<li class="mb-1">${baris.trim()}</li>`;
+                  }
+              });
+          } else {
+              containerElement.innerHTML = `<p class="whitespace-pre-wrap">${cleanText}</p>`;
+          }
+      }
+
+      window.renderTextOrList = renderTextOrList;
+
       // Synchronize Program Content from CMS (localStorage)
       document.addEventListener('DOMContentLoaded', () => {
         const savedProgData = localStorage.getItem('cmsData_program');
@@ -581,6 +629,16 @@
             return 'Akreditasi ' + clean;
           };
 
+          // Generic containers jika ada di DOM
+          const genericVisi = document.getElementById('container-visi');
+          if (genericVisi && data.visi) {
+            renderTextOrList(genericVisi, data.visi, false);
+          }
+          const genericMisi = document.getElementById('container-misi');
+          if (genericMisi && data.misi) {
+            renderTextOrList(genericMisi, data.misi, true);
+          }
+
           // 2. Data Jenjang Pendidikan
           const units = [
             { key: 'sdi', prefix: 'Sdi' },
@@ -598,11 +656,10 @@
               if (el) el.textContent = formatAkreditasi(akreditasiVal);
             }
 
-            // Text fields
+            // Text fields (Visi diproses terpisah oleh renderTextOrList)
             const mapFields = [
               { key: 'Desc', id: `public${u.prefix}Desc` },
               { key: 'Kurikulum', id: `public${u.prefix}Kurikulum` },
-              { key: 'Visi', id: `public${u.prefix}Visi` },
               { key: 'Unggulan', id: `public${u.prefix}Unggulan` },
               { key: 'Ekskul', id: `public${u.prefix}Ekskul` },
               { key: 'Fasilitas', id: `public${u.prefix}Fasilitas` }
@@ -616,30 +673,16 @@
               }
             });
 
-            // Misi (List format vs plain paragraph)
-            const misiRaw = data[u.key + 'Misi'];
-            if (misiRaw !== undefined && misiRaw !== null) {
-              const elMisi = document.getElementById(`public${u.prefix}Misi`);
-              if (elMisi) {
-                const cleanMisi = misiRaw.replace(/<\/?p[^>]*>/gi, '');
-                const lines = cleanMisi
-                  .split('\n')
-                  .map((l) => l.trim())
-                  .filter((l) => l.length > 0 && l !== '-');
+            // 1. Render VISI (Bukan List)
+            const elVisi = document.getElementById(`public${u.prefix}Visi`);
+            if (elVisi && data[u.key + 'Visi']) {
+              renderTextOrList(elVisi, data[u.key + 'Visi'], false);
+            }
 
-                if (lines.length === 0) {
-                  elMisi.innerHTML = '<p class="text-sm text-slate-600 mt-1 leading-relaxed">-</p>';
-                } else {
-                  const items = lines
-                    .map((line) => {
-                      const div = document.createElement('div');
-                      div.textContent = line;
-                      return `<li>${div.innerHTML}</li>`;
-                    })
-                    .join('');
-                  elMisi.innerHTML = `<ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">${items}</ul>`;
-                }
-              }
+            // 2. Render MISI (Wajib List = true)
+            const elMisi = document.getElementById(`public${u.prefix}Misi`);
+            if (elMisi && data[u.key + 'Misi']) {
+              renderTextOrList(elMisi, data[u.key + 'Misi'], true);
             }
           });
         } catch (e) {

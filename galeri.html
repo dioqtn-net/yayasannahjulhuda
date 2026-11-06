@@ -29,6 +29,15 @@
         scrollbar-color: #888 #f1f1f1;
       }
     </style>
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
+        if (event.persisted) {
+          // Paksa reload halaman dari server, bukan dari cache
+          window.location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">
@@ -699,7 +708,7 @@
           if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
             return trimmed;
           }
-          return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+          return `<div class="text-justify">${trimmed}</div>`;
         }
 
         function createCard(item, tipe) {

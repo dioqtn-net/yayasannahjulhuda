@@ -13,6 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
+        if (event.persisted) {
+          // Paksa reload halaman dari server, bukan dari cache
+          window.location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">
@@ -58,6 +67,32 @@
           </div>
         </div>
       </nav>
+
+      <!-- Hero Section (Fallback/Pre-render) -->
+      <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white min-h-[500px] flex items-center">
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 fade-in">
+          <h1 id="heroTitlePublic" class="text-2xl sm:text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md text-center md:text-left">
+            Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>
+          </h1>
+          <div id="heroDescPublic" class="text-lg md:text-xl text-emerald-100 max-w-2xl mb-8 leading-relaxed drop-shadow">
+            <div class="text-justify">Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sambutan (Mencetak Generasi Rabbani) -->
+      <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="taglineTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6 text-center">Mencetak Generasi Rabbani</h2>
+          <div class="w-24 h-1 bg-gold-500 mx-auto mb-8 rounded-full"></div>
+          <div id="taglineDescPublic" class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <div class="text-justify">
+              "Yayasan Nahjul Huda berdiri dengan semangat untuk memajukan pendidikan Islam di Kebon Jeruk, Jakarta Barat. Sejak awal berdirinya, yayasan ini telah berkomitmen untuk mencetak generasi yang tidak hanya unggul secara akademik, namun juga memiliki akhlakul karimah dan pemahaman agama yang mendalam."
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Jenjang Pendidikan (Fallback/Pre-render) -->
       <section id="jenjang" class="py-20 bg-white">
@@ -267,6 +302,41 @@
         </div>
       </section>
 
+      <!-- Program Sosial & Keagamaan (Fallback/Pre-render) -->
+      <section class="py-20 bg-emerald-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-800 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-950 opacity-50 blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-white mb-4">Program Sosial &amp; Keagamaan</h2>
+            <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-emerald-800/50 backdrop-blur border border-emerald-700 p-8 rounded-2xl hover:bg-emerald-800 transition">
+              <div class="w-14 h-14 bg-gold-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-gold-500/30">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3 id="progSosial1TitlePublic" class="text-2xl font-playfair font-bold mb-3 text-gold-400">Majelis Ta'lim Nahjul Huda</h3>
+              <div id="progSosial1DescPublic" class="text-emerald-100 leading-relaxed">
+                <div class="text-justify">Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.</div>
+              </div>
+            </div>
+            
+            <div class="bg-emerald-800/50 backdrop-blur border border-emerald-700 p-8 rounded-2xl hover:bg-emerald-800 transition">
+              <div class="w-14 h-14 bg-gold-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-gold-500/30">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h3 id="progSosial2TitlePublic" class="text-2xl font-playfair font-bold mb-3 text-gold-400">Pengajian Rutin Bulanan</h3>
+              <div id="progSosial2DescPublic" class="text-emerald-100 leading-relaxed">
+                <div class="text-justify">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Footer -->
       <footer class="bg-emerald-900 text-emerald-100 pt-12 pb-8 border-t-4 border-gold-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -400,7 +470,7 @@
           if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
             return trimmed;
           }
-          return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+          return `<div class="text-justify">${trimmed}</div>`;
         }
 
         async function updateUnitModalContent(id) {
@@ -458,7 +528,18 @@
                             (document.getElementById(`modal-${numId}`) ? document.getElementById(`modal-${numId}`).querySelector('.overflow-y-auto') : null);
 
           if (modalBody) {
-            const linesMisi = (misi || '')
+            modalBody.innerHTML = '';
+            let cleanMisi = misi || '';
+            if (cleanMisi.trim().startsWith('<div')) {
+              const temp = document.createElement('div');
+              temp.innerHTML = cleanMisi;
+              const wrapper = temp.firstElementChild;
+              if (wrapper && wrapper.tagName === 'DIV') {
+                cleanMisi = wrapper.innerHTML;
+              }
+            }
+
+            const linesMisi = cleanMisi
               .split('\n')
               .map(l => l.trim().replace(/^[-*•\d.]+\s*/, ''))
               .filter(l => l.length > 0 && l !== '-');
@@ -543,6 +624,35 @@
             document.body.classList.remove('modal-open');
           }
         };
+
+        // Sync inline fallback elements with cmsData_beranda if available
+        try {
+          const rawBeranda = localStorage.getItem('cmsData_beranda');
+          if (rawBeranda) {
+            const dataB = JSON.parse(rawBeranda);
+            const taglineEl = document.getElementById('taglineDescPublic');
+            if (taglineEl && dataB.taglineDesc) {
+              taglineEl.innerHTML = dataB.taglineDesc;
+            }
+            const heroDescEl = document.getElementById('heroDescPublic');
+            if (heroDescEl && dataB.heroDesc) {
+              heroDescEl.innerHTML = dataB.heroDesc;
+            }
+            const taglineTitleEl = document.getElementById('taglineTitlePublic');
+            if (taglineTitleEl && dataB.taglineTitle) {
+              taglineTitleEl.textContent = dataB.taglineTitle;
+            }
+            const ps1TitleEl = document.getElementById('progSosial1TitlePublic');
+            if (ps1TitleEl && dataB.progSosial1Title) ps1TitleEl.textContent = dataB.progSosial1Title;
+            const ps1DescEl = document.getElementById('progSosial1DescPublic');
+            if (ps1DescEl && dataB.progSosial1Desc) ps1DescEl.innerHTML = dataB.progSosial1Desc;
+
+            const ps2TitleEl = document.getElementById('progSosial2TitlePublic');
+            if (ps2TitleEl && dataB.progSosial2Title) ps2TitleEl.textContent = dataB.progSosial2Title;
+            const ps2DescEl = document.getElementById('progSosial2DescPublic');
+            if (ps2DescEl && dataB.progSosial2Desc) ps2DescEl.innerHTML = dataB.progSosial2Desc;
+          }
+        } catch(e) {}
       })();
     </script>
     <script type="module" src="/src/main.js?v=20261106_03"></script>

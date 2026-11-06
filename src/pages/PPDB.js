@@ -314,12 +314,6 @@ export const renderPPDB = (ppdb) => {
                     <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
                 </div>
             </div>
-            </div>
-            <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
-              <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Umi Dahlia</a>
-              <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MTs." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Abu Jalaluddin</a>
-            </div>
-          </div>
 
         </div>
 
@@ -507,12 +501,6 @@ export const renderPPDB = (ppdb) => {
                     <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
                 </div>
             </div>
-            </div>
-            <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
-              <a href="https://wa.me/6285880682115?text=Halo%20Umi%20Hj.%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Umi Dahlia</a>
-              <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MA." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Abu Jalaluddin</a>
-            </div>
-          </div>
 
         </div>
 
@@ -686,12 +674,6 @@ export const renderPPDB = (ppdb) => {
                     <a href="https://wa.me/6285695426904?text=Halo%20Abi%20Fahri,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abi Fahri</a>
                 </div>
             </div>
-            </div>
-            <div class="w-full xl:w-auto shrink-0 flex flex-col sm:flex-row gap-3 mt-2 xl:mt-0">
-              <a href="https://wa.me/628991168301?text=Halo%20Abi%20Subhan,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Abi Subhan</a>
-              <a href="https://wa.me/6285695426904?text=Halo%20Abi%20Fahri,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20MI." target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm"><i class="fab fa-whatsapp text-lg"></i> Hubungi Abi Fahri</a>
-            </div>
-          </div>
 
         </div>
 
@@ -866,17 +848,6 @@ export const renderPPDB = (ppdb) => {
                     <a href="https://wa.me/628158316436?text=Halo%20Abu%20Jalaluddin,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20Ponpes." target="_blank" rel="noopener noreferrer" class="btn-wa-2" style="background-color: #16a34a; color: #ffffff; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">Hubungi Abu Jalaluddin</a>
                 </div>
             </div>
-
-              <!-- Bagian Kanan: Tombol -->
-              <div class="w-full lg:w-auto shrink-0 mt-2 lg:mt-0">
-                <a href="https://wa.me/628589010538?text=Halo%20Bunda%20Dahlia,%20saya%20ingin%20bertanya-tanya%20seputar%20pendaftaran%20santri%20baru%20di%20Pondok%20Pesantren%20Assurur." target="_blank" rel="noopener noreferrer" class="inline-flex w-full lg:w-auto items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
-                  <i class="fab fa-whatsapp text-xl"></i> Tanya via WhatsApp
-                </a>
-              </div>
-              
-            </div>
-
-          </div>
 
         </div>
 

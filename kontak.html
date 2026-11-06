@@ -19,6 +19,15 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
+        if (event.persisted) {
+          // Paksa reload halaman dari server, bukan dari cache
+          window.location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">

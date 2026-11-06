@@ -1,12 +1,12 @@
-      function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
-        }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
+function formatContentHtml(str) {
+  if (str === null || str === undefined) return '-';
+  const trimmed = String(str).trim();
+  if (trimmed === '' || trimmed === '-') return '-';
+  if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+    return trimmed;
+  }
+  return `<div class="text-justify">${trimmed}</div>`;
+}
 
 export const unitModalMetadata = {
   1: { key: 'sdi', name: 'SD Islam (SDI) AL KINDY', short: 'SDI', logo: '/media/logo/SDI.jpg', anchor: 'program-sdi' },
@@ -149,6 +149,7 @@ export async function renderDynamicUnitModal(id) {
                     (document.getElementById(`modal-${numId}`) ? document.getElementById(`modal-${numId}`).querySelector('.overflow-y-auto') : null);
 
   if (modalBody) {
+    modalBody.innerHTML = '';
     const escapeHtml = (str) => {
       if (!str) return '';
       const div = document.createElement('div');
@@ -156,7 +157,17 @@ export async function renderDynamicUnitModal(id) {
       return div.innerHTML;
     };
 
-    const linesMisi = (misi || '')
+    let cleanMisi = misi || '';
+    if (cleanMisi.trim().startsWith('<div')) {
+      const temp = document.createElement('div');
+      temp.innerHTML = cleanMisi;
+      const wrapper = temp.firstElementChild;
+      if (wrapper && wrapper.tagName === 'DIV') {
+        cleanMisi = wrapper.innerHTML;
+      }
+    }
+
+    const linesMisi = cleanMisi
       .split('\n')
       .map(l => l.trim().replace(/^[-*•\d.]+\s*/, ''))
       .filter(l => l.length > 0 && l !== '-');

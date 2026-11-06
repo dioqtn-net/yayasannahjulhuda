@@ -107,7 +107,7 @@
           const rawText = ta.value;
           if (!rawText || rawText.trim() === '') return '';
           const align = ta.dataset.align || currentAlign || 'text-justify';
-          const payloadToSave = `<div class="${align} whitespace-pre-wrap">${rawText}</div>`;
+          const payloadToSave = `<div class="${align}">${rawText}</div>`;
           return payloadToSave;
         };
         window.getWrappedTextareaValue = window.getPayloadToSave;
@@ -129,8 +129,9 @@
               // Masukkan teks murni ke textarea (tanpa tag HTML)
               ta.value = wrapper.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
               // Ambil class alignment-nya
-              const savedAlign = wrapper.className.replace('whitespace-pre-wrap', '').trim();
-              currentAlign = savedAlign || 'text-justify';
+              const matchAlign = wrapper.className.match(/text-(left|center|right|justify)/);
+              const savedAlign = matchAlign ? matchAlign[0] : 'text-justify';
+              currentAlign = savedAlign;
               window.currentAlign = currentAlign;
               ta.dataset.align = currentAlign;
               ta.style.textAlign = currentAlign.replace('text-', '');
@@ -170,8 +171,12 @@
 
         window.wrapWithAlignment = function(text, align) {
           const a = align || 'text-justify';
-          return `<div class="${a} whitespace-pre-wrap">${text || ''}</div>`;
+          return `<div class="${a}">${text || ''}</div>`;
         };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          window.initTextareaAlignmentTools();
+        });
       })();
     </script>
 
@@ -545,9 +550,49 @@
                       </div>
                   </div>
 
+                  <!-- Bagian 5: Program Sosial & Keagamaan -->
+                  <div class="p-4 border rounded-lg bg-gray-50">
+                      <h3 class="font-semibold text-gray-800 mb-3 border-b pb-2">5. Program Sosial &amp; Keagamaan</h3>
+                      <div class="space-y-6">
+                          <!-- Program 1 -->
+                          <div class="p-4 bg-white rounded-lg border border-slate-200 shadow-xs">
+                              <h4 class="font-semibold text-emerald-800 text-sm mb-3 flex items-center gap-2">
+                                  <i class="fas fa-users text-amber-500"></i> Program Sosial 1
+                              </h4>
+                              <div class="space-y-3">
+                                  <div>
+                                      <label class="block text-xs font-semibold text-slate-700 mb-1">Judul Program 1</label>
+                                      <input type="text" id="progSosial1Title" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500 text-sm" value="Majelis Ta'lim Nahjul Huda">
+                                  </div>
+                                  <div>
+                                      <label class="block text-xs font-semibold text-slate-700 mb-1">Deskripsi Program 1</label>
+                                      <textarea id="progSosial1Desc" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500 text-sm">Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.</textarea>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Program 2 -->
+                          <div class="p-4 bg-white rounded-lg border border-slate-200 shadow-xs">
+                              <h4 class="font-semibold text-emerald-800 text-sm mb-3 flex items-center gap-2">
+                                  <i class="fas fa-calendar-alt text-amber-500"></i> Program Sosial 2
+                              </h4>
+                              <div class="space-y-3">
+                                  <div>
+                                      <label class="block text-xs font-semibold text-slate-700 mb-1">Judul Program 2</label>
+                                      <input type="text" id="progSosial2Title" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500 text-sm" value="Pengajian Rutin Bulanan">
+                                  </div>
+                                  <div>
+                                      <label class="block text-xs font-semibold text-slate-700 mb-1">Deskripsi Program 2</label>
+                                      <textarea id="progSosial2Desc" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500 text-sm">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</textarea>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
                   <!-- Tombol Simpan -->
                   <div class="flex justify-end pt-4">
-                      <button type="button" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanBeranda" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Beranda
                       </button>
@@ -1561,7 +1606,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <div class="flex justify-end pt-2">
-              <button type="button" onclick="savePPDBSambutan()" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm text-sm">
+              <button type="button" id="btnSimpanHeaderPPDB" onclick="savePPDBSambutan()" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 <span>Simpan Teks Sambutan</span>
               </button>
@@ -1570,23 +1615,23 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
           <!-- Navigasi Tab Jenjang PPDB Admin -->
           <div class="bg-white rounded-2xl border border-slate-200/80 p-2 shadow-sm mb-6 flex flex-wrap gap-2">
-            <button type="button" onclick="switchPPDBAdminTab('sdi')" data-ppdb-admin-tab="sdi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_sdi" data-ppdb-admin-tab="sdi" onclick="switchPPDBAdminTab('sdi')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-green-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2">
               <i class="fas fa-school text-slate-400"></i>
               <span>SDI Al Kindy</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('mi')" data-ppdb-admin-tab="mi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_mi" data-ppdb-admin-tab="mi" onclick="switchPPDBAdminTab('mi')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-book-reader text-slate-400"></i>
               <span>MI Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('mts')" data-ppdb-admin-tab="mts" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_mts" data-ppdb-admin-tab="mts" onclick="switchPPDBAdminTab('mts')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-graduation-cap text-gold-400"></i>
               <span>MTs Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('ma')" data-ppdb-admin-tab="ma" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_ma" data-ppdb-admin-tab="ma" onclick="switchPPDBAdminTab('ma')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-university text-slate-400"></i>
               <span>MA Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('ponpes')" data-ppdb-admin-tab="ponpes" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_ponpes" data-ppdb-admin-tab="ponpes" onclick="switchPPDBAdminTab('ponpes')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-mosque text-slate-400"></i>
               <span>Ponpes Assurur</span>
             </button>
@@ -1595,7 +1640,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                     <!-- Container Panel Form Masing-Masing Jenjang -->
           <div id="ppdb-admin-panels-container">
             <!-- Panel SDI -->
-            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_sdi" class="tab-content ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: SD Islam (SDI) AL KINDY</h3>
@@ -1748,7 +1793,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MI -->
-            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mi" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -1901,7 +1946,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MTs -->
-            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mts" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -2054,7 +2099,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel MA -->
-            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ma" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -2207,7 +2252,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             </div>
 
             <!-- Panel Ponpes -->
-            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ponpes" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Pondok Pesantren Assurur</h3>
@@ -2406,25 +2451,25 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
                 <i class="fas fa-building text-emerald-700"></i> Profil &amp; Kontak Yayasan
               </h3>
-              <form class="space-y-4 text-xs">
+              <form id="formPengaturanYayasan" class="space-y-4 text-xs">
                 <div>
                   <label class="block font-semibold text-slate-700 mb-1">Nama Yayasan</label>
-                  <input type="text" value="Yayasan Pendidikan Nahjul Huda" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                  <input type="text" id="setting_nama" value="Yayasan Pendidikan Nahjul Huda" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
                 </div>
                 <div>
                   <label class="block font-semibold text-slate-700 mb-1">WhatsApp / Call Center</label>
-                  <input type="text" value="+62 812-3456-7890" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                  <input type="text" id="setting_wa" value="+62 812-3456-7890" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
                 </div>
                 <div>
                   <label class="block font-semibold text-slate-700 mb-1">Email Resmi</label>
-                  <input type="email" value="info@nahjulhuda.sch.id" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
+                  <input type="email" id="setting_email" value="info@nahjulhuda.sch.id" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">
                 </div>
                 <div>
                   <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap</label>
-                  <textarea rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560</textarea>
+                  <textarea id="setting_alamat" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560</textarea>
                 </div>
                 <div class="pt-2">
-                  <button type="button" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold transition shadow-sm">
+                  <button type="button" id="btnSimpanPengaturan" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold transition shadow-sm">
                     Simpan Perubahan
                   </button>
                 </div>
@@ -2560,9 +2605,15 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
       });
     </script>
 
-    <!-- Script Penyimpan CMS Data Beranda (localStorage) -->
+    <!-- Script Penyimpan CMS Data Beranda (localStorage & Supabase) -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // Safe helper to get element value
+        const getVal = (id, fallback = '') => {
+          const el = document.getElementById(id);
+          return el ? el.value : fallback;
+        };
+
         // Muat data dari localStorage jika sebelumnya pernah disimpan
         const savedData = localStorage.getItem('cmsData_beranda');
         if (savedData) {
@@ -2582,48 +2633,77 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             if (data.stat4Text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = data.stat4Text;
             if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
             if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
+            if (data.progSosial1Title && document.getElementById('progSosial1Title')) document.getElementById('progSosial1Title').value = data.progSosial1Title;
+            if (data.progSosial1Desc && document.getElementById('progSosial1Desc')) window.setTextareaValueWithAlignment('progSosial1Desc', data.progSosial1Desc);
+            if (data.progSosial2Title && document.getElementById('progSosial2Title')) document.getElementById('progSosial2Title').value = data.progSosial2Title;
+            if (data.progSosial2Desc && document.getElementById('progSosial2Desc')) window.setTextareaValueWithAlignment('progSosial2Desc', data.progSosial2Desc);
           } catch (e) {
             console.error('Error parsing cmsData_beranda:', e);
           }
         }
 
-        const btnSaveBeranda = document.querySelector('#formBeranda button');
-        if (btnSaveBeranda) {
-          btnSaveBeranda.addEventListener('click', (e) => {
-            e.preventDefault();
+        const handleSimpanBeranda = async (e) => {
+          if (e) e.preventDefault();
+          try {
+            // Sesuai ID asli textarea di form HTML Beranda (heroDesc & taglineDesc)
+            const elHeroDesc = document.getElementById('heroDesc') || document.getElementById('deskripsi_singkat');
+            const elTaglineDesc = document.getElementById('taglineDesc') || document.getElementById('paragraf_tagline');
+
             const dataBeranda = {
-              heroTitle: document.getElementById('heroTitle').value,
-              heroDesc: window.getWrappedTextareaValue('heroDesc'),
-              taglineTitle: document.getElementById('taglineTitle').value,
-              taglineDesc: window.getWrappedTextareaValue('taglineDesc'),
-              stat1Num: document.getElementById('stat1Num').value,
-              stat1Text: document.getElementById('stat1Text').value,
-              stat2Num: document.getElementById('stat2Num').value,
-              stat2Text: document.getElementById('stat2Text').value,
-              stat3Num: document.getElementById('stat3Num').value,
-              stat3Text: document.getElementById('stat3Text').value,
-              stat4Num: document.getElementById('stat4Num').value,
-              stat4Text: document.getElementById('stat4Text').value,
-              ppdbYear: document.getElementById('ppdbYear').value,
-              ppdbStatus: document.getElementById('ppdbStatus').value
+              heroTitle: getVal('heroTitle', 'Selamat Datang di Yayasan Nahjul Huda'),
+              heroDesc: window.getWrappedTextareaValue(elHeroDesc || 'heroDesc'),
+              taglineTitle: getVal('taglineTitle', 'Mencetak Generasi Rabbani'),
+              taglineDesc: window.getWrappedTextareaValue(elTaglineDesc || 'taglineDesc'),
+              stat1Num: getVal('stat1Num', '5'),
+              stat1Text: getVal('stat1Text', 'JENJANG PENDIDIKAN'),
+              stat2Num: getVal('stat2Num', '100+'),
+              stat2Text: getVal('stat2Text', 'TENAGA PENDIDIK'),
+              stat3Num: getVal('stat3Num', '1000+'),
+              stat3Text: getVal('stat3Text', 'SANTRI & SISWA'),
+              stat4Num: getVal('stat4Num', '1980'),
+              stat4Text: getVal('stat4Text', 'TAHUN BERDIRI'),
+              ppdbYear: getVal('ppdbYear', '2024/2025'),
+              ppdbStatus: getVal('ppdbStatus', 'BUKA'),
+              progSosial1Title: getVal('progSosial1Title', "Majelis Ta'lim Nahjul Huda"),
+              progSosial1Desc: window.getWrappedTextareaValue('progSosial1Desc') || `<div class="text-justify">${document.getElementById('progSosial1Desc')?.value || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan."}</div>`,
+              progSosial2Title: getVal('progSosial2Title', "Pengajian Rutin Bulanan"),
+              progSosial2Desc: window.getWrappedTextareaValue('progSosial2Desc') || `<div class="text-justify">${document.getElementById('progSosial2Desc')?.value || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."}</div>`
             };
-            // Simpan ke memori browser
+
+            // 1. Simpan ke memori browser
             localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
 
-            // Simpan ke Supabase jika client aktif
+            // 2. Simpan ke Supabase jika client aktif
             if (window.supabaseClient) {
-              try {
-                window.supabaseClient.from('profile_settings').upsert({
-                  id: 1,
-                  history: dataBeranda.taglineDesc
-                }).then(() => {}).catch(console.error);
-              } catch(err) {
-                console.warn('Supabase upsert history:', err);
+              const { error } = await window.supabaseClient.from('profile_settings').upsert({
+                id: 1,
+                history: dataBeranda.taglineDesc
+              });
+              if (error) {
+                console.warn('Peringatan Supabase:', error);
               }
             }
 
-            alert('Sukses! Perubahan Beranda berhasil disimpan. Silakan cek halaman Beranda.');
-          });
+            alert('Perubahan beranda berhasil disimpan!');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } catch (error) {
+            console.error(error);
+            alert('Gagal menyimpan: ' + error.message);
+          }
+        };
+
+        // Hubungkan event listener secara presisi ke tombol Simpan Perubahan Beranda
+        const btnSaveBeranda = document.getElementById('btnSimpanBeranda') ||
+          Array.from(document.querySelectorAll('#formBeranda button')).find(b => b.textContent.includes('Simpan Perubahan Beranda')) ||
+          document.querySelector('#formBeranda button[type="button"]:last-of-type');
+
+        if (btnSaveBeranda) {
+          btnSaveBeranda.addEventListener('click', handleSimpanBeranda);
+        }
+
+        const formBeranda = document.getElementById('formBeranda');
+        if (formBeranda) {
+          formBeranda.addEventListener('submit', handleSimpanBeranda);
         }
       });
     </script>
@@ -3877,26 +3957,26 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         }
 
         window.switchPPDBAdminTab = function(jenjangKey) {
-          const tabBtns = document.querySelectorAll('.ppdb-admin-tab-btn');
-          tabBtns.forEach(btn => {
-            const key = btn.getAttribute('data-ppdb-admin-tab');
-            if (key === jenjangKey) {
-              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2";
-              const icon = btn.querySelector('i');
-              if (icon) icon.className = icon.className.replace('text-slate-400', 'text-gold-400');
-            } else {
-              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2";
-              const icon = btn.querySelector('i');
-              if (icon) icon.className = icon.className.replace('text-gold-400', 'text-slate-400');
+          const tab = document.querySelector(`.tab-jenjang[data-target="ppdbAdminPanel_${jenjangKey}"]`) ||
+                      document.querySelector(`.tab-jenjang[data-ppdb-admin-tab="${jenjangKey}"]`);
+          if (tab) {
+            tab.click();
+          } else {
+            const targetId = `ppdbAdminPanel_${jenjangKey}`;
+            document.querySelectorAll('.tab-jenjang').forEach(t => {
+              if (t.getAttribute('data-target') === targetId || t.getAttribute('data-ppdb-admin-tab') === jenjangKey) {
+                t.classList.add('bg-green-800', 'text-white');
+                t.classList.remove('text-slate-600', 'bg-white');
+              } else {
+                t.classList.remove('bg-green-800', 'bg-emerald-800', 'text-white');
+                t.classList.add('text-slate-600', 'bg-white');
+              }
+            });
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) {
+              activePanel.classList.remove('hidden');
             }
-          });
-
-          const panels = document.querySelectorAll('.ppdb-admin-panel');
-          panels.forEach(p => p.classList.add('hidden'));
-
-          const activePanel = document.getElementById(`ppdbAdminPanel_${jenjangKey}`);
-          if (activePanel) {
-            activePanel.classList.remove('hidden');
           }
         };
 
@@ -4202,7 +4282,6 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
             const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
             const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
-            const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
 
             if (elHari) elHari.value = item.hari || '';
             if (elTglMulai) elTglMulai.value = item.tgl_mulai || '';
@@ -4238,7 +4317,6 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
           const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
           const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
-            const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
 
           const jName = defaultPPDB[k] ? defaultPPDB[k].jenjangName : k.toUpperCase();
 
@@ -4282,14 +4360,37 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
         window.simpanInfoPPDB = window.savePPDBAdminJenjang;
 
-        window.savePPDBSambutan = function() {
-          const data = getPPDBData();
-          const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
-          const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
-          if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
-          if (elHeaderSubtitle) data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
-          localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-          alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+        window.savePPDBSambutan = async function(e) {
+          if (e) e.preventDefault();
+          try {
+            const data = getPPDBData();
+            const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
+            const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
+            if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
+            if (elHeaderSubtitle) {
+              data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
+            }
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+
+            // Simpan ke Supabase jika client aktif
+            if (window.supabaseClient) {
+              try {
+                await window.supabaseClient.from('ppdb_info').upsert({
+                  id: 1,
+                  academic_year: data.academic_year || '2024/2025',
+                  status: data.status || 'BUKA',
+                  requirements: data.header_subtitle || ''
+                });
+              } catch(supErr) {
+                console.warn('Supabase sync warning for PPDB sambutan:', supErr);
+              }
+            }
+
+            alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+          } catch(err) {
+            console.error('Error saving PPDB sambutan:', err);
+            alert('Gagal menyimpan teks sambutan: ' + err.message);
+          }
         };
 
         window.savePPDBSekretariat = function() {
@@ -4303,8 +4404,151 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+          // Tab Switching Handler
+          document.querySelectorAll('.tab-jenjang').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+              // Hapus class aktif dari semua tab
+              document.querySelectorAll('.tab-jenjang').forEach(t => {
+                t.classList.remove('bg-green-800', 'bg-emerald-800', 'text-white');
+                t.classList.add('text-slate-600', 'bg-white');
+              });
+              // Tambah class aktif ke tab yang diklik
+              e.currentTarget.classList.remove('text-slate-600', 'bg-white');
+              e.currentTarget.classList.add('bg-green-800', 'text-white');
+              
+              // Sembunyikan semua konten tab
+              document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+              // Tampilkan konten tab yang sesuai dengan data-target
+              const targetId = e.currentTarget.getAttribute('data-target');
+              const targetEl = document.getElementById(targetId);
+              if (targetEl) targetEl.classList.remove('hidden');
+            });
+          });
+
           loadPPDBFields();
           window.loadContactFields();
+
+          const btnHeaderPPDB = document.getElementById('btnSimpanHeaderPPDB');
+          if (btnHeaderPPDB) {
+            btnHeaderPPDB.addEventListener('click', window.savePPDBSambutan);
+          }
+        });
+      })();
+
+      // ==========================================
+      // FITUR PENGATURAN YAYASAN (CMS & SUPABASE)
+      // ==========================================
+      (function() {
+        const defaultPengaturan = {
+          nama: "Yayasan Pendidikan Nahjul Huda",
+          wa: "+62 812-3456-7890",
+          email: "info@nahjulhuda.sch.id",
+          alamat: "Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560"
+        };
+
+        window.loadPengaturanFields = function() {
+          let data = { ...defaultPengaturan };
+          try {
+            const rawProfile = localStorage.getItem('cmsData_profile');
+            if (rawProfile) {
+              const prof = JSON.parse(rawProfile);
+              if (prof.name) data.nama = prof.name;
+              if (prof.phone || prof.wa) data.wa = prof.phone || prof.wa;
+              if (prof.email) data.email = prof.email;
+              if (prof.address || prof.alamat) data.alamat = prof.address || prof.alamat;
+            }
+            const rawPengaturan = localStorage.getItem('cmsData_pengaturan');
+            if (rawPengaturan) {
+              data = { ...data, ...JSON.parse(rawPengaturan) };
+            }
+          } catch(e) {
+            console.warn('Error loading pengaturan fields:', e);
+          }
+
+          const elNama = document.getElementById('setting_nama');
+          const elWa = document.getElementById('setting_wa');
+          const elEmail = document.getElementById('setting_email');
+          const elAlamat = document.getElementById('setting_alamat');
+
+          if (elNama) elNama.value = data.nama || '';
+          if (elWa) elWa.value = data.wa || '';
+          if (elEmail) elEmail.value = data.email || '';
+          if (elAlamat) {
+            window.setTextareaValueWithAlignment('setting_alamat', data.alamat || defaultPengaturan.alamat);
+          }
+        };
+
+        window.savePengaturanYayasan = async function(e) {
+          if (e) e.preventDefault();
+          try {
+            const elNama = document.getElementById('setting_nama');
+            const elWa = document.getElementById('setting_wa');
+            const elEmail = document.getElementById('setting_email');
+            const elAlamat = document.getElementById('setting_alamat');
+
+            const nama = elNama ? elNama.value.trim() : '';
+            const wa = elWa ? elWa.value.trim() : '';
+            const email = elEmail ? elEmail.value.trim() : '';
+            const wrappedAlamat = window.getWrappedTextareaValue('setting_alamat') || (elAlamat ? elAlamat.value.trim() : '');
+
+            const payload = {
+              nama: nama,
+              wa: wa,
+              email: email,
+              alamat: wrappedAlamat
+            };
+
+            // 1. Simpan ke localStorage cmsData_pengaturan
+            localStorage.setItem('cmsData_pengaturan', JSON.stringify(payload));
+
+            // 2. Sinkronkan ke cmsData_profile
+            try {
+              const rawProf = localStorage.getItem('cmsData_profile');
+              const prof = rawProf ? JSON.parse(rawProf) : {};
+              prof.name = nama;
+              prof.phone = wa;
+              prof.email = email;
+              prof.address = wrappedAlamat;
+              localStorage.setItem('cmsData_profile', JSON.stringify(prof));
+            } catch(e) {}
+
+            // 3. Sinkronkan ke cmsData_contact
+            try {
+              const rawC = localStorage.getItem('cmsData_contact');
+              const contact = rawC ? JSON.parse(rawC) : {};
+              contact.wa1 = wa;
+              contact.email = email;
+              contact.address = wrappedAlamat;
+              localStorage.setItem('cmsData_contact', JSON.stringify(contact));
+            } catch(e) {}
+
+            // 4. Simpan ke Supabase jika client aktif
+            if (window.supabaseClient) {
+              const { error } = await window.supabaseClient.from('profile_settings').upsert({
+                id: 1,
+                name: nama,
+                phone: wa,
+                email: email,
+                address: wrappedAlamat
+              });
+              if (error) {
+                console.warn('Supabase sync warning for profile_settings:', error);
+              }
+            }
+
+            alert('Pengaturan Profil & Kontak Yayasan berhasil disimpan!');
+          } catch(err) {
+            console.error('Error saving pengaturan yayasan:', err);
+            alert('Gagal menyimpan pengaturan: ' + err.message);
+          }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          window.loadPengaturanFields();
+          const btn = document.getElementById('btnSimpanPengaturan');
+          if (btn) btn.addEventListener('click', window.savePengaturanYayasan);
+          const form = document.getElementById('formPengaturanYayasan');
+          if (form) form.addEventListener('submit', window.savePengaturanYayasan);
         });
       })();
     
@@ -4327,80 +4571,6 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
       });
     }
   </script>
-
-    <!-- TEXTAREA ALIGNMENT TOOLS (CMS FITUR RATA KANAN-KIRI & LIVE PREVIEW) -->
-    <script>
-      function initTextareaAlignmentTools() {
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(ta => {
-          if (ta.dataset.alignInit) return;
-          ta.dataset.alignInit = 'true';
-          
-          // Set default justify alignment
-          if (!ta.style.textAlign) {
-            ta.style.textAlign = 'justify';
-          }
-
-          const parent = ta.parentElement;
-          if (!parent) return;
-
-          const toolbar = document.createElement('div');
-          toolbar.className = 'textarea-align-toolbar flex flex-wrap items-center justify-between gap-2 mb-1.5 pt-1';
-          toolbar.innerHTML = `
-            <div class="inline-flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-              <button type="button" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-left"></i>
-              </button>
-              <button type="button" title="Rata Tengah" class="btn-align-center px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-center"></i>
-              </button>
-              <button type="button" title="Rata Kanan" class="btn-align-right px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-right"></i>
-              </button>
-              <button type="button" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
-                <i class="fas fa-align-justify"></i>
-              </button>
-            </div>
-            <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              <i class="fas fa-align-justify text-[10px]"></i> Otomatis Rata Kanan-Kiri (Justify) di Website
-            </span>
-          `;
-
-          const btns = toolbar.querySelectorAll('button');
-          btns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              e.preventDefault();
-              btns.forEach(b => {
-                b.className = 'px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition';
-              });
-              btn.className = 'px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs';
-
-              if (btn.classList.contains('btn-align-left') || btn.title.includes('Kiri')) {
-                ta.style.textAlign = 'left';
-              } else if (btn.classList.contains('btn-align-center') || btn.title.includes('Tengah')) {
-                ta.style.textAlign = 'center';
-              } else if (btn.classList.contains('btn-align-right') || btn.title.includes('Kanan')) {
-                ta.style.textAlign = 'right';
-              } else {
-                ta.style.textAlign = 'justify';
-              }
-            });
-          });
-
-          parent.insertBefore(toolbar, ta);
-        });
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        initTextareaAlignmentTools();
-        // Re-run whenever tab switches occur
-        document.querySelectorAll('button, a').forEach(el => {
-          el.addEventListener('click', () => {
-            setTimeout(initTextareaAlignmentTools, 150);
-          });
-        });
-      });
-    </script>
 
 </body>
 </html>

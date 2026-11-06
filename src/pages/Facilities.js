@@ -5,7 +5,7 @@ function formatContentHtml(str) {
   if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
     return trimmed;
   }
-  return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+  return `<div class="text-justify">${trimmed}</div>`;
 }
 
 export const renderFacilities = (facilities) => {

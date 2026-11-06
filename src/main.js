@@ -43,6 +43,7 @@ const loadHome = async () => {
     const facilities = await api.getFacilities();
     const galleries = await api.getGalleries();
     const ppdb = await api.getPPDB();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb), true, 'beranda');
     setupHomeEvents();
 };
@@ -56,41 +57,49 @@ router
   .on('/profil', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderProfile(profile), true, 'profil');
   })
   .on('/program', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const units = await api.getEducationUnits();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderPrograms(units), true, 'program');
     setupProgramEvents();
   })
   .on('/fasilitas', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const facilities = await api.getFacilities();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderFacilities(facilities), true, 'fasilitas');
   })
   .on('/ppdb', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const ppdb = await api.getPPDB();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderPPDB(ppdb), true, 'ppdb');
   })
   .on('/berita', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const news = await api.getNews();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderNews(news), true, 'berita');
   })
   .on('/galeri', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const galleries = await api.getGalleries();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderGallery(galleries), true, 'galeri');
   })
   .on('/kontak', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     const profile = await api.getProfile();
+    appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderContact(profile), true, 'kontak');
   })
   .on('/kelola', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
+    appDiv.innerHTML = '';
     await renderAdmin(appDiv, router);
   })
   .notFound(() => {
@@ -118,6 +127,9 @@ document.body.addEventListener('click', (e) => {
     const link = e.target.closest('a[data-navigo]');
     if (link) {
         e.preventDefault();
+        // Close modals and restore body scroll on navigation
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = 'auto';
         router.navigate(link.getAttribute('href'));
         // close mobile menu if open
         const mobileMenu = document.getElementById('mobile-menu');
@@ -147,6 +159,22 @@ function setupHomeEvents() {
             const taglineTitleEl = document.getElementById('taglineTitlePublic');
             if (taglineTitleEl && data.taglineTitle) {
                 taglineTitleEl.textContent = data.taglineTitle;
+            }
+            const ps1TitleEl = document.getElementById('progSosial1TitlePublic');
+            if (ps1TitleEl && data.progSosial1Title) {
+                ps1TitleEl.textContent = data.progSosial1Title;
+            }
+            const ps1DescEl = document.getElementById('progSosial1DescPublic');
+            if (ps1DescEl && data.progSosial1Desc) {
+                ps1DescEl.innerHTML = data.progSosial1Desc;
+            }
+            const ps2TitleEl = document.getElementById('progSosial2TitlePublic');
+            if (ps2TitleEl && data.progSosial2Title) {
+                ps2TitleEl.textContent = data.progSosial2Title;
+            }
+            const ps2DescEl = document.getElementById('progSosial2DescPublic');
+            if (ps2DescEl && data.progSosial2Desc) {
+                ps2DescEl.innerHTML = data.progSosial2Desc;
             }
         }
     } catch (e) {

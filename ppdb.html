@@ -33,6 +33,15 @@
         }
       }
     </style>
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
+        if (event.persisted) {
+          // Paksa reload halaman dari server, bukan dari cache
+          window.location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-800 font-inter antialiased flex flex-col min-h-screen overflow-x-hidden">
     <div id="app" class="flex-grow flex flex-col">
@@ -1109,6 +1118,7 @@
             }
 
             if (elSyaratList) {
+              elSyaratList.innerHTML = '';
               const lines = (item.syarat || '').split('\n').map(s => s.trim()).filter(Boolean);
               if (lines.length === 0) {
                 elSyaratList.innerHTML = '<li class="p-3 bg-gray-50 rounded-lg text-sm text-gray-500 italic">Belum ada rincian persyaratan berkas.</li>';

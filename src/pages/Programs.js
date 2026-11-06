@@ -1,12 +1,12 @@
 function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
-        }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
+  if (str === null || str === undefined) return '-';
+  const trimmed = String(str).trim();
+  if (trimmed === '' || trimmed === '-') return '-';
+  if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+    return trimmed;
+  }
+  return `<div class="text-justify">${trimmed}</div>`;
+}
 
 import { getUnitImage } from '../api';
 

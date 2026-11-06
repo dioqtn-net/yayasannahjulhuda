@@ -1,12 +1,12 @@
 function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
-        }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
+  if (str === null || str === undefined) return '-';
+  const trimmed = String(str).trim();
+  if (trimmed === '' || trimmed === '-') return '-';
+  if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+    return trimmed;
+  }
+  return `<div class="text-justify">${trimmed}</div>`;
+}
 
 import { getUnitImage } from '../api';
 
@@ -27,9 +27,16 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             : cmsData.heroTitle)
         : `Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>`;
 
-    const heroDescContent = cmsData?.heroDesc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
+    const rawHeroDesc = cmsData?.heroDesc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
+    const heroDescContent = (/^<(div|p)[\s>]/i.test(String(rawHeroDesc).trim()))
+        ? rawHeroDesc
+        : `<div class="text-justify">${rawHeroDesc}</div>`;
+
     const taglineTitleContent = cmsData?.taglineTitle || 'Mencetak Generasi Rabbani';
-    const taglineDescContent = cmsData?.taglineDesc || (profile?.history ? profile.history : '...');
+    const rawTagline = cmsData?.taglineDesc || (profile?.history ? profile.history : '...');
+    const taglineDescContent = (/^<(div|p)[\s>]/i.test(String(rawTagline).trim()))
+        ? rawTagline
+        : `<div class="text-justify">${rawTagline}</div>`;
     const stat1Num = cmsData?.stat1Num || '5';
     const stat1Text = cmsData?.stat1Text || 'JENJANG PENDIDIKAN';
     const stat2Num = cmsData?.stat2Num || '100+';
@@ -40,6 +47,18 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
     const stat4Text = cmsData?.stat4Text || 'TAHUN BERDIRI';
     const ppdbYearContent = cmsData?.ppdbYear || ppdb?.academic_year || '2024/2025';
     const ppdbStatusContent = cmsData?.ppdbStatus || ppdb?.status || 'BUKA';
+
+    const progSosial1TitleContent = cmsData?.progSosial1Title || "Majelis Ta'lim Nahjul Huda";
+    const rawProgSosial1Desc = cmsData?.progSosial1Desc || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.";
+    const progSosial1DescContent = (/^<(div|p)[\s>]/i.test(String(rawProgSosial1Desc).trim()))
+        ? rawProgSosial1Desc
+        : `<div class="text-justify">${rawProgSosial1Desc}</div>`;
+
+    const progSosial2TitleContent = cmsData?.progSosial2Title || "Pengajian Rutin Bulanan";
+    const rawProgSosial2Desc = cmsData?.progSosial2Desc || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.";
+    const progSosial2DescContent = (/^<(div|p)[\s>]/i.test(String(rawProgSosial2Desc).trim()))
+        ? rawProgSosial2Desc
+        : `<div class="text-justify">${rawProgSosial2Desc}</div>`;
 
     const renderUnitCard = (unit) => {
         const imageUrl = unit.image_url || getUnitImage(unit);
@@ -249,16 +268,16 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
               <div class="w-14 h-14 bg-gold-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-gold-500/30">
                 <i class="fas fa-users"></i>
               </div>
-              <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Majelis Ta'lim Nahjul Huda</h3>
-              <p class="text-emerald-100 leading-relaxed">Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.</p>
+              <h3 id="progSosial1TitlePublic" class="text-2xl font-playfair font-bold mb-3 text-gold-400">${progSosial1TitleContent}</h3>
+              <div id="progSosial1DescPublic" class="text-emerald-100 leading-relaxed">${progSosial1DescContent}</div>
             </div>
             
             <div class="bg-emerald-800/50 backdrop-blur border border-emerald-700 p-8 rounded-2xl hover:bg-emerald-800 transition">
               <div class="w-14 h-14 bg-gold-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-gold-500/30">
                 <i class="fas fa-calendar-alt"></i>
               </div>
-              <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Pengajian Rutin Bulanan</h3>
-              <p class="text-emerald-100 leading-relaxed">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</p>
+              <h3 id="progSosial2TitlePublic" class="text-2xl font-playfair font-bold mb-3 text-gold-400">${progSosial2TitleContent}</h3>
+              <div id="progSosial2DescPublic" class="text-emerald-100 leading-relaxed">${progSosial2DescContent}</div>
             </div>
           </div>
         </div>

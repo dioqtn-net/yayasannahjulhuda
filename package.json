@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); fs.copyFileSync('dist/index.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html');\"",
+    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); fs.copyFileSync('dist/index.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html'); if(fs.existsSync('kelola-info-ppdb.js')) fs.copyFileSync('kelola-info-ppdb.js', 'dist/kelola-info-ppdb.js');\"",
     "preview": "vite preview"
   },
   "dependencies": {

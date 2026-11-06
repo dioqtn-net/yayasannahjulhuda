@@ -8,7 +8,6 @@ export default {
     'text-center',
     'text-right',
     'text-justify',
-    'whitespace-pre-wrap',
   ],
   theme: {
     extend: {

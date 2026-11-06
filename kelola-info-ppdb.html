@@ -107,7 +107,7 @@
           const rawText = ta.value;
           if (!rawText || rawText.trim() === '') return '';
           const align = ta.dataset.align || currentAlign || 'text-justify';
-          const payloadToSave = `<div class="${align} whitespace-pre-wrap">${rawText}</div>`;
+          const payloadToSave = `<div class="${align}">${rawText}</div>`;
           return payloadToSave;
         };
         window.getWrappedTextareaValue = window.getPayloadToSave;
@@ -129,8 +129,9 @@
               // Masukkan teks murni ke textarea (tanpa tag HTML)
               ta.value = wrapper.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
               // Ambil class alignment-nya
-              const savedAlign = wrapper.className.replace('whitespace-pre-wrap', '').trim();
-              currentAlign = savedAlign || 'text-justify';
+              const matchAlign = wrapper.className.match(/text-(left|center|right|justify)/);
+              const savedAlign = matchAlign ? matchAlign[0] : 'text-justify';
+              currentAlign = savedAlign;
               window.currentAlign = currentAlign;
               ta.dataset.align = currentAlign;
               ta.style.textAlign = currentAlign.replace('text-', '');
@@ -162,7 +163,8 @@
           temp.innerHTML = val;
           const wrapper = temp.firstElementChild;
           if (wrapper) {
-            const savedAlign = wrapper.className.replace('whitespace-pre-wrap', '').trim() || 'text-justify';
+            const matchAlign = wrapper.className.match(/text-(left|center|right|justify)/);
+            const savedAlign = matchAlign ? matchAlign[0] : 'text-justify';
             return { text: wrapper.textContent || '', align: savedAlign };
           }
           return { text: val, align: 'text-justify' };
@@ -170,8 +172,12 @@
 
         window.wrapWithAlignment = function(text, align) {
           const a = align || 'text-justify';
-          return `<div class="${a} whitespace-pre-wrap">${text || ''}</div>`;
+          return `<div class="${a}">${text || ''}</div>`;
         };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          window.initTextareaAlignmentTools();
+        });
       })();
     </script>
 
@@ -356,7 +362,7 @@
             </div>
 
             <div class="flex justify-end pt-2">
-              <button type="button" onclick="savePPDBSambutan()" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm text-sm">
+              <button type="button" id="btnSimpanHeaderPPDB" onclick="savePPDBSambutan()" class="bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 <span>Simpan Teks Sambutan</span>
               </button>
@@ -365,23 +371,23 @@
 
           <!-- Navigasi Tab Jenjang PPDB Admin -->
           <div class="bg-white rounded-2xl border border-slate-200/80 p-2 shadow-sm mb-6 flex flex-wrap gap-2">
-            <button type="button" onclick="switchPPDBAdminTab('sdi')" data-ppdb-admin-tab="sdi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_sdi" data-ppdb-admin-tab="sdi" onclick="switchPPDBAdminTab('sdi')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-green-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2">
               <i class="fas fa-school text-slate-400"></i>
               <span>SDI Al Kindy</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('mi')" data-ppdb-admin-tab="mi" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_mi" data-ppdb-admin-tab="mi" onclick="switchPPDBAdminTab('mi')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-book-reader text-slate-400"></i>
               <span>MI Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('mts')" data-ppdb-admin-tab="mts" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_mts" data-ppdb-admin-tab="mts" onclick="switchPPDBAdminTab('mts')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-graduation-cap text-gold-400"></i>
               <span>MTs Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('ma')" data-ppdb-admin-tab="ma" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_ma" data-ppdb-admin-tab="ma" onclick="switchPPDBAdminTab('ma')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-university text-slate-400"></i>
               <span>MA Nahjul Huda</span>
             </button>
-            <button type="button" onclick="switchPPDBAdminTab('ponpes')" data-ppdb-admin-tab="ponpes" class="ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
+            <button type="button" data-target="ppdbAdminPanel_ponpes" data-ppdb-admin-tab="ponpes" onclick="switchPPDBAdminTab('ponpes')" class="tab-jenjang ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2">
               <i class="fas fa-mosque text-slate-400"></i>
               <span>Ponpes Assurur</span>
             </button>
@@ -390,7 +396,7 @@
                     <!-- Container Panel Form Masing-Masing Jenjang -->
           <div id="ppdb-admin-panels-container">
             <!-- Panel SDI -->
-            <div id="ppdbAdminPanel_sdi" class="ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_sdi" class="tab-content ppdb-admin-panel bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: SD Islam (SDI) AL KINDY</h3>
@@ -543,7 +549,7 @@
             </div>
 
             <!-- Panel MI -->
-            <div id="ppdbAdminPanel_mi" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mi" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
@@ -696,7 +702,7 @@
             </div>
 
             <!-- Panel MTs -->
-            <div id="ppdbAdminPanel_mts" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_mts" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
@@ -849,7 +855,7 @@
             </div>
 
             <!-- Panel MA -->
-            <div id="ppdbAdminPanel_ma" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ma" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Madrasah Aliyah (MA) Nahjul Huda</h3>
@@ -1002,7 +1008,7 @@
             </div>
 
             <!-- Panel Ponpes -->
-            <div id="ppdbAdminPanel_ponpes" class="ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
+            <div id="ppdbAdminPanel_ponpes" class="tab-content ppdb-admin-panel hidden bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-sm space-y-6">
               <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
                   <h3 class="text-lg font-bold text-slate-800">Form Info PPDB: Pondok Pesantren Assurur</h3>
@@ -1220,26 +1226,26 @@
         }
 
         window.switchPPDBAdminTab = function(jenjangKey) {
-          const tabBtns = document.querySelectorAll('.ppdb-admin-tab-btn');
-          tabBtns.forEach(btn => {
-            const key = btn.getAttribute('data-ppdb-admin-tab');
-            if (key === jenjangKey) {
-              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-emerald-800 text-white shadow-sm border border-emerald-800 flex items-center gap-2";
-              const icon = btn.querySelector('i');
-              if (icon) icon.className = icon.className.replace('text-slate-400', 'text-gold-400');
-            } else {
-              btn.className = "ppdb-admin-tab-btn px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2";
-              const icon = btn.querySelector('i');
-              if (icon) icon.className = icon.className.replace('text-gold-400', 'text-slate-400');
+          const tab = document.querySelector(`.tab-jenjang[data-target="ppdbAdminPanel_${jenjangKey}"]`) ||
+                      document.querySelector(`.tab-jenjang[data-ppdb-admin-tab="${jenjangKey}"]`);
+          if (tab) {
+            tab.click();
+          } else {
+            const targetId = `ppdbAdminPanel_${jenjangKey}`;
+            document.querySelectorAll('.tab-jenjang').forEach(t => {
+              if (t.getAttribute('data-target') === targetId || t.getAttribute('data-ppdb-admin-tab') === jenjangKey) {
+                t.classList.add('bg-green-800', 'text-white');
+                t.classList.remove('text-slate-600', 'bg-white');
+              } else {
+                t.classList.remove('bg-green-800', 'bg-emerald-800', 'text-white');
+                t.classList.add('text-slate-600', 'bg-white');
+              }
+            });
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) {
+              activePanel.classList.remove('hidden');
             }
-          });
-
-          const panels = document.querySelectorAll('.ppdb-admin-panel');
-          panels.forEach(p => p.classList.add('hidden'));
-
-          const activePanel = document.getElementById(`ppdbAdminPanel_${jenjangKey}`);
-          if (activePanel) {
-            activePanel.classList.remove('hidden');
           }
         };
 
@@ -1545,7 +1551,6 @@
             const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
             const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
             const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
-            const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
 
             if (elHari) elHari.value = item.hari || '';
             if (elTglMulai) elTglMulai.value = item.tgl_mulai || '';
@@ -1581,7 +1586,6 @@
           const elK1Wa = document.getElementById(`ppdbAdmin_${k}_k1_wa`);
           const elK2Nama = document.getElementById(`ppdbAdmin_${k}_k2_nama`);
           const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
-            const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
 
           const jName = defaultPPDB[k] ? defaultPPDB[k].jenjangName : k.toUpperCase();
 
@@ -1625,14 +1629,37 @@
 
         window.simpanInfoPPDB = window.savePPDBAdminJenjang;
 
-        window.savePPDBSambutan = function() {
-          const data = getPPDBData();
-          const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
-          const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
-          if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
-          if (elHeaderSubtitle) data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
-          localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-          alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+        window.savePPDBSambutan = async function(e) {
+          if (e) e.preventDefault();
+          try {
+            const data = getPPDBData();
+            const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
+            const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
+            if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
+            if (elHeaderSubtitle) {
+              data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
+            }
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+
+            // Simpan ke Supabase jika client aktif
+            if (window.supabaseClient) {
+              try {
+                await window.supabaseClient.from('ppdb_info').upsert({
+                  id: 1,
+                  academic_year: data.academic_year || '2024/2025',
+                  status: data.status || 'BUKA',
+                  requirements: data.header_subtitle || ''
+                });
+              } catch(supErr) {
+                console.warn('Supabase sync warning for PPDB sambutan:', supErr);
+              }
+            }
+
+            alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+          } catch(err) {
+            console.error('Error saving PPDB sambutan:', err);
+            alert('Gagal menyimpan teks sambutan: ' + err.message);
+          }
         };
 
         window.savePPDBSekretariat = function() {
@@ -1646,8 +1673,34 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+          // Tab Switching Handler
+          document.querySelectorAll('.tab-jenjang').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+              // Hapus class aktif dari semua tab
+              document.querySelectorAll('.tab-jenjang').forEach(t => {
+                t.classList.remove('bg-green-800', 'bg-emerald-800', 'text-white');
+                t.classList.add('text-slate-600', 'bg-white');
+              });
+              // Tambah class aktif ke tab yang diklik
+              e.currentTarget.classList.remove('text-slate-600', 'bg-white');
+              e.currentTarget.classList.add('bg-green-800', 'text-white');
+              
+              // Sembunyikan semua konten tab
+              document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+              // Tampilkan konten tab yang sesuai dengan data-target
+              const targetId = e.currentTarget.getAttribute('data-target');
+              const targetEl = document.getElementById(targetId);
+              if (targetEl) targetEl.classList.remove('hidden');
+            });
+          });
+
           loadPPDBFields();
           window.loadContactFields();
+
+          const btnHeaderPPDB = document.getElementById('btnSimpanHeaderPPDB');
+          if (btnHeaderPPDB) {
+            btnHeaderPPDB.addEventListener('click', window.savePPDBSambutan);
+          }
         });
       })();
     
@@ -1670,79 +1723,6 @@
     }
   </script>
 
-    <!-- TEXTAREA ALIGNMENT TOOLS (CMS FITUR RATA KANAN-KIRI & LIVE PREVIEW) -->
-    <script>
-      function initTextareaAlignmentTools() {
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(ta => {
-          if (ta.dataset.alignInit) return;
-          ta.dataset.alignInit = 'true';
-          
-          // Set default justify alignment
-          if (!ta.style.textAlign) {
-            ta.style.textAlign = 'justify';
-          }
-
-          const parent = ta.parentElement;
-          if (!parent) return;
-
-          const toolbar = document.createElement('div');
-          toolbar.className = 'textarea-align-toolbar flex flex-wrap items-center justify-between gap-2 mb-1.5 pt-1';
-          toolbar.innerHTML = `
-            <div class="inline-flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-              <button type="button" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-left"></i>
-              </button>
-              <button type="button" title="Rata Tengah" class="btn-align-center px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-center"></i>
-              </button>
-              <button type="button" title="Rata Kanan" class="btn-align-right px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                <i class="fas fa-align-right"></i>
-              </button>
-              <button type="button" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
-                <i class="fas fa-align-justify"></i>
-              </button>
-            </div>
-            <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              <i class="fas fa-align-justify text-[10px]"></i> Otomatis Rata Kanan-Kiri (Justify) di Website
-            </span>
-          `;
-
-          const btns = toolbar.querySelectorAll('button');
-          btns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              e.preventDefault();
-              btns.forEach(b => {
-                b.className = 'px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition';
-              });
-              btn.className = 'px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs';
-
-              if (btn.classList.contains('btn-align-left') || btn.title.includes('Kiri')) {
-                ta.style.textAlign = 'left';
-              } else if (btn.classList.contains('btn-align-center') || btn.title.includes('Tengah')) {
-                ta.style.textAlign = 'center';
-              } else if (btn.classList.contains('btn-align-right') || btn.title.includes('Kanan')) {
-                ta.style.textAlign = 'right';
-              } else {
-                ta.style.textAlign = 'justify';
-              }
-            });
-          });
-
-          parent.insertBefore(toolbar, ta);
-        });
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        initTextareaAlignmentTools();
-        // Re-run whenever tab switches occur
-        document.querySelectorAll('button, a').forEach(el => {
-          el.addEventListener('click', () => {
-            setTimeout(initTextareaAlignmentTools, 150);
-          });
-        });
-      });
-    </script>
-
+  <script type="module" src="/kelola-info-ppdb.js"></script>
 </body>
 </html>
