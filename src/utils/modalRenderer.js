@@ -170,35 +170,35 @@ export async function renderDynamicUnitModal(id) {
         <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto max-w-full h-auto">
       </div>
 
-      <div class="text-slate-700 mb-6 leading-relaxed">${formatContentHtml(desc)}</div>
+      <div class="text-slate-700 mb-6 leading-relaxed">${desc}</div>
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(kurikulum)}</div>
+        <div class="text-slate-600 text-sm leading-relaxed">${kurikulum}</div>
       </div>
 
       ${unggulan && unggulan !== '-' ? `
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unggulan)}</div>
+        <div class="text-slate-600 text-sm leading-relaxed">${unggulan}</div>
       </div>
       ` : ''}
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(ekskul)}</div>
+        <div class="text-slate-600 text-sm leading-relaxed">${ekskul}</div>
       </div>
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(fasilitas)}</div>
+        <div class="text-slate-600 text-sm leading-relaxed">${fasilitas}</div>
       </div>
 
       <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
         <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
         <div class="mb-3">
           <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
-          <div class="italic text-slate-700 text-sm leading-relaxed">${formatContentHtml(visi)}</div>
+          <div class="italic text-slate-700 text-sm leading-relaxed">${visi}</div>
         </div>
         <div>
           <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>

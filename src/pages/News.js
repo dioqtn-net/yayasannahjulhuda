@@ -69,7 +69,7 @@ export const renderNews = (newsList) => {
             const modal = document.getElementById('newsDetailModal');
             if (!modal) return;
             document.getElementById('modalNewsTitle').textContent = title;
-            document.getElementById('modalNewsBody').innerHTML = formatContentHtml(desc);
+            document.getElementById('modalNewsBody').innerHTML = desc;
             const modalImg = document.getElementById('modalNewsImg');
             if (modalImg) {
                 if (imgSrc) {

@@ -1046,13 +1046,13 @@
           }
           const elHeaderSubtitle = document.getElementById('ppdb-header-subtitle');
           if (elHeaderSubtitle) {
-            elHeaderSubtitle.innerHTML = formatContentHtml(data.header_subtitle || defaultPPDB.header_subtitle, 'text-center');
+            elHeaderSubtitle.innerHTML = data.header_subtitle || defaultPPDB.header_subtitle;
           }
 
           // 1. Alamat Sekretariat Bersama di Bagian Bawah
           const elSekretariat = document.getElementById('ppdb-sekretariat-alamat');
           if (elSekretariat) {
-            elSekretariat.innerHTML = formatContentHtml(data.sekretariat_alamat || defaultPPDB.sekretariat_alamat, 'text-justify');
+            elSekretariat.innerHTML = data.sekretariat_alamat || defaultPPDB.sekretariat_alamat;
           }
 
           jenjangKeys.forEach(k => {
@@ -1098,14 +1098,14 @@
             // 4. Lokasi Pendaftaran (Kotak Jadwal)
             const elLokasi = document.getElementById(`jadwal-lokasi-${k}`);
             if (elLokasi && item.lokasi) {
-              elLokasi.innerHTML = formatContentHtml(item.lokasi, 'text-justify');
+              elLokasi.innerHTML = item.lokasi;
             }
 
             // 5. Syarat List & Catatan Syarat
             const elSyaratList = document.getElementById(`syarat-list-${k}`) || document.getElementById(`ppdb-${k}-syarat-list`);
             const elSyaratCatatan = document.getElementById(`syarat-catatan-${k}`);
             if (elSyaratCatatan && item.syarat_catatan) {
-              elSyaratCatatan.innerHTML = formatContentHtml(item.syarat_catatan, 'text-justify');
+              elSyaratCatatan.innerHTML = item.syarat_catatan;
             }
 
             if (elSyaratList) {

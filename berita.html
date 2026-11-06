@@ -470,7 +470,7 @@
                       ${escapeHtml(item.judul)}
                     </h3>
                     <div class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                      ${formatContentHtml(item.deskripsiSingkat)}
+                      ${item.deskripsiSingkat}
                     </div>
                   </div>
                   <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -578,7 +578,7 @@
           document.getElementById('modalNewsBadge').textContent = item.jenjang;
           document.getElementById('modalNewsBadge').className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm';
 
-          document.getElementById('modalNewsBody').innerHTML = formatContentHtml(item.deskripsiLengkap || item.deskripsiSingkat);
+          document.getElementById('modalNewsBody').innerHTML = item.deskripsiLengkap || item.deskripsiSingkat;
 
           // Render Slider Images in Modal
           const sliderContainer = document.getElementById('modalNewsSliderContainer');
@@ -683,7 +683,7 @@
               const titleEl = document.getElementById('pubBeritaBannerTitle');
               const descEl = document.getElementById('pubBeritaBannerDesc');
               if (titleEl && bData.title) titleEl.textContent = bData.title;
-              if (descEl && bData.desc) descEl.innerHTML = formatContentHtml(bData.desc, 'text-center');
+              if (descEl && bData.desc) descEl.innerHTML = bData.desc;
             } catch (e) {
               console.error('Error parsing saved berita banner:', e);
             }

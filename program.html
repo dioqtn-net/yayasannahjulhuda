@@ -612,7 +612,7 @@
               const val = data[u.key + f.key];
               if (val !== undefined && val !== null) {
                 const el = document.getElementById(f.id);
-                if (el) el.innerHTML = formatContentHtml(val);
+                if (el) el.innerHTML = (val.trim() === '' ? '-' : val);
               }
             });
 

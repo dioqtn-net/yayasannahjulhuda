@@ -56,142 +56,121 @@
         }
       })();
     </script>
-      <!-- UNIVERSAL TEXTAREA ALIGNMENT ENGINE (CMS FITUR RATA KIRI, TENGAH, KANAN, JUSTIFY) -->
+      <!-- EXACT COPY-PASTE TEXT ALIGNMENT ENGINE FOR CMS -->
     <script>
       (function() {
-        // TUGAS 3: DOMParser logic to unwrap saved HTML and extract pure text + alignment class
-        window.unwrapAlignment = function(dataDariSupabase) {
-          if (!dataDariSupabase) return { text: '', align: 'text-left' };
-          const str = String(dataDariSupabase).trim();
-          if (!str.startsWith('<') && !str.includes('<div') && !str.includes('<p')) {
-            return { text: str, align: 'text-left' };
-          }
-          try {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(str, 'text/html');
-            const divElement = doc.body.firstElementChild || doc.body.firstChild;
-            if (divElement && divElement.nodeType === 1) {
-              let savedClass = 'text-left';
-              const cName = divElement.className || '';
-              if (cName.includes('text-center')) savedClass = 'text-center';
-              else if (cName.includes('text-right')) savedClass = 'text-right';
-              else if (cName.includes('text-justify')) savedClass = 'text-justify';
-              else if (cName.includes('text-left')) savedClass = 'text-left';
-              
-              return {
-                text: divElement.textContent !== undefined ? divElement.textContent : str,
-                align: savedClass
-              };
-            }
-          } catch (e) {
-            console.error('Error unwrapping alignment:', e);
-          }
-          return { text: str, align: 'text-left' };
-        };
+        // 1. Siapkan Variabel Global
+        let currentAlign = 'text-justify'; // default
+        window.currentAlign = currentAlign;
 
-        // TUGAS 2: Wrap string into HTML payload: <div class="${activeAlign} whitespace-pre-wrap">...</div>
-        window.wrapWithAlignment = function(text, alignmentClass) {
-          if (text === null || text === undefined) return '';
-          const trimmed = String(text).trim();
-          if (!trimmed) return '';
-          const unwrapped = window.unwrapAlignment(trimmed);
-          const align = alignmentClass || unwrapped.align || 'text-left';
-          return `<div class="${align} whitespace-pre-wrap">${unwrapped.text}</div>`;
-        };
-
-        window.getWrappedTextareaValue = function(textareaOrId) {
-          const ta = typeof textareaOrId === 'string' ? document.getElementById(textareaOrId) : textareaOrId;
-          if (!ta) return '';
-          const val = ta.value.trim();
-          if (!val) return '';
-          const align = ta.dataset.alignment || 'text-left';
-          return `<div class="${align} whitespace-pre-wrap">${val}</div>`;
-        };
-
-        window.setTextareaValueWithAlignment = function(textareaOrId, rawValue) {
-          const ta = typeof textareaOrId === 'string' ? document.getElementById(textareaOrId) : textareaOrId;
-          if (!ta) return;
-          const { text, align } = window.unwrapAlignment(rawValue);
-          ta.value = text;
-          ta.dataset.alignment = align;
-          ta.style.textAlign = align.replace('text-', '');
-          window.setToolbarActive(ta, align);
-        };
-
-        window.setToolbarActive = function(ta, align) {
-          const activeAlign = align || ta.dataset.alignment || 'text-left';
-          const toolbar = ta.previousElementSibling && ta.previousElementSibling.classList.contains('textarea-align-toolbar')
-            ? ta.previousElementSibling
-            : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') : null);
-          
-          if (!toolbar) return;
-          const btns = toolbar.querySelectorAll('button[data-align]');
-          btns.forEach(btn => {
-            if (btn.getAttribute('data-align') === activeAlign) {
-              btn.className = 'px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs';
-            } else {
-              btn.className = 'px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition';
-            }
-          });
-        };
-
+        // 2. Toolbar Generator & Event Listener Tombol Alignment
         window.initTextareaAlignmentTools = function() {
           const textareas = document.querySelectorAll('textarea');
           textareas.forEach(ta => {
-            if (ta.dataset.alignInit === 'true') {
-              const align = ta.dataset.alignment || 'text-left';
-              window.setToolbarActive(ta, align);
-              return;
-            }
+            if (ta.dataset.alignInit === 'true') return;
             ta.dataset.alignInit = 'true';
-
-            if (ta.value) {
-              const { text, align } = window.unwrapAlignment(ta.value);
-              ta.value = text;
-              ta.dataset.alignment = align;
-              ta.style.textAlign = align.replace('text-', '');
-            } else {
-              ta.dataset.alignment = ta.dataset.alignment || 'text-left';
-              ta.style.textAlign = ta.dataset.alignment.replace('text-', '');
-            }
 
             const parent = ta.parentElement;
             if (!parent) return;
 
-            // TUGAS 1: Toolbar TANPA BADGE "Otomatis Rata Kanan-Kiri"
             const toolbar = document.createElement('div');
-            toolbar.className = 'textarea-align-toolbar flex items-center gap-2 mb-1.5 pt-1';
+            toolbar.className = 'textarea-align-toolbar flex items-center gap-1 mb-1.5 pt-1';
             toolbar.innerHTML = `
               <div class="inline-flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-                <button type="button" data-align="text-left" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
-                  <i class="fas fa-align-left"></i>
-                </button>
-                <button type="button" data-align="text-center" title="Rata Tengah" class="btn-align-center px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                  <i class="fas fa-align-center"></i>
-                </button>
-                <button type="button" data-align="text-right" title="Rata Kanan" class="btn-align-right px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                  <i class="fas fa-align-right"></i>
-                </button>
-                <button type="button" data-align="text-justify" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
-                  <i class="fas fa-align-justify"></i>
-                </button>
+                <button type="button" class="btn-align px-2.5 py-1 text-xs rounded border border-transparent font-medium text-slate-700 hover:bg-white hover:text-slate-900 transition" data-align="text-left"><i class="fas fa-align-left mr-1"></i>Kiri</button>
+                <button type="button" class="btn-align px-2.5 py-1 text-xs rounded border border-transparent font-medium text-slate-700 hover:bg-white hover:text-slate-900 transition" data-align="text-center"><i class="fas fa-align-center mr-1"></i>Tengah</button>
+                <button type="button" class="btn-align px-2.5 py-1 text-xs rounded border border-transparent font-medium text-slate-700 hover:bg-white hover:text-slate-900 transition" data-align="text-right"><i class="fas fa-align-right mr-1"></i>Kanan</button>
+                <button type="button" class="btn-align px-2.5 py-1 text-xs rounded border border-transparent font-medium bg-green-700 text-white transition shadow-xs" data-align="text-justify"><i class="fas fa-align-justify mr-1"></i>Justify</button>
               </div>
             `;
 
-            const btns = toolbar.querySelectorAll('button[data-align]');
-            btns.forEach(btn => {
+            toolbar.querySelectorAll('.btn-align').forEach(btn => {
               btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const align = btn.getAttribute('data-align');
-                ta.dataset.alignment = align;
-                ta.style.textAlign = align.replace('text-', '');
-                window.setToolbarActive(ta, align);
+                toolbar.querySelectorAll('.btn-align').forEach(b => b.classList.remove('bg-green-700', 'text-white'));
+                e.currentTarget.classList.add('bg-green-700', 'text-white');
+                currentAlign = e.currentTarget.getAttribute('data-align');
+                window.currentAlign = currentAlign;
+                ta.dataset.align = currentAlign;
+                ta.style.textAlign = currentAlign.replace('text-', '');
               });
             });
 
             parent.insertBefore(toolbar, ta);
-            window.setToolbarActive(ta, ta.dataset.alignment || 'text-left');
           });
+        };
+
+        // 3. LOGIKA SAVE KE SUPABASE / LOCALSTORAGE
+        window.getPayloadToSave = function(textareaId) {
+          const ta = typeof textareaId === 'string' ? document.getElementById(textareaId) : textareaId;
+          if (!ta) return '';
+          const rawText = ta.value;
+          if (!rawText || rawText.trim() === '') return '';
+          const align = ta.dataset.align || currentAlign || 'text-justify';
+          const payloadToSave = `<div class="${align} whitespace-pre-wrap">${rawText}</div>`;
+          return payloadToSave;
+        };
+        window.getWrappedTextareaValue = window.getPayloadToSave;
+
+        // 4. LOGIKA LOAD DARI SUPABASE / LOCALSTORAGE (Saat buka halaman edit)
+        window.loadDataToForm = function(textareaId, dataDariDatabase) {
+          const ta = typeof textareaId === 'string' ? document.getElementById(textareaId) : textareaId;
+          if (!ta) return;
+          const toolbar = ta.previousElementSibling && ta.previousElementSibling.classList.contains('textarea-align-toolbar')
+            ? ta.previousElementSibling
+            : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') : document);
+
+          if (dataDariDatabase && (dataDariDatabase.includes('<div') || dataDariDatabase.includes('<p'))) {
+            const temp = document.createElement('div');
+            temp.innerHTML = dataDariDatabase;
+            const wrapper = temp.firstElementChild;
+            
+            if (wrapper && (wrapper.tagName === 'DIV' || wrapper.tagName === 'P')) {
+              // Masukkan teks murni ke textarea (tanpa tag HTML)
+              ta.value = wrapper.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+              // Ambil class alignment-nya
+              const savedAlign = wrapper.className.replace('whitespace-pre-wrap', '').trim();
+              currentAlign = savedAlign || 'text-justify';
+              window.currentAlign = currentAlign;
+              ta.dataset.align = currentAlign;
+              ta.style.textAlign = currentAlign.replace('text-', '');
+              
+              // Trigger klik pada tombol yang sesuai untuk update UI
+              const btnAktif = toolbar.querySelector(`.btn-align[data-align="${currentAlign}"]`);
+              if(btnAktif) {
+                toolbar.querySelectorAll('.btn-align').forEach(b => b.classList.remove('bg-green-700', 'text-white'));
+                btnAktif.classList.add('bg-green-700', 'text-white');
+              }
+              return;
+            }
+          }
+          // Fallback jika data lama belum dibungkus div
+          ta.value = dataDariDatabase || '';
+          ta.dataset.align = 'text-justify';
+          ta.style.textAlign = 'justify';
+          const btnDefault = toolbar.querySelector('.btn-align[data-align="text-justify"]');
+          if (btnDefault) {
+            toolbar.querySelectorAll('.btn-align').forEach(b => b.classList.remove('bg-green-700', 'text-white'));
+            btnDefault.classList.add('bg-green-700', 'text-white');
+          }
+        };
+        window.setTextareaValueWithAlignment = window.loadDataToForm;
+
+        window.unwrapAlignment = function(val) {
+          if (!val) return { text: '', align: 'text-justify' };
+          const temp = document.createElement('div');
+          temp.innerHTML = val;
+          const wrapper = temp.firstElementChild;
+          if (wrapper) {
+            const savedAlign = wrapper.className.replace('whitespace-pre-wrap', '').trim() || 'text-justify';
+            return { text: wrapper.textContent || '', align: savedAlign };
+          }
+          return { text: val, align: 'text-justify' };
+        };
+
+        window.wrapWithAlignment = function(text, align) {
+          const a = align || 'text-justify';
+          return `<div class="${a} whitespace-pre-wrap">${text || ''}</div>`;
         };
       })();
     </script>

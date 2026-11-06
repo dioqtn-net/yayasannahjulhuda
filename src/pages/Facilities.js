@@ -35,7 +35,7 @@ export const renderFacilities = (facilities) => {
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">${f.name}</h3>
-                            <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(f.description)}</div>
+                            <div class="text-slate-600 text-sm leading-relaxed">${f.description}</div>
                         </div>
                     </div>
                 `).join('')}

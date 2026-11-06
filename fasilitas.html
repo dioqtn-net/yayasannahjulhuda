@@ -300,7 +300,7 @@
           try {
             const data = JSON.parse(savedBannerFas);
             if (document.getElementById('pubFasBannerTitle') && data.title) document.getElementById('pubFasBannerTitle').textContent = data.title;
-            if (document.getElementById('pubFasBannerDesc') && data.desc) document.getElementById('pubFasBannerDesc').innerHTML = formatContentHtml(data.desc, 'text-center');
+            if (document.getElementById('pubFasBannerDesc') && data.desc) document.getElementById('pubFasBannerDesc').innerHTML = data.desc;
           } catch (e) {
             console.error('Error parsing cmsData_fasBanner:', e);
           }
@@ -415,7 +415,7 @@
                       ${safeTitle}
                     </h3>
                     <div class="text-slate-600 text-sm leading-relaxed">
-                      ${formatContentHtml(item.deskripsi)}
+                      ${item.deskripsi}
                     </div>
                   </div>
                 </div>
@@ -433,7 +433,7 @@
                       ${safeTitle}
                     </h3>
                     <div class="text-slate-600 text-sm leading-relaxed">
-                      ${formatContentHtml(item.deskripsi)}
+                      ${item.deskripsi}
                     </div>
                   </div>
                 </div>

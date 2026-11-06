@@ -734,7 +734,7 @@
                     ${escapeHtml(item.judul)}
                   </h3>
                   <div class="gallery-desc text-xs text-slate-500 leading-relaxed">
-                    ${formatContentHtml(item.deskripsi)}
+                    ${item.deskripsi}
                   </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
@@ -754,7 +754,7 @@
               const titleEl = document.getElementById('pubGaleriBannerTitle');
               const descEl = document.getElementById('pubGaleriBannerDesc');
               if (titleEl && b.title) titleEl.textContent = b.title;
-              if (descEl && b.desc) descEl.innerHTML = formatContentHtml(b.desc, 'text-center');
+              if (descEl && b.desc) descEl.innerHTML = b.desc;
             } catch (e) {}
           }
         }

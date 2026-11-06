@@ -462,11 +462,11 @@
           }
           if (data.profilDesc) {
             const el = document.getElementById('publicProfilDesc');
-            if (el) el.innerHTML = formatContentHtml(data.profilDesc, 'text-center');
+            if (el) el.innerHTML = data.profilDesc;
           }
           if (data.sejarahText) {
             const el = document.getElementById('publicSejarahText');
-            if (el) el.innerHTML = formatContentHtml(data.sejarahText, 'text-justify');
+            if (el) el.innerHTML = data.sejarahText;
           }
           if (data.strukturTitle) {
             const el = document.getElementById('publicStrukturTitle');
@@ -474,7 +474,7 @@
           }
           if (data.strukturDesc) {
             const el = document.getElementById('publicStrukturDesc');
-            if (el) el.innerHTML = formatContentHtml(data.strukturDesc, 'text-center');
+            if (el) el.innerHTML = data.strukturDesc;
           }
 
           const applyPerson = (role, photo, name) => {
