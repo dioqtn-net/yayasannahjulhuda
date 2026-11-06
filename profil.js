@@ -57,3 +57,4 @@ export function renderTextOrList(containerElement, rawData, isList = false, list
 if (typeof window !== 'undefined') {
     window.renderTextOrList = renderTextOrList;
 }
+
