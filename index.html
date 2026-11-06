@@ -67,7 +67,7 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
                 <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">SD Islam (SDI) AL KINDY</h3>
-                <p class="text-slate-600 text-sm mb-4 text-justify">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
               </div>
               <div>
                 <a href="program.html#program-sdi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -80,7 +80,7 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
                 <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4 text-justify">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
               </div>
               <div>
                 <a href="program.html#program-mi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -93,7 +93,7 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
                 <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4 text-justify">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
               </div>
               <div>
                 <a href="program.html#program-mts" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -106,7 +106,7 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
                 <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Aliyah (MA) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4 text-justify">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
+                <p class="text-slate-600 text-sm mb-4">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
               </div>
               <div>
                 <a href="program.html#program-ma" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -119,7 +119,7 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
                 <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Pondok Pesantren Assurur</h3>
-                <p class="text-slate-600 text-sm mb-4 text-justify">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
+                <p class="text-slate-600 text-sm mb-4">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
               </div>
               <div>
                 <a href="program.html#program-ponpes" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -393,14 +393,15 @@
           return div.innerHTML;
         }
 
-              function formatContentHtml(str, defaultAlign) {
-        if (!defaultAlign) defaultAlign = 'text-justify';
+              function formatContentHtml(str) {
         if (str === null || str === undefined) return '-';
         const trimmed = String(str).trim();
         if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
           return trimmed;
         }
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+      }
         return `<p class="${defaultAlign}">${trimmed}</p>`;
       }
 
@@ -465,8 +466,8 @@
               .filter(l => l.length > 0 && l !== '-');
 
             const misiHTML = linesMisi.length > 0
-              ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed text-justify">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
-              : '<p class="text-sm text-slate-500 italic text-justify">-</p>';
+              ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
+              : '<p class="text-sm text-slate-500 italic">-</p>';
 
             modalBody.innerHTML = `
               <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">

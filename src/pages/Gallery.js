@@ -147,7 +147,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Futsal
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Wadah penyaluran bakat olahraga untuk membentuk karakter sportif.
                     </p>
                   </div>
@@ -175,7 +175,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Drum Band
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.
                     </p>
                   </div>
@@ -205,7 +205,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Peringatan Isra Mi'raj
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Momen khidmat menghadirkan tausiyah dari Ustadz Maulana.
                     </p>
                   </div>
@@ -225,7 +225,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Pembiasaan Sholat Dhuha
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Rutinitas sholat Dhuha berjamaah sebelum KBM dimulai.
                     </p>
                   </div>
@@ -255,7 +255,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Pemilihan OSIS 2026/2027
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Mengajarkan nilai kepemimpinan dan demokrasi pelajar.
                     </p>
                   </div>
@@ -301,7 +301,7 @@ export const renderGallery = (galleries) => {
                     <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition-colors">
                       Lomba Cerdas Cermat
                     </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed text-justify">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                       Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.
                     </p>
                   </div>

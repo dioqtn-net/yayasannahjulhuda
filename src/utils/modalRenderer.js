@@ -1,12 +1,11 @@
-      function formatContentHtml(str, defaultAlign) {
-        if (!defaultAlign) defaultAlign = 'text-justify';
+      function formatContentHtml(str) {
         if (str === null || str === undefined) return '-';
         const trimmed = String(str).trim();
         if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
           return trimmed;
         }
-        return `<p class="${defaultAlign}">${trimmed}</p>`;
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
       }
 
 export const unitModalMetadata = {
@@ -163,43 +162,43 @@ export async function renderDynamicUnitModal(id) {
       .filter(l => l.length > 0 && l !== '-');
 
     const misiHTML = linesMisi.length > 0
-      ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed text-justify">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
-      : '<p class="text-sm text-slate-500 italic text-justify">-</p>';
+      ? `<ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 leading-relaxed">${linesMisi.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ol>`
+      : '<p class="text-sm text-slate-500 italic">-</p>';
 
     modalBody.innerHTML = `
       <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
         <img src="${meta.logo}" alt="${escapeHtml(meta.name)}" class="object-contain max-h-full w-auto max-w-full h-auto">
       </div>
 
-      <p class="text-slate-700 mb-6 leading-relaxed text-justify">${escapeHtml(desc)}</p>
+      <div class="text-slate-700 mb-6 leading-relaxed">${formatContentHtml(desc)}</div>
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-        <p class="text-slate-600 text-sm leading-relaxed text-justify">${escapeHtml(kurikulum)}</p>
+        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(kurikulum)}</div>
       </div>
 
       ${unggulan && unggulan !== '-' ? `
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-        <p class="text-slate-600 text-sm leading-relaxed text-justify">${escapeHtml(unggulan)}</p>
+        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unggulan)}</div>
       </div>
       ` : ''}
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-        <p class="text-slate-600 text-sm leading-relaxed text-justify">${escapeHtml(ekskul)}</p>
+        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(ekskul)}</div>
       </div>
 
       <div class="mb-4">
         <h4 class="font-bold text-emerald-700 mb-1.5 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-        <p class="text-slate-600 text-sm leading-relaxed text-justify">${escapeHtml(fasilitas)}</p>
+        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(fasilitas)}</div>
       </div>
 
       <div class="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
         <h4 class="font-bold text-emerald-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
         <div class="mb-3">
           <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
-          <p class="italic text-slate-700 text-sm leading-relaxed text-justify">${escapeHtml(visi)}</p>
+          <div class="italic text-slate-700 text-sm leading-relaxed">${formatContentHtml(visi)}</div>
         </div>
         <div>
           <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>

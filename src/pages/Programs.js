@@ -1,13 +1,12 @@
-function formatContentHtml(str, defaultAlign) {
-    if (!defaultAlign) defaultAlign = 'text-justify';
-    if (str === null || str === undefined) return '-';
-    const trimmed = String(str).trim();
-    if (trimmed === '' || trimmed === '-') return '-';
-    if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
-        return trimmed;
-    }
-    return `<p class="${defaultAlign}">${trimmed}</p>`;
-}
+function formatContentHtml(str) {
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+      }
 
 import { getUnitImage } from '../api';
 
@@ -64,7 +63,7 @@ export const renderPrograms = (units) => {
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                            <p class="text-sm text-slate-600 text-justify">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
+                            <p class="text-sm text-slate-600 ">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
                         </div>
                     </div>
                     ` : ''}
@@ -83,7 +82,7 @@ export const renderPrograms = (units) => {
                     ${(isMTs || isMA) ? `
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 col-span-full md:col-span-2">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 text-justify">
+                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
                             <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
                             <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
                             <li>Mengembangkan kemampuan &amp; budi pekerti</li>
@@ -99,13 +98,13 @@ export const renderPrograms = (units) => {
                         </h4>
                         <div class="mb-4 bg-white/70 p-3 rounded-lg border border-slate-200/60">
                             <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
-                            <p class="italic text-slate-700 text-sm leading-relaxed text-justify">
+                            <p class="italic text-slate-700 text-sm leading-relaxed ">
                                 "Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"
                             </p>
                         </div>
                         <div class="bg-white/70 p-3 rounded-lg border border-slate-200/60">
                             <span class="block font-semibold text-emerald-800 text-xs uppercase tracking-wider mb-1.5">Misi:</span>
-                            <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600 text-justify">
+                            <ol class="list-decimal ml-5 space-y-1.5 text-sm text-slate-600">
                                 <li>Penanaman Aqidah Sholihah</li>
                                 <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
                                 <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
@@ -122,22 +121,22 @@ export const renderPrograms = (units) => {
                     <h4 class="font-playfair font-bold text-lg text-emerald-800 mb-3 flex items-center">
                         <i class="fas fa-landmark mr-2.5 text-emerald-600"></i> Sejarah & Profil MTs
                     </h4>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3 ">
                         Awal pendirian MTs Nahjul Huda adalah kelanjutan dari proses penghimpunan anak-anak yatim dan dhuafa yang diselenggarakan oleh Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur yang beralamat di Jl. HH No.63 Rt.08 Rw.01 Kebon Jeruk Jakarta Barat.
                     </p>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3 ">
                         Pada perkembangannya tokoh masyarakat, ulama dan pemerintah daerah saling bergotong-royong untuk membangun gedung asrama dan madrasah bagi anak-anak yatim dan dhuafa selanjutnya memikirkan bagaimana memberikan bekal ilmu kepada mereka baik formal maupun non formal.
                     </p>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3 ">
                         Dengan biaya swadaya murni dari masyarakat setempat maka dibangunlah gedung asrama dan madrasah. Untuk tahap awal Yayasan Nahjul Huda membangun gedung madrasah untuk tingkat Ibtidaiyah (MI sederajat dengan SD) sebanyak 6 lokal. Kemudian seiring dengan berkembangnya Yayasan Nahjul Huda didirikanlah lagi gedung tiga lantai dengan pembagian: lantai pertama untuk pelaksanaan pendidikan berupa madrasah untuk tingkat tsanawiyah (MTs sederajat dengan SMP), lantai dua untuk asrama puteri, dan lantai ketiga untuk asrama putera. Madrasah tersebut kemudian diberi nama "MTs Nahjul Huda" atas usulan dari segenap masyarakat yang tinggal di Kebon Jeruk pada tahun 1985. Mengapa namanya MTs Nahjul Huda? Karena mengikuti nama yayasan sebagai induk lembaga madrasah yakni Yayasan Nahjul Huda.
                     </p>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3 ">
                         Sehubungan MTs Nahjul Huda bernaung di bawah Yayasan Nahjul Huda Pondok Pesantren Yatim Piatu Assurur, maka dalam proses penerimaan siswanya pun lebih mengupayakan kepada santri Pondok Pesantren yang diasramakan agar anak-anak yatim dan dhuafa bisa bersekolah dan mendapatkan ilmu serta STTB resmi dari pemerintah sehingga bisa melanjutkan pendidikan ke jenjang berikutnya yaitu SMA/MA kemudian Perguruan Tinggi.
                     </p>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3 text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3 ">
                         MTs Nahjul Huda pada awal berdirinya tahun 1985 dipimpin oleh kepala madrasah Bapak Drs. H. Nurohim. Selanjutnya MTs Nahjul Huda sempat mengalami kefakuman pada tahun 1986 s.d 1998 sehingga kegiatan belajar mengajar dihentikan sementara waktu sambil merancang ke depan bagaimana untuk membangunkan kembali pendidikan di madrasah ini.
                     </p>
-                    <p class="text-slate-600 text-sm leading-relaxed text-justify">
+                    <p class="text-slate-600 text-sm leading-relaxed ">
                         Maka pada tahun 1999 barulah MTs Nahjul Huda bangkit kembali dengan semangat dan tenaga baru untuk mulai mengembangkan pendidikan di wilayah Kebon Jeruk dan sekitarnya, sehingga sampai saat ini siswa di MTs Nahjul Huda mencapai lebih dari 70 siswa dari berbagai daerah.
                     </p>
                 </div>

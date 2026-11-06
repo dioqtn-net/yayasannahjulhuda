@@ -692,14 +692,15 @@
           return dateStr;
         }
 
-              function formatContentHtml(str, defaultAlign) {
-        if (!defaultAlign) defaultAlign = 'text-justify';
+              function formatContentHtml(str) {
         if (str === null || str === undefined) return '-';
         const trimmed = String(str).trim();
         if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
           return trimmed;
         }
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+      }
         return `<p class="${defaultAlign}">${trimmed}</p>`;
       }
 

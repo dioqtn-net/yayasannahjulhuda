@@ -129,7 +129,7 @@
                     <h3 id="publicFas1Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Masjid Jami' Assurur
                     </h3>
-                    <p id="publicFas1Desc" class="text-slate-600 text-sm leading-relaxed text-justify">
+                    <p id="publicFas1Desc" class="text-slate-600 text-sm leading-relaxed">
                       Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.
                     </p>
                   </div>
@@ -160,7 +160,7 @@
                     <h3 id="publicFas2Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Lapangan Upacara
                     </h3>
-                    <p id="publicFas2Desc" class="text-slate-600 text-sm leading-relaxed text-justify">
+                    <p id="publicFas2Desc" class="text-slate-600 text-sm leading-relaxed">
                       Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.
                     </p>
                   </div>
@@ -194,7 +194,7 @@
                     <h3 id="publicFas3Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Laboratorium Komputer
                     </h3>
-                    <p id="publicFas3Desc" class="text-slate-600 text-sm leading-relaxed text-justify">
+                    <p id="publicFas3Desc" class="text-slate-600 text-sm leading-relaxed">
                       Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.
                     </p>
                   </div>
@@ -211,7 +211,7 @@
                     <h3 id="publicFas4Title" class="text-lg font-playfair font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 transition-colors">
                       Lapangan Bola Basket
                     </h3>
-                    <p id="publicFas4Desc" class="text-slate-600 text-sm leading-relaxed text-justify">
+                    <p id="publicFas4Desc" class="text-slate-600 text-sm leading-relaxed">
                       Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.
                     </p>
                   </div>
@@ -368,14 +368,15 @@
           return div.innerHTML;
         };
 
-              function formatContentHtml(str, defaultAlign) {
-        if (!defaultAlign) defaultAlign = 'text-justify';
+              function formatContentHtml(str) {
         if (str === null || str === undefined) return '-';
         const trimmed = String(str).trim();
         if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
           return trimmed;
         }
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+      }
         return `<p class="${defaultAlign}">${trimmed}</p>`;
       }
 

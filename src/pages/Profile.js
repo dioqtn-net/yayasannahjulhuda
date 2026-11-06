@@ -1,13 +1,12 @@
-function formatContentHtml(str, defaultAlign) {
-    if (!defaultAlign) defaultAlign = 'text-justify';
-    if (str === null || str === undefined) return '-';
-    const trimmed = String(str).trim();
-    if (trimmed === '' || trimmed === '-') return '-';
-    if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
-        return trimmed;
-    }
-    return `<p class="${defaultAlign}">${trimmed}</p>`;
-}
+function formatContentHtml(str) {
+        if (str === null || str === undefined) return '-';
+        const trimmed = String(str).trim();
+        if (trimmed === '' || trimmed === '-') return '-';
+        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+          return trimmed;
+        }
+        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+      }
 
 export const renderProfile = (profile) => {
     let cmsData = null;

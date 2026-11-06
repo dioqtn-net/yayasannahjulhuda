@@ -56,33 +56,47 @@
         }
       })();
     </script>
-      <!-- UNIVERSAL TEXTAREA ALIGNMENT ENGINE (CMS FITUR RATA KANAN-KIRI & PAYLOAD FORMATTER) -->
+      <!-- UNIVERSAL TEXTAREA ALIGNMENT ENGINE (CMS FITUR RATA KIRI, TENGAH, KANAN, JUSTIFY) -->
     <script>
       (function() {
-        window.unwrapAlignment = function(htmlOrText) {
-          if (!htmlOrText) return { text: '', align: 'text-justify' };
-          const str = String(htmlOrText).trim();
-          const match = str.match(/^<p\s+class=["']([^"']*)["']>([\s\S]*?)<\/p>$/i);
-          if (match) {
-            const classAttr = match[1];
-            const innerContent = match[2];
-            let align = 'text-justify';
-            if (classAttr.includes('text-left')) align = 'text-left';
-            else if (classAttr.includes('text-center')) align = 'text-center';
-            else if (classAttr.includes('text-right')) align = 'text-right';
-            else if (classAttr.includes('text-justify')) align = 'text-justify';
-            return { text: innerContent, align: align };
+        // TUGAS 3: DOMParser logic to unwrap saved HTML and extract pure text + alignment class
+        window.unwrapAlignment = function(dataDariSupabase) {
+          if (!dataDariSupabase) return { text: '', align: 'text-left' };
+          const str = String(dataDariSupabase).trim();
+          if (!str.startsWith('<') && !str.includes('<div') && !str.includes('<p')) {
+            return { text: str, align: 'text-left' };
           }
-          return { text: str, align: 'text-justify' };
+          try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(str, 'text/html');
+            const divElement = doc.body.firstElementChild || doc.body.firstChild;
+            if (divElement && divElement.nodeType === 1) {
+              let savedClass = 'text-left';
+              const cName = divElement.className || '';
+              if (cName.includes('text-center')) savedClass = 'text-center';
+              else if (cName.includes('text-right')) savedClass = 'text-right';
+              else if (cName.includes('text-justify')) savedClass = 'text-justify';
+              else if (cName.includes('text-left')) savedClass = 'text-left';
+              
+              return {
+                text: divElement.textContent !== undefined ? divElement.textContent : str,
+                align: savedClass
+              };
+            }
+          } catch (e) {
+            console.error('Error unwrapping alignment:', e);
+          }
+          return { text: str, align: 'text-left' };
         };
 
+        // TUGAS 2: Wrap string into HTML payload: <div class="${activeAlign} whitespace-pre-wrap">...</div>
         window.wrapWithAlignment = function(text, alignmentClass) {
           if (text === null || text === undefined) return '';
           const trimmed = String(text).trim();
           if (!trimmed) return '';
           const unwrapped = window.unwrapAlignment(trimmed);
-          const align = alignmentClass || unwrapped.align || 'text-justify';
-          return `<p class="${align}">${unwrapped.text}</p>`;
+          const align = alignmentClass || unwrapped.align || 'text-left';
+          return `<div class="${align} whitespace-pre-wrap">${unwrapped.text}</div>`;
         };
 
         window.getWrappedTextareaValue = function(textareaOrId) {
@@ -90,8 +104,8 @@
           if (!ta) return '';
           const val = ta.value.trim();
           if (!val) return '';
-          const align = ta.dataset.alignment || 'text-justify';
-          return `<p class="${align}">${val}</p>`;
+          const align = ta.dataset.alignment || 'text-left';
+          return `<div class="${align} whitespace-pre-wrap">${val}</div>`;
         };
 
         window.setTextareaValueWithAlignment = function(textareaOrId, rawValue) {
@@ -105,7 +119,7 @@
         };
 
         window.setToolbarActive = function(ta, align) {
-          const activeAlign = align || ta.dataset.alignment || 'text-justify';
+          const activeAlign = align || ta.dataset.alignment || 'text-left';
           const toolbar = ta.previousElementSibling && ta.previousElementSibling.classList.contains('textarea-align-toolbar')
             ? ta.previousElementSibling
             : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') : null);
@@ -125,7 +139,7 @@
           const textareas = document.querySelectorAll('textarea');
           textareas.forEach(ta => {
             if (ta.dataset.alignInit === 'true') {
-              const align = ta.dataset.alignment || 'text-justify';
+              const align = ta.dataset.alignment || 'text-left';
               window.setToolbarActive(ta, align);
               return;
             }
@@ -137,18 +151,19 @@
               ta.dataset.alignment = align;
               ta.style.textAlign = align.replace('text-', '');
             } else {
-              ta.dataset.alignment = ta.dataset.alignment || 'text-justify';
+              ta.dataset.alignment = ta.dataset.alignment || 'text-left';
               ta.style.textAlign = ta.dataset.alignment.replace('text-', '');
             }
 
             const parent = ta.parentElement;
             if (!parent) return;
 
+            // TUGAS 1: Toolbar TANPA BADGE "Otomatis Rata Kanan-Kiri"
             const toolbar = document.createElement('div');
-            toolbar.className = 'textarea-align-toolbar flex flex-wrap items-center justify-between gap-2 mb-1.5 pt-1';
+            toolbar.className = 'textarea-align-toolbar flex items-center gap-2 mb-1.5 pt-1';
             toolbar.innerHTML = `
               <div class="inline-flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-                <button type="button" data-align="text-left" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
+                <button type="button" data-align="text-left" title="Rata Kiri" class="btn-align-left px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
                   <i class="fas fa-align-left"></i>
                 </button>
                 <button type="button" data-align="text-center" title="Rata Tengah" class="btn-align-center px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
@@ -157,13 +172,10 @@
                 <button type="button" data-align="text-right" title="Rata Kanan" class="btn-align-right px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
                   <i class="fas fa-align-right"></i>
                 </button>
-                <button type="button" data-align="text-justify" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded bg-emerald-700 text-white font-bold transition shadow-xs">
+                <button type="button" data-align="text-justify" title="Rata Kanan-Kiri (Justify)" class="btn-align-justify px-2 py-0.5 text-xs rounded text-slate-600 hover:bg-white hover:text-slate-800 transition">
                   <i class="fas fa-align-justify"></i>
                 </button>
               </div>
-              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                <i class="fas fa-align-justify text-[10px]"></i> Format Alignment Tersimpan Otomatis
-              </span>
             `;
 
             const btns = toolbar.querySelectorAll('button[data-align]');
@@ -178,7 +190,7 @@
             });
 
             parent.insertBefore(toolbar, ta);
-            window.setToolbarActive(ta, ta.dataset.alignment || 'text-justify');
+            window.setToolbarActive(ta, ta.dataset.alignment || 'text-left');
           });
         };
       })();
