@@ -153,7 +153,7 @@
                 class="block font-bold text-emerald-900 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <i class="fas fa-quote-left text-gold-500"></i> Visi:
               </span>
-              <p class="italic text-slate-700 text-sm sm:text-base leading-relaxed">
+              <p id="publicProfilVisi" class="italic text-slate-700 text-sm sm:text-base leading-relaxed">
                 "Terwujudnya lembaga pendidikan yang profesional, peduli, dan kompetitif guna terwujudnya generasi
                 qur'ani, berakhlak mulia, cerdas, kreatif, aktif, berprestasi, dan berwawasan global."
               </p>
@@ -165,7 +165,7 @@
                 class="block font-bold text-emerald-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
                 <i class="fas fa-list-ol text-gold-500"></i> Misi:
               </span>
-              <ol class="space-y-3 text-sm text-slate-700 leading-relaxed list-none">
+              <ol id="publicProfilMisi" class="space-y-3 text-sm text-slate-700 leading-relaxed list-none">
                 <li class="flex items-start gap-3">
                   <span
                     class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
@@ -225,12 +225,12 @@
               Target Lulusan
             </h3>
 
-            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+            <p id="publicTargetPengantar" class="text-slate-600 text-sm mb-6 leading-relaxed">
               Yayasan Nahjul Huda berkomitmen melahirkan lulusan unggul dengan standar capaian karakter, keilmuan, dan
               kepribadian:
             </p>
 
-            <ul class="space-y-4">
+            <ul id="publicTargetPoin" class="space-y-4">
               <li
                 class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:bg-emerald-50/40 transition">
                 <span
@@ -449,6 +449,63 @@
       });
     }
 
+    // Fungsi Pembantu untuk Merender Teks yang Mungkin Mengandung Bungkus <div> dari CMS
+    function renderTextOrList(containerElement, rawData, isList = false, listType = 'number') {
+        if (!containerElement || !rawData) return;
+        
+        let cleanText = rawData;
+        let alignClass = 'text-justify';
+        
+        if (typeof rawData === 'string' && rawData.trim().startsWith('<div')) {
+            const temp = document.createElement('div');
+            temp.innerHTML = rawData;
+            const wrapper = temp.firstElementChild;
+            if (wrapper && wrapper.tagName === 'DIV') {
+                alignClass = wrapper.className.replace('whitespace-pre-wrap', '').trim() || 'text-justify';
+                cleanText = wrapper.innerHTML;
+            }
+        }
+        
+        containerElement.classList.remove('text-left', 'text-center', 'text-right', 'text-justify');
+        if (alignClass) {
+            const classesToAdd = alignClass.split(' ').filter(c => c);
+            if (classesToAdd.length > 0) containerElement.classList.add(...classesToAdd);
+        }
+        
+        if (isList) {
+            const cleanLines = cleanText.replace(/<br\s*[\/]?>/gi, '\n')
+                .replace(/<\/?p[^>]*>/gi, '\n')
+                .split('\n')
+                .map(b => b.replace(/<[^>]+>/g, '').trim())
+                .filter(b => b !== '');
+                
+            containerElement.innerHTML = '';
+            cleanLines.forEach((item, index) => {
+                const textOnly = item.replace(/^\d+[\.\)]\s*/, '');
+                if (listType === 'number') {
+                    containerElement.innerHTML += `
+                    <li class="flex items-start gap-3">
+                      <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${index + 1}</span>
+                      <span class="${alignClass}">${textOnly}</span>
+                    </li>`;
+                } else {
+                    containerElement.innerHTML += `
+                    <li class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:bg-emerald-50/40 transition">
+                      <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-sm font-bold">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                      <div class="text-sm text-slate-700 leading-relaxed ${alignClass}">
+                        ${textOnly}
+                      </div>
+                    </li>`;
+                }
+            });
+        } else {
+            containerElement.innerHTML = cleanText.replace(/<br\s*[\/]?>/gi, '<br>');
+        }
+    }
+    window.renderTextOrList = renderTextOrList;
+
     // Sinkronisasi CMS Data Profil dari localStorage
     document.addEventListener('DOMContentLoaded', () => {
       try {
@@ -466,6 +523,22 @@
           if (data.sejarahText) {
             const el = document.getElementById('publicSejarahText');
             if (el) el.innerHTML = data.sejarahText;
+          }
+          if (data.teks_visi_profil || data.visi) {
+            const el = document.getElementById('publicProfilVisi');
+            if (el) renderTextOrList(el, data.teks_visi_profil || data.visi, false);
+          }
+          if (data.teks_misi_profil || data.misi) {
+            const el = document.getElementById('publicProfilMisi');
+            if (el) renderTextOrList(el, data.teks_misi_profil || data.misi, true, 'number');
+          }
+          if (data.pengantar_target_profil || data.targetPengantar) {
+            const el = document.getElementById('publicTargetPengantar');
+            if (el) renderTextOrList(el, data.pengantar_target_profil || data.targetPengantar, false);
+          }
+          if (data.poin_target_profil || data.targetPoin) {
+            const el = document.getElementById('publicTargetPoin');
+            if (el) renderTextOrList(el, data.poin_target_profil || data.targetPoin, true, 'check');
           }
           if (data.strukturTitle) {
             const el = document.getElementById('publicStrukturTitle');

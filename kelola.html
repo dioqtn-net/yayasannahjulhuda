@@ -73,6 +73,29 @@
             const parent = ta.parentElement;
             if (!parent) return;
 
+            // Cek apakah toolbar sudah ada secara manual di HTML
+            const existingToolbar = (ta.previousElementSibling && ta.previousElementSibling.querySelector('.btn-align')) 
+              ? ta.previousElementSibling 
+              : null;
+            if (existingToolbar) {
+              existingToolbar.querySelectorAll('.btn-align').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  existingToolbar.querySelectorAll('.btn-align').forEach(b => {
+                    b.classList.remove('bg-green-700', 'text-white');
+                    b.classList.add('text-gray-600');
+                  });
+                  e.currentTarget.classList.remove('text-gray-600');
+                  e.currentTarget.classList.add('bg-green-700', 'text-white');
+                  currentAlign = e.currentTarget.getAttribute('data-align');
+                  window.currentAlign = currentAlign;
+                  ta.dataset.align = currentAlign;
+                  ta.style.textAlign = currentAlign.replace('text-', '');
+                });
+              });
+              return;
+            }
+
             const toolbar = document.createElement('div');
             toolbar.className = 'textarea-align-toolbar flex items-center gap-1 mb-1.5 pt-1';
             toolbar.innerHTML = `
@@ -116,9 +139,9 @@
         window.loadDataToForm = function(textareaId, dataDariDatabase) {
           const ta = typeof textareaId === 'string' ? document.getElementById(textareaId) : textareaId;
           if (!ta) return;
-          const toolbar = ta.previousElementSibling && ta.previousElementSibling.classList.contains('textarea-align-toolbar')
+          const toolbar = (ta.previousElementSibling && ta.previousElementSibling.querySelector('.btn-align'))
             ? ta.previousElementSibling
-            : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') : document);
+            : (ta.parentElement ? ta.parentElement.querySelector('.textarea-align-toolbar') || ta.parentElement.querySelector('.btn-align')?.parentElement : document);
 
           if (dataDariDatabase && (dataDariDatabase.includes('<div') || dataDariDatabase.includes('<p'))) {
             const temp = document.createElement('div');
@@ -649,6 +672,59 @@
                               <label class="block text-sm font-medium text-gray-700 mb-1">Teks Sejarah</label>
                               <textarea id="sejarahText" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">-</textarea>
                           </div>
+                      </div>
+                  </div>
+
+                  <!-- 4. Visi & Misi Yayasan -->
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+                      <h3 class="text-lg font-bold text-gray-800 font-serif mb-4 border-b pb-2">4. Visi & Misi Yayasan</h3>
+                      
+                      <!-- Visi -->
+                      <div class="mb-4">
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Teks Visi</label>
+                          <!-- Toolbar Alignment Visi -->
+                          <div class="flex items-center space-x-2 mb-2 p-1 bg-gray-50 rounded border border-gray-200 w-max">
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-left" title="Rata Kiri"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-center" title="Rata Tengah"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M7 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-right" title="Rata Kanan"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded bg-green-700 text-white transition" data-align="text-justify" title="Rata Kanan Kiri (Justify)"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+                          </div>
+                          <textarea id="teks_visi_profil" rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-green-500 focus:border-green-500" placeholder="Masukkan teks Visi Yayasan..."></textarea>
+                      </div>
+
+                      <!-- Misi -->
+                      <div class="mb-4">
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Teks Misi (Pisahkan tiap poin dengan baris baru / Enter)</label>
+                           <!-- Toolbar Alignment Misi -->
+                           <div class="flex items-center space-x-2 mb-2 p-1 bg-gray-50 rounded border border-gray-200 w-max">
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-left" title="Rata Kiri"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-center" title="Rata Tengah"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M7 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-right" title="Rata Kanan"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded bg-green-700 text-white transition" data-align="text-justify" title="Rata Kanan Kiri (Justify)"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+                          </div>
+                          <textarea id="teks_misi_profil" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-green-500 focus:border-green-500" placeholder="Masukkan teks Misi Yayasan..."></textarea>
+                      </div>
+                  </div>
+
+                  <!-- 5. Target Lulusan -->
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+                      <h3 class="text-lg font-bold text-gray-800 font-serif mb-4 border-b pb-2">5. Target Lulusan</h3>
+                      
+                       <div class="mb-4">
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Teks Pengantar Target Lulusan</label>
+                          <textarea id="pengantar_target_profil" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-green-500 focus:border-green-500" placeholder="Masukkan teks pengantar..."></textarea>
+                      </div>
+
+                      <div class="mb-4">
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Poin-poin Target Lulusan (Pisahkan tiap poin dengan baris baru / Enter)</label>
+                          <!-- Toolbar Alignment Target Lulusan -->
+                          <div class="flex items-center space-x-2 mb-2 p-1 bg-gray-50 rounded border border-gray-200 w-max">
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-left" title="Rata Kiri"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-center" title="Rata Tengah"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M7 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded hover:bg-gray-200 text-gray-600 transition" data-align="text-right" title="Rata Kanan"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 12h10M4 18h16"></path></svg></button>
+                              <button type="button" class="btn-align p-1.5 rounded bg-green-700 text-white transition" data-align="text-justify" title="Rata Kanan Kiri (Justify)"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+                          </div>
+                          <textarea id="poin_target_profil" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-green-500 focus:border-green-500" placeholder="Masukkan poin target lulusan..."></textarea>
                       </div>
                   </div>
 
@@ -2725,12 +2801,30 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
         // Muat data Profil dari localStorage jika sebelumnya pernah disimpan
         const savedProfil = localStorage.getItem('cmsData_profil');
+        const defaultVisi = '"Terwujudnya lembaga pendidikan yang profesional, peduli, dan kompetitif guna terwujudnya generasi qur\'ani, berakhlak mulia, cerdas, kreatif, aktif, berprestasi, dan berwawasan global."';
+        const defaultMisi = `Melaksanakan pendidikan berdasarkan Al Qur'an dan Hadits guna mewujudkan peserta didik beraqidah baik, berakhlak mulia, jujur, percaya diri, bertanggung jawab, mandiri, dan peduli.
+Menumbuhkembangkan kecintaan terhadap Al Qur'an dengan kompetensi membaca Al Qur'an sesuai kaidah tajwid, menulis Al Qur'an dengan baik dan benar, menghafal Al Qur'an dalam kehidupan sehari-hari.
+Membekali peserta didik dengan ketrampilan abad 21 dan berwawasan global (berfikir kritis, kreatif, kolaboratif, komunikatif, dan kemampuan literasi) untuk mengembangkan jiwa kepemimpinan sehingga mampu menjadi rahmatan lil 'alamin.
+Memfasilitasi proses pembelajaran yang aktif, kreatif, efektif, menyenangkan dan membahagiakan.
+Memfasilitasi peserta didik untuk mengembangkan potensi diri sesuai dengan bakat, minat dan kecerdasan (Multiple Intelegences).
+Bekerjasama dengan berbagai pihak untuk mengembangkan kualitas SDM sehingga melahirkan pendidik yang kompeten, berdedikasi, istiqomah dan rendah hati.
+Secara kelembagaan terus menerus melakukan inovasi agar mampu menjadi lembaga pendidikan yang memberikan inspirasi dalam pengembangan pendidikan di Indonesia.`;
+        const defaultTargetPengantar = 'Yayasan Nahjul Huda berkomitmen melahirkan lulusan unggul dengan standar capaian karakter, keilmuan, dan kepribadian:';
+        const defaultTargetPoin = `Melahirkan generasi Qur'ani: mencintai Al Qur'an sebagai pedoman hidup, mampu membaca, menulis, dan menghafal Al Qur'an dengan baik dan benar.
+Memiliki aqidah yang baik dan benar sesuai Al Qur'an dan Hadits.
+Mampu beribadah baik dan benar sesuai Al Qur'an dan Hadits.
+Membina jiwa mandiri dan cinta tanah air (Hubbul Wathon Minal Iman).`;
+
         if (savedProfil) {
           try {
             const dataP = JSON.parse(savedProfil);
             setVal('profilTitle', dataP.profilTitle);
             setVal('profilDesc', dataP.profilDesc);
             setVal('sejarahText', dataP.sejarahText);
+            setVal('teks_visi_profil', dataP.teks_visi_profil || dataP.visi || defaultVisi);
+            setVal('teks_misi_profil', dataP.teks_misi_profil || dataP.misi || defaultMisi);
+            setVal('pengantar_target_profil', dataP.pengantar_target_profil || dataP.targetPengantar || defaultTargetPengantar);
+            setVal('poin_target_profil', dataP.poin_target_profil || dataP.targetPoin || defaultTargetPoin);
             setVal('strukturTitle', dataP.strukturTitle);
             setVal('strukturDesc', dataP.strukturDesc);
             setVal('namaKetua', dataP.namaKetua);
@@ -2742,6 +2836,11 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           } catch (e) {
             console.error('Error parsing cmsData_profil:', e);
           }
+        } else {
+          setVal('teks_visi_profil', defaultVisi);
+          setVal('teks_misi_profil', defaultMisi);
+          setVal('pengantar_target_profil', defaultTargetPengantar);
+          setVal('poin_target_profil', defaultTargetPoin);
         }
 
         const btnSaveProfil = document.getElementById('btnSimpanProfil');
@@ -2783,6 +2882,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               profilTitle: document.getElementById('profilTitle')?.value || '',
               profilDesc: window.getWrappedTextareaValue('profilDesc'),
               sejarahText: window.getWrappedTextareaValue('sejarahText'),
+              teks_visi_profil: window.getWrappedTextareaValue('teks_visi_profil'),
+              teks_misi_profil: window.getWrappedTextareaValue('teks_misi_profil'),
+              pengantar_target_profil: window.getWrappedTextareaValue('pengantar_target_profil'),
+              poin_target_profil: window.getWrappedTextareaValue('poin_target_profil'),
+              visi: window.getWrappedTextareaValue('teks_visi_profil'),
+              misi: window.getWrappedTextareaValue('teks_misi_profil'),
+              targetPengantar: window.getWrappedTextareaValue('pengantar_target_profil'),
+              targetPoin: window.getWrappedTextareaValue('poin_target_profil'),
               strukturTitle: document.getElementById('strukturTitle')?.value || '',
               strukturDesc: window.getWrappedTextareaValue('strukturDesc'),
               namaKetua: document.getElementById('namaKetua')?.value || '-',
@@ -2792,6 +2899,12 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               namaMI: document.getElementById('namaMI')?.value || '-',
               fotoMI: fotoMI,
               namaMTs: document.getElementById('namaMTs')?.value || '-',
+              fotoMTs: fotoMTs,
+              namaMA: document.getElementById('namaMA')?.value || '-',
+              fotoMA: fotoMA,
+              namaMudir: document.getElementById('namaMudir')?.value || '-',
+              fotoMudir: fotoMudir
+            };
               fotoMTs: fotoMTs,
               namaMA: document.getElementById('namaMA')?.value || '-',
               fotoMA: fotoMA,

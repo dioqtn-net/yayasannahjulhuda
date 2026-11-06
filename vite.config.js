@@ -11,6 +11,7 @@ export default defineConfig({
         dashboard: resolve(__dirname, 'dashboard.html'),
         kelolaKontak: resolve(__dirname, 'kelola-kontak.html'),
         kelolaInfoPpdb: resolve(__dirname, 'kelola-info-ppdb.html'),
+        kelolaProfil: resolve(__dirname, 'kelola-profil.html'),
         kelolaBeranda: resolve(__dirname, 'kelola-beranda.html'),
         kelolaPengaturan: resolve(__dirname, 'kelola-pengaturan.html'),
         galeri: resolve(__dirname, 'galeri.html'),

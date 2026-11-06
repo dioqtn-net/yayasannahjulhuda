@@ -1,5 +1,6 @@
 /login       /login.html      200
 /kelola      /kelola.html     200
+/kelola-profil /kelola-profil.html 200
 /dashboard   /dashboard.html  200
 /ppdb        /ppdb.html       200
 /berita      /berita.html     200

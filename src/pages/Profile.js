@@ -8,6 +8,52 @@ function formatContentHtml(str) {
   return `<div class="text-justify">${trimmed}</div>`;
 }
 
+function parseAligned(str, isList = false, listType = 'number') {
+  if (!str) return '';
+  let cleanText = String(str);
+  let alignClass = 'text-justify';
+  if (cleanText.trim().startsWith('<div')) {
+    const match = cleanText.match(/<div class="([^"]*)">([\s\S]*?)<\/div>/i);
+    if (match) {
+      alignClass = match[1].replace('whitespace-pre-wrap', '').trim() || 'text-justify';
+      cleanText = match[2];
+    }
+  }
+  if (!isList) {
+    return `<div class="${alignClass}">${cleanText.replace(/\n/g, '<br>')}</div>`;
+  }
+  const lines = cleanText.replace(/<br\s*[\/]?>/gi, '\n')
+    .split('\n')
+    .map(b => b.replace(/<[^>]+>/g, '').trim())
+    .filter(Boolean);
+
+  if (listType === 'number') {
+    return lines.map((line, idx) => {
+      const textOnly = line.replace(/^\d+[\.\)]\s*/, '');
+      return `
+        <li class="flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="${alignClass}">${textOnly}</span>
+        </li>
+      `;
+    }).join('');
+  } else {
+    return lines.map(line => {
+      const textOnly = line.replace(/^\d+[\.\)]\s*/, '');
+      return `
+        <li class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:bg-emerald-50/40 transition">
+          <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-sm font-bold">
+            <i class="fas fa-check-circle"></i>
+          </span>
+          <div class="text-sm text-slate-700 leading-relaxed ${alignClass}">
+            ${textOnly}
+          </div>
+        </li>
+      `;
+    }).join('');
+  }
+}
+
 export const renderProfile = (profile) => {
     let cmsData = null;
     try {
@@ -20,6 +66,20 @@ export const renderProfile = (profile) => {
     const profilTitle = cmsData?.profilTitle || 'Profil Yayasan';
     const profilDesc = cmsData?.profilDesc || 'Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.';
     const sejarahText = cmsData?.sejarahText || (profile?.history ? profile.history.replace(/\n/g, '<br>') : '-');
+    const rawVisi = cmsData?.teks_visi_profil || cmsData?.visi || '"Terwujudnya lembaga pendidikan yang profesional, peduli, dan kompetitif guna terwujudnya generasi qur\'ani, berakhlak mulia, cerdas, kreatif, aktif, berprestasi, dan berwawasan global."';
+    const rawMisi = cmsData?.teks_misi_profil || cmsData?.misi || `Melaksanakan pendidikan berdasarkan Al Qur'an dan Hadits guna mewujudkan peserta didik beraqidah baik, berakhlak mulia, jujur, percaya diri, bertanggung jawab, mandiri, dan peduli.
+Menumbuhkembangkan kecintaan terhadap Al Qur'an dengan kompetensi membaca Al Qur'an sesuai kaidah tajwid, menulis Al Qur'an dengan baik dan benar, menghafal Al Qur'an dalam kehidupan sehari-hari.
+Membekali peserta didik dengan ketrampilan abad 21 dan berwawasan global (berfikir kritis, kreatif, kolaboratif, komunikatif, dan kemampuan literasi) untuk mengembangkan jiwa kepemimpinan sehingga mampu menjadi rahmatan lil 'alamin.
+Memfasilitasi proses pembelajaran yang aktif, kreatif, efektif, menyenangkan dan membahagiakan.
+Memfasilitasi peserta didik untuk mengembangkan potensi diri sesuai dengan bakat, minat dan kecerdasan (Multiple Intelegences).
+Bekerjasama dengan berbagai pihak untuk mengembangkan kualitas SDM sehingga melahirkan pendidik yang kompeten, berdedikasi, istiqomah dan rendah hati.
+Secara kelembagaan terus menerus melakukan inovasi agar mampu menjadi lembaga pendidikan yang memberikan inspirasi dalam pengembangan pendidikan di Indonesia.`;
+    const rawTargetPengantar = cmsData?.pengantar_target_profil || cmsData?.targetPengantar || 'Yayasan Nahjul Huda berkomitmen melahirkan lulusan unggul dengan standar capaian karakter, keilmuan, dan kepribadian:';
+    const rawTargetPoin = cmsData?.poin_target_profil || cmsData?.targetPoin || `Melahirkan generasi Qur'ani: mencintai Al Qur'an sebagai pedoman hidup, mampu membaca, menulis, dan menghafal Al Qur'an dengan baik dan benar.
+Memiliki aqidah yang baik dan benar sesuai Al Qur'an dan Hadits.
+Mampu beribadah baik dan benar sesuai Al Qur'an dan Hadits.
+Membina jiwa mandiri dan cinta tanah air (Hubbul Wathon Minal Iman).`;
+
     const strukturTitle = cmsData?.strukturTitle || 'Struktur Organisasi';
     const strukturDesc = cmsData?.strukturDesc || 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.';
     const namaKetua = cmsData?.namaKetua || '-';
@@ -66,50 +126,54 @@ export const renderProfile = (profile) => {
           </div>
         </div>
 
-        <!-- Visi Misi -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
-            <h3 class="text-2xl font-playfair font-bold text-emerald-800 mb-6 flex items-center">
-              <i class="fas fa-eye text-gold-500 mr-4"></i> Visi & Misi
+        <!-- Visi Misi & Target Lulusan -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 items-start">
+          
+          <!-- Card Visi & Misi -->
+          <div class="bg-white rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-100 shadow-sm">
+            <h3 class="text-2xl font-playfair font-bold text-emerald-900 mb-6 flex items-center">
+              <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mr-3 text-base shadow-2xs">
+                <i class="fas fa-eye"></i>
+              </span>
+              Visi &amp; Misi Yayasan
             </h3>
-            <div class="text-slate-700 leading-relaxed whitespace-pre-line">
-              ${profile.vision_mission}
+
+            <!-- Visi -->
+            <div class="mb-6 bg-emerald-50/70 p-5 rounded-xl border border-emerald-100">
+              <span class="block font-bold text-emerald-900 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i class="fas fa-quote-left text-gold-500"></i> Visi:
+              </span>
+              <div class="italic text-slate-700 text-sm sm:text-base leading-relaxed">
+                ${parseAligned(rawVisi, false)}
+              </div>
+            </div>
+
+            <!-- Misi -->
+            <div>
+              <span class="block font-bold text-emerald-900 text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                <i class="fas fa-list-ol text-gold-500"></i> Misi:
+              </span>
+              <ol class="space-y-3 text-sm text-slate-700 leading-relaxed list-none">
+                ${parseAligned(rawMisi, true, 'number')}
+              </ol>
             </div>
           </div>
-          
-          <div class="bg-gold-50 rounded-2xl p-8 border border-gold-100">
-            <h3 class="text-2xl font-playfair font-bold text-gold-700 mb-6 flex items-center">
-              <i class="fas fa-star text-gold-500 mr-4"></i> Nilai-Nilai Utama
+
+          <!-- Card Target Lulusan -->
+          <div class="bg-white rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-100 shadow-sm">
+            <h3 class="text-2xl font-playfair font-bold text-emerald-900 mb-6 flex items-center">
+              <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-base shadow-2xs">
+                <i class="fas fa-bullseye"></i>
+              </span>
+              Target Lulusan
             </h3>
-            <ul class="space-y-4 text-slate-700">
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-emerald-600 mt-1 mr-3"></i>
-                <div>
-                  <span class="font-bold block">Keislaman (Religiusitas)</span>
-                  <span class="text-sm">Menanamkan nilai tauhid dan syariat dalam setiap aspek pembelajaran.</span>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-emerald-600 mt-1 mr-3"></i>
-                <div>
-                  <span class="font-bold block">Akhlakul Karimah</span>
-                  <span class="text-sm">Membentuk karakter santun, peduli, dan beradab.</span>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-emerald-600 mt-1 mr-3"></i>
-                <div>
-                  <span class="font-bold block">Keunggulan Akademik & Keterampilan</span>
-                  <span class="text-sm">Berprestasi di bidang IPTEK dan tanggap terhadap perubahan zaman.</span>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-emerald-600 mt-1 mr-3"></i>
-                <div>
-                  <span class="font-bold block">Kemandirian & Kebangsaan</span>
-                  <span class="text-sm">Membina jiwa mandiri dan cinta tanah air (Hubbul Wathon Minal Iman).</span>
-                </div>
-              </li>
+
+            <div class="text-slate-600 text-sm mb-6 leading-relaxed">
+              ${parseAligned(rawTargetPengantar, false)}
+            </div>
+
+            <ul class="space-y-4">
+              ${parseAligned(rawTargetPoin, true, 'check')}
             </ul>
           </div>
         </div>
