@@ -235,7 +235,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Visitasi Akreditasi MTs Nahjul Huda 2026/2027
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.
                 </p>
               </div>
@@ -271,7 +271,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Edukasi Polsek Kebon Jeruk
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Sosialisasi pencegahan kenakalan remaja, tata tertib hukum, dan pembinaan karakter generasi muda oleh jajaran Polsek Kebon Jeruk.
                 </p>
               </div>
@@ -307,7 +307,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Edukasi Kesehatan Puskesmas
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Sosialisasi edukasi kesehatan reproduksi dan pola hidup bersih sehat bagi santri putri oleh tenaga medis Puskesmas Kebon Jeruk.
                 </p>
               </div>
@@ -351,7 +351,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Simulasi Pemadam Kebakaran
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Pelatihan kesiapsiagaan mitigasi bencana dan simulasi pemadaman kebakaran bersama petugas Damkar Sektor 5 Kebon Jeruk.
                 </p>
               </div>
@@ -387,7 +387,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Kunjungan Perpusnas
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Kunjungan edukatif dan riset literasi santri kelas 9 MTs Nahjul Huda ke Perpustakaan Nasional Republik Indonesia.
                 </p>
               </div>
@@ -423,7 +423,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Olimpiade Madrasah Indonesia
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Siswa-siswi MTs Nahjul Huda berhasil menorehkan prestasi membanggakan dengan meraih juara pada ajang Olimpiade Madrasah Indonesia tingkat Kota Jakarta Barat.
                 </p>
               </div>
@@ -462,7 +462,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Testimoni Yayasan & Ponpes As-Surur
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
                 </p>
               </div>
@@ -529,7 +529,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Upacara Hari Santri Nasional
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional 2026 di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur dengan khidmat.
                 </p>
               </div>
@@ -568,7 +568,7 @@ export const renderNews = (newsList) => {
                 <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
                   Testimoni Yayasan & Ponpes As-Surur
                 </h3>
-                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                <p class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3 text-justify">
                   Untaian pesan inspiratif dan apresiasi dari Ustadz Maulana atas kiprah serta dedikasi Yayasan Nahjul Huda dan Pondok Pesantren As-Surur dalam membina generasi Qur'ani.
                 </p>
               </div>
@@ -642,7 +642,7 @@ export const renderNews = (newsList) => {
                 <i class="fas fa-arrows-alt-h"></i> Geser Scroll
               </div>
             </div>
-            <p id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line mb-6">
+            <p id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line mb-6 text-justify">
               Isi berita lengkap...
             </p>
             <div class="pt-4 border-t border-slate-100 flex justify-end">

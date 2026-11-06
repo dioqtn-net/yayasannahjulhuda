@@ -24,7 +24,7 @@ export const renderFacilities = (facilities) => {
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-playfair font-bold text-emerald-800 mb-2">${f.name}</h3>
-                            <p class="text-slate-600 text-sm">${f.description}</p>
+                            <p class="text-slate-600 text-sm text-justify">${f.description}</p>
                         </div>
                     </div>
                 `).join('')}

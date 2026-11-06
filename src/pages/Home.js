@@ -85,36 +85,36 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                     <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
                         <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto">
                     </div>
-                    <p class="text-slate-700 mb-6 leading-relaxed">${unit.description}</p>
+                    <p class="text-slate-700 mb-6 leading-relaxed text-justify">${unit.description}</p>
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                        <p class="text-slate-600 text-sm">${unit.curriculum || '-'}</p>
+                        <p class="text-slate-600 text-sm text-justify">${unit.curriculum || '-'}</p>
                     </div>
                     ${unit.featured_program ? `
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                        <p class="text-slate-600 text-sm">${unit.featured_program}</p>
+                        <p class="text-slate-600 text-sm text-justify">${unit.featured_program}</p>
                     </div>
                     ` : ''}
                     ${unit.intracurricular ? `
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
-                        <p class="text-slate-600 text-sm">${unit.intracurricular}</p>
+                        <p class="text-slate-600 text-sm text-justify">${unit.intracurricular}</p>
                     </div>
                     ` : ''}
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                        <p class="text-slate-600 text-sm">${unit.extracurricular || '-'}</p>
+                        <p class="text-slate-600 text-sm text-justify">${unit.extracurricular || '-'}</p>
                     </div>
                     <div class="mb-4">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                        <p class="text-slate-600 text-sm">${unit.facilities || '-'}</p>
+                        <p class="text-slate-600 text-sm text-justify">${unit.facilities || '-'}</p>
                     </div>
 
                     ${(isMTs || isMA) ? `
                     <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
+                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 text-justify">
                             <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
                             <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
                             <li>Mengembangkan kemampuan &amp; budi pekerti</li>
@@ -129,11 +129,11 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                         <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
                         <div class="mb-2">
                             <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
-                            <p class="italic text-slate-700 text-sm">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
+                            <p class="italic text-slate-700 text-sm text-justify">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
                         </div>
                         <div>
                             <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
-                            <ol class="list-decimal ml-5 space-y-1 text-sm text-slate-600">
+                            <ol class="list-decimal ml-5 space-y-1 text-sm text-slate-600 text-justify">
                                 <li>Penanaman Aqidah Sholihah</li>
                                 <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
                                 <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
@@ -203,7 +203,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 id="taglineTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6">${taglineTitleContent}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto mb-8 rounded-full"></div>
-          <p id="taglineDescPublic" class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          <p id="taglineDescPublic" class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed text-justify">
             ${taglineDescContent}
           </p>
         </div>
@@ -242,7 +242,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                 <i class="fas fa-users"></i>
               </div>
               <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Majelis Ta'lim Nahjul Huda</h3>
-              <p class="text-emerald-100 leading-relaxed">Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.</p>
+              <p class="text-emerald-100 leading-relaxed text-justify">Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.</p>
             </div>
             
             <div class="bg-emerald-800/50 backdrop-blur border border-emerald-700 p-8 rounded-2xl hover:bg-emerald-800 transition">
@@ -250,7 +250,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
                 <i class="fas fa-calendar-alt"></i>
               </div>
               <h3 class="text-2xl font-playfair font-bold mb-3 text-gold-400">Pengajian Rutin Bulanan</h3>
-              <p class="text-emerald-100 leading-relaxed">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</p>
+              <p class="text-emerald-100 leading-relaxed text-justify">Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.</p>
             </div>
           </div>
         </div>

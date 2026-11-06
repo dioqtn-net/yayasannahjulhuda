@@ -289,7 +289,7 @@ export const renderPPDB = (ppdb) => {
                         <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
                     </div>
                     
-                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;" class="text-justify">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
                     
                     <!-- Kotak Kontak Berjajar Horizontal -->
                     <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
@@ -482,7 +482,7 @@ export const renderPPDB = (ppdb) => {
                         <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
                     </div>
                     
-                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;" class="text-justify">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
                     
                     <!-- Kotak Kontak Berjajar Horizontal -->
                     <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
@@ -550,7 +550,7 @@ export const renderPPDB = (ppdb) => {
                 <h3 class="text-xl md:text-2xl font-playfair font-bold text-emerald-900 mb-3">
                   Waktu Pendaftaran
                 </h3>
-                <p class="text-slate-500 text-xs sm:text-sm mb-6">
+                <p class="text-slate-500 text-xs sm:text-sm mb-6 text-justify">
                   Pelayanan pendaftaran dan penerimaan berkas murid baru jenjang Madrasah Ibtidaiyah (MI) dibuka pada:
                 </p>
 
@@ -661,7 +661,7 @@ export const renderPPDB = (ppdb) => {
                         <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
                     </div>
                     
-                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;" class="text-justify">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
                     
                     <!-- Kotak Kontak Berjajar Horizontal -->
                     <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
@@ -841,7 +841,7 @@ export const renderPPDB = (ppdb) => {
                         <h4 style="font-weight: 700; color: #14532d; font-size: 1.125rem; margin: 0;">Pusat Layanan Konsultasi PPDB</h4>
                     </div>
                     
-                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0; line-height: 1.5;" class="text-justify">Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.</p>
                     
                     <!-- Kotak Kontak Berjajar Horizontal -->
                     <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;">
