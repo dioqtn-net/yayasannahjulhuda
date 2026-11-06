@@ -78,10 +78,10 @@
         <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
           <!-- Dark Overlay Wrapper -->
           <div class="absolute inset-0 bg-black/70 z-0"></div>
-          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="pubFasBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Fasilitas Yayasan</h1>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 id="pubFasBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">Fasilitas Yayasan</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <div id="pubFasBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</p>
+            <div id="pubFasBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</div>
           </div>
         </section>
 
@@ -368,17 +368,15 @@
           return div.innerHTML;
         };
 
-              function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
+        function formatContentHtml(str) {
+          if (str === null || str === undefined) return '-';
+          const trimmed = String(str).trim();
+          if (trimmed === '' || trimmed === '-') return '-';
+          if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+            return trimmed;
+          }
+          return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
         }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
-        return `<p class="${defaultAlign}">${trimmed}</p>`;
-      }
 
         const renderCard = (item) => {
           const images = (item.images && item.images.length > 0)

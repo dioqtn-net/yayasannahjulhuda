@@ -40,8 +40,8 @@ export const renderProfile = (profile) => {
       <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">${profilTitle}</h1>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">${profilTitle}</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
           <div class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">${profilDesc}</div>
         </div>
@@ -115,12 +115,12 @@ export const renderProfile = (profile) => {
         </div>
 
         <!-- Struktur Organisasi -->
-        <div class="text-center">
-          <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${strukturTitle}</h2>
+        <div>
+          <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4 text-center">${strukturTitle}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-12"></div>
           
           <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-            <p class="text-slate-600 italic mb-8">${strukturDesc}</p>
+            <div class="text-slate-600 italic mb-8">${strukturDesc}</div>
             
             <div class="max-w-xs mx-auto mb-8 p-6 border border-slate-100 rounded-2xl bg-white shadow-sm text-center">
               <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 overflow-hidden bg-slate-100 border-4 border-emerald-100 flex items-center justify-center shadow-md">

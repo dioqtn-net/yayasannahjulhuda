@@ -92,12 +92,12 @@
         <!-- Header Berita -->
         <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
           <div class="absolute inset-0 bg-black/75 z-0"></div>
-          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="pubBeritaBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Berita & Pengumuman</h1>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 id="pubBeritaBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">Berita &amp; Pengumuman</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
             <div id="pubBeritaBannerDesc" class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
               Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.
-            </p>
+            </div>
           </div>
         </section>
 
@@ -222,7 +222,7 @@
             </div>
             <div id="modalNewsBody" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
               Isi berita lengkap...
-            </p>
+            </div>
             <div class="pt-4 border-t border-slate-100 flex justify-end">
               <button onclick="closeNewsModal()" class="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition cursor-pointer">
                 Tutup
@@ -552,17 +552,15 @@
         };
 
         // News Modal by ID
-              function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
+        function formatContentHtml(str) {
+          if (str === null || str === undefined) return '-';
+          const trimmed = String(str).trim();
+          if (trimmed === '' || trimmed === '-') return '-';
+          if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+            return trimmed;
+          }
+          return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
         }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
-        return `<p class="${defaultAlign}">${trimmed}</p>`;
-      }
 
         window.openNewsModalById = function(id) {
           const list = currentBeritaData.length > 0 ? currentBeritaData : getBeritaList();

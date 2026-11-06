@@ -1,13 +1,12 @@
-      function formatContentHtml(str, defaultAlign) {
-        if (!defaultAlign) defaultAlign = 'text-justify';
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<p[\s>]/i.test(trimmed) || /^<div[\s>]/i.test(trimmed)) {
-          return trimmed;
-        }
-        return `<p class="${defaultAlign}">${trimmed}</p>`;
-      }
+function formatContentHtml(str) {
+  if (str === null || str === undefined) return '-';
+  const trimmed = String(str).trim();
+  if (trimmed === '' || trimmed === '-') return '-';
+  if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+    return trimmed;
+  }
+  return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
+}
 
 export const renderNews = (newsList) => {
     // Setup listeners and global handlers after render
@@ -130,16 +129,18 @@ export const renderNews = (newsList) => {
       <!-- Header Berita -->
       <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <div class="absolute inset-0 bg-black/75 z-0"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-900/80 border border-emerald-500/40 rounded-full text-xs font-semibold text-emerald-300 mb-3">
-            <i class="fas fa-newspaper text-emerald-400"></i>
-            <span>Kabar Terkini & Informasi</span>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-center mb-3">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-900/80 border border-emerald-500/40 rounded-full text-xs font-semibold text-emerald-300">
+              <i class="fas fa-newspaper text-emerald-400"></i>
+              <span>Kabar Terkini & Informasi</span>
+            </div>
           </div>
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Berita & Pengumuman</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">Berita & Pengumuman</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
+          <div class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
             Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.
-          </p>
+          </div>
         </div>
       </section>
 

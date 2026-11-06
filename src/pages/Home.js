@@ -29,7 +29,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
 
     const heroDescContent = cmsData?.heroDesc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
     const taglineTitleContent = cmsData?.taglineTitle || 'Mencetak Generasi Rabbani';
-    const taglineDescContent = cmsData?.taglineDesc || (profile?.history ? `"${profile.history}"` : '...');
+    const taglineDescContent = cmsData?.taglineDesc || (profile?.history ? profile.history : '...');
     const stat1Num = cmsData?.stat1Num || '5';
     const stat1Text = cmsData?.stat1Text || 'JENJANG PENDIDIKAN';
     const stat2Num = cmsData?.stat2Num || '100+';
@@ -166,8 +166,8 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
       <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white min-h-[500px] flex items-center">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/60 z-0"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left fade-in">
-          <h1 id="heroTitlePublic" class="text-2xl sm:text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 fade-in">
+          <h1 id="heroTitlePublic" class="text-2xl sm:text-4xl md:text-6xl font-playfair font-bold leading-tight mb-6 text-white drop-shadow-md text-center md:text-left">
             ${heroTitleContent}
           </h1>
           <div id="heroDescPublic" class="text-lg md:text-xl text-emerald-100 max-w-2xl mb-8 leading-relaxed drop-shadow">
@@ -208,8 +208,8 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
 
       <!-- Sambutan -->
       <section class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 id="taglineTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6">${taglineTitleContent}</h2>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="taglineTitlePublic" class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-6 text-center">${taglineTitleContent}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto mb-8 rounded-full"></div>
           <div id="taglineDescPublic" class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             ${taglineDescContent}

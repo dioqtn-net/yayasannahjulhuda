@@ -81,12 +81,12 @@
         <!-- Header Galeri -->
         <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
           <div class="absolute inset-0 bg-black/75 z-0"></div>
-          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="pubGaleriBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Galeri Dokumentasi</h1>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 id="pubGaleriBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">Galeri Dokumentasi</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
             <div id="pubGaleriBannerDesc" class="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">
               Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.
-            </p>
+            </div>
           </div>
         </section>
 
@@ -692,17 +692,15 @@
           return dateStr;
         }
 
-              function formatContentHtml(str) {
-        if (str === null || str === undefined) return '-';
-        const trimmed = String(str).trim();
-        if (trimmed === '' || trimmed === '-') return '-';
-        if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-          return trimmed;
+        function formatContentHtml(str) {
+          if (str === null || str === undefined) return '-';
+          const trimmed = String(str).trim();
+          if (trimmed === '' || trimmed === '-') return '-';
+          if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
+            return trimmed;
+          }
+          return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
         }
-        return `<div class="whitespace-pre-wrap">${trimmed}</div>`;
-      }
-        return `<p class="${defaultAlign}">${trimmed}</p>`;
-      }
 
         function createCard(item, tipe) {
           const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');

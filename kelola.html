@@ -2609,6 +2609,19 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             };
             // Simpan ke memori browser
             localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
+
+            // Simpan ke Supabase jika client aktif
+            if (window.supabaseClient) {
+              try {
+                window.supabaseClient.from('profile_settings').upsert({
+                  id: 1,
+                  history: dataBeranda.taglineDesc
+                }).then(() => {}).catch(console.error);
+              } catch(err) {
+                console.warn('Supabase upsert history:', err);
+              }
+            }
+
             alert('Sukses! Perubahan Beranda berhasil disimpan. Silakan cek halaman Beranda.');
           });
         }

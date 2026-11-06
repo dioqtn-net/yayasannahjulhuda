@@ -11,6 +11,13 @@ function formatContentHtml(str) {
 import { getUnitImage } from '../api';
 
 export const renderPrograms = (units) => {
+    let cmsData = null;
+    try {
+        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_program') : null;
+        if (stored) cmsData = JSON.parse(stored);
+    } catch (e) {
+        console.error('Error reading cmsData_program in renderPrograms:', e);
+    }
     
     const renderDetailedUnit = (unit, index) => {
         const isEven = index % 2 !== 0;
@@ -22,6 +29,18 @@ export const renderPrograms = (units) => {
         const isPonpes = unit.id === 5 || (unit.name && (unit.name.toLowerCase().includes('pesantren') || unit.name.toLowerCase().includes('ponpes') || unit.name.toLowerCase().includes('assurur')));
         const unitName = isSDI ? 'SD Islam (SDI) AL KINDY' : unit.name;
         const hasIntracurricular = Boolean(unit.intracurricular);
+
+        let unitKey = 'sdi';
+        if (isMI) unitKey = 'mi';
+        else if (isMTs) unitKey = 'mts';
+        else if (isMA) unitKey = 'ma';
+        else if (isPonpes) unitKey = 'ponpes';
+
+        const unitDesc = cmsData?.[unitKey + 'Desc'] || unit.description;
+        const unitKurikulum = cmsData?.[unitKey + 'Kurikulum'] || unit.curriculum;
+        const unitUnggulan = cmsData?.[unitKey + 'Unggulan'] || unit.featured_program;
+        const unitEkskul = cmsData?.[unitKey + 'Ekskul'] || unit.extracurricular;
+        const unitFasilitas = cmsData?.[unitKey + 'Fasilitas'] || unit.facilities;
 
         let waLink = `https://wa.me/${(unit.wa_number||'').replace(/\D/g,'')}?text=Assalamu'alaikum,%20Saya%20ingin%20bertanya%20tentang%20pendaftaran%20${encodeURIComponent(unit.name)}`;
         if (isMI) waLink = 'https://wa.me/628991168301';
@@ -42,13 +61,13 @@ export const renderPrograms = (units) => {
             </div>
             <div class="w-full md:w-2/3">
                 <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4">${unitName}</h2>
-                <div class="text-slate-600 text-lg mb-6 leading-relaxed">${unit.description}</div>
+                <div class="text-slate-600 text-lg mb-6 leading-relaxed">${formatContentHtml(unitDesc)}</div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                            <div class="text-sm text-slate-600 leading-relaxed">${unit.curriculum || '-'}</div>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unitKurikulum || '-')}</div>
                         </div>
                     </div>
                     ${hasIntracurricular ? `
@@ -59,24 +78,24 @@ export const renderPrograms = (units) => {
                         </div>
                     </div>
                     ` : ''}
-                    ${isPonpes ? `
+                    ${isPonpes || unitUnggulan ? `
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                            <p class="text-sm text-slate-600 ">Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah</p>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unitUnggulan || "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah")}</div>
                         </div>
                     </div>
                     ` : ''}
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                            <div class="text-sm text-slate-600 leading-relaxed">${unit.extracurricular || '-'}</div>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unitEkskul || '-')}</div>
                         </div>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex flex-col justify-between ${hasIntracurricular || isPonpes ? '' : 'md:col-span-2'}">
                         <div>
                             <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                            <div class="text-sm text-slate-600 leading-relaxed">${unit.facilities || '-'}</div>
+                            <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unitFasilitas || '-')}</div>
                         </div>
                     </div>
                     ${(isMTs || isMA) ? `
@@ -170,10 +189,10 @@ export const renderPrograms = (units) => {
       <section class="relative bg-[url('/media/background/wallpaper_yayasan.jpg')] bg-cover bg-center bg-no-repeat text-white py-20 overflow-hidden">
         <!-- Dark Overlay Wrapper -->
         <div class="absolute inset-0 bg-black/70 z-0"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Program & Jenjang Pendidikan</h1>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md text-center">${cmsData?.progBannerTitle || 'Program & Jenjang Pendidikan'}</h1>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-          <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.</p>
+          <div class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">${cmsData?.progBannerDesc || 'Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.'}</div>
         </div>
       </section>
 

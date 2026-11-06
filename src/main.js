@@ -130,6 +130,28 @@ document.body.addEventListener('click', (e) => {
 // Event Setups
 function setupHomeEvents() {
     window.renderDynamicUnitModal = renderDynamicUnitModal;
+
+    // Enforce live text alignment rendering via innerHTML from CMS / LocalStorage
+    try {
+        const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
+        if (saved) {
+            const data = JSON.parse(saved);
+            const taglineEl = document.getElementById('taglineDescPublic');
+            if (taglineEl && data.taglineDesc) {
+                taglineEl.innerHTML = data.taglineDesc;
+            }
+            const heroDescEl = document.getElementById('heroDescPublic');
+            if (heroDescEl && data.heroDesc) {
+                heroDescEl.innerHTML = data.heroDesc;
+            }
+            const taglineTitleEl = document.getElementById('taglineTitlePublic');
+            if (taglineTitleEl && data.taglineTitle) {
+                taglineTitleEl.textContent = data.taglineTitle;
+            }
+        }
+    } catch (e) {
+        console.error('Error synchronizing cmsData_beranda in setupHomeEvents:', e);
+    }
     window.openModal = async (id) => {
         // Handle lightbox images from gallery
         if (typeof id === 'string' && (id.startsWith('http') || id.startsWith('/') || id.includes('.'))) {
