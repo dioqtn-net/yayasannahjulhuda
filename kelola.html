@@ -35,25 +35,32 @@
       (function() {
         var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
         var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-        if (typeof window.supabase !== 'undefined' && SUPABASE_ANON_KEY) {
-          try {
-            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-              auth: { persistSession: true },
-              global: {
-                fetch: function(url, options) {
-                  options = options || {};
-                  options.cache = 'no-store';
-                  options.headers = options.headers || {};
-                  options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
-                  options.headers['Pragma'] = 'no-cache';
-                  return fetch(url, options);
+        window.getSupabaseClient = function() {
+          if (window.supabaseClient) return window.supabaseClient;
+          if (typeof window.supabase !== 'undefined' && window.supabase.createClient && SUPABASE_ANON_KEY) {
+            try {
+              window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                auth: { persistSession: true },
+                global: {
+                  fetch: function(url, options) {
+                    options = options || {};
+                    options.cache = 'no-store';
+                    options.headers = options.headers || {};
+                    options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                    options.headers['Pragma'] = 'no-cache';
+                    return fetch(url, options);
+                  }
                 }
-              }
-            });
-          } catch(e) {
-            console.warn('Supabase client init:', e);
+              });
+              return window.supabaseClient;
+            } catch(e) {
+              console.warn('Supabase client init:', e);
+            }
           }
-        }
+          return null;
+        };
+        // Inisialisasi langsung saat script dimuat
+        window.getSupabaseClient();
       })();
     </script>
       <!-- EXACT COPY-PASTE TEXT ALIGNMENT ENGINE FOR CMS -->
@@ -524,6 +531,12 @@
                               <label class="block text-sm font-medium text-gray-700 mb-1">Paragraf / Kutipan Tagline</label>
                               <textarea id="taglineDesc" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">"Yayasan Nahjul Huda berdiri dengan semangat untuk memajukan pendidikan Islam di Kebon Jeruk, Jakarta Barat. Sejak awal berdirinya, yayasan ini telah berkomitmen untuk mencetak generasi yang tidak hanya unggul secara akademik, namun juga memiliki akhlakul karimah dan pemahaman agama yang mendalam."</textarea>
                           </div>
+                          <div class="flex justify-end pt-2">
+                              <button type="button" id="btnSimpanTagline" onclick="window.handleSimpanBeranda ? window.handleSimpanBeranda(event) : null" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg text-sm font-medium transition shadow-sm flex items-center gap-2">
+                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                                  Simpan Tagline
+                              </button>
+                          </div>
                       </div>
                   </div>
 
@@ -615,7 +628,7 @@
 
                   <!-- Tombol Simpan -->
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanBeranda" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanBeranda" onclick="window.handleSimpanBeranda ? window.handleSimpanBeranda(event) : null" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Beranda
                       </button>
@@ -786,7 +799,7 @@
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProfil" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+                      <button type="button" id="btnSimpanProfil" onclick="window.handleSimpanProfil(event)" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
                           Simpan Perubahan Profil
                       </button>
                   </div>
@@ -1045,7 +1058,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProgram" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanProgram" onclick="window.handleSimpanProgram(event)" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Program
                       </button>
@@ -1111,7 +1124,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                           <textarea id="fasBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500">Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar dan pengembangan potensi siswa/siswi dan santri.</textarea>
                       </div>
                       <div class="flex justify-end pt-2">
-                          <button type="button" id="btnSimpanBannerFasilitas" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">
+                          <button type="button" id="btnSimpanBannerFasilitas" onclick="window.handleSimpanBannerFasilitas(event)" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">
                               Simpan Banner Fasilitas
                           </button>
                       </div>
@@ -1146,7 +1159,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                       
                       <div class="flex justify-end gap-2 pt-2">
                           <button type="button" id="btnBatalFasilitas" class="px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-100">Batal</button>
-                          <button type="button" id="btnSimpanCardFasilitas" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">Simpan Fasilitas</button>
+                          <button type="button" id="btnSimpanCardFasilitas" onclick="window.handleSimpanCardFasilitas(event)" class="bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">Simpan Fasilitas</button>
                       </div>
                   </div>
               </div>
@@ -1189,7 +1202,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="beritaBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerBerita" onclick="window.handleSimpanBannerBerita(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
                   Simpan Banner Berita
                 </button>
               </div>
@@ -1285,7 +1298,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalBerita" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanCardBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Berita</button>
+                  <button type="button" id="btnSimpanCardBerita" onclick="window.handleSimpanCardBerita(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Berita</button>
                 </div>
               </div>
             </div>
@@ -1328,7 +1341,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="galeriBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerGaleri" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerGaleri" onclick="window.handleSimpanBannerGaleri(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
                   Simpan Banner Galeri
                 </button>
               </div>
@@ -1407,7 +1420,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalEskul" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanEskul" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
+                  <button type="button" id="btnSimpanEskul" onclick="window.handleSimpanEskul(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
                 </div>
               </div>
             </div>
@@ -1485,7 +1498,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
                   <button type="button" id="btnBatalKegiatan" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanKegiatan" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
+                  <button type="button" id="btnSimpanKegiatan" onclick="window.handleSimpanKegiatan(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
                 </div>
               </div>
             </div>
@@ -2492,7 +2505,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   <textarea id="setting_alamat" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800">Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560</textarea>
                 </div>
                 <div class="pt-2">
-                  <button type="button" id="btnSimpanPengaturan" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold transition shadow-sm">
+                  <button type="button" id="btnSimpanPengaturan" onclick="window.savePengaturanYayasan(event)" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold transition shadow-sm">
                     Simpan Perubahan
                   </button>
                 </div>
@@ -2639,408 +2652,817 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
     <!-- Script Penyimpan CMS Data Beranda (localStorage & Supabase) -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Safe helper to get element value
+      (function() {
+        // 1. Helper aman resolusi Supabase Client
+        function getSupabaseClient() {
+          if (window.supabaseClient) return window.supabaseClient;
+          const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+          const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+            try {
+              window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                auth: { persistSession: true },
+                global: {
+                  fetch: function(url, options) {
+                    options = options || {};
+                    options.cache = 'no-store';
+                    options.headers = options.headers || {};
+                    options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                    options.headers['Pragma'] = 'no-cache';
+                    return fetch(url, options);
+                  }
+                }
+              });
+              return window.supabaseClient;
+            } catch(e) {
+              console.warn("[Kelola Beranda] Gagal inisialisasi Supabase:", e);
+            }
+          }
+          return null;
+        }
+
+        // 2. Helper aman ambil nilai input standar
+        function getVal(id, fallback = '') {
+          const el = document.getElementById(id);
+          return el && typeof el.value === 'string' ? el.value.trim() : fallback;
+        }
+
+        // 3. Helper aman ambil nilai textarea dengan format alignment
+        function getSafeTextareaValue(id, fallback = '') {
+          try {
+            const el = document.getElementById(id);
+            if (!el) return fallback;
+            if (typeof window.getWrappedTextareaValue === 'function') {
+              const wrapped = window.getWrappedTextareaValue(id);
+              if (wrapped && wrapped.trim() !== '') return wrapped;
+            }
+            const val = el.value ? el.value.trim() : '';
+            if (!val) return fallback;
+            const align = el.dataset && el.dataset.align ? el.dataset.align : 'text-justify';
+            return `<div class="${align}">${val}</div>`;
+          } catch(err) {
+            console.warn("[Kelola Beranda] Fallback alignment textarea:", id, err);
+            const el = document.getElementById(id);
+            return el && el.value ? el.value.trim() : fallback;
+          }
+        }
+
+        // 4. Helper aman set nilai textarea dengan alignment
+        function setSafeTextareaValue(id, val) {
+          try {
+            const el = document.getElementById(id);
+            if (!el || val === undefined || val === null) return;
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment(id, val);
+              return;
+            }
+            if (typeof val === 'string' && (val.includes('<div') || val.includes('<p'))) {
+              const temp = document.createElement('div');
+              temp.innerHTML = val;
+              el.value = temp.textContent || temp.innerText || val;
+            } else {
+              el.value = val;
+            }
+          } catch(err) {
+            console.warn("[Kelola Beranda] Fallback setSafeTextareaValue:", id, err);
+            const el = document.getElementById(id);
+            if (el) el.value = val || '';
+          }
+        }
+
+        // 5. Muat data Beranda (dari localStorage dulu, lalu timpa dengan data live Supabase)
+        window.loadBerandaData = async function() {
+          // A. Muat Cache Lokal
+          const savedData = localStorage.getItem('cmsData_beranda');
+          if (savedData) {
+            try {
+              const data = JSON.parse(savedData);
+              if (data.heroTitle && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = data.heroTitle;
+              if (data.heroDesc) setSafeTextareaValue('heroDesc', data.heroDesc);
+              if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
+              if (data.taglineDesc) setSafeTextareaValue('taglineDesc', data.taglineDesc);
+              if (data.stat1Num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = data.stat1Num;
+              if (data.stat1Text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = data.stat1Text;
+              if (data.stat2Num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = data.stat2Num;
+              if (data.stat2Text && document.getElementById('stat2Text')) document.getElementById('stat2Text').value = data.stat2Text;
+              if (data.stat3Num && document.getElementById('stat3Num')) document.getElementById('stat3Num').value = data.stat3Num;
+              if (data.stat3Text && document.getElementById('stat3Text')) document.getElementById('stat3Text').value = data.stat3Text;
+              if (data.stat4Num && document.getElementById('stat4Num')) document.getElementById('stat4Num').value = data.stat4Num;
+              if (data.stat4Text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = data.stat4Text;
+              if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
+              if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
+              if (data.progSosial1Title && document.getElementById('progSosial1Title')) document.getElementById('progSosial1Title').value = data.progSosial1Title;
+              if (data.progSosial1Desc) setSafeTextareaValue('progSosial1Desc', data.progSosial1Desc);
+              if (data.progSosial2Title && document.getElementById('progSosial2Title')) document.getElementById('progSosial2Title').value = data.progSosial2Title;
+              if (data.progSosial2Desc) setSafeTextareaValue('progSosial2Desc', data.progSosial2Desc);
+            } catch(e) {
+              console.warn("[Kelola Beranda] Cache parse error:", e);
+            }
+          }
+
+          // B. Muat Live Supabase
+          try {
+            const supa = getSupabaseClient();
+            if (!supa) return;
+
+            const { data: home, error: errHome } = await supa
+              .from('home_settings')
+              .select('*')
+              .eq('id', 1)
+              .maybeSingle();
+
+            if (!errHome && home) {
+              if (home.hero_title && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = home.hero_title;
+              if (home.hero_desc) setSafeTextareaValue('heroDesc', home.hero_desc);
+              if (home.tagline_title && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = home.tagline_title;
+              if (home.tagline_desc) setSafeTextareaValue('taglineDesc', home.tagline_desc);
+              if (home.stat1_num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = home.stat1_num;
+              if (home.stat1_text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = home.stat1_text;
+              if (home.stat2_num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = home.stat2_num;
+              if (home.stat2_text && document.getElementById('stat2Text')) document.getElementById('stat2Text').value = home.stat2_text;
+              if (home.stat3_num && document.getElementById('stat3Num')) document.getElementById('stat3Num').value = home.stat3_num;
+              if (home.stat3_text && document.getElementById('stat3Text')) document.getElementById('stat3Text').value = home.stat3_text;
+              if (home.stat4_num && document.getElementById('stat4Num')) document.getElementById('stat4Num').value = home.stat4_num;
+              if (home.stat4_text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = home.stat4_text;
+              if (home.social_prog1_title && document.getElementById('progSosial1Title')) document.getElementById('progSosial1Title').value = home.social_prog1_title;
+              if (home.social_prog1_desc) setSafeTextareaValue('progSosial1Desc', home.social_prog1_desc);
+              if (home.social_prog2_title && document.getElementById('progSosial2Title')) document.getElementById('progSosial2Title').value = home.social_prog2_title;
+              if (home.social_prog2_desc) setSafeTextareaValue('progSosial2Desc', home.social_prog2_desc);
+            }
+
+            const { data: ppdb, error: errPpdb } = await supa
+              .from('ppdb_info')
+              .select('academic_year, status')
+              .eq('id', 1)
+              .maybeSingle();
+
+            if (!errPpdb && ppdb) {
+              if (ppdb.academic_year && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = ppdb.academic_year;
+              if (ppdb.status && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = ppdb.status;
+            }
+          } catch(e) {
+            console.warn("[Kelola Beranda] Gagal fetch Supabase:", e);
+          }
+        };
+
+        // 6. Fungsi Utama: Simpan Data Beranda ke Supabase
+        window.handleSimpanBeranda = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const targetBtn = (e && e.currentTarget) || document.getElementById('btnSimpanBeranda') || document.getElementById('btnSimpanTagline');
+          const originalBtnHtml = targetBtn ? targetBtn.innerHTML : '';
+
+          try {
+            if (targetBtn) {
+              targetBtn.disabled = true;
+              targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const supa = getSupabaseClient();
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
+
+            // Kumpulkan nilai form
+            const heroTitle = getVal('heroTitle', 'Selamat Datang di Yayasan Nahjul Huda');
+            const heroDesc = getSafeTextareaValue('heroDesc');
+            const taglineTitle = getVal('taglineTitle', 'Mencetak Generasi Rabbani');
+            const taglineDesc = getSafeTextareaValue('taglineDesc');
+
+            const stat1Num = getVal('stat1Num', '5');
+            const stat1Text = getVal('stat1Text', 'JENJANG PENDIDIKAN');
+            const stat2Num = getVal('stat2Num', '100+');
+            const stat2Text = getVal('stat2Text', 'TENAGA PENDIDIK');
+            const stat3Num = getVal('stat3Num', '1000+');
+            const stat3Text = getVal('stat3Text', 'SANTRI & SISWA');
+            const stat4Num = getVal('stat4Num', '1980');
+            const stat4Text = getVal('stat4Text', 'TAHUN BERDIRI');
+
+            const ppdbYear = getVal('ppdbYear', '2024/2025');
+            const ppdbStatus = getVal('ppdbStatus', 'BUKA');
+
+            const progSosial1Title = getVal('progSosial1Title', "Majelis Ta'lim Nahjul Huda");
+            const progSosial1Desc = getSafeTextareaValue('progSosial1Desc');
+            const progSosial2Title = getVal('progSosial2Title', "Pengajian Rutin Bulanan");
+            const progSosial2Desc = getSafeTextareaValue('progSosial2Desc');
+
+            const homePayload = {
+              id: 1,
+              hero_title: heroTitle,
+              hero_desc: heroDesc,
+              tagline_title: taglineTitle,
+              tagline_desc: taglineDesc,
+              stat1_num: stat1Num,
+              stat1_text: stat1Text,
+              stat2_num: stat2Num,
+              stat2_text: stat2Text,
+              stat3_num: stat3Num,
+              stat3_text: stat3Text,
+              stat4_num: stat4Num,
+              stat4_text: stat4Text,
+              social_prog1_title: progSosial1Title,
+              social_prog1_desc: progSosial1Desc,
+              social_prog2_title: progSosial2Title,
+              social_prog2_desc: progSosial2Desc,
+              updated_at: new Date().toISOString()
+            };
+
+            console.log("[Kelola Beranda] Mengirim update ke Supabase home_settings...", homePayload);
+
+            const { data: homeRes, error: errHome } = await supa
+              .from('home_settings')
+              .upsert(homePayload, { onConflict: 'id' })
+              .select();
+
+            if (errHome) throw errHome;
+
+            const { data: ppdbRes, error: errPpdb } = await supa
+              .from('ppdb_info')
+              .upsert({
+                id: 1,
+                academic_year: ppdbYear,
+                status: ppdbStatus,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'id' })
+              .select();
+
+            if (errPpdb) throw errPpdb;
+
+            // Simpan cache lokal
+            const localCache = {
+              heroTitle, heroDesc,
+              taglineTitle, taglineDesc,
+              stat1Num, stat1Text, stat2Num, stat2Text,
+              stat3Num, stat3Text, stat4Num, stat4Text,
+              ppdbYear, ppdbStatus,
+              progSosial1Title, progSosial1Desc,
+              progSosial2Title, progSosial2Desc
+            };
+            localStorage.setItem('cmsData_beranda', JSON.stringify(localCache));
+
+            console.log("[Kelola Beranda] Berhasil disimpan ke Supabase:", { homeRes, ppdbRes });
+            alert("Konten Beranda berhasil disimpan ke database publik Supabase!");
+          } catch(error) {
+            console.error("[Kelola Beranda] Error simpan Supabase:", error);
+            let msg = "Gagal menyimpan ke database Supabase: " + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += "\n\n(Catatan: Akses ditolak oleh Row Level Security. Silakan jalankan perintah SQL berikut di Supabase SQL Editor: ALTER TABLE home_settings DISABLE ROW LEVEL SECURITY; ALTER TABLE ppdb_info DISABLE ROW LEVEL SECURITY;)";
+            }
+            alert(msg);
+          } finally {
+            if (targetBtn) {
+              targetBtn.disabled = false;
+              targetBtn.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        // 7. Daftarkan Event Listener
+        function initKelolaBerandaListeners() {
+          window.loadBerandaData();
+
+          const btnSaveTagline = document.getElementById('btnSimpanTagline');
+          if (btnSaveTagline && !btnSaveTagline.dataset.bound) {
+            btnSaveTagline.dataset.bound = 'true';
+            btnSaveTagline.addEventListener('click', window.handleSimpanBeranda);
+          }
+
+          const btnSaveBeranda = document.getElementById('btnSimpanBeranda');
+          if (btnSaveBeranda && !btnSaveBeranda.dataset.bound) {
+            btnSaveBeranda.dataset.bound = 'true';
+            btnSaveBeranda.addEventListener('click', window.handleSimpanBeranda);
+          }
+
+          const formBeranda = document.getElementById('formBeranda');
+          if (formBeranda && !formBeranda.dataset.bound) {
+            formBeranda.dataset.bound = 'true';
+            formBeranda.addEventListener('submit', window.handleSimpanBeranda);
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initKelolaBerandaListeners);
+        } else {
+          initKelolaBerandaListeners();
+        }
+      })();
+    </script>
+
+    <!-- Script Penyimpan CMS Data Profil (Supabase & localStorage) -->
+    <script>
+      (function() {
+        const setVal = (id, val) => {
+          const el = document.getElementById(id);
+          if (el && val !== undefined && val !== null) {
+            if (el.tagName.toLowerCase() === 'textarea') {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(id, val);
+              } else {
+                el.value = val;
+              }
+            } else {
+              el.value = val;
+            }
+          }
+        };
+
+        const getSafeTextareaValue = (id) => {
+          if (typeof window.getWrappedTextareaValue === 'function') {
+            return window.getWrappedTextareaValue(id);
+          }
+          const el = document.getElementById(id);
+          return el ? el.value : '';
+        };
+
+        // Muat Data Profil dari Supabase (dengan cache localStorage sebagai fallback)
+        window.loadProfilData = async function() {
+          // A. Fallback dari localStorage terlebih dahulu
+          const savedProfil = localStorage.getItem('cmsData_profil');
+          if (savedProfil) {
+            try {
+              const dataP = JSON.parse(savedProfil);
+              setVal('profilTitle', dataP.profilTitle);
+              setVal('profilDesc', dataP.profilDesc);
+              setVal('sejarahText', dataP.sejarahText);
+              setVal('strukturTitle', dataP.strukturTitle);
+              setVal('strukturDesc', dataP.strukturDesc);
+              setVal('namaKetua', dataP.namaKetua);
+              setVal('namaSDI', dataP.namaSDI);
+              setVal('namaMI', dataP.namaMI);
+              setVal('namaMTs', dataP.namaMTs);
+              setVal('namaMA', dataP.namaMA);
+              setVal('namaMudir', dataP.namaMudir);
+            } catch (e) {
+              console.warn('[Kelola Profil] Error parsing local cache:', e);
+            }
+          }
+
+          // B. Muat Live dari Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data: dbData, error } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+              if (!error && dbData) {
+                if (dbData.banner_title || dbData.name) setVal('profilTitle', dbData.banner_title || dbData.name);
+                if (dbData.banner_desc) setVal('profilDesc', dbData.banner_desc);
+                if (dbData.history) setVal('sejarahText', dbData.history);
+                if (dbData.struktur_title) setVal('strukturTitle', dbData.struktur_title);
+                if (dbData.struktur_desc) setVal('strukturDesc', dbData.struktur_desc);
+
+                if (dbData.pengurus && typeof dbData.pengurus === 'object') {
+                  const p = dbData.pengurus;
+                  if (p.namaKetua) setVal('namaKetua', p.namaKetua);
+                  if (p.namaSDI) setVal('namaSDI', p.namaSDI);
+                  if (p.namaMI) setVal('namaMI', p.namaMI);
+                  if (p.namaMTs) setVal('namaMTs', p.namaMTs);
+                  if (p.namaMA) setVal('namaMA', p.namaMA);
+                  if (p.namaMudir) setVal('namaMudir', p.namaMudir);
+                }
+
+                // Update cache lokal
+                const cacheData = {
+                  profilTitle: dbData.banner_title || dbData.name || '',
+                  profilDesc: dbData.banner_desc || '',
+                  sejarahText: dbData.history || '',
+                  strukturTitle: dbData.struktur_title || '',
+                  strukturDesc: dbData.struktur_desc || '',
+                  namaKetua: dbData.pengurus?.namaKetua || '',
+                  fotoKetua: dbData.pengurus?.fotoKetua || '',
+                  namaSDI: dbData.pengurus?.namaSDI || '',
+                  fotoSDI: dbData.pengurus?.fotoSDI || '',
+                  namaMI: dbData.pengurus?.namaMI || '',
+                  fotoMI: dbData.pengurus?.fotoMI || '',
+                  namaMTs: dbData.pengurus?.namaMTs || '',
+                  fotoMTs: dbData.pengurus?.fotoMTs || '',
+                  namaMA: dbData.pengurus?.namaMA || '',
+                  fotoMA: dbData.pengurus?.fotoMA || '',
+                  namaMudir: dbData.pengurus?.namaMudir || '',
+                  fotoMudir: dbData.pengurus?.fotoMudir || ''
+                };
+                localStorage.setItem('cmsData_profil', JSON.stringify(cacheData));
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola Profil] Gagal fetch Supabase:', e);
+          }
+        };
+
+        // Fungsi Simpan Profil ke Supabase
+        window.handleSimpanProfil = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const btnSaveProfil = (e && e.currentTarget) || document.getElementById('btnSimpanProfil');
+          const originalBtnHtml = btnSaveProfil ? btnSaveProfil.innerHTML : '';
+
+          try {
+            if (btnSaveProfil) {
+              btnSaveProfil.disabled = true;
+              btnSaveProfil.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
+
+            const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
+
+            const readFile = (inputId, prevVal) => {
+              return new Promise((resolve) => {
+                const input = document.getElementById(inputId);
+                if (input && input.getAttribute('data-hapus') === 'true') {
+                  resolve('');
+                  return;
+                }
+                if (input && input.files && input.files[0]) {
+                  const reader = new FileReader();
+                  reader.onload = (event) => resolve(event.target.result);
+                  reader.onerror = () => resolve(prevVal || '');
+                  reader.readAsDataURL(input.files[0]);
+                } else {
+                  resolve(prevVal || '');
+                }
+              });
+            };
+
+            const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
+              readFile('fotoKetua', prevData.fotoKetua),
+              readFile('fotoSDI', prevData.fotoSDI),
+              readFile('fotoMI', prevData.fotoMI),
+              readFile('fotoMTs', prevData.fotoMTs),
+              readFile('fotoMA', prevData.fotoMA),
+              readFile('fotoMudir', prevData.fotoMudir)
+            ]);
+
+            const dataProfil = {
+              profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
+              profilDesc: getSafeTextareaValue('profilDesc'),
+              sejarahText: getSafeTextareaValue('sejarahText'),
+              strukturTitle: document.getElementById('strukturTitle')?.value || 'Struktur Organisasi',
+              strukturDesc: getSafeTextareaValue('strukturDesc'),
+              namaKetua: document.getElementById('namaKetua')?.value || '-',
+              fotoKetua: fotoKetua,
+              namaSDI: document.getElementById('namaSDI')?.value || '-',
+              fotoSDI: fotoSDI,
+              namaMI: document.getElementById('namaMI')?.value || '-',
+              fotoMI: fotoMI,
+              namaMTs: document.getElementById('namaMTs')?.value || '-',
+              fotoMTs: fotoMTs,
+              namaMA: document.getElementById('namaMA')?.value || '-',
+              fotoMA: fotoMA,
+              namaMudir: document.getElementById('namaMudir')?.value || '-',
+              fotoMudir: fotoMudir
+            };
+
+            const supabasePayload = {
+              id: 1,
+              name: dataProfil.profilTitle || 'Yayasan Nahjul Huda',
+              banner_title: dataProfil.profilTitle || 'Profil Yayasan',
+              banner_desc: dataProfil.profilDesc || '',
+              history: dataProfil.sejarahText || '',
+              struktur_title: dataProfil.strukturTitle || 'Struktur Organisasi',
+              struktur_desc: dataProfil.strukturDesc || '',
+              pengurus: {
+                namaKetua: dataProfil.namaKetua, fotoKetua: dataProfil.fotoKetua,
+                namaSDI: dataProfil.namaSDI, fotoSDI: dataProfil.fotoSDI,
+                namaMI: dataProfil.namaMI, fotoMI: dataProfil.fotoMI,
+                namaMTs: dataProfil.namaMTs, fotoMTs: dataProfil.fotoMTs,
+                namaMA: dataProfil.namaMA, fotoMA: dataProfil.fotoMA,
+                namaMudir: dataProfil.namaMudir, fotoMudir: dataProfil.fotoMudir
+              },
+              updated_at: new Date().toISOString()
+            };
+
+            console.log('[Kelola Profil] Mengirim ke Supabase...', supabasePayload);
+
+            let { data, error } = await supa
+              .from('profile_settings')
+              .update(supabasePayload)
+              .eq('id', 1)
+              .select();
+
+            if (error) {
+              const upsertRes = await supa.from('profile_settings').upsert(supabasePayload, { onConflict: 'id' }).select();
+              error = upsertRes.error;
+            }
+
+            if (error) throw error;
+
+            // Simpan cache lokal setelah Supabase sukses
+            localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
+
+            // Reset status hapus foto
+            ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.setAttribute('data-hapus', 'false');
+            });
+
+            alert("Data profil berhasil diperbarui di database publik Supabase!");
+          } catch (error) {
+            console.error("Supabase Error [Kelola Profil]:", error);
+            let msg = "Gagal menyimpan ke server: " + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += "\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE profile_settings DISABLE ROW LEVEL SECURITY;)";
+            }
+            alert(msg);
+          } finally {
+            if (btnSaveProfil) {
+              btnSaveProfil.disabled = false;
+              btnSaveProfil.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', window.loadProfilData);
+        } else {
+          window.loadProfilData();
+        }
+      })();
+    </script>
+
+    <!-- Script Penyimpan CMS Data Program (Supabase & localStorage) -->
+    <script>
+      (function() {
+        const setVal = (id, val) => {
+          const el = document.getElementById(id);
+          if (el && val !== undefined && val !== null) {
+            if (el.tagName.toLowerCase() === 'textarea') {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(id, val);
+              } else {
+                el.value = val;
+              }
+            } else {
+              el.value = val;
+            }
+          }
+        };
+
         const getVal = (id, fallback = '') => {
           const el = document.getElementById(id);
-          return el ? el.value : fallback;
+          if (!el) return fallback;
+          return el.value !== undefined ? el.value : fallback;
         };
 
-        // Muat data dari localStorage jika sebelumnya pernah disimpan
-        const savedData = localStorage.getItem('cmsData_beranda');
-        if (savedData) {
-          try {
-            const data = JSON.parse(savedData);
-            if (data.heroTitle && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = data.heroTitle;
-            if (data.heroDesc && document.getElementById('heroDesc')) window.setTextareaValueWithAlignment('heroDesc', data.heroDesc);
-            if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
-            if (data.taglineDesc && document.getElementById('taglineDesc')) window.setTextareaValueWithAlignment('taglineDesc', data.taglineDesc);
-            if (data.stat1Num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = data.stat1Num;
-            if (data.stat1Text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = data.stat1Text;
-            if (data.stat2Num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = data.stat2Num;
-            if (data.stat2Text && document.getElementById('stat2Text')) document.getElementById('stat2Text').value = data.stat2Text;
-            if (data.stat3Num && document.getElementById('stat3Num')) document.getElementById('stat3Num').value = data.stat3Num;
-            if (data.stat3Text && document.getElementById('stat3Text')) document.getElementById('stat3Text').value = data.stat3Text;
-            if (data.stat4Num && document.getElementById('stat4Num')) document.getElementById('stat4Num').value = data.stat4Num;
-            if (data.stat4Text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = data.stat4Text;
-            if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
-            if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
-            if (data.progSosial1Title && document.getElementById('progSosial1Title')) document.getElementById('progSosial1Title').value = data.progSosial1Title;
-            if (data.progSosial1Desc && document.getElementById('progSosial1Desc')) window.setTextareaValueWithAlignment('progSosial1Desc', data.progSosial1Desc);
-            if (data.progSosial2Title && document.getElementById('progSosial2Title')) document.getElementById('progSosial2Title').value = data.progSosial2Title;
-            if (data.progSosial2Desc && document.getElementById('progSosial2Desc')) window.setTextareaValueWithAlignment('progSosial2Desc', data.progSosial2Desc);
-          } catch (e) {
-            console.error('Error parsing cmsData_beranda:', e);
+        const getSafeTextareaValue = (id) => {
+          if (typeof window.getWrappedTextareaValue === 'function') {
+            return window.getWrappedTextareaValue(id);
           }
-        }
-
-        const handleSimpanBeranda = async (e) => {
-          if (e) e.preventDefault();
-          try {
-            // Sesuai ID asli textarea di form HTML Beranda (heroDesc & taglineDesc)
-            const elHeroDesc = document.getElementById('heroDesc') || document.getElementById('deskripsi_singkat');
-            const elTaglineDesc = document.getElementById('taglineDesc') || document.getElementById('paragraf_tagline');
-
-            const dataBeranda = {
-              heroTitle: getVal('heroTitle', 'Selamat Datang di Yayasan Nahjul Huda'),
-              heroDesc: window.getWrappedTextareaValue(elHeroDesc || 'heroDesc'),
-              taglineTitle: getVal('taglineTitle', 'Mencetak Generasi Rabbani'),
-              taglineDesc: window.getWrappedTextareaValue(elTaglineDesc || 'taglineDesc'),
-              stat1Num: getVal('stat1Num', '5'),
-              stat1Text: getVal('stat1Text', 'JENJANG PENDIDIKAN'),
-              stat2Num: getVal('stat2Num', '100+'),
-              stat2Text: getVal('stat2Text', 'TENAGA PENDIDIK'),
-              stat3Num: getVal('stat3Num', '1000+'),
-              stat3Text: getVal('stat3Text', 'SANTRI & SISWA'),
-              stat4Num: getVal('stat4Num', '1980'),
-              stat4Text: getVal('stat4Text', 'TAHUN BERDIRI'),
-              ppdbYear: getVal('ppdbYear', '2024/2025'),
-              ppdbStatus: getVal('ppdbStatus', 'BUKA'),
-              progSosial1Title: getVal('progSosial1Title', "Majelis Ta'lim Nahjul Huda"),
-              progSosial1Desc: window.getWrappedTextareaValue('progSosial1Desc') || `<div class="text-justify">${document.getElementById('progSosial1Desc')?.value || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan."}</div>`,
-              progSosial2Title: getVal('progSosial2Title', "Pengajian Rutin Bulanan"),
-              progSosial2Desc: window.getWrappedTextareaValue('progSosial2Desc') || `<div class="text-justify">${document.getElementById('progSosial2Desc')?.value || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."}</div>`
-            };
-
-            // 1. Simpan ke memori browser
-            localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
-
-            // 2. Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              const { error } = await window.supabaseClient.from('profile_settings').upsert({
-                id: 1,
-                history: dataBeranda.taglineDesc
-              });
-              if (error) {
-                console.warn('Peringatan Supabase:', error);
-              }
-            }
-
-            alert('Perubahan beranda berhasil disimpan!');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } catch (error) {
-            console.error(error);
-            alert('Gagal menyimpan: ' + error.message);
-          }
-        };
-
-        // Hubungkan event listener secara presisi ke tombol Simpan Perubahan Beranda
-        const btnSaveBeranda = document.getElementById('btnSimpanBeranda') ||
-          Array.from(document.querySelectorAll('#formBeranda button')).find(b => b.textContent.includes('Simpan Perubahan Beranda')) ||
-          document.querySelector('#formBeranda button[type="button"]:last-of-type');
-
-        if (btnSaveBeranda) {
-          btnSaveBeranda.addEventListener('click', handleSimpanBeranda);
-        }
-
-        const formBeranda = document.getElementById('formBeranda');
-        if (formBeranda) {
-          formBeranda.addEventListener('submit', handleSimpanBeranda);
-        }
-      });
-    </script>
-
-    <!-- Script Penyimpan CMS Data Profil (localStorage) -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Helper function to set input value safely
-        const setVal = (id, val) => {
           const el = document.getElementById(id);
-          if (el && val !== undefined && val !== null) {
-            if (el.tagName.toLowerCase() === 'textarea') {
-              window.setTextareaValueWithAlignment(el, val);
-            } else {
-              el.value = val;
-            }
-          }
+          return el ? el.value : '';
         };
 
-        // Muat data Profil dari localStorage jika sebelumnya pernah disimpan
-        const savedProfil = localStorage.getItem('cmsData_profil');
-        if (savedProfil) {
-          try {
-            const dataP = JSON.parse(savedProfil);
-            setVal('profilTitle', dataP.profilTitle);
-            setVal('profilDesc', dataP.profilDesc);
-            setVal('sejarahText', dataP.sejarahText);
-            setVal('strukturTitle', dataP.strukturTitle);
-            setVal('strukturDesc', dataP.strukturDesc);
-            setVal('namaKetua', dataP.namaKetua);
-            setVal('namaSDI', dataP.namaSDI);
-            setVal('namaMI', dataP.namaMI);
-            setVal('namaMTs', dataP.namaMTs);
-            setVal('namaMA', dataP.namaMA);
-            setVal('namaMudir', dataP.namaMudir);
-          } catch (e) {
-            console.error('Error parsing cmsData_profil:', e);
-          }
-        }
-
-        const btnSaveProfil = document.getElementById('btnSimpanProfil');
-        if (btnSaveProfil) {
-          btnSaveProfil.addEventListener('click', async (e) => {
-            if (e) e.preventDefault();
+        // Muat Data Program dari Supabase (dengan fallback localStorage)
+        window.loadProgramData = async function() {
+          // A. Fallback dari localStorage
+          const savedProgram = localStorage.getItem('cmsData_program');
+          if (savedProgram) {
             try {
-              const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
+              const dataProg = JSON.parse(savedProgram);
+              const fields = [
+                'progBannerTitle', 'progBannerDesc',
+                'sdiAkreditasi', 'sdiKurikulum', 'sdiDesc', 'sdiVisi', 'sdiMisi', 'sdiUnggulan', 'sdiEkskul', 'sdiFasilitas',
+                'miAkreditasi', 'miKurikulum', 'miDesc', 'miVisi', 'miMisi', 'miUnggulan', 'miEkskul', 'miFasilitas',
+                'mtsAkreditasi', 'mtsKurikulum', 'mtsDesc', 'mtsVisi', 'mtsMisi', 'mtsUnggulan', 'mtsEkskul', 'mtsFasilitas',
+                'maAkreditasi', 'maKurikulum', 'maDesc', 'maVisi', 'maMisi', 'maUnggulan', 'maEkskul', 'maFasilitas',
+                'ponpesAkreditasi', 'ponpesKurikulum', 'ponpesDesc', 'ponpesVisi', 'ponpesMisi', 'ponpesUnggulan', 'ponpesEkskul', 'ponpesFasilitas'
+              ];
+              fields.forEach(field => setVal(field, dataProg[field]));
+            } catch (e) {
+              console.warn('[Kelola Program] Error parsing local cache:', e);
+            }
+          }
 
-              const readFile = (inputId, prevVal) => {
-                return new Promise((resolve) => {
-                  const input = document.getElementById(inputId);
-                  // Jika ditandai hapus, kosongkan data foto
-                  if (input && input.getAttribute('data-hapus') === 'true') {
-                    resolve('');
-                    return;
-                  }
-                  if (input && input.files && input.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => resolve(event.target.result);
-                    reader.onerror = () => resolve(prevVal || '');
-                    reader.readAsDataURL(input.files[0]);
-                  } else {
-                    resolve(prevVal || '');
+          // B. Muat Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data: units, error } = await supa.from('education_units').select('*').order('id', { ascending: true });
+              if (!error && units && units.length > 0) {
+                const prefixMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
+                units.forEach(u => {
+                  const p = prefixMap[u.id];
+                  if (p) {
+                    if (u.accreditation) setVal(p + 'Akreditasi', u.accreditation);
+                    if (u.curriculum) setVal(p + 'Kurikulum', u.curriculum);
+                    if (u.description) setVal(p + 'Desc', u.description);
+                    if (u.vision) setVal(p + 'Visi', u.vision);
+                    if (u.mission) setVal(p + 'Misi', u.mission);
+                    if (u.featured_programs) setVal(p + 'Unggulan', u.featured_programs);
+                    if (u.extracurricular) setVal(p + 'Ekskul', u.extracurricular);
+                    if (u.facilities) setVal(p + 'Fasilitas', u.facilities);
                   }
                 });
-              };
-
-              const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
-                readFile('fotoKetua', prevData.fotoKetua),
-                readFile('fotoSDI', prevData.fotoSDI),
-                readFile('fotoMI', prevData.fotoMI),
-                readFile('fotoMTs', prevData.fotoMTs),
-                readFile('fotoMA', prevData.fotoMA),
-                readFile('fotoMudir', prevData.fotoMudir)
-              ]);
-
-              // HANYA ambil input yang benar-benar ada di HTML saat ini
-              const dataProfil = {
-                profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
-                profilDesc: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('profilDesc') : (document.getElementById('profilDesc')?.value || ''),
-                sejarahText: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('sejarahText') : (document.getElementById('sejarahText')?.value || ''),
-                strukturTitle: document.getElementById('strukturTitle')?.value || 'Struktur Organisasi',
-                strukturDesc: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('strukturDesc') : (document.getElementById('strukturDesc')?.value || ''),
-                namaKetua: document.getElementById('namaKetua')?.value || '-',
-                fotoKetua: fotoKetua,
-                namaSDI: document.getElementById('namaSDI')?.value || '-',
-                fotoSDI: fotoSDI,
-                namaMI: document.getElementById('namaMI')?.value || '-',
-                fotoMI: fotoMI,
-                namaMTs: document.getElementById('namaMTs')?.value || '-',
-                fotoMTs: fotoMTs,
-                namaMA: document.getElementById('namaMA')?.value || '-',
-                fotoMA: fotoMA,
-                namaMudir: document.getElementById('namaMudir')?.value || '-',
-                fotoMudir: fotoMudir
-              };
-
-              localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
-
-              // Simpan ke Supabase jika client aktif (Hanya history)
-              if (window.supabaseClient) {
-                try {
-                  const { error: supaErr } = await window.supabaseClient.from('profile_settings').upsert({
-                    id: 1,
-                    history: dataProfil.sejarahText
-                  });
-                  if (supaErr) {
-                    console.warn('Peringatan Supabase:', supaErr);
-                  }
-                } catch (sErr) {
-                  console.warn('Supabase save error:', sErr);
-                }
               }
-
-              // Reset atribut penanda hapus setelah berhasil disimpan
-              ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.setAttribute('data-hapus', 'false');
-              });
-
-              alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
-            } catch (error) {
-              console.error("Error Simpan Profil:", error);
-              alert("Terjadi kesalahan sistem: " + error.message + ". Cek console untuk detail.");
             }
-          });
-        }
-      });
-    </script>
-
-    <!-- Script Penyimpan CMS Data Program (localStorage) -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const setVal = (id, val) => {
-          const el = document.getElementById(id);
-          if (el && val !== undefined && val !== null) {
-            if (el.tagName.toLowerCase() === 'textarea') {
-              window.setTextareaValueWithAlignment(el, val);
-            } else {
-              el.value = val;
-            }
+          } catch(e) {
+            console.warn('[Kelola Program] Gagal fetch Supabase:', e);
           }
         };
 
-        // Muat data Program dari localStorage jika ada
-        const savedProgram = localStorage.getItem('cmsData_program');
-        if (savedProgram) {
-          try {
-            const dataProg = JSON.parse(savedProgram);
-            const fields = [
-              'progBannerTitle', 'progBannerDesc',
-              'sdiAkreditasi', 'sdiKurikulum', 'sdiDesc', 'sdiVisi', 'sdiMisi', 'sdiUnggulan', 'sdiEkskul', 'sdiFasilitas',
-              'miAkreditasi', 'miKurikulum', 'miDesc', 'miVisi', 'miMisi', 'miUnggulan', 'miEkskul', 'miFasilitas',
-              'mtsAkreditasi', 'mtsKurikulum', 'mtsDesc', 'mtsVisi', 'mtsMisi', 'mtsUnggulan', 'mtsEkskul', 'mtsFasilitas',
-              'maAkreditasi', 'maKurikulum', 'maDesc', 'maVisi', 'maMisi', 'maUnggulan', 'maEkskul', 'maFasilitas',
-              'ponpesAkreditasi', 'ponpesKurikulum', 'ponpesDesc', 'ponpesVisi', 'ponpesMisi', 'ponpesUnggulan', 'ponpesEkskul', 'ponpesFasilitas'
-            ];
-            fields.forEach(field => setVal(field, dataProg[field]));
-          } catch (e) {
-            console.error('Error parsing cmsData_program:', e);
-          }
-        }
-
-        const btnSaveProgram = document.getElementById('btnSimpanProgram');
-        if (btnSaveProgram) {
-          btnSaveProgram.addEventListener('click', (e) => {
+        // Fungsi Simpan Program ke Supabase
+        window.handleSimpanProgram = async function(e) {
+          if (e) {
             e.preventDefault();
+            e.stopPropagation();
+          }
 
-            const getVal = (id) => {
-              const el = document.getElementById(id);
-              if (!el) return '';
-              if (el.tagName.toLowerCase() === 'textarea') {
-                return window.getWrappedTextareaValue(el);
-              }
-              return el.value || '';
-            };
+          const btnSaveProgram = (e && e.currentTarget) || document.getElementById('btnSimpanProgram');
+          const originalBtnHtml = btnSaveProgram ? btnSaveProgram.innerHTML : '';
+
+          try {
+            if (btnSaveProgram) {
+              btnSaveProgram.disabled = true;
+              btnSaveProgram.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
 
             const dataProgram = {
-              progBannerTitle: getVal('progBannerTitle'),
-              progBannerDesc: getVal('progBannerDesc'),
+              progBannerTitle: getVal('progBannerTitle', 'Program Pendidikan'),
+              progBannerDesc: getSafeTextareaValue('progBannerDesc'),
 
-              sdiAkreditasi: getVal('sdiAkreditasi'),
+              sdiAkreditasi: getVal('sdiAkreditasi', 'A'),
               sdiKurikulum: getVal('sdiKurikulum'),
-              sdiDesc: getVal('sdiDesc'),
-              sdiVisi: getVal('sdiVisi'),
-              sdiMisi: getVal('sdiMisi'),
+              sdiDesc: getSafeTextareaValue('sdiDesc'),
+              sdiVisi: getSafeTextareaValue('sdiVisi'),
+              sdiMisi: getSafeTextareaValue('sdiMisi'),
               sdiUnggulan: getVal('sdiUnggulan'),
               sdiEkskul: getVal('sdiEkskul'),
               sdiFasilitas: getVal('sdiFasilitas'),
 
-              miAkreditasi: getVal('miAkreditasi'),
+              miAkreditasi: getVal('miAkreditasi', 'A'),
               miKurikulum: getVal('miKurikulum'),
-              miDesc: getVal('miDesc'),
-              miVisi: getVal('miVisi'),
-              miMisi: getVal('miMisi'),
+              miDesc: getSafeTextareaValue('miDesc'),
+              miVisi: getSafeTextareaValue('miVisi'),
+              miMisi: getSafeTextareaValue('miMisi'),
               miUnggulan: getVal('miUnggulan'),
               miEkskul: getVal('miEkskul'),
               miFasilitas: getVal('miFasilitas'),
 
-              mtsAkreditasi: getVal('mtsAkreditasi'),
+              mtsAkreditasi: getVal('mtsAkreditasi', 'A'),
               mtsKurikulum: getVal('mtsKurikulum'),
-              mtsDesc: getVal('mtsDesc'),
-              mtsVisi: getVal('mtsVisi'),
-              mtsMisi: getVal('mtsMisi'),
+              mtsDesc: getSafeTextareaValue('mtsDesc'),
+              mtsVisi: getSafeTextareaValue('mtsVisi'),
+              mtsMisi: getSafeTextareaValue('mtsMisi'),
               mtsUnggulan: getVal('mtsUnggulan'),
               mtsEkskul: getVal('mtsEkskul'),
               mtsFasilitas: getVal('mtsFasilitas'),
 
-              maAkreditasi: getVal('maAkreditasi'),
+              maAkreditasi: getVal('maAkreditasi', 'A'),
               maKurikulum: getVal('maKurikulum'),
-              maDesc: getVal('maDesc'),
-              maVisi: getVal('maVisi'),
-              maMisi: getVal('maMisi'),
+              maDesc: getSafeTextareaValue('maDesc'),
+              maVisi: getSafeTextareaValue('maVisi'),
+              maMisi: getSafeTextareaValue('maMisi'),
               maUnggulan: getVal('maUnggulan'),
               maEkskul: getVal('maEkskul'),
               maFasilitas: getVal('maFasilitas'),
 
-              ponpesAkreditasi: getVal('ponpesAkreditasi'),
+              ponpesAkreditasi: getVal('ponpesAkreditasi', 'A'),
               ponpesKurikulum: getVal('ponpesKurikulum'),
-              ponpesDesc: getVal('ponpesDesc'),
-              ponpesVisi: getVal('ponpesVisi'),
-              ponpesMisi: getVal('ponpesMisi'),
+              ponpesDesc: getSafeTextareaValue('ponpesDesc'),
+              ponpesVisi: getSafeTextareaValue('ponpesVisi'),
+              ponpesMisi: getSafeTextareaValue('ponpesMisi'),
               ponpesUnggulan: getVal('ponpesUnggulan'),
               ponpesEkskul: getVal('ponpesEkskul'),
               ponpesFasilitas: getVal('ponpesFasilitas')
             };
 
+            const unitsPayload = [
+              {
+                id: 1,
+                name: 'SD Islam (SDI) AL KINDY',
+                accreditation: dataProgram.sdiAkreditasi,
+                curriculum: dataProgram.sdiKurikulum,
+                description: dataProgram.sdiDesc,
+                vision: dataProgram.sdiVisi,
+                mission: dataProgram.sdiMisi,
+                featured_programs: dataProgram.sdiUnggulan,
+                extracurricular: dataProgram.sdiEkskul,
+                facilities: dataProgram.sdiFasilitas
+              },
+              {
+                id: 2,
+                name: 'Madrasah Ibtidaiyah (MI) Nahjul Huda',
+                accreditation: dataProgram.miAkreditasi,
+                curriculum: dataProgram.miKurikulum,
+                description: dataProgram.miDesc,
+                vision: dataProgram.miVisi,
+                mission: dataProgram.miMisi,
+                featured_programs: dataProgram.miUnggulan,
+                extracurricular: dataProgram.miEkskul,
+                facilities: dataProgram.miFasilitas
+              },
+              {
+                id: 3,
+                name: 'Madrasah Tsanawiyah (MTs) Nahjul Huda',
+                accreditation: dataProgram.mtsAkreditasi,
+                curriculum: dataProgram.mtsKurikulum,
+                description: dataProgram.mtsDesc,
+                vision: dataProgram.mtsVisi,
+                mission: dataProgram.mtsMisi,
+                featured_programs: dataProgram.mtsUnggulan,
+                extracurricular: dataProgram.mtsEkskul,
+                facilities: dataProgram.mtsFasilitas
+              },
+              {
+                id: 4,
+                name: 'Madrasah Aliyah (MA) Nahjul Huda',
+                accreditation: dataProgram.maAkreditasi,
+                curriculum: dataProgram.maKurikulum,
+                description: dataProgram.maDesc,
+                vision: dataProgram.maVisi,
+                mission: dataProgram.maMisi,
+                featured_programs: dataProgram.maUnggulan,
+                extracurricular: dataProgram.maEkskul,
+                facilities: dataProgram.maFasilitas
+              },
+              {
+                id: 5,
+                name: 'Pondok Pesantren Assurur',
+                accreditation: dataProgram.ponpesAkreditasi,
+                curriculum: dataProgram.ponpesKurikulum,
+                description: dataProgram.ponpesDesc,
+                vision: dataProgram.ponpesVisi,
+                mission: dataProgram.ponpesMisi,
+                featured_programs: dataProgram.ponpesUnggulan,
+                extracurricular: dataProgram.ponpesEkskul,
+                facilities: dataProgram.ponpesFasilitas
+              }
+            ];
+
+            console.log('[Kelola Program] Mengirim 5 unit pendidikan ke Supabase education_units...');
+
+            for (const unit of unitsPayload) {
+              let { error } = await supa
+                .from('education_units')
+                .update(unit)
+                .eq('id', unit.id);
+
+              if (error) {
+                // Fallback upsert jika baris belum dibuat
+                const upRes = await supa.from('education_units').upsert(unit, { onConflict: 'id' });
+                if (upRes.error) throw upRes.error;
+              }
+            }
+
+            // Simpan cache lokal setelah Supabase sukses
             localStorage.setItem('cmsData_program', JSON.stringify(dataProgram));
-            alert('Sukses! Perubahan Konten Program berhasil disimpan. Silakan cek halaman Program.');
-          });
+
+            alert('Sukses! Data program pendidikan berhasil diperbarui di database publik Supabase.');
+          } catch(error) {
+            console.error("Supabase Error [Kelola Program]:", error);
+            let msg = "Gagal menyimpan ke server: " + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += "\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE education_units DISABLE ROW LEVEL SECURITY;)";
+            }
+            alert(msg);
+          } finally {
+            if (btnSaveProgram) {
+              btnSaveProgram.disabled = false;
+              btnSaveProgram.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', window.loadProgramData);
+        } else {
+          window.loadProgramData();
         }
-      });
+      })();
     </script>
 
-    <!-- Script CRUD CMS Data Fasilitas (localStorage) -->
+    <!-- Script CRUD CMS Data Fasilitas (Supabase & localStorage) -->
     <script>
       (function() {
         const STORAGE_KEY = 'cmsData_fasilitas_list';
-
-        const defaultFasilitas = [
-          {
-            id: 'fas-1',
-            nama: "Masjid Jami' Assurur",
-            deskripsi: "Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.",
-            images: [
-              "/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg",
-              "/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg"
-            ]
-          },
-          {
-            id: 'fas-2',
-            nama: "Lapangan Upacara",
-            deskripsi: "Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.",
-            images: [
-              "/media/fasilitas/umum/lapangan_upacara_umum.jpg",
-              "/media/fasilitas/umum/lapangan_upacara_umum_1.jpg"
-            ]
-          },
-          {
-            id: 'fas-3',
-            nama: "Laboratorium Komputer",
-            deskripsi: "Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.",
-            images: [
-              "/media/fasilitas/umum/lab_komputer_umum.jpg",
-              "/media/fasilitas/umum/lab_komputer_umum_1.jpg",
-              "/media/fasilitas/umum/lab_komputer_umum_2.jpg"
-            ]
-          },
-          {
-            id: 'fas-4',
-            nama: "Lapangan Bola Basket",
-            deskripsi: "Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.",
-            images: [
-              "/media/fasilitas/umum/lapangan_bola_basket_umum.jpg"
-            ]
-          }
-        ];
-
-        function getFasilitasList() {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultFasilitas));
-            return defaultFasilitas;
-          }
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaultFasilitas;
-          } catch (e) {
-            console.error('Error parsing fasilitas list:', e);
-            return defaultFasilitas;
-          }
-        }
-
-        function saveFasilitasList(list) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-        }
-
+        let currentFasilitasList = [];
         let editingImages = [];
 
-        function renderAdminTable() {
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text || '';
+          return div.innerHTML;
+        }
+
+        // Render Tabel Fasilitas di Panel Admin
+        function renderAdminTable(list) {
           const tbody = document.getElementById('adminListFasilitas');
           if (!tbody) return;
 
-          const list = getFasilitasList();
-          if (!list || list.length === 0) {
+          const dataToRender = list || currentFasilitasList || [];
+          if (dataToRender.length === 0) {
             tbody.innerHTML = `
               <tr>
                 <td colspan="3" class="px-4 py-8 text-center text-gray-400">
@@ -3051,21 +3473,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             return;
           }
 
-          const escapeHtml = (text) => {
-            const div = document.createElement('div');
-            div.textContent = text || '';
-            return div.innerHTML;
-          };
-
-          tbody.innerHTML = list.map((item) => {
+          tbody.innerHTML = dataToRender.map((item) => {
+            const imgCount = (item.images || []).length;
             return `
               <tr class="border-b hover:bg-gray-50 transition">
                 <td class="px-4 py-3 font-semibold text-gray-800">
-                  ${escapeHtml(item.nama)}
-                  <span class="block text-xs text-gray-400 font-normal">Foto: ${(item.images || []).length} file</span>
+                  ${escapeHtml(item.nama || item.name)}
+                  <span class="block text-xs text-gray-400 font-normal">Foto: ${imgCount} file</span>
                 </td>
                 <td class="px-4 py-3 text-gray-600 max-w-md">
-                  <p class="line-clamp-2 text-xs sm:text-sm leading-relaxed">${escapeHtml(item.deskripsi)}</p>
+                  <p class="line-clamp-2 text-xs sm:text-sm leading-relaxed">${escapeHtml(item.deskripsi || item.description)}</p>
                 </td>
                 <td class="px-4 py-3 text-center">
                   <div class="flex items-center justify-center gap-2">
@@ -3082,31 +3499,81 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }).join('');
         }
 
+        // Muat List Fasilitas dari Supabase (dengan fallback localStorage)
+        window.loadFasilitasList = async function() {
+          // A. Fallback lokal
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            try {
+              currentFasilitasList = JSON.parse(raw);
+              renderAdminTable(currentFasilitasList);
+            } catch(e) {}
+          }
+
+          // B. Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data, error } = await supa.from('facilities').select('*').order('id', { ascending: true });
+              if (!error && data && data.length > 0) {
+                currentFasilitasList = data.map(f => ({
+                  id: f.id,
+                  nama: f.name,
+                  deskripsi: f.description,
+                  images: Array.isArray(f.images) && f.images.length > 0 ? f.images : (f.image_url ? [f.image_url] : [])
+                }));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFasilitasList));
+                renderAdminTable(currentFasilitasList);
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola Fasilitas] Gagal fetch Supabase:', e);
+          }
+        };
+
         window.cmsEditFasilitas = function(id) {
-          const list = getFasilitasList();
-          const item = list.find(f => f.id === id);
+          const item = currentFasilitasList.find(f => String(f.id) === String(id));
           if (!item) return;
 
           document.getElementById('fasId').value = item.id;
-          document.getElementById('fasNama').value = item.nama;
-          window.setTextareaValueWithAlignment('fasDeskripsi', item.deskripsi);
+          document.getElementById('fasNama').value = item.nama || item.name || '';
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('fasDeskripsi', item.deskripsi || item.description || '');
+          } else {
+            document.getElementById('fasDeskripsi').value = item.deskripsi || item.description || '';
+          }
           document.getElementById('fasImg1').value = '';
           document.getElementById('fasImg2').value = '';
           document.getElementById('fasImg3').value = '';
 
           editingImages = item.images ? [...item.images] : [];
 
-          document.getElementById('formFasTitle').textContent = `Edit Fasilitas: ${item.nama}`;
+          document.getElementById('formFasTitle').textContent = `Edit Fasilitas: ${item.nama || item.name}`;
           const area = document.getElementById('areaFormFasilitas');
           area.classList.remove('hidden');
           area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
 
-        window.cmsHapusFasilitas = function(id) {
-          if (!confirm('Apakah Anda yakin ingin menghapus data fasilitas ini?')) return;
-          const list = getFasilitasList().filter(f => f.id !== id);
-          saveFasilitasList(list);
-          renderAdminTable();
+        window.cmsHapusFasilitas = async function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus data fasilitas ini dari database publik?')) return;
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { error } = await supa.from('facilities').delete().eq('id', id);
+              if (error) throw error;
+            }
+            currentFasilitasList = currentFasilitasList.filter(f => String(f.id) !== String(id));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFasilitasList));
+            renderAdminTable(currentFasilitasList);
+            alert('Fasilitas berhasil dihapus dari database publik!');
+          } catch(error) {
+            console.error('[Kelola Fasilitas] Gagal menghapus:', error);
+            let msg = 'Gagal menghapus fasilitas: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE facilities DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          }
         };
 
         function readFileOrName(input, fallback) {
@@ -3123,106 +3590,142 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           });
         }
 
+        // Handler Simpan Fasilitas (Create / Update)
+        window.handleSimpanCardFasilitas = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const btnSimpan = (e && e.currentTarget) || document.getElementById('btnSimpanCardFasilitas');
+          const originalBtnHtml = btnSimpan ? btnSimpan.innerHTML : '';
+
+          try {
+            const nama = document.getElementById('fasNama').value.trim();
+            const deskripsi = (typeof window.getWrappedTextareaValue === 'function') 
+              ? window.getWrappedTextareaValue('fasDeskripsi') 
+              : document.getElementById('fasDeskripsi').value.trim();
+            const fasId = document.getElementById('fasId').value.trim();
+
+            if (!nama) {
+              alert('Nama fasilitas wajib diisi!');
+              document.getElementById('fasNama').focus();
+              return;
+            }
+
+            if (btnSimpan) {
+              btnSimpan.disabled = true;
+              btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const inp1 = document.getElementById('fasImg1');
+            const inp2 = document.getElementById('fasImg2');
+            const inp3 = document.getElementById('fasImg3');
+
+            const [img1, img2, img3] = await Promise.all([
+              readFileOrName(inp1, editingImages[0]),
+              readFileOrName(inp2, editingImages[1]),
+              readFileOrName(inp3, editingImages[2])
+            ]);
+
+            const images = [img1, img2, img3].filter(img => img && img.trim() !== '');
+            if (images.length === 0) {
+              images.push('/media/background/wallpaper_yayasan.jpg');
+            }
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
+
+            const payload = {
+              name: nama,
+              description: deskripsi,
+              image_url: images[0] || '',
+              images: images
+            };
+
+            console.log('[Kelola Fasilitas] Menyimpan ke Supabase...', { fasId, payload });
+
+            if (fasId && !isNaN(Number(fasId))) {
+              // Update mode dengan ID numerik
+              const { error } = await supa.from('facilities').update(payload).eq('id', Number(fasId));
+              if (error) throw error;
+            } else {
+              // Create mode
+              const { error } = await supa.from('facilities').insert([payload]);
+              if (error) throw error;
+            }
+
+            await window.loadFasilitasList();
+
+            const areaForm = document.getElementById('areaFormFasilitas');
+            if (areaForm) areaForm.classList.add('hidden');
+
+            alert('Sukses! Data fasilitas berhasil disimpan ke database publik Supabase.');
+          } catch(error) {
+            console.error('[Kelola Fasilitas] Error simpan Supabase:', error);
+            let msg = 'Gagal menyimpan fasilitas: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE facilities DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          } finally {
+            if (btnSimpan) {
+              btnSimpan.disabled = false;
+              btnSimpan.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        // Handler Simpan Banner Fasilitas
+        window.handleSimpanBannerFasilitas = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          const title = document.getElementById('fasBannerTitle')?.value || 'Fasilitas Yayasan';
+          const desc = (typeof window.getWrappedTextareaValue === 'function') 
+            ? window.getWrappedTextareaValue('fasBannerDesc') 
+            : (document.getElementById('fasBannerDesc')?.value || '');
+
+          const bannerData = { title, desc };
+          localStorage.setItem('cmsData_fasBanner', JSON.stringify(bannerData));
+          alert('Teks banner fasilitas berhasil disimpan!');
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-          renderAdminTable();
+          window.loadFasilitasList();
 
           const btnTambah = document.getElementById('btnTambahFasilitas');
           const btnBatal = document.getElementById('btnBatalFasilitas');
-          const btnSimpan = document.getElementById('btnSimpanCardFasilitas');
           const areaForm = document.getElementById('areaFormFasilitas');
 
           if (btnTambah) {
             btnTambah.addEventListener('click', () => {
               document.getElementById('fasId').value = '';
               document.getElementById('fasNama').value = '';
-              window.setTextareaValueWithAlignment('fasDeskripsi', '');
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment('fasDeskripsi', '');
+              } else {
+                document.getElementById('fasDeskripsi').value = '';
+              }
               document.getElementById('fasImg1').value = '';
               document.getElementById('fasImg2').value = '';
               document.getElementById('fasImg3').value = '';
               editingImages = [];
 
               document.getElementById('formFasTitle').textContent = 'Tambah Fasilitas Baru';
-              areaForm.classList.remove('hidden');
-              areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              if (areaForm) {
+                areaForm.classList.remove('hidden');
+                areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
             });
           }
 
-          if (btnBatal) {
+          if (btnBatal && areaForm) {
             btnBatal.addEventListener('click', () => {
               areaForm.classList.add('hidden');
-            });
-          }
-
-          if (btnSimpan) {
-            btnSimpan.addEventListener('click', async () => {
-              const nama = document.getElementById('fasNama').value.trim();
-              const deskripsi = window.getWrappedTextareaValue('fasDeskripsi');
-              const fasId = document.getElementById('fasId').value.trim();
-
-              if (!nama) {
-                alert('Nama fasilitas wajib diisi!');
-                document.getElementById('fasNama').focus();
-                return;
-              }
-
-              const inp1 = document.getElementById('fasImg1');
-              const inp2 = document.getElementById('fasImg2');
-              const inp3 = document.getElementById('fasImg3');
-
-              const [img1, img2, img3] = await Promise.all([
-                readFileOrName(inp1, editingImages[0]),
-                readFileOrName(inp2, editingImages[1]),
-                readFileOrName(inp3, editingImages[2])
-              ]);
-
-              const images = [img1, img2, img3].filter(img => img && img.trim() !== '');
-
-              // Fallback image if none specified
-              if (images.length === 0) {
-                images.push('/media/background/wallpaper_yayasan.jpg');
-              }
-
-              const list = getFasilitasList();
-
-              if (fasId) {
-                // Mode Update
-                const idx = list.findIndex(f => f.id === fasId);
-                if (idx !== -1) {
-                  list[idx] = {
-                    ...list[idx],
-                    nama: nama,
-                    deskripsi: deskripsi,
-                    images: images
-                  };
-                }
-              } else {
-                // Mode Create
-                const newFas = {
-                  id: 'fas-' + Date.now(),
-                  nama: nama,
-                  deskripsi: deskripsi,
-                  images: images
-                };
-                list.push(newFas);
-              }
-
-              saveFasilitasList(list);
-              renderAdminTable();
-              areaForm.classList.add('hidden');
-              alert('Sukses! Data fasilitas berhasil disimpan.');
-            });
-          }
-
-          // Logika Banner Fasilitas
-          const btnSimpanBannerFas = document.getElementById('btnSimpanBannerFasilitas');
-          if (btnSimpanBannerFas) {
-            btnSimpanBannerFas.addEventListener('click', () => {
-              const bannerData = {
-                title: document.getElementById('fasBannerTitle').value,
-                desc: window.getWrappedTextareaValue('fasBannerDesc')
-              };
-              localStorage.setItem('cmsData_fasBanner', JSON.stringify(bannerData));
-              alert('Teks banner fasilitas berhasil disimpan!');
             });
           }
 
@@ -3232,116 +3735,26 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             try {
               const data = JSON.parse(savedBannerFas);
               if (document.getElementById('fasBannerTitle') && data.title) document.getElementById('fasBannerTitle').value = data.title;
-              if (document.getElementById('fasBannerDesc') && data.desc) document.getElementById('fasBannerDesc').value = data.desc;
-            } catch (e) {
-              console.error('Error parsing cmsData_fasBanner:', e);
-            }
+              if (document.getElementById('fasBannerDesc') && data.desc) {
+                if (typeof window.setTextareaValueWithAlignment === 'function') {
+                  window.setTextareaValueWithAlignment('fasBannerDesc', data.desc);
+                } else {
+                  document.getElementById('fasBannerDesc').value = data.desc;
+                }
+              }
+            } catch (e) {}
           }
         });
       })();
     </script>
 
-    <!-- Script CRUD CMS Data Berita (localStorage) -->
+    <!-- Script CRUD CMS Data Berita (Supabase & localStorage) -->
     <script>
       (function() {
         const STORAGE_KEY_BERITA = 'cmsData_listBerita';
         const STORAGE_KEY_BANNER = 'cmsData_beritaBanner';
-
-        const defaultBerita = [
-          {
-            id: 'berita-1',
-            judul: 'Masya Allah! Siswa/Siswi SDI Al Kindy Sukses Khatam Hafalan 30 Juz',
-            tanggal: '2026-10-28',
-            jenjang: 'SDI',
-            deskripsiSingkat: 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz.',
-            deskripsiLengkap: 'Prestasi membanggakan kembali ditorehkan oleh siswa-siswi SDI Al Kindy. Melalui ketekunan dan bimbingan para asatidz, mereka berhasil menyelesaikan ujian hafalan Al-Qur\'an 30 Juz dengan predikat mumtaz.\n\nSemoga pencapaian mulia ini menjadi inspirasi dan motivasi bagi seluruh peserta didik lainnya dalam menumbuhkan kecintaan terhadap Al-Qur\'an serta mengamalkan nilai-nilainya dalam kehidupan sehari-hari.',
-            images: [
-              '/media/berita/sdi/selesai_30_juz_1.jpg',
-              '/media/berita/sdi/selesai_30_juz_2.jpg',
-              '/media/berita/sdi/selesai_30_juz_3.jpg'
-            ]
-          },
-          {
-            id: 'berita-2',
-            judul: 'Selamat! SDI Al Kindy Sabet Juara 1 Plate Champion Kategori U-12',
-            tanggal: '2026-10-28',
-            jenjang: 'SDI',
-            deskripsiSingkat: 'Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.',
-            deskripsiLengkap: 'Tim tangguh dari SDI Al Kindy berhasil membawa pulang trofi Juara 1 dalam kejuaraan Plate Champion Kategori U-12. Kegigihan, sportivitas, dan kerja keras tim membuktikan bahwa siswa kita mampu bersaing dan berprestasi di tingkat antar sekolah.\n\nSelamat atas kerja keras dan semangat pantang menyerah tim! Prestasi ini membanggakan seluruh civitas Yayasan Nahjul Huda.',
-            images: [
-              '/media/berita/sdi/juara_1_plate_champion_category_u-12.jpg'
-            ]
-          },
-          {
-            id: 'berita-3',
-            judul: 'Visitasi Akreditasi MTs Nahjul Huda 2026/2027',
-            tanggal: '2026-10-24',
-            jenjang: 'MTs',
-            deskripsiSingkat: 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.',
-            deskripsiLengkap: 'MTs Nahjul Huda menerima kunjungan visitasi akreditasi dari Tim Asesor BAN-PDM Provinsi DKI Jakarta sebagai wujud komitmen peningkatan mutu dan kualitas pendidikan madrasah.\n\nSeluruh dewan guru, staf, serta siswa/siswi menyambut baik proses asesmen komprehensif ini untuk terus menghadirkan ekosistem belajar yang unggul dan berdaya saing.',
-            images: [
-              '/media/berita/mts/Akreditasi%20MTs%202026-2027.jpg',
-              '/media/berita/mts/Akreditasi%20MTs%202026-2027_2.jpg'
-            ]
-          },
-          {
-            id: 'berita-4',
-            judul: 'Simulasi Pemadam Kebakaran Bersama Damkar Sektor 5',
-            tanggal: '2026-10-15',
-            jenjang: 'MTs',
-            deskripsiSingkat: 'Pelatihan kesiapsiagaan mitigasi bencana dan simulasi pemadaman kebakaran bersama petugas Damkar Sektor 5 Kebon Jeruk.',
-            deskripsiLengkap: 'Pelatihan mitigasi tanggap darurat bencana kebakaran yang diselenggarakan bekerjasama dengan Suku Dinas Penanggulangan Kebakaran dan Penyelamatan (Damkar) Sektor 5 Kebon Jeruk.\n\nSeluruh siswa/siswi dan dewan guru mempraktikkan langsung teknik pemadaman api menggunakan APAR dan karung basah secara sigap dan aman.',
-            images: [
-              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_1.jpg',
-              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_2.jpg',
-              '/media/galeri/mts/sosialisasi_penanganan_kebakaran_3.jpg'
-            ]
-          },
-          {
-            id: 'berita-5',
-            judul: 'Upacara Peringatan Hari Santri Nasional 2026',
-            tanggal: '2026-10-22',
-            jenjang: 'Ponpes',
-            deskripsiSingkat: 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional 2026 di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur dengan khidmat.',
-            deskripsiLengkap: 'Dokumentasi kegiatan Upacara Peringatan Hari Santri Nasional tanggal 22 Oktober 2026 yang diselenggarakan di Kemenag, diikuti oleh santri dan asatidz Pondok Pesantren Assurur.\n\nSeluruh santri dan asatidz mengikuti rangkaian upacara dengan khidmat sebagai wujud penghormatan atas peran besar santri dalam perjuangan dan pembangunan bangsa.',
-            images: [
-              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag.jpg',
-              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_2.jpg',
-              '/media/berita/ponpes/Kegiatan_upacara_hari_santri_nasional_22_oktober_2026_di_kemenag_3.jpg'
-            ]
-          },
-          {
-            id: 'berita-6',
-            judul: 'Juara 2 Lomba Cerdas Cermat Antar Pesantren',
-            tanggal: '2026-10-28',
-            jenjang: 'Ponpes',
-            deskripsiSingkat: 'Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.',
-            deskripsiLengkap: 'Alhamdulillah, santri Pondok Pesantren Assurur berhasil menorehkan prestasi gemilang dengan meraih Juara 2 pada ajang Lomba Cerdas Cermat Antar Pesantren.\n\nPembinaan intensif di bidang qawaid, ilmu agama, dan wawasan umum membuktikan kualitas santri kita di tingkat wilayah.',
-            images: [
-              '/media/berita/ponpes/PEMENANG%20LOMBA.JPG'
-            ]
-          }
-        ];
-
-        function getBeritaList() {
-          const raw = localStorage.getItem(STORAGE_KEY_BERITA);
-          if (!raw) {
-            localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(defaultBerita));
-            return defaultBerita;
-          }
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaultBerita;
-          } catch (e) {
-            console.error('Error parsing berita list:', e);
-            return defaultBerita;
-          }
-        }
-
-        function saveBeritaList(list) {
-          localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(list));
-        }
+        let currentBeritaList = [];
+        let editingBeritaImages = [];
 
         function formatIndoDate(dateStr) {
           if (!dateStr) return '';
@@ -3358,14 +3771,18 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           return dateStr;
         }
 
-        let editingBeritaImages = [];
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text || '';
+          return div.innerHTML;
+        }
 
-        function renderAdminTableBerita() {
+        function renderAdminTableBerita(list) {
           const tbody = document.getElementById('adminListBerita');
           if (!tbody) return;
 
-          const list = getBeritaList();
-          if (!list || list.length === 0) {
+          const dataToRender = list || currentBeritaList || [];
+          if (dataToRender.length === 0) {
             tbody.innerHTML = `
               <tr>
                 <td colspan="4" class="px-4 py-8 text-center text-gray-400">
@@ -3376,25 +3793,19 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             return;
           }
 
-          const escapeHtml = (text) => {
-            const div = document.createElement('div');
-            div.textContent = text || '';
-            return div.innerHTML;
-          };
-
-          tbody.innerHTML = list.map((item) => {
-            const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
-            const imgCount = (item.images || []).length;
+          tbody.innerHTML = dataToRender.map((item) => {
+            const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal || item.date);
+            const imgCount = (item.images || []).length || (item.image_url ? 1 : 0);
 
             return `
               <tr class="border-b hover:bg-gray-50 transition">
                 <td class="px-4 py-3 font-semibold text-gray-800">
-                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="line-clamp-2">${escapeHtml(item.judul || item.title)}</div>
                   <span class="block text-xs text-gray-400 font-normal mt-0.5">Foto: ${imgCount} file</span>
                 </td>
                 <td class="px-4 py-3">
                   <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    ${escapeHtml(item.jenjang)}
+                    ${escapeHtml(item.jenjang || 'Semua')}
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
@@ -3415,35 +3826,93 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }).join('');
         }
 
+        // Muat Data Berita dari Supabase (dengan fallback localStorage)
+        window.loadBeritaList = async function() {
+          // A. Fallback dari localStorage
+          const raw = localStorage.getItem(STORAGE_KEY_BERITA);
+          if (raw) {
+            try {
+              currentBeritaList = JSON.parse(raw);
+              renderAdminTableBerita(currentBeritaList);
+            } catch(e) {}
+          }
+
+          // B. Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data, error } = await supa.from('news_posts').select('*').order('date', { ascending: false }).order('id', { ascending: false });
+              if (!error && data && data.length > 0) {
+                currentBeritaList = data.map(b => ({
+                  id: b.id,
+                  judul: b.title,
+                  jenjang: b.jenjang || 'Semua',
+                  tanggal: b.date || new Date().toISOString().split('T')[0],
+                  tanggalFormatted: formatIndoDate(b.date),
+                  deskripsiSingkat: b.summary || (b.content ? b.content.replace(/<[^>]*>?/gm, '').slice(0, 160) + '...' : ''),
+                  deskripsiLengkap: b.content || '',
+                  images: Array.isArray(b.images) && b.images.length > 0 ? b.images : (b.image_url ? [b.image_url] : [])
+                }));
+                localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(currentBeritaList));
+                renderAdminTableBerita(currentBeritaList);
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola Berita] Gagal fetch Supabase:', e);
+          }
+        };
+
         window.cmsEditBerita = function(id) {
-          const list = getBeritaList();
-          const item = list.find(b => b.id === id);
+          const item = currentBeritaList.find(b => String(b.id) === String(id));
           if (!item) return;
 
           document.getElementById('beritaId').value = item.id;
-          document.getElementById('beritaJudul').value = item.judul || '';
+          document.getElementById('beritaJudul').value = item.judul || item.title || '';
           document.getElementById('beritaJenjang').value = item.jenjang || 'SDI';
-          document.getElementById('beritaTanggal').value = item.tanggal || '';
-          window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', item.deskripsiSingkat || '');
-          window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', item.deskripsiLengkap || item.deskripsiSingkat || '');
+          document.getElementById('beritaTanggal').value = item.tanggal || item.date || '';
+
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', item.deskripsiSingkat || item.summary || '');
+            window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', item.deskripsiLengkap || item.content || '');
+          } else {
+            document.getElementById('beritaDeskripsiSingkat').value = item.deskripsiSingkat || '';
+            document.getElementById('beritaDeskripsiLengkap').value = item.deskripsiLengkap || '';
+          }
 
           document.getElementById('beritaImg1').value = '';
           document.getElementById('beritaImg2').value = '';
           document.getElementById('beritaImg3').value = '';
 
-          editingBeritaImages = item.images ? [...item.images] : [];
+          editingBeritaImages = item.images ? [...item.images] : (item.image_url ? [item.image_url] : []);
 
-          document.getElementById('formBeritaTitle').textContent = `Edit Berita: ${item.judul}`;
+          document.getElementById('formBeritaTitle').textContent = `Edit Berita: ${item.judul || item.title}`;
           const area = document.getElementById('areaFormBerita');
-          area.classList.remove('hidden');
-          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (area) {
+            area.classList.remove('hidden');
+            area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
         };
 
-        window.cmsHapusBerita = function(id) {
-          if (!confirm('Apakah Anda yakin ingin menghapus berita ini?')) return;
-          const list = getBeritaList().filter(b => b.id !== id);
-          saveBeritaList(list);
-          renderAdminTableBerita();
+        window.cmsHapusBerita = async function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus berita ini dari database publik?')) return;
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { error } = await supa.from('news_posts').delete().eq('id', id);
+              if (error) throw error;
+            }
+            currentBeritaList = currentBeritaList.filter(b => String(b.id) !== String(id));
+            localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(currentBeritaList));
+            renderAdminTableBerita(currentBeritaList);
+            alert('Berita berhasil dihapus dari database publik!');
+          } catch(error) {
+            console.error('[Kelola Berita] Gagal menghapus:', error);
+            let msg = 'Gagal menghapus berita: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE news_posts DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          }
         };
 
         function readBeritaFile(input, fallback) {
@@ -3460,12 +3929,158 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           });
         }
 
+        // Handler Simpan Berita (Create / Update)
+        window.handleSimpanCardBerita = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const btnSimpan = (e && e.currentTarget) || document.getElementById('btnSimpanCardBerita');
+          const originalBtnHtml = btnSimpan ? btnSimpan.innerHTML : '';
+
+          try {
+            const judul = document.getElementById('beritaJudul').value.trim();
+            const jenjang = document.getElementById('beritaJenjang').value;
+            const tanggal = document.getElementById('beritaTanggal').value;
+            const deskripsiSingkat = (typeof window.getWrappedTextareaValue === 'function')
+              ? window.getWrappedTextareaValue('beritaDeskripsiSingkat')
+              : document.getElementById('beritaDeskripsiSingkat').value.trim();
+            const deskripsiLengkap = (typeof window.getWrappedTextareaValue === 'function')
+              ? window.getWrappedTextareaValue('beritaDeskripsiLengkap')
+              : (document.getElementById('beritaDeskripsiLengkap').value.trim() || deskripsiSingkat);
+            const beritaId = document.getElementById('beritaId').value.trim();
+
+            if (!judul) {
+              alert('Judul berita wajib diisi!');
+              document.getElementById('beritaJudul').focus();
+              return;
+            }
+
+            if (!tanggal) {
+              alert('Tanggal publikasi wajib diisi!');
+              document.getElementById('beritaTanggal').focus();
+              return;
+            }
+
+            if (!deskripsiSingkat) {
+              alert('Deskripsi singkat wajib diisi!');
+              document.getElementById('beritaDeskripsiSingkat').focus();
+              return;
+            }
+
+            if (btnSimpan) {
+              btnSimpan.disabled = true;
+              btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const inp1 = document.getElementById('beritaImg1');
+            const inp2 = document.getElementById('beritaImg2');
+            const inp3 = document.getElementById('beritaImg3');
+
+            const [img1, img2, img3] = await Promise.all([
+              readBeritaFile(inp1, editingBeritaImages[0]),
+              readBeritaFile(inp2, editingBeritaImages[1]),
+              readBeritaFile(inp3, editingBeritaImages[2])
+            ]);
+
+            const images = [img1, img2, img3].filter(img => img && img.trim() !== '');
+            if (images.length === 0) {
+              images.push('/media/background/wallpaper_yayasan.jpg');
+            }
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
+
+            // Payload lengkap
+            let payload = {
+              title: judul,
+              content: deskripsiLengkap || deskripsiSingkat,
+              date: tanggal,
+              image_url: images[0] || '',
+              jenjang: jenjang,
+              summary: deskripsiSingkat,
+              images: images
+            };
+
+            console.log('[Kelola Berita] Menyimpan berita ke Supabase...', { beritaId, payload });
+
+            let saveErr = null;
+            if (beritaId && !isNaN(Number(beritaId))) {
+              // Update mode
+              const res = await supa.from('news_posts').update(payload).eq('id', Number(beritaId));
+              saveErr = res.error;
+              // Jika kolom ekstra belum ada di database, coba dengan kolom standar
+              if (saveErr && saveErr.code === 'PGRST204') {
+                const resFallback = await supa.from('news_posts').update({
+                  title: judul,
+                  content: deskripsiLengkap || deskripsiSingkat,
+                  date: tanggal,
+                  image_url: images[0] || ''
+                }).eq('id', Number(beritaId));
+                saveErr = resFallback.error;
+              }
+            } else {
+              // Create mode
+              const res = await supa.from('news_posts').insert([payload]);
+              saveErr = res.error;
+              if (saveErr && saveErr.code === 'PGRST204') {
+                const resFallback = await supa.from('news_posts').insert([{
+                  title: judul,
+                  content: deskripsiLengkap || deskripsiSingkat,
+                  date: tanggal,
+                  image_url: images[0] || ''
+                }]);
+                saveErr = resFallback.error;
+              }
+            }
+
+            if (saveErr) throw saveErr;
+
+            await window.loadBeritaList();
+
+            const areaForm = document.getElementById('areaFormBerita');
+            if (areaForm) areaForm.classList.add('hidden');
+
+            alert('Sukses! Data berita berhasil disimpan ke database publik Supabase.');
+          } catch(error) {
+            console.error('[Kelola Berita] Error simpan Supabase:', error);
+            let msg = 'Gagal menyimpan berita: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE news_posts DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          } finally {
+            if (btnSimpan) {
+              btnSimpan.disabled = false;
+              btnSimpan.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        // Handler Simpan Banner Berita
+        window.handleSimpanBannerBerita = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          const title = document.getElementById('beritaBannerTitle')?.value || 'Berita & Pengumuman';
+          const desc = (typeof window.getWrappedTextareaValue === 'function')
+            ? window.getWrappedTextareaValue('beritaBannerDesc')
+            : (document.getElementById('beritaBannerDesc')?.value || '');
+
+          const bannerData = { title, desc };
+          localStorage.setItem(STORAGE_KEY_BANNER, JSON.stringify(bannerData));
+          alert('Teks banner berita berhasil disimpan!');
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-          renderAdminTableBerita();
+          window.loadBeritaList();
 
           const btnTambah = document.getElementById('btnTambahBerita');
           const btnBatal = document.getElementById('btnBatalBerita');
-          const btnSimpan = document.getElementById('btnSimpanCardBerita');
           const areaForm = document.getElementById('areaFormBerita');
 
           if (btnTambah) {
@@ -3475,116 +4090,29 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('beritaJenjang').value = 'SDI';
               const today = new Date().toISOString().split('T')[0];
               document.getElementById('beritaTanggal').value = today;
-              window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', '');
-              window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', '');
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', '');
+                window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', '');
+              } else {
+                document.getElementById('beritaDeskripsiSingkat').value = '';
+                document.getElementById('beritaDeskripsiLengkap').value = '';
+              }
               document.getElementById('beritaImg1').value = '';
               document.getElementById('beritaImg2').value = '';
               document.getElementById('beritaImg3').value = '';
               editingBeritaImages = [];
 
               document.getElementById('formBeritaTitle').textContent = 'Tambah Berita Baru';
-              areaForm.classList.remove('hidden');
-              areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              if (areaForm) {
+                areaForm.classList.remove('hidden');
+                areaForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
             });
           }
 
-          if (btnBatal) {
+          if (btnBatal && areaForm) {
             btnBatal.addEventListener('click', () => {
               areaForm.classList.add('hidden');
-            });
-          }
-
-          if (btnSimpan) {
-            btnSimpan.addEventListener('click', async () => {
-              const judul = document.getElementById('beritaJudul').value.trim();
-              const jenjang = document.getElementById('beritaJenjang').value;
-              const tanggal = document.getElementById('beritaTanggal').value;
-              const deskripsiSingkat = window.getWrappedTextareaValue('beritaDeskripsiSingkat');
-              const deskripsiLengkap = window.getWrappedTextareaValue('beritaDeskripsiLengkap') || deskripsiSingkat;
-              const beritaId = document.getElementById('beritaId').value.trim();
-
-              if (!judul) {
-                alert('Judul berita wajib diisi!');
-                document.getElementById('beritaJudul').focus();
-                return;
-              }
-
-              if (!tanggal) {
-                alert('Tanggal publikasi wajib diisi!');
-                document.getElementById('beritaTanggal').focus();
-                return;
-              }
-
-              if (!deskripsiSingkat) {
-                alert('Deskripsi singkat wajib diisi!');
-                document.getElementById('beritaDeskripsiSingkat').focus();
-                return;
-              }
-
-              const inp1 = document.getElementById('beritaImg1');
-              const inp2 = document.getElementById('beritaImg2');
-              const inp3 = document.getElementById('beritaImg3');
-
-              const [img1, img2, img3] = await Promise.all([
-                readBeritaFile(inp1, editingBeritaImages[0]),
-                readBeritaFile(inp2, editingBeritaImages[1]),
-                readBeritaFile(inp3, editingBeritaImages[2])
-              ]);
-
-              const images = [img1, img2, img3].filter(img => img && img.trim() !== '');
-              if (images.length === 0) {
-                images.push('/media/background/wallpaper_yayasan.jpg');
-              }
-
-              const list = getBeritaList();
-
-              if (beritaId) {
-                // Mode Update
-                const idx = list.findIndex(b => b.id === beritaId);
-                if (idx !== -1) {
-                  list[idx] = {
-                    ...list[idx],
-                    judul,
-                    jenjang,
-                    tanggal,
-                    tanggalFormatted: formatIndoDate(tanggal),
-                    deskripsiSingkat,
-                    deskripsiLengkap,
-                    images
-                  };
-                }
-              } else {
-                // Mode Create
-                const newBerita = {
-                  id: 'berita-' + Date.now(),
-                  judul,
-                  jenjang,
-                  tanggal,
-                  tanggalFormatted: formatIndoDate(tanggal),
-                  deskripsiSingkat,
-                  deskripsiLengkap,
-                  images
-                };
-                list.unshift(newBerita);
-              }
-
-              saveBeritaList(list);
-              renderAdminTableBerita();
-              areaForm.classList.add('hidden');
-              alert('Sukses! Data berita berhasil disimpan.');
-            });
-          }
-
-          // Logika Banner Berita
-          const btnSimpanBannerBerita = document.getElementById('btnSimpanBannerBerita');
-          if (btnSimpanBannerBerita) {
-            btnSimpanBannerBerita.addEventListener('click', () => {
-              const bannerData = {
-                title: document.getElementById('beritaBannerTitle').value,
-                desc: window.getWrappedTextareaValue('beritaBannerDesc')
-              };
-              localStorage.setItem(STORAGE_KEY_BANNER, JSON.stringify(bannerData));
-              alert('Teks banner berita berhasil disimpan!');
             });
           }
 
@@ -3594,93 +4122,29 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             try {
               const data = JSON.parse(savedBannerBerita);
               if (document.getElementById('beritaBannerTitle') && data.title) document.getElementById('beritaBannerTitle').value = data.title;
-              if (document.getElementById('beritaBannerDesc') && data.desc) document.getElementById('beritaBannerDesc').value = data.desc;
-            } catch (e) {
-              console.error('Error parsing cmsData_beritaBanner:', e);
-            }
+              if (document.getElementById('beritaBannerDesc') && data.desc) {
+                if (typeof window.setTextareaValueWithAlignment === 'function') {
+                  window.setTextareaValueWithAlignment('beritaBannerDesc', data.desc);
+                } else {
+                  document.getElementById('beritaBannerDesc').value = data.desc;
+                }
+              }
+            } catch (e) {}
           }
         });
       })();
     </script>
-              <!-- Script CRUD Galeri (Ekstrakurikuler & Kegiatan) -->
+    <!-- Script CRUD Galeri (Ekstrakurikuler & Kegiatan) (Supabase & localStorage) -->
     <script>
       (function() {
         const KEY_ESKUL = 'cmsData_listEskul';
         const KEY_KEGIATAN = 'cmsData_listKegiatan';
         const KEY_BANNER = 'cmsData_galeriBanner';
 
-        const defaultEskul = [
-          {
-            id: 'eskul-1',
-            judul: 'Latihan Rutin Ekstrakurikuler Futsal',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Wadah penyaluran bakat olahraga untuk membentuk karakter sportif santri dan siswa.',
-            media: '/media/galeri/mts/ekstrakurikuler_futsal_1.jpg'
-          },
-          {
-            id: 'eskul-2',
-            judul: 'Marching Band Gema Nahjul Huda',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Melatih kedisiplinan dan kreativitas seni bermusik siswa/siswi MTs.',
-            media: '/media/galeri/mts/ekstrakurikuler_drum_band.mp4'
-          }
-        ];
-
-        const defaultKegiatan = [
-          {
-            id: 'kegiatan-1',
-            judul: 'Peringatan Isra Mi\'raj Bersama Ustadz Maulana',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Momen khidmat menghadirkan tausiyah dan nasihat kebaikan dari Ustadz Maulana.',
-            media: '/media/galeri/mts/peringatan_isra_miraj_oleh_ustadz_maulana_1.jpg'
-          },
-          {
-            id: 'kegiatan-2',
-            judul: 'Pembiasaan Sholat Dhuha Berjamaah Sebelum KBM',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Rutinitas pembiasaan sholat sunnah dhuha dan tadarus Al-Qur\'an sebelum proses belajar mengajar.',
-            media: '/media/galeri/mts/sholat_dhuha_sebelum_KBM_di_mulai.jpg'
-          },
-          {
-            id: 'kegiatan-3',
-            judul: 'Pemilihan Ketua & Wakil Ketua OSIS MTs Periode 2026/2027',
-            jenjang: 'MTs',
-            tanggal: '2026-10-21',
-            deskripsi: 'Pesta demokrasi sekolah untuk melatih kepemimpinan dan integritas berorganisasi siswa.',
-            media: '/media/galeri/mts/pemilihan_ketua_osis_periode_2026-2027_1.jpg'
-          },
-          {
-            id: 'kegiatan-4',
-            judul: 'Lomba Cerdas Cermat Santri',
-            jenjang: 'Ponpes',
-            tanggal: '2026-10-21',
-            deskripsi: 'Dokumentasi suasana perlombaan dan dewan juri pada ajang Cerdas Cermat.',
-            media: '/media/galeri/ponpes/juri_lomba.jpg'
-          }
-        ];
-
-        function getItems(key, defaults) {
-          const raw = localStorage.getItem(key);
-          if (!raw) {
-            localStorage.setItem(key, JSON.stringify(defaults));
-            return defaults;
-          }
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaults;
-          } catch (e) {
-            return defaults;
-          }
-        }
-
-        function saveItems(key, list) {
-          localStorage.setItem(key, JSON.stringify(list));
-        }
+        let currentEskulList = [];
+        let currentKegiatanList = [];
+        let editingEskulMedia = '';
+        let editingKegiatanMedia = '';
 
         function formatIndoDate(dateStr) {
           if (!dateStr) return '';
@@ -3721,19 +4185,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           });
         }
 
-        let editingEskulMedia = '';
-        let editingKegiatanMedia = '';
-
-        // 1. Render Ekstrakurikuler
-        function renderTableEskul() {
+        // Render Tabel Eskul
+        function renderTableEskul(list) {
           const tbody = document.getElementById('adminListEskul');
           if (!tbody) return;
-          const list = getItems(KEY_ESKUL, defaultEskul);
-          if (list.length === 0) {
+          const dataToRender = list || currentEskulList || [];
+          if (dataToRender.length === 0) {
             tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Belum ada data ekstrakurikuler.</td></tr>';
             return;
           }
-          tbody.innerHTML = list.map(item => {
+          tbody.innerHTML = dataToRender.map(item => {
             const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
             const mediaBadge = isVideo
               ? '<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
@@ -3741,16 +4202,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             return `
               <tr class="border-b hover:bg-gray-50 transition">
                 <td class="px-4 py-3 font-semibold text-gray-800">
-                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="line-clamp-2">${escapeHtml(item.judul || item.title)}</div>
                   <div class="mt-1">${mediaBadge}</div>
                 </td>
                 <td class="px-4 py-3">
                   <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    ${escapeHtml(item.jenjang)}
+                    ${escapeHtml(item.jenjang || 'Semua')}
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
-                  ${escapeHtml(formatIndoDate(item.tanggal))}
+                  ${escapeHtml(formatIndoDate(item.tanggal || item.created_at?.split('T')[0]))}
                 </td>
                 <td class="px-4 py-3 text-center">
                   <div class="flex items-center justify-center gap-2">
@@ -3767,40 +4228,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }).join('');
         }
 
-        window.cmsEditEskul = function(id) {
-          const list = getItems(KEY_ESKUL, defaultEskul);
-          const item = list.find(e => e.id === id);
-          if (!item) return;
-          document.getElementById('eskulId').value = item.id;
-          document.getElementById('eskulJudul').value = item.judul || '';
-          document.getElementById('eskulTanggal').value = item.tanggal || '';
-          document.getElementById('eskulJenjang').value = item.jenjang || 'Semua';
-          window.setTextareaValueWithAlignment('eskulDeskripsi', item.deskripsi || '');
-          document.getElementById('eskulMedia').value = '';
-          editingEskulMedia = item.media || '';
-          document.getElementById('formEskulTitle').textContent = `Edit Ekstrakurikuler: ${item.judul}`;
-          const area = document.getElementById('areaFormEskul');
-          area.classList.remove('hidden');
-          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        };
-
-        window.cmsHapusEskul = function(id) {
-          if (!confirm('Apakah Anda yakin ingin menghapus ekstrakurikuler ini?')) return;
-          const list = getItems(KEY_ESKUL, defaultEskul).filter(e => e.id !== id);
-          saveItems(KEY_ESKUL, list);
-          renderTableEskul();
-        };
-
-        // 2. Render Kegiatan
-        function renderTableKegiatan() {
+        // Render Tabel Kegiatan
+        function renderTableKegiatan(list) {
           const tbody = document.getElementById('adminListKegiatan');
           if (!tbody) return;
-          const list = getItems(KEY_KEGIATAN, defaultKegiatan);
-          if (list.length === 0) {
+          const dataToRender = list || currentKegiatanList || [];
+          if (dataToRender.length === 0) {
             tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Belum ada data kegiatan.</td></tr>';
             return;
           }
-          tbody.innerHTML = list.map(item => {
+          tbody.innerHTML = dataToRender.map(item => {
             const isVideo = item.media && item.media.toLowerCase().endsWith('.mp4');
             const mediaBadge = isVideo
               ? '<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>'
@@ -3808,16 +4245,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             return `
               <tr class="border-b hover:bg-gray-50 transition">
                 <td class="px-4 py-3 font-semibold text-gray-800">
-                  <div class="line-clamp-2">${escapeHtml(item.judul)}</div>
+                  <div class="line-clamp-2">${escapeHtml(item.judul || item.title)}</div>
                   <div class="mt-1">${mediaBadge}</div>
                 </td>
                 <td class="px-4 py-3">
                   <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    ${escapeHtml(item.jenjang)}
+                    ${escapeHtml(item.jenjang || 'Semua')}
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
-                  ${escapeHtml(formatIndoDate(item.tanggal))}
+                  ${escapeHtml(formatIndoDate(item.tanggal || item.created_at?.split('T')[0]))}
                 </td>
                 <td class="px-4 py-3 text-center">
                   <div class="flex items-center justify-center gap-2">
@@ -3834,38 +4271,307 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }).join('');
         }
 
-        window.cmsEditKegiatan = function(id) {
-          const list = getItems(KEY_KEGIATAN, defaultKegiatan);
-          const item = list.find(k => k.id === id);
-          if (!item) return;
-          document.getElementById('kegiatanId').value = item.id;
-          document.getElementById('kegiatanJudul').value = item.judul || '';
-          document.getElementById('kegiatanTanggal').value = item.tanggal || '';
-          document.getElementById('kegiatanJenjang').value = item.jenjang || 'Semua';
-          window.setTextareaValueWithAlignment('kegiatanDeskripsi', item.deskripsi || '');
-          document.getElementById('kegiatanMedia').value = '';
-          editingKegiatanMedia = item.media || '';
-          document.getElementById('formKegiatanTitle').textContent = `Edit Kegiatan: ${item.judul}`;
-          const area = document.getElementById('areaFormKegiatan');
-          area.classList.remove('hidden');
-          area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Muat Data Galeri dari Supabase
+        window.loadGaleriList = async function() {
+          // A. Fallback lokal
+          const rawEskul = localStorage.getItem(KEY_ESKUL);
+          if (rawEskul) {
+            try { currentEskulList = JSON.parse(rawEskul); renderTableEskul(currentEskulList); } catch(e) {}
+          }
+          const rawKegiatan = localStorage.getItem(KEY_KEGIATAN);
+          if (rawKegiatan) {
+            try { currentKegiatanList = JSON.parse(rawKegiatan); renderTableKegiatan(currentKegiatanList); } catch(e) {}
+          }
+
+          // B. Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data, error } = await supa.from('galleries').select('*').order('created_at', { ascending: false });
+              if (!error && data && data.length > 0) {
+                const eskulItems = [];
+                const kegiatanItems = [];
+
+                data.forEach(item => {
+                  const mapped = {
+                    id: item.id,
+                    judul: item.title,
+                    jenjang: item.jenjang || 'Semua',
+                    tanggal: item.event_date || item.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    deskripsi: item.description || '',
+                    media: item.image_url || '/media/background/wallpaper_yayasan.jpg'
+                  };
+                  if (item.category === 'ekskul') {
+                    eskulItems.push(mapped);
+                  } else {
+                    kegiatanItems.push(mapped);
+                  }
+                });
+
+                if (eskulItems.length > 0) {
+                  currentEskulList = eskulItems;
+                  localStorage.setItem(KEY_ESKUL, JSON.stringify(currentEskulList));
+                  renderTableEskul(currentEskulList);
+                }
+                if (kegiatanItems.length > 0) {
+                  currentKegiatanList = kegiatanItems;
+                  localStorage.setItem(KEY_KEGIATAN, JSON.stringify(currentKegiatanList));
+                  renderTableKegiatan(currentKegiatanList);
+                }
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola Galeri] Gagal fetch Supabase:', e);
+          }
         };
 
-        window.cmsHapusKegiatan = function(id) {
-          if (!confirm('Apakah Anda yakin ingin menghapus kegiatan ini?')) return;
-          const list = getItems(KEY_KEGIATAN, defaultKegiatan).filter(k => k.id !== id);
-          saveItems(KEY_KEGIATAN, list);
-          renderTableKegiatan();
+        window.cmsEditEskul = function(id) {
+          const item = currentEskulList.find(e => String(e.id) === String(id));
+          if (!item) return;
+          document.getElementById('eskulId').value = item.id;
+          document.getElementById('eskulJudul').value = item.judul || item.title || '';
+          document.getElementById('eskulTanggal').value = item.tanggal || '';
+          document.getElementById('eskulJenjang').value = item.jenjang || 'Semua';
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('eskulDeskripsi', item.deskripsi || '');
+          } else {
+            document.getElementById('eskulDeskripsi').value = item.deskripsi || '';
+          }
+          document.getElementById('eskulMedia').value = '';
+          editingEskulMedia = item.media || item.image_url || '';
+          document.getElementById('formEskulTitle').textContent = `Edit Ekstrakurikuler: ${item.judul || item.title}`;
+          const area = document.getElementById('areaFormEskul');
+          if (area) {
+            area.classList.remove('hidden');
+            area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        };
+
+        window.cmsHapusEskul = async function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus ekstrakurikuler ini dari database publik?')) return;
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { error } = await supa.from('galleries').delete().eq('id', id);
+              if (error) throw error;
+            }
+            currentEskulList = currentEskulList.filter(e => String(e.id) !== String(id));
+            localStorage.setItem(KEY_ESKUL, JSON.stringify(currentEskulList));
+            renderTableEskul(currentEskulList);
+            alert('Ekstrakurikuler berhasil dihapus dari database publik!');
+          } catch(error) {
+            console.error('[Kelola Galeri] Gagal menghapus:', error);
+            let msg = 'Gagal menghapus: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE galleries DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          }
+        };
+
+        window.cmsEditKegiatan = function(id) {
+          const item = currentKegiatanList.find(k => String(k.id) === String(id));
+          if (!item) return;
+          document.getElementById('kegiatanId').value = item.id;
+          document.getElementById('kegiatanJudul').value = item.judul || item.title || '';
+          document.getElementById('kegiatanTanggal').value = item.tanggal || '';
+          document.getElementById('kegiatanJenjang').value = item.jenjang || 'Semua';
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('kegiatanDeskripsi', item.deskripsi || '');
+          } else {
+            document.getElementById('kegiatanDeskripsi').value = item.deskripsi || '';
+          }
+          document.getElementById('kegiatanMedia').value = '';
+          editingKegiatanMedia = item.media || item.image_url || '';
+          document.getElementById('formKegiatanTitle').textContent = `Edit Kegiatan: ${item.judul || item.title}`;
+          const area = document.getElementById('areaFormKegiatan');
+          if (area) {
+            area.classList.remove('hidden');
+            area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        };
+
+        window.cmsHapusKegiatan = async function(id) {
+          if (!confirm('Apakah Anda yakin ingin menghapus kegiatan ini dari database publik?')) return;
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { error } = await supa.from('galleries').delete().eq('id', id);
+              if (error) throw error;
+            }
+            currentKegiatanList = currentKegiatanList.filter(k => String(k.id) !== String(id));
+            localStorage.setItem(KEY_KEGIATAN, JSON.stringify(currentKegiatanList));
+            renderTableKegiatan(currentKegiatanList);
+            alert('Kegiatan berhasil dihapus dari database publik!');
+          } catch(error) {
+            console.error('[Kelola Galeri] Gagal menghapus:', error);
+            let msg = 'Gagal menghapus: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE galleries DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          }
+        };
+
+        // Handler Simpan Ekstrakurikuler
+        window.handleSimpanEskul = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const btnSimpan = (e && e.currentTarget) || document.getElementById('btnSimpanEskul');
+          const originalBtnHtml = btnSimpan ? btnSimpan.innerHTML : '';
+
+          try {
+            const judul = document.getElementById('eskulJudul').value.trim();
+            const jenjang = document.getElementById('eskulJenjang').value;
+            const tanggal = document.getElementById('eskulTanggal').value;
+            const deskripsi = (typeof window.getWrappedTextareaValue === 'function')
+              ? window.getWrappedTextareaValue('eskulDeskripsi')
+              : document.getElementById('eskulDeskripsi').value.trim();
+            const eskulId = document.getElementById('eskulId').value.trim();
+
+            if (!judul) { alert('Judul ekstrakurikuler wajib diisi!'); return; }
+            if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
+            if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
+
+            if (btnSimpan) {
+              btnSimpan.disabled = true;
+              btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+            }
+
+            const media = await readMediaFile(document.getElementById('eskulMedia'), editingEskulMedia);
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+
+            const payload = {
+              title: judul,
+              image_url: media,
+              category: 'ekskul'
+            };
+
+            let saveErr = null;
+            if (eskulId && !isNaN(Number(eskulId))) {
+              const res = await supa.from('galleries').update(payload).eq('id', Number(eskulId));
+              saveErr = res.error;
+            } else {
+              const res = await supa.from('galleries').insert([payload]);
+              saveErr = res.error;
+            }
+
+            if (saveErr) throw saveErr;
+
+            await window.loadGaleriList();
+            const areaEskul = document.getElementById('areaFormEskul');
+            if (areaEskul) areaEskul.classList.add('hidden');
+
+            alert('Sukses! Data ekstrakurikuler berhasil disimpan ke database publik Supabase.');
+          } catch(error) {
+            console.error('[Kelola Galeri] Error simpan:', error);
+            let msg = 'Gagal menyimpan ekstrakurikuler: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE galleries DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          } finally {
+            if (btnSimpan) {
+              btnSimpan.disabled = false;
+              btnSimpan.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        // Handler Simpan Kegiatan
+        window.handleSimpanKegiatan = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          const btnSimpan = (e && e.currentTarget) || document.getElementById('btnSimpanKegiatan');
+          const originalBtnHtml = btnSimpan ? btnSimpan.innerHTML : '';
+
+          try {
+            const judul = document.getElementById('kegiatanJudul').value.trim();
+            const jenjang = document.getElementById('kegiatanJenjang').value;
+            const tanggal = document.getElementById('kegiatanTanggal').value;
+            const deskripsi = (typeof window.getWrappedTextareaValue === 'function')
+              ? window.getWrappedTextareaValue('kegiatanDeskripsi')
+              : document.getElementById('kegiatanDeskripsi').value.trim();
+            const kegiatanId = document.getElementById('kegiatanId').value.trim();
+
+            if (!judul) { alert('Judul kegiatan wajib diisi!'); return; }
+            if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
+            if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
+
+            if (btnSimpan) {
+              btnSimpan.disabled = true;
+              btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+            }
+
+            const media = await readMediaFile(document.getElementById('kegiatanMedia'), editingKegiatanMedia);
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+
+            const payload = {
+              title: judul,
+              image_url: media,
+              category: 'kegiatan'
+            };
+
+            let saveErr = null;
+            if (kegiatanId && !isNaN(Number(kegiatanId))) {
+              const res = await supa.from('galleries').update(payload).eq('id', Number(kegiatanId));
+              saveErr = res.error;
+            } else {
+              const res = await supa.from('galleries').insert([payload]);
+              saveErr = res.error;
+            }
+
+            if (saveErr) throw saveErr;
+
+            await window.loadGaleriList();
+            const areaKegiatan = document.getElementById('areaFormKegiatan');
+            if (areaKegiatan) areaKegiatan.classList.add('hidden');
+
+            alert('Sukses! Data kegiatan berhasil disimpan ke database publik Supabase.');
+          } catch(error) {
+            console.error('[Kelola Galeri] Error simpan kegiatan:', error);
+            let msg = 'Gagal menyimpan kegiatan: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE galleries DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          } finally {
+            if (btnSimpan) {
+              btnSimpan.disabled = false;
+              btnSimpan.innerHTML = originalBtnHtml;
+            }
+          }
+        };
+
+        // Handler Simpan Banner Galeri
+        window.handleSimpanBannerGaleri = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          const title = document.getElementById('galeriBannerTitle')?.value || 'Galeri Dokumentasi';
+          const desc = (typeof window.getWrappedTextareaValue === 'function')
+            ? window.getWrappedTextareaValue('galeriBannerDesc')
+            : (document.getElementById('galeriBannerDesc')?.value || '');
+
+          const bannerData = { title, desc };
+          localStorage.setItem(KEY_BANNER, JSON.stringify(bannerData));
+          alert('Teks banner galeri berhasil disimpan!');
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-          renderTableEskul();
-          renderTableKegiatan();
+          window.loadGaleriList();
 
-          // Handler Ekstrakurikuler
           const btnTambahEskul = document.getElementById('btnTambahEskul');
           const btnBatalEskul = document.getElementById('btnBatalEskul');
-          const btnSimpanEskul = document.getElementById('btnSimpanEskul');
           const areaEskul = document.getElementById('areaFormEskul');
 
           if (btnTambahEskul) {
@@ -3874,54 +4580,27 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('eskulJudul').value = '';
               document.getElementById('eskulJenjang').value = 'Semua';
               document.getElementById('eskulTanggal').value = new Date().toISOString().split('T')[0];
-              window.setTextareaValueWithAlignment('eskulDeskripsi', '');
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment('eskulDeskripsi', '');
+              } else {
+                document.getElementById('eskulDeskripsi').value = '';
+              }
               document.getElementById('eskulMedia').value = '';
               editingEskulMedia = '';
               document.getElementById('formEskulTitle').textContent = 'Tambah Ekstrakurikuler Baru';
-              areaEskul.classList.remove('hidden');
-              areaEskul.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              if (areaEskul) {
+                areaEskul.classList.remove('hidden');
+                areaEskul.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
             });
           }
 
-          if (btnBatalEskul) {
+          if (btnBatalEskul && areaEskul) {
             btnBatalEskul.addEventListener('click', () => areaEskul.classList.add('hidden'));
           }
 
-          if (btnSimpanEskul) {
-            btnSimpanEskul.addEventListener('click', async () => {
-              const judul = document.getElementById('eskulJudul').value.trim();
-              const jenjang = document.getElementById('eskulJenjang').value;
-              const tanggal = document.getElementById('eskulTanggal').value;
-              const deskripsi = window.getWrappedTextareaValue('eskulDeskripsi');
-              const eskulId = document.getElementById('eskulId').value.trim();
-
-              if (!judul) { alert('Judul ekstrakurikuler wajib diisi!'); return; }
-              if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
-              if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
-
-              const media = await readMediaFile(document.getElementById('eskulMedia'), editingEskulMedia);
-              const list = getItems(KEY_ESKUL, defaultEskul);
-
-              if (eskulId) {
-                const idx = list.findIndex(e => e.id === eskulId);
-                if (idx !== -1) {
-                  list[idx] = { ...list[idx], judul, jenjang, tanggal, deskripsi, media };
-                }
-              } else {
-                list.unshift({ id: 'eskul-' + Date.now(), judul, jenjang, tanggal, deskripsi, media });
-              }
-
-              saveItems(KEY_ESKUL, list);
-              renderTableEskul();
-              areaEskul.classList.add('hidden');
-              alert('Sukses! Data ekstrakurikuler berhasil disimpan.');
-            });
-          }
-
-          // Handler Kegiatan
           const btnTambahKegiatan = document.getElementById('btnTambahKegiatan');
           const btnBatalKegiatan = document.getElementById('btnBatalKegiatan');
-          const btnSimpanKegiatan = document.getElementById('btnSimpanKegiatan');
           const areaKegiatan = document.getElementById('areaFormKegiatan');
 
           if (btnTambahKegiatan) {
@@ -3930,61 +4609,23 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               document.getElementById('kegiatanJudul').value = '';
               document.getElementById('kegiatanJenjang').value = 'Semua';
               document.getElementById('kegiatanTanggal').value = new Date().toISOString().split('T')[0];
-              window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
+              } else {
+                document.getElementById('kegiatanDeskripsi').value = '';
+              }
               document.getElementById('kegiatanMedia').value = '';
               editingKegiatanMedia = '';
               document.getElementById('formKegiatanTitle').textContent = 'Tambah Kegiatan Baru';
-              areaKegiatan.classList.remove('hidden');
-              areaKegiatan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            });
-          }
-
-          if (btnBatalKegiatan) {
-            btnBatalKegiatan.addEventListener('click', () => areaKegiatan.classList.add('hidden'));
-          }
-
-          if (btnSimpanKegiatan) {
-            btnSimpanKegiatan.addEventListener('click', async () => {
-              const judul = document.getElementById('kegiatanJudul').value.trim();
-              const jenjang = document.getElementById('kegiatanJenjang').value;
-              const tanggal = document.getElementById('kegiatanTanggal').value;
-              const deskripsi = window.getWrappedTextareaValue('kegiatanDeskripsi');
-              const kegiatanId = document.getElementById('kegiatanId').value.trim();
-
-              if (!judul) { alert('Judul kegiatan wajib diisi!'); return; }
-              if (!tanggal) { alert('Tanggal wajib diisi!'); return; }
-              if (!deskripsi) { alert('Deskripsi singkat wajib diisi!'); return; }
-
-              const media = await readMediaFile(document.getElementById('kegiatanMedia'), editingKegiatanMedia);
-              const list = getItems(KEY_KEGIATAN, defaultKegiatan);
-
-              if (kegiatanId) {
-                const idx = list.findIndex(k => k.id === kegiatanId);
-                if (idx !== -1) {
-                  list[idx] = { ...list[idx], judul, jenjang, tanggal, deskripsi, media };
-                }
-              } else {
-                list.unshift({ id: 'kegiatan-' + Date.now(), judul, jenjang, tanggal, deskripsi, media });
+              if (areaKegiatan) {
+                areaKegiatan.classList.remove('hidden');
+                areaKegiatan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               }
-
-              saveItems(KEY_KEGIATAN, list);
-              renderTableKegiatan();
-              areaKegiatan.classList.add('hidden');
-              alert('Sukses! Data kegiatan berhasil disimpan.');
             });
           }
 
-          // Banner Galeri
-          const btnSimpanBannerGaleri = document.getElementById('btnSimpanBannerGaleri');
-          if (btnSimpanBannerGaleri) {
-            btnSimpanBannerGaleri.addEventListener('click', () => {
-              const bannerData = {
-                title: document.getElementById('galeriBannerTitle').value,
-                desc: window.getWrappedTextareaValue('galeriBannerDesc')
-              };
-              localStorage.setItem(KEY_BANNER, JSON.stringify(bannerData));
-              alert('Teks banner galeri berhasil disimpan!');
-            });
+          if (btnBatalKegiatan && areaKegiatan) {
+            btnBatalKegiatan.addEventListener('click', () => areaKegiatan.classList.add('hidden'));
           }
 
           const savedBanner = localStorage.getItem(KEY_BANNER);
@@ -3992,14 +4633,20 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             try {
               const b = JSON.parse(savedBanner);
               if (document.getElementById('galeriBannerTitle') && b.title) document.getElementById('galeriBannerTitle').value = b.title;
-              if (document.getElementById('galeriBannerDesc') && b.desc) document.getElementById('galeriBannerDesc').value = b.desc;
+              if (document.getElementById('galeriBannerDesc') && b.desc) {
+                if (typeof window.setTextareaValueWithAlignment === 'function') {
+                  window.setTextareaValueWithAlignment('galeriBannerDesc', b.desc);
+                } else {
+                  document.getElementById('galeriBannerDesc').value = b.desc;
+                }
+              }
             } catch (e) {}
           }
         });
       })();
     </script>
   
-    <!-- Script CRUD Kelola PPDB & Kontak (localStorage) -->
+    <!-- Script CRUD Kelola PPDB & Kontak (Supabase & localStorage) -->
     <script>
       (function() {
         function escapeHtml(text) {
@@ -4032,9 +4679,8 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         };
 
-        
         // ==========================================
-        // FITUR KELOLA KONTAK (CMS & SUPABASE READY)
+        // FITUR KELOLA KONTAK (CMS & SUPABASE)
         // ==========================================
         const KEY_CONTACT = 'cmsData_contact';
         const defaultContactData = {
@@ -4050,7 +4696,6 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         function getContactData() {
           const raw = localStorage.getItem(KEY_CONTACT);
           if (!raw) {
-            localStorage.setItem(KEY_CONTACT, JSON.stringify(defaultContactData));
             return defaultContactData;
           }
           try {
@@ -4060,8 +4705,31 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         }
 
-        window.loadContactFields = function() {
-          const data = getContactData();
+        window.loadContactFields = async function() {
+          let data = getContactData();
+
+          // Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data: dbContact, error } = await supa.from('contact_settings').select('*').eq('id', 1).maybeSingle();
+              if (!error && dbContact) {
+                data = {
+                  address: dbContact.address || data.address,
+                  phone: dbContact.phone || data.phone,
+                  wa1: dbContact.whatsapp1 || data.wa1,
+                  wa2: dbContact.whatsapp2 || data.wa2,
+                  email: dbContact.email || data.email,
+                  operational_hours: dbContact.operational_hours || data.operational_hours,
+                  maps_url: dbContact.maps_embed_url || data.maps_url
+                };
+                localStorage.setItem(KEY_CONTACT, JSON.stringify(data));
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola Kontak] Gagal fetch Supabase:', e);
+          }
+
           const elAddress = document.getElementById('contact_address');
           const elPhone = document.getElementById('contact_phone');
           const elWa1 = document.getElementById('contact_wa1');
@@ -4079,59 +4747,98 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (elMaps) elMaps.value = data.maps_url || '';
         };
 
-        window.saveContactData = async function() {
-          const elAddress = document.getElementById('contact_address');
-          const elPhone = document.getElementById('contact_phone');
-          const elWa1 = document.getElementById('contact_wa1');
-          const elWa2 = document.getElementById('contact_wa2');
-          const elEmail = document.getElementById('contact_email');
-          const elHours = document.getElementById('contact_hours');
-          const elMaps = document.getElementById('contact_maps_url');
-
-          const contactData = {
-            address: elAddress ? elAddress.value.trim() : '',
-            phone: elPhone ? elPhone.value.trim() : '',
-            wa1: elWa1 ? elWa1.value.trim() : '',
-            wa2: elWa2 ? elWa2.value.trim() : '',
-            email: elEmail ? elEmail.value.trim() : '',
-            operational_hours: elHours ? elHours.value.trim() : '',
-            maps_url: elMaps ? elMaps.value.trim() : ''
-          };
-
-          // Simpan ke localStorage
-          localStorage.setItem(KEY_CONTACT, JSON.stringify(contactData));
-
-          // Sinkronisasi ke profil jika ada
-          try {
-            const rawProfile = localStorage.getItem('cmsData_profile');
-            const prof = rawProfile ? JSON.parse(rawProfile) : {};
-            prof.address = contactData.address;
-            prof.phone = contactData.phone;
-            prof.email = contactData.email;
-            prof.operational_hours = contactData.operational_hours;
-            localStorage.setItem('cmsData_profile', JSON.stringify(prof));
-          } catch(e) {}
-
-          // Simpan ke Supabase jika client aktif
-          if (window.supabaseClient) {
-            try {
-              await window.supabaseClient.from('profile_settings').upsert({
-                id: 1,
-                address: contactData.address,
-                phone: contactData.phone + ' | WA: ' + contactData.wa1,
-                email: contactData.email,
-                operational_hours: contactData.operational_hours
-              });
-            } catch(err) {
-              console.warn('Supabase sync warning:', err);
-            }
+        window.saveContactData = async function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
           }
 
-          alert('Sukses! Informasi Kontak berhasil disimpan dan siap tampil di website.');
+          const btnSave = (e && e.currentTarget) || document.querySelector('#formAdminKontak button[type="submit"]');
+          const originalBtnHtml = btnSave ? btnSave.innerHTML : '';
+
+          try {
+            if (btnSave) {
+              btnSave.disabled = true;
+              btnSave.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            const elAddress = document.getElementById('contact_address');
+            const elPhone = document.getElementById('contact_phone');
+            const elWa1 = document.getElementById('contact_wa1');
+            const elWa2 = document.getElementById('contact_wa2');
+            const elEmail = document.getElementById('contact_email');
+            const elHours = document.getElementById('contact_hours');
+            const elMaps = document.getElementById('contact_maps_url');
+
+            const contactData = {
+              address: elAddress ? elAddress.value.trim() : '',
+              phone: elPhone ? elPhone.value.trim() : '',
+              wa1: elWa1 ? elWa1.value.trim() : '',
+              wa2: elWa2 ? elWa2.value.trim() : '',
+              email: elEmail ? elEmail.value.trim() : '',
+              operational_hours: elHours ? elHours.value.trim() : '',
+              maps_url: elMaps ? elMaps.value.trim() : ''
+            };
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+
+            const contactPayload = {
+              id: 1,
+              address: contactData.address,
+              phone: contactData.phone,
+              whatsapp1: contactData.wa1,
+              whatsapp2: contactData.wa2,
+              email: contactData.email,
+              operational_hours: contactData.operational_hours,
+              maps_embed_url: contactData.maps_url,
+              updated_at: new Date().toISOString()
+            };
+
+            console.log('[Kelola Kontak] Mengirim ke Supabase contact_settings...', contactPayload);
+
+            let { data: resC, error: errC } = await supa
+              .from('contact_settings')
+              .update(contactPayload)
+              .eq('id', 1)
+              .select();
+
+            if (errC) {
+              const upRes = await supa.from('contact_settings').upsert(contactPayload, { onConflict: 'id' }).select();
+              errC = upRes.error;
+            }
+            if (errC) throw errC;
+
+            // Sinkronisasi ke profile_settings
+            await supa.from('profile_settings').update({
+              address: contactData.address,
+              phone: contactData.phone + (contactData.wa1 ? ' | WA: ' + contactData.wa1 : ''),
+              email: contactData.email,
+              operational_hours: contactData.operational_hours,
+              updated_at: new Date().toISOString()
+            }).eq('id', 1);
+
+            // Simpan cache lokal
+            localStorage.setItem(KEY_CONTACT, JSON.stringify(contactData));
+
+            alert('Sukses! Informasi Kontak berhasil disimpan ke database publik Supabase.');
+          } catch(error) {
+            console.error('[Kelola Kontak] Error simpan Supabase:', error);
+            let msg = 'Gagal menyimpan kontak: ' + (error.message || error);
+            if (error.code === '42501' || (error.message && error.message.toLowerCase().includes('row-level security'))) {
+              msg += '\n\n(Akses dibatasi oleh Row Level Security Supabase. Jalankan perintah SQL: ALTER TABLE contact_settings DISABLE ROW LEVEL SECURITY;)';
+            }
+            alert(msg);
+          } finally {
+            if (btnSave) {
+              btnSave.disabled = false;
+              btnSave.innerHTML = originalBtnHtml;
+            }
+          }
         };
 
         // ==========================================
-        // FITUR KELOLA INFO PPDB (CMS & SUPABASE READY)
+        // FITUR KELOLA INFO PPDB (CMS & SUPABASE)
         // ==========================================
         const KEY_PPDB = 'cmsData_ppdb';
         const defaultPPDB = {
@@ -4223,7 +4930,6 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         function getPPDBData() {
           const raw = localStorage.getItem(KEY_PPDB);
           if (!raw) {
-            localStorage.setItem(KEY_PPDB, JSON.stringify(defaultPPDB));
             return defaultPPDB;
           }
           try {
@@ -4244,14 +4950,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const items = window.syaratData[k] || [];
           
           if (items.length >= 8) {
-            if (btnAdd) {
-              btnAdd.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
-            }
+            if (btnAdd) btnAdd.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
             if (maxNotice) maxNotice.classList.remove('hidden');
           } else {
-            if (btnAdd) {
-              btnAdd.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
-            }
+            if (btnAdd) btnAdd.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
             if (maxNotice) maxNotice.classList.add('hidden');
           }
 
@@ -4303,19 +5005,47 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         };
 
-        window.loadPPDBFields = function() {
-          const data = getPPDBData();
-          
+        window.loadPPDBFields = async function() {
+          let data = getPPDBData();
+
+          // Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data: dbPPDB, error } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
+              if (!error && dbPPDB) {
+                if (dbPPDB.greeting_title) data.header_title = dbPPDB.greeting_title;
+                if (dbPPDB.greeting_desc || dbPPDB.requirements) data.header_subtitle = dbPPDB.greeting_desc || dbPPDB.requirements;
+                if (dbPPDB.contact_person && typeof dbPPDB.contact_person === 'object') {
+                  data = { ...data, ...dbPPDB.contact_person };
+                }
+                localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+              }
+            }
+          } catch(e) {
+            console.warn('[Kelola PPDB] Gagal fetch Supabase:', e);
+          }
+
           // Header Teks Sambutan PPDB
           const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
           const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
           if (elHeaderTitle) elHeaderTitle.value = data.header_title || defaultPPDB.header_title || '';
-          if (elHeaderSubtitle) window.setTextareaValueWithAlignment('ppdbAdmin_header_subtitle', data.header_subtitle || defaultPPDB.header_subtitle || '');
+          if (elHeaderSubtitle) {
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('ppdbAdmin_header_subtitle', data.header_subtitle || defaultPPDB.header_subtitle || '');
+            } else {
+              elHeaderSubtitle.value = data.header_subtitle || '';
+            }
+          }
 
           // Alamat Sekretariat Bersama di Bawah
           const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
           if (elSekretariat) {
-            window.setTextareaValueWithAlignment('ppdbAdmin_sekretariat_alamat', data.sekretariat_alamat || defaultPPDB.sekretariat_alamat);
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('ppdbAdmin_sekretariat_alamat', data.sekretariat_alamat || defaultPPDB.sekretariat_alamat);
+            } else {
+              elSekretariat.value = data.sekretariat_alamat || defaultPPDB.sekretariat_alamat;
+            }
           }
 
           ['sdi', 'mi', 'mts', 'ma', 'ponpes'].forEach(k => {
@@ -4323,7 +5053,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             if (!item) return;
 
             const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
-          const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
+            const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
             const elTglMulai = document.getElementById(`ppdbAdmin_${k}_tgl_mulai`);
             const elTglSelesai = document.getElementById(`ppdbAdmin_${k}_tgl_selesai`);
             const elJam = document.getElementById(`ppdbAdmin_${k}_jam`);
@@ -4340,15 +5070,29 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             if (elTglSelesai) elTglSelesai.value = item.tgl_selesai || '';
             if (elJam) elJam.value = item.jam || '';
             if (elZona && item.zona) elZona.value = item.zona;
-            if (elLokasi) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
-            if (elSyaratCatatan) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
+
+            if (elLokasi) {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
+              } else {
+                elLokasi.value = item.lokasi || '';
+              }
+            }
+
+            if (elSyaratCatatan) {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
+              } else {
+                elSyaratCatatan.value = item.syarat_catatan || '';
+              }
+            }
+
             if (elK1Nama) elK1Nama.value = item.kontak1_nama || '';
             if (elK1Wa) elK1Wa.value = item.kontak1_wa || '';
             if (elK2Nama) elK2Nama.value = item.kontak2_nama || '';
             if (elK2Wa) elK2Wa.value = item.kontak2_wa || '';
             if (elStatus && item.status) elStatus.value = item.status;
 
-            // Parse list syarat dinamis (maksimal 8)
             const rawSyarat = (item.syarat || '').split('\n').map(s => s.trim()).filter(Boolean);
             window.syaratData[k] = rawSyarat.slice(0, 8);
             window.renderSyaratAdminList(k);
@@ -4371,8 +5115,15 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           const elK2Wa = document.getElementById(`ppdbAdmin_${k}_k2_wa`);
 
           const jName = defaultPPDB[k] ? defaultPPDB[k].jenjangName : k.toUpperCase();
-
           const currentSyaratList = (window.syaratData[k] || []).map(s => s.trim()).filter(Boolean);
+
+          const getValWithAlign = (id) => {
+            if (typeof window.getWrappedTextareaValue === 'function') {
+              return window.getWrappedTextareaValue(id);
+            }
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+          };
 
           data[k] = {
             jenjangName: jName,
@@ -4382,32 +5133,42 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             tgl_selesai: elTglSelesai ? elTglSelesai.value : '',
             jam: elJam ? elJam.value.trim() : '',
             zona: elZona ? elZona.value : 'WIB',
-            lokasi: window.getWrappedTextareaValue(`ppdbAdmin_${k}_lokasi`) || (elLokasi ? elLokasi.value.trim() : ''),
+            lokasi: getValWithAlign(`ppdbAdmin_${k}_lokasi`),
             syarat: currentSyaratList.join('\n'),
-            syarat_catatan: window.getWrappedTextareaValue(`ppdbAdmin_${k}_syarat_catatan`) || (elSyaratCatatan ? elSyaratCatatan.value.trim() : ''),
+            syarat_catatan: getValWithAlign(`ppdbAdmin_${k}_syarat_catatan`),
             kontak1_nama: elK1Nama ? elK1Nama.value.trim() : '',
             kontak1_wa: elK1Wa ? elK1Wa.value.trim() : '',
             kontak2_nama: elK2Nama ? elK2Nama.value.trim() : '',
             kontak2_wa: elK2Wa ? elK2Wa.value.trim() : ''
           };
 
-          localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-
-          if (window.supabaseClient) {
-            try {
-              await window.supabaseClient.from('ppdb_info').upsert({
-                status: data[k].status,
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const ppdbPayload = {
                 id: 1,
+                status: data[k].status,
                 schedule: data[k].hari + ' (' + data[k].jam + ')',
                 requirements: data[k].syarat,
-                wa_number: data[k].kontak1_wa
-              });
-            } catch(e) {
-              console.warn('Supabase sync warning:', e);
-            }
-          }
+                wa_number: data[k].kontak1_wa,
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              };
 
-          alert('Sukses! Data PPDB untuk ' + jName + ' berhasil disimpan dan diperbarui.');
+              let { error } = await supa.from('ppdb_info').update(ppdbPayload).eq('id', 1);
+              if (error) {
+                const upRes = await supa.from('ppdb_info').upsert(ppdbPayload, { onConflict: 'id' });
+                error = upRes.error;
+              }
+              if (error) throw error;
+            }
+
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+            alert('Sukses! Data PPDB untuk ' + jName + ' berhasil disimpan ke database publik Supabase.');
+          } catch(err) {
+            console.error('Error save PPDB jenjang:', err);
+            alert('Gagal menyimpan ke server: ' + (err.message || err));
+          }
         };
 
         window.simpanInfoPPDB = window.savePPDBAdminJenjang;
@@ -4420,64 +5181,82 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
             if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
             if (elHeaderSubtitle) {
-              data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
+              data.header_subtitle = (typeof window.getWrappedTextareaValue === 'function')
+                ? window.getWrappedTextareaValue('ppdbAdmin_header_subtitle')
+                : elHeaderSubtitle.value.trim();
             }
-            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
 
-            // Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              try {
-                await window.supabaseClient.from('ppdb_info').upsert({
-                  id: 1,
-                  academic_year: data.academic_year || '2024/2025',
-                  status: data.status || 'BUKA',
-                  requirements: data.header_subtitle || ''
-                });
-              } catch(supErr) {
-                console.warn('Supabase sync warning for PPDB sambutan:', supErr);
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const sambutanPayload = {
+                id: 1,
+                greeting_title: data.header_title,
+                greeting_desc: data.header_subtitle,
+                requirements: data.header_subtitle || '',
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              };
+              let { error } = await supa.from('ppdb_info').update(sambutanPayload).eq('id', 1);
+              if (error) {
+                const upRes = await supa.from('ppdb_info').upsert(sambutanPayload, { onConflict: 'id' });
+                error = upRes.error;
               }
+              if (error) throw error;
             }
 
-            alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+            alert('Sukses! Teks Sambutan PPDB berhasil disimpan ke database publik Supabase.');
           } catch(err) {
             console.error('Error saving PPDB sambutan:', err);
-            alert('Gagal menyimpan teks sambutan: ' + err.message);
+            alert('Gagal menyimpan teks sambutan: ' + (err.message || err));
           }
         };
 
-        window.savePPDBSekretariat = function() {
-          const data = getPPDBData();
-          const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
-          if (elSekretariat) {
-            data.sekretariat_alamat = window.getWrappedTextareaValue('ppdbAdmin_sekretariat_alamat') || elSekretariat.value.trim();
+        window.savePPDBSekretariat = async function() {
+          try {
+            const data = getPPDBData();
+            const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
+            if (elSekretariat) {
+              data.sekretariat_alamat = (typeof window.getWrappedTextareaValue === 'function')
+                ? window.getWrappedTextareaValue('ppdbAdmin_sekretariat_alamat')
+                : elSekretariat.value.trim();
+            }
+
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              let { error } = await supa.from('ppdb_info').update({
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              }).eq('id', 1);
+              if (error) throw error;
+            }
+
             localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-            alert('Sukses! Alamat Sekretariat Pendaftaran berhasil disimpan.');
+            alert('Sukses! Alamat Sekretariat Pendaftaran berhasil disimpan ke database publik Supabase.');
+          } catch(err) {
+            console.error('Error saving sekretariat:', err);
+            alert('Gagal menyimpan alamat sekretariat: ' + (err.message || err));
           }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-          // Tab Switching Handler
           document.querySelectorAll('.tab-jenjang').forEach(tab => {
             tab.addEventListener('click', (e) => {
-              // Hapus class aktif dari semua tab
               document.querySelectorAll('.tab-jenjang').forEach(t => {
                 t.classList.remove('bg-green-800', 'bg-emerald-800', 'text-white');
                 t.classList.add('text-slate-600', 'bg-white');
               });
-              // Tambah class aktif ke tab yang diklik
               e.currentTarget.classList.remove('text-slate-600', 'bg-white');
               e.currentTarget.classList.add('bg-green-800', 'text-white');
               
-              // Sembunyikan semua konten tab
               document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-              // Tampilkan konten tab yang sesuai dengan data-target
               const targetId = e.currentTarget.getAttribute('data-target');
               const targetEl = document.getElementById(targetId);
               if (targetEl) targetEl.classList.remove('hidden');
             });
           });
 
-          loadPPDBFields();
+          window.loadPPDBFields();
           window.loadContactFields();
 
           const btnHeaderPPDB = document.getElementById('btnSimpanHeaderPPDB');
@@ -4498,23 +5277,30 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           alamat: "Jl. Salam Raya No. 1, RT 01 / RW 03, Kel. Sukabumi Selatan, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta 11560"
         };
 
-        window.loadPengaturanFields = function() {
+        window.loadPengaturanFields = async function() {
           let data = { ...defaultPengaturan };
           try {
-            const rawProfile = localStorage.getItem('cmsData_profile');
-            if (rawProfile) {
-              const prof = JSON.parse(rawProfile);
-              if (prof.name) data.nama = prof.name;
-              if (prof.phone || prof.wa) data.wa = prof.phone || prof.wa;
-              if (prof.email) data.email = prof.email;
-              if (prof.address || prof.alamat) data.alamat = prof.address || prof.alamat;
-            }
             const rawPengaturan = localStorage.getItem('cmsData_pengaturan');
             if (rawPengaturan) {
               data = { ...data, ...JSON.parse(rawPengaturan) };
             }
+          } catch(e) {}
+
+          // Live Supabase
+          try {
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (supa) {
+              const { data: dbProf, error } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+              if (!error && dbProf) {
+                if (dbProf.name) data.nama = dbProf.name;
+                if (dbProf.phone) data.wa = dbProf.phone;
+                if (dbProf.email) data.email = dbProf.email;
+                if (dbProf.address) data.alamat = dbProf.address;
+                localStorage.setItem('cmsData_pengaturan', JSON.stringify(data));
+              }
+            }
           } catch(e) {
-            console.warn('Error loading pengaturan fields:', e);
+            console.warn('[Kelola Pengaturan] Gagal fetch Supabase:', e);
           }
 
           const elNama = document.getElementById('setting_nama');
@@ -4526,13 +5312,25 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (elWa) elWa.value = data.wa || '';
           if (elEmail) elEmail.value = data.email || '';
           if (elAlamat) {
-            window.setTextareaValueWithAlignment('setting_alamat', data.alamat || defaultPengaturan.alamat);
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('setting_alamat', data.alamat || defaultPengaturan.alamat);
+            } else {
+              elAlamat.value = data.alamat || defaultPengaturan.alamat;
+            }
           }
         };
 
         window.savePengaturanYayasan = async function(e) {
           if (e) e.preventDefault();
+          const btn = document.getElementById('btnSimpanPengaturan');
+          const origHtml = btn ? btn.innerHTML : '';
+
           try {
+            if (btn) {
+              btn.disabled = true;
+              btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+            }
+
             const elNama = document.getElementById('setting_nama');
             const elWa = document.getElementById('setting_wa');
             const elEmail = document.getElementById('setting_email');
@@ -4541,7 +5339,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             const nama = elNama ? elNama.value.trim() : '';
             const wa = elWa ? elWa.value.trim() : '';
             const email = elEmail ? elEmail.value.trim() : '';
-            const wrappedAlamat = window.getWrappedTextareaValue('setting_alamat') || (elAlamat ? elAlamat.value.trim() : '');
+            const wrappedAlamat = (typeof window.getWrappedTextareaValue === 'function')
+              ? window.getWrappedTextareaValue('setting_alamat')
+              : (elAlamat ? elAlamat.value.trim() : '');
 
             const payload = {
               nama: nama,
@@ -4550,48 +5350,58 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               alamat: wrappedAlamat
             };
 
-            // 1. Simpan ke localStorage cmsData_pengaturan
-            localStorage.setItem('cmsData_pengaturan', JSON.stringify(payload));
+            const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
+            if (!supa) throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
 
-            // 2. Sinkronkan ke cmsData_profile
-            try {
-              const rawProf = localStorage.getItem('cmsData_profile');
-              const prof = rawProf ? JSON.parse(rawProf) : {};
-              prof.name = nama;
-              prof.phone = wa;
-              prof.email = email;
-              prof.address = wrappedAlamat;
-              localStorage.setItem('cmsData_profile', JSON.stringify(prof));
-            } catch(e) {}
+            // 1. Simpan ke Supabase profile_settings
+            let { error: errP } = await supa.from('profile_settings').update({
+              name: nama,
+              phone: wa,
+              email: email,
+              address: wrappedAlamat,
+              updated_at: new Date().toISOString()
+            }).eq('id', 1);
 
-            // 3. Sinkronkan ke cmsData_contact
-            try {
-              const rawC = localStorage.getItem('cmsData_contact');
-              const contact = rawC ? JSON.parse(rawC) : {};
-              contact.wa1 = wa;
-              contact.email = email;
-              contact.address = wrappedAlamat;
-              localStorage.setItem('cmsData_contact', JSON.stringify(contact));
-            } catch(e) {}
-
-            // 4. Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              const { error } = await window.supabaseClient.from('profile_settings').upsert({
+            if (errP) {
+              const upRes = await supa.from('profile_settings').upsert({
                 id: 1,
                 name: nama,
                 phone: wa,
                 email: email,
-                address: wrappedAlamat
-              });
-              if (error) {
-                console.warn('Supabase sync warning for profile_settings:', error);
-              }
+                address: wrappedAlamat,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'id' });
+              errP = upRes.error;
             }
+            if (errP) throw errP;
 
-            alert('Pengaturan Profil & Kontak Yayasan berhasil disimpan!');
+            // 2. Simpan ke Supabase contact_settings
+            await supa.from('contact_settings').update({
+              foundation_name: nama,
+              whatsapp1: wa,
+              email: email,
+              address: wrappedAlamat,
+              updated_at: new Date().toISOString()
+            }).eq('id', 1);
+
+            // 3. Simpan ke cache lokal
+            localStorage.setItem('cmsData_pengaturan', JSON.stringify(payload));
+            localStorage.setItem('cmsData_contact', JSON.stringify({
+              address: wrappedAlamat,
+              phone: wa,
+              wa1: wa,
+              email: email
+            }));
+
+            alert('Pengaturan Profil & Kontak Yayasan berhasil disimpan ke database publik Supabase!');
           } catch(err) {
             console.error('Error saving pengaturan yayasan:', err);
-            alert('Gagal menyimpan pengaturan: ' + err.message);
+            alert('Gagal menyimpan pengaturan: ' + (err.message || err));
+          } finally {
+            if (btn) {
+              btn.disabled = false;
+              btn.innerHTML = origHtml;
+            }
           }
         };
 
@@ -4615,7 +5425,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
               if (confirm('Yakin ingin mengubah password admin? Anda harus login ulang dengan password baru setelah ini.')) {
                 try {
-                  const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+                  const supa = window.getSupabaseClient ? window.getSupabaseClient() : window.supabaseClient;
                   if (supa && supa.auth) {
                     const { data, error } = await supa.auth.updateUser({ password: newPassword });
                     if (error) throw error;

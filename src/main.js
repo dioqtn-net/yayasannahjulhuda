@@ -43,8 +43,9 @@ const loadHome = async () => {
     const facilities = await api.getFacilities();
     const galleries = await api.getGalleries();
     const ppdb = await api.getPPDB();
+    const homeSettings = await api.getHomeSettings();
     appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb), true, 'beranda');
+    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb, homeSettings), true, 'beranda');
     setupHomeEvents();
 };
 
@@ -61,11 +62,7 @@ router
   .on('/berita', () => { window.location.href = '/berita'; })
   .on('/galeri', () => { window.location.href = '/galeri'; })
   .on('/kontak', () => { window.location.href = '/kontak'; })
-  .on('/kelola', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    appDiv.innerHTML = '';
-    await renderAdmin(appDiv, router);
-  })
+  .on('/kelola', () => { window.location.href = '/kelola'; })
   .notFound(() => {
     appDiv.innerHTML = renderLayout(`
       <div class="text-center py-20">
@@ -80,9 +77,7 @@ router
 const path = window.location.pathname;
 const hash = window.location.hash;
 if (path.startsWith('/kelola') || hash.includes('/kelola')) {
-    if (path !== '/kelola' || hash !== '') {
-        window.history.replaceState(null, null, '/kelola');
-    }
+    window.location.href = '/kelola';
 }
 router.resolve();
 

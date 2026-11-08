@@ -19,6 +19,8 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Custom Style for PPDB Consultation Section -->
     <style>
       @media (max-width: 900px) {
@@ -1168,6 +1170,35 @@
         
         function initPPDB() {
           renderPPDBFront();
+
+          // Fetch live PPDB data from Supabase
+          (async function fetchPPDBFromSupabase() {
+            try {
+              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+              if (supa) {
+                var { data: dbPPDB, error } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
+                if (!error && dbPPDB) {
+                  var currentData = {};
+                  var raw = localStorage.getItem(KEY_PPDB);
+                  if (raw) {
+                    try { currentData = JSON.parse(raw); } catch(e) {}
+                  }
+                  if (dbPPDB.contact_person && typeof dbPPDB.contact_person === 'object') {
+                    currentData = { ...currentData, ...dbPPDB.contact_person };
+                  }
+                  if (dbPPDB.greeting_title) currentData.header_title = dbPPDB.greeting_title;
+                  if (dbPPDB.greeting_desc) currentData.header_subtitle = dbPPDB.greeting_desc;
+
+                  localStorage.setItem(KEY_PPDB, JSON.stringify(currentData));
+                  renderPPDBFront();
+                }
+              }
+            } catch(err) {
+              console.warn('[ppdb.html] Supabase fetch error:', err);
+            }
+          })();
         }
 
         document.addEventListener('DOMContentLoaded', initPPDB);

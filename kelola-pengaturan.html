@@ -501,6 +501,12 @@
                               <label class="block text-sm font-medium text-gray-700 mb-1">Paragraf / Kutipan Tagline</label>
                               <textarea id="taglineDesc" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">"Yayasan Nahjul Huda berdiri dengan semangat untuk memajukan pendidikan Islam di Kebon Jeruk, Jakarta Barat. Sejak awal berdirinya, yayasan ini telah berkomitmen untuk mencetak generasi yang tidak hanya unggul secara akademik, namun juga memiliki akhlakul karimah dan pemahaman agama yang mendalam."</textarea>
                           </div>
+                          <div class="flex justify-end pt-2">
+                              <button type="button" id="btnSimpanTagline" class="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg text-sm font-medium transition shadow-sm flex items-center gap-2">
+                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                                  Simpan Tagline
+                              </button>
+                          </div>
                       </div>
                   </div>
 
@@ -2651,57 +2657,120 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         }
 
-        const handleSimpanBeranda = async (e) => {
-          if (e) e.preventDefault();
+        // Muat data Tagline terbaru dari database Supabase jika tersedia
+        (async function() {
           try {
-            // Sesuai ID asli textarea di form HTML Beranda (heroDesc & taglineDesc)
-            const elHeroDesc = document.getElementById('heroDesc') || document.getElementById('deskripsi_singkat');
-            const elTaglineDesc = document.getElementById('taglineDesc') || document.getElementById('paragraf_tagline');
-
-            const dataBeranda = {
-              heroTitle: getVal('heroTitle', 'Selamat Datang di Yayasan Nahjul Huda'),
-              heroDesc: window.getWrappedTextareaValue(elHeroDesc || 'heroDesc'),
-              taglineTitle: getVal('taglineTitle', 'Mencetak Generasi Rabbani'),
-              taglineDesc: window.getWrappedTextareaValue(elTaglineDesc || 'taglineDesc'),
-              stat1Num: getVal('stat1Num', '5'),
-              stat1Text: getVal('stat1Text', 'JENJANG PENDIDIKAN'),
-              stat2Num: getVal('stat2Num', '100+'),
-              stat2Text: getVal('stat2Text', 'TENAGA PENDIDIK'),
-              stat3Num: getVal('stat3Num', '1000+'),
-              stat3Text: getVal('stat3Text', 'SANTRI & SISWA'),
-              stat4Num: getVal('stat4Num', '1980'),
-              stat4Text: getVal('stat4Text', 'TAHUN BERDIRI'),
-              ppdbYear: getVal('ppdbYear', '2024/2025'),
-              ppdbStatus: getVal('ppdbStatus', 'BUKA'),
-              progSosial1Title: getVal('progSosial1Title', "Majelis Ta'lim Nahjul Huda"),
-              progSosial1Desc: window.getWrappedTextareaValue('progSosial1Desc') || `<div class="text-justify">${document.getElementById('progSosial1Desc')?.value || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan."}</div>`,
-              progSosial2Title: getVal('progSosial2Title', "Pengajian Rutin Bulanan"),
-              progSosial2Desc: window.getWrappedTextareaValue('progSosial2Desc') || `<div class="text-justify">${document.getElementById('progSosial2Desc')?.value || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."}</div>`
-            };
-
-            // 1. Simpan ke memori browser
-            localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
-
-            // 2. Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              const { error } = await window.supabaseClient.from('profile_settings').upsert({
-                id: 1,
-                history: dataBeranda.taglineDesc
-              });
-              if (error) {
-                console.warn('Peringatan Supabase:', error);
+            const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+            if (supa) {
+              const { data: dbData, error } = await supa.from('profile_settings').select('history').eq('id', 1).maybeSingle();
+              if (!error && dbData && dbData.history) {
+                const el = document.getElementById('taglineDesc');
+                if (el) window.setTextareaValueWithAlignment('taglineDesc', dbData.history);
               }
             }
+          } catch(e) {}
+        })();
 
-            alert('Perubahan beranda berhasil disimpan!');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        const handleSimpanBeranda = async (e) => {
+          if (e) e.preventDefault();
+          const targetBtn = e?.currentTarget || document.getElementById('btnSimpanTagline') || document.getElementById('btnSimpanBeranda');
+          const originalBtnHtml = targetBtn ? targetBtn.innerHTML : '';
+          try {
+            if (targetBtn) {
+              targetBtn.disabled = true;
+              targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
+            // 1. Ambil nilai (value) terbaru dari input "Judul Tagline" dan "Paragraf / Kutipan Tagline"
+            const inputJudul = document.getElementById('taglineTitle') || document.getElementById('judul_tagline');
+            const nilaiJudul = inputJudul ? inputJudul.value.trim() : 'Mencetak Generasi Rabbani';
+
+            const elHeroDesc = document.getElementById('heroDesc') || document.getElementById('deskripsi_singkat');
+            const elTaglineDesc = document.getElementById('taglineDesc') || document.getElementById('paragraf_tagline');
+            const nilaiParagraf = window.getWrappedTextareaValue 
+              ? window.getWrappedTextareaValue(elTaglineDesc || 'taglineDesc') 
+              : (elTaglineDesc?.value || '');
+
+            const prevBeranda = JSON.parse(localStorage.getItem('cmsData_beranda') || '{}');
+            const dataBeranda = {
+              ...prevBeranda,
+              heroTitle: getVal('heroTitle', prevBeranda.heroTitle || 'Selamat Datang di Yayasan Nahjul Huda'),
+              heroDesc: elHeroDesc ? window.getWrappedTextareaValue(elHeroDesc) : (prevBeranda.heroDesc || ''),
+              taglineTitle: nilaiJudul,
+              taglineDesc: nilaiParagraf,
+              stat1Num: getVal('stat1Num', prevBeranda.stat1Num || '5'),
+              stat1Text: getVal('stat1Text', prevBeranda.stat1Text || 'JENJANG PENDIDIKAN'),
+              stat2Num: getVal('stat2Num', prevBeranda.stat2Num || '100+'),
+              stat2Text: getVal('stat2Text', prevBeranda.stat2Text || 'TENAGA PENDIDIK'),
+              stat3Num: getVal('stat3Num', prevBeranda.stat3Num || '1000+'),
+              stat3Text: getVal('stat3Text', prevBeranda.stat3Text || 'SANTRI & SISWA'),
+              stat4Num: getVal('stat4Num', prevBeranda.stat4Num || '1980'),
+              stat4Text: getVal('stat4Text', prevBeranda.stat4Text || 'TAHUN BERDIRI'),
+              ppdbYear: getVal('ppdbYear', prevBeranda.ppdbYear || '2024/2025'),
+              ppdbStatus: getVal('ppdbStatus', prevBeranda.ppdbStatus || 'BUKA'),
+              progSosial1Title: getVal('progSosial1Title', prevBeranda.progSosial1Title || "Majelis Ta'lim Nahjul Huda"),
+              progSosial1Desc: window.getWrappedTextareaValue('progSosial1Desc') || (prevBeranda.progSosial1Desc || `<div class="text-justify">${document.getElementById('progSosial1Desc')?.value || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan."}</div>`),
+              progSosial2Title: getVal('progSosial2Title', prevBeranda.progSosial2Title || "Pengajian Rutin Bulanan"),
+              progSosial2Desc: window.getWrappedTextareaValue('progSosial2Desc') || (prevBeranda.progSosial2Desc || `<div class="text-justify">${document.getElementById('progSosial2Desc')?.value || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."}</div>`)
+            };
+
+            // Inisialisasi Supabase Client
+            const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+            if (!supa) {
+              throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
+            }
+
+            // 3. Eksekusi update ke Supabase tabel profile_settings baris id: 1
+            const supabasePayload = {
+              history: nilaiParagraf,
+              updated_at: new Date().toISOString()
+            };
+
+            let { data, error } = await supa
+              .from('profile_settings')
+              .update(supabasePayload)
+              .eq('id', 1)
+              .select();
+
+            // 4. WAJIB tambahkan penanganan error
+            if (error) throw error;
+
+            // Jika baris id: 1 belum ada di database, gunakan upsert
+            if (!data || data.length === 0) {
+              const upsertRes = await supa
+                .from('profile_settings')
+                .upsert({
+                  id: 1,
+                  name: 'Yayasan Nahjul Huda',
+                  history: nilaiParagraf,
+                  updated_at: new Date().toISOString()
+                });
+              if (upsertRes.error) throw upsertRes.error;
+            }
+
+            // 5. Jangan lakukan perubahan DOM/Local Storage sebelum fungsi Supabase berhasil (sukses)
+            localStorage.setItem('cmsData_beranda', JSON.stringify(dataBeranda));
+
+            // 6. Jika try sukses, tampilkan alert
+            alert("Tagline berhasil disimpan ke server publik!");
           } catch (error) {
+            // 7. Jika catch menangkap error, tampilkan console.error dan alert
             console.error(error);
-            alert('Gagal menyimpan: ' + error.message);
+            alert("Gagal menyimpan ke database: " + error.message);
+          } finally {
+            if (targetBtn) {
+              targetBtn.disabled = false;
+              targetBtn.innerHTML = originalBtnHtml;
+            }
           }
         };
 
-        // Hubungkan event listener secara presisi ke tombol Simpan Perubahan Beranda
+        // Hubungkan event listener ke tombol Simpan Tagline dan Simpan Beranda
+        const btnSaveTagline = document.getElementById('btnSimpanTagline');
+        if (btnSaveTagline) {
+          btnSaveTagline.addEventListener('click', handleSimpanBeranda);
+        }
+
         const btnSaveBeranda = document.getElementById('btnSimpanBeranda') ||
           Array.from(document.querySelectorAll('#formBeranda button')).find(b => b.textContent.includes('Simpan Perubahan Beranda')) ||
           document.querySelector('#formBeranda button[type="button"]:last-of-type');
@@ -2753,11 +2822,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         }
 
+        // Muat data profil terbaru dari Supabase jika tersedia
+        (async function() {
+          try {
+            const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+            if (supa) {
+              const { data: dbData, error } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+              if (!error && dbData && dbData.history) {
+                setVal('sejarahText', dbData.history);
+              }
+            }
+          } catch(e) {}
+        })();
+
         const btnSaveProfil = document.getElementById('btnSimpanProfil');
         if (btnSaveProfil) {
           btnSaveProfil.addEventListener('click', async (e) => {
             if (e) e.preventDefault();
+            const originalBtnHtml = btnSaveProfil.innerHTML;
             try {
+              btnSaveProfil.disabled = true;
+              btnSaveProfil.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+
               const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
 
               const readFile = (inputId, prevVal) => {
@@ -2788,7 +2874,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 readFile('fotoMudir', prevData.fotoMudir)
               ]);
 
-              // HANYA ambil input yang benar-benar ada di HTML saat ini
+              // Kumpulkan seluruh nilai input terbaru dari form ke dalam objek (payload)
               const dataProfil = {
                 profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
                 profilDesc: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('profilDesc') : (document.getElementById('profilDesc')?.value || ''),
@@ -2809,22 +2895,42 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 fotoMudir: fotoMudir
               };
 
-              localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
-
-              // Simpan ke Supabase jika client aktif (Hanya history)
-              if (window.supabaseClient) {
-                try {
-                  const { error: supaErr } = await window.supabaseClient.from('profile_settings').upsert({
-                    id: 1,
-                    history: dataProfil.sejarahText
-                  });
-                  if (supaErr) {
-                    console.warn('Peringatan Supabase:', supaErr);
-                  }
-                } catch (sErr) {
-                  console.warn('Supabase save error:', sErr);
-                }
+              // Pastikan Supabase client tersedia
+              const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+              if (!supa) {
+                throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
               }
+
+              // Eksekusi perintah update ke Supabase (tabel profile_settings, baris id: 1)
+              const supabasePayload = {
+                history: dataProfil.sejarahText,
+                updated_at: new Date().toISOString()
+              };
+
+              let { data, error } = await supa
+                .from('profile_settings')
+                .update(supabasePayload)
+                .eq('id', 1)
+                .select();
+
+              // Validasi error: Jika ada error dari respons Supabase, paksa lempar error
+              if (error) throw error;
+
+              // Jika baris id: 1 belum ada di database, gunakan upsert untuk membuat baris awal
+              if (!data || data.length === 0) {
+                const upsertRes = await supa
+                  .from('profile_settings')
+                  .upsert({
+                    id: 1,
+                    name: dataProfil.profilTitle || 'Yayasan Nahjul Huda',
+                    history: dataProfil.sejarahText,
+                    updated_at: new Date().toISOString()
+                  });
+                if (upsertRes.error) throw upsertRes.error;
+              }
+
+              // SINKRONISASI UI & STORAGE: HANYA dieksekusi setelah Supabase berhasil 100%
+              localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
 
               // Reset atribut penanda hapus setelah berhasil disimpan
               ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
@@ -2832,10 +2938,13 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 if (el) el.setAttribute('data-hapus', 'false');
               });
 
-              alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
+              alert("Data profil berhasil diperbarui di database publik!");
+              window.location.reload();
             } catch (error) {
-              console.error("Error Simpan Profil:", error);
-              alert("Terjadi kesalahan sistem: " + error.message + ". Cek console untuk detail.");
+              console.error("Supabase Error:", error);
+              alert("Gagal menyimpan ke server: " + error.message);
+              btnSaveProfil.disabled = false;
+              btnSaveProfil.innerHTML = originalBtnHtml;
             }
           });
         }
@@ -4490,6 +4599,25 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
             if (rawPengaturan) {
               data = { ...data, ...JSON.parse(rawPengaturan) };
             }
+
+            // Muat dari Supabase profile_settings & contact_settings
+            const supa = window.supabaseClient;
+            if (supa) {
+              const { data: profDB } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+              if (profDB) {
+                if (profDB.name) data.nama = profDB.name;
+                if (profDB.phone) data.wa = profDB.phone;
+                if (profDB.email) data.email = profDB.email;
+                if (profDB.address) data.alamat = profDB.address;
+              }
+              const { data: contDB } = await supa.from('contact_settings').select('*').eq('id', 1).maybeSingle();
+              if (contDB) {
+                if (contDB.foundation_name) data.nama = contDB.foundation_name;
+                if (contDB.whatsapp1 || contDB.phone) data.wa = contDB.whatsapp1 || contDB.phone;
+                if (contDB.email) data.email = contDB.email;
+                if (contDB.address) data.alamat = contDB.address;
+              }
+            }
           } catch(e) {
             console.warn('Error loading pengaturan fields:', e);
           }
@@ -4527,10 +4655,35 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               alamat: wrappedAlamat
             };
 
-            // 1. Simpan ke localStorage cmsData_pengaturan
+            // 1. Simpan ke Supabase jika client aktif
+            const supa = window.supabaseClient;
+            if (supa) {
+              const { error: errProf } = await supa.from('profile_settings').upsert({
+                id: 1,
+                name: nama,
+                phone: wa,
+                email: email,
+                address: wrappedAlamat,
+                updated_at: new Date().toISOString()
+              });
+              if (errProf) throw errProf;
+
+              const { error: errContact } = await supa.from('contact_settings').upsert({
+                id: 1,
+                foundation_name: nama,
+                phone: wa,
+                whatsapp1: wa,
+                email: email,
+                address: wrappedAlamat,
+                updated_at: new Date().toISOString()
+              });
+              if (errContact) throw errContact;
+            }
+
+            // 2. Simpan ke localStorage cmsData_pengaturan
             localStorage.setItem('cmsData_pengaturan', JSON.stringify(payload));
 
-            // 2. Sinkronkan ke cmsData_profile
+            // 3. Sinkronkan ke cmsData_profile
             try {
               const rawProf = localStorage.getItem('cmsData_profile');
               const prof = rawProf ? JSON.parse(rawProf) : {};
@@ -4541,7 +4694,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               localStorage.setItem('cmsData_profile', JSON.stringify(prof));
             } catch(e) {}
 
-            // 3. Sinkronkan ke cmsData_contact
+            // 4. Sinkronkan ke cmsData_contact
             try {
               const rawC = localStorage.getItem('cmsData_contact');
               const contact = rawC ? JSON.parse(rawC) : {};
@@ -4551,21 +4704,12 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               localStorage.setItem('cmsData_contact', JSON.stringify(contact));
             } catch(e) {}
 
-            // 4. Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              const { error } = await window.supabaseClient.from('profile_settings').upsert({
-                id: 1,
-                name: nama,
-                phone: wa,
-                email: email,
-                address: wrappedAlamat
-              });
-              if (error) {
-                console.warn('Supabase sync warning for profile_settings:', error);
-              }
-            }
-
-            alert('Pengaturan Profil & Kontak Yayasan berhasil disimpan!');
+            alert('Pengaturan Profil & Kontak Yayasan berhasil disimpan ke database publik Supabase!');
+          } catch(err) {
+            console.error('Error saving pengaturan yayasan:', err);
+            alert('Gagal menyimpan pengaturan ke server: ' + err.message);
+          }
+        };
           } catch(err) {
             console.error('Error saving pengaturan yayasan:', err);
             alert('Gagal menyimpan pengaturan: ' + err.message);

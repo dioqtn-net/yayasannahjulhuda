@@ -77,12 +77,79 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Helper resolve Supabase client
+    const SUPABASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SUPABASE_URL)
+        ? import.meta.env.VITE_SUPABASE_URL
+        : "https://lrorriksjooxrpoihfge.supabase.co";
+    const SUPABASE_ANON_KEY = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SUPABASE_ANON_KEY)
+        ? import.meta.env.VITE_SUPABASE_ANON_KEY
+        : "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+
+    function getSupabase() {
+        if (window.supabaseClient) return window.supabaseClient;
+        if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                auth: { persistSession: true },
+                global: {
+                    fetch: (url, options = {}) => {
+                        options.cache = 'no-store';
+                        options.headers = options.headers || {};
+                        options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                        options.headers['Pragma'] = 'no-cache';
+                        return fetch(url, options);
+                    }
+                }
+            });
+            return window.supabaseClient;
+        }
+        return null;
+    }
+
     // 4. Muat Data Tersimpan (Hanya Banner, Sejarah, Struktur Organisasi)
-    function loadProfilData() {
+    async function loadProfilData() {
         initAlignmentToolbars();
         try {
             const raw = localStorage.getItem('cmsData_profil');
-            const data = raw ? JSON.parse(raw) : {};
+            let data = raw ? JSON.parse(raw) : {};
+
+            // Muat dari Supabase jika koneksi aktif
+            const supa = getSupabase();
+            if (supa) {
+                try {
+                    const { data: dbData, error } = await supa
+                        .from('profile_settings')
+                        .select('*')
+                        .eq('id', 1)
+                        .maybeSingle();
+                    if (!error && dbData) {
+                        if (dbData.banner_title || dbData.name) data.profilTitle = dbData.banner_title || dbData.name;
+                        if (dbData.banner_desc) data.profilDesc = dbData.banner_desc;
+                        if (dbData.history) data.sejarahText = dbData.history;
+                        if (dbData.struktur_title) data.strukturTitle = dbData.struktur_title;
+                        if (dbData.struktur_desc) data.strukturDesc = dbData.struktur_desc;
+
+                        if (dbData.pengurus && typeof dbData.pengurus === 'object') {
+                            const p = dbData.pengurus;
+                            if (p.namaKetua !== undefined) data.namaKetua = p.namaKetua;
+                            if (p.fotoKetua !== undefined) data.fotoKetua = p.fotoKetua;
+                            if (p.namaSDI !== undefined) data.namaSDI = p.namaSDI;
+                            if (p.fotoSDI !== undefined) data.fotoSDI = p.fotoSDI;
+                            if (p.namaMI !== undefined) data.namaMI = p.namaMI;
+                            if (p.fotoMI !== undefined) data.fotoMI = p.fotoMI;
+                            if (p.namaMTs !== undefined) data.namaMTs = p.namaMTs;
+                            if (p.fotoMTs !== undefined) data.fotoMTs = p.fotoMTs;
+                            if (p.namaMA !== undefined) data.namaMA = p.namaMA;
+                            if (p.fotoMA !== undefined) data.fotoMA = p.fotoMA;
+                            if (p.namaMudir !== undefined) data.namaMudir = p.namaMudir;
+                            if (p.fotoMudir !== undefined) data.fotoMudir = p.fotoMudir;
+                        }
+
+                        localStorage.setItem('cmsData_profil', JSON.stringify(data));
+                    }
+                } catch (err) {
+                    console.warn('Gagal memuat profil awal dari Supabase:', err);
+                }
+            }
 
             const setInput = (id, val, def = '') => {
                 const el = document.getElementById(id);
@@ -108,7 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Simpan Data Profil
     async function saveProfilData(e) {
         if (e) e.preventDefault();
+
+        const btnSave = document.getElementById('btnSimpanProfil') ||
+            document.querySelector('button[type="submit"]') ||
+            Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Simpan Perubahan Profil'));
+        const originalBtnHtml = btnSave ? btnSave.innerHTML : '';
+
         try {
+            if (btnSave) {
+                btnSave.disabled = true;
+                btnSave.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+            }
+
             const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
 
             const readFile = (inputId, prevVal) => {
@@ -138,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 readFile('fotoMudir', prevData.fotoMudir)
             ]);
 
-            // HANYA ambil input yang benar-benar ada di HTML saat ini
+            // Kumpulkan seluruh nilai input terbaru dari form ke dalam objek (payload)
             const payload = {
                 profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
                 profilDesc: getWrappedValue('profilDesc'),
@@ -159,19 +237,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 fotoMudir: fotoMudir
             };
 
-            localStorage.setItem('cmsData_profil', JSON.stringify(payload));
-
-            // Simpan ke Supabase jika client aktif (Hanya sejarah, tanpa visi/misi/target)
-            if (window.supabaseClient) {
-                try {
-                    await window.supabaseClient.from('profile_settings').upsert({
-                        id: 1,
-                        history: payload.sejarahText
-                    });
-                } catch (supaErr) {
-                    console.warn('Peringatan Supabase:', supaErr);
-                }
+            // Inisialisasi Supabase
+            const supa = getSupabase();
+            if (!supa) {
+                throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
             }
+
+            // Eksekusi perintah update/upsert ke Supabase (tabel profile_settings, baris id: 1)
+            const supabasePayload = {
+                id: 1,
+                name: payload.profilTitle || 'Yayasan Nahjul Huda',
+                banner_title: payload.profilTitle || 'Profil Yayasan',
+                banner_desc: payload.profilDesc || '',
+                history: payload.sejarahText || '',
+                struktur_title: payload.strukturTitle || 'Struktur Organisasi',
+                struktur_desc: payload.strukturDesc || '',
+                pengurus: {
+                    namaKetua: payload.namaKetua, fotoKetua: payload.fotoKetua,
+                    namaSDI: payload.namaSDI, fotoSDI: payload.fotoSDI,
+                    namaMI: payload.namaMI, fotoMI: payload.fotoMI,
+                    namaMTs: payload.namaMTs, fotoMTs: payload.fotoMTs,
+                    namaMA: payload.namaMA, fotoMA: payload.fotoMA,
+                    namaMudir: payload.namaMudir, fotoMudir: payload.fotoMudir
+                },
+                updated_at: new Date().toISOString()
+            };
+
+            let { data, error } = await supa
+                .from('profile_settings')
+                .update(supabasePayload)
+                .eq('id', 1)
+                .select();
+
+            if (error || !data || data.length === 0) {
+                const upsertRes = await supa
+                    .from('profile_settings')
+                    .upsert(supabasePayload, { onConflict: 'id' })
+                    .select();
+                error = upsertRes.error;
+            }
+
+            // Validasi error: Jika ada error dari respons Supabase, paksa lempar error
+            if (error) throw error;
+
+            // SINKRONISASI UI & STORAGE: HANYA dieksekusi setelah Supabase berhasil 100%
+            localStorage.setItem('cmsData_profil', JSON.stringify(payload));
 
             // Reset atribut hapus foto
             ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
@@ -179,10 +289,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (el) el.setAttribute('data-hapus', 'false');
             });
 
-            alert('Sukses! Perubahan Profil berhasil disimpan.');
+            alert("Data profil berhasil diperbarui di database publik!");
+            window.location.reload();
         } catch (error) {
-            console.error("Error Simpan Profil:", error);
-            alert("Terjadi kesalahan sistem: " + error.message + ". Cek console untuk detail.");
+            console.error("Supabase Error:", error);
+            alert("Gagal menyimpan ke server: " + error.message);
+            if (btnSave) {
+                btnSave.disabled = false;
+                btnSave.innerHTML = originalBtnHtml;
+            }
         }
     }
 

@@ -40,6 +40,8 @@
         scrollbar-color: #888 #f1f1f1;
       }
     </style>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       window.addEventListener('pageshow', function(event) {
         const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
@@ -703,6 +705,36 @@
 
           // 3. Default to active 'Semua'
           switchNewsJenjang('Semua');
+
+          // 4. Fetch live news from Supabase
+          (async function fetchBeritaFromSupabase() {
+            try {
+              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+              if (supa) {
+                var { data: dbNews, error } = await supa.from('news_posts').select('*').order('date', { ascending: false });
+                if (!error && dbNews && dbNews.length > 0) {
+                  var mapped = dbNews.map(n => ({
+                    id: n.id,
+                    judul: n.title || '-',
+                    tanggal: n.date || '',
+                    jenjang: n.jenjang || 'Semua',
+                    deskripsiSingkat: n.summary || (n.content ? n.content.substring(0, 150) + '...' : '-'),
+                    deskripsiLengkap: n.content || '-',
+                    images: (Array.isArray(n.images) && n.images.length > 0)
+                      ? n.images
+                      : (n.image_url ? [n.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
+                  }));
+                  localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(mapped));
+                  renderBeritaCards();
+                  switchNewsJenjang(activeJenjang || 'Semua');
+                }
+              }
+            } catch(err) {
+              console.warn('[berita.html] Supabase fetch error:', err);
+            }
+          })();
         }
 
         document.addEventListener('DOMContentLoaded', initBerita);

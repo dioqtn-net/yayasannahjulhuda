@@ -19,6 +19,8 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
       .custom-scrollbar::-webkit-scrollbar { width: 8px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 8px; }
@@ -477,6 +479,32 @@
         };
 
         renderList(list);
+
+        // Fetch live facilities from Supabase
+        (async function fetchFasilitasFromSupabase() {
+          try {
+            var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+            var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+            var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+            if (supa) {
+              var { data: dbData, error } = await supa.from('facilities').select('*').order('id');
+              if (!error && dbData && dbData.length > 0) {
+                list = dbData.map(f => ({
+                  id: f.id,
+                  nama: f.name || '-',
+                  deskripsi: f.description || '-',
+                  images: (Array.isArray(f.images) && f.images.length > 0)
+                    ? f.images
+                    : (f.image_url ? [f.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
+                }));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                renderList(list);
+              }
+            }
+          } catch(err) {
+            console.warn('[fasilitas.html] Supabase fetch error:', err);
+          }
+        })();
 
         if (searchInput) {
           searchInput.addEventListener('input', (e) => {

@@ -20,6 +20,34 @@
     <!-- Tailwind CSS (via Vite style.css) -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
 
+    <!-- Supabase JS CDN & Client Init -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      (function() {
+        var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+        var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+        if (typeof window.supabase !== 'undefined' && SUPABASE_ANON_KEY) {
+          try {
+            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+              auth: { persistSession: true },
+              global: {
+                fetch: function(url, options) {
+                  options = options || {};
+                  options.cache = 'no-store';
+                  options.headers = options.headers || {};
+                  options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+                  options.headers['Pragma'] = 'no-cache';
+                  return fetch(url, options);
+                }
+              }
+            });
+          } catch(e) {
+            console.warn('Supabase client init:', e);
+          }
+        }
+      })();
+    </script>
+
     <!-- Auth Guard -->
     <script>
       (function() {

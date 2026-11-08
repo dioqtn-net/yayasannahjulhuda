@@ -29,6 +29,8 @@
         scrollbar-color: #888 #f1f1f1;
       }
     </style>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       window.addEventListener('pageshow', function(event) {
         const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
@@ -846,6 +848,43 @@
         function initGallery() {
           syncBanner();
           syncDynamicCards();
+
+          // Fetch live galleries from Supabase
+          (async function fetchGalleriesFromSupabase() {
+            try {
+              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+              if (supa) {
+                var { data: dbData, error } = await supa.from('galleries').select('*').order('created_at', { ascending: false });
+                if (!error && dbData && dbData.length > 0) {
+                  var eskulArr = [];
+                  var kegArr = [];
+                  dbData.forEach(item => {
+                    var formatted = {
+                      id: item.id,
+                      judul: item.title || '-',
+                      jenjang: item.jenjang || 'Semua',
+                      tanggal: item.event_date || (item.created_at ? item.created_at.split('T')[0] : ''),
+                      deskripsi: item.description || '-',
+                      media: item.image_url || '/media/background/wallpaper_yayasan.jpg'
+                    };
+                    if (item.category === 'ekskul') {
+                      eskulArr.push(formatted);
+                    } else {
+                      kegArr.push(formatted);
+                    }
+                  });
+
+                  if (eskulArr.length > 0) localStorage.setItem(KEY_ESKUL, JSON.stringify(eskulArr));
+                  if (kegArr.length > 0) localStorage.setItem(KEY_KEGIATAN, JSON.stringify(kegArr));
+                  syncDynamicCards();
+                }
+              }
+            } catch (err) {
+              console.warn('[galeri.html] Supabase fetch error:', err);
+            }
+          })();
         }
 
         document.addEventListener('DOMContentLoaded', initGallery);

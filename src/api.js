@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://lrorriksjooxrpoihfge.supabase.co";
 // Isi dengan anon key dari Supabase dashboard Anda.
 // Jika kosong, sistem akan otomatis menggunakan mode fallback (data lokal).
-const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
 
 let supabase = null;
 
@@ -106,6 +106,77 @@ export const getUnitImage = (unit) => {
 export const api = {
     isSupabaseConnected: () => supabase !== null,
     
+    async getHomeSettings() {
+        let h = {
+            id: 1,
+            hero_title: 'Selamat Datang di Yayasan Nahjul Huda',
+            hero_desc: 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.',
+            tagline_title: 'Mencetak Generasi Rabbani',
+            tagline_desc: '"Yayasan Nahjul Huda berdiri dengan semangat untuk memajukan pendidikan Islam di Kebon Jeruk, Jakarta Barat. Sejak awal berdirinya, yayasan ini telah berkomitmen untuk mencetak generasi yang tidak hanya unggul secara akademik, namun juga memiliki akhlakul karimah dan pemahaman agama yang mendalam."',
+            stat1_num: '5', stat1_text: 'JENJANG PENDIDIKAN',
+            stat2_num: '100+', stat2_text: 'TENAGA PENDIDIK',
+            stat3_num: '1000+', stat3_text: 'SANTRI & SISWA',
+            stat4_num: '1980', stat4_text: 'TAHUN BERDIRI',
+            social_prog1_title: "Majelis Ta'lim Nahjul Huda",
+            social_prog1_desc: "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.",
+            social_prog2_title: "Pengajian Rutin Bulanan",
+            social_prog2_desc: "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."
+        };
+        try {
+            const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
+            if (raw) {
+                const d = JSON.parse(raw);
+                if (d.heroTitle) h.hero_title = d.heroTitle;
+                if (d.heroDesc) h.hero_desc = d.heroDesc;
+                if (d.taglineTitle) h.tagline_title = d.taglineTitle;
+                if (d.taglineDesc) h.tagline_desc = d.taglineDesc;
+                if (d.stat1Num) h.stat1_num = d.stat1Num;
+                if (d.stat1Text) h.stat1_text = d.stat1Text;
+                if (d.stat2Num) h.stat2_num = d.stat2Num;
+                if (d.stat2Text) h.stat2_text = d.stat2Text;
+                if (d.stat3Num) h.stat3_num = d.stat3Num;
+                if (d.stat3Text) h.stat3_text = d.stat3Text;
+                if (d.stat4Num) h.stat4_num = d.stat4Num;
+                if (d.stat4Text) h.stat4_text = d.stat4Text;
+                if (d.progSosial1Title) h.social_prog1_title = d.progSosial1Title;
+                if (d.progSosial1Desc) h.social_prog1_desc = d.progSosial1Desc;
+                if (d.progSosial2Title) h.social_prog2_title = d.progSosial2Title;
+                if (d.progSosial2Desc) h.social_prog2_desc = d.progSosial2Desc;
+            }
+        } catch(e) {}
+        if (supabase) {
+            try {
+                const { data, error } = await supabase.from('home_settings').select('*').eq('id', 1).maybeSingle();
+                if (!error && data) {
+                    h = { ...h, ...data };
+                }
+            } catch(err) {
+                console.warn('[api.getHomeSettings] fallback to local:', err);
+            }
+        }
+        return h;
+    },
+
+    async getContactSettings() {
+        let c = {
+            id: 1,
+            foundation_name: 'Yayasan Nahjul Huda',
+            address: 'Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530',
+            phone: '(021) 53654830',
+            whatsapp1: '+6281234567890',
+            whatsapp2: '+628991168301',
+            email: 'nahjulhuda74@gmail.com',
+            operational_hours: 'Senin - Jumat: 07:00 - 15:00 WIB'
+        };
+        if (supabase) {
+            try {
+                const { data, error } = await supabase.from('contact_settings').select('*').eq('id', 1).maybeSingle();
+                if (!error && data) c = { ...c, ...data };
+            } catch(err) {}
+        }
+        return c;
+    },
+
     async getProfile() {
         let p = fallbackData.profile;
         if (supabase) {

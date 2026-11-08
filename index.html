@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       window.addEventListener('pageshow', function(event) {
         const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
@@ -654,6 +656,49 @@
               if (ps2DescEl && dataB.progSosial2Desc) ps2DescEl.innerHTML = dataB.progSosial2Desc;
             }
           } catch(e) {}
+
+          // Muat data Beranda terbaru langsung dari Supabase agar sinkron di semua device
+          (async function loadHomeFromSupabase() {
+            try {
+              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+              if (supa) {
+                var { data: homeData, error: homeErr } = await supa.from('home_settings').select('*').eq('id', 1).maybeSingle();
+                if (!homeErr && homeData) {
+                  var heroTitleEl = document.getElementById('heroTitlePublic');
+                  if (heroTitleEl && homeData.hero_title) {
+                    var hTitle = homeData.hero_title;
+                    if (hTitle.includes('Yayasan Nahjul Huda') && !hTitle.includes('text-gold-400')) {
+                      hTitle = hTitle.replace('Yayasan Nahjul Huda', '<br><span class="text-gold-400">Yayasan Nahjul Huda</span>');
+                    }
+                    heroTitleEl.innerHTML = hTitle;
+                  }
+
+                  var heroDescEl = document.getElementById('heroDescPublic');
+                  if (heroDescEl && homeData.hero_desc) heroDescEl.innerHTML = homeData.hero_desc;
+
+                  var taglineTitleEl = document.getElementById('taglineTitlePublic');
+                  if (taglineTitleEl && homeData.tagline_title) taglineTitleEl.textContent = homeData.tagline_title;
+
+                  var taglineEl = document.getElementById('taglineDescPublic');
+                  if (taglineEl && homeData.tagline_desc) taglineEl.innerHTML = homeData.tagline_desc;
+
+                  var ps1TitleEl = document.getElementById('progSosial1TitlePublic');
+                  if (ps1TitleEl && homeData.social_prog1_title) ps1TitleEl.textContent = homeData.social_prog1_title;
+                  var ps1DescEl = document.getElementById('progSosial1DescPublic');
+                  if (ps1DescEl && homeData.social_prog1_desc) ps1DescEl.innerHTML = homeData.social_prog1_desc;
+
+                  var ps2TitleEl = document.getElementById('progSosial2TitlePublic');
+                  if (ps2TitleEl && homeData.social_prog2_title) ps2TitleEl.textContent = homeData.social_prog2_title;
+                  var ps2DescEl = document.getElementById('progSosial2DescPublic');
+                  if (ps2DescEl && homeData.social_prog2_desc) ps2DescEl.innerHTML = homeData.social_prog2_desc;
+                }
+              }
+            } catch (err) {
+              console.warn('Supabase fetch beranda:', err);
+            }
+          })();
         }
 
         document.addEventListener('DOMContentLoaded', initIndex);

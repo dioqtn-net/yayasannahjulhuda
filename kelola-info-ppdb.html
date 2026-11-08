@@ -1520,19 +1520,43 @@
           }
         };
 
-        window.loadPPDBFields = function() {
-          const data = getPPDBData();
+        window.loadPPDBFields = async function() {
+          let data = getPPDBData();
+
+          // Coba muat data terbaru dari Supabase
+          try {
+            const supa = window.supabaseClient;
+            if (supa) {
+              const { data: dbPPDB, error: errDB } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
+              if (!errDB && dbPPDB && dbPPDB.contact_person && typeof dbPPDB.contact_person === 'object') {
+                data = { ...data, ...dbPPDB.contact_person };
+                localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+              }
+            }
+          } catch(e) {
+            console.warn('[PPDB Admin] Supabase fetch fallback to local:', e);
+          }
           
           // Header Teks Sambutan PPDB
           const elHeaderTitle = document.getElementById('ppdbAdmin_header_title');
           const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
           if (elHeaderTitle) elHeaderTitle.value = data.header_title || defaultPPDB.header_title || '';
-          if (elHeaderSubtitle) window.setTextareaValueWithAlignment('ppdbAdmin_header_subtitle', data.header_subtitle || defaultPPDB.header_subtitle || '');
+          if (elHeaderSubtitle) {
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('ppdbAdmin_header_subtitle', data.header_subtitle || defaultPPDB.header_subtitle || '');
+            } else {
+              elHeaderSubtitle.value = data.header_subtitle || defaultPPDB.header_subtitle || '';
+            }
+          }
 
           // Alamat Sekretariat Bersama di Bawah
           const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
           if (elSekretariat) {
-            window.setTextareaValueWithAlignment('ppdbAdmin_sekretariat_alamat', data.sekretariat_alamat || defaultPPDB.sekretariat_alamat);
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('ppdbAdmin_sekretariat_alamat', data.sekretariat_alamat || defaultPPDB.sekretariat_alamat);
+            } else {
+              elSekretariat.value = data.sekretariat_alamat || defaultPPDB.sekretariat_alamat;
+            }
           }
 
           ['sdi', 'mi', 'mts', 'ma', 'ponpes'].forEach(k => {
@@ -1540,7 +1564,7 @@
             if (!item) return;
 
             const elStatus = document.getElementById(`ppdbAdmin_${k}_status`);
-          const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
+            const elHari = document.getElementById(`ppdbAdmin_${k}_hari`);
             const elTglMulai = document.getElementById(`ppdbAdmin_${k}_tgl_mulai`);
             const elTglSelesai = document.getElementById(`ppdbAdmin_${k}_tgl_selesai`);
             const elJam = document.getElementById(`ppdbAdmin_${k}_jam`);
@@ -1557,15 +1581,29 @@
             if (elTglSelesai) elTglSelesai.value = item.tgl_selesai || '';
             if (elJam) elJam.value = item.jam || '';
             if (elZona && item.zona) elZona.value = item.zona;
-            if (elLokasi) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
-            if (elSyaratCatatan) window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
+
+            if (elLokasi) {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
+              } else {
+                elLokasi.value = item.lokasi || '';
+              }
+            }
+
+            if (elSyaratCatatan) {
+              if (typeof window.setTextareaValueWithAlignment === 'function') {
+                window.setTextareaValueWithAlignment(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
+              } else {
+                elSyaratCatatan.value = item.syarat_catatan || '';
+              }
+            }
+
             if (elK1Nama) elK1Nama.value = item.kontak1_nama || '';
             if (elK1Wa) elK1Wa.value = item.kontak1_wa || '';
             if (elK2Nama) elK2Nama.value = item.kontak2_nama || '';
             if (elK2Wa) elK2Wa.value = item.kontak2_wa || '';
             if (elStatus && item.status) elStatus.value = item.status;
 
-            // Parse list syarat dinamis (maksimal 8)
             const rawSyarat = (item.syarat || '').split('\n').map(s => s.trim()).filter(Boolean);
             window.syaratData[k] = rawSyarat.slice(0, 8);
             window.renderSyaratAdminList(k);
@@ -1591,6 +1629,14 @@
 
           const currentSyaratList = (window.syaratData[k] || []).map(s => s.trim()).filter(Boolean);
 
+          const getValWithAlign = (id) => {
+            if (typeof window.getWrappedTextareaValue === 'function') {
+              return window.getWrappedTextareaValue(id);
+            }
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+          };
+
           data[k] = {
             jenjangName: jName,
             status: elStatus ? elStatus.value : 'BUKA',
@@ -1599,32 +1645,42 @@
             tgl_selesai: elTglSelesai ? elTglSelesai.value : '',
             jam: elJam ? elJam.value.trim() : '',
             zona: elZona ? elZona.value : 'WIB',
-            lokasi: window.getWrappedTextareaValue(`ppdbAdmin_${k}_lokasi`) || (elLokasi ? elLokasi.value.trim() : ''),
+            lokasi: getValWithAlign(`ppdbAdmin_${k}_lokasi`),
             syarat: currentSyaratList.join('\n'),
-            syarat_catatan: window.getWrappedTextareaValue(`ppdbAdmin_${k}_syarat_catatan`) || (elSyaratCatatan ? elSyaratCatatan.value.trim() : ''),
+            syarat_catatan: getValWithAlign(`ppdbAdmin_${k}_syarat_catatan`),
             kontak1_nama: elK1Nama ? elK1Nama.value.trim() : '',
             kontak1_wa: elK1Wa ? elK1Wa.value.trim() : '',
             kontak2_nama: elK2Nama ? elK2Nama.value.trim() : '',
             kontak2_wa: elK2Wa ? elK2Wa.value.trim() : ''
           };
 
-          localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-
-          if (window.supabaseClient) {
-            try {
-              await window.supabaseClient.from('ppdb_info').upsert({
-                status: data[k].status,
+          try {
+            const supa = window.supabaseClient;
+            if (supa) {
+              const ppdbPayload = {
                 id: 1,
+                status: data[k].status,
                 schedule: data[k].hari + ' (' + data[k].jam + ')',
                 requirements: data[k].syarat,
-                wa_number: data[k].kontak1_wa
-              });
-            } catch(e) {
-              console.warn('Supabase sync warning:', e);
-            }
-          }
+                wa_number: data[k].kontak1_wa,
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              };
 
-          alert('Sukses! Data PPDB untuk ' + jName + ' berhasil disimpan dan diperbarui.');
+              let { error } = await supa.from('ppdb_info').update(ppdbPayload).eq('id', 1);
+              if (error) {
+                const upRes = await supa.from('ppdb_info').upsert(ppdbPayload, { onConflict: 'id' });
+                error = upRes.error;
+              }
+              if (error) throw error;
+            }
+
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+            alert('Sukses! Data PPDB untuk ' + jName + ' berhasil disimpan ke database publik Supabase.');
+          } catch(err) {
+            console.error('Error save PPDB jenjang:', err);
+            alert('Gagal menyimpan ke server: ' + (err.message || err));
+          }
         };
 
         window.simpanInfoPPDB = window.savePPDBAdminJenjang;
@@ -1637,38 +1693,61 @@
             const elHeaderSubtitle = document.getElementById('ppdbAdmin_header_subtitle');
             if (elHeaderTitle) data.header_title = elHeaderTitle.value.trim();
             if (elHeaderSubtitle) {
-              data.header_subtitle = window.getWrappedTextareaValue('ppdbAdmin_header_subtitle') || elHeaderSubtitle.value.trim();
+              data.header_subtitle = (typeof window.getWrappedTextareaValue === 'function')
+                ? window.getWrappedTextareaValue('ppdbAdmin_header_subtitle')
+                : elHeaderSubtitle.value.trim();
             }
-            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
 
-            // Simpan ke Supabase jika client aktif
-            if (window.supabaseClient) {
-              try {
-                await window.supabaseClient.from('ppdb_info').upsert({
-                  id: 1,
-                  academic_year: data.academic_year || '2024/2025',
-                  status: data.status || 'BUKA',
-                  requirements: data.header_subtitle || ''
-                });
-              } catch(supErr) {
-                console.warn('Supabase sync warning for PPDB sambutan:', supErr);
+            const supa = window.supabaseClient;
+            if (supa) {
+              const sambutanPayload = {
+                id: 1,
+                greeting_title: data.header_title,
+                greeting_desc: data.header_subtitle,
+                requirements: data.header_subtitle || '',
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              };
+              let { error } = await supa.from('ppdb_info').update(sambutanPayload).eq('id', 1);
+              if (error) {
+                const upRes = await supa.from('ppdb_info').upsert(sambutanPayload, { onConflict: 'id' });
+                error = upRes.error;
               }
+              if (error) throw error;
             }
 
-            alert('Sukses! Teks Sambutan PPDB berhasil disimpan dan siap tampil di website.');
+            localStorage.setItem(KEY_PPDB, JSON.stringify(data));
+            alert('Sukses! Teks Sambutan PPDB berhasil disimpan ke database publik Supabase.');
           } catch(err) {
             console.error('Error saving PPDB sambutan:', err);
-            alert('Gagal menyimpan teks sambutan: ' + err.message);
+            alert('Gagal menyimpan teks sambutan: ' + (err.message || err));
           }
         };
 
-        window.savePPDBSekretariat = function() {
-          const data = getPPDBData();
-          const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
-          if (elSekretariat) {
-            data.sekretariat_alamat = window.getWrappedTextareaValue('ppdbAdmin_sekretariat_alamat') || elSekretariat.value.trim();
+        window.savePPDBSekretariat = async function() {
+          try {
+            const data = getPPDBData();
+            const elSekretariat = document.getElementById('ppdbAdmin_sekretariat_alamat');
+            if (elSekretariat) {
+              data.sekretariat_alamat = (typeof window.getWrappedTextareaValue === 'function')
+                ? window.getWrappedTextareaValue('ppdbAdmin_sekretariat_alamat')
+                : elSekretariat.value.trim();
+            }
+
+            const supa = window.supabaseClient;
+            if (supa) {
+              let { error } = await supa.from('ppdb_info').update({
+                contact_person: data,
+                updated_at: new Date().toISOString()
+              }).eq('id', 1);
+              if (error) throw error;
+            }
+
             localStorage.setItem(KEY_PPDB, JSON.stringify(data));
-            alert('Sukses! Alamat Sekretariat Pendaftaran berhasil disimpan.');
+            alert('Sukses! Alamat Sekretariat Pendaftaran berhasil disimpan ke database publik Supabase.');
+          } catch(err) {
+            console.error('Error saving sekretariat:', err);
+            alert('Gagal menyimpan alamat sekretariat: ' + (err.message || err));
           }
         };
 

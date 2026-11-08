@@ -19,6 +19,8 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       window.addEventListener('pageshow', function(event) {
         const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
@@ -306,6 +308,49 @@
 
         function initContact() {
           renderContactPage();
+
+          // Muat data Kontak terbaru langsung dari Supabase
+          (async function fetchContactFromSupabase() {
+            try {
+              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+              if (supa) {
+                var updated = {};
+                var { data: contData } = await supa.from('contact_settings').select('*').eq('id', 1).maybeSingle();
+                var { data: profData } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+
+                if (contData || profData) {
+                  var rawCurrent = localStorage.getItem(KEY_CONTACT);
+                  if (rawCurrent) {
+                    try { updated = JSON.parse(rawCurrent); } catch(e) {}
+                  }
+
+                  if (contData) {
+                    if (contData.address) updated.address = contData.address;
+                    if (contData.phone) updated.phone = contData.phone;
+                    if (contData.whatsapp1) updated.wa1 = contData.whatsapp1;
+                    if (contData.whatsapp2) updated.wa2 = contData.whatsapp2;
+                    if (contData.email) updated.email = contData.email;
+                    if (contData.operational_hours) updated.operational_hours = contData.operational_hours;
+                    if (contData.maps_embed_url) updated.maps_url = contData.maps_embed_url;
+                  }
+
+                  if (profData) {
+                    if (!updated.address && profData.address) updated.address = profData.address;
+                    if (!updated.phone && profData.phone) updated.phone = profData.phone;
+                    if (!updated.email && profData.email) updated.email = profData.email;
+                    if (!updated.operational_hours && profData.operational_hours) updated.operational_hours = profData.operational_hours;
+                  }
+
+                  localStorage.setItem(KEY_CONTACT, JSON.stringify(updated));
+                  renderContactPage();
+                }
+              }
+            } catch(err) {
+              console.warn('[kontak.html] Supabase fetch error:', err);
+            }
+          })();
         }
 
         document.addEventListener('DOMContentLoaded', initContact);

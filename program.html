@@ -19,6 +19,8 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       window.addEventListener('pageshow', function(event) {
         const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
@@ -602,14 +604,18 @@
 
       window.renderTextOrList = renderTextOrList;
 
-      // Synchronize Program Content from CMS (localStorage)
-      function syncProgramContent() {
-        const savedProgData = localStorage.getItem('cmsData_program');
-        if (!savedProgData) return;
+      // Synchronize Program Content from Supabase (with fallback to localStorage)
+      async function syncProgramContent() {
+        const formatAkreditasi = (val) => {
+          if (!val) return 'Akreditasi -';
+          const clean = val.trim();
+          if (clean.toLowerCase().startsWith('akreditasi')) return clean;
+          if (clean === '-') return 'Akreditasi -';
+          return 'Akreditasi ' + clean;
+        };
 
-        try {
-          const data = JSON.parse(savedProgData);
-
+        const applyDataToDOM = (data) => {
+          if (!data) return;
           // 1. Banner Utama
           if (data.progBannerTitle && data.progBannerTitle.trim()) {
             const el = document.getElementById('publicProgBannerTitle');
@@ -619,15 +625,6 @@
             const el = document.getElementById('publicProgBannerDesc');
             if (el) el.innerHTML = data.progBannerDesc;
           }
-
-          // Format Akreditasi Helper
-          const formatAkreditasi = (val) => {
-            if (!val) return 'Akreditasi -';
-            const clean = val.trim();
-            if (clean.toLowerCase().startsWith('akreditasi')) return clean;
-            if (clean === '-') return 'Akreditasi -';
-            return 'Akreditasi ' + clean;
-          };
 
           // Generic containers jika ada di DOM
           const genericVisi = document.getElementById('container-visi');
@@ -656,7 +653,7 @@
               if (el) el.textContent = formatAkreditasi(akreditasiVal);
             }
 
-            // Text fields (Visi diproses terpisah oleh renderTextOrList)
+            // Text fields
             const mapFields = [
               { key: 'Desc', id: `public${u.prefix}Desc` },
               { key: 'Kurikulum', id: `public${u.prefix}Kurikulum` },
@@ -685,8 +682,58 @@
               renderTextOrList(elMisi, data[u.key + 'Misi'], true);
             }
           });
-        } catch (e) {
-          console.error('Error synchronizing cmsData_program:', e);
+        };
+
+        // A. Cepat: Muat dari localStorage terlebih dahulu
+        try {
+          const savedProgData = localStorage.getItem('cmsData_program');
+          if (savedProgData) {
+            applyDataToDOM(JSON.parse(savedProgData));
+          }
+        } catch(e) {}
+
+        // B. Sinkronisasi Online: Muat dari Supabase education_units
+        try {
+          var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+          var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
+          if (supa) {
+            const { data: dbUnits, error: errUnits } = await supa.from('education_units').select('*').order('id');
+            if (!errUnits && dbUnits && dbUnits.length > 0) {
+              const mapped = {};
+              const keyMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
+              dbUnits.forEach(u => {
+                const k = keyMap[u.id];
+                if (k) {
+                  mapped[k + 'Akreditasi'] = u.accreditation || '-';
+                  mapped[k + 'Desc'] = u.description || '-';
+                  mapped[k + 'Kurikulum'] = u.curriculum || '-';
+                  mapped[k + 'Unggulan'] = u.featured_programs || u.featured_program || '-';
+                  mapped[k + 'Ekskul'] = u.extracurricular || '-';
+                  mapped[k + 'Fasilitas'] = u.facilities || '-';
+                  mapped[k + 'Visi'] = u.vision || '-';
+                  mapped[k + 'Misi'] = u.mission || '-';
+                }
+              });
+
+              // Cek juga banner di profile_settings jika ada
+              try {
+                const { data: profData } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+                if (profData) {
+                  if (profData.banner_title) mapped.progBannerTitle = profData.banner_title;
+                  if (profData.banner_desc) mapped.progBannerDesc = profData.banner_desc;
+                }
+              } catch(e) {}
+
+              // Gabungkan dengan cache lokal & terapkan ke DOM
+              const localProg = JSON.parse(localStorage.getItem('cmsData_program') || '{}');
+              const finalData = { ...localProg, ...mapped };
+              localStorage.setItem('cmsData_program', JSON.stringify(finalData));
+              applyDataToDOM(finalData);
+            }
+          }
+        } catch(e) {
+          console.warn('[program.html] Supabase fetch error, fallback active:', e);
         }
       }
 
