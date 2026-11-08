@@ -2700,37 +2700,12 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
         }
 
-        // 5. Muat data Beranda (dari localStorage dulu, lalu timpa dengan data live Supabase)
+        // 5. Muat data Beranda 100% dari Live Supabase (Bebas LocalStorage / Anti-Fatamorgana)
         window.loadBerandaData = async function() {
-          // A. Muat Cache Lokal
-          const savedData = localStorage.getItem('cmsData_beranda');
-          if (savedData) {
-            try {
-              const data = JSON.parse(savedData);
-              if (data.heroTitle && document.getElementById('heroTitle')) document.getElementById('heroTitle').value = data.heroTitle;
-              if (data.heroDesc) setSafeTextareaValue('heroDesc', data.heroDesc);
-              if (data.taglineTitle && document.getElementById('taglineTitle')) document.getElementById('taglineTitle').value = data.taglineTitle;
-              if (data.taglineDesc) setSafeTextareaValue('taglineDesc', data.taglineDesc);
-              if (data.stat1Num && document.getElementById('stat1Num')) document.getElementById('stat1Num').value = data.stat1Num;
-              if (data.stat1Text && document.getElementById('stat1Text')) document.getElementById('stat1Text').value = data.stat1Text;
-              if (data.stat2Num && document.getElementById('stat2Num')) document.getElementById('stat2Num').value = data.stat2Num;
-              if (data.stat2Text && document.getElementById('stat2Text')) document.getElementById('stat2Text').value = data.stat2Text;
-              if (data.stat3Num && document.getElementById('stat3Num')) document.getElementById('stat3Num').value = data.stat3Num;
-              if (data.stat3Text && document.getElementById('stat3Text')) document.getElementById('stat3Text').value = data.stat3Text;
-              if (data.stat4Num && document.getElementById('stat4Num')) document.getElementById('stat4Num').value = data.stat4Num;
-              if (data.stat4Text && document.getElementById('stat4Text')) document.getElementById('stat4Text').value = data.stat4Text;
-              if (data.ppdbYear && document.getElementById('ppdbYear')) document.getElementById('ppdbYear').value = data.ppdbYear;
-              if (data.ppdbStatus && document.getElementById('ppdbStatus')) document.getElementById('ppdbStatus').value = data.ppdbStatus;
-              if (data.progSosial1Title && document.getElementById('progSosial1Title')) document.getElementById('progSosial1Title').value = data.progSosial1Title;
-              if (data.progSosial1Desc) setSafeTextareaValue('progSosial1Desc', data.progSosial1Desc);
-              if (data.progSosial2Title && document.getElementById('progSosial2Title')) document.getElementById('progSosial2Title').value = data.progSosial2Title;
-              if (data.progSosial2Desc) setSafeTextareaValue('progSosial2Desc', data.progSosial2Desc);
-            } catch(e) {
-              console.warn("[Kelola Beranda] Cache parse error:", e);
-            }
-          }
+          try {
+            localStorage.removeItem('cmsData_beranda'); // Bersihkan sisa cache lokal
+          } catch(e) {}
 
-          // B. Muat Live Supabase
           try {
             const supa = getSupabaseClient();
             if (!supa) return;
@@ -2861,17 +2836,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
             if (errPpdb) throw errPpdb;
 
-            // Simpan cache lokal
-            const localCache = {
-              heroTitle, heroDesc,
-              taglineTitle, taglineDesc,
-              stat1Num, stat1Text, stat2Num, stat2Text,
-              stat3Num, stat3Text, stat4Num, stat4Text,
-              ppdbYear, ppdbStatus,
-              progSosial1Title, progSosial1Desc,
-              progSosial2Title, progSosial2Desc
-            };
-            localStorage.setItem('cmsData_beranda', JSON.stringify(localCache));
+            // Bersihkan sisa cache lokal
+            try {
+              localStorage.removeItem('cmsData_beranda');
+            } catch(e) {}
 
             console.log("[Kelola Beranda] Berhasil disimpan ke Supabase:", { homeRes, ppdbRes });
             alert("Konten Beranda berhasil disimpan ke database publik Supabase!");

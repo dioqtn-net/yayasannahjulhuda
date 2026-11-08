@@ -122,28 +122,6 @@ export const api = {
             social_prog2_title: "Pengajian Rutin Bulanan",
             social_prog2_desc: "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."
         };
-        try {
-            const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
-            if (raw) {
-                const d = JSON.parse(raw);
-                if (d.heroTitle) h.hero_title = d.heroTitle;
-                if (d.heroDesc) h.hero_desc = d.heroDesc;
-                if (d.taglineTitle) h.tagline_title = d.taglineTitle;
-                if (d.taglineDesc) h.tagline_desc = d.taglineDesc;
-                if (d.stat1Num) h.stat1_num = d.stat1Num;
-                if (d.stat1Text) h.stat1_text = d.stat1Text;
-                if (d.stat2Num) h.stat2_num = d.stat2Num;
-                if (d.stat2Text) h.stat2_text = d.stat2Text;
-                if (d.stat3Num) h.stat3_num = d.stat3Num;
-                if (d.stat3Text) h.stat3_text = d.stat3Text;
-                if (d.stat4Num) h.stat4_num = d.stat4Num;
-                if (d.stat4Text) h.stat4_text = d.stat4Text;
-                if (d.progSosial1Title) h.social_prog1_title = d.progSosial1Title;
-                if (d.progSosial1Desc) h.social_prog1_desc = d.progSosial1Desc;
-                if (d.progSosial2Title) h.social_prog2_title = d.progSosial2Title;
-                if (d.progSosial2Desc) h.social_prog2_desc = d.progSosial2Desc;
-            }
-        } catch(e) {}
         if (supabase) {
             try {
                 const { data, error } = await supabase.from('home_settings').select('*').eq('id', 1).maybeSingle();
@@ -151,7 +129,7 @@ export const api = {
                     h = { ...h, ...data };
                 }
             } catch(err) {
-                console.warn('[api.getHomeSettings] fallback to local:', err);
+                console.warn('[api.getHomeSettings] query error:', err);
             }
         }
         return h;

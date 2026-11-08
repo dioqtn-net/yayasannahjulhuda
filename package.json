@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); if(fs.existsSync('dist/kelola.html')) fs.copyFileSync('dist/kelola.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html'); if(fs.existsSync('kelola-info-ppdb.js')) fs.copyFileSync('kelola-info-ppdb.js', 'dist/kelola-info-ppdb.js'); if(fs.existsSync('kelola-profil.js')) fs.copyFileSync('kelola-profil.js', 'dist/kelola-profil.js'); if(fs.existsSync('profil.js')) fs.copyFileSync('profil.js', 'dist/profil.js');\"",
+    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); if(fs.existsSync('dist/kelola.html')) fs.copyFileSync('dist/kelola.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html'); if(fs.existsSync('kelola-beranda.js')) fs.copyFileSync('kelola-beranda.js', 'dist/kelola-beranda.js'); if(fs.existsSync('kelola-info-ppdb.js')) fs.copyFileSync('kelola-info-ppdb.js', 'dist/kelola-info-ppdb.js'); if(fs.existsSync('kelola-profil.js')) fs.copyFileSync('kelola-profil.js', 'dist/kelola-profil.js'); if(fs.existsSync('profil.js')) fs.copyFileSync('profil.js', 'dist/profil.js');\"",
     "preview": "vite preview"
   },
   "dependencies": {

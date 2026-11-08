@@ -86,7 +86,11 @@ router.resolve();
 function setupHomeEvents(homeSettings = null) {
     window.renderDynamicUnitModal = renderDynamicUnitModal;
 
-    // Prioritaskan data Supabase yang baru saja di-load
+    // Prioritaskan data Supabase yang baru saja di-load (100% Bebas LocalStorage)
+    try {
+        if (typeof localStorage !== 'undefined') localStorage.removeItem('cmsData_beranda');
+    } catch(e) {}
+
     if (homeSettings) {
         const taglineEl = document.getElementById('taglineDescPublic');
         if (taglineEl && homeSettings.tagline_desc) taglineEl.innerHTML = homeSettings.tagline_desc;
@@ -102,29 +106,6 @@ function setupHomeEvents(homeSettings = null) {
         if (ps2TitleEl && homeSettings.social_prog2_title) ps2TitleEl.textContent = homeSettings.social_prog2_title;
         const ps2DescEl = document.getElementById('progSosial2DescPublic');
         if (ps2DescEl && homeSettings.social_prog2_desc) ps2DescEl.innerHTML = homeSettings.social_prog2_desc;
-    } else {
-        try {
-            const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
-            if (saved) {
-                const data = JSON.parse(saved);
-                const taglineEl = document.getElementById('taglineDescPublic');
-                if (taglineEl && data.taglineDesc) taglineEl.innerHTML = data.taglineDesc;
-                const heroDescEl = document.getElementById('heroDescPublic');
-                if (heroDescEl && data.heroDesc) heroDescEl.innerHTML = data.heroDesc;
-                const taglineTitleEl = document.getElementById('taglineTitlePublic');
-                if (taglineTitleEl && data.taglineTitle) taglineTitleEl.textContent = data.taglineTitle;
-                const ps1TitleEl = document.getElementById('progSosial1TitlePublic');
-                if (ps1TitleEl && data.progSosial1Title) ps1TitleEl.textContent = data.progSosial1Title;
-                const ps1DescEl = document.getElementById('progSosial1DescPublic');
-                if (ps1DescEl && data.progSosial1Desc) ps1DescEl.innerHTML = data.progSosial1Desc;
-                const ps2TitleEl = document.getElementById('progSosial2TitlePublic');
-                if (ps2TitleEl && data.progSosial2Title) ps2TitleEl.textContent = data.progSosial2Title;
-                const ps2DescEl = document.getElementById('progSosial2DescPublic');
-                if (ps2DescEl && data.progSosial2Desc) ps2DescEl.innerHTML = data.progSosial2Desc;
-            }
-        } catch (e) {
-            console.error('Error synchronizing cmsData_beranda in setupHomeEvents:', e);
-        }
     }
     window.openModal = async (id) => {
         // Handle lightbox images from gallery

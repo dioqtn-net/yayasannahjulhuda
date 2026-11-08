@@ -649,34 +649,10 @@
           }
         };
 
-        // Sync inline fallback elements with cmsData_beranda if available
+        // Muat data Beranda 100% dari Supabase (Bebas LocalStorage / Anti-Fatamorgana)
         function initIndex() {
           try {
-            const rawBeranda = localStorage.getItem('cmsData_beranda');
-            if (rawBeranda) {
-              const dataB = JSON.parse(rawBeranda);
-              const taglineEl = document.getElementById('taglineDescPublic');
-              if (taglineEl && dataB.taglineDesc) {
-                taglineEl.innerHTML = dataB.taglineDesc;
-              }
-              const heroDescEl = document.getElementById('heroDescPublic');
-              if (heroDescEl && dataB.heroDesc) {
-                heroDescEl.innerHTML = dataB.heroDesc;
-              }
-              const taglineTitleEl = document.getElementById('taglineTitlePublic');
-              if (taglineTitleEl && dataB.taglineTitle) {
-                taglineTitleEl.textContent = dataB.taglineTitle;
-              }
-              const ps1TitleEl = document.getElementById('progSosial1TitlePublic');
-              if (ps1TitleEl && dataB.progSosial1Title) ps1TitleEl.textContent = dataB.progSosial1Title;
-              const ps1DescEl = document.getElementById('progSosial1DescPublic');
-              if (ps1DescEl && dataB.progSosial1Desc) ps1DescEl.innerHTML = dataB.progSosial1Desc;
-
-              const ps2TitleEl = document.getElementById('progSosial2TitlePublic');
-              if (ps2TitleEl && dataB.progSosial2Title) ps2TitleEl.textContent = dataB.progSosial2Title;
-              const ps2DescEl = document.getElementById('progSosial2DescPublic');
-              if (ps2DescEl && dataB.progSosial2Desc) ps2DescEl.innerHTML = dataB.progSosial2Desc;
-            }
+            localStorage.removeItem('cmsData_beranda'); // Bersihkan sisa cache lokal jika ada
           } catch(e) {}
 
           // Muat data Beranda terbaru langsung dari Supabase agar sinkron di semua device

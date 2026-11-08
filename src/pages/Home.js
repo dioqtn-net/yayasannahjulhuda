@@ -11,51 +11,45 @@ function formatContentHtml(str) {
 import { getUnitImage } from '../api';
 
 export const renderHome = (profile, units, news, facilities, galleries, ppdb, homeSettings = null) => {
-    let cmsData = null;
     try {
-        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_beranda') : null;
-        if (stored) {
-            cmsData = JSON.parse(stored);
-        }
-    } catch (e) {
-        console.error('Error reading cmsData_beranda in renderHome:', e);
-    }
+        if (typeof localStorage !== 'undefined') localStorage.removeItem('cmsData_beranda');
+    } catch(e) {}
 
-    const heroTitleRaw = homeSettings?.hero_title || cmsData?.heroTitle || 'Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>';
+    const heroTitleRaw = homeSettings?.hero_title || 'Selamat Datang di <br><span class="text-gold-400">Yayasan Nahjul Huda</span>';
     const heroTitleContent = heroTitleRaw.includes('Yayasan Nahjul Huda') && !heroTitleRaw.includes('text-gold-400')
         ? heroTitleRaw.replace('Yayasan Nahjul Huda', '<br><span class="text-gold-400">Yayasan Nahjul Huda</span>')
         : heroTitleRaw;
 
-    const rawHeroDesc = homeSettings?.hero_desc || cmsData?.heroDesc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
+    const rawHeroDesc = homeSettings?.hero_desc || 'Membangun generasi emas yang beriman, berilmu, dan berakhlakul karimah melalui pendidikan berkualitas dan terpadu.';
     const heroDescContent = (/^<(div|p)[\s>]/i.test(String(rawHeroDesc).trim()))
         ? rawHeroDesc
         : `<div class="text-justify">${rawHeroDesc}</div>`;
 
-    const taglineTitleContent = homeSettings?.tagline_title || cmsData?.taglineTitle || 'Mencetak Generasi Rabbani';
-    const rawTagline = homeSettings?.tagline_desc || cmsData?.taglineDesc || (profile?.history ? profile.history : '...');
+    const taglineTitleContent = homeSettings?.tagline_title || 'Mencetak Generasi Rabbani';
+    const rawTagline = homeSettings?.tagline_desc || (profile?.history ? profile.history : '...');
     const taglineDescContent = (/^<(div|p)[\s>]/i.test(String(rawTagline).trim()))
         ? rawTagline
         : `<div class="text-justify">${rawTagline}</div>`;
 
-    const stat1Num = homeSettings?.stat1_num || cmsData?.stat1Num || '5';
-    const stat1Text = homeSettings?.stat1_text || cmsData?.stat1Text || 'JENJANG PENDIDIKAN';
-    const stat2Num = homeSettings?.stat2_num || cmsData?.stat2Num || '100+';
-    const stat2Text = homeSettings?.stat2_text || cmsData?.stat2Text || 'TENAGA PENDIDIK';
-    const stat3Num = homeSettings?.stat3_num || cmsData?.stat3Num || '1000+';
-    const stat3Text = homeSettings?.stat3_text || cmsData?.stat3Text || 'SANTRI & SISWA';
-    const stat4Num = homeSettings?.stat4_num || cmsData?.stat4Num || '1980';
-    const stat4Text = homeSettings?.stat4_text || cmsData?.stat4Text || 'TAHUN BERDIRI';
-    const ppdbYearContent = ppdb?.academic_year || cmsData?.ppdbYear || '2024/2025';
-    const ppdbStatusContent = ppdb?.status || cmsData?.ppdbStatus || 'BUKA';
+    const stat1Num = homeSettings?.stat1_num || '5';
+    const stat1Text = homeSettings?.stat1_text || 'JENJANG PENDIDIKAN';
+    const stat2Num = homeSettings?.stat2_num || '100+';
+    const stat2Text = homeSettings?.stat2_text || 'TENAGA PENDIDIK';
+    const stat3Num = homeSettings?.stat3_num || '1000+';
+    const stat3Text = homeSettings?.stat3_text || 'SANTRI & SISWA';
+    const stat4Num = homeSettings?.stat4_num || '1980';
+    const stat4Text = homeSettings?.stat4_text || 'TAHUN BERDIRI';
+    const ppdbYearContent = ppdb?.academic_year || '2024/2025';
+    const ppdbStatusContent = ppdb?.status || 'BUKA';
 
-    const progSosial1TitleContent = homeSettings?.social_prog1_title || cmsData?.progSosial1Title || "Majelis Ta'lim Nahjul Huda";
-    const rawProgSosial1Desc = homeSettings?.social_prog1_desc || cmsData?.progSosial1Desc || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.";
+    const progSosial1TitleContent = homeSettings?.social_prog1_title || "Majelis Ta'lim Nahjul Huda";
+    const rawProgSosial1Desc = homeSettings?.social_prog1_desc || "Wadah pengajian rutin bagi masyarakat sekitar untuk memperdalam ilmu agama, kajian tafsir, fiqih, dan tasawuf yang diasuh langsung oleh para asatidz Yayasan.";
     const progSosial1DescContent = (/^<(div|p)[\s>]/i.test(String(rawProgSosial1Desc).trim()))
         ? rawProgSosial1Desc
         : `<div class="text-justify">${rawProgSosial1Desc}</div>`;
 
-    const progSosial2TitleContent = homeSettings?.social_prog2_title || cmsData?.progSosial2Title || "Pengajian Rutin Bulanan";
-    const rawProgSosial2Desc = homeSettings?.social_prog2_desc || cmsData?.progSosial2Desc || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.";
+    const progSosial2TitleContent = homeSettings?.social_prog2_title || "Pengajian Rutin Bulanan";
+    const rawProgSosial2Desc = homeSettings?.social_prog2_desc || "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid.";
     const progSosial2DescContent = (/^<(div|p)[\s>]/i.test(String(rawProgSosial2Desc).trim()))
         ? rawProgSosial2Desc
         : `<div class="text-justify">${rawProgSosial2Desc}</div>`;
