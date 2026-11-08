@@ -21,20 +21,20 @@ export const renderNavbar = (active = '') => {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center py-2 md:py-3">
             <div class="flex items-center">
-              <a href="/" data-navigo class="flex-shrink-0 flex items-center">
+              <a href="/" class="flex-shrink-0 flex items-center">
                 <img class="h-16 md:h-24 w-auto mr-3 md:mr-4 object-contain flex-shrink-0" src="/logo.png" alt="Logo Yayasan Nahjul Huda">
                 <span class="font-playfair font-bold text-lg sm:text-xl md:text-2xl text-emerald-800 leading-tight">Yayasan Nahjul Huda</span>
               </a>
             </div>
             <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
-              <a href="/" data-navigo class="${getLinkClass('beranda')}">Beranda</a>
-              <a href="/profil" data-navigo class="${getLinkClass('profil')}">Profil</a>
-              <a href="/program" data-navigo class="${getLinkClass('program')}">Program</a>
-              <a href="/fasilitas" data-navigo class="${getLinkClass('fasilitas')}">Fasilitas</a>
-              <a href="/berita" data-navigo class="${getLinkClass('berita')}">Berita</a>
-              <a href="/galeri" data-navigo class="${getLinkClass('galeri')}">Galeri</a>
-              <a href="/kontak" data-navigo class="${getLinkClass('kontak')}">Kontak</a>
-              <a href="/ppdb" data-navigo class="${ppdbBtnClass}">Info PPDB</a>
+              <a href="/" class="${getLinkClass('beranda')}">Beranda</a>
+              <a href="/profil" class="${getLinkClass('profil')}">Profil</a>
+              <a href="/program" class="${getLinkClass('program')}">Program</a>
+              <a href="/fasilitas" class="${getLinkClass('fasilitas')}">Fasilitas</a>
+              <a href="/berita" class="${getLinkClass('berita')}">Berita</a>
+              <a href="/galeri" class="${getLinkClass('galeri')}">Galeri</a>
+              <a href="/kontak" class="${getLinkClass('kontak')}">Kontak</a>
+              <a href="/ppdb" class="${ppdbBtnClass}">Info PPDB</a>
             </div>
             <div class="-mr-2 flex items-center md:hidden">
               <button onclick="toggleMobileMenu()" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none">
@@ -47,14 +47,14 @@ export const renderNavbar = (active = '') => {
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
           <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/" data-navigo class="${getMobileLinkClass('beranda')}">Beranda</a>
-            <a href="/profil" data-navigo class="${getMobileLinkClass('profil')}">Profil</a>
-            <a href="/program" data-navigo class="${getMobileLinkClass('program')}">Program</a>
-            <a href="/fasilitas" data-navigo class="${getMobileLinkClass('fasilitas')}">Fasilitas</a>
-            <a href="/berita" data-navigo class="${getMobileLinkClass('berita')}">Berita</a>
-            <a href="/galeri" data-navigo class="${getMobileLinkClass('galeri')}">Galeri</a>
-            <a href="/kontak" data-navigo class="${getMobileLinkClass('kontak')}">Kontak</a>
-            <a href="/ppdb" data-navigo class="${mobilePpdbBtnClass}">Info PPDB</a>
+            <a href="/" class="${getMobileLinkClass('beranda')}">Beranda</a>
+            <a href="/profil" class="${getMobileLinkClass('profil')}">Profil</a>
+            <a href="/program" class="${getMobileLinkClass('program')}">Program</a>
+            <a href="/fasilitas" class="${getMobileLinkClass('fasilitas')}">Fasilitas</a>
+            <a href="/berita" class="${getMobileLinkClass('berita')}">Berita</a>
+            <a href="/galeri" class="${getMobileLinkClass('galeri')}">Galeri</a>
+            <a href="/kontak" class="${getMobileLinkClass('kontak')}">Kontak</a>
+            <a href="/ppdb" class="${mobilePpdbBtnClass}">Info PPDB</a>
           </div>
         </div>
       </nav>

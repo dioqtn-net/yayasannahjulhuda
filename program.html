@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
     <script>
       window.addEventListener('pageshow', function(event) {
-        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
-        if (event.persisted) {
-          // Paksa reload halaman dari server, bukan dari cache
+        const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+        const isBackForward = perfNav && perfNav.type === 'back_forward';
+        if (event.persisted || isBackForward) {
           window.location.reload();
         }
       });
@@ -603,7 +603,7 @@
       window.renderTextOrList = renderTextOrList;
 
       // Synchronize Program Content from CMS (localStorage)
-      document.addEventListener('DOMContentLoaded', () => {
+      function syncProgramContent() {
         const savedProgData = localStorage.getItem('cmsData_program');
         if (!savedProgData) return;
 
@@ -687,6 +687,21 @@
           });
         } catch (e) {
           console.error('Error synchronizing cmsData_program:', e);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', syncProgramContent);
+      document.addEventListener('turbolinks:load', syncProgramContent);
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        syncProgramContent();
+      }
+
+      // Memaksa reload/render ulang jika halaman dimuat dari Back/Forward Cache
+      window.addEventListener('pageshow', function (event) {
+        const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+        const isBackForward = perfNav && perfNav.type === 'back_forward';
+        if (event.persisted || isBackForward) {
+          window.location.reload(); 
         }
       });
     </script>

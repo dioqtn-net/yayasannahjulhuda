@@ -148,18 +148,18 @@ export const renderProfile = (profile) => {
           <h2 class="text-3xl font-playfair font-bold text-emerald-800 mb-4 text-center">${strukturTitle}</h2>
           <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-12"></div>
           
-          <div class="max-w-5xl mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100">
-            <div class="text-slate-600 italic mb-8">${strukturDesc}</div>
+          <div class="max-w-5xl mx-auto">
+            <div class="text-slate-600 italic mb-10 text-center">${strukturDesc}</div>
             
-            <!-- Card Ketua Yayasan (Wide Box) -->
-            <div class="w-full bg-white border border-slate-100 rounded-2xl p-8 sm:p-10 mb-10 text-center shadow-xs">
-              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 overflow-hidden bg-emerald-50/70 border-4 border-emerald-100 flex items-center justify-center shadow-xs relative">
+            <!-- Ketua Yayasan -->
+            <div class="flex flex-col items-center justify-center mb-12 text-center">
+              <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                 ${fotoKetua ? `<img src="${fotoKetua}" alt="Ketua Yayasan" class="w-full h-full object-cover">` : `
-                <div class="w-full h-full flex items-center justify-center text-emerald-800 text-3xl sm:text-4xl">
-                  <i class="fas fa-user"></i>
+                <div class="w-full h-full flex items-center justify-center text-green-700">
+                  <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </div>`}
               </div>
-              <h4 class="font-playfair font-bold text-slate-800 text-lg sm:text-xl">Ketua Yayasan</h4>
+              <h4 class="font-playfair font-bold text-slate-800 text-base sm:text-lg">Ketua Yayasan</h4>
               <p class="text-sm font-semibold text-emerald-800 mt-1">${namaKetua}</p>
             </div>
             
@@ -167,67 +167,67 @@ export const renderProfile = (profile) => {
             <div class="mt-8">
                <h4 class="font-playfair font-bold text-slate-800 mb-8 text-base sm:text-lg text-center">Kepala Unit Pendidikan</h4>
                
-               <!-- 5 Item Sejajar Horisontal dalam 1 Baris (Single Row) -->
-               <div class="grid grid-cols-5 gap-2 sm:gap-4 md:gap-6 max-w-4xl mx-auto justify-items-center items-start">
+               <!-- Kelima Item Sejajar Horisontal -->
+               <div class="flex flex-wrap justify-center gap-8 md:gap-12 mt-8">
                   
                   <!-- Kepala SDI -->
                   <div class="flex flex-col items-center text-center">
-                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white shadow-sm flex items-center justify-center mb-2 overflow-hidden relative">
+                     <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                         ${fotoSDI ? `<img src="${fotoSDI}" alt="Kepala SDI" class="w-full h-full object-cover">` : `
-                        <div class="w-full h-full flex items-center justify-center text-white text-lg sm:text-xl">
-                          <i class="fas fa-user-tie"></i>
+                        <div class="w-full h-full flex items-center justify-center text-green-700">
+                          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>`}
                      </div>
-                     <h5 class="font-playfair font-bold text-slate-800 text-xs sm:text-sm">Kepala SDI</h5>
-                     <p class="text-xs text-slate-500 mt-0.5">${namaSDI}</p>
+                     <h5 class="font-playfair font-bold text-slate-800 text-sm sm:text-base">Kepala SDI</h5>
+                     <p class="text-xs sm:text-sm text-slate-500 mt-1">${namaSDI}</p>
                   </div>
 
                   <!-- Kepala MI -->
                   <div class="flex flex-col items-center text-center">
-                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white shadow-sm flex items-center justify-center mb-2 overflow-hidden relative">
+                     <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                         ${fotoMI ? `<img src="${fotoMI}" alt="Kepala MI" class="w-full h-full object-cover">` : `
-                        <div class="w-full h-full flex items-center justify-center text-white text-lg sm:text-xl">
-                          <i class="fas fa-user-tie"></i>
+                        <div class="w-full h-full flex items-center justify-center text-green-700">
+                          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>`}
                      </div>
-                     <h5 class="font-playfair font-bold text-slate-800 text-xs sm:text-sm">Kepala MI</h5>
-                     <p class="text-xs text-slate-500 mt-0.5">${namaMI}</p>
+                     <h5 class="font-playfair font-bold text-slate-800 text-sm sm:text-base">Kepala MI</h5>
+                     <p class="text-xs sm:text-sm text-slate-500 mt-1">${namaMI}</p>
                   </div>
 
                   <!-- Kepala MTs -->
                   <div class="flex flex-col items-center text-center">
-                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white shadow-sm flex items-center justify-center mb-2 overflow-hidden relative">
+                     <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                         ${fotoMTs ? `<img src="${fotoMTs}" alt="Kepala MTs" class="w-full h-full object-cover">` : `
-                        <div class="w-full h-full flex items-center justify-center text-white text-lg sm:text-xl">
-                          <i class="fas fa-user-tie"></i>
+                        <div class="w-full h-full flex items-center justify-center text-green-700">
+                          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>`}
                      </div>
-                     <h5 class="font-playfair font-bold text-slate-800 text-xs sm:text-sm">Kepala MTs</h5>
-                     <p class="text-xs text-slate-500 mt-0.5">${namaMTs}</p>
+                     <h5 class="font-playfair font-bold text-slate-800 text-sm sm:text-base">Kepala MTs</h5>
+                     <p class="text-xs sm:text-sm text-slate-500 mt-1">${namaMTs}</p>
                   </div>
 
                   <!-- Kepala MA -->
                   <div class="flex flex-col items-center text-center">
-                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white shadow-sm flex items-center justify-center mb-2 overflow-hidden relative">
+                     <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                         ${fotoMA ? `<img src="${fotoMA}" alt="Kepala MA" class="w-full h-full object-cover">` : `
-                        <div class="w-full h-full flex items-center justify-center text-white text-lg sm:text-xl">
-                          <i class="fas fa-user-tie"></i>
+                        <div class="w-full h-full flex items-center justify-center text-green-700">
+                          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>`}
                      </div>
-                     <h5 class="font-playfair font-bold text-slate-800 text-xs sm:text-sm">Kepala MA</h5>
-                     <p class="text-xs text-slate-500 mt-0.5">${namaMA}</p>
+                     <h5 class="font-playfair font-bold text-slate-800 text-sm sm:text-base">Kepala MA</h5>
+                     <p class="text-xs sm:text-sm text-slate-500 mt-1">${namaMA}</p>
                   </div>
 
                   <!-- Mudir Ponpes -->
                   <div class="flex flex-col items-center text-center">
-                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white shadow-sm flex items-center justify-center mb-2 overflow-hidden relative">
+                     <div class="w-20 h-20 rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center mx-auto mb-4 text-green-700 overflow-hidden relative">
                         ${fotoMudir ? `<img src="${fotoMudir}" alt="Mudir Ponpes" class="w-full h-full object-cover">` : `
-                        <div class="w-full h-full flex items-center justify-center text-white text-lg sm:text-xl">
-                          <i class="fas fa-user-tie"></i>
+                        <div class="w-full h-full flex items-center justify-center text-green-700">
+                          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>`}
                      </div>
-                     <h5 class="font-playfair font-bold text-slate-800 text-xs sm:text-sm">Mudir Ponpes</h5>
-                     <p class="text-xs text-slate-500 mt-0.5">${namaMudir}</p>
+                     <h5 class="font-playfair font-bold text-slate-800 text-sm sm:text-base">Mudir Ponpes</h5>
+                     <p class="text-xs sm:text-sm text-slate-500 mt-1">${namaMudir}</p>
                   </div>
 
                </div>

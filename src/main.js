@@ -54,49 +54,13 @@ router
   .on('/beranda', loadHome)
   .on('/beranda.html', loadHome)
   .on('/index.html', loadHome)
-  .on('/profil', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const profile = await api.getProfile();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderProfile(profile), true, 'profil');
-  })
-  .on('/program', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const units = await api.getEducationUnits();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderPrograms(units), true, 'program');
-    setupProgramEvents();
-  })
-  .on('/fasilitas', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const facilities = await api.getFacilities();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderFacilities(facilities), true, 'fasilitas');
-  })
-  .on('/ppdb', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const ppdb = await api.getPPDB();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderPPDB(ppdb), true, 'ppdb');
-  })
-  .on('/berita', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const news = await api.getNews();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderNews(news), true, 'berita');
-  })
-  .on('/galeri', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const galleries = await api.getGalleries();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderGallery(galleries), true, 'galeri');
-  })
-  .on('/kontak', async () => {
-    appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
-    const profile = await api.getProfile();
-    appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderContact(profile), true, 'kontak');
-  })
+  .on('/profil', () => { window.location.href = '/profil'; })
+  .on('/program', () => { window.location.href = '/program'; })
+  .on('/fasilitas', () => { window.location.href = '/fasilitas'; })
+  .on('/ppdb', () => { window.location.href = '/ppdb'; })
+  .on('/berita', () => { window.location.href = '/berita'; })
+  .on('/galeri', () => { window.location.href = '/galeri'; })
+  .on('/kontak', () => { window.location.href = '/kontak'; })
   .on('/kelola', async () => {
     appDiv.innerHTML = '<div class="p-8 text-center"><i class="fas fa-spinner fa-spin fa-2x text-emerald-700"></i></div>';
     appDiv.innerHTML = '';
@@ -107,7 +71,7 @@ router
       <div class="text-center py-20">
         <h1 class="text-4xl font-bold text-emerald-800 mb-4">404</h1>
         <p class="text-slate-600 mb-8">Halaman tidak ditemukan.</p>
-        <a href="/" data-navigo class="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition">Kembali ke Beranda</a>
+        <a href="/" class="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition">Kembali ke Beranda</a>
       </div>
     `);
   });
@@ -122,23 +86,7 @@ if (path.startsWith('/kelola') || hash.includes('/kelola')) {
 }
 router.resolve();
 
-// Global handler for data-navigo links
-document.body.addEventListener('click', (e) => {
-    const link = e.target.closest('a[data-navigo]');
-    if (link) {
-        e.preventDefault();
-        // Close modals and restore body scroll on navigation
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = 'auto';
-        router.navigate(link.getAttribute('href'));
-        // close mobile menu if open
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
-        }
-    }
-});
-
+// Matikan intercept navigasi SPA agar semua menu berpindah via native full page load (hard load)
 // Event Setups
 function setupHomeEvents() {
     window.renderDynamicUnitModal = renderDynamicUnitModal;
@@ -224,3 +172,13 @@ window.toggleMobileMenu = () => {
         mobileMenu.classList.toggle('hidden');
     }
 };
+
+// Memaksa reload/render ulang jika halaman dimuat dari Back/Forward Cache
+window.addEventListener('pageshow', function (event) {
+    const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+    const isBackForward = perfNav && perfNav.type === 'back_forward';
+    if (event.persisted || isBackForward) {
+        window.location.reload(); 
+    }
+});
+

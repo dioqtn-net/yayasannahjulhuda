@@ -193,7 +193,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
             ${heroDescContent}
           </div>
           <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a href="/ppdb" data-navigo class="bg-gold-500 hover:bg-gold-400 text-slate-900 px-8 py-3 rounded-full font-bold transition shadow-lg flex items-center justify-center">
+            <a href="/ppdb" class="bg-gold-500 hover:bg-gold-400 text-slate-900 px-8 py-3 rounded-full font-bold transition shadow-lg flex items-center justify-center">
               <i class="fas fa-user-graduate mr-2"></i> Info PPDB
             </a>
             <a href="#jenjang" class="bg-emerald-700/50 hover:bg-emerald-600/80 border border-emerald-400/30 text-white px-8 py-3 rounded-full font-medium transition backdrop-blur flex items-center justify-center">
@@ -288,7 +288,7 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb) =>
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 class="text-3xl md:text-4xl font-playfair font-bold text-emerald-900 mb-4">Penerimaan Peserta Didik Baru (PPDB)</h2>
           <p class="text-emerald-900/80 text-lg mb-8">Tahun Ajaran <span id="ppdbYearPublic">${ppdbYearContent}</span> - Status: <span id="ppdbStatusPublic" class="font-bold bg-white px-3 py-1 rounded-full text-emerald-700 text-sm ml-2">${ppdbStatusContent}</span></p>
-          <a href="/ppdb" data-navigo class="inline-block bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-3.5 rounded-full font-bold text-lg transition shadow-xl hover:-translate-y-1 transform">
+          <a href="/ppdb" class="inline-block bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-3.5 rounded-full font-bold text-lg transition shadow-xl hover:-translate-y-1 transform">
             Lihat Informasi Pendaftaran
           </a>
         </div>

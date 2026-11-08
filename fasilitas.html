@@ -27,9 +27,9 @@
     </style>
     <script>
       window.addEventListener('pageshow', function(event) {
-        // Jika halaman dimuat dari BFCache (tombol back/forward atau navigasi tab)
-        if (event.persisted) {
-          // Paksa reload halaman dari server, bukan dari cache
+        const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+        const isBackForward = perfNav && perfNav.type === 'back_forward';
+        if (event.persisted || isBackForward) {
           window.location.reload();
         }
       });
@@ -302,7 +302,7 @@
       }
 
       // Render Dynamic Fasilitas Cards from CMS (localStorage)
-      document.addEventListener('DOMContentLoaded', () => {
+      function initFasilitas() {
         // Render Teks Banner
         const savedBannerFas = localStorage.getItem('cmsData_fasBanner');
         if (savedBannerFas) {
@@ -492,6 +492,21 @@
             });
             renderList(filtered);
           });
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', initFasilitas);
+      document.addEventListener('turbolinks:load', initFasilitas);
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        initFasilitas();
+      }
+
+      // Memaksa reload/render ulang jika halaman dimuat dari Back/Forward Cache
+      window.addEventListener('pageshow', function (event) {
+        const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+        const isBackForward = perfNav && perfNav.type === 'back_forward';
+        if (event.persisted || isBackForward) {
+          window.location.reload(); 
         }
       });
     </script>

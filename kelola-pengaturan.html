@@ -2501,15 +2501,24 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <!-- Admin Security -->
-              <div class="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-6 shadow-sm">
-                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm border-b border-slate-100 pb-3">
-                  <i class="fas fa-lock text-emerald-700"></i> Keamanan Akun
+              <!-- Admin Security: Keamanan Akun -->
+              <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 mt-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center border-b border-slate-100 pb-3">
+                  <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                  Keamanan Akun
                 </h3>
-                <p class="text-xs text-slate-600 mb-3">Terakhir login: Hari ini, dari IP Administrator</p>
-                <button type="button" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition border border-slate-200">
-                  Ganti Password Admin
-                </button>
+                
+                <!-- Blok Ganti Password -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Ganti Password Administrator</label>
+                  <div class="flex flex-row items-center gap-2">
+                    <input type="password" id="input_password_baru" placeholder="Minimal 6 karakter..." class="w-full flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 text-sm">
+                    <button type="button" id="btn_update_password" class="whitespace-nowrap bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                      Update Password
+                    </button>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">Anda akan logout otomatis setelah password berhasil diubah.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2747,67 +2756,87 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
         const btnSaveProfil = document.getElementById('btnSimpanProfil');
         if (btnSaveProfil) {
           btnSaveProfil.addEventListener('click', async (e) => {
-            e.preventDefault();
+            if (e) e.preventDefault();
+            try {
+              const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
 
-            const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
+              const readFile = (inputId, prevVal) => {
+                return new Promise((resolve) => {
+                  const input = document.getElementById(inputId);
+                  // Jika ditandai hapus, kosongkan data foto
+                  if (input && input.getAttribute('data-hapus') === 'true') {
+                    resolve('');
+                    return;
+                  }
+                  if (input && input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => resolve(event.target.result);
+                    reader.onerror = () => resolve(prevVal || '');
+                    reader.readAsDataURL(input.files[0]);
+                  } else {
+                    resolve(prevVal || '');
+                  }
+                });
+              };
 
-            const readFile = (inputId, prevVal) => {
-              return new Promise((resolve) => {
-                const input = document.getElementById(inputId);
-                // Jika ditandai hapus, kosongkan data foto
-                if (input && input.getAttribute('data-hapus') === 'true') {
-                  resolve('');
-                  return;
+              const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
+                readFile('fotoKetua', prevData.fotoKetua),
+                readFile('fotoSDI', prevData.fotoSDI),
+                readFile('fotoMI', prevData.fotoMI),
+                readFile('fotoMTs', prevData.fotoMTs),
+                readFile('fotoMA', prevData.fotoMA),
+                readFile('fotoMudir', prevData.fotoMudir)
+              ]);
+
+              // HANYA ambil input yang benar-benar ada di HTML saat ini
+              const dataProfil = {
+                profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
+                profilDesc: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('profilDesc') : (document.getElementById('profilDesc')?.value || ''),
+                sejarahText: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('sejarahText') : (document.getElementById('sejarahText')?.value || ''),
+                strukturTitle: document.getElementById('strukturTitle')?.value || 'Struktur Organisasi',
+                strukturDesc: window.getWrappedTextareaValue ? window.getWrappedTextareaValue('strukturDesc') : (document.getElementById('strukturDesc')?.value || ''),
+                namaKetua: document.getElementById('namaKetua')?.value || '-',
+                fotoKetua: fotoKetua,
+                namaSDI: document.getElementById('namaSDI')?.value || '-',
+                fotoSDI: fotoSDI,
+                namaMI: document.getElementById('namaMI')?.value || '-',
+                fotoMI: fotoMI,
+                namaMTs: document.getElementById('namaMTs')?.value || '-',
+                fotoMTs: fotoMTs,
+                namaMA: document.getElementById('namaMA')?.value || '-',
+                fotoMA: fotoMA,
+                namaMudir: document.getElementById('namaMudir')?.value || '-',
+                fotoMudir: fotoMudir
+              };
+
+              localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
+
+              // Simpan ke Supabase jika client aktif (Hanya history)
+              if (window.supabaseClient) {
+                try {
+                  const { error: supaErr } = await window.supabaseClient.from('profile_settings').upsert({
+                    id: 1,
+                    history: dataProfil.sejarahText
+                  });
+                  if (supaErr) {
+                    console.warn('Peringatan Supabase:', supaErr);
+                  }
+                } catch (sErr) {
+                  console.warn('Supabase save error:', sErr);
                 }
-                if (input && input.files && input.files[0]) {
-                  const reader = new FileReader();
-                  reader.onload = (event) => resolve(event.target.result);
-                  reader.onerror = () => resolve(prevVal || '');
-                  reader.readAsDataURL(input.files[0]);
-                } else {
-                  resolve(prevVal || '');
-                }
+              }
+
+              // Reset atribut penanda hapus setelah berhasil disimpan
+              ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.setAttribute('data-hapus', 'false');
               });
-            };
 
-            const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
-              readFile('fotoKetua', prevData.fotoKetua),
-              readFile('fotoSDI', prevData.fotoSDI),
-              readFile('fotoMI', prevData.fotoMI),
-              readFile('fotoMTs', prevData.fotoMTs),
-              readFile('fotoMA', prevData.fotoMA),
-              readFile('fotoMudir', prevData.fotoMudir)
-            ]);
-
-            const dataProfil = {
-              profilTitle: document.getElementById('profilTitle')?.value || '',
-              profilDesc: window.getWrappedTextareaValue('profilDesc'),
-              sejarahText: window.getWrappedTextareaValue('sejarahText'),
-              strukturTitle: document.getElementById('strukturTitle')?.value || '',
-              strukturDesc: window.getWrappedTextareaValue('strukturDesc'),
-              namaKetua: document.getElementById('namaKetua')?.value || '-',
-              fotoKetua: fotoKetua,
-              namaSDI: document.getElementById('namaSDI')?.value || '-',
-              fotoSDI: fotoSDI,
-              namaMI: document.getElementById('namaMI')?.value || '-',
-              fotoMI: fotoMI,
-              namaMTs: document.getElementById('namaMTs')?.value || '-',
-              fotoMTs: fotoMTs,
-              namaMA: document.getElementById('namaMA')?.value || '-',
-              fotoMA: fotoMA,
-              namaMudir: document.getElementById('namaMudir')?.value || '-',
-              fotoMudir: fotoMudir
-            };
-
-            localStorage.setItem('cmsData_profil', JSON.stringify(dataProfil));
-
-            // Reset atribut penanda hapus setelah berhasil disimpan
-            ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
-              const el = document.getElementById(id);
-              if (el) el.setAttribute('data-hapus', 'false');
-            });
-
-            alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
+              alert('Sukses! Perubahan Profil berhasil disimpan. Silakan cek halaman Profil.');
+            } catch (error) {
+              console.error("Error Simpan Profil:", error);
+              alert("Terjadi kesalahan sistem: " + error.message + ". Cek console untuk detail.");
+            }
           });
         }
       });
@@ -4549,6 +4578,37 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (btn) btn.addEventListener('click', window.savePengaturanYayasan);
           const form = document.getElementById('formPengaturanYayasan');
           if (form) form.addEventListener('submit', window.savePengaturanYayasan);
+
+          // Handler Update Password Administrator
+          const btnUpdatePassword = document.getElementById('btn_update_password');
+          if (btnUpdatePassword) {
+            btnUpdatePassword.addEventListener('click', async (e) => {
+              e.preventDefault();
+              const inputPass = document.getElementById('input_password_baru');
+              const newPassword = inputPass ? inputPass.value : '';
+              if (!newPassword || newPassword.length < 6) {
+                return alert('Password baru harus terdiri dari minimal 6 karakter!');
+              }
+
+              if (confirm('Yakin ingin mengubah password admin? Anda harus login ulang dengan password baru setelah ini.')) {
+                try {
+                  const supa = window.supabaseClient || (typeof supabase !== 'undefined' ? supabase : null);
+                  if (supa && supa.auth) {
+                    const { data, error } = await supa.auth.updateUser({ password: newPassword });
+                    if (error) throw error;
+                    await supa.auth.signOut().catch(() => {});
+                  }
+                  sessionStorage.removeItem('admin_session');
+                  localStorage.removeItem('admin_session');
+                  alert('Password berhasil diubah! Sesi Anda telah diakhiri. Silakan login kembali.');
+                  window.location.href = 'login.html';
+                } catch (err) {
+                  console.error('Error update password:', err);
+                  alert('Gagal memperbarui password: ' + err.message);
+                }
+              }
+            });
+          }
         });
       })();
     

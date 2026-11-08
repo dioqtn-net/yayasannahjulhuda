@@ -173,7 +173,7 @@ export const renderAdmin = async (appDiv, router) => {
                 <div class="flex-1 p-4 md:p-8 overflow-y-auto">
                     <div class="flex justify-between items-center mb-8">
                         <h1 class="text-3xl font-playfair font-bold text-emerald-900">Dashboard Admin</h1>
-                        <a href="/" data-navigo class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition flex items-center">
+                        <a href="/" class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition flex items-center">
                             <i class="fas fa-external-link-alt mr-1"></i> Lihat Web
                         </a>
                     </div>
@@ -384,7 +384,7 @@ const renderLogin = (appDiv, router) => {
                         </div>
                     </form>
                     <div class="mt-6 text-center">
-                        <a href="/" data-navigo class="text-sm font-medium text-emerald-600 hover:text-emerald-500"><i class="fas fa-arrow-left mr-1"></i> Kembali ke Beranda Publik</a>
+                        <a href="/" class="text-sm font-medium text-emerald-600 hover:text-emerald-500"><i class="fas fa-arrow-left mr-1"></i> Kembali ke Beranda Publik</a>
                     </div>
                 </div>
             </div>

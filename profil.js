@@ -56,5 +56,14 @@ export function renderTextOrList(containerElement, rawData, isList = false, list
 
 if (typeof window !== 'undefined') {
     window.renderTextOrList = renderTextOrList;
+
+    // Memaksa reload/render ulang jika halaman dimuat dari Back/Forward Cache
+    window.addEventListener('pageshow', function (event) {
+        const perfNav = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation')[0];
+        const isBackForward = perfNav && perfNav.type === 'back_forward';
+        if (event.persisted || isBackForward) {
+            window.location.reload(); 
+        }
+    });
 }
 

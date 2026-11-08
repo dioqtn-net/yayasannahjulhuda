@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 readFile('fotoMudir', prevData.fotoMudir)
             ]);
 
+            // HANYA ambil input yang benar-benar ada di HTML saat ini
             const payload = {
                 profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
                 profilDesc: getWrappedValue('profilDesc'),
@@ -160,6 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.setItem('cmsData_profil', JSON.stringify(payload));
 
+            // Simpan ke Supabase jika client aktif (Hanya sejarah, tanpa visi/misi/target)
+            if (window.supabaseClient) {
+                try {
+                    await window.supabaseClient.from('profile_settings').upsert({
+                        id: 1,
+                        history: payload.sejarahText
+                    });
+                } catch (supaErr) {
+                    console.warn('Peringatan Supabase:', supaErr);
+                }
+            }
+
             // Reset atribut hapus foto
             ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
                 const el = document.getElementById(id);
@@ -167,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             alert('Sukses! Perubahan Profil berhasil disimpan.');
-        } catch (err) {
-            console.error('Gagal menyimpan profil:', err);
-            alert('Terjadi kesalahan saat menyimpan data profil: ' + err.message);
+        } catch (error) {
+            console.error("Error Simpan Profil:", error);
+            alert("Terjadi kesalahan sistem: " + error.message + ". Cek console untuk detail.");
         }
     }
 
