@@ -83,6 +83,28 @@
         </div>
       </section>
 
+      <!-- Stats Section -->
+      <section class="py-12 bg-white border-b border-slate-100 relative z-20 -mt-10 mx-4 md:mx-auto max-w-5xl rounded-2xl shadow-xl">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-100">
+          <div class="p-4">
+            <div id="stat1NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">5</div>
+            <div id="stat1TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">JENJANG PENDIDIKAN</div>
+          </div>
+          <div class="p-4">
+            <div id="stat2NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">100+</div>
+            <div id="stat2TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">TENAGA PENDIDIK</div>
+          </div>
+          <div class="p-4">
+            <div id="stat3NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">1000+</div>
+            <div id="stat3TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">SANTRI &amp; SISWA</div>
+          </div>
+          <div class="p-4">
+            <div id="stat4NumPublic" class="text-3xl font-bold text-emerald-600 mb-1">1980</div>
+            <div id="stat4TextPublic" class="text-slate-500 text-sm font-medium uppercase tracking-wide">TAHUN BERDIRI</div>
+          </div>
+        </div>
+      </section>
+
       <!-- Sambutan (Mencetak Generasi Rabbani) -->
       <section class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,8 +125,8 @@
             <!-- Card SDI -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
-                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">SD Islam (SDI) AL KINDY</h3>
-                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
+                <h3 id="unitName-1" class="font-playfair font-bold text-xl text-emerald-800 mb-2">SD Islam (SDI) AL KINDY</h3>
+                <p id="unitDesc-1" class="text-slate-600 text-sm mb-4">Pendidikan dasar dengan dasar-dasar keislaman yang kuat.</p>
               </div>
               <div>
                 <a href="program.html#program-sdi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -116,8 +138,8 @@
             <!-- Card MI -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
-                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
+                <h3 id="unitName-2" class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Ibtidaiyah (MI) Nahjul Huda</h3>
+                <p id="unitDesc-2" class="text-slate-600 text-sm mb-4">Pendidikan dasar berciri khas Islam yang mengintegrasikan ilmu umum dan agama.</p>
               </div>
               <div>
                 <a href="program.html#program-mi" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -129,8 +151,8 @@
             <!-- Card MTs -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
-                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
+                <h3 id="unitName-3" class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Tsanawiyah (MTs) Nahjul Huda</h3>
+                <p id="unitDesc-3" class="text-slate-600 text-sm mb-4">Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.</p>
               </div>
               <div>
                 <a href="program.html#program-mts" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -142,8 +164,8 @@
             <!-- Card MA -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
-                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Aliyah (MA) Nahjul Huda</h3>
-                <p class="text-slate-600 text-sm mb-4">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
+                <h3 id="unitName-4" class="font-playfair font-bold text-xl text-emerald-800 mb-2">Madrasah Aliyah (MA) Nahjul Huda</h3>
+                <p id="unitDesc-4" class="text-slate-600 text-sm mb-4">Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.</p>
               </div>
               <div>
                 <a href="program.html#program-ma" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -155,8 +177,8 @@
             <!-- Card Ponpes -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden p-5 flex flex-col justify-between">
               <div>
-                <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2">Pondok Pesantren Assurur</h3>
-                <p class="text-slate-600 text-sm mb-4">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
+                <h3 id="unitName-5" class="font-playfair font-bold text-xl text-emerald-800 mb-2">Pondok Pesantren Assurur</h3>
+                <p id="unitDesc-5" class="text-slate-600 text-sm mb-4">Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.</p>
               </div>
               <div>
                 <a href="program.html#program-ponpes" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -664,6 +686,7 @@
               var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
               var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
               if (supa) {
+                // 1. Ambil Pengaturan Beranda (Hero, Sambutan, Statistik, Program Sosial)
                 var { data: homeData, error: homeErr } = await supa.from('home_settings').select('*').eq('id', 1).maybeSingle();
                 if (!homeErr && homeData) {
                   var heroTitleEl = document.getElementById('heroTitlePublic');
@@ -684,6 +707,28 @@
                   var taglineEl = document.getElementById('taglineDescPublic');
                   if (taglineEl && homeData.tagline_desc) taglineEl.innerHTML = homeData.tagline_desc;
 
+                  // Update Angka & Label Statistik
+                  var s1n = document.getElementById('stat1NumPublic');
+                  if (s1n && homeData.stat1_num) s1n.textContent = homeData.stat1_num;
+                  var s1t = document.getElementById('stat1TextPublic');
+                  if (s1t && homeData.stat1_text) s1t.textContent = homeData.stat1_text;
+
+                  var s2n = document.getElementById('stat2NumPublic');
+                  if (s2n && homeData.stat2_num) s2n.textContent = homeData.stat2_num;
+                  var s2t = document.getElementById('stat2TextPublic');
+                  if (s2t && homeData.stat2_text) s2t.textContent = homeData.stat2_text;
+
+                  var s3n = document.getElementById('stat3NumPublic');
+                  if (s3n && homeData.stat3_num) s3n.textContent = homeData.stat3_num;
+                  var s3t = document.getElementById('stat3TextPublic');
+                  if (s3t && homeData.stat3_text) s3t.textContent = homeData.stat3_text;
+
+                  var s4n = document.getElementById('stat4NumPublic');
+                  if (s4n && homeData.stat4_num) s4n.textContent = homeData.stat4_num;
+                  var s4t = document.getElementById('stat4TextPublic');
+                  if (s4t && homeData.stat4_text) s4t.textContent = homeData.stat4_text;
+
+                  // Update Program Sosial & Keagamaan
                   var ps1TitleEl = document.getElementById('progSosial1TitlePublic');
                   if (ps1TitleEl && homeData.social_prog1_title) ps1TitleEl.textContent = homeData.social_prog1_title;
                   var ps1DescEl = document.getElementById('progSosial1DescPublic');
@@ -693,6 +738,41 @@
                   if (ps2TitleEl && homeData.social_prog2_title) ps2TitleEl.textContent = homeData.social_prog2_title;
                   var ps2DescEl = document.getElementById('progSosial2DescPublic');
                   if (ps2DescEl && homeData.social_prog2_desc) ps2DescEl.innerHTML = homeData.social_prog2_desc;
+                }
+
+                // 2. Ambil Jenjang Pendidikan dari Supabase
+                var { data: unitsData, error: unitsErr } = await supa.from('education_units').select('*').order('id', { ascending: true });
+                if (!unitsErr && unitsData && unitsData.length > 0) {
+                  unitsData.forEach(function(u) {
+                    var uNameEl = document.getElementById('unitName-' + u.id);
+                    if (uNameEl && u.name) uNameEl.textContent = u.name;
+                    var uDescEl = document.getElementById('unitDesc-' + u.id);
+                    if (uDescEl && u.description) uDescEl.textContent = u.description;
+
+                    // Update defaultProg untuk modal
+                    var mapKey = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' }[u.id];
+                    if (mapKey && defaultProg[mapKey]) {
+                      if (u.description) defaultProg[mapKey].desc = u.description;
+                      if (u.curriculum) defaultProg[mapKey].kurikulum = u.curriculum;
+                      if (u.featured_programs) defaultProg[mapKey].unggulan = u.featured_programs;
+                      if (u.extracurricular) defaultProg[mapKey].ekskul = u.extracurricular;
+                      if (u.facilities) defaultProg[mapKey].fasilitas = u.facilities;
+                      if (u.vision) defaultProg[mapKey].visi = u.vision;
+                      if (u.mission) defaultProg[mapKey].misi = u.mission;
+                      if (u.accreditation) defaultProg[mapKey].akreditasi = 'Akreditasi ' + u.accreditation;
+                    }
+                  });
+                }
+
+                // 3. Ambil Info PPDB dari Supabase
+                var { data: ppdbData, error: ppdbErr } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
+                if (!ppdbErr && ppdbData) {
+                  var ppdbBadgeEl = document.getElementById('ppdbStatusBadge');
+                  if (ppdbBadgeEl) {
+                    ppdbBadgeEl.textContent = ppdbData.status === 'BUKA' 
+                      ? 'Pendaftaran Dibuka TP ' + (ppdbData.academic_year || '')
+                      : 'Pendaftaran Ditutup';
+                  }
                 }
               }
             } catch (err) {
