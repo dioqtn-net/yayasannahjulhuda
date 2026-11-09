@@ -44,7 +44,7 @@
       timer = setTimeout(() => reject(new Error(errorMsg)), ms);
     });
     return Promise.race([
-      promise.finally(() => clearTimeout(timer)),
+      Promise.resolve(promise).finally(() => clearTimeout(timer)),
       timeoutPromise
     ]);
   }
@@ -110,7 +110,7 @@
 
       if (!dbData) {
         try {
-          dbData = await restFetch(`news_posts?select=*&order=id.desc&t=${Date.now()}`);
+          dbData = await restFetch(`news_posts?select=*&order=id.desc`);
         } catch (e) {
           console.warn("[Kelola Berita] REST fetch error:", e);
         }

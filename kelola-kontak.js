@@ -41,7 +41,7 @@
       timer = setTimeout(() => reject(new Error(errorMsg)), ms);
     });
     return Promise.race([
-      promise.finally(() => clearTimeout(timer)),
+      Promise.resolve(promise).finally(() => clearTimeout(timer)),
       timeoutPromise
     ]);
   }
