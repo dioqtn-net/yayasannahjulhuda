@@ -3,6 +3,7 @@
  * KELOLA FASILITAS (PANEL ADMIN) - 100% PURE SUPABASE
  * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem
  * Fitur: Full CRUD Facilities, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * Kolom Tabel: Nama Fasilitas (+ Foto: X file), Deskripsi Singkat, Aksi
  * =======================================================================
  */
 
@@ -13,11 +14,13 @@
   const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
 
   let isSaving = false;
+  let isSavingBanner = false;
   let currentFasilitasList = [];
   let editingImages = [];
   const BTN_FASILITAS_HTML = `Simpan Fasilitas`;
+  const BTN_BANNER_HTML = `Simpan Banner Fasilitas`;
 
-  // Bersihkan cache lokal
+  // Bersihkan cache lokal jika ada sisa
   try {
     localStorage.removeItem('cmsData_fasilitas_list');
     localStorage.removeItem('cmsData_fasBanner');
@@ -106,6 +109,22 @@
       } else {
         currentFasilitasList = [];
       }
+
+      // 1. Tampilkan data banner jika row id: 0 ada
+      const banner = currentFasilitasList.find(f => Number(f.id) === 0);
+      if (banner) {
+        const bTitle = document.getElementById('fasBannerTitle');
+        const bDesc = document.getElementById('fasBannerDesc');
+        if (bTitle && banner.name) bTitle.value = banner.name;
+        if (bDesc && banner.description) {
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('fasBannerDesc', banner.description);
+          } else {
+            bDesc.value = banner.description;
+          }
+        }
+      }
+
       renderAdminTable();
     } catch (e) {
       console.error("[Kelola Fasilitas] Gagal memuat daftar fasilitas:", e);
@@ -113,69 +132,97 @@
   };
 
   function renderAdminTable() {
-    const tbody = document.getElementById('daftarFasilitasAdmin');
-    if (!tbody) return;
-
-    if (currentFasilitasList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">Belum ada data fasilitas tersimpan di database. Silakan klik tombol Tambah Fasilitas.</td></tr>`;
+    // Dukung ID 'adminListFasilitas' dan fallback 'daftarFasilitasAdmin'
+    const tbody = document.getElementById('adminListFasilitas') || document.getElementById('daftarFasilitasAdmin');
+    if (!tbody) {
+      console.warn("[Kelola Fasilitas] Elemen tbody adminListFasilitas tidak ditemukan di DOM!");
       return;
     }
 
-    tbody.innerHTML = currentFasilitasList.map(item => {
+    // Filter baris fasilitas aktual (id > 0), baris id: 0 adalah Banner Fasilitas
+    const facilities = currentFasilitasList.filter(item => Number(item.id) > 0);
+
+    if (facilities.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="3" class="px-6 py-8 text-center text-gray-500">
+            Belum ada fasilitas tersimpan di database. Silakan klik tombol <span class="font-semibold text-green-700">+ Tambah Fasilitas Baru</span> di atas.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = facilities.map(item => {
       const images = (Array.isArray(item.images) && item.images.length > 0)
         ? item.images
-        : (item.image_url ? [item.image_url] : ['/media/background/wallpaper_yayasan.jpg']);
-      const mainImg = images[0] || '/media/background/wallpaper_yayasan.jpg';
+        : (item.image_url ? [item.image_url] : []);
 
       return `
-        <tr class="hover:bg-slate-50 transition border-b">
-          <td class="px-6 py-4">
-            <img src="${mainImg}" alt="${escapeHtml(item.name)}" class="w-16 h-12 object-cover rounded shadow-sm">
+        <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+          <td class="px-4 py-3 align-top">
+            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.name)}</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">Foto: ${images.length} file</div>
           </td>
-          <td class="px-6 py-4 font-semibold text-slate-800">
-            ${escapeHtml(item.name)}
+          <td class="px-4 py-3 align-top">
+            <div class="text-xs text-gray-600 line-clamp-2 max-w-xl">${item.description || '-'}</div>
           </td>
-          <td class="px-6 py-4 text-slate-600 text-sm max-w-xs truncate">
-            ${escapeHtml(item.description)}
-          </td>
-          <td class="px-6 py-4 text-right space-x-2">
-            <button type="button" onclick="window.editFasilitasCard('${item.id}')" class="px-3 py-1 bg-amber-500 text-white rounded text-xs hover:bg-amber-600 transition">
-              <i class="fas fa-edit mr-1"></i> Edit
-            </button>
-            <button type="button" onclick="window.deleteFasilitasCard('${item.id}')" class="px-3 py-1 bg-rose-600 text-white rounded text-xs hover:bg-rose-700 transition">
-              <i class="fas fa-trash-alt mr-1"></i> Hapus
-            </button>
+          <td class="px-4 py-3 align-top text-center">
+            <div class="flex items-center justify-center gap-3">
+              <button type="button" onclick="window.editFasilitasCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1 transition" title="Edit Fasilitas">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              </button>
+              <button type="button" onclick="window.deleteFasilitasCard('${item.id}')" class="text-red-500 hover:text-red-700 p-1 transition" title="Hapus Fasilitas">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </div>
           </td>
         </tr>
       `;
     }).join('');
   }
 
-  // 2. FORM EDIT & TAMBAH
+  // 2. FORM EDIT FASILITAS
   window.editFasilitasCard = function (id) {
     const item = currentFasilitasList.find(f => String(f.id) === String(id));
     if (!item) return;
 
-    document.getElementById('fasId').value = item.id;
-    document.getElementById('fasNama').value = item.name || '';
+    const elId = document.getElementById('fasId');
+    const elNama = document.getElementById('fasNama');
+    const formTitle = document.getElementById('formFasTitle');
+
+    if (elId) elId.value = item.id;
+    if (elNama) elNama.value = item.name || '';
+    if (formTitle) formTitle.textContent = 'Edit Fasilitas: ' + (item.name || '');
+
     if (typeof window.setTextareaValueWithAlignment === 'function') {
       window.setTextareaValueWithAlignment('fasDeskripsi', item.description || '');
     } else {
-      document.getElementById('fasDeskripsi').value = item.description || '';
+      const elDesc = document.getElementById('fasDeskripsi');
+      if (elDesc) elDesc.value = item.description || '';
     }
+
+    ['fasImg1', 'fasImg2', 'fasImg3'].forEach(inpId => {
+      const el = document.getElementById(inpId);
+      if (el) el.value = '';
+    });
 
     editingImages = (Array.isArray(item.images) && item.images.length > 0)
       ? item.images
       : (item.image_url ? [item.image_url] : []);
 
     const areaForm = document.getElementById('areaFormFasilitas');
-    if (areaForm) areaForm.classList.remove('hidden');
-    areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (areaForm) {
+      areaForm.classList.remove('hidden');
+      areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   // 3. HAPUS FASILITAS DARI SUPABASE
   window.deleteFasilitasCard = async function (id) {
-    if (!confirm('Apakah Anda yakin ingin menghapus fasilitas ini dari database secara permanen?')) {
+    const item = currentFasilitasList.find(f => String(f.id) === String(id));
+    const nama = item ? item.name : 'fasilitas ini';
+    if (!confirm(`Apakah Anda yakin ingin menghapus "${nama}" secara permanen dari database?`)) {
       return;
     }
 
@@ -202,7 +249,7 @@
       }
 
       await window.loadFasilitasList();
-      alert('Fasilitas berhasil dihapus dari database Supabase.');
+      alert(`Fasilitas "${nama}" berhasil dihapus dari database.`);
     } catch (e) {
       console.error("[Kelola Fasilitas] Gagal menghapus:", e);
       alert('Gagal menghapus fasilitas: ' + (e.message || e));
@@ -249,7 +296,7 @@
     const btnSimpan = document.getElementById('btnSimpanCardFasilitas');
     if (btnSimpan) {
       btnSimpan.disabled = true;
-      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengompres foto & menyimpan...';
     }
 
     try {
@@ -262,11 +309,6 @@
       if (!nama) {
         alert('Nama fasilitas wajib diisi!');
         document.getElementById('fasNama')?.focus();
-        isSaving = false;
-        if (btnSimpan) {
-          btnSimpan.disabled = false;
-          btnSimpan.innerHTML = BTN_FASILITAS_HTML;
-        }
         return;
       }
 
@@ -351,6 +393,12 @@
       // Bersihkan form
       document.getElementById('fasId').value = '';
       document.getElementById('fasNama').value = '';
+      if (typeof window.setTextareaValueWithAlignment === 'function') {
+        window.setTextareaValueWithAlignment('fasDeskripsi', '');
+      } else {
+        const elDesc = document.getElementById('fasDeskripsi');
+        if (elDesc) elDesc.value = '';
+      }
       if (inp1) inp1.value = '';
       if (inp2) inp2.value = '';
       if (inp3) inp3.value = '';
@@ -373,42 +421,124 @@
     }
   };
 
-  // 5. BANNER FASILITAS (Opsional, simpan ke home/profile settings jika diperlukan)
+  // 5. BANNER FASILITAS (Disimpan ke row id: 0 tabel facilities)
   window.handleSimpanBannerFasilitas = async function (e) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    alert('Teks banner fasilitas berhasil disimpan.');
+
+    if (isSavingBanner) return;
+    isSavingBanner = true;
+
+    const btn = document.getElementById('btnSimpanBannerFasilitas');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan banner...';
+    }
+
+    try {
+      const title = document.getElementById('fasBannerTitle')?.value?.trim() || 'Fasilitas Yayasan';
+      const desc = (typeof window.getWrappedTextareaValue === 'function')
+        ? window.getWrappedTextareaValue('fasBannerDesc')
+        : (document.getElementById('fasBannerDesc')?.value?.trim() || '');
+
+      const payload = {
+        id: 0,
+        name: title,
+        description: desc,
+        images: []
+      };
+
+      const supa = getSupabaseClient();
+      let ok = false;
+      if (supa) {
+        try {
+          const { error } = await withTimeout(
+            supa.from('facilities').upsert(payload, { onConflict: 'id' }),
+            8000
+          );
+          if (!error) ok = true;
+        } catch (err) {
+          console.warn("[Kelola Fasilitas] Banner upsert client warning:", err);
+        }
+      }
+      if (!ok) {
+        await withTimeout(
+          restFetch('facilities?on_conflict=id', {
+            method: 'POST',
+            headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
+            body: JSON.stringify(payload)
+          }),
+          10000
+        );
+      }
+
+      alert('Alhamdulillah! Banner fasilitas berhasil disimpan.');
+    } catch (err) {
+      console.error("[Kelola Fasilitas] Gagal menyimpan banner:", err);
+      alert('Gagal menyimpan banner fasilitas:\n' + (err.message || err));
+    } finally {
+      isSavingBanner = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = BTN_BANNER_HTML;
+      }
+    }
   };
 
   function initKelolaFasilitas() {
     window.loadFasilitasList();
 
+    // 1. Tombol Simpan Fasilitas Form
     const btnSimpan = document.getElementById('btnSimpanCardFasilitas');
     if (btnSimpan && !btnSimpan.dataset.bound) {
       btnSimpan.dataset.bound = 'true';
       btnSimpan.addEventListener('click', window.handleSimpanCardFasilitas);
     }
 
+    // 2. Tombol Simpan Banner Fasilitas
+    const btnBanner = document.getElementById('btnSimpanBannerFasilitas');
+    if (btnBanner && !btnBanner.dataset.bound) {
+      btnBanner.dataset.bound = 'true';
+      btnBanner.addEventListener('click', window.handleSimpanBannerFasilitas);
+    }
+
+    // 3. Tombol Tambah Fasilitas Baru
     const btnTambah = document.getElementById('btnTambahFasilitas');
     if (btnTambah && !btnTambah.dataset.bound) {
       btnTambah.dataset.bound = 'true';
       btnTambah.addEventListener('click', () => {
-        document.getElementById('fasId').value = '';
-        document.getElementById('fasNama').value = '';
+        const elId = document.getElementById('fasId');
+        const elNama = document.getElementById('fasNama');
+        const formTitle = document.getElementById('formFasTitle');
+
+        if (elId) elId.value = '';
+        if (elNama) elNama.value = '';
+        if (formTitle) formTitle.textContent = 'Tambah Fasilitas Baru';
+
         if (typeof window.setTextareaValueWithAlignment === 'function') {
           window.setTextareaValueWithAlignment('fasDeskripsi', '');
         } else {
-          document.getElementById('fasDeskripsi').value = '';
+          const elDesc = document.getElementById('fasDeskripsi');
+          if (elDesc) elDesc.value = '';
         }
+
+        ['fasImg1', 'fasImg2', 'fasImg3'].forEach(inpId => {
+          const el = document.getElementById(inpId);
+          if (el) el.value = '';
+        });
+
         editingImages = [];
         const areaForm = document.getElementById('areaFormFasilitas');
-        if (areaForm) areaForm.classList.remove('hidden');
-        areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (areaForm) {
+          areaForm.classList.remove('hidden');
+          areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     }
 
+    // 4. Tombol Batal Fasilitas
     const btnBatal = document.getElementById('btnBatalFasilitas');
     if (btnBatal && !btnBatal.dataset.bound) {
       btnBatal.dataset.bound = 'true';
@@ -424,4 +554,11 @@
   } else {
     initKelolaFasilitas();
   }
+
+  // Reload saat navigasi hash berubah ke #fasilitas
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#fasilitas') {
+      window.loadFasilitasList();
+    }
+  });
 })();

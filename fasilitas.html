@@ -420,7 +420,24 @@
           if (res.ok) {
             const dbData = await res.json();
             if (dbData && dbData.length > 0) {
-              window.allFasilitasList = dbData.map(f => ({
+              // 1. Perbarui Banner Fasilitas (id: 0)
+              const banner = dbData.find(f => Number(f.id) === 0);
+              if (banner) {
+                const pubTitle = document.getElementById('pubFasBannerTitle');
+                const pubDesc = document.getElementById('pubFasBannerDesc');
+                if (pubTitle && banner.name) pubTitle.textContent = banner.name;
+                if (pubDesc && banner.description) {
+                  if (banner.description.includes('<div') || banner.description.includes('<p')) {
+                    pubDesc.innerHTML = banner.description;
+                  } else {
+                    pubDesc.textContent = banner.description;
+                  }
+                }
+              }
+
+              // 2. Render Cards Fasilitas (hanya id > 0)
+              const cards = dbData.filter(f => Number(f.id) > 0);
+              window.allFasilitasList = cards.map(f => ({
                 id: f.id,
                 nama: f.name || '-',
                 deskripsi: f.description || '-',
@@ -455,7 +472,8 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initFdocument.addEventListener('turbolinks:load', initFasilitas);
+      document.addEventListener('DOMContentLoaded', initFasilitas);
+      document.addEventListener('turbolinks:load', initFasilitas);
       if (document.readyState === 'interactive' || document.readyState === 'complete') {
         initFasilitas();
       }
