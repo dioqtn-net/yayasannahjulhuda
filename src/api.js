@@ -122,6 +122,26 @@ export const api = {
             social_prog2_title: "Pengajian Rutin Bulanan",
             social_prog2_desc: "Kegiatan rutin bulanan yang diselenggarakan oleh yayasan sebagai wadah silaturahmi, doa bersama, serta kajian keislaman tematik untuk memperkuat ukhuwah dan wawasan spiritual para jamaah dan wali murid."
         };
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/home_settings?id=eq.1&select=*', {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            });
+            if (res.ok) {
+                const rows = await res.json();
+                if (rows && rows[0]) {
+                    h = { ...h, ...rows[0] };
+                    return h;
+                }
+            }
+        } catch(e) {
+            console.warn('[api.getHomeSettings] REST fallback error:', e);
+        }
+
         if (supabase) {
             try {
                 const { data, error } = await supabase.from('home_settings').select('*').eq('id', 1).maybeSingle();
