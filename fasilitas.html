@@ -472,10 +472,49 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initFasilitas);
-      document.addEventListener('turbolinks:load', initFasilitas);
+      async function syncFooterContact() {
+        try {
+          var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+          var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          var res = await fetch(SUPABASE_URL + '/rest/v1/contact_settings?id=eq.1&select=*', {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+          });
+          if (!res.ok) return;
+          var rows = await res.json();
+          var data = rows && rows[0];
+          if (!data) return;
+          if (data.address) {
+            document.querySelectorAll('footer .fa-map-marker-alt').forEach(function(icon) {
+              var span = icon.closest('li')?.querySelector('span');
+              if (span) span.textContent = data.address;
+            });
+          }
+          var phone = data.phone || data.whatsapp1;
+          if (phone) {
+            document.querySelectorAll('footer .fa-phone-alt').forEach(function(icon) {
+              var span = icon.closest('li')?.querySelector('span.text-white');
+              if (span) span.textContent = phone;
+            });
+          }
+          if (data.email) {
+            document.querySelectorAll('footer a[href^="mailto:"]').forEach(function(el) {
+              el.textContent = data.email;
+              el.href = 'mailto:' + data.email;
+            });
+          }
+          if (data.foundation_name) {
+            document.querySelectorAll('footer h2').forEach(function(el) {
+              el.textContent = data.foundation_name;
+            });
+          }
+        } catch(e) {}
+      }
+
+      document.addEventListener('DOMContentLoaded', () => { initFasilitas(); syncFooterContact(); });
+      document.addEventListener('turbolinks:load', () => { initFasilitas(); syncFooterContact(); });
       if (document.readyState === 'interactive' || document.readyState === 'complete') {
         initFasilitas();
+        syncFooterContact();
       }
 
       // Memaksa reload/render ulang jika halaman dimuat dari Back/Forward Cache
