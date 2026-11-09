@@ -2,26 +2,32 @@
  * =======================================================================
  * KELOLA GALERI (PANEL ADMIN) - 100% PURE SUPABASE
  * Aturan: NO localStorage.getItem / NO localStorage.setItem
- * Fitur: Full CRUD Ekstrakurikuler & Kegiatan, 15s Timeout & Native REST Fallback
- * Kolom Tabel: 4 Kolom (Judul, Jenjang, Tanggal, Aksi)
+ * Fitur: Form Terpadu dengan Dropdown Kategori (Ekstrakurikuler vs Kegiatan),
+ *        15s Timeout & Native REST Fallback, Filter & Live Search,
+ *        Pencegahan Crosstalk/Duplikasi & Dukungan Responsif Mobile/Tablet.
  * =======================================================================
  */
 
 (function () {
-  console.log("[Kelola Galeri] Skrip kelola-galeri.js dimuat...");
+  console.log("[Kelola Galeri] Skrip kelola-galeri.js terpadu dimuat...");
 
   const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
 
-  let isSavingEskul = false;
-  let isSavingKegiatan = false;
-  let currentEskulList = [];
-  let currentKegiatanList = [];
+  let isSavingGaleri = false;
+  let currentGaleriList = [];
+  let currentFilterKategori = 'all';
+  let currentSearchQuery = '';
 
   try {
     localStorage.removeItem('cmsData_listEskul');
     localStorage.removeItem('cmsData_listKegiatan');
     localStorage.removeItem('cmsData_galeriBanner');
+    localStorage.removeItem('cmsData_galeri');
+    sessionStorage.removeItem('cmsData_listEskul');
+    sessionStorage.removeItem('cmsData_listKegiatan');
+    sessionStorage.removeItem('cmsData_galeriBanner');
+    sessionStorage.removeItem('cmsData_galeri');
   } catch (e) {}
 
   function getSupabaseClient() {
@@ -149,7 +155,7 @@
           );
           if (!error && data) dbData = data;
         } catch (e) {
-          console.warn("[Kelola Galeri] Supabase client SELECT error:", e);
+          console.warn("[Kelola Galeri] Supabase client SELECT warning:", e);
         }
       }
 
@@ -177,142 +183,158 @@
           }
         }
 
+        // Filter item galeri aktual (id > 0 dan bukan banner)
         const validItems = dbData.filter(g => Number(g.id) > 0 && (g.category || '').toLowerCase() !== 'banner');
-        currentEskulList = validItems.filter(g => {
-          const cat = (g.category || '').toLowerCase();
-          return cat === 'ekstrakurikuler' || cat === 'eskul';
-        });
-        currentKegiatanList = validItems.filter(g => {
-          const cat = (g.category || '').toLowerCase();
-          return cat === 'kegiatan' || !cat.includes('eskul');
-        });
+        currentGaleriList = validItems;
       } else {
-        currentEskulList = [];
-        currentKegiatanList = [];
+        currentGaleriList = [];
       }
 
-      renderAdminEskulTable();
-      renderAdminKegiatanTable();
+      window.renderAdminGaleriTable();
     } catch (e) {
       console.error("[Kelola Galeri] Gagal memuat galeri:", e);
     }
   };
 
-  // 2. TABEL ADMIN ESKUL (4 Kolom Sesuai kelola.html & Acuan Desain)
-  function renderAdminEskulTable() {
-    const tbody = document.getElementById('adminListEskul') || document.getElementById('daftarEskulAdmin');
+  // 2. RENDER TABEL ADMIN TERPADU
+  window.renderAdminGaleriTable = function () {
+    const tbody = document.getElementById('adminListGaleri') || document.getElementById('adminListEskul');
     if (!tbody) return;
 
-    if (currentEskulList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-6 text-center text-gray-500">Belum ada ekstrakurikuler tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Ekstrakurikuler</span> di atas.</td></tr>`;
+    // Filter Kategori
+    let filtered = currentGaleriList.filter(item => {
+      const cat = (item.category || '').toLowerCase();
+      const isEskul = cat.includes('ekstra') || cat.includes('eskul');
+      if (currentFilterKategori === 'Ekstrakurikuler') return isEskul;
+      if (currentFilterKategori === 'Kegiatan') return !isEskul;
+      return true; // 'all'
+    });
+
+    // Filter Pencarian
+    if (currentSearchQuery) {
+      const q = currentSearchQuery.toLowerCase().trim();
+      filtered = filtered.filter(item => {
+        const title = (item.title || '').toLowerCase();
+        const desc = (item.description || '').toLowerCase();
+        const jenjang = (item.jenjang || '').toLowerCase();
+        return title.includes(q) || desc.includes(q) || jenjang.includes(q);
+      });
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" class="px-6 py-10 text-center text-slate-500">
+            <div class="w-12 h-12 mx-auto mb-2 text-slate-300 text-3xl"><i class="far fa-images"></i></div>
+            <p class="font-medium text-slate-700">Belum ada dokumentasi galeri tersimpan di database.</p>
+            <p class="text-xs text-slate-400 mt-1">Silakan klik tombol <button type="button" onclick="window.bukaFormTambahGaleri()" class="font-semibold text-emerald-700 underline cursor-pointer">+ Tambah Galeri Baru</button> di atas.</p>
+          </td>
+        </tr>
+      `;
       return;
     }
 
-    tbody.innerHTML = currentEskulList.map(item => {
+    tbody.innerHTML = filtered.map(item => {
+      const cat = (item.category || '').toLowerCase();
+      const isEskul = cat.includes('ekstra') || cat.includes('eskul');
       const isVideo = item.image_url && (item.image_url.toLowerCase().endsWith('.mp4') || item.image_url.includes('.mp4'));
+      
       const mediaBadge = isVideo
-        ? `<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>`
-        : `<span class="inline-flex items-center gap-1 text-[11px] text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"><i class="far fa-image"></i> Foto</span>`;
+        ? `<span class="inline-flex items-center gap-1 text-[11px] font-medium text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>`
+        : `<span class="inline-flex items-center gap-1 text-[11px] font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"><i class="far fa-image"></i> Foto</span>`;
+
+      const categoryBadge = isEskul
+        ? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 border border-purple-200">Ekstrakurikuler</span>`
+        : `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Kegiatan</span>`;
 
       return `
         <tr class="hover:bg-slate-50 transition border-b border-gray-100">
           <td class="px-4 py-3 align-top">
-            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+            <div class="font-semibold text-gray-800 text-sm leading-snug">${escapeHtml(item.title)}</div>
             <div class="mt-1">${mediaBadge}</div>
           </td>
-          <td class="px-4 py-3 align-top">
+          <td class="px-3 py-3 align-top whitespace-nowrap">
+            ${categoryBadge}
+          </td>
+          <td class="px-3 py-3 align-top whitespace-nowrap">
             <span class="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-medium border border-emerald-100 inline-block">
               ${escapeHtml(item.jenjang || 'Semua')}
             </span>
           </td>
-          <td class="px-4 py-3 align-top text-xs text-slate-500">
+          <td class="px-3 py-3 align-top text-xs text-slate-500 whitespace-nowrap">
             ${formatIndoDate(item.event_date || item.created_at)}
           </td>
-          <td class="px-4 py-3 align-top text-center">
-            <div class="flex items-center justify-center gap-3">
-              <button type="button" onclick="window.editEskulCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Ekstrakurikuler">
-                <i class="far fa-edit text-base"></i>
+          <td class="px-4 py-3 align-top text-center whitespace-nowrap">
+            <div class="flex items-center justify-center gap-2">
+              <button type="button" onclick="window.editGaleriCard('${item.id}')" aria-label="Edit Galeri" class="text-blue-600 hover:text-blue-800 p-2 transition rounded-lg hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-blue-500 min-w-[36px] min-h-[36px] flex items-center justify-center" title="Edit Galeri">
+                <i class="far fa-edit text-sm"></i>
               </button>
-              <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'eskul')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Ekstrakurikuler">
-                <i class="far fa-trash-alt text-base"></i>
+              <button type="button" onclick="window.deleteGaleriCard('${item.id}')" aria-label="Hapus Galeri" class="text-red-500 hover:text-red-700 p-2 transition rounded-lg hover:bg-red-50 focus-visible:ring-2 focus-visible:ring-red-500 min-w-[36px] min-h-[36px] flex items-center justify-center" title="Hapus Galeri">
+                <i class="far fa-trash-alt text-sm"></i>
               </button>
             </div>
           </td>
         </tr>
       `;
     }).join('');
-  }
+  };
 
-  // 3. TABEL ADMIN KEGIATAN (4 Kolom Sesuai kelola.html & Acuan Desain)
-  function renderAdminKegiatanTable() {
-    const tbody = document.getElementById('adminListKegiatan') || document.getElementById('daftarKegiatanAdmin');
-    if (!tbody) return;
+  // 3. FILTER & SEARCH HANDLER
+  window.filterAdminGaleri = function (kategori) {
+    currentFilterKategori = kategori;
+    const btnAll = document.getElementById('filterGaleriAll');
+    const btnEskul = document.getElementById('filterGaleriEskul');
+    const btnKegiatan = document.getElementById('filterGaleriKegiatan');
 
-    if (currentKegiatanList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-6 text-center text-gray-500">Belum ada kegiatan tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Kegiatan Baru</span> di atas.</td></tr>`;
-      return;
+    [btnAll, btnEskul, btnKegiatan].forEach(btn => {
+      if (btn) {
+        btn.className = "filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition";
+      }
+    });
+
+    if (kategori === 'all' && btnAll) {
+      btnAll.className = "filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition";
+    } else if (kategori === 'Ekstrakurikuler' && btnEskul) {
+      btnEskul.className = "filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition";
+    } else if (kategori === 'Kegiatan' && btnKegiatan) {
+      btnKegiatan.className = "filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition";
     }
 
-    tbody.innerHTML = currentKegiatanList.map(item => {
-      const isVideo = item.image_url && (item.image_url.toLowerCase().endsWith('.mp4') || item.image_url.includes('.mp4'));
-      const mediaBadge = isVideo
-        ? `<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>`
-        : `<span class="inline-flex items-center gap-1 text-[11px] text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"><i class="far fa-image"></i> Foto</span>`;
+    window.renderAdminGaleriTable();
+  };
 
-      return `
-        <tr class="hover:bg-slate-50 transition border-b border-gray-100">
-          <td class="px-4 py-3 align-top">
-            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
-            <div class="mt-1">${mediaBadge}</div>
-          </td>
-          <td class="px-4 py-3 align-top">
-            <span class="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-medium border border-emerald-100 inline-block">
-              ${escapeHtml(item.jenjang || 'Semua')}
-            </span>
-          </td>
-          <td class="px-4 py-3 align-top text-xs text-slate-500">
-            ${formatIndoDate(item.event_date || item.created_at)}
-          </td>
-          <td class="px-4 py-3 align-top text-center">
-            <div class="flex items-center justify-center gap-3">
-              <button type="button" onclick="window.editKegiatanCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Kegiatan">
-                <i class="far fa-edit text-base"></i>
-              </button>
-              <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'kegiatan')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Kegiatan">
-                <i class="far fa-trash-alt text-base"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
+  window.handleSearchAdminGaleri = function (val) {
+    currentSearchQuery = val || '';
+    window.renderAdminGaleriTable();
+  };
 
-  // 4. BUKA & TUTUP FORM ESKUL
-  window.bukaFormTambahEskul = function () {
-    const elId = document.getElementById('eskulId');
-    const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
-    const elTanggal = document.getElementById('eskulTanggal');
-    const elJenjang = document.getElementById('eskulJenjang');
-    const formTitle = document.getElementById('formEskulTitle');
+  // 4. BUKA & TUTUP FORM TERPADU
+  window.bukaFormTambahGaleri = function (kategoriDefault = 'Ekstrakurikuler') {
+    const elId = document.getElementById('galeriId');
+    const elJudul = document.getElementById('galeriJudul');
+    const elTanggal = document.getElementById('galeriTanggal');
+    const elKategori = document.getElementById('galeriKategori');
+    const elJenjang = document.getElementById('galeriJenjang');
+    const formTitle = document.getElementById('formGaleriTitle');
 
     if (elId) elId.value = '';
     if (elJudul) elJudul.value = '';
     if (elTanggal) elTanggal.value = new Date().toISOString().split('T')[0];
+    if (elKategori) elKategori.value = kategoriDefault;
     if (elJenjang) elJenjang.value = 'Semua';
-    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600 mr-2"></i> Tambah Ekstrakurikuler Baru';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600 mr-2"></i> Tambah Dokumentasi Galeri Baru';
 
     if (typeof window.setTextareaValueWithAlignment === 'function') {
-      window.setTextareaValueWithAlignment('eskulDeskripsi', '');
+      window.setTextareaValueWithAlignment('galeriDeskripsi', '');
     } else {
-      const elD = document.getElementById('eskulDeskripsi');
+      const elD = document.getElementById('galeriDeskripsi');
       if (elD) elD.value = '';
     }
 
-    const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
+    const inputMedia = document.getElementById('galeriMedia');
     if (inputMedia) inputMedia.value = '';
 
-    const area = document.getElementById('areaFormEskul');
+    const area = document.getElementById('areaFormGaleri');
     if (area) area.classList.remove('hidden');
     area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (typeof window.initTextareaAlignmentTools === 'function') {
@@ -320,113 +342,171 @@
     }
   };
 
-  window.tutupFormEskul = function () {
-    const area = document.getElementById('areaFormEskul');
+  window.tutupFormGaleri = function () {
+    const area = document.getElementById('areaFormGaleri');
     if (area) area.classList.add('hidden');
   };
 
-  // 5. BUKA & TUTUP FORM KEGIATAN
-  window.bukaFormTambahKegiatan = function () {
-    const elId = document.getElementById('kegiatanId');
-    const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
-    const elTanggal = document.getElementById('kegiatanTanggal');
-    const elJenjang = document.getElementById('kegiatanJenjang');
-    const formTitle = document.getElementById('formKegiatanTitle');
+  // 5. EDIT FORM TERPADU
+  window.editGaleriCard = function (id) {
+    const item = currentGaleriList.find(g => String(g.id) === String(id));
+    if (!item) return;
 
-    if (elId) elId.value = '';
-    if (elJudul) elJudul.value = '';
-    if (elTanggal) elTanggal.value = new Date().toISOString().split('T')[0];
-    if (elJenjang) elJenjang.value = 'Semua';
-    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600 mr-2"></i> Tambah Kegiatan Baru';
+    const elId = document.getElementById('galeriId');
+    const elJudul = document.getElementById('galeriJudul');
+    const elTanggal = document.getElementById('galeriTanggal');
+    const elKategori = document.getElementById('galeriKategori');
+    const elJenjang = document.getElementById('galeriJenjang');
+    const formTitle = document.getElementById('formGaleriTitle');
+
+    const cat = (item.category || '').toLowerCase();
+    const isEskul = cat.includes('ekstra') || cat.includes('eskul');
+
+    if (elId) elId.value = item.id;
+    if (elJudul) elJudul.value = item.title || '';
+    if (elTanggal) elTanggal.value = item.event_date || (item.created_at ? item.created_at.split('T')[0] : new Date().toISOString().split('T')[0]);
+    if (elKategori) elKategori.value = isEskul ? 'Ekstrakurikuler' : 'Kegiatan';
+    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600 mr-2"></i> Edit Dokumentasi Galeri';
 
     if (typeof window.setTextareaValueWithAlignment === 'function') {
-      window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
+      window.setTextareaValueWithAlignment('galeriDeskripsi', item.description || '');
     } else {
-      const elD = document.getElementById('kegiatanDeskripsi');
-      if (elD) elD.value = '';
+      const elD = document.getElementById('galeriDeskripsi');
+      if (elD) elD.value = item.description || '';
     }
 
-    const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
+    const inputMedia = document.getElementById('galeriMedia');
     if (inputMedia) inputMedia.value = '';
 
-    const area = document.getElementById('areaFormKegiatan');
-    if (area) area.classList.remove('hidden');
-    area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const areaForm = document.getElementById('areaFormGaleri');
+    if (areaForm) areaForm.classList.remove('hidden');
+    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (typeof window.initTextareaAlignmentTools === 'function') {
       window.initTextareaAlignmentTools();
     }
   };
 
-  window.tutupFormKegiatan = function () {
-    const area = document.getElementById('areaFormKegiatan');
-    if (area) area.classList.add('hidden');
-  };
+  // 6. SIMPAN GALERI TERPADU (INSERT / UPDATE)
+  window.handleSimpanGaleri = async function (e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (isSavingGaleri) return;
+    isSavingGaleri = true;
 
-  // 6. EDIT
-  window.editEskulCard = function (id) {
-    const item = currentEskulList.find(e => String(e.id) === String(id));
-    if (!item) return;
-
-    const elId = document.getElementById('eskulId');
-    const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
-    const elTanggal = document.getElementById('eskulTanggal');
-    const elJenjang = document.getElementById('eskulJenjang');
-    const formTitle = document.getElementById('formEskulTitle');
-
-    if (elId) elId.value = item.id;
-    if (elJudul) elJudul.value = item.title || '';
-    if (elTanggal) elTanggal.value = item.event_date || new Date().toISOString().split('T')[0];
-    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
-    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600 mr-2"></i> Edit Ekstrakurikuler';
-
-    if (typeof window.setTextareaValueWithAlignment === 'function') {
-      window.setTextareaValueWithAlignment('eskulDeskripsi', item.description || '');
-    } else {
-      const elD = document.getElementById('eskulDeskripsi');
-      if (elD) elD.value = item.description || '';
+    const btnSimpan = document.getElementById('btnSimpanCardGaleri');
+    const originalHtml = btnSimpan ? btnSimpan.innerHTML : 'Simpan Galeri';
+    if (btnSimpan) {
+      btnSimpan.disabled = true;
+      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
     }
 
-    const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
-    if (inputMedia) inputMedia.value = '';
+    try {
+      const elJudul = document.getElementById('galeriJudul');
+      const title = elJudul?.value?.trim();
+      const category = document.getElementById('galeriKategori')?.value || 'Ekstrakurikuler';
+      const jenjang = document.getElementById('galeriJenjang')?.value || 'Semua';
+      const event_date = document.getElementById('galeriTanggal')?.value || new Date().toISOString().split('T')[0];
+      const description = (typeof window.getWrappedTextareaValue === 'function')
+        ? window.getWrappedTextareaValue('galeriDeskripsi')
+        : (document.getElementById('galeriDeskripsi')?.value?.trim() || '');
+      const galeriId = document.getElementById('galeriId')?.value?.trim();
 
-    const areaForm = document.getElementById('areaFormEskul');
-    if (areaForm) areaForm.classList.remove('hidden');
-    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+      if (!title) {
+        alert('Judul dokumentasi wajib diisi!');
+        elJudul?.focus();
+        isSavingGaleri = false;
+        if (btnSimpan) {
+          btnSimpan.disabled = false;
+          btnSimpan.innerHTML = originalHtml;
+        }
+        return;
+      }
 
-  window.editKegiatanCard = function (id) {
-    const item = currentKegiatanList.find(k => String(k.id) === String(id));
-    if (!item) return;
+      const inputMedia = document.getElementById('galeriMedia');
+      const prevItem = galeriId ? currentGaleriList.find(x => String(x.id) === String(galeriId)) : null;
+      const imageUrl = await readFileOrName(inputMedia, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
 
-    const elId = document.getElementById('kegiatanId');
-    const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
-    const elTanggal = document.getElementById('kegiatanTanggal');
-    const elJenjang = document.getElementById('kegiatanJenjang');
-    const formTitle = document.getElementById('formKegiatanTitle');
+      const payload = {
+        title,
+        jenjang,
+        event_date,
+        category,
+        description,
+        image_url: imageUrl
+      };
 
-    if (elId) elId.value = item.id;
-    if (elJudul) elJudul.value = item.title || '';
-    if (elTanggal) elTanggal.value = item.event_date || new Date().toISOString().split('T')[0];
-    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
-    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600 mr-2"></i> Edit Kegiatan';
+      const supa = getSupabaseClient();
+      let saveSuccess = false;
 
-    if (typeof window.setTextareaValueWithAlignment === 'function') {
-      window.setTextareaValueWithAlignment('kegiatanDeskripsi', item.description || '');
-    } else {
-      const elD = document.getElementById('kegiatanDeskripsi');
-      if (elD) elD.value = item.description || '';
+      if (galeriId && !isNaN(Number(galeriId))) {
+        const numId = Number(galeriId);
+        if (supa) {
+          try {
+            const { error } = await withTimeout(
+              supa.from('galleries').update(payload).eq('id', numId),
+              10000
+            );
+            if (!error) saveSuccess = true;
+          } catch (e) {
+            console.warn("[Kelola Galeri] Supabase client UPDATE error:", e);
+          }
+        }
+        if (!saveSuccess) {
+          await withTimeout(
+            restFetch(`galleries?id=eq.${numId}`, {
+              method: 'PATCH',
+              headers: { 'Prefer': 'return=representation' },
+              body: JSON.stringify(payload)
+            }),
+            10000
+          );
+          saveSuccess = true;
+        }
+      } else {
+        if (supa) {
+          try {
+            const { error } = await withTimeout(
+              supa.from('galleries').insert([payload]),
+              10000
+            );
+            if (!error) saveSuccess = true;
+          } catch (e) {
+            console.warn("[Kelola Galeri] Supabase client INSERT error:", e);
+          }
+        }
+        if (!saveSuccess) {
+          await withTimeout(
+            restFetch('galleries', {
+              method: 'POST',
+              headers: { 'Prefer': 'return=representation' },
+              body: JSON.stringify(payload)
+            }),
+            10000
+          );
+          saveSuccess = true;
+        }
+      }
+
+      window.tutupFormGaleri();
+      await window.loadGaleriData();
+      alert(`Alhamdulillah! Dokumentasi ${category} berhasil disimpan ke database Supabase.`);
+    } catch (err) {
+      alert('Gagal menyimpan galeri:\n' + (err.message || err));
+    } finally {
+      isSavingGaleri = false;
+      if (btnSimpan) {
+        btnSimpan.disabled = false;
+        btnSimpan.innerHTML = originalHtml;
+      }
     }
-
-    const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
-    if (inputMedia) inputMedia.value = '';
-
-    const areaForm = document.getElementById('areaFormKegiatan');
-    if (areaForm) areaForm.classList.remove('hidden');
-    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  window.deleteGaleriItem = async function (id, type) {
-    if (!confirm('Apakah Anda yakin ingin menghapus data ini dari database secara permanen?')) {
+  // 7. HAPUS GALERI
+  window.deleteGaleriCard = async function (id) {
+    if (!confirm('Apakah Anda yakin ingin menghapus data dokumentasi ini dari database secara permanen?')) {
       return;
     }
 
@@ -451,237 +531,13 @@
       }
 
       await window.loadGaleriData();
-      alert('Data berhasil dihapus dari database Supabase.');
+      alert('Data dokumentasi galeri berhasil dihapus dari database Supabase.');
     } catch (e) {
       alert('Gagal menghapus: ' + (e.message || e));
     }
   };
 
-  // 7. SIMPAN ESKUL KE SUPABASE
-  window.handleSimpanEskul = async function (e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (isSavingEskul) return;
-    isSavingEskul = true;
-
-    const btnSimpan = document.getElementById('btnSimpanEskul');
-    const originalHtml = 'Simpan Ekstrakurikuler';
-    if (btnSimpan) {
-      btnSimpan.disabled = true;
-      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
-    }
-
-    try {
-      const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
-      const title = elJudul?.value?.trim();
-      const jenjang = document.getElementById('eskulJenjang')?.value || 'Semua';
-      const event_date = document.getElementById('eskulTanggal')?.value || new Date().toISOString().split('T')[0];
-      const description = (typeof window.getWrappedTextareaValue === 'function')
-        ? window.getWrappedTextareaValue('eskulDeskripsi')
-        : (document.getElementById('eskulDeskripsi')?.value?.trim() || '');
-      const eskulId = document.getElementById('eskulId')?.value?.trim();
-
-      if (!title) {
-        alert('Judul ekstrakurikuler wajib diisi!');
-        elJudul?.focus();
-        isSavingEskul = false;
-        if (btnSimpan) {
-          btnSimpan.disabled = false;
-          btnSimpan.innerHTML = originalHtml;
-        }
-        return;
-      }
-
-      const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
-      const prevItem = eskulId ? currentEskulList.find(x => String(x.id) === String(eskulId)) : null;
-      const imageUrl = await readFileOrName(inputMedia, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
-
-      const payload = {
-        title,
-        jenjang,
-        event_date,
-        category: 'Ekstrakurikuler',
-        description,
-        image_url: imageUrl
-      };
-
-      const supa = getSupabaseClient();
-      let saveSuccess = false;
-
-      if (eskulId && !isNaN(Number(eskulId))) {
-        const numId = Number(eskulId);
-        if (supa) {
-          try {
-            const { error } = await withTimeout(
-              supa.from('galleries').update(payload).eq('id', numId),
-              10000
-            );
-            if (!error) saveSuccess = true;
-          } catch (e) {}
-        }
-        if (!saveSuccess) {
-          await withTimeout(
-            restFetch(`galleries?id=eq.${numId}`, {
-              method: 'PATCH',
-              headers: { 'Prefer': 'return=representation' },
-              body: JSON.stringify(payload)
-            }),
-            10000
-          );
-          saveSuccess = true;
-        }
-      } else {
-        if (supa) {
-          try {
-            const { error } = await withTimeout(
-              supa.from('galleries').insert([payload]),
-              10000
-            );
-            if (!error) saveSuccess = true;
-          } catch (e) {}
-        }
-        if (!saveSuccess) {
-          await withTimeout(
-            restFetch('galleries', {
-              method: 'POST',
-              headers: { 'Prefer': 'return=representation' },
-              body: JSON.stringify(payload)
-            }),
-            10000
-          );
-          saveSuccess = true;
-        }
-      }
-
-      window.tutupFormEskul();
-      await window.loadGaleriData();
-      alert('Alhamdulillah! Data ekstrakurikuler berhasil disimpan ke database Supabase.');
-    } catch (err) {
-      alert('Gagal menyimpan ekstrakurikuler:\n' + (err.message || err));
-    } finally {
-      isSavingEskul = false;
-      if (btnSimpan) {
-        btnSimpan.disabled = false;
-        btnSimpan.innerHTML = originalHtml;
-      }
-    }
-  };
-
-  // 8. SIMPAN KEGIATAN KE SUPABASE
-  window.handleSimpanKegiatan = async function (e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (isSavingKegiatan) return;
-    isSavingKegiatan = true;
-
-    const btnSimpan = document.getElementById('btnSimpanKegiatan');
-    const originalHtml = 'Simpan Kegiatan';
-    if (btnSimpan) {
-      btnSimpan.disabled = true;
-      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
-    }
-
-    try {
-      const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
-      const title = elJudul?.value?.trim();
-      const jenjang = document.getElementById('kegiatanJenjang')?.value || 'Semua';
-      const event_date = document.getElementById('kegiatanTanggal')?.value || new Date().toISOString().split('T')[0];
-      const description = (typeof window.getWrappedTextareaValue === 'function')
-        ? window.getWrappedTextareaValue('kegiatanDeskripsi')
-        : (document.getElementById('kegiatanDeskripsi')?.value?.trim() || '');
-      const kegiatanId = document.getElementById('kegiatanId')?.value?.trim();
-
-      if (!title) {
-        alert('Judul kegiatan wajib diisi!');
-        elJudul?.focus();
-        isSavingKegiatan = false;
-        if (btnSimpan) {
-          btnSimpan.disabled = false;
-          btnSimpan.innerHTML = originalHtml;
-        }
-        return;
-      }
-
-      const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
-      const prevItem = kegiatanId ? currentKegiatanList.find(x => String(x.id) === String(kegiatanId)) : null;
-      const imageUrl = await readFileOrName(inputMedia, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
-
-      const payload = {
-        title,
-        jenjang,
-        event_date,
-        category: 'Kegiatan',
-        description,
-        image_url: imageUrl
-      };
-
-      const supa = getSupabaseClient();
-      let saveSuccess = false;
-
-      if (kegiatanId && !isNaN(Number(kegiatanId))) {
-        const numId = Number(kegiatanId);
-        if (supa) {
-          try {
-            const { error } = await withTimeout(
-              supa.from('galleries').update(payload).eq('id', numId),
-              10000
-            );
-            if (!error) saveSuccess = true;
-          } catch (e) {}
-        }
-        if (!saveSuccess) {
-          await withTimeout(
-            restFetch(`galleries?id=eq.${numId}`, {
-              method: 'PATCH',
-              headers: { 'Prefer': 'return=representation' },
-              body: JSON.stringify(payload)
-            }),
-            10000
-          );
-          saveSuccess = true;
-        }
-      } else {
-        if (supa) {
-          try {
-            const { error } = await withTimeout(
-              supa.from('galleries').insert([payload]),
-              10000
-            );
-            if (!error) saveSuccess = true;
-          } catch (e) {}
-        }
-        if (!saveSuccess) {
-          await withTimeout(
-            restFetch('galleries', {
-              method: 'POST',
-              headers: { 'Prefer': 'return=representation' },
-              body: JSON.stringify(payload)
-            }),
-            10000
-          );
-          saveSuccess = true;
-        }
-      }
-
-      window.tutupFormKegiatan();
-      await window.loadGaleriData();
-      alert('Alhamdulillah! Data kegiatan berhasil disimpan ke database Supabase.');
-    } catch (err) {
-      alert('Gagal menyimpan kegiatan:\n' + (err.message || err));
-    } finally {
-      isSavingKegiatan = false;
-      if (btnSimpan) {
-        btnSimpan.disabled = false;
-        btnSimpan.innerHTML = originalHtml;
-      }
-    }
-  };
-
-  // Banner galeri
+  // 8. SIMPAN BANNER GALERI
   window.handleSimpanBannerGaleri = async function (e) {
     if (e) {
       e.preventDefault();
@@ -745,7 +601,7 @@
     }
   };
 
-  // Simpan perubahan galeri terpadu
+  // 9. SIMPAN TOTAL PERUBAHAN GALERI
   window.handleSimpanGaleriTotal = async function (e) {
     if (e) {
       e.preventDefault();
@@ -774,43 +630,37 @@
     }
   };
 
+  // 10. BACKWARD-COMPATIBILITY ALIASES
+  window.bukaFormTambahEskul = () => window.bukaFormTambahGaleri('Ekstrakurikuler');
+  window.bukaFormTambahKegiatan = () => window.bukaFormTambahGaleri('Kegiatan');
+  window.tutupFormEskul = window.tutupFormGaleri;
+  window.tutupFormKegiatan = window.tutupFormGaleri;
+  window.editEskulCard = (id) => window.editGaleriCard(id);
+  window.editKegiatanCard = (id) => window.editGaleriCard(id);
+  window.deleteGaleriItem = (id) => window.deleteGaleriCard(id);
+  window.handleSimpanEskul = window.handleSimpanGaleri;
+  window.handleSimpanKegiatan = window.handleSimpanGaleri;
+
+  // 11. EVENT LISTENERS INITIALIZATION
   function initKelolaGaleri() {
     window.loadGaleriData();
 
-    const btnSimpanEskul = document.getElementById('btnSimpanEskul');
-    if (btnSimpanEskul && !btnSimpanEskul.dataset.bound) {
-      btnSimpanEskul.dataset.bound = 'true';
-      btnSimpanEskul.addEventListener('click', window.handleSimpanEskul);
+    const btnTambahGaleri = document.getElementById('btnTambahGaleri');
+    if (btnTambahGaleri && !btnTambahGaleri.dataset.bound) {
+      btnTambahGaleri.dataset.bound = 'true';
+      btnTambahGaleri.addEventListener('click', () => window.bukaFormTambahGaleri('Ekstrakurikuler'));
     }
 
-    const btnSimpanKegiatan = document.getElementById('btnSimpanKegiatan');
-    if (btnSimpanKegiatan && !btnSimpanKegiatan.dataset.bound) {
-      btnSimpanKegiatan.dataset.bound = 'true';
-      btnSimpanKegiatan.addEventListener('click', window.handleSimpanKegiatan);
+    const btnBatalGaleri = document.getElementById('btnBatalGaleri');
+    if (btnBatalGaleri && !btnBatalGaleri.dataset.bound) {
+      btnBatalGaleri.dataset.bound = 'true';
+      btnBatalGaleri.addEventListener('click', window.tutupFormGaleri);
     }
 
-    const btnTambahEskul = document.getElementById('btnTambahEskul');
-    if (btnTambahEskul && !btnTambahEskul.dataset.bound) {
-      btnTambahEskul.dataset.bound = 'true';
-      btnTambahEskul.addEventListener('click', window.bukaFormTambahEskul);
-    }
-
-    const btnBatalEskul = document.getElementById('btnBatalEskul');
-    if (btnBatalEskul && !btnBatalEskul.dataset.bound) {
-      btnBatalEskul.dataset.bound = 'true';
-      btnBatalEskul.addEventListener('click', window.tutupFormEskul);
-    }
-
-    const btnTambahKegiatan = document.getElementById('btnTambahKegiatan');
-    if (btnTambahKegiatan && !btnTambahKegiatan.dataset.bound) {
-      btnTambahKegiatan.dataset.bound = 'true';
-      btnTambahKegiatan.addEventListener('click', window.bukaFormTambahKegiatan);
-    }
-
-    const btnBatalKegiatan = document.getElementById('btnBatalKegiatan');
-    if (btnBatalKegiatan && !btnBatalKegiatan.dataset.bound) {
-      btnBatalKegiatan.dataset.bound = 'true';
-      btnBatalKegiatan.addEventListener('click', window.tutupFormKegiatan);
+    const btnSimpanCardGaleri = document.getElementById('btnSimpanCardGaleri');
+    if (btnSimpanCardGaleri && !btnSimpanCardGaleri.dataset.bound) {
+      btnSimpanCardGaleri.dataset.bound = 'true';
+      btnSimpanCardGaleri.addEventListener('click', window.handleSimpanGaleri);
     }
   }
 

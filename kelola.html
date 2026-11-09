@@ -1392,173 +1392,120 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           </div>
 
           <!-- ========================================== -->
-          <!-- BLOK: EKSTRAKURIKULER -->
+          <!-- BLOK: KELOLA DAFTAR GALERI DOKUMENTASI (TERPADU) -->
           <!-- ========================================== -->
-          <div class="bg-white rounded-xl shadow border p-6 mb-6">
+          <div class="bg-white rounded-xl shadow border p-4 sm:p-6 mb-6">
             <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
               <div>
                 <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  Ekstrakurikuler
+                  <i class="fas fa-images text-emerald-700 text-lg"></i>
+                  Daftar Galeri Dokumentasi
                 </h3>
-                <p class="text-xs text-gray-500">Dokumentasi kegiatan minat bakat, marching band, futsal, dan olahraga siswa/siswi dan santri.</p>
+                <p class="text-xs text-gray-500 mt-0.5">Dokumentasi kegiatan ekstrakurikuler dan agenda siswa/siswi serta santri di seluruh jenjang.</p>
               </div>
-              <button type="button" id="btnTambahEskul" onclick="window.bukaFormTambahEskul()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit cursor-pointer transition">
+              <button type="button" id="btnTambahGaleri" onclick="window.bukaFormTambahGaleri()" class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-lg shadow-sm text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer transition min-h-[44px]">
                 <i class="fas fa-plus"></i>
-                <span>+ Tambah Ekstrakurikuler Baru</span>
+                <span>+ Tambah Galeri Baru</span>
               </button>
             </div>
 
-            <!-- Form Tambah/Edit Ekstrakurikuler (Muncul tepat di atas tabel) -->
-            <div id="areaFormEskul" class="hidden p-5 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
-              <h4 id="formEskulTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2 text-base flex items-center gap-2">
+            <!-- Form Tambah/Edit Galeri (Muncul tepat di atas tabel) -->
+            <div id="areaFormGaleri" class="hidden p-4 sm:p-6 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
+              <h4 id="formGaleriTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2.5 text-base flex items-center gap-2">
                 <i class="fas fa-edit text-emerald-600"></i>
-                <span>Tambah Ekstrakurikuler Baru</span>
+                <span>Tambah Dokumentasi Galeri Baru</span>
               </h4>
-              <input type="hidden" id="eskulId">
+              <input type="hidden" id="galeriId">
               <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
-                    <input type="text" id="eskulJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Marching Band Gema Nahjul Huda...">
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Judul Dokumentasi <span class="text-red-500">*</span></label>
+                    <input type="text" id="galeriJudul" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white min-h-[44px]" placeholder="Contoh: Latihan Rutin Futsal / Peringatan Isra Mi'raj...">
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
-                    <input type="date" id="eskulTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Tanggal Kegiatan <span class="text-red-500">*</span></label>
+                    <input type="date" id="galeriTanggal" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white min-h-[44px]">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Kategori Galeri <span class="text-red-500">*</span></label>
+                    <select id="galeriKategori" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white font-medium min-h-[44px]">
+                      <option value="Ekstrakurikuler">Ekstrakurikuler</option>
+                      <option value="Kegiatan">Kegiatan</option>
+                    </select>
+                    <p class="text-[11px] text-slate-500 mt-1">Pilih apakah dokumentasi ini merupakan Ekstrakurikuler atau Kegiatan & Pembiasaan.</p>
+                  </div>
+                  <div>
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
+                    <select id="galeriJenjang" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white min-h-[44px]">
+                      <option value="Semua">Semua</option>
+                      <option value="SDI">SDI Al Kindy</option>
+                      <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                      <option value="MTs">MTs Nahjul Huda</option>
+                      <option value="MA">Madrasah Aliyah (MA)</option>
+                      <option value="Ponpes">Pondok Pesantren Assurur</option>
+                    </select>
+                    <p class="text-[11px] text-slate-500 mt-1">Pilih jenjang spesifik atau Semua Jenjang.</p>
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
-                  <select id="eskulJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                    <option value="Semua">Semua Jenjang</option>
-                    <option value="SDI">SDI Al Kindy</option>
-                    <option value="MI">Madrasah Ibtidaiyah (MI)</option>
-                    <option value="MTs">MTs Nahjul Huda</option>
-                    <option value="MA">Madrasah Aliyah (MA)</option>
-                    <option value="Ponpes">Pondok Pesantren Assurur</option>
-                  </select>
+                  <div class="flex items-center justify-between mb-1">
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700">Deskripsi Singkat <span class="text-red-500">*</span></label>
+                    <div class="flex items-center gap-1 p-0.5 bg-slate-100 rounded-lg border border-slate-200">
+                      <button type="button" class="btn-align px-2 py-1 text-xs rounded font-medium hover:bg-white transition text-slate-700" data-align="text-left" title="Rata Kiri"><i class="fas fa-align-left mr-1"></i> Kiri</button>
+                      <button type="button" class="btn-align px-2 py-1 text-xs rounded font-medium hover:bg-white transition text-slate-700" data-align="text-center" title="Rata Tengah"><i class="fas fa-align-center mr-1"></i> Tengah</button>
+                      <button type="button" class="btn-align px-2 py-1 text-xs rounded font-medium hover:bg-white transition text-slate-700" data-align="text-right" title="Rata Kanan"><i class="fas fa-align-right mr-1"></i> Kanan</button>
+                      <button type="button" class="btn-align px-2 py-1 text-xs rounded font-medium hover:bg-white transition bg-green-700 text-white" data-align="text-justify" title="Rata Kiri-Kanan"><i class="fas fa-align-justify mr-1"></i> Justify</button>
+                    </div>
+                  </div>
+                  <textarea id="galeriDeskripsi" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat dokumentasi kegiatan atau ekstrakurikuler..."></textarea>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
-                  <textarea id="eskulDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat kegiatan ekstrakurikuler..."></textarea>
+                  <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Upload Media (Foto atau Video MP4)</label>
+                  <input type="file" id="galeriMedia" accept=".jpg, .jpeg, .png, .webp, .mp4" class="block w-full text-xs text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-800 hover:file:bg-emerald-100 cursor-pointer border border-slate-300 rounded-lg bg-white min-h-[44px]">
+                  <p class="text-[11px] text-gray-500 mt-1.5 leading-relaxed">*Format file: Gambar JPG/PNG/WebP (maks 2MB, otomatis dikompres) atau Video MP4 (maks 15MB). Disarankan rasio 16:9 (Landscape) dengan resolusi minimal 800x450 piksel.</p>
                 </div>
 
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto/Video</label>
-                  <input type="file" id="eskulMedia" accept=".jpg, .jpeg, .png, .mp4" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-lg bg-white">
-                  <p class="text-[10px] text-gray-500 mt-1">*Format: JPG/PNG (Maks 2MB), Video MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi min 800x450 piksel.</p>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalEskul" onclick="window.tutupFormEskul()" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition cursor-pointer">Batal</button>
-                  <button type="button" id="btnSimpanEskul" onclick="window.handleSimpanEskul(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm cursor-pointer flex items-center gap-2">
+                <div class="flex flex-col-reverse sm:flex-row justify-end gap-2.5 pt-3 border-t">
+                  <button type="button" id="btnBatalGaleri" onclick="window.tutupFormGaleri()" class="w-full sm:w-auto px-5 py-2.5 border border-slate-300 rounded-lg text-gray-700 hover:bg-slate-100 font-medium text-sm transition cursor-pointer min-h-[44px]">Batal</button>
+                  <button type="button" id="btnSimpanCardGaleri" onclick="window.handleSimpanGaleri(event)" class="w-full sm:w-auto justify-center bg-emerald-800 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition shadow-sm text-sm cursor-pointer flex items-center gap-2 min-h-[44px]">
                     <i class="fas fa-save"></i>
-                    <span>Simpan Ekstrakurikuler</span>
+                    <span>Simpan Galeri</span>
                   </button>
                 </div>
               </div>
             </div>
 
-            <!-- Tabel List Ekstrakurikuler -->
-            <div class="overflow-x-auto border rounded-lg mb-6">
-              <table class="min-w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b">
-                  <tr>
-                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Ekstrakurikuler</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody id="adminListEskul">
-                  <!-- Rendered via JS -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- ========================================== -->
-          <!-- BLOK C: KEGIATAN -->
-          <!-- ========================================== -->
-          <div class="bg-white rounded-xl shadow border p-6 mb-6">
-            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  Kegiatan & Pembiasaan Siswa/Siswi dan Santri
-                </h3>
-                <p class="text-xs text-gray-500">Dokumentasi agenda ibadah harian, peringatan hari besar Islam (PHBI), dan kegiatan sekolah siswa/siswi dan santri.</p>
+            <!-- Filter Kategori & Pencarian Tabel -->
+            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mb-4">
+              <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 overflow-x-auto text-xs">
+                <button type="button" id="filterGaleriAll" onclick="window.filterAdminGaleri('all')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition">Semua</button>
+                <button type="button" id="filterGaleriEskul" onclick="window.filterAdminGaleri('Ekstrakurikuler')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Ekstrakurikuler</button>
+                <button type="button" id="filterGaleriKegiatan" onclick="window.filterAdminGaleri('Kegiatan')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Kegiatan</button>
               </div>
-              <button type="button" id="btnTambahKegiatan" onclick="window.bukaFormTambahKegiatan()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit cursor-pointer transition">
-                <i class="fas fa-plus"></i>
-                <span>+ Tambah Kegiatan Baru</span>
-              </button>
-            </div>
-
-            <!-- Form Tambah/Edit Kegiatan (Muncul tepat di atas tabel) -->
-            <div id="areaFormKegiatan" class="hidden p-5 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
-              <h4 id="formKegiatanTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2 text-base flex items-center gap-2">
-                <i class="fas fa-edit text-emerald-600"></i>
-                <span>Tambah Kegiatan Baru</span>
-              </h4>
-              <input type="hidden" id="kegiatanId">
-              <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Judul <span class="text-red-500">*</span></label>
-                    <input type="text" id="kegiatanJudul" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Contoh: Peringatan Isra Mi'raj...">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal <span class="text-red-500">*</span></label>
-                    <input type="date" id="kegiatanTanggal" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                  </div>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
-                  <select id="kegiatanJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
-                    <option value="Semua">Semua Jenjang</option>
-                    <option value="SDI">SDI Al Kindy</option>
-                    <option value="MI">Madrasah Ibtidaiyah (MI)</option>
-                    <option value="MTs">MTs Nahjul Huda</option>
-                    <option value="MA">Madrasah Aliyah (MA)</option>
-                    <option value="Ponpes">Pondok Pesantren Assurur</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat <span class="text-red-500">*</span></label>
-                  <textarea id="kegiatanDeskripsi" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white" placeholder="Keterangan singkat agenda kegiatan..."></textarea>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto/Video</label>
-                  <input type="file" id="kegiatanMedia" accept=".jpg, .jpeg, .png, .mp4" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border border-slate-200 rounded-lg bg-white">
-                  <p class="text-[10px] text-gray-500 mt-1">*Format: JPG/PNG (Maks 2MB), Video MP4 (Maks 15MB). Agar tidak terpotong, gunakan aspect ratio 16:9 (Landscape) dengan resolusi min 800x450 piksel.</p>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalKegiatan" onclick="window.tutupFormKegiatan()" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition cursor-pointer">Batal</button>
-                  <button type="button" id="btnSimpanKegiatan" onclick="window.handleSimpanKegiatan(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm cursor-pointer flex items-center gap-2">
-                    <i class="fas fa-save"></i>
-                    <span>Simpan Kegiatan</span>
-                  </button>
-                </div>
+              <div class="relative w-full sm:w-64">
+                <input type="text" id="searchAdminGaleri" oninput="window.handleSearchAdminGaleri(this.value)" placeholder="Cari judul galeri..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
               </div>
             </div>
 
-            <!-- Tabel List Kegiatan -->
-            <div class="overflow-x-auto border rounded-lg mb-6">
-              <table class="min-w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b">
+            <!-- Tabel List Galeri Terpadu -->
+            <div class="overflow-x-auto border border-slate-200 rounded-xl mb-6 shadow-2xs">
+              <table class="min-w-full text-xs sm:text-sm text-left">
+                <thead class="bg-slate-50 border-b border-slate-200">
                   <tr>
-                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Kegiatan</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Dokumentasi</th>
+                    <th class="px-3 py-3 font-semibold text-gray-700 w-32">Kategori</th>
+                    <th class="px-3 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-3 py-3 font-semibold text-gray-700 w-32">Tanggal</th>
                     <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
                   </tr>
                 </thead>
-                <tbody id="adminListKegiatan">
+                <tbody id="adminListGaleri">
                   <!-- Rendered via JS -->
                 </tbody>
               </table>
@@ -1566,7 +1513,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
             <!-- Tombol Simpan Perubahan Galeri (Satu Tombol Simpan Terpadu) -->
             <div class="flex justify-end pt-4 border-t border-gray-200">
-              <button type="button" id="btnSimpanGaleriTotal" onclick="window.handleSimpanGaleriTotal(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition shadow flex items-center gap-2 cursor-pointer">
+              <button type="button" id="btnSimpanGaleriTotal" onclick="window.handleSimpanGaleriTotal(event)" class="w-full sm:w-auto justify-center bg-emerald-800 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition shadow-sm flex items-center gap-2 cursor-pointer min-h-[44px]">
                 <i class="fas fa-save"></i>
                 <span>Simpan Perubahan Galeri</span>
               </button>

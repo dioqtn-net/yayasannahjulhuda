@@ -669,8 +669,8 @@
         ];
 
         function getItems(key, defaults) {
-          if (key === KEY_ESKUL && window.allEskulList) return window.allEskulList;
-          if (key === KEY_KEGIATAN && window.allKegiatanList) return window.allKegiatanList;
+          if (key === KEY_ESKUL && Array.isArray(window.allEskulList)) return window.allEskulList;
+          if (key === KEY_KEGIATAN && Array.isArray(window.allKegiatanList)) return window.allKegiatanList;
           return defaults;
         }
 
@@ -886,16 +886,22 @@
                       media: item.image_url || '/media/background/wallpaper_yayasan.jpg'
                     };
                     const cat = (item.category || '').toLowerCase();
-                    if (cat.includes('eskul') || cat.includes('ekstrakurikuler')) {
+                    const isEskul = cat.includes('ekstra') || cat.includes('eskul');
+                    if (isEskul) {
                       eskulArr.push(formatted);
                     } else {
                       kegArr.push(formatted);
                     }
                   });
 
-                  if (eskulArr.length > 0) window.allEskulList = eskulArr;
-                  if (kegArr.length > 0) window.allKegiatanList = kegArr;
+                  window.allEskulList = eskulArr;
+                  window.allKegiatanList = kegArr;
                   syncDynamicCards();
+                  if (typeof switchJenjang === 'function') {
+                    const activeBtn = document.querySelector('.jenjang-tab-btn.bg-emerald-800');
+                    const currentJ = activeBtn ? activeBtn.getAttribute('data-jenjang') : 'Semua';
+                    switchJenjang(currentJ || 'Semua');
+                  }
                   console.log('[Publik Galeri] Berhasil dimuat dari Supabase galleries.');
                 }
               }
