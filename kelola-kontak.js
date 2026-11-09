@@ -81,23 +81,23 @@
   window.loadContactFields = async function () {
     console.log("[Kelola Kontak] Memuat data kontak dari Supabase...");
     try {
-      let contData = null;
+      let rows = null;
       const supa = getSupabaseClient();
       if (supa) {
         try {
           const { data, error } = await withTimeout(
-            supa.from('contact_settings').select('*').eq('id', 1).maybeSingle(),
+            supa.from('contact_settings').select('*'),
             8000
           );
-          if (!error && data) contData = data;
+          if (!error && Array.isArray(data)) rows = data;
         } catch (e) {
           console.warn("[Kelola Kontak] Supabase client SELECT error:", e);
         }
       }
 
-      if (!contData) {
+      if (!rows) {
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?id=eq.1&select=*`, {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?select=*`, {
             cache: 'no-store',
             headers: {
               'apikey': SUPABASE_ANON_KEY,
@@ -105,31 +105,46 @@
             }
           });
           if (res.ok) {
-            const rows = await res.json();
-            if (rows && rows[0]) contData = rows[0];
+            rows = await res.json();
           }
         } catch (e) {}
       }
 
-      if (contData) {
-        setVal('contact_address', contData.address || '');
-        setVal('contact_phone', contData.phone || '');
-        setVal('contact_wa1', contData.whatsapp1 || '');
-        setVal('contact_wa2', contData.whatsapp2 || '');
-        setVal('contact_email', contData.email || '');
-        setVal('contact_hours', contData.operational_hours || '');
-        setVal('contact_maps_url', contData.maps_embed_url || '');
+      if (rows && rows.length > 0) {
+        // 1. Banner Kontak (id: 0)
+        const bannerRow = rows.find(r => Number(r.id) === 0);
+        if (bannerRow) {
+          setVal('kontakBannerTitle', bannerRow.foundation_name || 'Kontak & Lokasi');
+          if (typeof window.setTextareaValueWithAlignment === 'function') {
+            window.setTextareaValueWithAlignment('kontakBannerDesc', bannerRow.address || 'Silakan hubungi kami atau kunjungi langsung Yayasan Nahjul Huda.');
+          } else {
+            setVal('kontakBannerDesc', bannerRow.address || 'Silakan hubungi kami atau kunjungi langsung Yayasan Nahjul Huda.');
+          }
+        }
 
-        // Sinkronisasi ke Section Pengaturan Yayasan
-        setVal('setting_nama', contData.foundation_name || 'Yayasan Nahjul Huda Jakarta');
-        setVal('setting_wa', contData.whatsapp1 || contData.phone || '');
-        setVal('setting_email', contData.email || '');
-        setVal('setting_alamat', contData.address || '');
+        // 2. Data Kontak Detail (id: 1)
+        const contData = rows.find(r => Number(r.id) === 1);
+        if (contData) {
+          setVal('contact_address', contData.address || '');
+          setVal('contact_phone', contData.phone || '');
+          setVal('contact_wa1', contData.whatsapp1 || '');
+          setVal('contact_wa2', contData.whatsapp2 || '');
+          setVal('contact_email', contData.email || '');
+          setVal('contact_hours', contData.operational_hours || '');
+          setVal('contact_maps_url', contData.maps_embed_url || '');
+
+          // Sinkronisasi ke Section Pengaturan Yayasan
+          setVal('setting_nama', contData.foundation_name || 'Yayasan Nahjul Huda Jakarta');
+          setVal('setting_wa', contData.whatsapp1 || contData.phone || '');
+          setVal('setting_email', contData.email || '');
+          setVal('setting_alamat', contData.address || '');
+        }
       }
     } catch (e) {
       console.error("[Kelola Kontak] Gagal memuat data kontak:", e);
     }
   };
+  window.loadKontakData = window.loadContactFields;
 
   // 2. SIMPAN INFORMASI KONTAK (SECTION KONTAK)
   window.saveContactData = async function (e) {
@@ -150,6 +165,37 @@
     }
 
     try {
+      const supa = getSupabaseClient();
+
+      // 1. Simpan Banner Kontak (id: 0)
+      const bannerTitle = getVal('kontakBannerTitle', 'Kontak & Lokasi');
+      const bannerDesc = (typeof window.getWrappedTextareaValue === 'function')
+        ? window.getWrappedTextareaValue('kontakBannerDesc')
+        : getVal('kontakBannerDesc', 'Silakan hubungi kami atau kunjungi langsung Yayasan Nahjul Huda.');
+
+      const bannerPayload = {
+        id: 0,
+        foundation_name: bannerTitle,
+        address: bannerDesc,
+        updated_at: new Date().toISOString()
+      };
+
+      if (supa) {
+        try {
+          await withTimeout(
+            supa.from('contact_settings').upsert(bannerPayload, { onConflict: 'id' }),
+            10000
+          );
+        } catch (e) {
+          console.warn("[Kelola Kontak] Upsert banner client error:", e);
+        }
+      } else {
+        try {
+          await withTimeout(restPatch('contact_settings', 0, bannerPayload), 10000);
+        } catch(e) {}
+      }
+
+      // 2. Simpan Data Kontak Detail (id: 1)
       const address = getVal('contact_address');
       const phone = getVal('contact_phone');
       const wa1 = getVal('contact_wa1');
@@ -172,7 +218,6 @@
 
       console.log("[Kelola Kontak] Mengirim contact_settings ke Supabase...", payload);
 
-      const supa = getSupabaseClient();
       let saveSuccess = false;
 
       if (supa) {
@@ -221,7 +266,7 @@
       setVal('setting_wa', wa1 || phone);
       setVal('setting_email', email);
 
-      alert("Alhamdulillah! Informasi Kontak berhasil disimpan secara online ke database Supabase.\nPerubahan sudah aktif di semua perangkat.");
+      alert("Alhamdulillah! Banner dan Informasi Kontak berhasil disimpan secara online ke database Supabase.\nPerubahan sudah aktif di semua perangkat.");
     } catch (error) {
       console.error("[Kelola Kontak] Gagal menyimpan:", error);
       alert("Gagal menyimpan kontak:\n" + (error.message || error));

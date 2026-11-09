@@ -84,9 +84,9 @@
           <!-- Dark Overlay Wrapper -->
           <div class="absolute inset-0 bg-black/70 z-0"></div>
           <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Kontak &amp; Lokasi</h1>
+            <h1 id="pubKontakBannerTitle" class="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold mb-4 text-gold-400 drop-shadow-md">Kontak &amp; Lokasi</h1>
             <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
-            <p class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Silakan hubungi kami atau kunjungi langsung Yayasan Nahjul Huda.</p>
+            <div id="pubKontakBannerDesc" class="text-white text-lg max-w-2xl mx-auto drop-shadow leading-relaxed">Silakan hubungi kami atau kunjungi langsung Yayasan Nahjul Huda.</div>
           </div>
         </section>
 
@@ -308,7 +308,7 @@
           try {
             const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
             const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?id=eq.1&select=*`, {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?select=*`, {
               cache: 'no-store',
               headers: {
                 'apikey': SUPABASE_ANON_KEY,
@@ -317,9 +317,20 @@
             });
             if (res.ok) {
               const rows = await res.json();
-              if (rows && rows[0]) {
-                applyContact(rows[0]);
-                console.log('[Publik Kontak] Informasi kontak berhasil diperbarui dari Supabase.');
+              if (rows && rows.length > 0) {
+                const bannerRow = rows.find(r => Number(r.id) === 0);
+                if (bannerRow) {
+                  const titleEl = document.getElementById('pubKontakBannerTitle');
+                  const descEl = document.getElementById('pubKontakBannerDesc');
+                  if (titleEl && bannerRow.foundation_name) titleEl.textContent = bannerRow.foundation_name;
+                  if (descEl && bannerRow.address) descEl.innerHTML = bannerRow.address;
+                }
+
+                const contactRow = rows.find(r => Number(r.id) === 1);
+                if (contactRow) {
+                  applyContact(contactRow);
+                  console.log('[Publik Kontak] Informasi kontak berhasil diperbarui dari Supabase.');
+                }
               }
             }
           } catch(e) {
