@@ -392,9 +392,21 @@
         ];
 
         function getBeritaList() {
-          if (window.currentBeritaData && Array.isArray(window.currentBeritaData) && window.currentBeritaData.length > 0) return window.currentBeritaData;
+          if (window.beritaLoadedFromDB) return currentBeritaData || [];
           if (currentBeritaData && Array.isArray(currentBeritaData) && currentBeritaData.length > 0) return currentBeritaData;
-          return defaultBerita;
+          return [];
+        }
+
+        function showBeritaLoadingState() {
+          const container = document.getElementById('pubContainerBerita');
+          if (container) {
+            container.innerHTML = `
+              <div class="col-span-full py-20 flex flex-col items-center justify-center text-slate-400">
+                <i class="fas fa-spinner fa-spin text-3xl text-emerald-600 mb-3"></i>
+                <span class="text-sm font-medium">Memuat berita & pengumuman...</span>
+              </div>
+            `;
+          }
         }
 
         function formatIndoDate(dateStr) {
@@ -428,6 +440,19 @@
 
           currentBeritaData = getBeritaList();
           container.innerHTML = '';
+
+          if (!currentBeritaData || currentBeritaData.length === 0) {
+            container.innerHTML = `
+              <div class="col-span-full py-16 text-center text-slate-400">
+                <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-2xl">
+                  <i class="far fa-newspaper"></i>
+                </div>
+                <h4 class="font-bold text-slate-700 text-base mb-1">Belum Ada Berita Terbaru</h4>
+                <p class="text-xs text-slate-500 max-w-sm mx-auto">Warta kegiatan dan pengumuman resmi akan ditampilkan di sini setelah dipublikasikan melalui panel admin.</p>
+              </div>
+            `;
+            return;
+          }
 
           container.innerHTML = currentBeritaData.map(item => {
             const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
@@ -706,27 +731,9 @@
 
         // Initialize Banner & Content on Load
         function initBerita() {
-          // 1. Sync Banner
-          const savedBanner = null;
-          if (savedBanner) {
-            try {
-              const bData = JSON.parse(savedBanner);
-              const titleEl = document.getElementById('pubBeritaBannerTitle');
-              const descEl = document.getElementById('pubBeritaBannerDesc');
-              if (titleEl && bData.title) titleEl.textContent = bData.title;
-              if (descEl && bData.desc) descEl.innerHTML = bData.desc;
-            } catch (e) {
-              console.error('Error parsing saved berita banner:', e);
-            }
-          }
+          showBeritaLoadingState();
 
-          // 2. Render News Cards
-          renderBeritaCards();
-
-          // 3. Default to active 'Semua'
-          switchNewsJenjang('Semua');
-
-          // 4. Fetch live news 100% Pure Supabase Native REST
+          // Fetch live news 100% Pure Supabase Native REST (Anti-cache timestamp)
           try {
             localStorage.removeItem('cmsData_listBerita');
             localStorage.removeItem('cmsData_beritaBanner');
@@ -736,16 +743,18 @@
             try {
               const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
               const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              const res = await fetch(`${SUPABASE_URL}/rest/v1/news_posts?select=*&order=id.desc`, {
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/news_posts?select=*&order=id.desc&_t=${Date.now()}`, {
                 cache: 'no-store',
                 headers: {
                   'apikey': SUPABASE_ANON_KEY,
-                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                  'Cache-Control': 'no-cache, no-store, must-revalidate',
+                  'Pragma': 'no-cache'
                 }
               });
               if (res.ok) {
                 const dbNews = await res.json();
-                if (dbNews && dbNews.length > 0) {
+                if (dbNews && Array.isArray(dbNews)) {
                   // 1. Perbarui Banner Berita dari row id: 0
                   const banner = dbNews.find(n => Number(n.id) === 0);
                   if (banner) {
@@ -772,12 +781,27 @@
                         : (n.image_url ? [n.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
                     }));
                     currentBeritaData = mapped;
-                    renderBeritaCards();
-                    switchNewsJenjang(activeJenjang || 'Semua');
+                  } else {
+                    currentBeritaData = [];
                   }
+                  window.beritaLoadedFromDB = true;
+                  renderBeritaCards();
+                  switchNewsJenjang(activeJenjang || 'Semua');
+                } else {
+                  currentBeritaData = [];
+                  window.beritaLoadedFromDB = true;
+                  renderBeritaCards();
+                  switchNewsJenjang(activeJenjang || 'Semua');
                 }
               }
             } catch(err) {
+              console.error('[berita.html] REST fetch error:', err);
+              window.beritaLoadedFromDB = true;
+              renderBeritaCards();
+              switchNewsJenjang(activeJenjang || 'Semua');
+            }
+          })();
+        }
               console.error('[berita.html] REST fetch error:', err);
             }
           })();

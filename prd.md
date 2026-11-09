@@ -94,9 +94,18 @@ Untuk mencegah bug duplikasi / *crosstalk* antara Ekstrakurikuler dan Kegiatan:
 
 ---
 
-### 5. Spesifikasi Halaman Publik: Galeri (`galeri.html`)
+### 5. Spesifikasi Halaman Publik: Galeri (`galeri.html`) & Berita (`berita.html`)
 
-1. **Sinkronisasi Tab Jenjang**:
+#### 5.1. Arsitektur Siklus Hidup Bebas Glitch (Zero-FOUC & Anti-Glitch Architecture)
+Untuk mengeliminasi glitch tampilan konten lama/dummy yang berkedip beberapa detik saat refresh halaman:
+1. **Dilarang Render Data Dummy Saat Inisialisasi**: Halaman publik TIDAK BOLEH merender array dummy/hardcoded secara sinkron sebelum data Supabase diterima.
+2. **Indikator Loading Elegan (Loading State)**: Selama request jaringan ke Supabase berlangsung (1-2 detik pertama), container wajib menampilkan indikator loading/spinner yang bersih.
+3. **Bypass Cache Agresif (Cache-Busting)**: Setiap query REST ke Supabase wajib menyertakan parameter `_t=Date.now()` serta header `Cache-Control: no-cache, no-store, must-revalidate` untuk mencegah caching perantara.
+4. **Penanganan Kondisi Kosong (Empty State Baku)**: Jika tabel database kosong atau seluruh data telah dihapus, sistem menampilkan card *Empty State* yang ramah pengguna, bukan kembali (*fallback*) ke data dummy usang.
+5. **Penghapusan Permanen di Panel Admin (Direct Native REST DELETE)**: Aksi hapus di panel admin wajib mengeksekusi endpoint REST DELETE secara langsung dengan header `Prefer: return=representation` untuk menjamin data musnah permanen dari server Supabase tanpa terhalang session auth kadaluarsa.
+
+#### 5.2. Sinkronisasi Tab Jenjang:
+1. **Tab Jenjang**:
    - Tab: `Semua`, `SDI`, `MI`, `MTs`, `MA`, `Ponpes`.
    - **Tab Semua**: Menampilkan seluruh dokumentasi dari semua jenjang dan semua kategori, dengan badge kategori (`Ekstrakurikuler` / `Kegiatan`) dan jenjang.
    - **Tab Jenjang Spesifik (SDI, MI, MTs, MA, Ponpes)**:

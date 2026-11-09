@@ -511,28 +511,32 @@
     }
 
     try {
+      // 1. Eksekusi Native REST DELETE langsung dengan apikey & token untuk jaminan bypass cache / auth session
+      await withTimeout(
+        restFetch(`galleries?id=eq.${id}`, {
+          method: 'DELETE',
+          headers: { 'Prefer': 'return=representation' }
+        }),
+        10000
+      );
+
+      // 2. Redundansi ke Supabase client jika aktif
       const supa = getSupabaseClient();
-      let delSuccess = false;
       if (supa) {
         try {
-          const { error } = await withTimeout(
-            supa.from('galleries').delete().eq('id', Number(id)),
-            8000
-          );
-          if (!error) delSuccess = true;
+          await supa.from('galleries').delete().eq('id', Number(id));
         } catch (e) {}
       }
 
-      if (!delSuccess) {
-        await withTimeout(
-          restFetch(`galleries?id=eq.${id}`, { method: 'DELETE' }),
-          10000
-        );
-      }
+      // 3. Langsung perbarui memori lokal dan render ulang tabel agar tidak menunggu
+      currentGaleriList = currentGaleriList.filter(item => String(item.id) !== String(id));
+      renderAdminGaleriTable();
 
+      // 4. Verifikasi final dengan memuat ulang data dari database Supabase
       await window.loadGaleriData();
-      alert('Data dokumentasi galeri berhasil dihapus dari database Supabase.');
+      alert('Alhamdulillah! Data dokumentasi galeri berhasil dihapus dari database Supabase secara permanen.');
     } catch (e) {
+      console.error("[Kelola Galeri] Gagal menghapus:", e);
       alert('Gagal menghapus: ' + (e.message || e));
     }
   };

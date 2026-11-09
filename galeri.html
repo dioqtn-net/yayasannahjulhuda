@@ -671,7 +671,19 @@
         function getItems(key, defaults) {
           if (key === KEY_ESKUL && Array.isArray(window.allEskulList)) return window.allEskulList;
           if (key === KEY_KEGIATAN && Array.isArray(window.allKegiatanList)) return window.allKegiatanList;
-          return defaults;
+          return defaults || [];
+        }
+
+        function showGalleryLoadingState() {
+          const gridSemua = document.getElementById('grid-semua');
+          if (gridSemua) {
+            gridSemua.innerHTML = `
+              <div class="col-span-full py-20 flex flex-col items-center justify-center text-slate-400">
+                <i class="fas fa-spinner fa-spin text-3xl text-emerald-600 mb-3"></i>
+                <span class="text-sm font-medium">Memuat dokumentasi galeri...</span>
+              </div>
+            `;
+          }
         }
 
         function escapeHtml(text) {
@@ -761,20 +773,32 @@
         }
 
         function syncDynamicCards() {
-          const eskulList = getItems(KEY_ESKUL, defaultEskul);
-          const kegList = getItems(KEY_KEGIATAN, defaultKegiatan);
+          const eskulList = getItems(KEY_ESKUL, []);
+          const kegList = getItems(KEY_KEGIATAN, []);
 
           const gridSemua = document.getElementById('grid-semua');
 
           // Insert into Tab Semua dengan label kategori hitam-putih
           if (gridSemua) {
             gridSemua.innerHTML = '';
-            eskulList.forEach(item => {
-              gridSemua.insertAdjacentHTML('beforeend', createCard(item, 'Ekstrakurikuler'));
-            });
-            kegList.forEach(item => {
-              gridSemua.insertAdjacentHTML('beforeend', createCard(item, 'Kegiatan'));
-            });
+            if (eskulList.length === 0 && kegList.length === 0) {
+              gridSemua.innerHTML = `
+                <div class="col-span-full py-16 text-center text-slate-400">
+                  <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="far fa-images"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-700 text-base mb-1">Belum Ada Dokumentasi Tersimpan</h4>
+                  <p class="text-xs text-slate-500 max-w-sm mx-auto">Dokumentasi kegiatan dan ekstrakurikuler akan ditampilkan di sini setelah diunggah melalui panel admin.</p>
+                </div>
+              `;
+            } else {
+              eskulList.forEach(item => {
+                gridSemua.insertAdjacentHTML('beforeend', createCard(item, 'Ekstrakurikuler'));
+              });
+              kegList.forEach(item => {
+                gridSemua.insertAdjacentHTML('beforeend', createCard(item, 'Kegiatan'));
+              });
+            }
           }
 
           // Clear all category grids
@@ -839,9 +863,9 @@
 
         function initGallery() {
           syncBanner();
-          syncDynamicCards();
+          showGalleryLoadingState();
 
-          // Fetch live galleries 100% Pure Supabase REST API
+          // Fetch live galleries 100% Pure Supabase REST API (Anti-cache timestamp)
           try {
             localStorage.removeItem(KEY_ESKUL);
             localStorage.removeItem(KEY_KEGIATAN);
@@ -852,16 +876,18 @@
             try {
               const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
               const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              const res = await fetch(`${SUPABASE_URL}/rest/v1/galleries?select=*&order=id.desc`, {
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/galleries?select=*&order=id.desc&_t=${Date.now()}`, {
                 cache: 'no-store',
                 headers: {
                   'apikey': SUPABASE_ANON_KEY,
-                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                  'Cache-Control': 'no-cache, no-store, must-revalidate',
+                  'Pragma': 'no-cache'
                 }
               });
               if (res.ok) {
                 const dbData = await res.json();
-                if (dbData && dbData.length > 0) {
+                if (dbData && Array.isArray(dbData)) {
                   // 1. Perbarui Banner Galeri dari row id: 0 atau category: 'banner'
                   const banner = dbData.find(g => Number(g.id) === 0 || (g.category || '').toLowerCase() === 'banner');
                   if (banner) {
@@ -903,10 +929,20 @@
                     switchJenjang(currentJ || 'Semua');
                   }
                   console.log('[Publik Galeri] Berhasil dimuat dari Supabase galleries.');
+                } else {
+                  window.allEskulList = [];
+                  window.allKegiatanList = [];
+                  syncDynamicCards();
+                  if (typeof switchJenjang === 'function') {
+                    switchJenjang('Semua');
+                  }
                 }
               }
             } catch (err) {
               console.error('[galeri.html] Supabase REST fetch error:', err);
+              window.allEskulList = window.allEskulList || [];
+              window.allKegiatanList = window.allKegiatanList || [];
+              syncDynamicCards();
             }
           })();
         }

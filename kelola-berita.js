@@ -286,29 +286,32 @@
     }
 
     try {
+      // 1. Eksekusi Native REST DELETE langsung dengan apikey & token
+      await withTimeout(
+        restFetch(`news_posts?id=eq.${id}`, {
+          method: 'DELETE',
+          headers: { 'Prefer': 'return=representation' }
+        }),
+        10000
+      );
+
+      // 2. Redundansi ke Supabase client jika aktif
       const supa = getSupabaseClient();
-      let delSuccess = false;
       if (supa) {
         try {
-          const { error } = await withTimeout(
-            supa.from('news_posts').delete().eq('id', Number(id)),
-            8000
-          );
-          if (!error) delSuccess = true;
+          await supa.from('news_posts').delete().eq('id', Number(id));
         } catch (e) {
-          console.warn("[Kelola Berita] Supabase client DELETE warning:", e);
+          console.warn("[Kelola Berita] Supabase client DELETE fallback warning:", e);
         }
       }
 
-      if (!delSuccess) {
-        await withTimeout(
-          restFetch(`news_posts?id=eq.${id}`, { method: 'DELETE' }),
-          10000
-        );
-      }
+      // 3. Update state lokal dan re-render seketika
+      currentBeritaList = currentBeritaList.filter(item => String(item.id) !== String(id));
+      renderAdminTable();
 
+      // 4. Verifikasi final dengan memuat ulang data dari database Supabase
       await window.loadBeritaList();
-      alert('Alhamdulillah! Berita berhasil dihapus dari database Supabase.');
+      alert('Alhamdulillah! Berita berhasil dihapus dari database Supabase secara permanen.');
     } catch (e) {
       console.error("[Kelola Berita] Gagal menghapus:", e);
       alert('Gagal menghapus berita: ' + (e.message || e));
