@@ -667,6 +667,8 @@
         try {
           const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
           const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          let dbUnits = null;
+
           const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc`, {
             cache: 'no-store',
             headers: {
@@ -675,26 +677,53 @@
             }
           });
           if (res.ok) {
-            const dbUnits = await res.json();
-            if (dbUnits && dbUnits.length > 0) {
-              const mapped = {};
-              const keyMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
-              dbUnits.forEach(u => {
-                const k = keyMap[u.id];
-                if (k) {
-                  mapped[k + 'Akreditasi'] = u.accreditation || '-';
-                  mapped[k + 'Desc'] = u.description || '-';
-                  mapped[k + 'Kurikulum'] = u.curriculum || '-';
-                  mapped[k + 'Unggulan'] = u.featured_programs || '-';
-                  mapped[k + 'Ekskul'] = u.extracurricular || '-';
-                  mapped[k + 'Fasilitas'] = u.facilities || '-';
-                  mapped[k + 'Visi'] = u.vision || '-';
-                  mapped[k + 'Misi'] = u.mission || '-';
+            dbUnits = await res.json();
+          }
+
+          if ((!dbUnits || dbUnits.length === 0) && typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+            try {
+              const supa = window.supabaseClient || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+              const { data, error } = await supa.from('education_units').select('*').order('id', { ascending: true });
+              if (!error && data) dbUnits = data;
+            } catch(e) {}
+          }
+
+          if (dbUnits && dbUnits.length > 0) {
+            // 1. Tampilkan Banner Utama Program (Row ID: 0)
+            const bannerRow = dbUnits.find(u => Number(u.id) === 0);
+            if (bannerRow) {
+              const elTitle = document.getElementById('publicProgBannerTitle');
+              if (elTitle && bannerRow.name) {
+                elTitle.textContent = bannerRow.name;
+              }
+              const elDesc = document.getElementById('publicProgBannerDesc');
+              if (elDesc && bannerRow.description) {
+                if (typeof window.renderTextOrList === 'function') {
+                  window.renderTextOrList(elDesc, bannerRow.description, false);
+                } else {
+                  elDesc.innerHTML = bannerRow.description;
                 }
-              });
-              applyDataToDOM(mapped);
-              console.log('[Publik Program] Berhasil memperbarui tampilan dari Supabase education_units.');
+              }
             }
+
+            // 2. Tampilkan 5 Jenjang Pendidikan (Row ID: 1 - 5)
+            const mapped = {};
+            const keyMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
+            dbUnits.forEach(u => {
+              const k = keyMap[u.id];
+              if (k) {
+                mapped[k + 'Akreditasi'] = u.accreditation || '-';
+                mapped[k + 'Desc'] = u.description || '-';
+                mapped[k + 'Kurikulum'] = u.curriculum || '-';
+                mapped[k + 'Unggulan'] = u.featured_programs || '-';
+                mapped[k + 'Ekskul'] = u.extracurricular || '-';
+                mapped[k + 'Fasilitas'] = u.facilities || '-';
+                mapped[k + 'Visi'] = u.vision || '-';
+                mapped[k + 'Misi'] = u.mission || '-';
+              }
+            });
+            applyDataToDOM(mapped);
+            console.log('[Publik Program] Berhasil memperbarui tampilan dari Supabase education_units.');
           }
         } catch(err) {
           console.error('[Publik Program] Error fetch education_units:', err);

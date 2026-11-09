@@ -225,7 +225,7 @@ export const api = {
         } else {
             await delay(300);
         }
-        return list.map(u => {
+        return list.filter(u => Number(u.id) > 0).map(u => {
             const isSDI = u.id === 1 || (u.name && (u.name.includes('SD Islam') || u.name.includes('SDI') || u.name.toLowerCase().includes('al kindy')));
             const isMI = u.id === 2 || (u.name && (u.name.includes('Ibtidaiyah') || u.name.includes('(MI)')));
             const isMTs = u.id === 3 || (u.name && (u.name.includes('MTs') || u.name.toLowerCase().includes('tsanawiyah')));
@@ -261,6 +261,24 @@ export const api = {
                 } : {})
             };
         });
+    },
+
+    async getProgramBanner() {
+        if (supabase) {
+            try {
+                const { data, error } = await supabase.from('education_units').select('name,description').eq('id', 0).maybeSingle();
+                if (!error && data) {
+                    return {
+                        progBannerTitle: data.name || 'Program & Jenjang Pendidikan',
+                        progBannerDesc: data.description || 'Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.'
+                    };
+                }
+            } catch(e) {}
+        }
+        return {
+            progBannerTitle: 'Program & Jenjang Pendidikan',
+            progBannerDesc: 'Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.'
+        };
     },
 
     async getNews() {

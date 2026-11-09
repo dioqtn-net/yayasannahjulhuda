@@ -3,6 +3,7 @@
  * KELOLA PROGRAM (PANEL ADMIN) - 100% PURE SUPABASE
  * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem
  * Fitur: Single Save Button, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * Mendukung: Banner Utama Halaman Program (Row ID: 0) & 5 Unit Jenjang Pendidikan (Row ID: 1-5)
  * =======================================================================
  */
 
@@ -163,6 +164,15 @@
 
       if (units && units.length > 0) {
         console.log("[Kelola Program] Data education_units berhasil dimuat:", units);
+
+        // 1. Muat Banner Utama Halaman Program (Row ID: 0)
+        const bannerRow = units.find(u => Number(u.id) === 0);
+        if (bannerRow) {
+          if (bannerRow.name) setVal('progBannerTitle', bannerRow.name);
+          if (bannerRow.description) setSafeTextareaValue('progBannerDesc', bannerRow.description);
+        }
+
+        // 2. Muat 5 Jenjang Pendidikan (Row ID: 1 - 5)
         const prefixMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
         units.forEach(u => {
           const p = prefixMap[u.id];
@@ -205,11 +215,22 @@
     }
 
     try {
+      // 1. Data Banner Utama (Row ID: 0)
+      const progBannerTitle = getVal('progBannerTitle', 'Program & Jenjang Pendidikan');
+      const progBannerDesc = getSafeTextareaValue('progBannerDesc', 'Kami menyelenggarakan pendidikan berkelanjutan dari jenjang dasar hingga menengah atas dan pendidikan kepesantrenan.');
+
+      const bannerPayload = {
+        id: 0,
+        name: progBannerTitle,
+        description: progBannerDesc
+      };
+
+      // 2. Data 5 Jenjang Pendidikan (Row ID: 1 - 5)
       const unitsPayload = [
         {
           id: 1,
           name: 'SD Islam (SDI) AL KINDY',
-          accreditation: getVal('sdiAkreditasi', 'A'),
+          accreditation: getVal('sdiAkreditasi', 'Akreditasi A'),
           curriculum: getVal('sdiKurikulum', 'Kedinasan : Kementerian Pendidikan'),
           description: getSafeTextareaValue('sdiDesc'),
           vision: getSafeTextareaValue('sdiVisi'),
@@ -268,26 +289,42 @@
         }
       ];
 
-      console.log('[Kelola Program] Mengirim 5 unit pendidikan ke Supabase education_units...');
+      const allPayloads = [bannerPayload, ...unitsPayload];
+
+      console.log('[Kelola Program] Mengirim Banner & 5 unit pendidikan ke Supabase education_units...', allPayloads);
 
       const supa = getSupabaseClient();
-      for (const unit of unitsPayload) {
-        let savedUnit = false;
+      for (const item of allPayloads) {
+        let savedItem = false;
         if (supa) {
           try {
             const { error } = await withTimeout(
-              supa.from('education_units').update(unit).eq('id', unit.id),
+              supa.from('education_units').upsert(item, { onConflict: 'id' }),
               8000
             );
-            if (!error) savedUnit = true;
+            if (!error) savedItem = true;
           } catch (e) {
-            console.warn(`[Kelola Program] Supabase client gagal update unit ${unit.id}:`, e);
+            console.warn(`[Kelola Program] Supabase client gagal upsert unit ${item.id}:`, e);
           }
         }
 
-        if (!savedUnit) {
-          console.log(`[Kelola Program] REST PATCH fallback unit ${unit.id}...`);
-          await withTimeout(restPatch('education_units', unit.id, unit), 10000);
+        if (!savedItem) {
+          console.log(`[Kelola Program] REST PATCH fallback unit ${item.id}...`);
+          try {
+            await withTimeout(restPatch('education_units', item.id, item), 10000);
+          } catch (patchErr) {
+            console.warn(`[Kelola Program] REST PATCH gagal, mencoba POST upsert:`, patchErr);
+            await fetch(`${SUPABASE_URL}/rest/v1/education_units`, {
+              method: 'POST',
+              headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'resolution=merge-duplicates,return=representation'
+              },
+              body: JSON.stringify(item)
+            });
+          }
         }
       }
 
@@ -297,7 +334,7 @@
       } catch (e) {}
 
       console.log("[Kelola Program] === BERHASIL DISIMPAN KE SUPABASE ===");
-      alert("Alhamdulillah! Data 5 Jenjang Program Pendidikan BERHASIL DISIMPAN secara online ke database Supabase.\nPerubahan sudah aktif di semua perangkat pengunjung.");
+      alert("Alhamdulillah! Data Banner & 5 Jenjang Program Pendidikan BERHASIL DISIMPAN secara online ke database Supabase.\nPerubahan sudah aktif di semua perangkat pengunjung.");
     } catch (error) {
       console.error("[Kelola Program] GAGAL menyimpan ke Supabase:", error);
       let errMsg = error?.message || String(error);
