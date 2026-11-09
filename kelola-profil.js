@@ -1,320 +1,373 @@
-// kelola-profil.js - Logika Pengelolaan Konten Profil Yayasan, Sejarah, dan Struktur Organisasi
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Setup Toolbar Alignment untuk seluruh tombol .btn-align
-    function initAlignmentToolbars() {
-        document.querySelectorAll('.btn-align').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const parentToolbar = btn.closest('div');
-                if (!parentToolbar) return;
+/**
+ * =======================================================================
+ * KELOLA PROFIL (PANEL ADMIN) - 100% PURE SUPABASE
+ * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem / NO localCache
+ * Fitur: Single Save Button, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * =======================================================================
+ */
 
-                const parentBlock = btn.closest('.mb-4, .space-y-4, .p-4') || btn.parentElement.parentElement;
-                const ta = parentBlock ? parentBlock.querySelector('textarea') : null;
+(function () {
+  console.log("[Kelola Profil] Skrip kelola-profil.js mulai dimuat...");
 
-                parentToolbar.querySelectorAll('.btn-align').forEach(b => {
-                    b.classList.remove('bg-green-700', 'text-white');
-                    b.classList.add('hover:bg-gray-200', 'text-gray-600');
-                });
-                btn.classList.remove('hover:bg-gray-200', 'text-gray-600');
-                btn.classList.add('bg-green-700', 'text-white');
+  const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
 
-                const align = btn.getAttribute('data-align') || 'text-justify';
-                if (ta) {
-                    ta.dataset.align = align;
-                    ta.style.textAlign = align.replace('text-', '');
-                }
-            });
+  let isSaving = false;
+  const BTN_PROFIL_HTML = `<svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg> Simpan Perubahan Profil`;
+
+  // Memory cache untuk foto yang sudah tersimpan di database
+  let currentPengurusState = {
+    fotoKetua: '',
+    fotoSDI: '',
+    fotoMI: '',
+    fotoMTs: '',
+    fotoMA: '',
+    fotoMudir: ''
+  };
+
+  // Bersihkan sisa-sisa cache lama dari memori browser
+  try {
+    localStorage.removeItem('cmsData_profil');
+  } catch (e) {}
+
+  function getSupabaseClient() {
+    if (window.supabaseClient) return window.supabaseClient;
+    if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+      try {
+        window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+          auth: { persistSession: true }
         });
+        return window.supabaseClient;
+      } catch (err) {
+        console.warn("[Kelola Profil] createClient warning:", err);
+      }
     }
+    return null;
+  }
 
-    // 2. Helper bungkus payload ke format CMS <div class="...">
-    function getWrappedValue(id) {
-        const el = document.getElementById(id);
-        if (!el) return '';
-        const raw = el.value || '';
-        if (raw.trim() === '') return '';
-        const align = el.dataset.align || 'text-justify';
-        return `<div class="${align}">${raw}</div>`;
+  function resetButtonState() {
+    const btn = document.getElementById('btnSimpanProfil');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = BTN_PROFIL_HTML;
     }
+  }
 
-    // 3. Helper ekstrak dan set nilai dengan alignment
-    function loadValueWithAlign(id, dbValue, fallback = '') {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const valToParse = dbValue || fallback || '';
-        let cleanText = valToParse;
-        let alignClass = 'text-justify';
+  function getVal(id, fallback = '') {
+    const el = document.getElementById(id);
+    const val = el?.value;
+    return (typeof val === 'string' && val.trim() !== '') ? val.trim() : fallback;
+  }
 
-        if (typeof valToParse === 'string' && valToParse.trim().startsWith('<div')) {
-            const temp = document.createElement('div');
-            temp.innerHTML = valToParse;
-            const wrapper = temp.firstElementChild;
-            if (wrapper && wrapper.tagName === 'DIV') {
-                alignClass = wrapper.className.replace('whitespace-pre-wrap', '').trim() || 'text-justify';
-                cleanText = wrapper.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-            }
-        }
-
-        el.value = cleanText;
-        el.dataset.align = alignClass;
-        el.style.textAlign = alignClass.replace('text-', '');
-
-        // Aktifkan tombol alignment yang sesuai jika ada toolbar
-        const parentBlock = el.closest('.mb-4, .space-y-4, .p-4') || el.parentElement;
-        if (parentBlock) {
-            const toolbar = parentBlock.querySelector('.btn-align')?.closest('div');
-            if (toolbar) {
-                const targetBtn = toolbar.querySelector(`.btn-align[data-align="${alignClass}"]`);
-                if (targetBtn) {
-                    toolbar.querySelectorAll('.btn-align').forEach(b => {
-                        b.classList.remove('bg-green-700', 'text-white');
-                        b.classList.add('hover:bg-gray-200', 'text-gray-600');
-                    });
-                    targetBtn.classList.remove('hover:bg-gray-200', 'text-gray-600');
-                    targetBtn.classList.add('bg-green-700', 'text-white');
-                }
-            }
-        }
+  function setVal(id, val) {
+    const el = document.getElementById(id);
+    if (!el || val === undefined || val === null) return;
+    if (el.tagName.toLowerCase() === 'textarea') {
+      setSafeTextareaValue(id, val);
+    } else {
+      el.value = val;
     }
+  }
 
-    // Helper resolve Supabase client
-    const SUPABASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SUPABASE_URL)
-        ? import.meta.env.VITE_SUPABASE_URL
-        : "https://lrorriksjooxrpoihfge.supabase.co";
-    const SUPABASE_ANON_KEY = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SUPABASE_ANON_KEY)
-        ? import.meta.env.VITE_SUPABASE_ANON_KEY
-        : "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-
-    function getSupabase() {
-        if (window.supabaseClient) return window.supabaseClient;
-        if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-                auth: { persistSession: true },
-                global: {
-                    fetch: (url, options = {}) => {
-                        options.cache = 'no-store';
-                        options.headers = options.headers || {};
-                        options.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
-                        options.headers['Pragma'] = 'no-cache';
-                        return fetch(url, options);
-                    }
-                }
-            });
-            return window.supabaseClient;
-        }
-        return null;
+  function getSafeTextareaValue(id, fallback = '') {
+    try {
+      const el = document.getElementById(id);
+      if (!el) return fallback;
+      if (typeof window.getWrappedTextareaValue === 'function') {
+        const wrapped = window.getWrappedTextareaValue(id);
+        if (wrapped && typeof wrapped === 'string' && wrapped.trim() !== '') return wrapped;
+      }
+      const raw = el?.value;
+      if (!raw || typeof raw !== 'string' || raw.trim() === '') return fallback;
+      const align = el?.dataset?.align || 'text-justify';
+      return `<div class="${align}">${raw.trim()}</div>`;
+    } catch (err) {
+      const el = document.getElementById(id);
+      return el?.value?.trim() || fallback;
     }
+  }
 
-    // 4. Muat Data Tersimpan (Hanya Banner, Sejarah, Struktur Organisasi)
-    async function loadProfilData() {
-        initAlignmentToolbars();
+  function setSafeTextareaValue(id, val) {
+    try {
+      const el = document.getElementById(id);
+      if (!el || val === undefined || val === null) return;
+      if (typeof window.setTextareaValueWithAlignment === 'function') {
+        window.setTextareaValueWithAlignment(id, val);
+        return;
+      }
+      if (typeof val === 'string' && (val.includes('<div') || val.includes('<p'))) {
+        const temp = document.createElement('div');
+        temp.innerHTML = val;
+        el.value = temp.textContent || temp.innerText || val;
+      } else {
+        el.value = val;
+      }
+    } catch (err) {
+      const el = document.getElementById(id);
+      if (el) el.value = val || '';
+    }
+  }
+
+  function withTimeout(promise, ms = 15000, errorMsg = "Batas waktu koneksi terlampaui.") {
+    let timer = null;
+    const timeoutPromise = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(errorMsg)), ms);
+    });
+    return Promise.race([
+      promise.finally(() => clearTimeout(timer)),
+      timeoutPromise
+    ]);
+  }
+
+  async function restUpsert(table, payload) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates,return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`REST Upsert ${table} gagal (${res.status}): ${text}`);
+    }
+    return await res.json();
+  }
+
+  // 1. SELECT DARI SUPABASE (LOAD FORM PROFIL)
+  window.loadProfilData = async function () {
+    console.log("[Kelola Profil] Memulai loadProfilData()...");
+    try {
+      let dbData = null;
+      const supa = getSupabaseClient();
+      if (supa) {
         try {
-            const raw = localStorage.getItem('cmsData_profil');
-            let data = raw ? JSON.parse(raw) : {};
-
-            // Muat dari Supabase jika koneksi aktif
-            const supa = getSupabase();
-            if (supa) {
-                try {
-                    const { data: dbData, error } = await supa
-                        .from('profile_settings')
-                        .select('*')
-                        .eq('id', 1)
-                        .maybeSingle();
-                    if (!error && dbData) {
-                        if (dbData.banner_title || dbData.name) data.profilTitle = dbData.banner_title || dbData.name;
-                        if (dbData.banner_desc) data.profilDesc = dbData.banner_desc;
-                        if (dbData.history) data.sejarahText = dbData.history;
-                        if (dbData.struktur_title) data.strukturTitle = dbData.struktur_title;
-                        if (dbData.struktur_desc) data.strukturDesc = dbData.struktur_desc;
-
-                        if (dbData.pengurus && typeof dbData.pengurus === 'object') {
-                            const p = dbData.pengurus;
-                            if (p.namaKetua !== undefined) data.namaKetua = p.namaKetua;
-                            if (p.fotoKetua !== undefined) data.fotoKetua = p.fotoKetua;
-                            if (p.namaSDI !== undefined) data.namaSDI = p.namaSDI;
-                            if (p.fotoSDI !== undefined) data.fotoSDI = p.fotoSDI;
-                            if (p.namaMI !== undefined) data.namaMI = p.namaMI;
-                            if (p.fotoMI !== undefined) data.fotoMI = p.fotoMI;
-                            if (p.namaMTs !== undefined) data.namaMTs = p.namaMTs;
-                            if (p.fotoMTs !== undefined) data.fotoMTs = p.fotoMTs;
-                            if (p.namaMA !== undefined) data.namaMA = p.namaMA;
-                            if (p.fotoMA !== undefined) data.fotoMA = p.fotoMA;
-                            if (p.namaMudir !== undefined) data.namaMudir = p.namaMudir;
-                            if (p.fotoMudir !== undefined) data.fotoMudir = p.fotoMudir;
-                        }
-
-                        localStorage.setItem('cmsData_profil', JSON.stringify(data));
-                    }
-                } catch (err) {
-                    console.warn('Gagal memuat profil awal dari Supabase:', err);
-                }
-            }
-
-            const setInput = (id, val, def = '') => {
-                const el = document.getElementById(id);
-                if (el) el.value = val !== undefined && val !== null ? val : def;
-            };
-
-            setInput('profilTitle', data.profilTitle, 'Profil Yayasan');
-            loadValueWithAlign('profilDesc', data.profilDesc, 'Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.');
-            loadValueWithAlign('sejarahText', data.sejarahText, '-');
-            setInput('strukturTitle', data.strukturTitle, 'Struktur Organisasi');
-            loadValueWithAlign('strukturDesc', data.strukturDesc, 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.');
-            setInput('namaKetua', data.namaKetua, '-');
-            setInput('namaSDI', data.namaSDI, '-');
-            setInput('namaMI', data.namaMI, '-');
-            setInput('namaMTs', data.namaMTs, '-');
-            setInput('namaMA', data.namaMA, '-');
-            setInput('namaMudir', data.namaMudir, '-');
+          const { data, error } = await withTimeout(
+            supa.from('profile_settings').select('*').eq('id', 1).maybeSingle(),
+            8000
+          );
+          if (!error && data) dbData = data;
         } catch (e) {
-            console.error('Error loading profil data:', e);
+          console.warn("[Kelola Profil] Supabase client SELECT error/timeout:", e);
         }
-    }
+      }
 
-    // 5. Simpan Data Profil
-    async function saveProfilData(e) {
-        if (e) e.preventDefault();
-
-        const btnSave = document.getElementById('btnSimpanProfil') ||
-            document.querySelector('button[type="submit"]') ||
-            Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Simpan Perubahan Profil'));
-        const originalBtnHtml = btnSave ? btnSave.innerHTML : '';
-
+      // Fallback via Native REST API jika supa belum menghasilkan data
+      if (!dbData) {
         try {
-            if (btnSave) {
-                btnSave.disabled = true;
-                btnSave.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/profile_settings?id=eq.1&select=*`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
             }
+          });
+          if (res.ok) {
+            const rows = await res.json();
+            if (rows && rows[0]) dbData = rows[0];
+          }
+        } catch (e) {}
+      }
 
-            const prevData = JSON.parse(localStorage.getItem('cmsData_profil') || '{}');
+      if (dbData) {
+        console.log("[Kelola Profil] Data profile_settings berhasil dimuat:", dbData);
+        if (dbData.banner_title || dbData.name) setVal('profilTitle', dbData.banner_title || dbData.name);
+        if (dbData.banner_desc) setSafeTextareaValue('profilDesc', dbData.banner_desc);
+        if (dbData.history) setSafeTextareaValue('sejarahText', dbData.history);
+        if (dbData.struktur_title) setVal('strukturTitle', dbData.struktur_title);
+        if (dbData.struktur_desc) setSafeTextareaValue('strukturDesc', dbData.struktur_desc);
 
-            const readFile = (inputId, prevVal) => {
-                return new Promise((resolve) => {
-                    const input = document.getElementById(inputId);
-                    if (input && input.getAttribute('data-hapus') === 'true') {
-                        resolve('');
-                        return;
-                    }
-                    if (input && input.files && input.files[0]) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => resolve(event.target.result);
-                        reader.onerror = () => resolve(prevVal || '');
-                        reader.readAsDataURL(input.files[0]);
-                    } else {
-                        resolve(prevVal || '');
-                    }
-                });
-            };
+        if (dbData.pengurus && typeof dbData.pengurus === 'object') {
+          const p = dbData.pengurus;
+          if (p.namaKetua) setVal('namaKetua', p.namaKetua);
+          if (p.namaSDI) setVal('namaSDI', p.namaSDI);
+          if (p.namaMI) setVal('namaMI', p.namaMI);
+          if (p.namaMTs) setVal('namaMTs', p.namaMTs);
+          if (p.namaMA) setVal('namaMA', p.namaMA);
+          if (p.namaMudir) setVal('namaMudir', p.namaMudir);
 
-            const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
-                readFile('fotoKetua', prevData.fotoKetua),
-                readFile('fotoSDI', prevData.fotoSDI),
-                readFile('fotoMI', prevData.fotoMI),
-                readFile('fotoMTs', prevData.fotoMTs),
-                readFile('fotoMA', prevData.fotoMA),
-                readFile('fotoMudir', prevData.fotoMudir)
-            ]);
-
-            // Kumpulkan seluruh nilai input terbaru dari form ke dalam objek (payload)
-            const payload = {
-                profilTitle: document.getElementById('profilTitle')?.value || 'Profil Yayasan',
-                profilDesc: getWrappedValue('profilDesc'),
-                sejarahText: getWrappedValue('sejarahText'),
-                strukturTitle: document.getElementById('strukturTitle')?.value || 'Struktur Organisasi',
-                strukturDesc: getWrappedValue('strukturDesc'),
-                namaKetua: document.getElementById('namaKetua')?.value || '-',
-                fotoKetua: fotoKetua,
-                namaSDI: document.getElementById('namaSDI')?.value || '-',
-                fotoSDI: fotoSDI,
-                namaMI: document.getElementById('namaMI')?.value || '-',
-                fotoMI: fotoMI,
-                namaMTs: document.getElementById('namaMTs')?.value || '-',
-                fotoMTs: fotoMTs,
-                namaMA: document.getElementById('namaMA')?.value || '-',
-                fotoMA: fotoMA,
-                namaMudir: document.getElementById('namaMudir')?.value || '-',
-                fotoMudir: fotoMudir
-            };
-
-            // Inisialisasi Supabase
-            const supa = getSupabase();
-            if (!supa) {
-                throw new Error("Koneksi Supabase belum siap atau client tidak termuat.");
-            }
-
-            // Eksekusi perintah update/upsert ke Supabase (tabel profile_settings, baris id: 1)
-            const supabasePayload = {
-                id: 1,
-                name: payload.profilTitle || 'Yayasan Nahjul Huda',
-                banner_title: payload.profilTitle || 'Profil Yayasan',
-                banner_desc: payload.profilDesc || '',
-                history: payload.sejarahText || '',
-                struktur_title: payload.strukturTitle || 'Struktur Organisasi',
-                struktur_desc: payload.strukturDesc || '',
-                pengurus: {
-                    namaKetua: payload.namaKetua, fotoKetua: payload.fotoKetua,
-                    namaSDI: payload.namaSDI, fotoSDI: payload.fotoSDI,
-                    namaMI: payload.namaMI, fotoMI: payload.fotoMI,
-                    namaMTs: payload.namaMTs, fotoMTs: payload.fotoMTs,
-                    namaMA: payload.namaMA, fotoMA: payload.fotoMA,
-                    namaMudir: payload.namaMudir, fotoMudir: payload.fotoMudir
-                },
-                updated_at: new Date().toISOString()
-            };
-
-            let { data, error } = await supa
-                .from('profile_settings')
-                .update(supabasePayload)
-                .eq('id', 1)
-                .select();
-
-            if (error || !data || data.length === 0) {
-                const upsertRes = await supa
-                    .from('profile_settings')
-                    .upsert(supabasePayload, { onConflict: 'id' })
-                    .select();
-                error = upsertRes.error;
-            }
-
-            // Validasi error: Jika ada error dari respons Supabase, paksa lempar error
-            if (error) throw error;
-
-            // SINKRONISASI UI & STORAGE: HANYA dieksekusi setelah Supabase berhasil 100%
-            localStorage.setItem('cmsData_profil', JSON.stringify(payload));
-
-            // Reset atribut hapus foto
-            ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.setAttribute('data-hapus', 'false');
-            });
-
-            alert("Data profil berhasil diperbarui di database publik!");
-            window.location.reload();
-        } catch (error) {
-            console.error("Supabase Error:", error);
-            alert("Gagal menyimpan ke server: " + error.message);
-            if (btnSave) {
-                btnSave.disabled = false;
-                btnSave.innerHTML = originalBtnHtml;
-            }
+          // Simpan foto di memori untuk keperluan fallback simpan
+          currentPengurusState = {
+            fotoKetua: p.fotoKetua || '',
+            fotoSDI: p.fotoSDI || '',
+            fotoMI: p.fotoMI || '',
+            fotoMTs: p.fotoMTs || '',
+            fotoMA: p.fotoMA || '',
+            fotoMudir: p.fotoMudir || ''
+          };
         }
+      }
+    } catch (e) {
+      console.warn("[Kelola Profil] Gagal memuat data Supabase:", e);
+    }
+  };
+
+  // 2. SIMPAN PROFIL 100% PURE SUPABASE
+  window.handleSimpanProfil = async function (e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
 
-    // Inisialisasi awal
-    loadProfilData();
+    if (isSaving) {
+      console.warn("[Kelola Profil] Proses simpan sedang berjalan, klik ganda diabaikan.");
+      return;
+    }
+    isSaving = true;
 
-    // Event listener tombol simpan
-    const btnSave = document.getElementById('btnSimpanProfil') ||
-        document.querySelector('button[type="submit"]') ||
-        Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Simpan Perubahan Profil'));
+    console.log("[Kelola Profil] === MEMULAI PROSES SIMPAN PROFIL ===");
 
-    if (btnSave) {
-        btnSave.addEventListener('click', saveProfilData);
+    const btnSaveProfil = document.getElementById('btnSimpanProfil');
+    if (btnSaveProfil) {
+      btnSaveProfil.disabled = true;
+      btnSaveProfil.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+    }
+
+    try {
+      // Helper membaca file gambar
+      const readFile = (inputId, prevVal) => {
+        return new Promise((resolve) => {
+          const input = document.getElementById(inputId);
+          if (input && input.getAttribute('data-hapus') === 'true') {
+            resolve('');
+            return;
+          }
+          if (input && input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (event) => resolve(event.target.result);
+            reader.onerror = () => resolve(prevVal || '');
+            reader.readAsDataURL(input.files[0]);
+          } else {
+            resolve(prevVal || '');
+          }
+        });
+      };
+
+      const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
+        readFile('fotoKetua', currentPengurusState.fotoKetua),
+        readFile('fotoSDI', currentPengurusState.fotoSDI),
+        readFile('fotoMI', currentPengurusState.fotoMI),
+        readFile('fotoMTs', currentPengurusState.fotoMTs),
+        readFile('fotoMA', currentPengurusState.fotoMA),
+        readFile('fotoMudir', currentPengurusState.fotoMudir)
+      ]);
+
+      const profilTitle = getVal('profilTitle', 'Profil Yayasan');
+      const profilDesc = getSafeTextareaValue('profilDesc');
+      const sejarahText = getSafeTextareaValue('sejarahText');
+      const strukturTitle = getVal('strukturTitle', 'Struktur Organisasi');
+      const strukturDesc = getSafeTextareaValue('strukturDesc');
+
+      const namaKetua = getVal('namaKetua', '-');
+      const namaSDI = getVal('namaSDI', '-');
+      const namaMI = getVal('namaMI', '-');
+      const namaMTs = getVal('namaMTs', '-');
+      const namaMA = getVal('namaMA', '-');
+      const namaMudir = getVal('namaMudir', '-');
+
+      const newPengurus = {
+        namaKetua, fotoKetua,
+        namaSDI, fotoSDI,
+        namaMI, fotoMI,
+        namaMTs, fotoMTs,
+        namaMA, fotoMA,
+        namaMudir, fotoMudir
+      };
+
+      const supabasePayload = {
+        id: 1,
+        name: profilTitle,
+        banner_title: profilTitle,
+        banner_desc: profilDesc,
+        history: sejarahText,
+        struktur_title: strukturTitle,
+        struktur_desc: strukturDesc,
+        pengurus: newPengurus,
+        updated_at: new Date().toISOString()
+      };
+
+      console.log("[Kelola Profil] Mengirim payload ke Supabase:", {
+        ...supabasePayload,
+        pengurus: { ...newPengurus, fotoKetua: fotoKetua ? `${fotoKetua.substring(0, 30)}... (${fotoKetua.length} chars)` : '' }
+      });
+
+      let saveSuccess = false;
+      const supa = getSupabaseClient();
+
+      if (supa) {
+        try {
+          const { error } = await withTimeout(
+            supa.from('profile_settings').upsert(supabasePayload, { onConflict: 'id' }),
+            15000,
+            "Timeout saat menyimpan profile_settings"
+          );
+          if (error) throw error;
+          saveSuccess = true;
+        } catch (clientErr) {
+          console.warn("[Kelola Profil] Supabase client gagal, mencoba REST fallback:", clientErr);
+        }
+      }
+
+      if (!saveSuccess) {
+        console.log("[Kelola Profil] Menjalankan REST Upsert langsung...");
+        await withTimeout(restUpsert('profile_settings', supabasePayload), 15000, "REST timeout profile_settings");
+        saveSuccess = true;
+      }
+
+      // Update memory state
+      currentPengurusState = newPengurus;
+
+      // Bersihkan attribute data-hapus dan reset input file
+      ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.setAttribute('data-hapus', 'false');
+          el.value = '';
+        }
+      });
+
+      try {
+        localStorage.removeItem('cmsData_profil');
+      } catch (e) {}
+
+      console.log("[Kelola Profil] === BERHASIL DISIMPAN KE SUPABASE ===");
+      alert("Alhamdulillah! Data Profil & Struktur Organisasi BERHASIL DISIMPAN secara online ke database Supabase.\nPerubahan sudah aktif di semua perangkat.");
+    } catch (error) {
+      console.error("[Kelola Profil] GAGAL menyimpan ke Supabase:", error);
+      let errMsg = error?.message || String(error);
+      if (error?.code === '42501' || errMsg.toLowerCase().includes('row-level security') || errMsg.toLowerCase().includes('rls')) {
+        errMsg += "\n\n(Akses ditolak oleh RLS di Supabase. Jalankan perintah: ALTER TABLE profile_settings DISABLE ROW LEVEL SECURITY;)";
+      }
+      alert("Gagal menyimpan ke database Supabase:\n" + errMsg);
+    } finally {
+      console.log("[Kelola Profil] Mengembalikan state tombol (finally block)...");
+      isSaving = false;
+      resetButtonState();
+    }
+  };
+
+  function initKelolaProfil() {
+    console.log("[Kelola Profil] Menjalankan initKelolaProfil()...");
+    window.loadProfilData();
+
+    const btnSaveProfil = document.getElementById('btnSimpanProfil');
+    if (btnSaveProfil && !btnSaveProfil.dataset.bound) {
+      btnSaveProfil.dataset.bound = 'true';
+      btnSaveProfil.addEventListener('click', window.handleSimpanProfil);
     }
 
     const formProfil = document.getElementById('formProfil');
-    if (formProfil) {
-        formProfil.addEventListener('submit', saveProfilData);
+    if (formProfil && !formProfil.dataset.bound) {
+      formProfil.dataset.bound = 'true';
+      formProfil.addEventListener('submit', window.handleSimpanProfil);
     }
-});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initKelolaProfil);
+  } else {
+    initKelolaProfil();
+  }
+})();

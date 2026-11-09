@@ -9,32 +9,31 @@ function formatContentHtml(str) {
 }
 
 export const renderProfile = (profile) => {
-    let cmsData = null;
     try {
-        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_profil') : null;
-        if (stored) cmsData = JSON.parse(stored);
-    } catch (e) {
-        console.error('Error reading cmsData_profil in renderProfile:', e);
-    }
+        if (typeof localStorage !== 'undefined') localStorage.removeItem('cmsData_profil');
+    } catch (e) {}
 
-    const profilTitle = cmsData?.profilTitle || 'Profil Yayasan';
-    const profilDesc = cmsData?.profilDesc || 'Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.';
-    const sejarahText = cmsData?.sejarahText || (profile?.history ? profile.history.replace(/\n/g, '<br>') : '-');
+    const pengurus = (profile && typeof profile.pengurus === 'object' && profile.pengurus !== null) ? profile.pengurus : {};
 
-    const strukturTitle = cmsData?.strukturTitle || 'Struktur Organisasi';
-    const strukturDesc = cmsData?.strukturDesc || 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.';
-    const namaKetua = cmsData?.namaKetua || '-';
-    const fotoKetua = cmsData?.fotoKetua || '';
-    const namaSDI = cmsData?.namaSDI || '-';
-    const fotoSDI = cmsData?.fotoSDI || '';
-    const namaMI = cmsData?.namaMI || '-';
-    const fotoMI = cmsData?.fotoMI || '';
-    const namaMTs = cmsData?.namaMTs || '-';
-    const fotoMTs = cmsData?.fotoMTs || '';
-    const namaMA = cmsData?.namaMA || '-';
-    const fotoMA = cmsData?.fotoMA || '';
-    const namaMudir = cmsData?.namaMudir || '-';
-    const fotoMudir = cmsData?.fotoMudir || '';
+    const profilTitle = profile?.banner_title || profile?.name || 'Profil Yayasan';
+    const profilDesc = profile?.banner_desc || 'Mengenal lebih dekat sejarah, visi, misi, target lulusan, dan struktur kepengurusan Yayasan Nahjul Huda.';
+    const sejarahText = profile?.history ? profile.history.replace(/\n/g, '<br>') : '-';
+
+    const strukturTitle = profile?.struktur_title || 'Struktur Organisasi';
+    const strukturDesc = profile?.struktur_desc || 'Struktur kepengurusan Yayasan Nahjul Huda berdedikasi tinggi untuk memajukan lembaga tercinta.';
+
+    const namaKetua = pengurus.namaKetua || '-';
+    const fotoKetua = pengurus.fotoKetua || '';
+    const namaSDI = pengurus.namaSDI || '-';
+    const fotoSDI = pengurus.fotoSDI || '';
+    const namaMI = pengurus.namaMI || '-';
+    const fotoMI = pengurus.fotoMI || '';
+    const namaMTs = pengurus.namaMTs || '-';
+    const fotoMTs = pengurus.fotoMTs || '';
+    const namaMA = pengurus.namaMA || '-';
+    const fotoMA = pengurus.fotoMA || '';
+    const namaMudir = pengurus.namaMudir || '-';
+    const fotoMudir = pengurus.fotoMudir || '';
 
     return `
       <!-- Header Profile -->

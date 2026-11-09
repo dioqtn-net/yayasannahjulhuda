@@ -177,25 +177,35 @@ export const api = {
 
     async getProfile() {
         let p = fallbackData.profile;
-        if (supabase) {
-            const { data, error } = await supabase.from('profile_settings').select('*').single();
-            if (error && error.code !== 'PGRST116') console.error(error);
-            if (data) p = data;
-        } else {
-            await delay(300);
+
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/profile_settings?id=eq.1&select=*', {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            });
+            if (res.ok) {
+                const rows = await res.json();
+                if (rows && rows[0]) {
+                    p = { ...p, ...rows[0] };
+                    return p;
+                }
+            }
+        } catch(e) {
+            console.warn('[api.getProfile] REST fallback error:', e);
         }
-        return {
-            ...p,
-            id: p.id || 1,
-            name: p.name || 'Yayasan Nahjul Huda',
-            history: p.history || '-',
-            vision_mission: p.vision_mission || '-',
-            address: p.address || '-',
-            phone: p.phone || '-',
-            telephone: p.telephone || '-',
-            email: p.email || '-',
-            operational_hours: p.operational_hours || '-'
-        };
+
+        if (supabase) {
+            try {
+                const { data, error } = await supabase.from('profile_settings').select('*').single();
+                if (!error && data) p = { ...p, ...data };
+            } catch(e) {}
+        }
+
+        return p;
     },
 
     async updateProfile(profile) {

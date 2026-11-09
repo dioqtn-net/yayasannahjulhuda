@@ -431,117 +431,109 @@
     window.renderTextOrList = renderTextOrList;
 
     // Sinkronisasi CMS Data Profil dari localStorage
-    function initProfil() {
+    // Helper fetch langsung ke Supabase REST API (Tanpa ketergantungan CDN / 100% Bebas LocalStorage)
+    async function fetchFromSupabaseRest(endpoint) {
+      var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+      var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
       try {
-        const saved = localStorage.getItem('cmsData_profil');
-        if (saved) {
-          const data = JSON.parse(saved);
-          if (data.profilTitle) {
-            const el = document.getElementById('publicProfilTitle');
-            if (el) el.textContent = data.profilTitle;
+        var res = await fetch(SUPABASE_URL + '/rest/v1/' + endpoint, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
           }
-          if (data.profilDesc) {
-            const el = document.getElementById('publicProfilDesc');
-            if (el) el.innerHTML = data.profilDesc;
-          }
-          if (data.sejarahText) {
-            const el = document.getElementById('publicSejarahText');
-            if (el) el.innerHTML = data.sejarahText;
-          }
-          if (data.strukturTitle) {
-            const el = document.getElementById('publicStrukturTitle');
-            if (el) el.textContent = data.strukturTitle;
-          }
-          if (data.strukturDesc) {
-            const el = document.getElementById('publicStrukturDesc');
-            if (el) el.innerHTML = data.strukturDesc;
-          }
-
-          const applyPerson = (role, photo, name) => {
-            const imgEl = document.getElementById(`publicFoto${role}`);
-            const placeholderEl = document.getElementById(`publicFoto${role}Placeholder`);
-            const nameEl = document.getElementById(`publicNama${role}`);
-            if (nameEl) {
-              nameEl.textContent = name || '-';
-            }
-            if (photo && typeof photo === 'string' && photo.trim() !== '') {
-              if (imgEl) {
-                imgEl.src = photo;
-                imgEl.classList.remove('hidden');
-              }
-              if (placeholderEl) {
-                placeholderEl.classList.add('hidden');
-              }
-            } else {
-              if (imgEl) {
-                imgEl.removeAttribute('src');
-                imgEl.classList.add('hidden');
-              }
-              if (placeholderEl) {
-                placeholderEl.classList.remove('hidden');
-              }
-            }
-          };
-
-          applyPerson('Ketua', data.fotoKetua, data.namaKetua);
-          applyPerson('SDI', data.fotoSDI, data.namaSDI);
-          applyPerson('MI', data.fotoMI, data.namaMI);
-          applyPerson('MTs', data.fotoMTs, data.namaMTs);
-          applyPerson('MA', data.fotoMA, data.namaMA);
-          applyPerson('Mudir', data.fotoMudir, data.namaMudir);
+        });
+        if (!res.ok) {
+          console.warn('[Supabase REST Profil] Response status ' + res.status + ' for ' + endpoint);
+          return null;
         }
-      } catch (e) {
-        console.error('Error loading cmsData_profil:', e);
+        return await res.json();
+      } catch(e) {
+        console.warn('[Supabase REST Profil] Gagal fetch ' + endpoint, e);
+        return null;
       }
+    }
 
-      // Muat seluruh data Profil & Struktur terbaru langsung dari Supabase
-      (async function loadProfilFromSupabase() {
-        try {
-          var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-          var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-          var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-          if (supa) {
-            var { data, error } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
-            if (!error && data) {
-              if (data.banner_title || data.name) {
-                var elTitle = document.getElementById('publicProfilTitle');
-                if (elTitle) elTitle.textContent = data.banner_title || data.name;
-              }
-              if (data.banner_desc) {
-                var elDesc = document.getElementById('publicProfilDesc');
-                if (elDesc) elDesc.innerHTML = data.banner_desc;
-              }
-              if (data.history) {
-                var elSejarah = document.getElementById('publicSejarahText');
-                if (elSejarah) elSejarah.innerHTML = data.history;
-              }
-              if (data.struktur_title) {
-                var elStrukturTitle = document.getElementById('publicStrukturTitle');
-                if (elStrukturTitle) elStrukturTitle.textContent = data.struktur_title;
-              }
-              if (data.struktur_desc) {
-                var elStrukturDesc = document.getElementById('publicStrukturDesc');
-                if (elStrukturDesc) elStrukturDesc.innerHTML = data.struktur_desc;
-              }
-
-              if (data.pengurus && typeof data.pengurus === 'object') {
-                var p = data.pengurus;
-                applyPerson('Ketua', p.fotoKetua, p.namaKetua);
-                applyPerson('SDI', p.fotoSDI, p.namaSDI);
-                applyPerson('MI', p.fotoMI, p.namaMI);
-                applyPerson('MTs', p.fotoMTs, p.namaMTs);
-                applyPerson('MA', p.fotoMA, p.namaMA);
-                applyPerson('Mudir', p.fotoMudir, p.namaMudir);
-              }
-            }
-          }
-        } catch (err) {
-          console.warn('Supabase fetch profil:', err);
+    const applyPerson = (role, photo, name) => {
+      const imgEl = document.getElementById(`publicFoto${role}`);
+      const placeholderEl = document.getElementById(`publicFoto${role}Placeholder`);
+      const nameEl = document.getElementById(`publicNama${role}`);
+      if (nameEl) {
+        nameEl.textContent = name || '-';
+      }
+      if (photo && typeof photo === 'string' && photo.trim() !== '') {
+        if (imgEl) {
+          imgEl.src = photo;
+          imgEl.classList.remove('hidden');
         }
-      })();
+        if (placeholderEl) {
+          placeholderEl.classList.add('hidden');
+        }
+      } else {
+        if (imgEl) {
+          imgEl.removeAttribute('src');
+          imgEl.classList.add('hidden');
+        }
+        if (placeholderEl) {
+          placeholderEl.classList.remove('hidden');
+        }
+      }
+    };
+
+    // Muat data Profil 100% dari Supabase secara online
+    async function initProfil() {
+      console.log("[Publik Profil] Memulai penarikan data Profil dari Supabase...");
+      try {
+        localStorage.removeItem('cmsData_profil');
+      } catch(e) {}
+
+      try {
+        var rows = await fetchFromSupabaseRest('profile_settings?id=eq.1&select=*');
+        var data = rows && rows[0] ? rows[0] : null;
+
+        if (data) {
+          console.log("[Publik Profil] Data profile_settings berhasil diterima:", data);
+
+          if (data.banner_title || data.name) {
+            var elTitle = document.getElementById('publicProfilTitle');
+            if (elTitle) elTitle.textContent = data.banner_title || data.name;
+          }
+          if (data.banner_desc) {
+            var elDesc = document.getElementById('publicProfilDesc');
+            if (elDesc) elDesc.innerHTML = data.banner_desc;
+          }
+          if (data.history) {
+            var elSejarah = document.getElementById('publicSejarahText');
+            if (elSejarah) elSejarah.innerHTML = data.history;
+          }
+          if (data.struktur_title) {
+            var elStrukturTitle = document.getElementById('publicStrukturTitle');
+            if (elStrukturTitle) elStrukturTitle.textContent = data.struktur_title;
+          }
+          if (data.struktur_desc) {
+            var elStrukturDesc = document.getElementById('publicStrukturDesc');
+            if (elStrukturDesc) elStrukturDesc.innerHTML = data.struktur_desc;
+          }
+
+          if (data.pengurus && typeof data.pengurus === 'object') {
+            var p = data.pengurus;
+            applyPerson('Ketua', p.fotoKetua, p.namaKetua);
+            applyPerson('SDI', p.fotoSDI, p.namaSDI);
+            applyPerson('MI', p.fotoMI, p.namaMI);
+            applyPerson('MTs', p.fotoMTs, p.namaMTs);
+            applyPerson('MA', p.fotoMA, p.namaMA);
+            applyPerson('Mudir', p.fotoMudir, p.namaMudir);
+            console.log("[Publik Profil] Struktur Organisasi berhasil diperbarui dengan data Supabase.");
+          }
+        }
+      } catch (err) {
+        console.error('[Publik Profil] Error fetch profil:', err);
+      }
     }
 
     document.addEventListener('DOMContentLoaded', initProfil);
+    initProfil();
     document.addEventListener('turbolinks:load', initProfil);
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
       initProfil();
