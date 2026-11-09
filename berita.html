@@ -19,6 +19,9 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/src/style.css?v=20261106_03">
+
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css?v=20261106_03" />
     <style>
       .custom-scrollbar::-webkit-scrollbar {
         width: 8px;
@@ -433,7 +436,9 @@
             let mediaMarkup = '';
             if (images.length > 1) {
               const imgsHtml = images.map((img, i) => `
-                <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="w-full h-48 object-cover object-center shrink-0 snap-center cursor-pointer hover:brightness-90 transition">
+                <a href="${img}" class="glightbox block shrink-0 snap-center w-full h-full cursor-zoom-in" data-gallery="gallery-berita">
+                  <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="w-full h-48 object-cover object-center hover:scale-105 transition-transform duration-300">
+                </a>
               `).join('');
 
               mediaMarkup = `
@@ -447,7 +452,7 @@
                   <button type="button" aria-label="Media berikutnya" onclick="this.parentElement.querySelector('.overflow-x-auto').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm shadow-md transition z-10 focus:outline-none cursor-pointer">
                     <i class="fas fa-chevron-right"></i>
                   </button>
-                  <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow">
+                  <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-sm text-emerald-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-600/40 shadow pointer-events-none">
                     ${images.length} Foto
                   </div>
                 </div>
@@ -455,7 +460,9 @@
             } else {
               mediaMarkup = `
                 <div class="relative w-full h-48 mb-4 bg-gray-100 rounded-t-2xl border-b border-gray-200 overflow-hidden">
-                  <img src="${images[0]}" alt="${escapeHtml(item.judul)}" class="w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-300 cursor-pointer hover:brightness-90">
+                  <a href="${images[0]}" class="glightbox block w-full h-full cursor-zoom-in" data-gallery="gallery-berita">
+                    <img src="${images[0]}" alt="${escapeHtml(item.judul)}" class="w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                  </a>
                 </div>
               `;
             }
@@ -469,7 +476,7 @@
                       <i class="far fa-calendar-alt text-emerald-600"></i>
                       <span class="text-xs text-slate-500 font-medium">${escapeHtml(tgl)}</span>
                     </div>
-                    <h3 class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2">
+                    <h3 onclick="openNewsModalById('${item.id}')" class="news-title font-playfair font-bold text-base text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug mb-2 line-clamp-2 cursor-pointer">
                       ${escapeHtml(item.judul)}
                     </h3>
                     <div class="news-desc text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
@@ -489,13 +496,16 @@
             `;
           }).join('');
 
-          // Reattach media click listeners for universal lightbox
-          container.querySelectorAll('img, video').forEach((media) => {
-            media.addEventListener('click', (e) => {
-              e.stopPropagation();
-              window.openMediaModal(media);
-            });
-          });
+          if (window.GLightbox) {
+            try {
+              window.GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: true
+              });
+            } catch (e) {}
+          }
         }
 
         // Switch Jenjang Filter
@@ -562,24 +572,36 @@
           if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
             return trimmed;
           }
-          return `<div class="text-justify">${trimmed}</div>`;
+          return `<div class="text-justify whitespace-pre-line leading-relaxed">${trimmed}</div>`;
         }
 
         window.openNewsModalById = function(id) {
-          const list = currentBeritaData.length > 0 ? currentBeritaData : getBeritaList();
-          const item = list.find(b => b.id === id);
-          if (!item) return;
+          const list = (currentBeritaData && currentBeritaData.length > 0) ? currentBeritaData : getBeritaList();
+          const item = list.find(b => String(b.id) === String(id));
+          if (!item) {
+            console.warn('[openNewsModalById] Berita tidak ditemukan dengan ID:', id);
+            return;
+          }
 
           const modal = document.getElementById('newsDetailModal');
           if (!modal) return;
 
           const tgl = item.tanggalFormatted || formatIndoDate(item.tanggal);
-          document.getElementById('modalNewsTitle').textContent = item.judul;
-          document.getElementById('modalNewsDate').textContent = tgl;
-          document.getElementById('modalNewsBadge').textContent = item.jenjang;
-          document.getElementById('modalNewsBadge').className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm';
+          const titleEl = document.getElementById('modalNewsTitle');
+          const dateEl = document.getElementById('modalNewsDate');
+          const badgeEl = document.getElementById('modalNewsBadge');
+          const bodyEl = document.getElementById('modalNewsBody');
 
-          document.getElementById('modalNewsBody').innerHTML = item.deskripsiLengkap || item.deskripsiSingkat;
+          if (titleEl) titleEl.textContent = item.judul || '-';
+          if (dateEl) dateEl.textContent = tgl;
+          if (badgeEl) {
+            badgeEl.textContent = item.jenjang || 'Semua';
+            badgeEl.className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm';
+          }
+
+          if (bodyEl) {
+            bodyEl.innerHTML = formatContentHtml(item.deskripsiLengkap || item.deskripsiSingkat);
+          }
 
           // Render Slider Images in Modal
           const sliderContainer = document.getElementById('modalNewsSliderContainer');
@@ -590,18 +612,11 @@
           const images = (item.images && item.images.length > 0) ? item.images : ['/media/background/wallpaper_yayasan.jpg'];
 
           if (slider) {
-            slider.innerHTML = '';
             slider.innerHTML = images.map((img, i) => `
-              <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="max-h-96 w-full object-contain shrink-0 snap-center cursor-pointer hover:brightness-95 transition">
+              <a href="${img}" class="glightbox block max-h-96 w-full shrink-0 snap-center cursor-zoom-in" data-gallery="gallery-modal-${item.id}">
+                <img src="${img}" alt="${escapeHtml(item.judul)} ${i + 1}" class="max-h-96 w-full object-contain shrink-0 snap-center hover:brightness-95 transition">
+              </a>
             `).join('');
-
-            // Attach click listeners to modal slider images for lightbox
-            slider.querySelectorAll('img').forEach((img) => {
-              img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.openMediaModal(img);
-              });
-            });
           }
 
           if (sliderContainer) {
@@ -620,6 +635,17 @@
 
           modal.classList.remove('hidden');
           document.body.style.overflow = 'hidden';
+
+          if (window.GLightbox) {
+            try {
+              window.GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: true
+              });
+            } catch (e) {}
+          }
         };
 
         window.closeNewsModal = function() {
@@ -768,8 +794,22 @@
       const closeMediaModalBtn = document.getElementById('closeMediaModalBtn');
 
       window.openMediaModal = function(element) {
+        if (!element) return;
+        const tagName = (element.tagName || '').toLowerCase();
+        const src = element.src || element.getAttribute('src') || element.getAttribute('href');
+        if (typeof GLightbox !== 'undefined' && src) {
+          try {
+            const singleLb = GLightbox({
+              elements: [{
+                href: src,
+                type: tagName === 'video' ? 'video' : 'image'
+              }]
+            });
+            singleLb.open();
+            return;
+          } catch (e) {}
+        }
         if (!mediaModal) return;
-        const tagName = element.tagName.toLowerCase();
         if (tagName === 'img') {
           if (modalVideo) {
             modalVideo.pause();
@@ -853,6 +893,23 @@
         <video id="modalVideo" controls class="hidden max-w-full max-h-[85vh] rounded-lg shadow-2xl"></video>
       </div>
     </div>
+    <!-- GLightbox CDN & Initialization -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js?v=20261106_03"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof GLightbox !== 'undefined') {
+          try {
+            GLightbox({ 
+              selector: '.glightbox', 
+              touchNavigation: true, 
+              loop: true, 
+              autoplayVideos: true 
+            });
+          } catch(e) {}
+        }
+      });
+    </script>
+
     <!-- Service Worker Killer (Anti-Cache Global) -->
   <script>
     if ('serviceWorker' in navigator) {
