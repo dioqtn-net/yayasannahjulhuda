@@ -1,11 +1,7 @@
 export const renderPPDB = (ppdb) => {
     const isBuka = ppdb?.status !== 'TUTUP';
 
-    let cmsPPDB = null;
-    try {
-        const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_ppdb') : null;
-        if (raw) cmsPPDB = JSON.parse(raw);
-    } catch(e) {}
+    let cmsPPDB = (ppdb && ppdb.contact_person && typeof ppdb.contact_person === 'object') ? ppdb.contact_person : null;
     const headerTitle = cmsPPDB?.header_title || 'Penerimaan Peserta Didik Baru';
     const headerSubtitle = cmsPPDB?.header_subtitle || 'Papan Informasi Resmi Pendaftaran Peserta Didik Baru Yayasan Nahjul Huda';
 

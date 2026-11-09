@@ -389,11 +389,9 @@
         ];
 
         function getBeritaList() {
-          const raw = localStorage.getItem(STORAGE_KEY_BERITA);
-          if (!raw) {
-            localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(defaultBerita));
-            return defaultBerita;
-          }
+          if (window.currentBeritaData && Array.isArray(window.currentBeritaData) && window.currentBeritaData.length > 0) return window.currentBeritaData;
+          return defaultBerita;
+        }
           try {
             const parsed = JSON.parse(raw);
             if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -687,7 +685,7 @@
         // Initialize Banner & Content on Load
         function initBerita() {
           // 1. Sync Banner
-          const savedBanner = localStorage.getItem(STORAGE_KEY_BANNER);
+          const savedBanner = null;
           if (savedBanner) {
             try {
               const bData = JSON.parse(savedBanner);
@@ -706,16 +704,28 @@
           // 3. Default to active 'Semua'
           switchNewsJenjang('Semua');
 
-          // 4. Fetch live news from Supabase
+          // 4. Fetch live news 100% Pure Supabase Native REST
+          try {
+            localStorage.removeItem('cmsData_listBerita');
+            localStorage.removeItem('cmsData_beritaBanner');
+          } catch(e) {}
+
           (async function fetchBeritaFromSupabase() {
             try {
-              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-              if (supa) {
-                var { data: dbNews, error } = await supa.from('news_posts').select('*').order('date', { ascending: false });
-                if (!error && dbNews && dbNews.length > 0) {
-                  var mapped = dbNews.map(n => ({
+              const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/news_posts?select=*&order=id.desc&t=${Date.now()}`, {
+                headers: {
+                  'apikey': SUPABASE_ANON_KEY,
+                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                  'Cache-Control': 'no-cache, no-store, must-revalidate',
+                  'Pragma': 'no-cache'
+                }
+              });
+              if (res.ok) {
+                const dbNews = await res.json();
+                if (dbNews && dbNews.length > 0) {
+                  const mapped = dbNews.map(n => ({
                     id: n.id,
                     judul: n.title || '-',
                     tanggal: n.date || '',
@@ -726,13 +736,13 @@
                       ? n.images
                       : (n.image_url ? [n.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
                   }));
-                  localStorage.setItem(STORAGE_KEY_BERITA, JSON.stringify(mapped));
+                  currentBeritaData = mapped;
                   renderBeritaCards();
                   switchNewsJenjang(activeJenjang || 'Semua');
                 }
               }
             } catch(err) {
-              console.warn('[berita.html] Supabase fetch error:', err);
+              console.error('[berita.html] REST fetch error:', err);
             }
           })();
         }

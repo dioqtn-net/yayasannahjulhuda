@@ -1359,9 +1359,7 @@
       };
 
       function getPPDBData() {
-        const raw = localStorage.getItem(KEY_PPDB);
-        if (!raw) {
-          localStorage.setItem(KEY_PPDB, JSON.stringify(defaultPPDB));
+          if (window.currentPPDBData) return window.currentPPDBData;
           return defaultPPDB;
         }
         try {
@@ -1532,17 +1530,7 @@
               var { data: dbPPDB, error } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
               if (!error && dbPPDB) {
                 var currentData = {};
-                var raw = localStorage.getItem(KEY_PPDB);
-                if (raw) {
-                  try { currentData = JSON.parse(raw); } catch(e) {}
-                }
-                if (dbPPDB.contact_person && typeof dbPPDB.contact_person === 'object') {
-                  currentData = { ...currentData, ...dbPPDB.contact_person };
-                }
-                if (dbPPDB.greeting_title) currentData.header_title = dbPPDB.greeting_title;
-                if (dbPPDB.greeting_desc) currentData.header_subtitle = dbPPDB.greeting_desc;
-
-                localStorage.setItem(KEY_PPDB, JSON.stringify(currentData));
+                // 100% Pure Supabase - No localStorage
                 renderPPDBFront();
               }
             }

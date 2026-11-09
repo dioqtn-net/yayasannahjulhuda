@@ -604,8 +604,13 @@
 
       window.renderTextOrList = renderTextOrList;
 
-      // Synchronize Program Content from Supabase (with fallback to localStorage)
+      // Synchronize Program Content 100% Pure Supabase Native REST
       async function syncProgramContent() {
+        console.log('[Publik Program] Memulai penarikan data dari Supabase education_units...');
+        try {
+          localStorage.removeItem('cmsData_program');
+        } catch(e) {}
+
         const formatAkreditasi = (val) => {
           if (!val) return 'Akreditasi -';
           const clean = val.trim();
@@ -616,27 +621,6 @@
 
         const applyDataToDOM = (data) => {
           if (!data) return;
-          // 1. Banner Utama
-          if (data.progBannerTitle && data.progBannerTitle.trim()) {
-            const el = document.getElementById('publicProgBannerTitle');
-            if (el) el.textContent = data.progBannerTitle;
-          }
-          if (data.progBannerDesc && data.progBannerDesc.trim()) {
-            const el = document.getElementById('publicProgBannerDesc');
-            if (el) el.innerHTML = data.progBannerDesc;
-          }
-
-          // Generic containers jika ada di DOM
-          const genericVisi = document.getElementById('container-visi');
-          if (genericVisi && data.visi) {
-            renderTextOrList(genericVisi, data.visi, false);
-          }
-          const genericMisi = document.getElementById('container-misi');
-          if (genericMisi && data.misi) {
-            renderTextOrList(genericMisi, data.misi, true);
-          }
-
-          // 2. Data Jenjang Pendidikan
           const units = [
             { key: 'sdi', prefix: 'Sdi' },
             { key: 'mi', prefix: 'Mi' },
@@ -646,14 +630,12 @@
           ];
 
           units.forEach((u) => {
-            // Status Akreditasi
             const akreditasiVal = data[u.key + 'Akreditasi'];
             if (akreditasiVal !== undefined && akreditasiVal !== null) {
               const el = document.getElementById(`public${u.prefix}AkreditasiText`);
               if (el) el.textContent = formatAkreditasi(akreditasiVal);
             }
 
-            // Text fields
             const mapFields = [
               { key: 'Desc', id: `public${u.prefix}Desc` },
               { key: 'Kurikulum', id: `public${u.prefix}Kurikulum` },
@@ -670,13 +652,11 @@
               }
             });
 
-            // 1. Render VISI (Bukan List)
             const elVisi = document.getElementById(`public${u.prefix}Visi`);
             if (elVisi && data[u.key + 'Visi']) {
               renderTextOrList(elVisi, data[u.key + 'Visi'], false);
             }
 
-            // 2. Render MISI (Wajib List = true)
             const elMisi = document.getElementById(`public${u.prefix}Misi`);
             if (elMisi && data[u.key + 'Misi']) {
               renderTextOrList(elMisi, data[u.key + 'Misi'], true);
@@ -684,22 +664,20 @@
           });
         };
 
-        // A. Cepat: Muat dari localStorage terlebih dahulu
         try {
-          const savedProgData = localStorage.getItem('cmsData_program');
-          if (savedProgData) {
-            applyDataToDOM(JSON.parse(savedProgData));
-          }
-        } catch(e) {}
-
-        // B. Sinkronisasi Online: Muat dari Supabase education_units
-        try {
-          var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-          var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-          var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-          if (supa) {
-            const { data: dbUnits, error: errUnits } = await supa.from('education_units').select('*').order('id');
-            if (!errUnits && dbUnits && dbUnits.length > 0) {
+          const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+          const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc&t=${Date.now()}`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache'
+            }
+          });
+          if (res.ok) {
+            const dbUnits = await res.json();
+            if (dbUnits && dbUnits.length > 0) {
               const mapped = {};
               const keyMap = { 1: 'sdi', 2: 'mi', 3: 'mts', 4: 'ma', 5: 'ponpes' };
               dbUnits.forEach(u => {
@@ -708,32 +686,19 @@
                   mapped[k + 'Akreditasi'] = u.accreditation || '-';
                   mapped[k + 'Desc'] = u.description || '-';
                   mapped[k + 'Kurikulum'] = u.curriculum || '-';
-                  mapped[k + 'Unggulan'] = u.featured_programs || u.featured_program || '-';
+                  mapped[k + 'Unggulan'] = u.featured_programs || '-';
                   mapped[k + 'Ekskul'] = u.extracurricular || '-';
                   mapped[k + 'Fasilitas'] = u.facilities || '-';
                   mapped[k + 'Visi'] = u.vision || '-';
                   mapped[k + 'Misi'] = u.mission || '-';
                 }
               });
-
-              // Cek juga banner di profile_settings jika ada
-              try {
-                const { data: profData } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
-                if (profData) {
-                  if (profData.banner_title) mapped.progBannerTitle = profData.banner_title;
-                  if (profData.banner_desc) mapped.progBannerDesc = profData.banner_desc;
-                }
-              } catch(e) {}
-
-              // Gabungkan dengan cache lokal & terapkan ke DOM
-              const localProg = JSON.parse(localStorage.getItem('cmsData_program') || '{}');
-              const finalData = { ...localProg, ...mapped };
-              localStorage.setItem('cmsData_program', JSON.stringify(finalData));
-              applyDataToDOM(finalData);
+              applyDataToDOM(mapped);
+              console.log('[Publik Program] Berhasil memperbarui tampilan dari Supabase education_units.');
             }
           }
-        } catch(e) {
-          console.warn('[program.html] Supabase fetch error, fallback active:', e);
+        } catch(err) {
+          console.error('[Publik Program] Error fetch education_units:', err);
         }
       }
 

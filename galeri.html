@@ -669,11 +669,10 @@
         ];
 
         function getItems(key, defaults) {
-          const raw = localStorage.getItem(key);
-          if (!raw) {
-            localStorage.setItem(key, JSON.stringify(defaults));
-            return defaults;
-          }
+          if (key === KEY_ESKUL && window.allEskulList) return window.allEskulList;
+          if (key === KEY_KEGIATAN && window.allKegiatanList) return window.allKegiatanList;
+          return defaults;
+        }
           try {
             const parsed = JSON.parse(raw);
             return Array.isArray(parsed) && parsed.length > 0 ? parsed : defaults;
@@ -756,7 +755,7 @@
         }
 
         function syncBanner() {
-          const raw = localStorage.getItem(KEY_BANNER);
+          const raw = null;
           if (raw) {
             try {
               const b = JSON.parse(raw);
@@ -849,40 +848,55 @@
           syncBanner();
           syncDynamicCards();
 
-          // Fetch live galleries from Supabase
+          // Fetch live galleries 100% Pure Supabase REST API
+          try {
+            localStorage.removeItem(KEY_ESKUL);
+            localStorage.removeItem(KEY_KEGIATAN);
+            localStorage.removeItem(KEY_BANNER);
+          } catch(e) {}
+
           (async function fetchGalleriesFromSupabase() {
             try {
-              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-              if (supa) {
-                var { data: dbData, error } = await supa.from('galleries').select('*').order('created_at', { ascending: false });
-                if (!error && dbData && dbData.length > 0) {
-                  var eskulArr = [];
-                  var kegArr = [];
+              const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/galleries?select=*&order=id.desc&t=${Date.now()}`, {
+                headers: {
+                  'apikey': SUPABASE_ANON_KEY,
+                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                  'Cache-Control': 'no-cache, no-store, must-revalidate',
+                  'Pragma': 'no-cache'
+                }
+              });
+              if (res.ok) {
+                const dbData = await res.json();
+                if (dbData && dbData.length > 0) {
+                  const eskulArr = [];
+                  const kegArr = [];
                   dbData.forEach(item => {
-                    var formatted = {
+                    const formatted = {
                       id: item.id,
                       judul: item.title || '-',
                       jenjang: item.jenjang || 'Semua',
-                      tanggal: item.event_date || (item.created_at ? item.created_at.split('T')[0] : ''),
+                      tanggal: item.created_at ? item.created_at.split('T')[0] : '',
                       deskripsi: item.description || '-',
                       media: item.image_url || '/media/background/wallpaper_yayasan.jpg'
                     };
-                    if (item.category === 'ekskul') {
+                    const cat = (item.category || '').toLowerCase();
+                    if (cat.includes('eskul') || cat.includes('ekstrakurikuler')) {
                       eskulArr.push(formatted);
                     } else {
                       kegArr.push(formatted);
                     }
                   });
 
-                  if (eskulArr.length > 0) localStorage.setItem(KEY_ESKUL, JSON.stringify(eskulArr));
-                  if (kegArr.length > 0) localStorage.setItem(KEY_KEGIATAN, JSON.stringify(kegArr));
+                  if (eskulArr.length > 0) window.allEskulList = eskulArr;
+                  if (kegArr.length > 0) window.allKegiatanList = kegArr;
                   syncDynamicCards();
+                  console.log('[Publik Galeri] Berhasil dimuat dari Supabase galleries.');
                 }
               }
             } catch (err) {
-              console.warn('[galeri.html] Supabase fetch error:', err);
+              console.error('[galeri.html] Supabase REST fetch error:', err);
             }
           })();
         }

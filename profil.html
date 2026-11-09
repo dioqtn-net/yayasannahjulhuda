@@ -436,7 +436,9 @@
       var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
       var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
       try {
-        var res = await fetch(SUPABASE_URL + '/rest/v1/' + endpoint, {
+        var targetUrl = SUPABASE_URL + '/rest/v1/' + endpoint;
+        targetUrl += (targetUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
+        var res = await fetch(targetUrl, {
           headers: {
             'apikey': SUPABASE_ANON_KEY,
             'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,

@@ -247,110 +247,85 @@
         const KEY_CONTACT = 'cmsData_contact';
         const KEY_PROFILE = 'cmsData_profile';
 
-        function renderContactPage() {
-          let data = null;
+        // Render Kontak 100% Pure Supabase Native REST
+        async function initContact() {
+          console.log('[Publik Kontak] Mengambil informasi kontak dari Supabase...');
           try {
-            const rawContact = localStorage.getItem(KEY_CONTACT);
-            if (rawContact) data = JSON.parse(rawContact);
-            else {
-              const rawProfile = localStorage.getItem(KEY_PROFILE);
-              if (rawProfile) data = JSON.parse(rawProfile);
-            }
+            localStorage.removeItem('cmsData_contact');
+            localStorage.removeItem('cmsData_pengaturan');
           } catch(e) {}
 
-          if (!data) return;
-
-          if (data.address) {
-            const el = document.getElementById('kontak-view-address');
-            if (el) el.textContent = data.address;
-          }
-          if (data.phone) {
-            const el = document.getElementById('kontak-view-phone');
-            if (el) {
-              el.textContent = data.phone;
-              el.href = 'tel:' + data.phone.replace(/\D/g, '');
+          const applyContact = (data) => {
+            if (!data) return;
+            if (data.address) {
+              const el = document.getElementById('kontak-view-address');
+              if (el) el.textContent = data.address;
             }
-          }
-          if (data.wa1) {
-            const el = document.getElementById('kontak-view-wa1');
-            if (el) {
-              el.textContent = data.wa1;
-              let clean = data.wa1.replace(/\D/g, '');
-              if (clean.startsWith('0')) clean = '62' + clean.slice(1);
-              el.href = 'https://wa.me/' + clean;
-            }
-          }
-          if (data.wa2) {
-            const el = document.getElementById('kontak-view-wa2');
-            if (el) {
-              el.textContent = data.wa2;
-              let clean = data.wa2.replace(/\D/g, '');
-              if (clean.startsWith('0')) clean = '62' + clean.slice(1);
-              el.href = 'https://wa.me/' + clean;
-            }
-          }
-          if (data.email) {
-            const el = document.getElementById('kontak-view-email');
-            if (el) {
-              el.textContent = data.email;
-              el.href = 'mailto:' + data.email;
-            }
-          }
-          if (data.operational_hours) {
-            const el = document.getElementById('kontak-view-hours');
-            if (el) el.textContent = data.operational_hours;
-          }
-          if (data.maps_url) {
-            const el = document.getElementById('kontak-view-maps');
-            if (el) el.src = data.maps_url;
-          }
-        }
-
-        function initContact() {
-          renderContactPage();
-
-          // Muat data Kontak terbaru langsung dari Supabase
-          (async function fetchContactFromSupabase() {
-            try {
-              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-              if (supa) {
-                var updated = {};
-                var { data: contData } = await supa.from('contact_settings').select('*').eq('id', 1).maybeSingle();
-                var { data: profData } = await supa.from('profile_settings').select('*').eq('id', 1).maybeSingle();
-
-                if (contData || profData) {
-                  var rawCurrent = localStorage.getItem(KEY_CONTACT);
-                  if (rawCurrent) {
-                    try { updated = JSON.parse(rawCurrent); } catch(e) {}
-                  }
-
-                  if (contData) {
-                    if (contData.address) updated.address = contData.address;
-                    if (contData.phone) updated.phone = contData.phone;
-                    if (contData.whatsapp1) updated.wa1 = contData.whatsapp1;
-                    if (contData.whatsapp2) updated.wa2 = contData.whatsapp2;
-                    if (contData.email) updated.email = contData.email;
-                    if (contData.operational_hours) updated.operational_hours = contData.operational_hours;
-                    if (contData.maps_embed_url) updated.maps_url = contData.maps_embed_url;
-                  }
-
-                  if (profData) {
-                    if (!updated.address && profData.address) updated.address = profData.address;
-                    if (!updated.phone && profData.phone) updated.phone = profData.phone;
-                    if (!updated.email && profData.email) updated.email = profData.email;
-                    if (!updated.operational_hours && profData.operational_hours) updated.operational_hours = profData.operational_hours;
-                  }
-
-                  localStorage.setItem(KEY_CONTACT, JSON.stringify(updated));
-                  renderContactPage();
-                }
+            if (data.phone) {
+              const el = document.getElementById('kontak-view-phone');
+              if (el) {
+                el.textContent = data.phone;
+                el.href = 'tel:' + data.phone.replace(/\D/g, '');
               }
-            } catch(err) {
-              console.warn('[kontak.html] Supabase fetch error:', err);
             }
-          })();
+            if (data.whatsapp1 || data.wa1) {
+              const wa = data.whatsapp1 || data.wa1;
+              const el = document.getElementById('kontak-view-wa1');
+              if (el) {
+                el.textContent = wa;
+                let clean = wa.replace(/\D/g, '');
+                if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+                el.href = 'https://wa.me/' + clean;
+              }
+            }
+            if (data.whatsapp2 || data.wa2) {
+              const wa2 = data.whatsapp2 || data.wa2;
+              const el = document.getElementById('kontak-view-wa2');
+              if (el) {
+                el.textContent = wa2;
+                let clean = wa2.replace(/\D/g, '');
+                if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+                el.href = 'https://wa.me/' + clean;
+              }
+            }
+            if (data.email) {
+              const el = document.getElementById('kontak-view-email');
+              if (el) {
+                el.textContent = data.email;
+                el.href = 'mailto:' + data.email;
+              }
+            }
+            if (data.operational_hours) {
+              const el = document.getElementById('kontak-view-hours');
+              if (el) el.textContent = data.operational_hours;
+            }
+            if (data.maps_embed_url || data.maps_url) {
+              const el = document.getElementById('kontak-view-maps');
+              if (el) el.src = data.maps_embed_url || data.maps_url;
+            }
+          };
+
+          try {
+            const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+            const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?id=eq.1&select=*&t=${Date.now()}`, {
+              headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache'
+              }
+            });
+            if (res.ok) {
+              const rows = await res.json();
+              if (rows && rows[0]) {
+                applyContact(rows[0]);
+                console.log('[Publik Kontak] Informasi kontak berhasil diperbarui dari Supabase.');
+              }
+            }
+          } catch(e) {
+            console.error('[Publik Kontak] Gagal fetch contact_settings:', e);
+          }
         }
 
         document.addEventListener('DOMContentLoaded', initContact);

@@ -514,22 +514,8 @@
           const defaults = defaultProg[key] || defaultProg.sdi;
 
           let cmsProg = {};
-          try {
-            const rawP = localStorage.getItem('cmsData_program');
-            if (rawP) cmsProg = JSON.parse(rawP);
-          } catch(e) {}
-
-          let cmsPPDB = {};
-          try {
-            const rawPPDB = localStorage.getItem('cmsData_ppdb');
-            if (rawPPDB) cmsPPDB = JSON.parse(rawPPDB);
-          } catch(e) {}
-
-          let cmsContact = {};
-          try {
-            const rawC = localStorage.getItem('cmsData_contact');
-            if (rawC) cmsContact = JSON.parse(rawC);
-          } catch(e) {}
+          let cmsPPDB = window.currentPPDBData || {};
+          let cmsContact = window.currentContactData || {};
 
           const desc = cmsProg[key + 'Desc'] || defaults.desc || '-';
           const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum || '-';

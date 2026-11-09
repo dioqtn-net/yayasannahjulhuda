@@ -87,45 +87,9 @@ export async function renderDynamicUnitModal(id) {
   const meta = unitModalMetadata[numId] || unitModalMetadata[1];
   const defaults = defaultUnitProgramData[key] || defaultUnitProgramData.sdi;
 
-  // 1. Fetch from localStorage CMS Program
   let cmsProg = {};
-  try {
-    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_program') : null;
-    if (raw) cmsProg = JSON.parse(raw);
-  } catch(e) {}
-
-  // 2. Fetch from localStorage CMS PPDB
-  let cmsPPDB = {};
-  try {
-    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_ppdb') : null;
-    if (raw) cmsPPDB = JSON.parse(raw);
-  } catch(e) {}
-
-  // 3. Fetch from localStorage CMS Contact
-  let cmsContact = {};
-  try {
-    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_contact') : null;
-    if (raw) cmsContact = JSON.parse(raw);
-  } catch(e) {}
-
-  // 4. Supabase fetch if client available
-  if (typeof window !== 'undefined' && window.supabaseClient) {
-    try {
-      const { data: supaUnits } = await window.supabaseClient.from('education_units').select('*');
-      if (supaUnits && supaUnits.length > 0) {
-        const matching = supaUnits.find(u => u.id === numId || (u.name && u.name.toLowerCase().includes(key)));
-        if (matching) {
-          if (matching.description) cmsProg[key + 'Desc'] = cmsProg[key + 'Desc'] || matching.description;
-          if (matching.curriculum) cmsProg[key + 'Kurikulum'] = cmsProg[key + 'Kurikulum'] || matching.curriculum;
-          if (matching.extracurricular) cmsProg[key + 'Ekskul'] = cmsProg[key + 'Ekskul'] || matching.extracurricular;
-          if (matching.facilities) cmsProg[key + 'Fasilitas'] = cmsProg[key + 'Fasilitas'] || matching.facilities;
-          if (matching.featured_program) cmsProg[key + 'Unggulan'] = cmsProg[key + 'Unggulan'] || matching.featured_program;
-        }
-      }
-    } catch(err) {
-      // offline / fallback
-    }
-  }
+  let cmsPPDB = (typeof window !== 'undefined' && window.currentPPDBData) ? window.currentPPDBData : {};
+  let cmsContact = (typeof window !== 'undefined' && window.currentContactData) ? window.currentContactData : {};
 
   const desc = cmsProg[key + 'Desc'] || defaults.desc || '-';
   const kurikulum = cmsProg[key + 'Kurikulum'] || defaults.kurikulum || '-';

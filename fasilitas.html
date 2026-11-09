@@ -303,91 +303,22 @@
         });
       }
 
-      // Render Dynamic Fasilitas Cards from CMS (localStorage)
-      function initFasilitas() {
-        // Render Teks Banner
-        const savedBannerFas = localStorage.getItem('cmsData_fasBanner');
-        if (savedBannerFas) {
-          try {
-            const data = JSON.parse(savedBannerFas);
-            if (document.getElementById('pubFasBannerTitle') && data.title) document.getElementById('pubFasBannerTitle').textContent = data.title;
-            if (document.getElementById('pubFasBannerDesc') && data.desc) document.getElementById('pubFasBannerDesc').innerHTML = data.desc;
-          } catch (e) {
-            console.error('Error parsing cmsData_fasBanner:', e);
-          }
-        }
+      // Render Dynamic Fasilitas Cards 100% Pure Supabase Native REST
+      async function initFasilitas() {
+        console.log('[Publik Fasilitas] Mengambil data fasilitas dari Supabase...');
+        try {
+          localStorage.removeItem('cmsData_fasilitas_list');
+          localStorage.removeItem('cmsData_fasBanner');
+        } catch(e) {}
 
         const grid = document.getElementById('gridFasilitas');
         if (!grid) return;
-
-        const STORAGE_KEY = 'cmsData_fasilitas_list';
-        const defaultFasilitas = [
-          {
-            id: 'fas-1',
-            nama: "Masjid Jami' Assurur",
-            deskripsi: "Pusat ibadah sholat berjamaah, pengajian kitab, dan kegiatan keagamaan civitas yayasan, siswa/siswi, dan santri.",
-            images: [
-              "/media/fasilitas/umum/masjid_jami'assuruur_umum.jpg",
-              "/media/fasilitas/umum/masjid_jami'assuruur_umum_1.jpg"
-            ]
-          },
-          {
-            id: 'fas-2',
-            nama: "Lapangan Upacara",
-            deskripsi: "Area terbuka serbaguna untuk upacara bendera, apel siswa/siswi dan santri, serta berbagai kegiatan luar ruangan.",
-            images: [
-              "/media/fasilitas/umum/lapangan_upacara_umum.jpg",
-              "/media/fasilitas/umum/lapangan_upacara_umum_1.jpg"
-            ]
-          },
-          {
-            id: 'fas-3',
-            nama: "Laboratorium Komputer",
-            deskripsi: "Fasilitas komputer modern terhubung internet untuk praktikum TIK serta asesmen berbasis komputer bagi siswa/siswi dan santri.",
-            images: [
-              "/media/fasilitas/umum/lab_komputer_umum.jpg",
-              "/media/fasilitas/umum/lab_komputer_umum_1.jpg",
-              "/media/fasilitas/umum/lab_komputer_umum_2.jpg"
-            ]
-          },
-          {
-            id: 'fas-4',
-            nama: "Lapangan Bola Basket",
-            deskripsi: "Fasilitas olahraga basket dan aktivitas kebugaran untuk mendukung kesehatan serta prestasi siswa/siswi dan santri.",
-            images: [
-              "/media/fasilitas/umum/lapangan_bola_basket_umum.jpg"
-            ]
-          }
-        ];
-
-        let list = defaultFasilitas;
-        const savedData = localStorage.getItem(STORAGE_KEY);
-        if (savedData) {
-          try {
-            const parsed = JSON.parse(savedData);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              list = parsed;
-            }
-          } catch (e) {
-            console.error('Error parsing cmsData_fasilitas_list:', e);
-          }
-        }
 
         const escapeHtml = (text) => {
           const div = document.createElement('div');
           div.textContent = text || '';
           return div.innerHTML;
         };
-
-        function formatContentHtml(str) {
-          if (str === null || str === undefined) return '-';
-          const trimmed = String(str).trim();
-          if (trimmed === '' || trimmed === '-') return '-';
-          if (/^<div[\s>]/i.test(trimmed) || /^<p[\s>]/i.test(trimmed)) {
-            return trimmed;
-          }
-          return `<div class="text-justify">${trimmed}</div>`;
-        }
 
         const renderCard = (item) => {
           const images = (item.images && item.images.length > 0)
@@ -451,15 +382,13 @@
           }
         };
 
-                const searchInput = document.getElementById('searchFasilitas');
-
         const renderList = (dataList) => {
           if (grid) grid.innerHTML = '';
           if (!dataList || dataList.length === 0) {
             grid.innerHTML = `
               <div class="col-span-full py-12 text-center text-slate-500">
                 <i class="fas fa-search text-3xl mb-3 text-slate-300 block"></i>
-                <p class="text-base font-medium">Tidak ada fasilitas yang sesuai dengan pencarian Anda.</p>
+                <p class="text-base font-medium">Tidak ada fasilitas yang tersedia saat ini.</p>
               </div>
             `;
             return;
@@ -467,7 +396,6 @@
 
           grid.innerHTML = dataList.map(renderCard).join('');
 
-          // Initialize GLightbox on newly rendered elements
           if (typeof GLightbox !== 'undefined') {
             GLightbox({ 
               selector: '.glightbox', 
@@ -478,35 +406,59 @@
           }
         };
 
-        renderList(list);
-
-        // Fetch live facilities from Supabase
-        (async function fetchFasilitasFromSupabase() {
-          try {
-            var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-            var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-            var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-            if (supa) {
-              var { data: dbData, error } = await supa.from('facilities').select('*').order('id');
-              if (!error && dbData && dbData.length > 0) {
-                list = dbData.map(f => ({
-                  id: f.id,
-                  nama: f.name || '-',
-                  deskripsi: f.description || '-',
-                  images: (Array.isArray(f.images) && f.images.length > 0)
-                    ? f.images
-                    : (f.image_url ? [f.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
-                }));
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-                renderList(list);
-              }
+        // Fetch live from Supabase
+        try {
+          const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+          const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/facilities?select=*&order=id.asc&t=${Date.now()}`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache'
             }
-          } catch(err) {
-            console.warn('[fasilitas.html] Supabase fetch error:', err);
+          });
+          if (res.ok) {
+            const dbData = await res.json();
+            if (dbData && dbData.length > 0) {
+              window.allFasilitasList = dbData.map(f => ({
+                id: f.id,
+                nama: f.name || '-',
+                deskripsi: f.description || '-',
+                images: (Array.isArray(f.images) && f.images.length > 0)
+                  ? f.images
+                  : (f.image_url ? [f.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
+              }));
+              renderList(window.allFasilitasList);
+            }
           }
-        })();
+        } catch(err) {
+          console.error('[Publik Fasilitas] Error fetch facilities:', err);
+        }
 
-        if (searchInput) {
+        const searchInput = document.getElementById('searchFasilitas');
+        if (searchInput && !searchInput.dataset.bound) {
+          searchInput.dataset.bound = 'true';
+          searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const list = window.allFasilitasList || [];
+            if (!query) {
+              renderList(list);
+              return;
+            }
+            const filtered = list.filter((item) => {
+              const nama = (item.nama || '').toLowerCase();
+              const desc = (item.deskripsi || '').toLowerCase();
+              return nama.includes(query) || desc.includes(query);
+            });
+            renderList(filtered);
+          });
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', initFasilitas);
+      initFasilitas();
+      if (searchInput) {
           searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             if (!query) {

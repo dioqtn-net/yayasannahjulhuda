@@ -1008,11 +1008,10 @@
         };
 
         function getPPDBData() {
-          const raw = localStorage.getItem(KEY_PPDB);
-          if (!raw) {
-            localStorage.setItem(KEY_PPDB, JSON.stringify(defaultPPDB));
-            return defaultPPDB;
-          }
+          if (window.currentPPDBData) return window.currentPPDBData;
+          if (window.currentPPDBData) return window.currentPPDBData;
+          return defaultPPDB;
+        }
           try {
             const parsed = JSON.parse(raw);
             return { ...defaultPPDB, ...parsed };
@@ -1171,32 +1170,41 @@
         function initPPDB() {
           renderPPDBFront();
 
-          // Fetch live PPDB data from Supabase
+          // Fetch live PPDB data 100% Pure Supabase Native REST
+          try {
+            localStorage.removeItem(KEY_PPDB);
+          } catch(e) {}
+
           (async function fetchPPDBFromSupabase() {
             try {
-              var SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
-              var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              var supa = window.supabaseClient || (typeof window.supabase !== 'undefined' ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null);
-              if (supa) {
-                var { data: dbPPDB, error } = await supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle();
-                if (!error && dbPPDB) {
-                  var currentData = {};
-                  var raw = localStorage.getItem(KEY_PPDB);
-                  if (raw) {
-                    try { currentData = JSON.parse(raw); } catch(e) {}
-                  }
+              const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
+              const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/ppdb_info?id=eq.1&select=*&t=${Date.now()}`, {
+                headers: {
+                  'apikey': SUPABASE_ANON_KEY,
+                  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                  'Cache-Control': 'no-cache, no-store, must-revalidate',
+                  'Pragma': 'no-cache'
+                }
+              });
+              if (res.ok) {
+                const rows = await res.json();
+                const dbPPDB = rows && rows[0] ? rows[0] : null;
+                if (dbPPDB) {
+                  let currentData = { ...defaultPPDB };
                   if (dbPPDB.contact_person && typeof dbPPDB.contact_person === 'object') {
                     currentData = { ...currentData, ...dbPPDB.contact_person };
                   }
                   if (dbPPDB.greeting_title) currentData.header_title = dbPPDB.greeting_title;
                   if (dbPPDB.greeting_desc) currentData.header_subtitle = dbPPDB.greeting_desc;
 
-                  localStorage.setItem(KEY_PPDB, JSON.stringify(currentData));
+                  window.currentPPDBData = currentData;
                   renderPPDBFront();
+                  console.log('[Publik PPDB] Data PPDB berhasil diperbarui dari Supabase.');
                 }
               }
             } catch(err) {
-              console.warn('[ppdb.html] Supabase fetch error:', err);
+              console.error('[ppdb.html] Supabase REST fetch error:', err);
             }
           })();
         }

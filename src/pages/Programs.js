@@ -12,12 +12,6 @@ import { getUnitImage } from '../api';
 
 export const renderPrograms = (units) => {
     let cmsData = null;
-    try {
-        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('cmsData_program') : null;
-        if (stored) cmsData = JSON.parse(stored);
-    } catch (e) {
-        console.error('Error reading cmsData_program in renderPrograms:', e);
-    }
     
     const renderDetailedUnit = (unit, index) => {
         const isEven = index % 2 !== 0;
