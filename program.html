@@ -667,12 +667,11 @@
         try {
           const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
           const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc&t=${Date.now()}`, {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc`, {
+            cache: 'no-store',
             headers: {
               'apikey': SUPABASE_ANON_KEY,
-              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-              'Cache-Control': 'no-cache, no-store, must-revalidate',
-              'Pragma': 'no-cache'
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
             }
           });
           if (res.ok) {

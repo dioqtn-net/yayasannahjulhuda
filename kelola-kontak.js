@@ -97,7 +97,8 @@
 
       if (!contData) {
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?id=eq.1&select=*&t=${Date.now()}`, {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_settings?id=eq.1&select=*`, {
+            cache: 'no-store',
             headers: {
               'apikey': SUPABASE_ANON_KEY,
               'Authorization': `Bearer ${SUPABASE_ANON_KEY}`

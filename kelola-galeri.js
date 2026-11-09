@@ -76,22 +76,31 @@
     return div.innerHTML;
   }
 
-  function readFileOrName(inputEl, fallback) {
-    return new Promise((resolve) => {
-      if (!inputEl) {
-        resolve(fallback || '');
-        return;
+  // Helper membaca dan mengompresi file gambar
+  async function readFileOrName(inputEl, fallback) {
+    if (!inputEl) return fallback || '';
+    if (typeof window.processImageField === 'function') {
+      return await window.processImageField(inputEl, fallback, {
+        maxWidth: 1600,
+        maxHeight: 1200,
+        quality: 0.85,
+        pathPrefix: 'galeri'
+      });
+    }
+    const file = inputEl.files && inputEl.files[0];
+    if (file) {
+      if (typeof window.compressImage === 'function') {
+        const comp = await window.compressImage(file, { maxWidth: 1600, maxHeight: 1200, quality: 0.85 });
+        return comp.dataUrl;
       }
-      const file = inputEl.files && inputEl.files[0];
-      if (file) {
+      return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = () => resolve(fallback || '');
         reader.readAsDataURL(file);
-      } else {
-        resolve(fallback || '');
-      }
-    });
+      });
+    }
+    return fallback || '';
   }
 
   // 1. LOAD SEMUA GALERI DARI SUPABASE

@@ -2,7 +2,11 @@
  * =======================================================================
  * KELOLA PROFIL (PANEL ADMIN) - 100% PURE SUPABASE
  * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem / NO localCache
- * Fitur: Single Save Button, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * Fitur:
+ * 1. Client-Side Image Compression (HTML5 Canvas maks 600px, 85% quality).
+ * 2. Supabase Storage Upload (Public CDN URL https://...images/...).
+ * 3. Graceful Fallback jika Storage belum aktif (<80KB compressed image).
+ * 4. Single Save Button, Auto-Reset Finally, 15s Timeout & Native REST Fallback.
  * =======================================================================
  */
 
@@ -15,7 +19,7 @@
   let isSaving = false;
   const BTN_PROFIL_HTML = `<svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg> Simpan Perubahan Profil`;
 
-  // Memory cache untuk foto yang sudah tersimpan di database
+  // Memory cache untuk foto yang sudah tersimpan di database pusat
   let currentPengurusState = {
     fotoKetua: '',
     fotoSDI: '',
@@ -137,6 +141,53 @@
     return await res.json();
   }
 
+  // Helper kompresi dan upload foto
+  async function processPengurusPhoto(inputId, prevVal, prefix) {
+    if (typeof window.processImageField === 'function') {
+      return await window.processImageField(inputId, prevVal, {
+        maxWidth: 600,
+        maxHeight: 600,
+        quality: 0.85,
+        pathPrefix: prefix
+      });
+    }
+
+    // Fallback inline jika image-compressor.js belum selesai dimuat
+    const input = document.getElementById(inputId);
+    if (input && input.getAttribute('data-hapus') === 'true') {
+      return '';
+    }
+    if (input && input.files && input.files[0]) {
+      return new Promise((resolve) => {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            if (w > 600 || h > 600) {
+              const r = Math.min(600 / w, 600 / h);
+              w = Math.round(w * r);
+              h = Math.round(h * r);
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.85));
+          };
+          img.onerror = () => resolve(prevVal || '');
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve(prevVal || '');
+        reader.readAsDataURL(file);
+      });
+    }
+    return prevVal || '';
+  }
+
   // 1. SELECT DARI SUPABASE (LOAD FORM PROFIL)
   window.loadProfilData = async function () {
     console.log("[Kelola Profil] Memulai loadProfilData()...");
@@ -159,6 +210,7 @@
       if (!dbData) {
         try {
           const res = await fetch(`${SUPABASE_URL}/rest/v1/profile_settings?id=eq.1&select=*`, {
+            cache: 'no-store',
             headers: {
               'apikey': SUPABASE_ANON_KEY,
               'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -222,36 +274,19 @@
     const btnSaveProfil = document.getElementById('btnSimpanProfil');
     if (btnSaveProfil) {
       btnSaveProfil.disabled = true;
-      btnSaveProfil.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+      btnSaveProfil.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengompres gambar & menyimpan...';
     }
 
     try {
-      // Helper membaca file gambar
-      const readFile = (inputId, prevVal) => {
-        return new Promise((resolve) => {
-          const input = document.getElementById(inputId);
-          if (input && input.getAttribute('data-hapus') === 'true') {
-            resolve('');
-            return;
-          }
-          if (input && input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (event) => resolve(event.target.result);
-            reader.onerror = () => resolve(prevVal || '');
-            reader.readAsDataURL(input.files[0]);
-          } else {
-            resolve(prevVal || '');
-          }
-        });
-      };
-
+      // 1. Proses kompresi canvas dan upload storage untuk semua foto pengurus secara paralel
+      console.log("[Kelola Profil] Memproses kompresi & upload foto pengurus...");
       const [fotoKetua, fotoSDI, fotoMI, fotoMTs, fotoMA, fotoMudir] = await Promise.all([
-        readFile('fotoKetua', currentPengurusState.fotoKetua),
-        readFile('fotoSDI', currentPengurusState.fotoSDI),
-        readFile('fotoMI', currentPengurusState.fotoMI),
-        readFile('fotoMTs', currentPengurusState.fotoMTs),
-        readFile('fotoMA', currentPengurusState.fotoMA),
-        readFile('fotoMudir', currentPengurusState.fotoMudir)
+        processPengurusPhoto('fotoKetua', currentPengurusState.fotoKetua, 'ketua'),
+        processPengurusPhoto('fotoSDI', currentPengurusState.fotoSDI, 'sdi'),
+        processPengurusPhoto('fotoMI', currentPengurusState.fotoMI, 'mi'),
+        processPengurusPhoto('fotoMTs', currentPengurusState.fotoMTs, 'mts'),
+        processPengurusPhoto('fotoMA', currentPengurusState.fotoMA, 'ma'),
+        processPengurusPhoto('fotoMudir', currentPengurusState.fotoMudir, 'mudir')
       ]);
 
       const profilTitle = getVal('profilTitle', 'Profil Yayasan');
@@ -290,7 +325,10 @@
 
       console.log("[Kelola Profil] Mengirim payload ke Supabase:", {
         ...supabasePayload,
-        pengurus: { ...newPengurus, fotoKetua: fotoKetua ? `${fotoKetua.substring(0, 30)}... (${fotoKetua.length} chars)` : '' }
+        pengurus: {
+          ...newPengurus,
+          fotoKetua: fotoKetua ? (fotoKetua.startsWith('http') ? fotoKetua : `[dataUrl ${fotoKetua.length} chars]`) : 'kosong'
+        }
       });
 
       let saveSuccess = false;

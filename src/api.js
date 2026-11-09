@@ -124,11 +124,10 @@ export const api = {
         };
         try {
             const res = await fetch(SUPABASE_URL + '/rest/v1/home_settings?id=eq.1&select=*', {
+                cache: 'no-store',
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache'
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
                 }
             });
             if (res.ok) {
@@ -180,11 +179,10 @@ export const api = {
 
         try {
             const res = await fetch(SUPABASE_URL + '/rest/v1/profile_settings?id=eq.1&select=*', {
+                cache: 'no-store',
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache'
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
                 }
             });
             if (res.ok) {

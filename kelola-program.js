@@ -148,7 +148,8 @@
       // Fallback via Native REST API jika supa belum menghasilkan data
       if (!units) {
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc&t=${Date.now()}`, {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/education_units?select=*&order=id.asc`, {
+            cache: 'no-store',
             headers: {
               'apikey': SUPABASE_ANON_KEY,
               'Authorization': `Bearer ${SUPABASE_ANON_KEY}`

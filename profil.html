@@ -437,13 +437,11 @@
       var SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
       try {
         var targetUrl = SUPABASE_URL + '/rest/v1/' + endpoint;
-        targetUrl += (targetUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
         var res = await fetch(targetUrl, {
+          cache: 'no-store',
           headers: {
             'apikey': SUPABASE_ANON_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache'
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
           }
         });
         if (!res.ok) {
@@ -493,6 +491,16 @@
       try {
         var rows = await fetchFromSupabaseRest('profile_settings?id=eq.1&select=*');
         var data = rows && rows[0] ? rows[0] : null;
+
+        if (!data && typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+          try {
+            var client = window.supabaseClient || window.supabase.createClient("https://lrorriksjooxrpoihfge.supabase.co", "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT");
+            var res = await client.from('profile_settings').select('*').eq('id', 1).maybeSingle();
+            if (res && res.data) data = res.data;
+          } catch(errClient) {
+            console.warn("[Publik Profil] Supabase client fallback error:", errClient);
+          }
+        }
 
         if (data) {
           console.log("[Publik Profil] Data profile_settings berhasil diterima:", data);

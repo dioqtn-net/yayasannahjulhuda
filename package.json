@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); if(fs.existsSync('dist/kelola.html')) fs.copyFileSync('dist/kelola.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html'); fs.readdirSync('.').filter(f => (f.startsWith('kelola-') || f === 'profil.js') && f.endsWith('.js')).forEach(f => fs.copyFileSync(f, 'dist/' + f));\"",
+    "postbuild": "node -e \"const fs=require('fs'); fs.mkdirSync('dist/kelola', {recursive:true}); if(fs.existsSync('dist/kelola.html')) fs.copyFileSync('dist/kelola.html', 'dist/kelola/index.html'); fs.copyFileSync('dist/index.html', 'dist/404.html'); fs.readdirSync('.').filter(f => (f.startsWith('kelola-') || f === 'profil.js' || f === 'image-compressor.js') && f.endsWith('.js')).forEach(f => fs.copyFileSync(f, 'dist/' + f));\"",
     "preview": "vite preview"
   },
   "dependencies": {
