@@ -862,14 +862,26 @@
               if (res.ok) {
                 const dbData = await res.json();
                 if (dbData && dbData.length > 0) {
+                  // 1. Perbarui Banner Galeri dari row id: 0 atau category: 'banner'
+                  const banner = dbData.find(g => Number(g.id) === 0 || (g.category || '').toLowerCase() === 'banner');
+                  if (banner) {
+                    const titleEl = document.getElementById('pubGaleriBannerTitle');
+                    const descEl = document.getElementById('pubGaleriBannerDesc');
+                    if (titleEl && banner.title) titleEl.textContent = banner.title;
+                    if (descEl && banner.description) descEl.innerHTML = banner.description;
+                  }
+
+                  // 2. Filter item galeri aktual (id > 0)
                   const eskulArr = [];
                   const kegArr = [];
-                  dbData.forEach(item => {
+                  const validItems = dbData.filter(g => Number(g.id) > 0 && (g.category || '').toLowerCase() !== 'banner');
+
+                  validItems.forEach(item => {
                     const formatted = {
                       id: item.id,
                       judul: item.title || '-',
                       jenjang: item.jenjang || 'Semua',
-                      tanggal: item.created_at ? item.created_at.split('T')[0] : '',
+                      tanggal: item.event_date || (item.created_at ? item.created_at.split('T')[0] : ''),
                       deskripsi: item.description || '-',
                       media: item.image_url || '/media/background/wallpaper_yayasan.jpg'
                     };

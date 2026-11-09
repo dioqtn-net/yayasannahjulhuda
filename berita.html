@@ -717,20 +717,35 @@
               if (res.ok) {
                 const dbNews = await res.json();
                 if (dbNews && dbNews.length > 0) {
-                  const mapped = dbNews.map(n => ({
-                    id: n.id,
-                    judul: n.title || '-',
-                    tanggal: n.date || '',
-                    jenjang: n.jenjang || 'Semua',
-                    deskripsiSingkat: n.summary || (n.content ? n.content.substring(0, 150) + '...' : '-'),
-                    deskripsiLengkap: n.content || '-',
-                    images: (Array.isArray(n.images) && n.images.length > 0)
-                      ? n.images
-                      : (n.image_url ? [n.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
-                  }));
-                  currentBeritaData = mapped;
-                  renderBeritaCards();
-                  switchNewsJenjang(activeJenjang || 'Semua');
+                  // 1. Perbarui Banner Berita dari row id: 0
+                  const banner = dbNews.find(n => Number(n.id) === 0);
+                  if (banner) {
+                    const titleEl = document.getElementById('pubBeritaBannerTitle');
+                    const descEl = document.getElementById('pubBeritaBannerDesc');
+                    if (titleEl && banner.title) titleEl.textContent = banner.title;
+                    if (descEl && (banner.content || banner.summary)) {
+                      descEl.innerHTML = banner.content || banner.summary;
+                    }
+                  }
+
+                  // 2. Filter berita aktual (id > 0)
+                  const newsItems = dbNews.filter(n => Number(n.id) > 0);
+                  if (newsItems.length > 0) {
+                    const mapped = newsItems.map(n => ({
+                      id: n.id,
+                      judul: n.title || '-',
+                      tanggal: n.date || '',
+                      jenjang: n.jenjang || 'Semua',
+                      deskripsiSingkat: n.summary || (n.content ? n.content.substring(0, 150) + '...' : '-'),
+                      deskripsiLengkap: n.content || '-',
+                      images: (Array.isArray(n.images) && n.images.length > 0)
+                        ? n.images
+                        : (n.image_url ? [n.image_url] : ['/media/background/wallpaper_yayasan.jpg'])
+                    }));
+                    currentBeritaData = mapped;
+                    renderBeritaCards();
+                    switchNewsJenjang(activeJenjang || 'Semua');
+                  }
                 }
               }
             } catch(err) {

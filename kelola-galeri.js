@@ -94,9 +94,35 @@
     return dateStr;
   }
 
-  // Helper membaca file/media
+  // Helper membaca file/media (Mendukung Gambar & Video MP4)
   async function readFileOrName(inputEl, fallback) {
     if (!inputEl) return fallback || '';
+    const file = inputEl.files && inputEl.files[0];
+    if (!file) return fallback || '';
+
+    // Deteksi video MP4 -> upload langsung ke Supabase Storage (tanpa kompresi canvas)
+    if (file.type.includes('video') || file.type.includes('mp4') || file.name.toLowerCase().endsWith('.mp4')) {
+      try {
+        const objectPath = `galeri_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.mp4`;
+        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/images/${objectPath}`, {
+          method: 'POST',
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': file.type || 'video/mp4'
+          },
+          body: file
+        });
+        if (uploadRes.ok) {
+          return `${SUPABASE_URL}/storage/v1/object/public/images/${objectPath}`;
+        }
+      } catch (err) {
+        console.warn("[Kelola Galeri] Gagal upload video ke storage:", err);
+      }
+      return fallback || '';
+    }
+
+    // Jika gambar -> kompres dengan Canvas dan upload ke Supabase Storage
     if (typeof window.processImageField === 'function') {
       return await window.processImageField(inputEl, fallback, {
         maxWidth: 1600,
@@ -105,19 +131,7 @@
         pathPrefix: 'galeri'
       });
     }
-    const file = inputEl.files && inputEl.files[0];
-    if (file) {
-      if (typeof window.compressImage === 'function' && file.type && file.type.startsWith('image/')) {
-        const comp = await window.compressImage(file, { maxWidth: 1600, maxHeight: 1200, quality: 0.85 });
-        return comp.dataUrl;
-      }
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.onerror = () => resolve(fallback || '');
-        reader.readAsDataURL(file);
-      });
-    }
+
     return fallback || '';
   }
 
@@ -148,8 +162,30 @@
       }
 
       if (dbData && Array.isArray(dbData)) {
-        currentEskulList = dbData.filter(g => (g.category || '').toLowerCase() === 'ekstrakurikuler' || (g.category || '').toLowerCase() === 'eskul');
-        currentKegiatanList = dbData.filter(g => (g.category || '').toLowerCase() === 'kegiatan' || !(g.category || '').toLowerCase().includes('eskul'));
+        // Tampilkan Banner jika ada (row id: 0 atau category: 'banner')
+        const banner = dbData.find(g => Number(g.id) === 0 || (g.category || '').toLowerCase() === 'banner');
+        if (banner) {
+          const tEl = document.getElementById('galeriBannerTitle');
+          const dEl = document.getElementById('galeriBannerDesc');
+          if (tEl && banner.title) tEl.value = banner.title;
+          if (dEl && banner.description) {
+            if (typeof window.setTextareaValueWithAlignment === 'function') {
+              window.setTextareaValueWithAlignment('galeriBannerDesc', banner.description);
+            } else {
+              dEl.value = banner.description;
+            }
+          }
+        }
+
+        const validItems = dbData.filter(g => Number(g.id) > 0 && (g.category || '').toLowerCase() !== 'banner');
+        currentEskulList = validItems.filter(g => {
+          const cat = (g.category || '').toLowerCase();
+          return cat === 'ekstrakurikuler' || cat === 'eskul';
+        });
+        currentKegiatanList = validItems.filter(g => {
+          const cat = (g.category || '').toLowerCase();
+          return cat === 'kegiatan' || !cat.includes('eskul');
+        });
       } else {
         currentEskulList = [];
         currentKegiatanList = [];
@@ -162,7 +198,7 @@
     }
   };
 
-  // 2. TABEL ADMIN ESKUL (4 Kolom Sesuai kelola.html)
+  // 2. TABEL ADMIN ESKUL (4 Kolom Sesuai kelola.html & Acuan Desain)
   function renderAdminEskulTable() {
     const tbody = document.getElementById('adminListEskul') || document.getElementById('daftarEskulAdmin');
     if (!tbody) return;
@@ -172,35 +208,42 @@
       return;
     }
 
-    tbody.innerHTML = currentEskulList.map(item => `
-      <tr class="hover:bg-slate-50 transition border-b border-gray-100">
-        <td class="px-4 py-3 align-top">
-          <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
-          <div class="text-[11px] text-gray-400 mt-0.5">${item.image_url ? 'Foto/Video tersimpan' : 'Tanpa media'}</div>
-        </td>
-        <td class="px-4 py-3 align-top">
-          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
-            ${escapeHtml(item.jenjang || 'Semua')}
-          </span>
-        </td>
-        <td class="px-4 py-3 align-top text-xs text-slate-500">
-          ${formatIndoDate(item.event_date)}
-        </td>
-        <td class="px-4 py-3 align-top text-center">
-          <div class="flex items-center justify-center gap-3">
-            <button type="button" onclick="window.editEskulCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Ekstrakurikuler">
-              <i class="far fa-edit text-base"></i>
-            </button>
-            <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'eskul')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Ekstrakurikuler">
-              <i class="far fa-trash-alt text-base"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = currentEskulList.map(item => {
+      const isVideo = item.image_url && (item.image_url.toLowerCase().endsWith('.mp4') || item.image_url.includes('.mp4'));
+      const mediaBadge = isVideo
+        ? `<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>`
+        : `<span class="inline-flex items-center gap-1 text-[11px] text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"><i class="far fa-image"></i> Foto</span>`;
+
+      return `
+        <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+          <td class="px-4 py-3 align-top">
+            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+            <div class="mt-1">${mediaBadge}</div>
+          </td>
+          <td class="px-4 py-3 align-top">
+            <span class="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-medium border border-emerald-100 inline-block">
+              ${escapeHtml(item.jenjang || 'Semua')}
+            </span>
+          </td>
+          <td class="px-4 py-3 align-top text-xs text-slate-500">
+            ${formatIndoDate(item.event_date || item.created_at)}
+          </td>
+          <td class="px-4 py-3 align-top text-center">
+            <div class="flex items-center justify-center gap-3">
+              <button type="button" onclick="window.editEskulCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Ekstrakurikuler">
+                <i class="far fa-edit text-base"></i>
+              </button>
+              <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'eskul')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Ekstrakurikuler">
+                <i class="far fa-trash-alt text-base"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
-  // 3. TABEL ADMIN KEGIATAN (4 Kolom Sesuai kelola.html)
+  // 3. TABEL ADMIN KEGIATAN (4 Kolom Sesuai kelola.html & Acuan Desain)
   function renderAdminKegiatanTable() {
     const tbody = document.getElementById('adminListKegiatan') || document.getElementById('daftarKegiatanAdmin');
     if (!tbody) return;
@@ -210,32 +253,39 @@
       return;
     }
 
-    tbody.innerHTML = currentKegiatanList.map(item => `
-      <tr class="hover:bg-slate-50 transition border-b border-gray-100">
-        <td class="px-4 py-3 align-top">
-          <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
-          <div class="text-[11px] text-gray-400 mt-0.5">${item.image_url ? 'Foto/Video tersimpan' : 'Tanpa media'}</div>
-        </td>
-        <td class="px-4 py-3 align-top">
-          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
-            ${escapeHtml(item.jenjang || 'Semua')}
-          </span>
-        </td>
-        <td class="px-4 py-3 align-top text-xs text-slate-500">
-          ${formatIndoDate(item.event_date)}
-        </td>
-        <td class="px-4 py-3 align-top text-center">
-          <div class="flex items-center justify-center gap-3">
-            <button type="button" onclick="window.editKegiatanCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Kegiatan">
-              <i class="far fa-edit text-base"></i>
-            </button>
-            <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'kegiatan')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Kegiatan">
-              <i class="far fa-trash-alt text-base"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = currentKegiatanList.map(item => {
+      const isVideo = item.image_url && (item.image_url.toLowerCase().endsWith('.mp4') || item.image_url.includes('.mp4'));
+      const mediaBadge = isVideo
+        ? `<span class="inline-flex items-center gap-1 text-[11px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200"><i class="fas fa-video"></i> Video MP4</span>`
+        : `<span class="inline-flex items-center gap-1 text-[11px] text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"><i class="far fa-image"></i> Foto</span>`;
+
+      return `
+        <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+          <td class="px-4 py-3 align-top">
+            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+            <div class="mt-1">${mediaBadge}</div>
+          </td>
+          <td class="px-4 py-3 align-top">
+            <span class="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-medium border border-emerald-100 inline-block">
+              ${escapeHtml(item.jenjang || 'Semua')}
+            </span>
+          </td>
+          <td class="px-4 py-3 align-top text-xs text-slate-500">
+            ${formatIndoDate(item.event_date || item.created_at)}
+          </td>
+          <td class="px-4 py-3 align-top text-center">
+            <div class="flex items-center justify-center gap-3">
+              <button type="button" onclick="window.editKegiatanCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Kegiatan">
+                <i class="far fa-edit text-base"></i>
+              </button>
+              <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'kegiatan')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Kegiatan">
+                <i class="far fa-trash-alt text-base"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
   // 4. BUKA & TUTUP FORM ESKUL
@@ -265,6 +315,9 @@
     const area = document.getElementById('areaFormEskul');
     if (area) area.classList.remove('hidden');
     area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof window.initTextareaAlignmentTools === 'function') {
+      window.initTextareaAlignmentTools();
+    }
   };
 
   window.tutupFormEskul = function () {
@@ -299,6 +352,9 @@
     const area = document.getElementById('areaFormKegiatan');
     if (area) area.classList.remove('hidden');
     area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof window.initTextareaAlignmentTools === 'function') {
+      window.initTextareaAlignmentTools();
+    }
   };
 
   window.tutupFormKegiatan = function () {
@@ -625,13 +681,97 @@
     }
   };
 
-  // 9. BANNER GALERI
+  // Banner galeri
   window.handleSimpanBannerGaleri = async function (e) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    alert('Teks banner galeri berhasil disimpan.');
+
+    const btn = document.getElementById('btnSimpanBannerGaleri');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+    }
+
+    try {
+      const title = document.getElementById('galeriBannerTitle')?.value?.trim() || 'Galeri Dokumentasi';
+      const desc = (typeof window.getWrappedTextareaValue === 'function')
+        ? window.getWrappedTextareaValue('galeriBannerDesc')
+        : (document.getElementById('galeriBannerDesc')?.value?.trim() || '');
+
+      const payload = {
+        id: 0,
+        title: title,
+        description: desc,
+        category: 'banner',
+        jenjang: 'Semua',
+        event_date: new Date().toISOString().split('T')[0]
+      };
+
+      const supa = getSupabaseClient();
+      let ok = false;
+      if (supa) {
+        try {
+          const { error } = await withTimeout(
+            supa.from('galleries').upsert(payload, { onConflict: 'id' }),
+            8000
+          );
+          if (!error) ok = true;
+        } catch (err) {
+          console.warn("[Kelola Galeri] Banner upsert client warning:", err);
+        }
+      }
+      if (!ok) {
+        await withTimeout(
+          restFetch('galleries?on_conflict=id', {
+            method: 'POST',
+            headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
+            body: JSON.stringify(payload)
+          }),
+          10000
+        );
+      }
+
+      alert('Alhamdulillah! Banner galeri berhasil disimpan.');
+    } catch (err) {
+      console.error("[Kelola Galeri] Gagal simpan banner:", err);
+      alert('Gagal menyimpan banner galeri: ' + (err.message || err));
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = 'Simpan Banner Galeri';
+      }
+    }
+  };
+
+  // Simpan perubahan galeri terpadu
+  window.handleSimpanGaleriTotal = async function (e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const btn = document.getElementById('btnSimpanGaleriTotal');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan perubahan...';
+    }
+    try {
+      const title = document.getElementById('galeriBannerTitle')?.value?.trim();
+      if (title) {
+        await window.handleSimpanBannerGaleri(null);
+      }
+      await window.loadGaleriData();
+      alert('Alhamdulillah! Perubahan kelola galeri berhasil disimpan.');
+    } catch (err) {
+      console.error("[Kelola Galeri] Gagal simpan total:", err);
+      alert('Gagal menyimpan perubahan galeri: ' + (err.message || err));
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-save"></i> <span>Simpan Perubahan Galeri</span>';
+      }
+    }
   };
 
   function initKelolaGaleri() {

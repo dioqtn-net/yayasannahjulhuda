@@ -1183,6 +1183,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                       </div>
                   </div>
               </div>
+
+              <!-- Tombol Simpan Perubahan Fasilitas (Satu Tombol Simpan Terpadu) -->
+              <div class="flex justify-end pt-4 border-t border-gray-200">
+                <button type="button" id="btnSimpanFasilitasTotal" onclick="window.handleSimpanFasilitasTotal(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition shadow flex items-center gap-2 cursor-pointer">
+                  <i class="fas fa-save"></i>
+                  <span>Simpan Perubahan Fasilitas</span>
+                </button>
+              </div>
           </div>
         </section>
 
@@ -1328,6 +1336,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   <!-- List akan dirender oleh JavaScript -->
                 </tbody>
               </table>
+            </div>
+
+            <!-- Tombol Simpan Perubahan Berita (Satu Tombol Simpan Terpadu) -->
+            <div class="flex justify-end pt-4 border-t border-gray-200">
+              <button type="button" id="btnSimpanBeritaTotal" onclick="window.handleSimpanBeritaTotal(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition shadow flex items-center gap-2 cursor-pointer">
+                <i class="fas fa-save"></i>
+                <span>Simpan Perubahan Berita</span>
+              </button>
             </div>
           </div>
         </section>
@@ -1546,6 +1562,14 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   <!-- Rendered via JS -->
                 </tbody>
               </table>
+            </div>
+
+            <!-- Tombol Simpan Perubahan Galeri (Satu Tombol Simpan Terpadu) -->
+            <div class="flex justify-end pt-4 border-t border-gray-200">
+              <button type="button" id="btnSimpanGaleriTotal" onclick="window.handleSimpanGaleriTotal(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition shadow flex items-center gap-2 cursor-pointer">
+                <i class="fas fa-save"></i>
+                <span>Simpan Perubahan Galeri</span>
+              </button>
             </div>
           </div>
         </section>
@@ -2647,6 +2671,9 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (activeSection) {
             activeSection.classList.remove('hidden');
           }
+          if (typeof window.initTextareaAlignmentTools === 'function') {
+            window.initTextareaAlignmentTools();
+          }
 
           // 3. Update styling aktif pada sidebar menu
           sidebarLinks.forEach(link => {
@@ -2667,32 +2694,24 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
 
           // Panggil loader data otomatis saat berpindah tab agar form selalu fresh
-          if (hash === '#beranda') {
-            if (typeof window.loadBerandaData === 'function') window.loadBerandaData();
-          }
-          if (hash === '#profil') {
-            if (typeof window.loadProfilData === 'function') window.loadProfilData();
-          }
-          if (hash === '#program') {
-            if (typeof window.loadProgramData === 'function') window.loadProgramData();
-          }
-          if (hash === '#fasilitas') {
-            if (typeof window.loadFasilitasList === 'function') window.loadFasilitasList();
-            else if (typeof window.loadFasilitasData === 'function') window.loadFasilitasData();
-          }
-          if (hash === '#berita') {
-            if (typeof window.loadBeritaList === 'function') window.loadBeritaList();
-            else if (typeof window.loadBeritaData === 'function') window.loadBeritaData();
-          }
-          if (hash === '#galeri') {
-            if (typeof window.loadGaleriData === 'function') window.loadGaleriData();
-          }
-          if (hash === '#kontak') {
-            if (typeof window.loadKontakData === 'function') window.loadKontakData();
-          }
-          if (hash === '#ppdb') {
-            if (typeof window.loadPPDBData === 'function') window.loadPPDBData();
-          }
+          const triggerLoader = (loaderFnName) => {
+            if (typeof window[loaderFnName] === 'function') {
+              window[loaderFnName]();
+            } else {
+              setTimeout(() => {
+                if (typeof window[loaderFnName] === 'function') window[loaderFnName]();
+              }, 300);
+            }
+          };
+
+          if (hash === '#beranda') triggerLoader('loadBerandaData');
+          if (hash === '#profil') triggerLoader('loadProfilData');
+          if (hash === '#program') triggerLoader('loadProgramData');
+          if (hash === '#fasilitas') triggerLoader('loadFasilitasList');
+          if (hash === '#berita') triggerLoader('loadBeritaList');
+          if (hash === '#galeri') triggerLoader('loadGaleriData');
+          if (hash === '#kontak') triggerLoader('loadKontakData');
+          if (hash === '#ppdb') triggerLoader('loadPPDBData');
         }
 
         // Jalankan saat hash di URL berubah (user klik menu)

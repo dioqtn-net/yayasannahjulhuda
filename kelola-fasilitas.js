@@ -216,6 +216,9 @@
       areaForm.classList.remove('hidden');
       areaForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    if (typeof window.initTextareaAlignmentTools === 'function') {
+      window.initTextareaAlignmentTools();
+    }
   };
 
   window.tutupFormFasilitas = function () {
@@ -527,6 +530,36 @@
       if (btn) {
         btn.disabled = false;
         btn.innerHTML = BTN_BANNER_HTML;
+      }
+    }
+  };
+
+  // Simpan perubahan fasilitas terpadu
+  window.handleSimpanFasilitasTotal = async function (e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const btn = document.getElementById('btnSimpanFasilitasTotal');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan perubahan...';
+    }
+    try {
+      // Simpan banner jika ada input
+      const title = document.getElementById('fasBannerTitle')?.value?.trim();
+      if (title) {
+        await window.handleSimpanBannerFasilitas(null);
+      }
+      await window.loadFasilitasList();
+      alert('Alhamdulillah! Perubahan kelola fasilitas berhasil disimpan.');
+    } catch (err) {
+      console.error("[Kelola Fasilitas] Gagal simpan total:", err);
+      alert('Gagal menyimpan perubahan fasilitas: ' + (err.message || err));
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-save"></i> <span>Simpan Perubahan Fasilitas</span>';
       }
     }
   };
