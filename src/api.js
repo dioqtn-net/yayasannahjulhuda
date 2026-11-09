@@ -158,13 +158,35 @@ export const api = {
         let c = {
             id: 1,
             foundation_name: 'Yayasan Nahjul Huda',
-            address: 'Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530',
-            phone: '(021) 53654830',
+            address: 'Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530',
+            phone: '+6281234567890',
             whatsapp1: '+6281234567890',
             whatsapp2: '+628991168301',
             email: 'nahjulhuda74@gmail.com',
-            operational_hours: 'Senin - Jumat: 07:00 - 15:00 WIB'
+            operational_hours: 'Senin - Jumat: 07:00 - 15:00'
         };
+
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/contact_settings?id=eq.1&select=*', {
+                cache: 'no-store',
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            });
+            if (res.ok) {
+                const rows = await res.json();
+                if (rows && rows[0]) {
+                    c = { ...c, ...rows[0] };
+                    return c;
+                }
+            }
+        } catch(e) {
+            console.warn('[api.getContactSettings] REST fallback error:', e);
+        }
+
         if (supabase) {
             try {
                 const { data, error } = await supabase.from('contact_settings').select('*').eq('id', 1).maybeSingle();

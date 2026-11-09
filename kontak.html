@@ -211,7 +211,7 @@
                     <i class="fas fa-phone-alt"></i>
                   </span>
                   <div>
-                    <p class="text-gray-300">Telepon: <span id="pubFooterPhone" class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300">Telepon: <span id="pubFooterPhone" class="font-semibold text-white">+6281234567890</span></p>
                   </div>
                 </li>
                 <li class="flex items-center">
@@ -269,8 +269,15 @@
                 el.textContent = data.phone;
                 el.href = 'tel:' + data.phone.replace(/\D/g, '');
               }
+            }
+            const phoneVal = data.phone || data.whatsapp1 || data.wa1;
+            if (phoneVal) {
               const fPhone = document.getElementById('pubFooterPhone');
-              if (fPhone) fPhone.textContent = data.phone;
+              if (fPhone) fPhone.textContent = phoneVal;
+              document.querySelectorAll('footer .fa-phone-alt').forEach(icon => {
+                const span = icon.closest('li')?.querySelector('span.text-white') || icon.closest('li')?.querySelector('span:last-child');
+                if (span) span.textContent = phoneVal;
+              });
             }
             if (data.whatsapp1 || data.wa1) {
               const wa = data.whatsapp1 || data.wa1;

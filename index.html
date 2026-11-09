@@ -396,7 +396,7 @@
                     <i class="fas fa-phone-alt"></i>
                   </span>
                   <div>
-                    <p class="text-gray-300">Telepon: <span id="indexFooterPhone" class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300">Telepon: <span id="indexFooterPhone" class="font-semibold text-white">+6281234567890</span></p>
                   </div>
                 </li>
                 <li class="flex items-center">
@@ -771,8 +771,13 @@
                 if (fAddr) fAddr.textContent = contactData.address;
               }
               if (contactData.phone || contactData.whatsapp1) {
-                var fPhone = document.getElementById('indexFooterPhone');
-                if (fPhone) fPhone.textContent = contactData.phone || contactData.whatsapp1;
+                var phoneVal = contactData.phone || contactData.whatsapp1;
+                var fPhone = document.getElementById('indexFooterPhone') || document.getElementById('pubFooterPhone');
+                if (fPhone) fPhone.textContent = phoneVal;
+                document.querySelectorAll('footer .fa-phone-alt').forEach(function(icon) {
+                  var span = icon.closest('li')?.querySelector('span.text-white') || icon.closest('li')?.querySelector('span:last-child');
+                  if (span) span.textContent = phoneVal;
+                });
               }
               if (contactData.email) {
                 var fEmail = document.getElementById('indexFooterEmail');

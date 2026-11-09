@@ -21,12 +21,12 @@ import { renderAdmin } from './pages/Admin';
 const router = new Navigo('/');
 const appDiv = document.getElementById('app');
 
-const renderLayout = (contentHTML, isPublic = true, activePage = '') => {
+const renderLayout = (contentHTML, isPublic = true, activePage = '', contact = null) => {
     if (isPublic) {
         return `
             ${renderNavbar(activePage)}
             <main class="flex-grow">${contentHTML}</main>
-            ${renderFooter()}
+            ${renderFooter(contact)}
         `;
     } else {
         return `<main class="flex-grow bg-slate-100 min-h-screen">${contentHTML}</main>`;
@@ -44,9 +44,10 @@ const loadHome = async () => {
     const galleries = await api.getGalleries();
     const ppdb = await api.getPPDB();
     const homeSettings = await api.getHomeSettings();
+    const contact = await api.getContactSettings();
     appDiv.innerHTML = '';
-    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb, homeSettings), true, 'beranda');
-    setupHomeEvents(homeSettings);
+    appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb, homeSettings), true, 'beranda', contact);
+    setupHomeEvents(homeSettings, contact);
 };
 
 // Setup Routing
@@ -83,13 +84,25 @@ router.resolve();
 
 // Matikan intercept navigasi SPA agar semua menu berpindah via native full page load (hard load)
 // Event Setups
-function setupHomeEvents(homeSettings = null) {
+function setupHomeEvents(homeSettings = null, contact = null) {
     window.renderDynamicUnitModal = renderDynamicUnitModal;
 
     // Prioritaskan data Supabase yang baru saja di-load (100% Bebas LocalStorage)
     try {
         if (typeof localStorage !== 'undefined') localStorage.removeItem('cmsData_beranda');
     } catch(e) {}
+
+    if (contact) {
+        const fAddr = document.getElementById('pubFooterAddress') || document.getElementById('indexFooterAddress');
+        if (fAddr && contact.address) fAddr.textContent = contact.address;
+        const fPhone = document.getElementById('pubFooterPhone') || document.getElementById('indexFooterPhone');
+        if (fPhone && (contact.phone || contact.whatsapp1)) fPhone.textContent = contact.phone || contact.whatsapp1;
+        const fEmail = document.getElementById('pubFooterEmail') || document.getElementById('indexFooterEmail');
+        if (fEmail && contact.email) {
+            fEmail.textContent = contact.email;
+            fEmail.href = 'mailto:' + contact.email;
+        }
+    }
 
     if (homeSettings) {
         const taglineEl = document.getElementById('taglineDescPublic');

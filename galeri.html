@@ -439,7 +439,7 @@
                     <i class="fas fa-phone-alt"></i>
                   </span>
                   <div>
-                    <p class="text-gray-300">Telepon: <span class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300">Telepon: <span id="pubFooterPhone" class="font-semibold text-white">+6281234567890</span></p>
                   </div>
                 </li>
                 <li class="flex items-center">
@@ -924,8 +924,11 @@
             }
             var phone = data.phone || data.whatsapp1;
             if (phone) {
+              document.querySelectorAll('#pubFooterPhone, #indexFooterPhone').forEach(function(el) {
+                el.textContent = phone;
+              });
               document.querySelectorAll('footer .fa-phone-alt').forEach(function(icon) {
-                var span = icon.closest('li')?.querySelector('span.text-white');
+                var span = icon.closest('li')?.querySelector('span.text-white') || icon.closest('li')?.querySelector('span:last-child');
                 if (span) span.textContent = phone;
               });
             }
