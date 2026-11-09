@@ -389,19 +389,19 @@
               <ul class="space-y-3 text-sm">
                 <li class="flex items-start">
                   <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
-                  <span>Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
+                  <span id="indexFooterAddress">Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
                 </li>
                 <li class="flex items-start">
                   <span class="mr-3 mt-1 text-orange-400">
                     <i class="fas fa-phone-alt"></i>
                   </span>
                   <div>
-                    <p class="text-gray-300">Telepon: <span class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300">Telepon: <span id="indexFooterPhone" class="font-semibold text-white">(021) 53654830</span></p>
                   </div>
                 </li>
                 <li class="flex items-center">
                   <i class="fas fa-envelope mr-3 text-gold-500"></i>
-                  <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
+                  <a id="indexFooterEmail" href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -759,6 +759,27 @@
                 ppdbBadgeEl.textContent = ppdbData.status === 'BUKA' 
                   ? 'Pendaftaran Dibuka TP ' + (ppdbData.academic_year || '')
                   : 'Pendaftaran Ditutup';
+              }
+            }
+
+            // 4. Ambil Informasi Kontak & Footer dari Supabase
+            var contactRows = await fetchFromSupabaseRest('contact_settings?id=eq.1&select=*');
+            var contactData = contactRows && contactRows[0] ? contactRows[0] : null;
+            if (contactData) {
+              if (contactData.address) {
+                var fAddr = document.getElementById('indexFooterAddress');
+                if (fAddr) fAddr.textContent = contactData.address;
+              }
+              if (contactData.phone || contactData.whatsapp1) {
+                var fPhone = document.getElementById('indexFooterPhone');
+                if (fPhone) fPhone.textContent = contactData.phone || contactData.whatsapp1;
+              }
+              if (contactData.email) {
+                var fEmail = document.getElementById('indexFooterEmail');
+                if (fEmail) {
+                  fEmail.textContent = contactData.email;
+                  fEmail.href = 'mailto:' + contactData.email;
+                }
               }
             }
           } catch (err) {

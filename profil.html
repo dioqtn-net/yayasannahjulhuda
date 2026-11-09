@@ -336,19 +336,19 @@
               <ul class="space-y-3 text-sm">
                 <li class="flex items-start">
                   <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
-                  <span>Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
+                  <span id="pubFooterAddress">Jl. J No.67G / Jl. HH Gg. 1 No. 63, RT.008/RW.001, Kebon Jeruk, Jakarta Barat 11530</span>
                 </li>
                 <li class="flex items-start">
                   <span class="mr-3 mt-1 text-orange-400">
                     <i class="fas fa-phone-alt"></i>
                   </span>
                   <div>
-                    <p class="text-gray-300">Telepon: <span class="font-semibold text-white">(021) 53654830</span></p>
+                    <p class="text-gray-300">Telepon: <span id="pubFooterPhone" class="font-semibold text-white">(021) 53654830</span></p>
                   </div>
                 </li>
                 <li class="flex items-center">
                   <i class="fas fa-envelope mr-3 text-gold-500"></i>
-                  <a href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
+                  <a id="pubFooterEmail" href="mailto:nahjulhuda74@gmail.com" class="hover:text-gold-400 transition">nahjulhuda74@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -535,6 +535,22 @@
             applyPerson('MA', p.fotoMA, p.namaMA);
             applyPerson('Mudir', p.fotoMudir, p.namaMudir);
             console.log("[Publik Profil] Struktur Organisasi berhasil diperbarui dengan data Supabase.");
+          }
+
+          if (data.address) {
+            var fAddr = document.getElementById('pubFooterAddress');
+            if (fAddr) fAddr.textContent = data.address;
+          }
+          if (data.phone) {
+            var fPhone = document.getElementById('pubFooterPhone');
+            if (fPhone) fPhone.textContent = data.phone;
+          }
+          if (data.email) {
+            var fEmail = document.getElementById('pubFooterEmail');
+            if (fEmail) {
+              fEmail.textContent = data.email;
+              fEmail.href = 'mailto:' + data.email;
+            }
           }
         }
       } catch (err) {

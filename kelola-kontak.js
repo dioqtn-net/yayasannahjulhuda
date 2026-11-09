@@ -77,6 +77,16 @@
     return (typeof val === 'string' && val.trim() !== '') ? val.trim() : fallback;
   }
 
+  function getCleanText(val) {
+    if (!val) return '';
+    if (typeof val === 'string' && (val.includes('<div') || val.includes('<p'))) {
+      const temp = document.createElement('div');
+      temp.innerHTML = val;
+      return temp.textContent.trim();
+    }
+    return String(val).trim();
+  }
+
   // 1. MUAT DATA KONTAK DARI SUPABASE
   window.loadContactFields = async function () {
     console.log("[Kelola Kontak] Memuat data kontak dari Supabase...");
@@ -134,10 +144,17 @@
           setVal('contact_maps_url', contData.maps_embed_url || '');
 
           // Sinkronisasi ke Section Pengaturan Yayasan
-          setVal('setting_nama', contData.foundation_name || 'Yayasan Nahjul Huda Jakarta');
+          const namaYayasan = contData.foundation_name || 'Yayasan Nahjul Huda';
+          setVal('setting_nama', namaYayasan);
           setVal('setting_wa', contData.whatsapp1 || contData.phone || '');
           setVal('setting_email', contData.email || '');
-          setVal('setting_alamat', contData.address || '');
+          setVal('setting_alamat', getCleanText(contData.address || ''));
+
+          // Update header subtitle di Panel Admin
+          const adminSub = document.getElementById('adminHeaderSubtitle') || document.querySelector('header p.text-xs.text-slate-500');
+          if (adminSub && namaYayasan) {
+            adminSub.innerHTML = `${namaYayasan} &bull; Sistem Informasi &amp; Kelola Konten`;
+          }
         }
       }
     } catch (e) {
@@ -145,6 +162,7 @@
     }
   };
   window.loadKontakData = window.loadContactFields;
+  window.loadPengaturanData = window.loadContactFields;
 
   // 2. SIMPAN INFORMASI KONTAK (SECTION KONTAK)
   window.saveContactData = async function (e) {
@@ -298,20 +316,21 @@
     }
 
     try {
-      const nama = getVal('setting_nama', 'Yayasan Nahjul Huda Jakarta');
+      const nama = getVal('setting_nama', 'Yayasan Nahjul Huda');
       const wa = getVal('setting_wa');
       const email = getVal('setting_email');
-      const alamat = getVal('setting_alamat');
+      const alamat = getCleanText(getVal('setting_alamat'));
 
       const payload = {
         foundation_name: nama,
         address: alamat,
+        phone: wa,
         whatsapp1: wa,
         email: email,
         updated_at: new Date().toISOString()
       };
 
-      console.log("[Kelola Pengaturan] Mengirim ke Supabase...", payload);
+      console.log("[Kelola Pengaturan] Mengirim contact_settings ke Supabase...", payload);
 
       const supa = getSupabaseClient();
       let saveSuccess = false;
@@ -319,12 +338,12 @@
       if (supa) {
         try {
           const { error } = await withTimeout(
-            supa.from('contact_settings').update(payload).eq('id', 1),
+            supa.from('contact_settings').upsert({ id: 1, ...payload }, { onConflict: 'id' }),
             10000
           );
           if (!error) saveSuccess = true;
         } catch (e) {
-          console.warn("[Kelola Pengaturan] Supabase client update warning:", e);
+          console.warn("[Kelola Pengaturan] Supabase client upsert warning:", e);
         }
       }
 
@@ -333,32 +352,71 @@
         saveSuccess = true;
       }
 
-      // Sinkronisasi ke profile_settings
+      // Sinkronisasi ke profile_settings (nama yayasan, alamat, telepon/wa, email)
       try {
         const profPayload = {
+          name: nama,
           address: alamat,
           phone: wa,
           email: email,
           updated_at: new Date().toISOString()
         };
         if (supa) {
-          await supa.from('profile_settings').update(profPayload).eq('id', 1);
+          await supa.from('profile_settings').upsert({ id: 1, ...profPayload }, { onConflict: 'id' });
         } else {
           await restPatch('profile_settings', 1, profPayload);
         }
-      } catch (e) {}
+      } catch (errProf) {
+        console.warn("[Kelola Pengaturan] Sync ke profile_settings warning:", errProf);
+      }
 
-      // Perbarui juga form kontak
+      // Sinkronisasi ke ppdb_info (sekretariat_alamat)
+      try {
+        let ppdbRow = null;
+        if (supa) {
+          const { data } = await supa.from('ppdb_info').select('id, contact_person').eq('id', 1).maybeSingle();
+          ppdbRow = data;
+        }
+        if (!ppdbRow) {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/ppdb_info?id=eq.1&select=id,contact_person`, {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+          });
+          if (res.ok) {
+            const arr = await res.json();
+            if (arr && arr.length > 0) ppdbRow = arr[0];
+          }
+        }
+        if (ppdbRow && ppdbRow.contact_person) {
+          const cp = typeof ppdbRow.contact_person === 'string' ? JSON.parse(ppdbRow.contact_person) : { ...ppdbRow.contact_person };
+          cp.sekretariat_alamat = alamat;
+          if (supa) {
+            await supa.from('ppdb_info').update({ contact_person: cp, updated_at: new Date().toISOString() }).eq('id', 1);
+          } else {
+            await restPatch('ppdb_info', 1, { contact_person: cp, updated_at: new Date().toISOString() });
+          }
+        }
+      } catch (errPpdb) {
+        console.warn("[Kelola Pengaturan] Sync ke ppdb_info warning:", errPpdb);
+      }
+
+      // Perbarui juga form kontak di panel admin
       setVal('contact_address', alamat);
       setVal('contact_wa1', wa);
+      setVal('contact_phone', wa);
       setVal('contact_email', email);
+
+      // Perbarui subtitle header panel admin secara real-time
+      const adminSub = document.getElementById('adminHeaderSubtitle') || document.querySelector('header p.text-xs.text-slate-500');
+      if (adminSub && nama) {
+        adminSub.innerHTML = `${nama} &bull; Sistem Informasi &amp; Kelola Konten`;
+      }
 
       try {
         localStorage.removeItem('cmsData_contact');
         localStorage.removeItem('cmsData_pengaturan');
       } catch (e) {}
 
-      alert("Alhamdulillah! Pengaturan Yayasan berhasil disimpan ke database Supabase.");
+      alert("Alhamdulillah! Profil dan Kontak Yayasan berhasil disimpan ke database Supabase.\nPerubahan sudah aktif di seluruh halaman website.");
     } catch (error) {
       console.error("[Kelola Pengaturan] Gagal menyimpan:", error);
       alert("Gagal menyimpan pengaturan:\n" + (error.message || error));
