@@ -455,27 +455,7 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initFasilitas);
-      initFasilitas();
-      if (searchInput) {
-          searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-              renderList(list);
-              return;
-            }
-            const filtered = list.filter((item) => {
-              const nama = (item.nama || '').toLowerCase();
-              const desc = (item.deskripsi || '').toLowerCase();
-              return nama.includes(query) || desc.includes(query);
-            });
-            renderList(filtered);
-          });
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', initFasilitas);
-      document.addEventListener('turbolinks:load', initFasilitas);
+      document.addEventListener('DOMContentLoaded', initFdocument.addEventListener('turbolinks:load', initFasilitas);
       if (document.readyState === 'interactive' || document.readyState === 'complete') {
         initFasilitas();
       }

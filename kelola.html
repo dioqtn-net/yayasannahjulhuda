@@ -2615,6 +2615,16 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           if (window.innerWidth < 1024 && typeof closeSidebar === 'function') {
             closeSidebar();
           }
+
+          // Panggil loader data otomatis saat berpindah tab agar form selalu fresh
+          if (hash === '#beranda' && typeof window.loadBerandaData === 'function') window.loadBerandaData();
+          if (hash === '#profil' && typeof window.loadProfilData === 'function') window.loadProfilData();
+          if (hash === '#program' && typeof window.loadProgramData === 'function') window.loadProgramData();
+          if (hash === '#fasilitas' && typeof window.loadFasilitasList === 'function') window.loadFasilitasList();
+          if (hash === '#berita' && typeof window.loadBeritaData === 'function') window.loadBeritaData();
+          if (hash === '#galeri' && typeof window.loadGaleriData === 'function') window.loadGaleriData();
+          if (hash === '#kontak' && typeof window.loadKontakData === 'function') window.loadKontakData();
+          if (hash === '#ppdb' && typeof window.loadPPDBData === 'function') window.loadPPDBData();
         }
 
         // Jalankan saat hash di URL berubah (user klik menu)
