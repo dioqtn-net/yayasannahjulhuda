@@ -1851,30 +1851,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <div id="ppdbAdmin_sdi_syarat_list_container" class="space-y-2.5">
                   <!-- Poin-poin diisi secara dinamis oleh JS -->
                 </div>
+                <div id="ppdbAdmin_sdi_syarat_empty_notice" class="hidden text-xs text-slate-500 italic p-3 bg-white rounded-lg border border-dashed border-slate-300 text-center">
+                  Belum ada poin persyaratan berkas. Klik tombol "+ Tambah Poin" di atas untuk menambahkan.
+                </div>
                 <p id="ppdbAdmin_sdi_syarat_max_notice" class="hidden text-xs text-amber-700 font-semibold bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                   <i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal 8 poin persyaratan telah tercapai.
                 </p>
-
-                <!-- Catatan Bawah Syarat -->
-                <div class="pt-3 border-t border-slate-200/70">
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan di Bawah Syarat Pendaftaran</label>
-                  <textarea id="ppdbAdmin_sdi_syarat_catatan" rows="2" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
-                </div>
-
-                <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('sdi')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                        Simpan Info PPDB SDI
-                    </button>
-                </div>
               </div>
 
-              <!-- 4. Pusat Layanan Konsultasi PPDB -->
+              <!-- 4. Catatan / Kotak Informasi Tambahan di Bawah Persyaratan (Box Hijau) -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-info-circle text-emerald-600"></i> 4. Catatan / Kotak Informasi Tambahan (Box Hijau)
+                </h4>
+                <p class="text-xs text-slate-500">Teks catatan dengan ikon (i) yang tampil di dalam kotak hijau di bawah rincian persyaratan berkas.</p>
+                <textarea id="ppdbAdmin_sdi_syarat_catatan" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
+              </div>
+
+              <!-- 5. Pusat Layanan Konsultasi PPDB -->
               <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
                 <div class="flex items-center justify-between">
                   <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                    <i class="fas fa-headset text-emerald-600"></i> 4. Pusat Layanan Konsultasi PPDB
+                    <i class="fas fa-headset text-emerald-600"></i> 5. Pusat Layanan Konsultasi PPDB
                   </h4>
                   <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
                 </div>
@@ -1908,10 +1906,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <div class="flex justify-end pt-2">
-                <button type="button" onclick="savePPDBAdminJenjang('sdi')" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+              <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button type="button" onclick="savePPDBAdminJenjang('sdi', event)" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Data PPDB SDI</span>
+                  <span>Simpan Info PPDB SDI</span>
                 </button>
               </div>
             </div>
@@ -2004,30 +2002,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <div id="ppdbAdmin_mi_syarat_list_container" class="space-y-2.5">
                   <!-- Poin-poin diisi secara dinamis oleh JS -->
                 </div>
+                <div id="ppdbAdmin_mi_syarat_empty_notice" class="hidden text-xs text-slate-500 italic p-3 bg-white rounded-lg border border-dashed border-slate-300 text-center">
+                  Belum ada poin persyaratan berkas. Klik tombol "+ Tambah Poin" di atas untuk menambahkan.
+                </div>
                 <p id="ppdbAdmin_mi_syarat_max_notice" class="hidden text-xs text-amber-700 font-semibold bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                   <i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal 8 poin persyaratan telah tercapai.
                 </p>
-
-                <!-- Catatan Bawah Syarat -->
-                <div class="pt-3 border-t border-slate-200/70">
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan di Bawah Syarat Pendaftaran</label>
-                  <textarea id="ppdbAdmin_mi_syarat_catatan" rows="2" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
-                </div>
-
-                <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('mi')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                        Simpan Info PPDB MI
-                    </button>
-                </div>
               </div>
 
-              <!-- 4. Pusat Layanan Konsultasi PPDB -->
+              <!-- 4. Catatan / Kotak Informasi Tambahan di Bawah Persyaratan (Box Hijau) -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-info-circle text-emerald-600"></i> 4. Catatan / Kotak Informasi Tambahan (Box Hijau)
+                </h4>
+                <p class="text-xs text-slate-500">Teks catatan dengan ikon (i) yang tampil di dalam kotak hijau di bawah rincian persyaratan berkas.</p>
+                <textarea id="ppdbAdmin_mi_syarat_catatan" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
+              </div>
+
+              <!-- 5. Pusat Layanan Konsultasi PPDB -->
               <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
                 <div class="flex items-center justify-between">
                   <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                    <i class="fas fa-headset text-emerald-600"></i> 4. Pusat Layanan Konsultasi PPDB
+                    <i class="fas fa-headset text-emerald-600"></i> 5. Pusat Layanan Konsultasi PPDB
                   </h4>
                   <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
                 </div>
@@ -2061,10 +2057,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <div class="flex justify-end pt-2">
-                <button type="button" onclick="savePPDBAdminJenjang('mi')" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+              <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button type="button" onclick="savePPDBAdminJenjang('mi', event)" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Data PPDB MI</span>
+                  <span>Simpan Info PPDB MI</span>
                 </button>
               </div>
             </div>
@@ -2157,30 +2153,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <div id="ppdbAdmin_mts_syarat_list_container" class="space-y-2.5">
                   <!-- Poin-poin diisi secara dinamis oleh JS -->
                 </div>
+                <div id="ppdbAdmin_mts_syarat_empty_notice" class="hidden text-xs text-slate-500 italic p-3 bg-white rounded-lg border border-dashed border-slate-300 text-center">
+                  Belum ada poin persyaratan berkas. Klik tombol "+ Tambah Poin" di atas untuk menambahkan.
+                </div>
                 <p id="ppdbAdmin_mts_syarat_max_notice" class="hidden text-xs text-amber-700 font-semibold bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                   <i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal 8 poin persyaratan telah tercapai.
                 </p>
-
-                <!-- Catatan Bawah Syarat -->
-                <div class="pt-3 border-t border-slate-200/70">
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan di Bawah Syarat Pendaftaran</label>
-                  <textarea id="ppdbAdmin_mts_syarat_catatan" rows="2" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
-                </div>
-
-                <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('mts')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                        Simpan Info PPDB MTs
-                    </button>
-                </div>
               </div>
 
-              <!-- 4. Pusat Layanan Konsultasi PPDB -->
+              <!-- 4. Catatan / Kotak Informasi Tambahan di Bawah Persyaratan (Box Hijau) -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-info-circle text-emerald-600"></i> 4. Catatan / Kotak Informasi Tambahan (Box Hijau)
+                </h4>
+                <p class="text-xs text-slate-500">Teks catatan dengan ikon (i) yang tampil di dalam kotak hijau di bawah rincian persyaratan berkas.</p>
+                <textarea id="ppdbAdmin_mts_syarat_catatan" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
+              </div>
+
+              <!-- 5. Pusat Layanan Konsultasi PPDB -->
               <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
                 <div class="flex items-center justify-between">
                   <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                    <i class="fas fa-headset text-emerald-600"></i> 4. Pusat Layanan Konsultasi PPDB
+                    <i class="fas fa-headset text-emerald-600"></i> 5. Pusat Layanan Konsultasi PPDB
                   </h4>
                   <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
                 </div>
@@ -2214,10 +2208,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <div class="flex justify-end pt-2">
-                <button type="button" onclick="savePPDBAdminJenjang('mts')" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+              <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button type="button" onclick="savePPDBAdminJenjang('mts', event)" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Data PPDB MTs</span>
+                  <span>Simpan Info PPDB MTs</span>
                 </button>
               </div>
             </div>
@@ -2310,30 +2304,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <div id="ppdbAdmin_ma_syarat_list_container" class="space-y-2.5">
                   <!-- Poin-poin diisi secara dinamis oleh JS -->
                 </div>
+                <div id="ppdbAdmin_ma_syarat_empty_notice" class="hidden text-xs text-slate-500 italic p-3 bg-white rounded-lg border border-dashed border-slate-300 text-center">
+                  Belum ada poin persyaratan berkas. Klik tombol "+ Tambah Poin" di atas untuk menambahkan.
+                </div>
                 <p id="ppdbAdmin_ma_syarat_max_notice" class="hidden text-xs text-amber-700 font-semibold bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                   <i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal 8 poin persyaratan telah tercapai.
                 </p>
-
-                <!-- Catatan Bawah Syarat -->
-                <div class="pt-3 border-t border-slate-200/70">
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan di Bawah Syarat Pendaftaran</label>
-                  <textarea id="ppdbAdmin_ma_syarat_catatan" rows="2" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
-                </div>
-
-                <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('ma')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                        Simpan Info PPDB MA
-                    </button>
-                </div>
               </div>
 
-              <!-- 4. Pusat Layanan Konsultasi PPDB -->
+              <!-- 4. Catatan / Kotak Informasi Tambahan di Bawah Persyaratan (Box Hijau) -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-info-circle text-emerald-600"></i> 4. Catatan / Kotak Informasi Tambahan (Box Hijau)
+                </h4>
+                <p class="text-xs text-slate-500">Teks catatan dengan ikon (i) yang tampil di dalam kotak hijau di bawah rincian persyaratan berkas.</p>
+                <textarea id="ppdbAdmin_ma_syarat_catatan" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
+              </div>
+
+              <!-- 5. Pusat Layanan Konsultasi PPDB -->
               <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
                 <div class="flex items-center justify-between">
                   <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                    <i class="fas fa-headset text-emerald-600"></i> 4. Pusat Layanan Konsultasi PPDB
+                    <i class="fas fa-headset text-emerald-600"></i> 5. Pusat Layanan Konsultasi PPDB
                   </h4>
                   <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
                 </div>
@@ -2367,10 +2359,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <div class="flex justify-end pt-2">
-                <button type="button" onclick="savePPDBAdminJenjang('ma')" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+              <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button type="button" onclick="savePPDBAdminJenjang('ma', event)" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Data PPDB MA</span>
+                  <span>Simpan Info PPDB MA</span>
                 </button>
               </div>
             </div>
@@ -2463,30 +2455,28 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <div id="ppdbAdmin_ponpes_syarat_list_container" class="space-y-2.5">
                   <!-- Poin-poin diisi secara dinamis oleh JS -->
                 </div>
+                <div id="ppdbAdmin_ponpes_syarat_empty_notice" class="hidden text-xs text-slate-500 italic p-3 bg-white rounded-lg border border-dashed border-slate-300 text-center">
+                  Belum ada poin persyaratan berkas. Klik tombol "+ Tambah Poin" di atas untuk menambahkan.
+                </div>
                 <p id="ppdbAdmin_ponpes_syarat_max_notice" class="hidden text-xs text-amber-700 font-semibold bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                   <i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal 8 poin persyaratan telah tercapai.
                 </p>
-
-                <!-- Catatan Bawah Syarat -->
-                <div class="pt-3 border-t border-slate-200/70">
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan di Bawah Syarat Pendaftaran</label>
-                  <textarea id="ppdbAdmin_ponpes_syarat_catatan" rows="2" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
-                </div>
-
-                <!-- TOMBOL SIMPAN INFO PPDB -->
-                <div class="mt-8 flex flex-col sm:flex-row justify-end border-t border-gray-100 pt-6">
-                    <button type="button" onclick="simpanInfoPPDB('ponpes')" class="w-full sm:w-auto justify-center bg-[#0a5c36] hover:bg-[#08482a] text-white px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                        Simpan Info PPDB Ponpes
-                    </button>
-                </div>
               </div>
 
-              <!-- 4. Pusat Layanan Konsultasi PPDB -->
+              <!-- 4. Catatan / Kotak Informasi Tambahan di Bawah Persyaratan (Box Hijau) -->
+              <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fas fa-info-circle text-emerald-600"></i> 4. Catatan / Kotak Informasi Tambahan (Box Hijau)
+                </h4>
+                <p class="text-xs text-slate-500">Teks catatan dengan ikon (i) yang tampil di dalam kotak hijau di bawah rincian persyaratan berkas.</p>
+                <textarea id="ppdbAdmin_ponpes_syarat_catatan" rows="3" class="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="Contoh: Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran."></textarea>
+              </div>
+
+              <!-- 5. Pusat Layanan Konsultasi PPDB -->
               <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/70 space-y-4">
                 <div class="flex items-center justify-between">
                   <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                    <i class="fas fa-headset text-emerald-600"></i> 4. Pusat Layanan Konsultasi PPDB
+                    <i class="fas fa-headset text-emerald-600"></i> 5. Pusat Layanan Konsultasi PPDB
                   </h4>
                   <span class="text-[11px] text-amber-700 font-medium">*Jika belum ada, isi kontak dengan tanda "-"</span>
                 </div>
@@ -2520,10 +2510,10 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
               </div>
 
-              <div class="flex justify-end pt-2">
-                <button type="button" onclick="savePPDBAdminJenjang('ponpes')" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+              <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button type="button" onclick="savePPDBAdminJenjang('ponpes', event)" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
                   <i class="fas fa-save"></i>
-                  <span>Simpan Data PPDB Ponpes</span>
+                  <span>Simpan Info PPDB Ponpes</span>
                 </button>
               </div>
             </div>

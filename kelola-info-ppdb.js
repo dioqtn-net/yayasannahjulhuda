@@ -179,6 +179,113 @@
     return el?.value?.trim() || fallback;
   }
 
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // DYNAMIC SYARAT LIST HANDLERS
+  window.renderSyaratList = function (jenjang, syaratStr) {
+    const container = document.getElementById(`ppdbAdmin_${jenjang}_syarat_list_container`);
+    if (!container) return;
+    container.innerHTML = '';
+
+    let lines = [];
+    if (typeof syaratStr === 'string' && syaratStr.trim() !== '') {
+      lines = syaratStr.split('\n').map(s => s.trim()).filter(Boolean);
+    } else if (defaultPPDB[jenjang] && defaultPPDB[jenjang].syarat) {
+      lines = defaultPPDB[jenjang].syarat.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+
+    lines.forEach(text => {
+      window.addSyaratItem(jenjang, text);
+    });
+
+    window.updateSyaratUIState(jenjang);
+  };
+
+  window.addSyaratItem = function (jenjang, initialVal = '') {
+    const container = document.getElementById(`ppdbAdmin_${jenjang}_syarat_list_container`);
+    if (!container) return;
+
+    const currentRows = container.querySelectorAll('.syarat-item-row');
+    if (currentRows.length >= 8) {
+      window.updateSyaratUIState(jenjang);
+      return;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'syarat-item-row flex items-center gap-2.5 bg-white p-2.5 border border-slate-200 rounded-xl shadow-xs transition hover:border-emerald-300';
+    
+    const escapedVal = escapeHtml(initialVal || '');
+    
+    row.innerHTML = `
+      <span class="syarat-number w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold shrink-0">
+        ${currentRows.length + 1}
+      </span>
+      <input type="text" value="${escapedVal}" class="syarat-input flex-1 px-3.5 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white text-slate-800 transition" placeholder="Contoh: Fotokopi Akta Kelahiran (2 lembar)">
+      <button type="button" onclick="window.removeSyaratItem(this, '${jenjang}')" class="p-2 text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition" title="Hapus Poin Berkas">
+        <i class="far fa-trash-alt text-sm"></i>
+      </button>
+    `;
+    container.appendChild(row);
+
+    window.updateSyaratUIState(jenjang);
+  };
+
+  window.removeSyaratItem = function (btn, jenjang) {
+    const row = btn.closest('.syarat-item-row');
+    if (row) row.remove();
+    window.updateSyaratUIState(jenjang);
+  };
+
+  window.updateSyaratUIState = function (jenjang) {
+    const container = document.getElementById(`ppdbAdmin_${jenjang}_syarat_list_container`);
+    const emptyNotice = document.getElementById(`ppdbAdmin_${jenjang}_syarat_empty_notice`);
+    const maxNotice = document.getElementById(`ppdbAdmin_${jenjang}_syarat_max_notice`);
+    const addBtn = document.getElementById(`ppdbAdmin_${jenjang}_btn_add_syarat`);
+    if (!container) return;
+
+    const rows = container.querySelectorAll('.syarat-item-row');
+    rows.forEach((r, idx) => {
+      const badge = r.querySelector('.syarat-number');
+      if (badge) badge.textContent = idx + 1;
+    });
+
+    if (emptyNotice) {
+      if (rows.length === 0) {
+        emptyNotice.classList.remove('hidden');
+      } else {
+        emptyNotice.classList.add('hidden');
+      }
+    }
+
+    if (rows.length >= 8) {
+      if (maxNotice) maxNotice.classList.remove('hidden');
+      if (addBtn) addBtn.classList.add('opacity-50', 'pointer-events-none');
+    } else {
+      if (maxNotice) maxNotice.classList.add('hidden');
+      if (addBtn) addBtn.classList.remove('opacity-50', 'pointer-events-none');
+    }
+  };
+
+  window.getSyaratListValues = function (jenjang) {
+    const container = document.getElementById(`ppdbAdmin_${jenjang}_syarat_list_container`);
+    if (!container) return '';
+    const inputs = container.querySelectorAll('.syarat-input');
+    const values = [];
+    inputs.forEach(inp => {
+      const v = inp.value.trim();
+      if (v) values.push(v);
+    });
+    return values.join('\n');
+  };
+
   // 1. MUAT DATA PPDB DARI SUPABASE
   window.loadPPDBFields = async function () {
     console.log("[Kelola PPDB] Memuat data PPDB dari Supabase...");
@@ -234,7 +341,7 @@
           setVal(`ppdbAdmin_${k}_tgl_mulai`, item.tgl_mulai || '');
           setVal(`ppdbAdmin_${k}_tgl_selesai`, item.tgl_selesai || '');
           setVal(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
-          setVal(`ppdbAdmin_${k}_syarat`, item.syarat || '');
+          window.renderSyaratList(k, item.syarat);
           setVal(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
           setVal(`ppdbAdmin_${k}_kontak1_nama`, item.kontak1_nama || '');
           setVal(`ppdbAdmin_${k}_kontak1_wa`, item.kontak1_wa || '');
@@ -379,7 +486,7 @@
         tgl_mulai: getVal(`ppdbAdmin_${k}_tgl_mulai`),
         tgl_selesai: getVal(`ppdbAdmin_${k}_tgl_selesai`),
         lokasi: getSafeTextarea(`ppdbAdmin_${k}_lokasi`),
-        syarat: getSafeTextarea(`ppdbAdmin_${k}_syarat`),
+        syarat: window.getSyaratListValues(k),
         syarat_catatan: getSafeTextarea(`ppdbAdmin_${k}_syarat_catatan`),
         kontak1_nama: getVal(`ppdbAdmin_${k}_kontak1_nama`),
         kontak1_wa: getVal(`ppdbAdmin_${k}_kontak1_wa`),
