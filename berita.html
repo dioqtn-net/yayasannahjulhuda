@@ -484,8 +484,8 @@
                     </div>
                   </div>
                   <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                      ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang)}
+                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded whitespace-nowrap">
+                      ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase().includes('semua')) ? 'Semua' : item.jenjang)}
                     </span>
                     <button type="button" onclick="openNewsModalById('${item.id}')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0 cursor-pointer">
                       Baca Selengkapnya &rarr;
@@ -596,9 +596,9 @@
           if (titleEl) titleEl.textContent = item.judul || '-';
           if (dateEl) dateEl.textContent = tgl;
           if (badgeEl) {
-            const badgeText = (!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang;
+            const badgeText = (!item.jenjang || item.jenjang.toLowerCase().includes('semua')) ? 'Semua' : item.jenjang;
             badgeEl.textContent = badgeText;
-            badgeEl.className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm';
+            badgeEl.className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm whitespace-nowrap';
           }
 
           if (bodyEl) {

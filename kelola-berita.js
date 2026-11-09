@@ -170,8 +170,8 @@
             <div class="text-[11px] text-gray-400 mt-0.5">Foto: ${images.length} file</div>
           </td>
           <td class="px-4 py-3 align-top">
-            <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
-              ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang)}
+            <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block whitespace-nowrap">
+              ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase().includes('semua')) ? 'Semua' : item.jenjang)}
             </span>
           </td>
           <td class="px-4 py-3 align-top text-xs text-slate-500">
