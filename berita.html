@@ -485,7 +485,7 @@
                   </div>
                   <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                     <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                      ${escapeHtml(item.jenjang)}
+                      ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang)}
                     </span>
                     <button type="button" onclick="openNewsModalById('${item.id}')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 py-1 px-2 rounded-lg hover:bg-emerald-50 transition shrink-0 cursor-pointer">
                       Baca Selengkapnya &rarr;
@@ -538,8 +538,9 @@
           let visibleCount = 0;
 
           allCards.forEach(card => {
-            const cardJenjang = card.getAttribute('data-jenjang');
-            if (jenjang === 'Semua' || cardJenjang === jenjang) {
+            const cardJenjang = (card.getAttribute('data-jenjang') || '').trim();
+            const isUniversal = !cardJenjang || cardJenjang.toLowerCase() === 'semua' || cardJenjang.toLowerCase() === 'semua jenjang';
+            if (jenjang === 'Semua' || isUniversal || cardJenjang.toLowerCase() === jenjang.toLowerCase()) {
               card.classList.remove('hidden');
               visibleCount++;
             } else {
@@ -595,7 +596,8 @@
           if (titleEl) titleEl.textContent = item.judul || '-';
           if (dateEl) dateEl.textContent = tgl;
           if (badgeEl) {
-            badgeEl.textContent = item.jenjang || 'Semua';
+            const badgeText = (!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang;
+            badgeEl.textContent = badgeText;
             badgeEl.className = 'bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded shadow-sm';
           }
 
@@ -678,8 +680,9 @@
             let visibleCount = 0;
 
             currentCards.forEach(card => {
-              const cardJenjang = card.getAttribute('data-jenjang');
-              const matchesJenjang = activeJenjang === 'Semua' || cardJenjang === activeJenjang;
+              const cardJenjang = (card.getAttribute('data-jenjang') || '').trim();
+              const isUniversal = !cardJenjang || cardJenjang.toLowerCase() === 'semua' || cardJenjang.toLowerCase() === 'semua jenjang';
+              const matchesJenjang = activeJenjang === 'Semua' || isUniversal || cardJenjang.toLowerCase() === activeJenjang.toLowerCase();
               const title = card.querySelector('.news-title')?.textContent.toLowerCase() || '';
               const desc = card.querySelector('.news-desc')?.textContent.toLowerCase() || '';
 

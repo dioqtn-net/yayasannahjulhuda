@@ -171,7 +171,7 @@
           </td>
           <td class="px-4 py-3 align-top">
             <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
-              ${escapeHtml(item.jenjang || 'Semua')}
+              ${escapeHtml((!item.jenjang || item.jenjang.toLowerCase() === 'semua') ? 'Semua Jenjang' : item.jenjang)}
             </span>
           </td>
           <td class="px-4 py-3 align-top text-xs text-slate-500">
@@ -248,7 +248,7 @@
 
     if (elId) elId.value = item.id;
     if (elJudul) elJudul.value = item.title || '';
-    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
+    if (elJenjang) elJenjang.value = (!item.jenjang || item.jenjang === 'Semua Jenjang' || item.jenjang === 'Semua') ? 'Semua' : item.jenjang;
     if (elTanggal) elTanggal.value = item.date || new Date().toISOString().split('T')[0];
     if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600"></i> <span>Edit Berita</span>';
 
