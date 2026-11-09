@@ -136,6 +136,8 @@
     }
   };
 
+  window.loadFasilitasData = window.loadFasilitasList;
+
   function renderAdminTable() {
     const tbody = document.getElementById('adminListFasilitas') || document.getElementById('daftarFasilitasAdmin');
     if (!tbody) {

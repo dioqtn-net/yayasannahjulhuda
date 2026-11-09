@@ -395,4 +395,10 @@
   } else {
     initKelolaBeranda();
   }
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#beranda' || window.location.hash === '') {
+      window.loadBerandaData();
+    }
+  });
 })();

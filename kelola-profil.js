@@ -249,6 +249,21 @@
             fotoMA: p.fotoMA || '',
             fotoMudir: p.fotoMudir || ''
           };
+
+          // Tampilkan preview thumbnail foto yang sudah tersimpan
+          ['Ketua', 'SDI', 'MI', 'MTs', 'MA', 'Mudir'].forEach(role => {
+            const photoUrl = p['foto' + role];
+            const prevEl = document.getElementById('previewFoto' + role);
+            if (prevEl) {
+              if (photoUrl && typeof photoUrl === 'string' && photoUrl.trim() !== '') {
+                prevEl.src = photoUrl;
+                prevEl.classList.remove('hidden');
+              } else {
+                prevEl.src = '';
+                prevEl.classList.add('hidden');
+              }
+            }
+          });
         }
       }
     } catch (e) {
@@ -354,8 +369,21 @@
         saveSuccess = true;
       }
 
-      // Update memory state
+      // Update memory state & thumbnail preview
       currentPengurusState = newPengurus;
+      ['Ketua', 'SDI', 'MI', 'MTs', 'MA', 'Mudir'].forEach(role => {
+        const photoUrl = newPengurus['foto' + role];
+        const prevEl = document.getElementById('previewFoto' + role);
+        if (prevEl) {
+          if (photoUrl && typeof photoUrl === 'string' && photoUrl.trim() !== '') {
+            prevEl.src = photoUrl;
+            prevEl.classList.remove('hidden');
+          } else {
+            prevEl.src = '';
+            prevEl.classList.add('hidden');
+          }
+        }
+      });
 
       // Bersihkan attribute data-hapus dan reset input file
       ['fotoKetua', 'fotoSDI', 'fotoMI', 'fotoMTs', 'fotoMA', 'fotoMudir'].forEach(id => {
@@ -408,4 +436,10 @@
   } else {
     initKelolaProfil();
   }
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#profil') {
+      window.loadProfilData();
+    }
+  });
 })();

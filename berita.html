@@ -390,15 +390,8 @@
 
         function getBeritaList() {
           if (window.currentBeritaData && Array.isArray(window.currentBeritaData) && window.currentBeritaData.length > 0) return window.currentBeritaData;
+          if (currentBeritaData && Array.isArray(currentBeritaData) && currentBeritaData.length > 0) return currentBeritaData;
           return defaultBerita;
-        }
-          try {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            return defaultBerita;
-          } catch(e) {
-            return defaultBerita;
-          }
         }
 
         function formatIndoDate(dateStr) {

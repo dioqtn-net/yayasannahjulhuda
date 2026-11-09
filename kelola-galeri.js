@@ -1,8 +1,9 @@
 /**
  * =======================================================================
- * KELOLA GALERI (EKSTRAKURIKULER & KEGIATAN) - 100% PURE SUPABASE
- * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem
- * Fitur: Full CRUD Galleries Table, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * KELOLA GALERI (PANEL ADMIN) - 100% PURE SUPABASE
+ * Aturan: NO localStorage.getItem / NO localStorage.setItem
+ * Fitur: Full CRUD Ekstrakurikuler & Kegiatan, 15s Timeout & Native REST Fallback
+ * Kolom Tabel: 4 Kolom (Judul, Jenjang, Tanggal, Aksi)
  * =======================================================================
  */
 
@@ -17,7 +18,6 @@
   let currentEskulList = [];
   let currentKegiatanList = [];
 
-  // Bersihkan cache lokal lama
   try {
     localStorage.removeItem('cmsData_listEskul');
     localStorage.removeItem('cmsData_listKegiatan');
@@ -56,6 +56,8 @@
       'apikey': SUPABASE_ANON_KEY,
       'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
       ...(options.headers || {})
     };
     const res = await fetch(url, { ...options, headers });
@@ -71,12 +73,28 @@
   }
 
   function escapeHtml(text) {
+    if (!text) return '';
     const div = document.createElement('div');
-    div.textContent = text || '';
+    div.textContent = text;
     return div.innerHTML;
   }
 
-  // Helper membaca dan mengompresi file gambar
+  function formatIndoDate(dateStr) {
+    if (!dateStr) return '-';
+    try {
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const year = parts[0];
+        const month = months[parseInt(parts[1], 10) - 1] || parts[1];
+        const day = parseInt(parts[2], 10);
+        return `${day} ${month} ${year}`;
+      }
+    } catch (e) {}
+    return dateStr;
+  }
+
+  // Helper membaca file/media
   async function readFileOrName(inputEl, fallback) {
     if (!inputEl) return fallback || '';
     if (typeof window.processImageField === 'function') {
@@ -89,7 +107,7 @@
     }
     const file = inputEl.files && inputEl.files[0];
     if (file) {
-      if (typeof window.compressImage === 'function') {
+      if (typeof window.compressImage === 'function' && file.type && file.type.startsWith('image/')) {
         const comp = await window.compressImage(file, { maxWidth: 1600, maxHeight: 1200, quality: 0.85 });
         return comp.dataUrl;
       }
@@ -103,7 +121,7 @@
     return fallback || '';
   }
 
-  // 1. LOAD SEMUA GALERI DARI SUPABASE
+  // 1. LOAD DAFTAR GALERI DARI SUPABASE
   window.loadGaleriData = async function () {
     console.log("[Kelola Galeri] Memuat galeri dari Supabase...");
     try {
@@ -123,15 +141,15 @@
 
       if (!dbData) {
         try {
-          dbData = await restFetch(`galleries?select=*&order=id.desc`);
+          dbData = await withTimeout(restFetch('galleries?select=*&order=id.desc'), 8000);
         } catch (e) {
           console.warn("[Kelola Galeri] REST fetch error:", e);
         }
       }
 
       if (dbData && Array.isArray(dbData)) {
-        currentEskulList = dbData.filter(g => (g.category || '').toLowerCase().includes('eskul') || (g.category || '').toLowerCase().includes('ekstrakurikuler'));
-        currentKegiatanList = dbData.filter(g => (g.category || '').toLowerCase().includes('kegiatan'));
+        currentEskulList = dbData.filter(g => (g.category || '').toLowerCase() === 'ekstrakurikuler' || (g.category || '').toLowerCase() === 'eskul');
+        currentKegiatanList = dbData.filter(g => (g.category || '').toLowerCase() === 'kegiatan' || !(g.category || '').toLowerCase().includes('eskul'));
       } else {
         currentEskulList = [];
         currentKegiatanList = [];
@@ -144,117 +162,211 @@
     }
   };
 
-  // 2. TABEL ADMIN ESKUL
+  // 2. TABEL ADMIN ESKUL (4 Kolom Sesuai kelola.html)
   function renderAdminEskulTable() {
-    const tbody = document.getElementById('daftarEskulAdmin');
+    const tbody = document.getElementById('adminListEskul') || document.getElementById('daftarEskulAdmin');
     if (!tbody) return;
 
     if (currentEskulList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-6 text-center text-gray-500">Belum ada ekstrakurikuler tersimpan di database. Silakan klik Tambah Ekstrakurikuler.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-6 text-center text-gray-500">Belum ada ekstrakurikuler tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Ekstrakurikuler</span> di atas.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = currentEskulList.map(item => `
-      <tr class="hover:bg-slate-50 transition border-b">
-        <td class="px-6 py-4">
-          <img src="${item.image_url || '/media/background/wallpaper_yayasan.jpg'}" alt="${escapeHtml(item.title)}" class="w-16 h-12 object-cover rounded shadow-sm">
+      <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+        <td class="px-4 py-3 align-top">
+          <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">${item.image_url ? 'Foto/Video tersimpan' : 'Tanpa media'}</div>
         </td>
-        <td class="px-6 py-4 font-semibold text-slate-800">
-          ${escapeHtml(item.title)}
-        </td>
-        <td class="px-6 py-4">
-          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">
+        <td class="px-4 py-3 align-top">
+          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
             ${escapeHtml(item.jenjang || 'Semua')}
           </span>
         </td>
-        <td class="px-6 py-4 text-slate-600 text-sm max-w-xs truncate">
-          ${escapeHtml(item.description || '-')}
+        <td class="px-4 py-3 align-top text-xs text-slate-500">
+          ${formatIndoDate(item.event_date)}
         </td>
-        <td class="px-6 py-4 text-right space-x-2">
-          <button type="button" onclick="window.editEskulCard('${item.id}')" class="px-3 py-1 bg-amber-500 text-white rounded text-xs hover:bg-amber-600 transition">
-            <i class="fas fa-edit mr-1"></i> Edit
-          </button>
-          <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'eskul')" class="px-3 py-1 bg-rose-600 text-white rounded text-xs hover:bg-rose-700 transition">
-            <i class="fas fa-trash-alt mr-1"></i> Hapus
-          </button>
+        <td class="px-4 py-3 align-top text-center">
+          <div class="flex items-center justify-center gap-3">
+            <button type="button" onclick="window.editEskulCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Ekstrakurikuler">
+              <i class="far fa-edit text-base"></i>
+            </button>
+            <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'eskul')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Ekstrakurikuler">
+              <i class="far fa-trash-alt text-base"></i>
+            </button>
+          </div>
         </td>
       </tr>
     `).join('');
   }
 
-  // 3. TABEL ADMIN KEGIATAN
+  // 3. TABEL ADMIN KEGIATAN (4 Kolom Sesuai kelola.html)
   function renderAdminKegiatanTable() {
-    const tbody = document.getElementById('daftarKegiatanAdmin');
+    const tbody = document.getElementById('adminListKegiatan') || document.getElementById('daftarKegiatanAdmin');
     if (!tbody) return;
 
     if (currentKegiatanList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-6 text-center text-gray-500">Belum ada kegiatan tersimpan di database. Silakan klik Tambah Kegiatan.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-6 text-center text-gray-500">Belum ada kegiatan tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Kegiatan Baru</span> di atas.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = currentKegiatanList.map(item => `
-      <tr class="hover:bg-slate-50 transition border-b">
-        <td class="px-6 py-4">
-          <img src="${item.image_url || '/media/background/wallpaper_yayasan.jpg'}" alt="${escapeHtml(item.title)}" class="w-16 h-12 object-cover rounded shadow-sm">
+      <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+        <td class="px-4 py-3 align-top">
+          <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+          <div class="text-[11px] text-gray-400 mt-0.5">${item.image_url ? 'Foto/Video tersimpan' : 'Tanpa media'}</div>
         </td>
-        <td class="px-6 py-4 font-semibold text-slate-800">
-          ${escapeHtml(item.title)}
-        </td>
-        <td class="px-6 py-4">
-          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">
+        <td class="px-4 py-3 align-top">
+          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
             ${escapeHtml(item.jenjang || 'Semua')}
           </span>
         </td>
-        <td class="px-6 py-4 text-slate-600 text-sm max-w-xs truncate">
-          ${escapeHtml(item.description || '-')}
+        <td class="px-4 py-3 align-top text-xs text-slate-500">
+          ${formatIndoDate(item.event_date)}
         </td>
-        <td class="px-6 py-4 text-right space-x-2">
-          <button type="button" onclick="window.editKegiatanCard('${item.id}')" class="px-3 py-1 bg-amber-500 text-white rounded text-xs hover:bg-amber-600 transition">
-            <i class="fas fa-edit mr-1"></i> Edit
-          </button>
-          <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'kegiatan')" class="px-3 py-1 bg-rose-600 text-white rounded text-xs hover:bg-rose-700 transition">
-            <i class="fas fa-trash-alt mr-1"></i> Hapus
-          </button>
+        <td class="px-4 py-3 align-top text-center">
+          <div class="flex items-center justify-center gap-3">
+            <button type="button" onclick="window.editKegiatanCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Kegiatan">
+              <i class="far fa-edit text-base"></i>
+            </button>
+            <button type="button" onclick="window.deleteGaleriItem('${item.id}', 'kegiatan')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Kegiatan">
+              <i class="far fa-trash-alt text-base"></i>
+            </button>
+          </div>
         </td>
       </tr>
     `).join('');
   }
 
-  // 4. EDIT & HAPUS
+  // 4. BUKA & TUTUP FORM ESKUL
+  window.bukaFormTambahEskul = function () {
+    const elId = document.getElementById('eskulId');
+    const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
+    const elTanggal = document.getElementById('eskulTanggal');
+    const elJenjang = document.getElementById('eskulJenjang');
+    const formTitle = document.getElementById('formEskulTitle');
+
+    if (elId) elId.value = '';
+    if (elJudul) elJudul.value = '';
+    if (elTanggal) elTanggal.value = new Date().toISOString().split('T')[0];
+    if (elJenjang) elJenjang.value = 'Semua';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600 mr-2"></i> Tambah Ekstrakurikuler Baru';
+
+    if (typeof window.setTextareaValueWithAlignment === 'function') {
+      window.setTextareaValueWithAlignment('eskulDeskripsi', '');
+    } else {
+      const elD = document.getElementById('eskulDeskripsi');
+      if (elD) elD.value = '';
+    }
+
+    const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
+    if (inputMedia) inputMedia.value = '';
+
+    const area = document.getElementById('areaFormEskul');
+    if (area) area.classList.remove('hidden');
+    area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.tutupFormEskul = function () {
+    const area = document.getElementById('areaFormEskul');
+    if (area) area.classList.add('hidden');
+  };
+
+  // 5. BUKA & TUTUP FORM KEGIATAN
+  window.bukaFormTambahKegiatan = function () {
+    const elId = document.getElementById('kegiatanId');
+    const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
+    const elTanggal = document.getElementById('kegiatanTanggal');
+    const elJenjang = document.getElementById('kegiatanJenjang');
+    const formTitle = document.getElementById('formKegiatanTitle');
+
+    if (elId) elId.value = '';
+    if (elJudul) elJudul.value = '';
+    if (elTanggal) elTanggal.value = new Date().toISOString().split('T')[0];
+    if (elJenjang) elJenjang.value = 'Semua';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600 mr-2"></i> Tambah Kegiatan Baru';
+
+    if (typeof window.setTextareaValueWithAlignment === 'function') {
+      window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
+    } else {
+      const elD = document.getElementById('kegiatanDeskripsi');
+      if (elD) elD.value = '';
+    }
+
+    const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
+    if (inputMedia) inputMedia.value = '';
+
+    const area = document.getElementById('areaFormKegiatan');
+    if (area) area.classList.remove('hidden');
+    area?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.tutupFormKegiatan = function () {
+    const area = document.getElementById('areaFormKegiatan');
+    if (area) area.classList.add('hidden');
+  };
+
+  // 6. EDIT
   window.editEskulCard = function (id) {
     const item = currentEskulList.find(e => String(e.id) === String(id));
     if (!item) return;
 
-    document.getElementById('eskulId').value = item.id;
-    document.getElementById('eskulNama').value = item.title || '';
-    document.getElementById('eskulJenjang').value = item.jenjang || 'Semua';
+    const elId = document.getElementById('eskulId');
+    const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
+    const elTanggal = document.getElementById('eskulTanggal');
+    const elJenjang = document.getElementById('eskulJenjang');
+    const formTitle = document.getElementById('formEskulTitle');
+
+    if (elId) elId.value = item.id;
+    if (elJudul) elJudul.value = item.title || '';
+    if (elTanggal) elTanggal.value = item.event_date || new Date().toISOString().split('T')[0];
+    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600 mr-2"></i> Edit Ekstrakurikuler';
+
     if (typeof window.setTextareaValueWithAlignment === 'function') {
       window.setTextareaValueWithAlignment('eskulDeskripsi', item.description || '');
     } else {
-      document.getElementById('eskulDeskripsi').value = item.description || '';
+      const elD = document.getElementById('eskulDeskripsi');
+      if (elD) elD.value = item.description || '';
     }
+
+    const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
+    if (inputMedia) inputMedia.value = '';
 
     const areaForm = document.getElementById('areaFormEskul');
     if (areaForm) areaForm.classList.remove('hidden');
-    areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   window.editKegiatanCard = function (id) {
     const item = currentKegiatanList.find(k => String(k.id) === String(id));
     if (!item) return;
 
-    document.getElementById('kegiatanId').value = item.id;
-    document.getElementById('kegiatanNama').value = item.title || '';
-    document.getElementById('kegiatanJenjang').value = item.jenjang || 'Semua';
+    const elId = document.getElementById('kegiatanId');
+    const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
+    const elTanggal = document.getElementById('kegiatanTanggal');
+    const elJenjang = document.getElementById('kegiatanJenjang');
+    const formTitle = document.getElementById('formKegiatanTitle');
+
+    if (elId) elId.value = item.id;
+    if (elJudul) elJudul.value = item.title || '';
+    if (elTanggal) elTanggal.value = item.event_date || new Date().toISOString().split('T')[0];
+    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600 mr-2"></i> Edit Kegiatan';
+
     if (typeof window.setTextareaValueWithAlignment === 'function') {
       window.setTextareaValueWithAlignment('kegiatanDeskripsi', item.description || '');
     } else {
-      document.getElementById('kegiatanDeskripsi').value = item.description || '';
+      const elD = document.getElementById('kegiatanDeskripsi');
+      if (elD) elD.value = item.description || '';
     }
+
+    const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
+    if (inputMedia) inputMedia.value = '';
 
     const areaForm = document.getElementById('areaFormKegiatan');
     if (areaForm) areaForm.classList.remove('hidden');
-    areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   window.deleteGaleriItem = async function (id, type) {
@@ -289,7 +401,7 @@
     }
   };
 
-  // 5. SIMPAN ESKUL KE SUPABASE
+  // 7. SIMPAN ESKUL KE SUPABASE
   window.handleSimpanEskul = async function (e) {
     if (e) {
       e.preventDefault();
@@ -306,16 +418,18 @@
     }
 
     try {
-      const title = document.getElementById('eskulNama')?.value?.trim();
+      const elJudul = document.getElementById('eskulJudul') || document.getElementById('eskulNama');
+      const title = elJudul?.value?.trim();
       const jenjang = document.getElementById('eskulJenjang')?.value || 'Semua';
+      const event_date = document.getElementById('eskulTanggal')?.value || new Date().toISOString().split('T')[0];
       const description = (typeof window.getWrappedTextareaValue === 'function')
         ? window.getWrappedTextareaValue('eskulDeskripsi')
         : (document.getElementById('eskulDeskripsi')?.value?.trim() || '');
       const eskulId = document.getElementById('eskulId')?.value?.trim();
 
       if (!title) {
-        alert('Nama ekstrakurikuler wajib diisi!');
-        document.getElementById('eskulNama')?.focus();
+        alert('Judul ekstrakurikuler wajib diisi!');
+        elJudul?.focus();
         isSavingEskul = false;
         if (btnSimpan) {
           btnSimpan.disabled = false;
@@ -324,13 +438,14 @@
         return;
       }
 
-      const inputImg = document.getElementById('eskulImg1');
+      const inputMedia = document.getElementById('eskulMedia') || document.getElementById('eskulImg1');
       const prevItem = eskulId ? currentEskulList.find(x => String(x.id) === String(eskulId)) : null;
-      const imageUrl = await readFileOrName(inputImg, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
+      const imageUrl = await readFileOrName(inputMedia, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
 
       const payload = {
         title,
         jenjang,
+        event_date,
         category: 'Ekstrakurikuler',
         description,
         image_url: imageUrl
@@ -384,12 +499,7 @@
         }
       }
 
-      document.getElementById('eskulId').value = '';
-      document.getElementById('eskulNama').value = '';
-      if (inputImg) inputImg.value = '';
-      const areaForm = document.getElementById('areaFormEskul');
-      if (areaForm) areaForm.classList.add('hidden');
-
+      window.tutupFormEskul();
       await window.loadGaleriData();
       alert('Alhamdulillah! Data ekstrakurikuler berhasil disimpan ke database Supabase.');
     } catch (err) {
@@ -403,7 +513,7 @@
     }
   };
 
-  // 6. SIMPAN KEGIATAN KE SUPABASE
+  // 8. SIMPAN KEGIATAN KE SUPABASE
   window.handleSimpanKegiatan = async function (e) {
     if (e) {
       e.preventDefault();
@@ -420,16 +530,18 @@
     }
 
     try {
-      const title = document.getElementById('kegiatanNama')?.value?.trim();
+      const elJudul = document.getElementById('kegiatanJudul') || document.getElementById('kegiatanNama');
+      const title = elJudul?.value?.trim();
       const jenjang = document.getElementById('kegiatanJenjang')?.value || 'Semua';
+      const event_date = document.getElementById('kegiatanTanggal')?.value || new Date().toISOString().split('T')[0];
       const description = (typeof window.getWrappedTextareaValue === 'function')
         ? window.getWrappedTextareaValue('kegiatanDeskripsi')
         : (document.getElementById('kegiatanDeskripsi')?.value?.trim() || '');
       const kegiatanId = document.getElementById('kegiatanId')?.value?.trim();
 
       if (!title) {
-        alert('Nama kegiatan wajib diisi!');
-        document.getElementById('kegiatanNama')?.focus();
+        alert('Judul kegiatan wajib diisi!');
+        elJudul?.focus();
         isSavingKegiatan = false;
         if (btnSimpan) {
           btnSimpan.disabled = false;
@@ -438,13 +550,14 @@
         return;
       }
 
-      const inputImg = document.getElementById('kegiatanImg1');
+      const inputMedia = document.getElementById('kegiatanMedia') || document.getElementById('kegiatanImg1');
       const prevItem = kegiatanId ? currentKegiatanList.find(x => String(x.id) === String(kegiatanId)) : null;
-      const imageUrl = await readFileOrName(inputImg, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
+      const imageUrl = await readFileOrName(inputMedia, prevItem ? prevItem.image_url : '/media/background/wallpaper_yayasan.jpg');
 
       const payload = {
         title,
         jenjang,
+        event_date,
         category: 'Kegiatan',
         description,
         image_url: imageUrl
@@ -498,12 +611,7 @@
         }
       }
 
-      document.getElementById('kegiatanId').value = '';
-      document.getElementById('kegiatanNama').value = '';
-      if (inputImg) inputImg.value = '';
-      const areaForm = document.getElementById('areaFormKegiatan');
-      if (areaForm) areaForm.classList.add('hidden');
-
+      window.tutupFormKegiatan();
       await window.loadGaleriData();
       alert('Alhamdulillah! Data kegiatan berhasil disimpan ke database Supabase.');
     } catch (err) {
@@ -517,7 +625,7 @@
     }
   };
 
-  // 7. BANNER GALERI
+  // 9. BANNER GALERI
   window.handleSimpanBannerGaleri = async function (e) {
     if (e) {
       e.preventDefault();
@@ -544,61 +652,37 @@
     const btnTambahEskul = document.getElementById('btnTambahEskul');
     if (btnTambahEskul && !btnTambahEskul.dataset.bound) {
       btnTambahEskul.dataset.bound = 'true';
-      btnTambahEskul.addEventListener('click', () => {
-        document.getElementById('eskulId').value = '';
-        document.getElementById('eskulNama').value = '';
-        document.getElementById('eskulJenjang').value = 'Semua';
-        if (typeof window.setTextareaValueWithAlignment === 'function') {
-          window.setTextareaValueWithAlignment('eskulDeskripsi', '');
-        } else {
-          document.getElementById('eskulDeskripsi').value = '';
-        }
-        const area = document.getElementById('areaFormEskul');
-        if (area) area.classList.remove('hidden');
-        area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      btnTambahEskul.addEventListener('click', window.bukaFormTambahEskul);
     }
 
     const btnBatalEskul = document.getElementById('btnBatalEskul');
     if (btnBatalEskul && !btnBatalEskul.dataset.bound) {
       btnBatalEskul.dataset.bound = 'true';
-      btnBatalEskul.addEventListener('click', () => {
-        const area = document.getElementById('areaFormEskul');
-        if (area) area.classList.add('hidden');
-      });
+      btnBatalEskul.addEventListener('click', window.tutupFormEskul);
     }
 
     const btnTambahKegiatan = document.getElementById('btnTambahKegiatan');
     if (btnTambahKegiatan && !btnTambahKegiatan.dataset.bound) {
       btnTambahKegiatan.dataset.bound = 'true';
-      btnTambahKegiatan.addEventListener('click', () => {
-        document.getElementById('kegiatanId').value = '';
-        document.getElementById('kegiatanNama').value = '';
-        document.getElementById('kegiatanJenjang').value = 'Semua';
-        if (typeof window.setTextareaValueWithAlignment === 'function') {
-          window.setTextareaValueWithAlignment('kegiatanDeskripsi', '');
-        } else {
-          document.getElementById('kegiatanDeskripsi').value = '';
-        }
-        const area = document.getElementById('areaFormKegiatan');
-        if (area) area.classList.remove('hidden');
-        area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      btnTambahKegiatan.addEventListener('click', window.bukaFormTambahKegiatan);
     }
 
     const btnBatalKegiatan = document.getElementById('btnBatalKegiatan');
     if (btnBatalKegiatan && !btnBatalKegiatan.dataset.bound) {
       btnBatalKegiatan.dataset.bound = 'true';
-      btnBatalKegiatan.addEventListener('click', () => {
-        const area = document.getElementById('areaFormKegiatan');
-        if (area) area.classList.add('hidden');
-      });
+      btnBatalKegiatan.addEventListener('click', window.tutupFormKegiatan);
     }
   }
 
+  initKelolaGaleri();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initKelolaGaleri);
-  } else {
-    initKelolaGaleri();
   }
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#galeri') {
+      window.loadGaleriData();
+    }
+  });
 })();

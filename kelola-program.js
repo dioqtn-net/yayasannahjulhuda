@@ -371,4 +371,10 @@
   } else {
     initKelolaProgram();
   }
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#program') {
+      window.loadProgramData();
+    }
+  });
 })();

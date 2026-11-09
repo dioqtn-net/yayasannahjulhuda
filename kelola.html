@@ -623,7 +623,7 @@
 
                   <!-- Tombol Simpan -->
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanBeranda" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanBeranda" onclick="window.handleSimpanBeranda(event)" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2 cursor-pointer">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Beranda
                       </button>
@@ -700,14 +700,17 @@
                               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <!-- Ketua Yayasan -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Ketua Yayasan</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Ketua Yayasan</label>
+                                          <img id="previewFotoKetua" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaKetua" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Ketua" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoKetua" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoKetua').value=''; document.getElementById('fotoKetua').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoKetua').value=''; document.getElementById('fotoKetua').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoKetua'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -715,14 +718,17 @@
                                   </div>
                                   <!-- Kepala SDI -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Kepala SDI</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Kepala SDI</label>
+                                          <img id="previewFotoSDI" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaSDI" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala SDI" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoSDI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoSDI').value=''; document.getElementById('fotoSDI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoSDI').value=''; document.getElementById('fotoSDI').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoSDI'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -730,14 +736,17 @@
                                   </div>
                                   <!-- Kepala MI -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MI</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Kepala MI</label>
+                                          <img id="previewFotoMI" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaMI" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MI" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoMI" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMI').value=''; document.getElementById('fotoMI').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoMI').value=''; document.getElementById('fotoMI').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoMI'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -745,14 +754,17 @@
                                   </div>
                                   <!-- Kepala MTs -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MTs</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Kepala MTs</label>
+                                          <img id="previewFotoMTs" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaMTs" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MTs" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoMTs" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMTs').value=''; document.getElementById('fotoMTs').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoMTs').value=''; document.getElementById('fotoMTs').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoMTs'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -760,14 +772,17 @@
                                   </div>
                                   <!-- Kepala MA -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Kepala MA</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Kepala MA</label>
+                                          <img id="previewFotoMA" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaMA" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Kepala MA" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoMA" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMA').value=''; document.getElementById('fotoMA').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoMA').value=''; document.getElementById('fotoMA').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoMA'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -775,14 +790,17 @@
                                   </div>
                                   <!-- Mudir Ponpes -->
                                   <div class="p-3 bg-white border rounded shadow-sm">
-                                      <label class="block text-xs font-bold text-gray-700 mb-1">Mudir Ponpes</label>
+                                      <div class="flex items-center justify-between mb-1">
+                                          <label class="block text-xs font-bold text-gray-700">Mudir Ponpes</label>
+                                          <img id="previewFotoMudir" src="" alt="Pratinjau" class="w-8 h-8 rounded-full object-cover border border-emerald-300 hidden">
+                                      </div>
                                       <input type="text" id="namaMudir" class="w-full px-2 py-1 mb-2 border rounded text-sm focus:ring-green-500" placeholder="Nama Mudir" value="-">
                                       
                                       <div class="mt-1">
                                           <label class="block text-[10px] text-gray-500 mb-1">Format: JPG/PNG (Maks 2MB)</label>
                                           <div class="flex items-center gap-2">
                                               <input type="file" id="fotoMudir" accept=".jpg, .jpeg, .png" onchange="this.setAttribute('data-hapus', 'false')" class="flex-1 w-full text-xs border p-1 rounded">
-                                              <button type="button" onclick="document.getElementById('fotoMudir').value=''; document.getElementById('fotoMudir').setAttribute('data-hapus', 'true');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
+                                              <button type="button" onclick="document.getElementById('fotoMudir').value=''; document.getElementById('fotoMudir').setAttribute('data-hapus', 'true'); const p=document.getElementById('previewFotoMudir'); if(p) p.classList.add('hidden');" class="p-1.5 text-red-500 hover:bg-red-50 rounded border border-red-200 transition-colors" title="Hapus Pilihan Foto">
                                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                               </button>
                                           </div>
@@ -794,7 +812,8 @@
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProfil" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+                      <button type="button" id="btnSimpanProfil" onclick="window.handleSimpanProfil(event)" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2 cursor-pointer">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Profil
                       </button>
                   </div>
@@ -1053,7 +1072,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   </div>
 
                   <div class="flex justify-end pt-4">
-                      <button type="button" id="btnSimpanProgram" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2">
+                      <button type="button" id="btnSimpanProgram" onclick="window.handleSimpanProgram(event)" class="w-full sm:w-auto justify-center bg-green-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center gap-2 cursor-pointer">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                           Simpan Perubahan Program
                       </button>
@@ -1203,7 +1222,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="beritaBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Informasi teranyar seputar kegiatan kesiswaan, prestasi, pembiasaan ibadah, dan pengumuman resmi Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerBerita" onclick="window.handleSimpanBannerBerita(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow cursor-pointer">
                   Simpan Banner Berita
                 </button>
               </div>
@@ -1217,32 +1236,18 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <h3 class="text-xl font-bold text-gray-900">Daftar Berita & Kegiatan</h3>
                 <p class="text-xs text-gray-500">Publikasi warta prestasi, agenda kegiatan, dan dokumentasi sekolah.</p>
               </div>
-              <button type="button" id="btnTambahBerita" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">
+              <button type="button" id="btnTambahBerita" onclick="window.bukaFormTambahBerita()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit cursor-pointer transition">
                 <i class="fas fa-plus"></i>
-                <span>Tambah Berita Baru</span>
+                <span>+ Tambah Berita Baru</span>
               </button>
             </div>
 
-            <!-- Tabel List Berita -->
-            <div class="overflow-x-auto border rounded-lg mb-6">
-              <table class="min-w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b">
-                  <tr>
-                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Berita</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody id="adminListBerita">
-                  <!-- List akan dirender oleh JavaScript -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Form Tambah/Edit Berita (Hidden by default) -->
-            <div id="areaFormBerita" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
-              <h3 id="formBeritaTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Berita Baru</h3>
+            <!-- Form Tambah/Edit Berita (Muncul tepat di atas tabel agar langsung terlihat) -->
+            <div id="areaFormBerita" class="hidden p-5 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
+              <h3 id="formBeritaTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2 text-base flex items-center gap-2">
+                <i class="fas fa-edit text-emerald-600"></i>
+                <span>Tambah Berita Baru</span>
+              </h3>
               <input type="hidden" id="beritaId">
               <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1253,6 +1258,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                   <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Jenjang <span class="text-red-500">*</span></label>
                     <select id="beritaJenjang" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500 bg-white">
+                      <option value="Semua">Semua Jenjang</option>
                       <option value="SDI">SDI Al Kindy</option>
                       <option value="MI">Madrasah Ibtidaiyah (MI)</option>
                       <option value="MTs">MTs Nahjul Huda</option>
@@ -1279,7 +1285,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
 
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">Upload Foto Berita (Maksimal 3 Foto)</label>
-                  <p class="text-[10px] text-gray-500 mb-2">*Format: JPG/PNG. Agar tidak terpotong, gunakan foto dengan rasio 16:9 (Landscape) atau resolusi minimal 800x450 piksel.</p>
+                  <p class="text-[10px] text-gray-500 mb-2">*Format: JPG/PNG. Foto otomatis dikompres sebelum diunggah ke storage.</p>
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
                       <span class="block text-xs text-gray-500 mb-1">Foto Utama (1)</span>
@@ -1298,10 +1304,30 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalBerita" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanCardBerita" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Berita</button>
+                  <button type="button" id="btnBatalBerita" onclick="window.tutupFormBerita()" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition cursor-pointer">Batal</button>
+                  <button type="button" id="btnSimpanCardBerita" onclick="window.handleSimpanCardBerita(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm cursor-pointer flex items-center gap-2">
+                    <i class="fas fa-save"></i>
+                    <span>Simpan Berita</span>
+                  </button>
                 </div>
               </div>
+            </div>
+
+            <!-- Tabel List Berita -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Berita</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListBerita">
+                  <!-- List akan dirender oleh JavaScript -->
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -1342,7 +1368,7 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 <textarea id="galeriBannerDesc" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-emerald-500">Momen berharga dan potret kegiatan keseharian siswa/siswi dan santri serta fasilitas di lingkungan Yayasan Nahjul Huda.</textarea>
               </div>
               <div class="flex justify-end pt-2">
-                <button type="button" id="btnSimpanBannerGaleri" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow">
+                <button type="button" id="btnSimpanBannerGaleri" onclick="window.handleSimpanBannerGaleri(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow cursor-pointer">
                   Simpan Banner Galeri
                 </button>
               </div>
@@ -1360,29 +1386,18 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </h3>
                 <p class="text-xs text-gray-500">Dokumentasi kegiatan minat bakat, marching band, futsal, dan olahraga siswa/siswi dan santri.</p>
               </div>
-              <button type="button" id="btnTambahEskul" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">+ Tambah Ekstrakurikuler Baru</button>
+              <button type="button" id="btnTambahEskul" onclick="window.bukaFormTambahEskul()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit cursor-pointer transition">
+                <i class="fas fa-plus"></i>
+                <span>+ Tambah Ekstrakurikuler Baru</span>
+              </button>
             </div>
 
-            <!-- Tabel List Ekstrakurikuler -->
-            <div class="overflow-x-auto border rounded-lg mb-6">
-              <table class="min-w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b">
-                  <tr>
-                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Ekstrakurikuler</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody id="adminListEskul">
-                  <!-- Rendered via JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Form Tambah/Edit Ekstrakurikuler -->
-            <div id="areaFormEskul" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
-              <h4 id="formEskulTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Ekstrakurikuler Baru</h4>
+            <!-- Form Tambah/Edit Ekstrakurikuler (Muncul tepat di atas tabel) -->
+            <div id="areaFormEskul" class="hidden p-5 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
+              <h4 id="formEskulTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2 text-base flex items-center gap-2">
+                <i class="fas fa-edit text-emerald-600"></i>
+                <span>Tambah Ekstrakurikuler Baru</span>
+              </h4>
               <input type="hidden" id="eskulId">
               <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1420,10 +1435,30 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalEskul" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanEskul" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Ekstrakurikuler</button>
+                  <button type="button" id="btnBatalEskul" onclick="window.tutupFormEskul()" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition cursor-pointer">Batal</button>
+                  <button type="button" id="btnSimpanEskul" onclick="window.handleSimpanEskul(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm cursor-pointer flex items-center gap-2">
+                    <i class="fas fa-save"></i>
+                    <span>Simpan Ekstrakurikuler</span>
+                  </button>
                 </div>
               </div>
+            </div>
+
+            <!-- Tabel List Ekstrakurikuler -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Ekstrakurikuler</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListEskul">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
             </div>
           </div>
 
@@ -1438,29 +1473,18 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </h3>
                 <p class="text-xs text-gray-500">Dokumentasi agenda ibadah harian, peringatan hari besar Islam (PHBI), dan kegiatan sekolah siswa/siswi dan santri.</p>
               </div>
-              <button type="button" id="btnTambahKegiatan" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit">+ Tambah Kegiatan Baru</button>
+              <button type="button" id="btnTambahKegiatan" onclick="window.bukaFormTambahKegiatan()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 text-sm font-medium flex items-center gap-2 w-fit cursor-pointer transition">
+                <i class="fas fa-plus"></i>
+                <span>+ Tambah Kegiatan Baru</span>
+              </button>
             </div>
 
-            <!-- Tabel List Kegiatan -->
-            <div class="overflow-x-auto border rounded-lg mb-6">
-              <table class="min-w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b">
-                  <tr>
-                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Kegiatan</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
-                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody id="adminListKegiatan">
-                  <!-- Rendered via JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Form Tambah/Edit Kegiatan -->
-            <div id="areaFormKegiatan" class="hidden p-5 border border-emerald-200 rounded-xl bg-slate-50">
-              <h4 id="formKegiatanTitle" class="font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 text-base">Tambah Kegiatan Baru</h4>
+            <!-- Form Tambah/Edit Kegiatan (Muncul tepat di atas tabel) -->
+            <div id="areaFormKegiatan" class="hidden p-5 border-2 border-emerald-500 rounded-xl bg-emerald-50/40 mb-6 shadow-sm">
+              <h4 id="formKegiatanTitle" class="font-bold text-emerald-900 mb-4 border-b border-emerald-200 pb-2 text-base flex items-center gap-2">
+                <i class="fas fa-edit text-emerald-600"></i>
+                <span>Tambah Kegiatan Baru</span>
+              </h4>
               <input type="hidden" id="kegiatanId">
               <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1498,10 +1522,30 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
-                  <button type="button" id="btnBatalKegiatan" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition">Batal</button>
-                  <button type="button" id="btnSimpanKegiatan" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm">Simpan Kegiatan</button>
+                  <button type="button" id="btnBatalKegiatan" onclick="window.tutupFormKegiatan()" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 font-medium text-sm transition cursor-pointer">Batal</button>
+                  <button type="button" id="btnSimpanKegiatan" onclick="window.handleSimpanKegiatan(event)" class="w-full sm:w-auto justify-center bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition shadow text-sm cursor-pointer flex items-center gap-2">
+                    <i class="fas fa-save"></i>
+                    <span>Simpan Kegiatan</span>
+                  </button>
                 </div>
               </div>
+            </div>
+
+            <!-- Tabel List Kegiatan -->
+            <div class="overflow-x-auto border rounded-lg mb-6">
+              <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 border-b">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-gray-700">Judul Kegiatan</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-28">Jenjang</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 w-36">Tanggal</th>
+                    <th class="px-4 py-3 font-semibold text-gray-700 text-center w-24">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminListKegiatan">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -2623,14 +2667,32 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
           }
 
           // Panggil loader data otomatis saat berpindah tab agar form selalu fresh
-          if (hash === '#beranda' && typeof window.loadBerandaData === 'function') window.loadBerandaData();
-          if (hash === '#profil' && typeof window.loadProfilData === 'function') window.loadProfilData();
-          if (hash === '#program' && typeof window.loadProgramData === 'function') window.loadProgramData();
-          if (hash === '#fasilitas' && typeof window.loadFasilitasList === 'function') window.loadFasilitasList();
-          if (hash === '#berita' && typeof window.loadBeritaData === 'function') window.loadBeritaData();
-          if (hash === '#galeri' && typeof window.loadGaleriData === 'function') window.loadGaleriData();
-          if (hash === '#kontak' && typeof window.loadKontakData === 'function') window.loadKontakData();
-          if (hash === '#ppdb' && typeof window.loadPPDBData === 'function') window.loadPPDBData();
+          if (hash === '#beranda') {
+            if (typeof window.loadBerandaData === 'function') window.loadBerandaData();
+          }
+          if (hash === '#profil') {
+            if (typeof window.loadProfilData === 'function') window.loadProfilData();
+          }
+          if (hash === '#program') {
+            if (typeof window.loadProgramData === 'function') window.loadProgramData();
+          }
+          if (hash === '#fasilitas') {
+            if (typeof window.loadFasilitasList === 'function') window.loadFasilitasList();
+            else if (typeof window.loadFasilitasData === 'function') window.loadFasilitasData();
+          }
+          if (hash === '#berita') {
+            if (typeof window.loadBeritaList === 'function') window.loadBeritaList();
+            else if (typeof window.loadBeritaData === 'function') window.loadBeritaData();
+          }
+          if (hash === '#galeri') {
+            if (typeof window.loadGaleriData === 'function') window.loadGaleriData();
+          }
+          if (hash === '#kontak') {
+            if (typeof window.loadKontakData === 'function') window.loadKontakData();
+          }
+          if (hash === '#ppdb') {
+            if (typeof window.loadPPDBData === 'function') window.loadPPDBData();
+          }
         }
 
         // Jalankan saat hash di URL berubah (user klik menu)

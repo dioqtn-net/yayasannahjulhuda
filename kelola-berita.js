@@ -1,8 +1,9 @@
 /**
  * =======================================================================
  * KELOLA BERITA (PANEL ADMIN) - 100% PURE SUPABASE
- * Aturan Mutlak: NO localStorage.getItem / NO localStorage.setItem
+ * Aturan: NO localStorage.getItem / NO localStorage.setItem
  * Fitur: Full CRUD News, Auto-Reset Finally, 15s Timeout & Native REST Fallback
+ * Kolom Tabel: 4 Kolom (Judul Berita, Jenjang, Tanggal, Aksi)
  * =======================================================================
  */
 
@@ -17,7 +18,6 @@
   let editingImages = [];
   const BTN_BERITA_HTML = `Simpan Berita`;
 
-  // Bersihkan cache lokal
   try {
     localStorage.removeItem('cmsData_listBerita');
     localStorage.removeItem('cmsData_beritaBanner');
@@ -55,6 +55,8 @@
       'apikey': SUPABASE_ANON_KEY,
       'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
       ...(options.headers || {})
     };
     const res = await fetch(url, { ...options, headers });
@@ -70,8 +72,9 @@
   }
 
   function escapeHtml(text) {
+    if (!text) return '';
     const div = document.createElement('div');
-    div.textContent = text || '';
+    div.textContent = text;
     return div.innerHTML;
   }
 
@@ -110,7 +113,7 @@
 
       if (!dbData) {
         try {
-          dbData = await restFetch(`news_posts?select=*&order=id.desc`);
+          dbData = await withTimeout(restFetch('news_posts?select=*&order=id.desc'), 8000);
         } catch (e) {
           console.warn("[Kelola Berita] REST fetch error:", e);
         }
@@ -127,67 +130,126 @@
     }
   };
 
+  // Alias agar kelola.html dapat memanggil window.loadBeritaData() maupun window.loadBeritaList()
+  window.loadBeritaData = window.loadBeritaList;
+
   function renderAdminTable() {
-    const tbody = document.getElementById('daftarBeritaAdmin');
-    if (!tbody) return;
+    const tbody = document.getElementById('adminListBerita') || document.getElementById('daftarBeritaAdmin');
+    if (!tbody) {
+      console.warn("[Kelola Berita] Elemen tbody adminListBerita tidak ditemukan!");
+      return;
+    }
 
     if (currentBeritaList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-gray-500">Belum ada berita tersimpan di database. Silakan klik tombol Tambah Berita.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">Belum ada berita tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Berita Baru</span> di atas.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = currentBeritaList.map(item => {
       const images = (Array.isArray(item.images) && item.images.length > 0)
         ? item.images
-        : (item.image_url ? [item.image_url] : ['/media/background/wallpaper_yayasan.jpg']);
-      const mainImg = images[0] || '/media/background/wallpaper_yayasan.jpg';
+        : (item.image_url ? [item.image_url] : []);
 
       return `
-        <tr class="hover:bg-slate-50 transition border-b">
-          <td class="px-6 py-4">
-            <img src="${mainImg}" alt="${escapeHtml(item.title)}" class="w-16 h-12 object-cover rounded shadow-sm">
+        <tr class="hover:bg-slate-50 transition border-b border-gray-100">
+          <td class="px-4 py-3 align-top">
+            <div class="font-semibold text-gray-800 text-sm">${escapeHtml(item.title)}</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">Foto: ${images.length} file</div>
           </td>
-          <td class="px-6 py-4 font-semibold text-slate-800">
-            ${escapeHtml(item.title)}
-          </td>
-          <td class="px-6 py-4">
-            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">
+          <td class="px-4 py-3 align-top">
+            <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold inline-block">
               ${escapeHtml(item.jenjang || 'Semua')}
             </span>
           </td>
-          <td class="px-6 py-4 text-slate-500 text-xs">
+          <td class="px-4 py-3 align-top text-xs text-slate-500">
             ${formatIndoDate(item.date)}
           </td>
-          <td class="px-6 py-4 text-right space-x-2">
-            <button type="button" onclick="window.editBeritaCard('${item.id}')" class="px-3 py-1 bg-amber-500 text-white rounded text-xs hover:bg-amber-600 transition">
-              <i class="fas fa-edit mr-1"></i> Edit
-            </button>
-            <button type="button" onclick="window.deleteBeritaCard('${item.id}')" class="px-3 py-1 bg-rose-600 text-white rounded text-xs hover:bg-rose-700 transition">
-              <i class="fas fa-trash-alt mr-1"></i> Hapus
-            </button>
+          <td class="px-4 py-3 align-top text-center">
+            <div class="flex items-center justify-center gap-3">
+              <button type="button" onclick="window.editBeritaCard('${item.id}')" class="text-blue-600 hover:text-blue-800 p-1.5 transition rounded hover:bg-blue-50" title="Edit Berita">
+                <i class="far fa-edit text-base"></i>
+              </button>
+              <button type="button" onclick="window.deleteBeritaCard('${item.id}')" class="text-red-500 hover:text-red-700 p-1.5 transition rounded hover:bg-red-50" title="Hapus Berita">
+                <i class="far fa-trash-alt text-base"></i>
+              </button>
+            </div>
           </td>
         </tr>
       `;
     }).join('');
   }
 
-  // 2. FORM EDIT & TAMBAH
+  // 2. BUKA & TUTUP FORM BERITA
+  window.bukaFormTambahBerita = function () {
+    const elId = document.getElementById('beritaId');
+    const elJudul = document.getElementById('beritaJudul');
+    const elJenjang = document.getElementById('beritaJenjang');
+    const elTanggal = document.getElementById('beritaTanggal');
+    const formTitle = document.getElementById('formBeritaTitle');
+
+    if (elId) elId.value = '';
+    if (elJudul) elJudul.value = '';
+    if (elJenjang) elJenjang.value = 'Semua';
+    if (elTanggal) elTanggal.value = new Date().toISOString().split('T')[0];
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle text-emerald-600"></i> <span>Tambah Berita Baru</span>';
+
+    if (typeof window.setTextareaValueWithAlignment === 'function') {
+      window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', '');
+      window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', '');
+    } else {
+      const elS = document.getElementById('beritaDeskripsiSingkat');
+      const elL = document.getElementById('beritaDeskripsiLengkap');
+      if (elS) elS.value = '';
+      if (elL) elL.value = '';
+    }
+
+    ['beritaImg1', 'beritaImg2', 'beritaImg3'].forEach(id => {
+      const inp = document.getElementById(id);
+      if (inp) inp.value = '';
+    });
+    editingImages = [];
+
+    const areaForm = document.getElementById('areaFormBerita');
+    if (areaForm) areaForm.classList.remove('hidden');
+    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.tutupFormBerita = function () {
+    const areaForm = document.getElementById('areaFormBerita');
+    if (areaForm) areaForm.classList.add('hidden');
+  };
+
+  // 3. EDIT BERITA
   window.editBeritaCard = function (id) {
     const item = currentBeritaList.find(b => String(b.id) === String(id));
     if (!item) return;
 
-    document.getElementById('beritaId').value = item.id;
-    document.getElementById('beritaJudul').value = item.title || '';
-    document.getElementById('beritaJenjang').value = item.jenjang || 'Semua';
-    document.getElementById('beritaTanggal').value = item.date || new Date().toISOString().split('T')[0];
+    const elId = document.getElementById('beritaId');
+    const elJudul = document.getElementById('beritaJudul');
+    const elJenjang = document.getElementById('beritaJenjang');
+    const elTanggal = document.getElementById('beritaTanggal');
+    const formTitle = document.getElementById('formBeritaTitle');
+
+    if (elId) elId.value = item.id;
+    if (elJudul) elJudul.value = item.title || '';
+    if (elJenjang) elJenjang.value = item.jenjang || 'Semua';
+    if (elTanggal) elTanggal.value = item.date || new Date().toISOString().split('T')[0];
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit text-emerald-600"></i> <span>Edit Berita</span>';
 
     if (typeof window.setTextareaValueWithAlignment === 'function') {
       window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', item.summary || '');
       window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', item.content || '');
     } else {
-      document.getElementById('beritaDeskripsiSingkat').value = item.summary || '';
-      document.getElementById('beritaDeskripsiLengkap').value = item.content || '';
+      const elS = document.getElementById('beritaDeskripsiSingkat');
+      const elL = document.getElementById('beritaDeskripsiLengkap');
+      if (elS) elS.value = item.summary || '';
+      if (elL) elL.value = item.content || '';
     }
+
+    ['beritaImg1', 'beritaImg2', 'beritaImg3'].forEach(id => {
+      const inp = document.getElementById(id);
+      if (inp) inp.value = '';
+    });
 
     editingImages = (Array.isArray(item.images) && item.images.length > 0)
       ? item.images
@@ -195,10 +257,10 @@
 
     const areaForm = document.getElementById('areaFormBerita');
     if (areaForm) areaForm.classList.remove('hidden');
-    areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    areaForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // 3. HAPUS BERITA DARI SUPABASE
+  // 4. HAPUS BERITA
   window.deleteBeritaCard = async function (id) {
     if (!confirm('Apakah Anda yakin ingin menghapus berita ini dari database secara permanen?')) {
       return;
@@ -227,14 +289,13 @@
       }
 
       await window.loadBeritaList();
-      alert('Berita berhasil dihapus dari database Supabase.');
+      alert('Alhamdulillah! Berita berhasil dihapus dari database Supabase.');
     } catch (e) {
       console.error("[Kelola Berita] Gagal menghapus:", e);
       alert('Gagal menghapus berita: ' + (e.message || e));
     }
   };
 
-  // Helper membaca dan mengompresi file gambar
   async function readFileOrName(inputEl, fallback) {
     if (!inputEl) return fallback || '';
     if (typeof window.processImageField === 'function') {
@@ -261,7 +322,7 @@
     return fallback || '';
   }
 
-  // 4. SIMPAN KARTU BERITA KE SUPABASE
+  // 5. SIMPAN KARTU BERITA
   window.handleSimpanCardBerita = async function (e) {
     if (e) {
       e.preventDefault();
@@ -274,7 +335,7 @@
     const btnSimpan = document.getElementById('btnSimpanCardBerita');
     if (btnSimpan) {
       btnSimpan.disabled = true;
-      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan ke server...';
+      btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengompres gambar & menyimpan...';
     }
 
     try {
@@ -381,17 +442,8 @@
         }
       }
 
-      // Bersihkan form
-      document.getElementById('beritaId').value = '';
-      document.getElementById('beritaJudul').value = '';
-      if (inp1) inp1.value = '';
-      if (inp2) inp2.value = '';
-      if (inp3) inp3.value = '';
-      editingImages = [];
-
-      const areaForm = document.getElementById('areaFormBerita');
-      if (areaForm) areaForm.classList.add('hidden');
-
+      // Bersihkan dan tutup form
+      window.tutupFormBerita();
       await window.loadBeritaList();
       alert('Alhamdulillah! Berita berhasil disimpan ke database Supabase.');
     } catch (error) {
@@ -406,7 +458,7 @@
     }
   };
 
-  // 5. BANNER BERITA
+  // 6. BANNER BERITA
   window.handleSimpanBannerBerita = async function (e) {
     if (e) {
       e.preventDefault();
@@ -427,38 +479,25 @@
     const btnTambah = document.getElementById('btnTambahBerita');
     if (btnTambah && !btnTambah.dataset.bound) {
       btnTambah.dataset.bound = 'true';
-      btnTambah.addEventListener('click', () => {
-        document.getElementById('beritaId').value = '';
-        document.getElementById('beritaJudul').value = '';
-        document.getElementById('beritaJenjang').value = 'Semua';
-        document.getElementById('beritaTanggal').value = new Date().toISOString().split('T')[0];
-        if (typeof window.setTextareaValueWithAlignment === 'function') {
-          window.setTextareaValueWithAlignment('beritaDeskripsiSingkat', '');
-          window.setTextareaValueWithAlignment('beritaDeskripsiLengkap', '');
-        } else {
-          document.getElementById('beritaDeskripsiSingkat').value = '';
-          document.getElementById('beritaDeskripsiLengkap').value = '';
-        }
-        editingImages = [];
-        const areaForm = document.getElementById('areaFormBerita');
-        if (areaForm) areaForm.classList.remove('hidden');
-        areaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      btnTambah.addEventListener('click', window.bukaFormTambahBerita);
     }
 
     const btnBatal = document.getElementById('btnBatalBerita');
     if (btnBatal && !btnBatal.dataset.bound) {
       btnBatal.dataset.bound = 'true';
-      btnBatal.addEventListener('click', () => {
-        const areaForm = document.getElementById('areaFormBerita');
-        if (areaForm) areaForm.classList.add('hidden');
-      });
+      btnBatal.addEventListener('click', window.tutupFormBerita);
     }
   }
 
+  initKelolaBerita();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initKelolaBerita);
-  } else {
-    initKelolaBerita();
   }
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#berita') {
+      window.loadBeritaList();
+    }
+  });
 })();

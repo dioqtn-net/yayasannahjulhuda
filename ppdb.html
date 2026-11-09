@@ -1009,15 +1009,7 @@
 
         function getPPDBData() {
           if (window.currentPPDBData) return window.currentPPDBData;
-          if (window.currentPPDBData) return window.currentPPDBData;
           return defaultPPDB;
-        }
-          try {
-            const parsed = JSON.parse(raw);
-            return { ...defaultPPDB, ...parsed };
-          } catch (e) {
-            return defaultPPDB;
-          }
         }
 
         function escapeHtml(text) {
