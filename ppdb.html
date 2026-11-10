@@ -936,6 +936,7 @@
             lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
             syarat: "Mengisi formulir pendaftaran\nFotokopi Akta Kelahiran (2 lembar)\nFotokopi KK & KTP Orang Tua\nPas Foto 3x4 (4 lembar)\nSurat Keterangan Lulus TK / RA (jika ada)",
             syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+            konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas sekolah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
             kontak1_nama: 'Ibu Fatimah',
             kontak1_wa: '081234567890',
             kontak2_nama: 'Bapak Ahmad',
@@ -952,6 +953,7 @@
             lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
             syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah / Sertifikat RA/TK",
             syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+            konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
             kontak1_nama: 'Abi Subhan, SPd.',
             kontak1_wa: '08991168301',
             kontak2_nama: 'Abi Fahri, SPd.',
@@ -968,6 +970,7 @@
             lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
             syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah SD/MI (2 lembar legalisir)",
             syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+            konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
             kontak1_nama: 'Umi Hj. Dahlia',
             kontak1_wa: '085880682115',
             kontak2_nama: 'Abu Jalaluddin',
@@ -984,6 +987,7 @@
             lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
             syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah / SKL SMP/MTs (2 lembar)",
             syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+            konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
             kontak1_nama: 'Umi Hj. Dahlia',
             kontak1_wa: '085880682115',
             kontak2_nama: 'Abu Jalaluddin',
@@ -1000,6 +1004,7 @@
             lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Pondok Pesantren Assurur / Yayasan Nahjul Huda.',
             syarat: "Mengisi formulir pendaftaran santri baru\nFotokopi Akta Kelahiran & Kartu Keluarga (KK)\nFotokopi KTP Orang Tua / Wali\nSurat Keterangan Sehat dari Dokter\nPas Foto 3x4 berpakaian muslim/muslimah (5 lembar)\nMengikuti tes penempatan (baca Al-Qur'an & wawancara)",
             syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+            konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas pondok pesantren? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
             kontak1_nama: 'Bunda Dahlia',
             kontak1_wa: '08589010538',
             kontak2_nama: 'Abu Jalaluddin',
@@ -1128,32 +1133,56 @@
             // 6. Pusat Layanan Konsultasi PPDB (Panitia 1 & 2)
             const container = document.getElementById(`ppdb-${k}-konsultasi`);
             if (container) {
+              const elDesc = container.querySelector('.deskripsi-konsultasi') || container.querySelector('p');
               const elNama1 = container.querySelector('.nama-panitia-1');
               const elNo1 = container.querySelector('.no-panitia-1');
               const elNama2 = container.querySelector('.nama-panitia-2');
               const elNo2 = container.querySelector('.no-panitia-2');
               const elBtn1 = container.querySelector('.btn-wa-1');
               const elBtn2 = container.querySelector('.btn-wa-2');
+              const badge1 = container.querySelector('.badge-kontak-1') || elNama1?.closest('div');
+              const badge2 = container.querySelector('.badge-kontak-2') || elNama2?.closest('div');
               const label = shortLabels[k] || k.toUpperCase();
 
-              const k1Valid = item.kontak1_nama && item.kontak1_nama !== '-' && item.kontak1_wa && item.kontak1_wa !== '-';
-              const k2Valid = item.kontak2_nama && item.kontak2_nama !== '-' && item.kontak2_wa && item.kontak2_wa !== '-';
+              const descText = item.konsultasi_desc || defaultPPDB[k]?.konsultasi_desc;
+              if (elDesc && descText) {
+                elDesc.innerHTML = descText;
+              }
+
+              const k1Nama = (item.kontak1_nama !== undefined && item.kontak1_nama !== '') ? item.kontak1_nama : defaultPPDB[k]?.kontak1_nama;
+              const k1Wa = (item.kontak1_wa !== undefined && item.kontak1_wa !== '') ? item.kontak1_wa : defaultPPDB[k]?.kontak1_wa;
+              const k2Nama = (item.kontak2_nama !== undefined && item.kontak2_nama !== '') ? item.kontak2_nama : defaultPPDB[k]?.kontak2_nama;
+              const k2Wa = (item.kontak2_wa !== undefined && item.kontak2_wa !== '') ? item.kontak2_wa : defaultPPDB[k]?.kontak2_wa;
+
+              const k1Valid = k1Nama && k1Nama !== '-' && k1Wa && k1Wa !== '-';
+              const k2Valid = k2Nama && k2Nama !== '-' && k2Wa && k2Wa !== '-';
 
               if (k1Valid) {
-                if (elNama1) elNama1.textContent = item.kontak1_nama;
-                if (elNo1) elNo1.textContent = item.kontak1_wa;
+                if (badge1) badge1.style.display = 'inline-flex';
+                if (elNama1) elNama1.textContent = k1Nama;
+                if (elNo1) elNo1.textContent = k1Wa;
                 if (elBtn1) {
-                  elBtn1.href = formatWhatsAppLink(item.kontak1_wa, item.kontak1_nama, label);
-                  elBtn1.textContent = `Hubungi ${item.kontak1_nama}`;
+                  elBtn1.style.display = 'inline-flex';
+                  elBtn1.href = formatWhatsAppLink(k1Wa, k1Nama, label);
+                  elBtn1.textContent = `Hubungi ${k1Nama}`;
                 }
+              } else {
+                if (badge1) badge1.style.display = 'none';
+                if (elBtn1) elBtn1.style.display = 'none';
               }
+
               if (k2Valid) {
-                if (elNama2) elNama2.textContent = item.kontak2_nama;
-                if (elNo2) elNo2.textContent = item.kontak2_wa;
+                if (badge2) badge2.style.display = 'inline-flex';
+                if (elNama2) elNama2.textContent = k2Nama;
+                if (elNo2) elNo2.textContent = k2Wa;
                 if (elBtn2) {
-                  elBtn2.href = formatWhatsAppLink(item.kontak2_wa, item.kontak2_nama, label);
-                  elBtn2.textContent = `Hubungi ${item.kontak2_nama}`;
+                  elBtn2.style.display = 'inline-flex';
+                  elBtn2.href = formatWhatsAppLink(k2Wa, k2Nama, label);
+                  elBtn2.textContent = `Hubungi ${k2Nama}`;
                 }
+              } else {
+                if (badge2) badge2.style.display = 'none';
+                if (elBtn2) elBtn2.style.display = 'none';
               }
             }
           });

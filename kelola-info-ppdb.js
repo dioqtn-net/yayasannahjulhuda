@@ -29,6 +29,7 @@
       lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
       syarat: "Mengisi formulir pendaftaran\nFotokopi Akta Kelahiran (2 lembar)\nFotokopi KK & KTP Orang Tua\nPas Foto 3x4 (4 lembar)\nSurat Keterangan Lulus TK / RA (jika ada)",
       syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+      konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas sekolah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
       kontak1_nama: 'Ibu Fatimah',
       kontak1_wa: '081234567890',
       kontak2_nama: 'Bapak Ahmad',
@@ -45,6 +46,7 @@
       lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
       syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah / Sertifikat RA/TK",
       syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+      konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
       kontak1_nama: 'Abi Subhan, SPd.',
       kontak1_wa: '08991168301',
       kontak2_nama: 'Abi Fahri, SPd.',
@@ -61,6 +63,7 @@
       lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
       syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah SD/MI (2 lembar legalisir)",
       syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+      konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
       kontak1_nama: 'Umi Hj. Dahlia',
       kontak1_wa: '085880682115',
       kontak2_nama: 'Abu Jalaluddin',
@@ -77,6 +80,7 @@
       lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Yayasan Nahjul Huda.',
       syarat: "Mengisi formulir pendaftaran\nFotokopi Kartu Keluarga & KTP Orang Tua/Wali\nFotokopi Akta Kelahiran\nPas Foto 3x4 (4 lembar)\nFotokopi Ijazah SMP/MTs (2 lembar legalisir)",
       syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+      konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
       kontak1_nama: 'Umi Hj. Dahlia',
       kontak1_wa: '085880682115',
       kontak2_nama: 'Abu Jalaluddin',
@@ -93,6 +97,7 @@
       lokasi: 'Pendaftaran dapat dilakukan secara langsung di ruang sekretariat Pondok Pesantren Assurur / Yayasan Nahjul Huda.',
       syarat: "Mengisi formulir pendaftaran santri baru\nFotokopi Akta Kelahiran & Kartu Keluarga (KK)\nFotokopi KTP Orang Tua / Wali\nSurat Keterangan Sehat dari Dokter\nPas Foto 3x4 berpakaian muslim/muslimah (5 lembar)\nMengikuti tes penempatan (baca Al-Qur'an & wawancara)",
       syarat_catatan: 'Seluruh berkas administrasi diserahkan ke ruang sekretariat pendaftaran.',
+      konsultasi_desc: 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas pondok pesantren? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.',
       kontak1_nama: 'Bunda Dahlia',
       kontak1_wa: '08589010538',
       kontak2_nama: 'Abu Jalaluddin',
@@ -177,6 +182,21 @@
     }
     const el = document.getElementById(id);
     return el?.value?.trim() || fallback;
+  }
+
+  function setValDual(id1, id2, val) {
+    if (document.getElementById(id1)) setVal(id1, val);
+    if (document.getElementById(id2)) setVal(id2, val);
+  }
+
+  function getValDual(id1, id2, fallback = '') {
+    const el1 = document.getElementById(id1);
+    if (el1 && typeof el1.value === 'string' && el1.value.trim() !== '') return el1.value.trim();
+    const el2 = document.getElementById(id2);
+    if (el2 && typeof el2.value === 'string' && el2.value.trim() !== '') return el2.value.trim();
+    if (el1 && el1.value !== undefined && el1.value !== '') return el1.value.trim();
+    if (el2 && el2.value !== undefined && el2.value !== '') return el2.value.trim();
+    return fallback;
   }
 
   function escapeHtml(str) {
@@ -343,10 +363,27 @@
           setVal(`ppdbAdmin_${k}_lokasi`, item.lokasi || '');
           window.renderSyaratList(k, item.syarat);
           setVal(`ppdbAdmin_${k}_syarat_catatan`, item.syarat_catatan || '');
-          setVal(`ppdbAdmin_${k}_kontak1_nama`, item.kontak1_nama || '');
-          setVal(`ppdbAdmin_${k}_kontak1_wa`, item.kontak1_wa || '');
-          setVal(`ppdbAdmin_${k}_kontak2_nama`, item.kontak2_nama || '');
-          setVal(`ppdbAdmin_${k}_kontak2_wa`, item.kontak2_wa || '');
+
+          // Deskripsi Konsultasi
+          const defDesc = defaultPPDB[k]?.konsultasi_desc || 'Masih bingung mengenai detail persyaratan, biaya, kurikulum, atau fasilitas madrasah? Jangan ragu untuk bertanya! Panitia kami siap membantu menjawab semua kebingungan Anda sebelum mendaftar.';
+          const valDesc = (item.konsultasi_desc !== undefined && item.konsultasi_desc !== '') ? item.konsultasi_desc : defDesc;
+          setVal(`ppdbAdmin_${k}_konsultasi_desc`, valDesc);
+
+          // Kontak 1 & 2
+          const defK1Nama = defaultPPDB[k]?.kontak1_nama || '';
+          const defK1Wa = defaultPPDB[k]?.kontak1_wa || '';
+          const defK2Nama = defaultPPDB[k]?.kontak2_nama || '';
+          const defK2Wa = defaultPPDB[k]?.kontak2_wa || '';
+
+          const valK1Nama = (item.kontak1_nama !== undefined && item.kontak1_nama !== '') ? item.kontak1_nama : defK1Nama;
+          const valK1Wa = (item.kontak1_wa !== undefined && item.kontak1_wa !== '') ? item.kontak1_wa : defK1Wa;
+          const valK2Nama = (item.kontak2_nama !== undefined && item.kontak2_nama !== '') ? item.kontak2_nama : defK2Nama;
+          const valK2Wa = (item.kontak2_wa !== undefined && item.kontak2_wa !== '') ? item.kontak2_wa : defK2Wa;
+
+          setValDual(`ppdbAdmin_${k}_k1_nama`, `ppdbAdmin_${k}_kontak1_nama`, valK1Nama);
+          setValDual(`ppdbAdmin_${k}_k1_wa`, `ppdbAdmin_${k}_kontak1_wa`, valK1Wa);
+          setValDual(`ppdbAdmin_${k}_k2_nama`, `ppdbAdmin_${k}_kontak2_nama`, valK2Nama);
+          setValDual(`ppdbAdmin_${k}_k2_wa`, `ppdbAdmin_${k}_kontak2_wa`, valK2Wa);
         });
       }
     } catch (e) {
@@ -478,7 +515,7 @@
     try {
       const k = jenjangKey;
       currentPPDBState[k] = {
-        jenjangName: currentPPDBState[k]?.jenjangName || k.toUpperCase(),
+        jenjangName: currentPPDBState[k]?.jenjangName || defaultPPDB[k]?.jenjangName || k.toUpperCase(),
         status: getVal(`ppdbAdmin_${k}_status`, 'BUKA'),
         hari: getVal(`ppdbAdmin_${k}_hari`),
         jam: getVal(`ppdbAdmin_${k}_jam`),
@@ -488,10 +525,11 @@
         lokasi: getSafeTextarea(`ppdbAdmin_${k}_lokasi`),
         syarat: window.getSyaratListValues(k),
         syarat_catatan: getSafeTextarea(`ppdbAdmin_${k}_syarat_catatan`),
-        kontak1_nama: getVal(`ppdbAdmin_${k}_kontak1_nama`),
-        kontak1_wa: getVal(`ppdbAdmin_${k}_kontak1_wa`),
-        kontak2_nama: getVal(`ppdbAdmin_${k}_kontak2_nama`),
-        kontak2_wa: getVal(`ppdbAdmin_${k}_kontak2_wa`)
+        konsultasi_desc: getSafeTextarea(`ppdbAdmin_${k}_konsultasi_desc`, defaultPPDB[k]?.konsultasi_desc || ''),
+        kontak1_nama: getValDual(`ppdbAdmin_${k}_k1_nama`, `ppdbAdmin_${k}_kontak1_nama`, ''),
+        kontak1_wa: getValDual(`ppdbAdmin_${k}_k1_wa`, `ppdbAdmin_${k}_kontak1_wa`, ''),
+        kontak2_nama: getValDual(`ppdbAdmin_${k}_k2_nama`, `ppdbAdmin_${k}_kontak2_nama`, ''),
+        kontak2_wa: getValDual(`ppdbAdmin_${k}_k2_wa`, `ppdbAdmin_${k}_kontak2_wa`, '')
       };
 
       const payload = {
