@@ -8,6 +8,31 @@ function formatContentHtml(str) {
   return `<div class="text-justify">${trimmed}</div>`;
 }
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function extractCleanText(str) {
+  if (!str) return '';
+  const trimmed = String(str).trim();
+  if (trimmed === '' || trimmed === '-') return '';
+  return trimmed.replace(/^<(div|p)[^>]*>/i, '').replace(/<\/(div|p)>$/i, '').trim();
+}
+
+function formatAkreditasi(val) {
+  if (!val) return 'Akreditasi A';
+  const clean = String(val).trim();
+  if (clean.toLowerCase().startsWith('akreditasi')) return clean;
+  if (clean === '-' || clean === '') return 'Akreditasi -';
+  return 'Akreditasi ' + clean;
+}
+
 import { getUnitImage } from '../api';
 
 export const renderHome = (profile, units, news, facilities, galleries, ppdb, homeSettings = null) => {
@@ -71,15 +96,48 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb, ho
 
         const programHref = `program.html#${programAnchor}`;
 
+        const akreditasi = formatAkreditasi(unit.accreditation);
+        const rawDesc = extractCleanText(unit.description) || '-';
+        const unggulan = unit.featured_programs || unit.featured_program || '-';
+        const cleanVisi = extractCleanText(unit.vision);
+        const rawMisi = extractCleanText(unit.mission);
+        const misiItems = rawMisi
+            ? rawMisi.split('\n')
+                .map(l => l.trim().replace(/^[-*•\d.]+\s*/, ''))
+                .filter(l => l.length > 0 && l !== '-')
+            : [];
+
+        const visiMisiSection = (cleanVisi || misiItems.length > 0) ? `
+        <div class="mb-6 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200/80">
+            <h4 class="font-bold text-emerald-800 mb-3 flex items-center text-sm sm:text-base">
+                <i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi
+            </h4>
+            ${cleanVisi ? `
+            <div class="mb-3">
+                <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Visi:</span>
+                <div class="italic text-slate-700 text-sm leading-relaxed">${cleanVisi}</div>
+            </div>
+            ` : ''}
+            ${misiItems.length > 0 ? `
+            <div>
+                <span class="block font-bold text-emerald-800 text-xs uppercase tracking-wider mb-1">Misi:</span>
+                <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600 leading-relaxed">
+                    ${misiItems.map(m => `<li class="mb-1">${escapeHtml(m)}</li>`).join('')}
+                </ul>
+            </div>
+            ` : ''}
+        </div>
+        ` : '';
+
         return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer border border-slate-100 transform hover:-translate-y-1 flex flex-col h-full group" onclick="openModal(${unit.id})">
             <div class="w-full h-48 flex-shrink-0 flex items-center justify-center bg-white p-4 border-b border-slate-100 overflow-hidden">
-                <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto group-hover:scale-105 transition duration-300">
+                <img src="${imageUrl}" alt="${escapeHtml(unitName)}" class="object-contain max-h-full w-auto max-w-full h-auto group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5 text-center flex-grow flex flex-col justify-between bg-white">
                 <div>
                     <h3 class="font-playfair font-bold text-xl text-emerald-800 mb-2 h-14 flex items-center justify-center">${unitName}</h3>
-                    <p class="text-slate-600 text-sm line-clamp-2 mb-4">${unit.description}</p>
+                    <p class="text-slate-600 text-sm line-clamp-2 mb-4">${rawDesc}</p>
                 </div>
                 <div>
                     <a href="${programHref}" onclick="event.stopPropagation()" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
@@ -92,80 +150,70 @@ export const renderHome = (profile, units, news, facilities, galleries, ppdb, ho
         <!-- Modal for ${unitName} -->
         <div id="modal-${unit.id}" class="hidden fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-3 sm:p-6">
             <div class="fixed inset-0 bg-slate-900 bg-opacity-75 backdrop-blur-sm transition-opacity" onclick="closeModal(${unit.id})"></div>
-            <div class="bg-white rounded-2xl max-w-2xl w-[95%] md:w-full m-4 md:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[85vh] overflow-y-auto">
-                <div class="flex justify-between items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-xl sm:text-2xl font-playfair font-bold text-emerald-800" id="modal-title-${unit.id}">${unitName}</h3>
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="modal-akreditasi-${unit.id}">Akreditasi</span>
+            <div class="bg-white rounded-2xl max-w-2xl w-full m-2 sm:m-0 mx-auto relative z-10 shadow-2xl flex flex-col max-h-[90vh]">
+                <div class="flex justify-between items-start sm:items-center p-4 sm:p-6 border-b border-slate-100 flex-shrink-0">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 pr-2">
+                        <h3 class="text-lg sm:text-2xl font-playfair font-bold text-emerald-800 leading-tight" id="modal-title-${unit.id}">${unitName}</h3>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs w-fit shrink-0" id="modal-akreditasi-${unit.id}">
+                            <i class="fas fa-certificate text-emerald-600"></i> <span id="modal-akreditasi-text-${unit.id}">${akreditasi}</span>
+                        </span>
                     </div>
-                    <button onclick="closeModal(${unit.id})" class="text-slate-400 hover:text-red-500 transition">
+                    <button onclick="closeModal(${unit.id})" aria-label="Tutup" class="text-slate-400 hover:text-red-500 transition p-1 shrink-0">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="modal-body-${unit.id}">
-                    <div class="w-full h-48 sm:h-64 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
-                        <img src="${imageUrl}" alt="${unitName}" class="object-contain max-h-full w-auto max-w-full h-auto">
+                <div class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-6" id="modal-body-${unit.id}">
+                    <div class="w-full h-44 sm:h-56 mb-6 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-4 shadow-sm">
+                        <img src="${imageUrl}" alt="${escapeHtml(unitName)}" class="object-contain max-h-full w-auto max-w-full h-auto">
                     </div>
-                    <div class="text-slate-700 mb-6 leading-relaxed">${formatContentHtml(unit.description)}</div>
-                    <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum</h4>
-                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.curriculum || "-")}</div>
-                    </div>
-                    ${unit.featured_program ? `
-                    <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan</h4>
-                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.featured_program)}</div>
-                    </div>
-                    ` : ''}
-                    ${unit.intracurricular ? `
-                    <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-pencil-alt mr-2 text-gold-500"></i> Intrakurikuler</h4>
-                        <p class="text-slate-600 text-sm">${unit.intracurricular}</p>
-                    </div>
-                    ` : ''}
-                    <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler</h4>
-                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.extracurricular || "-")}</div>
-                    </div>
-                    <div class="mb-4">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas</h4>
-                        <div class="text-slate-600 text-sm leading-relaxed">${formatContentHtml(unit.facilities || "-")}</div>
-                    </div>
+                    <div class="text-slate-600 text-base mb-6 leading-relaxed">${formatContentHtml(unit.description)}</div>
 
-                    ${(isMTs || isMA) ? `
-                    <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                        <ul class="list-disc ml-5 space-y-1 text-sm text-slate-600">
-                            <li>Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak</li>
-                            <li>Membentuk generasi yang berilmu, beriman, dan berakhlak mulia</li>
-                            <li>Mengembangkan kemampuan &amp; budi pekerti</li>
-                            <li>Berwawasan Luas</li>
-                            <li>Mencetak Generasi Global</li>
-                        </ul>
-                    </div>
-                    ` : ''}
+                    ${visiMisiSection}
 
-                    ${isPonpes ? `
-                    <div class="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-gold-500"></i> Visi &amp; Misi</h4>
-                        <div class="mb-2">
-                            <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Visi:</span>
-                            <p class="italic text-slate-700 text-sm">"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)"</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Kurikulum -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
+                                    <i class="fas fa-book-reader mr-2 text-gold-500"></i> Kurikulum
+                                </h4>
+                                <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.curriculum || "-")}</div>
+                            </div>
                         </div>
-                        <div>
-                            <span class="font-semibold text-emerald-800 text-xs uppercase tracking-wider block mb-1">Misi:</span>
-                            <ol class="list-decimal ml-5 space-y-1 text-sm text-slate-600">
-                                <li>Penanaman Aqidah Sholihah</li>
-                                <li>Bimbingan Ibadah Sesuai Al Qur'an &amp; Hadits</li>
-                                <li>Membentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21</li>
-                                <li>Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</li>
-                            </ol>
+
+                        <!-- Program Unggulan -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
+                                    <i class="fas fa-star mr-2 text-gold-500"></i> Program Unggulan
+                                </h4>
+                                <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unggulan)}</div>
+                            </div>
+                        </div>
+
+                        <!-- Ekstrakurikuler -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
+                                    <i class="fas fa-running mr-2 text-gold-500"></i> Ekstrakurikuler
+                                </h4>
+                                <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.extracurricular || "-")}</div>
+                            </div>
+                        </div>
+
+                        <!-- Fasilitas -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
+                                    <i class="fas fa-building mr-2 text-gold-500"></i> Fasilitas
+                                </h4>
+                                <div class="text-sm text-slate-600 leading-relaxed">${formatContentHtml(unit.facilities || "-")}</div>
+                            </div>
                         </div>
                     </div>
-                    ` : ''}
                 </div>
-                <div class="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
-                    <a href="${programHref}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
+                <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end flex-shrink-0">
+                    <a href="${programHref}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm text-sm">
                         Lihat Program Lengkap &rarr;
                     </a>
                 </div>

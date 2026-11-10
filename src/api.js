@@ -12,16 +12,16 @@ if (SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== "") {
         auth: { persistSession: true },
         global: {
             fetch: (url, options = {}) => {
-                const customOptions = {
+                const headers = new Headers(options.headers || {});
+                headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+                headers.set('Pragma', 'no-cache');
+                if (!headers.has('apikey')) headers.set('apikey', SUPABASE_ANON_KEY);
+                if (!headers.has('Authorization')) headers.set('Authorization', `Bearer ${SUPABASE_ANON_KEY}`);
+                return fetch(url, {
                     ...options,
                     cache: 'no-store',
-                    headers: {
-                        ...(options.headers || {}),
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache'
-                    }
-                };
-                return fetch(url, customOptions);
+                    headers
+                });
             }
         }
     });
@@ -41,21 +41,76 @@ const fallbackData = {
         operational_hours: "Senin - Jumat: 07:00 - 15:00 WIB"
     },
     education_units: [
-        { id: 1, name: "SD Islam (SDI) AL KINDY", image_url: "/media/logo/SDI.jpg", description: "Pendidikan dasar dengan dasar-dasar keislaman yang kuat.", curriculum: "Kurikulum Merdeka & Kurikulum Kemenag", extracurricular: "Pramuka, Marawis, Pencak Silat", facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan", wa_number: "+6281234567890" },
+        {
+            id: 1,
+            name: "SD Islam (SDI) AL KINDY",
+            accreditation: "A",
+            image_url: "/media/logo/SDI.jpg",
+            description: "Pendidikan dasar dengan pondasi nilai-nilai keislaman yang kuat.",
+            curriculum: "Kurikulum Merdeka Terintegrasi Kemenag",
+            featured_programs: "Qira'ati, Tahfidz Al-Qur'an (Juz 30), dan KTIQ.",
+            extracurricular: "Pramuka, Marawis, Tahfidz Qur'an",
+            facilities: "Ruang Kelas Nyaman, Perpustakaan, Lapangan Olahraga",
+            vision: "\"Terwujudnya Generasi Qur'ani yang Berakhlak Mulia, Berkarakter, Kreatif, Berprestasi, Mampu Berkompetisi, Serta Mandiri Melalui Pembelajaran Mendalam di Era Global.\"",
+            mission: "Menanamkan nilai-nilai keimanan dan ketakwaan melalui pembiasaan ibadah dan penguatan karakter Islami dalam kehidupan sehari-hari.\nMengintegrasikan pembelajaran Al-Qur'an dalam kegiatan intrakurikuler dan kokurikuler.\nMenerapkan Kurikulum Merdeka yang berpusat pada peserta didik dengan pendekatan pembelajaran mendalam (deep learning).\nMengembangkan kemampuan berpikir kritis, kreatif, kolaboratif, dan komunikatif melalui kegiatan pembelajaran yang bermakna.\nMenciptakan lingkungan belajar yang aman, nyaman, inklusif, dan menyenangkan.\nMendorong peserta didik untuk selalu berakhlak baik, berprestasi, mandiri, bertanggung jawab, serta memiliki kepedulian sosial dan lingkungan.",
+            wa_number: "+6281234567890"
+        },
         { 
             id: 2, 
             name: "Madrasah Ibtidaiyah (MI) Nahjul Huda", 
+            accreditation: "A",
             image_url: "/media/logo/MI.jpg", 
-            description: "Mencetak siswa-siswi berprestasi dengan pemahaman agama yang mendalam.", 
+            description: "Mencetak siswa-siswi berprestasi dengan penekanan pada ilmu agama dasar.", 
             curriculum: "Kurikulum Kemenag", 
-            intracurricular: "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
-            extracurricular: "Futsal, Menari, Pramuka", 
-            facilities: "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan", 
+            featured_programs: "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
+            extracurricular: "Pramuka, Qiroah, Futsal", 
+            facilities: "Lab Komputer, Mushola, Perpustakaan", 
+            vision: "-",
+            mission: "...",
             wa_number: "+628991168301" 
         },
-        { id: 3, name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", image_url: "/media/logo/MTs.jpg", description: "Pendidikan menengah pertama dengan penekanan pada akhlak dan ilmu pengetahuan.", curriculum: "Kurikulum Merdeka & Kemenag", extracurricular: "Paskibra, PMR, Rohis", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+6285880682115" },
-        { id: 4, name: "Madrasah Aliyah (MA) Nahjul Huda", image_url: "/media/logo/MA.jpg", description: "Mempersiapkan generasi muda untuk pendidikan tinggi dan kehidupan bermasyarakat.", curriculum: "Kurikulum Kemenag", extracurricular: "Karya Ilmiah Remaja, Jurnalistik", facilities: "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih", wa_number: "+628158316436" },
-        { id: 5, name: "Pondok Pesantren Assurur", image_url: "/media/logo/Ponpes.jpg", description: "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.", curriculum: "Salafiyah & Modern", featured_program: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah", extracurricular: "Muhadharah, Bahtsul Masail", facilities: "Asrama Putra/Putri, Masjid As-Surur", wa_number: "+628569010538" }
+        { 
+            id: 3, 
+            name: "Madrasah Tsanawiyah (MTs) Nahjul Huda", 
+            accreditation: "A",
+            image_url: "/media/logo/MTs.jpg", 
+            description: "Pendidikan menengah pertama dengan lingkungan yang Islami dan disiplin.", 
+            curriculum: "Kurikulum Merdeka & Kemenag", 
+            featured_programs: "-",
+            extracurricular: "Paskibra, PMR, Rohis, Hadroh", 
+            facilities: "Lab IPA, Lab Bahasa, Sarana Olahraga", 
+            vision: "-",
+            mission: "Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak\nMembentuk generasi yang berilmu, beriman, dan berakhlak mulia\nMengembangkan kemampuan & budi pekerti\nBerwawasan Luas\nMencetak Generasi Global",
+            wa_number: "+6285880682115" 
+        },
+        { 
+            id: 4, 
+            name: "Madrasah Aliyah (MA) Nahjul Huda", 
+            accreditation: "A",
+            image_url: "/media/logo/MA.jpg", 
+            description: "Mempersiapkan generasi unggul menuju jenjang pendidikan tinggi.", 
+            curriculum: "Kurikulum Kemenag (IPA/IPS/Agama)", 
+            featured_programs: "-",
+            extracurricular: "Karya Ilmiah Remaja, Jurnalistik, Bahasa Arab & Inggris", 
+            facilities: "Lab Terpadu, Perpustakaan Digital", 
+            vision: "-",
+            mission: "Terwujudnya Al-Qur'an, Ilmiah, Cerdas, Sehat, Mandiri, Berakhlak\nMembentuk generasi yang berilmu, beriman, dan berakhlak mulia\nMengembangkan kemampuan & budi pekerti\nBerwawasan Luas\nMencetak Generasi Global",
+            wa_number: "+628158316436" 
+        },
+        { 
+            id: 5, 
+            name: "Pondok Pesantren Assurur", 
+            accreditation: "A",
+            image_url: "/media/logo/Ponpes.jpg", 
+            description: "Pendidikan asrama 24 jam dengan kajian kitab kuning dan tahfidz.", 
+            curriculum: "Salafiyah, Modern, & Tahfidz", 
+            featured_programs: "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah", 
+            extracurricular: "Muhadharah, Bahtsul Masail, Kaligrafi", 
+            facilities: "Asrama Putra/Putri, Masjid As-Surur, Ruang Aula", 
+            vision: "\"Mendidik Santri Beriman, Bertaqwa, Berakhlak Mulia, Berilmu, Beribadah Bermanfaat Ahlus Sunah Wal Jama'ah (ASWAJA)\"",
+            mission: "Penanaman Aqidah Sholihah\nBimbingan Ibadah Sesuai Al Qur'an & Hadits\nMembentuk Pribadi Berakhlak Mulia, Kreatif, Cerdas, Inovatif, Mandiri, Bertanggung Jawab, dan Ketrampilan Abad 21\nMengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi",
+            wa_number: "+628569010538" 
+        }
     ],
     news: [
         { id: 1, title: "Penerimaan Santri Baru Telah Dibuka", content: "Segera daftarkan putra-putri Anda ke Yayasan Nahjul Huda...", date: "2023-10-01", image_url: null },
@@ -239,50 +294,67 @@ export const api = {
     },
 
     async getEducationUnits() {
-        let list = fallbackData.education_units;
-        if (supabase) {
-            const { data, error } = await supabase.from('education_units').select('*').order('id');
-            if (error) console.error(error);
-            if (data && data.length > 0) list = data.filter(n => Number(n.id) > 0);
-        } else {
-            await delay(300);
+        let list = null;
+
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/education_units?select=*&order=id.asc', {
+                cache: 'no-store',
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.length > 0) {
+                    list = data.filter(n => Number(n.id) > 0);
+                }
+            }
+        } catch (e) {
+            console.warn('[api.getEducationUnits] REST fetch error:', e);
         }
-        return list.filter(u => Number(u.id) > 0).map(u => {
+
+        if (!list && supabase) {
+            try {
+                const { data, error } = await supabase.from('education_units').select('*').order('id');
+                if (!error && data && data.length > 0) {
+                    list = data.filter(n => Number(n.id) > 0);
+                }
+            } catch (err) {
+                console.warn('[api.getEducationUnits] Supabase client error:', err);
+            }
+        }
+
+        if (!list || list.length === 0) {
+            list = fallbackData.education_units;
+        }
+
+        const mapped = list.filter(u => Number(u.id) > 0).map(u => {
             const isSDI = u.id === 1 || (u.name && (u.name.includes('SD Islam') || u.name.includes('SDI') || u.name.toLowerCase().includes('al kindy')));
-            const isMI = u.id === 2 || (u.name && (u.name.includes('Ibtidaiyah') || u.name.includes('(MI)')));
-            const isMTs = u.id === 3 || (u.name && (u.name.includes('MTs') || u.name.toLowerCase().includes('tsanawiyah')));
-            const isMA = u.id === 4 || (u.name && (u.name.includes('MA') || u.name.toLowerCase().includes('aliyah')));
-            const isPonpes = u.id === 5 || (u.name && (u.name.toLowerCase().includes('pesantren') || u.name.toLowerCase().includes('ponpes') || u.name.toLowerCase().includes('assurur')));
             return {
                 ...u,
+                id: Number(u.id),
                 name: isSDI ? 'SD Islam (SDI) AL KINDY' : (u.name || '-'),
+                accreditation: u.accreditation || 'A',
                 image_url: u.image_url || getUnitImage(u),
                 description: u.description || '-',
                 curriculum: u.curriculum || '-',
+                featured_programs: u.featured_programs || u.featured_program || '-',
+                featured_program: u.featured_programs || u.featured_program || '-',
                 extracurricular: u.extracurricular || '-',
                 facilities: u.facilities || '-',
-                wa_number: u.wa_number || '-',
-                ...(isMI ? {
-                    intracurricular: u.intracurricular || "Qira'atul Qur'an Metode Qiroati, Keterampilan Kemandirian, Prestasi Akademik & Non Akademik",
-                    extracurricular: u.extracurricular || "Futsal, Menari, Pramuka",
-                    facilities: u.facilities || "Lapangan Upacara, Lapangan Olahraga, Lab Komputer, Musholla, Toilet, Kantin, Perpustakaan",
-                    wa_number: u.wa_number || "+628991168301"
-                } : {}),
-                ...(isMTs ? {
-                    facilities: u.facilities || "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
-                    wa_number: u.wa_number || "+6285880682115"
-                } : {}),
-                ...(isMA ? {
-                    facilities: u.facilities || "Ruang Kelas AC, Lapangan Olahraga, Lapangan Futsal, Laboratorium Komputer, Ruang Asrama, Mushola, Kantin, Kamar Mandi Bersih",
-                    wa_number: u.wa_number || "+628158316436"
-                } : {}),
-                ...(isPonpes ? {
-                    description: u.description || "Pendidikan asrama 24 jam dengan kajian kitab kuning, tahfidz, dan program unggulan.",
-                    featured_program: u.featured_program || "Bahasa Arab, Bahasa Inggris, Metode Qiroati, Tahfidzul Qur'an, Kitab Kuning, Multimedia, Leadership Kulliyatul Muallimin Al-Islamiyyah",
-                    wa_number: u.wa_number || "+628569010538"
-                } : {})
+                vision: u.vision || '-',
+                mission: u.mission || '-',
+                wa_number: u.wa_number || ''
             };
         });
+
+        if (typeof window !== 'undefined') {
+            window.__cachedEducationUnits = mapped;
+        }
+        return mapped;
     },
 
     async getProgramBanner() {
