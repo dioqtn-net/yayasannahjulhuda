@@ -243,7 +243,7 @@ export const api = {
         if (supabase) {
             const { data, error } = await supabase.from('education_units').select('*').order('id');
             if (error) console.error(error);
-            if (data && data.length > 0) list = data;
+            if (data && data.length > 0) list = data.filter(n => Number(n.id) > 0);
         } else {
             await delay(300);
         }
@@ -308,7 +308,7 @@ export const api = {
         if (supabase) {
             const { data, error } = await supabase.from('news_posts').select('*').order('date', { ascending: false });
             if (error) console.error(error);
-            if (data && data.length > 0) list = data;
+            if (data && data.length > 0) list = data.filter(n => Number(n.id) > 0);
         } else {
             await delay(300);
         }
@@ -325,7 +325,7 @@ export const api = {
         if (supabase) {
             const { data, error } = await supabase.from('facilities').select('*');
             if (error) console.error(error);
-            if (data && data.length > 0) list = data;
+            if (data && data.length > 0) list = data.filter(n => Number(n.id) > 0);
         } else {
             await delay(300);
         }
@@ -362,7 +362,7 @@ export const api = {
         if (supabase) {
             const { data, error } = await supabase.from('galleries').select('*').order('created_at', { ascending: false });
             if (error) console.error(error);
-            if (data && data.length > 0) list = data;
+            if (data && data.length > 0) list = data.filter(g => Number(g.id) > 0 && (g.category || '').toLowerCase() !== 'banner');
         } else {
             await delay(300);
         }

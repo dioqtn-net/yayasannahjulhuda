@@ -17,6 +17,7 @@
   let isSavingGaleri = false;
   let currentGaleriList = [];
   let currentFilterKategori = 'all';
+  let currentFilterJenjang = 'Semua';
   let currentSearchQuery = '';
 
   try {
@@ -210,6 +211,15 @@
       return true; // 'all'
     });
 
+    // Filter Jenjang
+    if (currentFilterJenjang && currentFilterJenjang !== 'Semua') {
+      const targetJ = currentFilterJenjang.toLowerCase();
+      filtered = filtered.filter(item => {
+        const j = (item.jenjang || '').toLowerCase().trim();
+        return j === targetJ || j.includes(targetJ) || j.includes('semua') || (targetJ === 'ponpes' && (j.includes('pesantren') || j.includes('assurur')));
+      });
+    }
+
     // Filter Pencarian
     if (currentSearchQuery) {
       const q = currentSearchQuery.toLowerCase().trim();
@@ -308,6 +318,11 @@
     window.renderAdminGaleriTable();
   };
 
+  window.handleFilterGaleriJenjang = function (val) {
+    currentFilterJenjang = val || 'Semua';
+    window.renderAdminGaleriTable();
+  };
+
   // 4. BUKA & TUTUP FORM TERPADU
   window.bukaFormTambahGaleri = function (kategoriDefault = 'Ekstrakurikuler') {
     const elId = document.getElementById('galeriId');
@@ -388,12 +403,12 @@
   };
 
   // 6. SIMPAN GALERI TERPADU (INSERT / UPDATE)
-  window.handleSimpanGaleri = async function (e) {
+  window.handleSimpanGaleri = async function (e, silent = false) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (isSavingGaleri) return;
+    if (isSavingGaleri) return false;
     isSavingGaleri = true;
 
     const btnSimpan = document.getElementById('btnSimpanCardGaleri');
@@ -422,7 +437,7 @@
           btnSimpan.disabled = false;
           btnSimpan.innerHTML = originalHtml;
         }
-        return;
+        return false;
       }
 
       const inputMedia = document.getElementById('galeriMedia');
@@ -492,9 +507,16 @@
 
       window.tutupFormGaleri();
       await window.loadGaleriData();
-      alert(`Alhamdulillah! Dokumentasi ${category} berhasil disimpan ke database Supabase.`);
+      if (!silent) {
+        alert(`Alhamdulillah! Dokumentasi ${category} berhasil disimpan ke database Supabase.`);
+      }
+      return true;
     } catch (err) {
-      alert('Gagal menyimpan galeri:\n' + (err.message || err));
+      console.error("[Kelola Galeri] Gagal menyimpan:", err);
+      if (!silent) {
+        alert('Gagal menyimpan galeri:\n' + (err.message || err));
+      }
+      throw err;
     } finally {
       isSavingGaleri = false;
       if (btnSimpan) {
@@ -542,7 +564,7 @@
   };
 
   // 8. SIMPAN BANNER GALERI
-  window.handleSimpanBannerGaleri = async function (e) {
+  window.handleSimpanBannerGaleri = async function (e, silent = false) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -593,10 +615,16 @@
         );
       }
 
-      alert('Alhamdulillah! Banner galeri berhasil disimpan.');
+      if (!silent) {
+        alert('Alhamdulillah! Banner galeri berhasil disimpan.');
+      }
+      return true;
     } catch (err) {
       console.error("[Kelola Galeri] Gagal simpan banner:", err);
-      alert('Gagal menyimpan banner galeri: ' + (err.message || err));
+      if (!silent) {
+        alert('Gagal menyimpan banner galeri: ' + (err.message || err));
+      }
+      throw err;
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -617,12 +645,24 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan perubahan...';
     }
     try {
-      const title = document.getElementById('galeriBannerTitle')?.value?.trim();
-      if (title) {
-        await window.handleSimpanBannerGaleri(null);
+      let cardSaved = false;
+      const areaForm = document.getElementById('areaFormGaleri');
+      const isFormOpen = areaForm && !areaForm.classList.contains('hidden');
+      const title = document.getElementById('galeriJudul')?.value?.trim();
+
+      if (isFormOpen && title) {
+        const ok = await window.handleSimpanGaleri(null, true);
+        if (ok) cardSaved = true;
       }
+
+      await window.handleSimpanBannerGaleri(null, true);
       await window.loadGaleriData();
-      alert('Alhamdulillah! Perubahan kelola galeri berhasil disimpan.');
+
+      if (cardSaved) {
+        alert('Alhamdulillah! Dokumentasi galeri baru dan banner berhasil disimpan ke database Supabase.');
+      } else {
+        alert('Alhamdulillah! Perubahan kelola galeri berhasil disimpan.');
+      }
     } catch (err) {
       console.error("[Kelola Galeri] Gagal simpan total:", err);
       alert('Gagal menyimpan perubahan galeri: ' + (err.message || err));
@@ -664,7 +704,19 @@
     const btnSimpanCardGaleri = document.getElementById('btnSimpanCardGaleri');
     if (btnSimpanCardGaleri && !btnSimpanCardGaleri.dataset.bound) {
       btnSimpanCardGaleri.dataset.bound = 'true';
-      btnSimpanCardGaleri.addEventListener('click', window.handleSimpanGaleri);
+      btnSimpanCardGaleri.addEventListener('click', (e) => window.handleSimpanGaleri(e, false));
+    }
+
+    const btnBannerGaleri = document.getElementById('btnSimpanBannerGaleri');
+    if (btnBannerGaleri && !btnBannerGaleri.dataset.bound) {
+      btnBannerGaleri.dataset.bound = 'true';
+      btnBannerGaleri.addEventListener('click', (e) => window.handleSimpanBannerGaleri(e, false));
+    }
+
+    const btnTotalGaleri = document.getElementById('btnSimpanGaleriTotal');
+    if (btnTotalGaleri && !btnTotalGaleri.dataset.bound) {
+      btnTotalGaleri.dataset.bound = 'true';
+      btnTotalGaleri.addEventListener('click', window.handleSimpanGaleriTotal);
     }
   }
 

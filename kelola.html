@@ -1321,6 +1321,22 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               </div>
             </div>
 
+            <!-- Filter Jenjang & Pencarian Tabel Berita -->
+            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mb-4">
+              <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 overflow-x-auto text-xs">
+                <button type="button" onclick="window.filterAdminBerita('Semua')" class="filter-berita-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-2xs transition" data-jenjang="Semua">Semua</button>
+                <button type="button" onclick="window.filterAdminBerita('SDI')" class="filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition" data-jenjang="SDI">SDI</button>
+                <button type="button" onclick="window.filterAdminBerita('MI')" class="filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition" data-jenjang="MI">MI</button>
+                <button type="button" onclick="window.filterAdminBerita('MTs')" class="filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition" data-jenjang="MTs">MTs</button>
+                <button type="button" onclick="window.filterAdminBerita('MA')" class="filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition" data-jenjang="MA">MA</button>
+                <button type="button" onclick="window.filterAdminBerita('Ponpes')" class="filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition" data-jenjang="Ponpes">Ponpes</button>
+              </div>
+              <div class="relative w-full sm:w-64">
+                <input type="text" id="searchAdminBerita" oninput="window.handleSearchAdminBerita(this.value)" placeholder="Cari judul berita..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+              </div>
+            </div>
+
             <!-- Tabel List Berita -->
             <div class="overflow-x-auto border rounded-lg mb-6">
               <table class="min-w-full text-sm text-left">
@@ -1480,14 +1496,27 @@ Mengaplikasikan Ilmu Agama dengan diimbangi aplikasi Teknologi Informasi</textar
               </div>
             </div>
 
-            <!-- Filter Kategori & Pencarian Tabel -->
-            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mb-4">
-              <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 overflow-x-auto text-xs">
-                <button type="button" id="filterGaleriAll" onclick="window.filterAdminGaleri('all')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition">Semua</button>
-                <button type="button" id="filterGaleriEskul" onclick="window.filterAdminGaleri('Ekstrakurikuler')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Ekstrakurikuler</button>
-                <button type="button" id="filterGaleriKegiatan" onclick="window.filterAdminGaleri('Kegiatan')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Kegiatan</button>
+            <!-- Filter Kategori, Jenjang & Pencarian Tabel -->
+            <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 mb-4">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
+                  <button type="button" id="filterGaleriAll" onclick="window.filterAdminGaleri('all')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-xs transition">Semua</button>
+                  <button type="button" id="filterGaleriEskul" onclick="window.filterAdminGaleri('Ekstrakurikuler')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Ekstrakurikuler</button>
+                  <button type="button" id="filterGaleriKegiatan" onclick="window.filterAdminGaleri('Kegiatan')" class="filter-galeri-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition">Kegiatan</button>
+                </div>
+                <div class="flex items-center gap-1 text-xs text-slate-500 font-medium">
+                  <label for="filterAdminGaleriJenjang" class="shrink-0"><i class="fas fa-graduation-cap text-emerald-700"></i> Jenjang:</label>
+                  <select id="filterAdminGaleriJenjang" onchange="window.handleFilterGaleriJenjang(this.value)" class="text-xs border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white font-medium text-slate-700 focus:ring-2 focus:ring-emerald-500">
+                    <option value="Semua">Semua Jenjang</option>
+                    <option value="SDI">SDI Al Kindy</option>
+                    <option value="MI">MI Nahjul Huda</option>
+                    <option value="MTs">MTs Nahjul Huda</option>
+                    <option value="MA">MA Nahjul Huda</option>
+                    <option value="Ponpes">Ponpes Assurur</option>
+                  </select>
+                </div>
               </div>
-              <div class="relative w-full sm:w-64">
+              <div class="relative w-full md:w-64">
                 <input type="text" id="searchAdminGaleri" oninput="window.handleSearchAdminGaleri(this.value)" placeholder="Cari judul galeri..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
                 <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
               </div>

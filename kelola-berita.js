@@ -146,6 +146,27 @@
   // Alias agar kelola.html dapat memanggil window.loadBeritaData() maupun window.loadBeritaList()
   window.loadBeritaData = window.loadBeritaList;
 
+  // Variabel Filter Jenjang & Pencarian
+  let activeBeritaJenjang = 'Semua';
+  let searchBeritaQuery = '';
+
+  window.filterAdminBerita = function(jenjang) {
+    activeBeritaJenjang = jenjang || 'Semua';
+    document.querySelectorAll('.filter-berita-btn').forEach(btn => {
+      if (btn.getAttribute('data-jenjang') === jenjang) {
+        btn.className = 'filter-berita-btn px-3 py-1.5 rounded-md font-semibold bg-white text-emerald-800 shadow-2xs transition';
+      } else {
+        btn.className = 'filter-berita-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-emerald-800 transition';
+      }
+    });
+    renderAdminTable();
+  };
+
+  window.handleSearchAdminBerita = function(val) {
+    searchBeritaQuery = (val || '').trim();
+    renderAdminTable();
+  };
+
   function renderAdminTable() {
     const tbody = document.getElementById('adminListBerita') || document.getElementById('daftarBeritaAdmin');
     if (!tbody) {
@@ -153,12 +174,25 @@
       return;
     }
 
-    if (currentBeritaList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">Belum ada berita tersimpan di database. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Berita Baru</span> di atas.</td></tr>`;
+    let filtered = currentBeritaList;
+    if (activeBeritaJenjang && activeBeritaJenjang !== 'Semua') {
+      filtered = filtered.filter(item => {
+        const j = (item.jenjang || '').toLowerCase().trim();
+        const target = activeBeritaJenjang.toLowerCase();
+        return j === target || j.includes(target) || j.includes('semua') || (target === 'ponpes' && (j.includes('pesantren') || j.includes('assurur')));
+      });
+    }
+    if (searchBeritaQuery) {
+      const q = searchBeritaQuery.toLowerCase();
+      filtered = filtered.filter(item => (item.title || '').toLowerCase().includes(q));
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">Belum ada berita tersimpan di database${activeBeritaJenjang && activeBeritaJenjang !== 'Semua' ? ' untuk jenjang ' + activeBeritaJenjang : ''}. Silakan klik tombol <span class="font-semibold text-emerald-700">+ Tambah Berita Baru</span> di atas.</td></tr>`;
       return;
     }
 
-    tbody.innerHTML = currentBeritaList.map(item => {
+    tbody.innerHTML = filtered.map(item => {
       const images = (Array.isArray(item.images) && item.images.length > 0)
         ? item.images
         : (item.image_url ? [item.image_url] : []);
@@ -345,13 +379,13 @@
   }
 
   // 5. SIMPAN KARTU BERITA
-  window.handleSimpanCardBerita = async function (e) {
+  window.handleSimpanCardBerita = async function (e, silent = false) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
 
-    if (isSaving) return;
+    if (isSaving) return false;
     isSaving = true;
 
     const btnSimpan = document.getElementById('btnSimpanCardBerita');
@@ -380,7 +414,7 @@
           btnSimpan.disabled = false;
           btnSimpan.innerHTML = BTN_BERITA_HTML;
         }
-        return;
+        return false;
       }
 
       const inp1 = document.getElementById('beritaImg1');
@@ -467,10 +501,16 @@
       // Bersihkan dan tutup form
       window.tutupFormBerita();
       await window.loadBeritaList();
-      alert('Alhamdulillah! Berita berhasil disimpan ke database Supabase.');
+      if (!silent) {
+        alert('Alhamdulillah! Berita berhasil disimpan ke database Supabase.');
+      }
+      return true;
     } catch (error) {
       console.error('[Kelola Berita] Gagal menyimpan:', error);
-      alert('Gagal menyimpan berita:\n' + (error.message || error));
+      if (!silent) {
+        alert('Gagal menyimpan berita:\n' + (error.message || error));
+      }
+      throw error;
     } finally {
       isSaving = false;
       if (btnSimpan) {
@@ -481,7 +521,7 @@
   };
 
   // Banner berita
-  window.handleSimpanBannerBerita = async function (e) {
+  window.handleSimpanBannerBerita = async function (e, silent = false) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -532,10 +572,16 @@
         );
       }
 
-      alert('Alhamdulillah! Banner berita berhasil disimpan.');
+      if (!silent) {
+        alert('Alhamdulillah! Banner berita berhasil disimpan.');
+      }
+      return true;
     } catch (err) {
       console.error("[Kelola Berita] Gagal simpan banner:", err);
-      alert('Gagal menyimpan banner berita: ' + (err.message || err));
+      if (!silent) {
+        alert('Gagal menyimpan banner berita: ' + (err.message || err));
+      }
+      throw err;
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -556,12 +602,24 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan perubahan...';
     }
     try {
-      const title = document.getElementById('beritaBannerTitle')?.value?.trim();
-      if (title) {
-        await window.handleSimpanBannerBerita(null);
+      let cardSaved = false;
+      const areaForm = document.getElementById('areaFormBerita');
+      const isFormOpen = areaForm && !areaForm.classList.contains('hidden');
+      const judul = document.getElementById('beritaJudul')?.value?.trim();
+
+      if (isFormOpen && judul) {
+        const ok = await window.handleSimpanCardBerita(null, true);
+        if (ok) cardSaved = true;
       }
+
+      await window.handleSimpanBannerBerita(null, true);
       await window.loadBeritaList();
-      alert('Alhamdulillah! Perubahan kelola berita berhasil disimpan.');
+
+      if (cardSaved) {
+        alert('Alhamdulillah! Berita baru dan banner berhasil disimpan ke database Supabase.');
+      } else {
+        alert('Alhamdulillah! Perubahan kelola berita berhasil disimpan.');
+      }
     } catch (err) {
       console.error("[Kelola Berita] Gagal simpan total:", err);
       alert('Gagal menyimpan perubahan berita: ' + (err.message || err));
@@ -592,6 +650,18 @@
     if (btnBatal && !btnBatal.dataset.bound) {
       btnBatal.dataset.bound = 'true';
       btnBatal.addEventListener('click', window.tutupFormBerita);
+    }
+
+    const btnBanner = document.getElementById('btnSimpanBannerBerita');
+    if (btnBanner && !btnBanner.dataset.bound) {
+      btnBanner.dataset.bound = 'true';
+      btnBanner.addEventListener('click', (e) => window.handleSimpanBannerBerita(e, false));
+    }
+
+    const btnTotal = document.getElementById('btnSimpanBeritaTotal');
+    if (btnTotal && !btnTotal.dataset.bound) {
+      btnTotal.dataset.bound = 'true';
+      btnTotal.addEventListener('click', window.handleSimpanBeritaTotal);
     }
   }
 

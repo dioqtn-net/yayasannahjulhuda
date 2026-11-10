@@ -816,14 +816,22 @@
           // Insert into specific category grids by jenjang
           function insertByJenjang(list, targetMap, tipeName) {
             list.forEach(item => {
-              const j = (item.jenjang || 'Semua').toLowerCase();
-              if (j === 'semua') {
+              const rawJ = (item.jenjang || 'Semua').toLowerCase();
+              if (rawJ.includes('semua')) {
                 Object.values(targetMap).forEach(targetId => {
                   const targetEl = document.getElementById(targetId);
                   if (targetEl) targetEl.insertAdjacentHTML('beforeend', createCard(item, tipeName));
                 });
               } else {
-                const targetId = targetMap[j];
+                let key = '';
+                if (rawJ.includes('sdi')) key = 'sdi';
+                else if (rawJ.includes('mi') || rawJ.includes('ibtidaiyah')) key = 'mi';
+                else if (rawJ.includes('mts') || rawJ.includes('tsanawiyah')) key = 'mts';
+                else if (rawJ.includes('ma') || rawJ.includes('aliyah')) key = 'ma';
+                else if (rawJ.includes('ponpes') || rawJ.includes('pesantren') || rawJ.includes('assurur')) key = 'ponpes';
+                else key = rawJ;
+
+                const targetId = targetMap[key];
                 if (targetId) {
                   const targetEl = document.getElementById(targetId);
                   if (targetEl) targetEl.insertAdjacentHTML('beforeend', createCard(item, tipeName));
@@ -876,7 +884,7 @@
             try {
               const SUPABASE_URL = "https://lrorriksjooxrpoihfge.supabase.co";
               const SUPABASE_ANON_KEY = "sb_publishable_lh_h3wSEaX3dUsR1XzWeGw_5t18TWxT";
-              const res = await fetch(`${SUPABASE_URL}/rest/v1/galleries?select=*&order=id.desc&_t=${Date.now()}`, {
+              const res = await fetch(`${SUPABASE_URL}/rest/v1/galleries?select=*&order=id.desc`, {
                 cache: 'no-store',
                 headers: {
                   'apikey': SUPABASE_ANON_KEY,
@@ -936,6 +944,14 @@
                   if (typeof switchJenjang === 'function') {
                     switchJenjang('Semua');
                   }
+                }
+              } else {
+                console.warn('[galeri.html] REST fetch not ok:', res.status);
+                window.allEskulList = [];
+                window.allKegiatanList = [];
+                syncDynamicCards();
+                if (typeof switchJenjang === 'function') {
+                  switchJenjang('Semua');
                 }
               }
             } catch (err) {
