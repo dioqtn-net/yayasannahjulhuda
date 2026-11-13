@@ -48,6 +48,11 @@ const loadHome = async () => {
     appDiv.innerHTML = '';
     appDiv.innerHTML = renderLayout(renderHome(profile, units, news, facilities, galleries, ppdb, homeSettings), true, 'beranda', contact);
     setupHomeEvents(homeSettings, contact);
+    if (ppdb && ppdb.contact_person && ppdb.contact_person.popup_banner) {
+        if (typeof window.initHomePpdbPopup === 'function') {
+            window.initHomePpdbPopup(ppdb.contact_person.popup_banner);
+        }
+    }
 };
 
 // Setup Routing

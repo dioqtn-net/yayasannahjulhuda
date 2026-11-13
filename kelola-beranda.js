@@ -15,6 +15,14 @@
   // Flag guard agar tidak terjadi double-submit
   let isSaving = false;
 
+  // Cache object contact_person dari ppdb_info agar tidak tertimpa
+  let cachedContactPerson = null;
+
+  // Variabel untuk modal pratinjau pop-up di admin
+  let adminPrevIndex = 0;
+  let adminPrevTimer = null;
+  let adminPrevSlides = [];
+
   // Template HTML default tombol utama agar tidak pernah macet di teks 'Menyimpan...'
   const BTN_BERANDA_HTML = `<svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg> Simpan Perubahan Beranda`;
 
@@ -149,7 +157,7 @@
 
         try {
           const { data, error } = await withTimeout(
-            supa.from('ppdb_info').select('academic_year, status').eq('id', 1).maybeSingle(),
+            supa.from('ppdb_info').select('*').eq('id', 1).maybeSingle(),
             8000
           );
           if (!error && data) ppdb = data;
@@ -235,6 +243,50 @@
         if (ppdbYearEl && ppdb.academic_year) ppdbYearEl.value = ppdb.academic_year;
         const ppdbStatusEl = document.getElementById('ppdbStatus');
         if (ppdbStatusEl && ppdb.status) ppdbStatusEl.value = ppdb.status;
+
+        // Simpan contact_person agar data lainnya tidak hilang saat simpan
+        if (ppdb.contact_person && typeof ppdb.contact_person === 'object') {
+          cachedContactPerson = ppdb.contact_person;
+        }
+
+        // Isi form Pop-up Brosur PPDB (Bagian 6)
+        const pb = (cachedContactPerson && cachedContactPerson.popup_banner) ? cachedContactPerson.popup_banner : {};
+        const activeCheck = document.getElementById('popupBannerActive');
+        if (activeCheck) {
+          activeCheck.checked = pb.active !== false;
+          const labelActive = document.getElementById('labelPopupBannerActive');
+          if (labelActive) {
+            labelActive.textContent = activeCheck.checked ? 'Aktif (Tampil di Beranda)' : 'Nonaktif (Disembunyikan)';
+          }
+        }
+
+        const autoSlideCheck = document.getElementById('popupBannerAutoSlide');
+        if (autoSlideCheck && pb.auto_slide !== undefined) {
+          autoSlideCheck.checked = pb.auto_slide !== false;
+        }
+
+        const durSelect = document.getElementById('popupBannerDuration');
+        if (durSelect && pb.slide_duration) {
+          durSelect.value = String(pb.slide_duration);
+        }
+
+        const slides = Array.isArray(pb.slides) ? pb.slides : [];
+        const jenjangList = ['sdi', 'mi', 'mts', 'ma', 'ponpes'];
+        jenjangList.forEach(j => {
+          const s = slides.find(item => item.jenjang === j) || {};
+          const elBadge = document.getElementById('popupSlideBadge_' + j);
+          if (elBadge && s.badge) elBadge.value = s.badge;
+          const elTitle = document.getElementById('popupSlideTitle_' + j);
+          if (elTitle && s.title) elTitle.value = s.title;
+          const elSub = document.getElementById('popupSlideSubtitle_' + j);
+          if (elSub && s.subtitle) elSub.value = s.subtitle;
+          const elLink = document.getElementById('popupSlideLink_' + j);
+          if (elLink && s.link_url) elLink.value = s.link_url;
+          const elImg = document.getElementById('popupSlideImgUrl_' + j);
+          if (elImg && s.image_url) elImg.value = s.image_url;
+          const elPrev = document.getElementById('popupSlideImgPreview_' + j);
+          if (elPrev && s.image_url) elPrev.src = s.image_url;
+        });
       }
     } catch (e) {
       console.warn("[Kelola Beranda] Gagal mengambil data Supabase:", e);
@@ -307,10 +359,88 @@
         updated_at: new Date().toISOString()
       };
 
+      // Kumpulkan pengaturan Pop-up Brosur PPDB (Bagian 6)
+      const popupActive = document.getElementById('popupBannerActive') ? document.getElementById('popupBannerActive').checked : true;
+      const popupAutoSlide = document.getElementById('popupBannerAutoSlide') ? document.getElementById('popupBannerAutoSlide').checked : true;
+      const popupDuration = parseInt(getVal('popupBannerDuration', '5000'), 10) || 5000;
+
+      const jenjangDef = [
+        { id: 'sdi', defaultBadge: 'SDI AL KINDY', defaultTitle: 'Penerimaan Peserta Didik Baru (PPDB)', defaultSub: "Sekolah Dasar Berbasis Al-Qur'an & Karakter Islami", defaultLink: '/ppdb#sdi', defaultImg: '/media/logo/SDI.jpg' },
+        { id: 'mi', defaultBadge: 'MI NAHJUL HUDA', defaultTitle: 'Penerimaan Peserta Didik Baru (PPDB)', defaultSub: 'Pendidikan Dasar Islam Terpadu & Berakhlak Mulia', defaultLink: '/ppdb#mi', defaultImg: '/media/logo/MI.jpg' },
+        { id: 'mts', defaultBadge: 'MTS NAHJUL HUDA', defaultTitle: 'Penerimaan Murid Baru (SPMB)', defaultSub: 'Dapatkan Promo Spesial SPMB: GRATIS UANG PANGKAL!', defaultLink: '/ppdb#mts', defaultImg: '/media/logo/MTs.jpg' },
+        { id: 'ma', defaultBadge: 'MA NAHJUL HUDA', defaultTitle: 'Penerimaan Murid Baru (SPMB)', defaultSub: 'Madrasah Aliyah Unggul Menuju Perguruan Tinggi Favorit', defaultLink: '/ppdb#ma', defaultImg: '/media/logo/MA.jpg' },
+        { id: 'ponpes', defaultBadge: 'PONPES ASSURUR', defaultTitle: 'Penerimaan Santri Baru (PSB)', defaultSub: "Pondok Pesantren Tahfidz Qur'an & Pendalaman Kitab Kuning", defaultLink: '/ppdb#ponpes', defaultImg: '/media/logo/Ponpes.jpg' }
+      ];
+
+      const processedSlides = [];
+      for (const item of jenjangDef) {
+        const j = item.id;
+        const prevUrl = document.getElementById('popupSlideImgUrl_' + j)?.value || item.defaultImg;
+        let finalImageUrl = prevUrl;
+
+        if (typeof window.processImageField === 'function') {
+          try {
+            finalImageUrl = await window.processImageField(
+              'popupSlideFile_' + j,
+              prevUrl,
+              { maxWidth: 1200, maxHeight: 1600, quality: 0.85, pathPrefix: 'brosur_ppdb_' + j }
+            );
+          } catch (imgErr) {
+            console.warn(`[Kelola Beranda] Gagal kompresi brosur ${j}, tetap gunakan file lama:`, imgErr);
+            finalImageUrl = prevUrl;
+          }
+        }
+
+        const badge = getVal('popupSlideBadge_' + j, item.defaultBadge);
+        const title = getVal('popupSlideTitle_' + j, item.defaultTitle);
+        const subtitle = getVal('popupSlideSubtitle_' + j, item.defaultSub);
+        const link_url = getVal('popupSlideLink_' + j, item.defaultLink);
+
+        processedSlides.push({
+          jenjang: j,
+          name: item.defaultBadge,
+          badge,
+          title,
+          subtitle,
+          image_url: finalImageUrl,
+          link_url
+        });
+      }
+
+      // Pastikan contact_person tidak terhapus (ambil dari cache atau fetch cepat jika null)
+      let baseContactPerson = cachedContactPerson || {};
+      if (!baseContactPerson || Object.keys(baseContactPerson).length === 0) {
+        try {
+          const resCp = await fetch(`${SUPABASE_URL}/rest/v1/ppdb_info?id=eq.1&select=contact_person`, {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+          });
+          if (resCp.ok) {
+            const rowsCp = await resCp.json();
+            if (rowsCp && rowsCp[0] && rowsCp[0].contact_person) {
+              baseContactPerson = rowsCp[0].contact_person;
+            }
+          }
+        } catch (e) {}
+      }
+
+      const updatedContactPerson = {
+        ...baseContactPerson,
+        popup_banner: {
+          active: popupActive,
+          auto_slide: popupAutoSlide,
+          slide_duration: popupDuration,
+          slides: processedSlides
+        }
+      };
+
+      // Perbarui cachedContactPerson lokal
+      cachedContactPerson = updatedContactPerson;
+
       const ppdbPayload = {
         id: 1,
         academic_year: ppdbYear,
         status: ppdbStatus,
+        contact_person: updatedContactPerson,
         updated_at: new Date().toISOString()
       };
 
@@ -371,7 +501,145 @@
     }
   };
 
-  // 5. Inisialisasi Listener
+  // 5. HELPER TAB SLIDE DAN PRATINJAU POP-UP BROSUR PPDB (ADMIN)
+  window.switchPopupSlideTab = function (jenjang) {
+    const jenjangList = ['sdi', 'mi', 'mts', 'ma', 'ponpes'];
+    jenjangList.forEach(j => {
+      const btn = document.getElementById('tabBtnPopup_' + j);
+      const panel = document.getElementById('popupSlidePanel_' + j);
+      if (j === jenjang) {
+        if (btn) {
+          btn.className = 'popup-slide-tab-btn px-3 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-emerald-700 text-white shadow-xs';
+        }
+        if (panel) panel.classList.remove('hidden');
+      } else {
+        if (btn) {
+          btn.className = 'popup-slide-tab-btn px-3 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100';
+        }
+        if (panel) panel.classList.add('hidden');
+      }
+    });
+  };
+
+  window.handlePopupFileChange = function (jenjang, input) {
+    if (!input || !input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const prevImg = document.getElementById('popupSlideImgPreview_' + jenjang);
+      if (prevImg) prevImg.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Preview Modal Slider di Admin
+  function collectAdminPreviewSlides() {
+    const jenjangList = [
+      { id: 'sdi', defaultBadge: 'SDI AL KINDY', defaultTitle: 'Penerimaan Peserta Didik Baru (PPDB)', defaultSub: "Sekolah Dasar Berbasis Al-Qur'an & Karakter Islami", defaultLink: '/ppdb#sdi', defaultImg: '/media/logo/SDI.jpg' },
+      { id: 'mi', defaultBadge: 'MI NAHJUL HUDA', defaultTitle: 'Penerimaan Peserta Didik Baru (PPDB)', defaultSub: 'Pendidikan Dasar Islam Terpadu & Berakhlak Mulia', defaultLink: '/ppdb#mi', defaultImg: '/media/logo/MI.jpg' },
+      { id: 'mts', defaultBadge: 'MTS NAHJUL HUDA', defaultTitle: 'Penerimaan Murid Baru (SPMB)', defaultSub: 'Dapatkan Promo Spesial SPMB: GRATIS UANG PANGKAL!', defaultLink: '/ppdb#mts', defaultImg: '/media/logo/MTs.jpg' },
+      { id: 'ma', defaultBadge: 'MA NAHJUL HUDA', defaultTitle: 'Penerimaan Murid Baru (SPMB)', defaultSub: 'Madrasah Aliyah Unggul Menuju Perguruan Tinggi Favorit', defaultLink: '/ppdb#ma', defaultImg: '/media/logo/MA.jpg' },
+      { id: 'ponpes', defaultBadge: 'PONPES ASSURUR', defaultTitle: 'Penerimaan Santri Baru (PSB)', defaultSub: "Pondok Pesantren Tahfidz Qur'an & Pendalaman Kitab Kuning", defaultLink: '/ppdb#ponpes', defaultImg: '/media/logo/Ponpes.jpg' }
+    ];
+
+    return jenjangList.map(item => {
+      const j = item.id;
+      const previewEl = document.getElementById('popupSlideImgPreview_' + j);
+      const imgSrc = (previewEl && previewEl.src) ? previewEl.src : (document.getElementById('popupSlideImgUrl_' + j)?.value || item.defaultImg);
+      return {
+        badge: getVal('popupSlideBadge_' + j, item.defaultBadge),
+        title: getVal('popupSlideTitle_' + j, item.defaultTitle),
+        subtitle: getVal('popupSlideSubtitle_' + j, item.defaultSub),
+        link_url: getVal('popupSlideLink_' + j, item.defaultLink),
+        image_url: imgSrc
+      };
+    });
+  }
+
+  function renderAdminPreviewSlide(index) {
+    if (!adminPrevSlides || adminPrevSlides.length === 0) return;
+    const total = adminPrevSlides.length;
+    adminPrevIndex = ((index % total) + total) % total;
+    const s = adminPrevSlides[adminPrevIndex];
+
+    const elBadge = document.getElementById('adminPrevBadge');
+    if (elBadge) elBadge.textContent = s.badge || 'PPDB';
+    const elCounter = document.getElementById('adminPrevCounter');
+    if (elCounter) elCounter.textContent = `${adminPrevIndex + 1} / ${total}`;
+    const elTitle = document.getElementById('adminPrevTitle');
+    if (elTitle) elTitle.textContent = s.title || '';
+    const elSub = document.getElementById('adminPrevSubtitle');
+    if (elSub) elSub.textContent = s.subtitle || '';
+    const elImg = document.getElementById('adminPrevImage');
+    if (elImg) {
+      elImg.style.opacity = '0.3';
+      setTimeout(() => {
+        elImg.src = s.image_url || '/media/logo/SDI.jpg';
+        elImg.style.opacity = '1';
+      }, 80);
+    }
+    const elLink = document.getElementById('adminPrevLink');
+    if (elLink) elLink.href = s.link_url || '/ppdb';
+
+    // Dots
+    const dotsContainer = document.getElementById('adminPrevDots');
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('button');
+      dots.forEach((d, i) => {
+        if (i === adminPrevIndex) {
+          d.className = 'w-6 h-2 rounded-full bg-emerald-600 transition-all';
+        } else {
+          d.className = 'w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all cursor-pointer';
+        }
+      });
+    }
+  }
+
+  window.previewHomePopupFromAdmin = function () {
+    adminPrevSlides = collectAdminPreviewSlides();
+    adminPrevIndex = 0;
+    renderAdminPreviewSlide(0);
+
+    const modal = document.getElementById('adminPopupPreviewModal');
+    if (modal) modal.classList.remove('hidden');
+
+    const autoSlide = document.getElementById('popupBannerAutoSlide')?.checked ?? true;
+    const duration = parseInt(getVal('popupBannerDuration', '5000'), 10) || 5000;
+
+    if (adminPrevTimer) clearInterval(adminPrevTimer);
+    if (autoSlide) {
+      adminPrevTimer = setInterval(() => {
+        renderAdminPreviewSlide(adminPrevIndex + 1);
+      }, duration);
+    }
+  };
+
+  window.closeAdminPopupPreview = function () {
+    if (adminPrevTimer) {
+      clearInterval(adminPrevTimer);
+      adminPrevTimer = null;
+    }
+    const modal = document.getElementById('adminPopupPreviewModal');
+    if (modal) modal.classList.add('hidden');
+  };
+
+  window.adminPrevStep = function (dir) {
+    if (adminPrevTimer) {
+      clearInterval(adminPrevTimer);
+      adminPrevTimer = null;
+    }
+    renderAdminPreviewSlide(adminPrevIndex + dir);
+  };
+
+  window.adminPrevGoTo = function (index) {
+    if (adminPrevTimer) {
+      clearInterval(adminPrevTimer);
+      adminPrevTimer = null;
+    }
+    renderAdminPreviewSlide(index);
+  };
+
+  // 6. Inisialisasi Listener
   function initKelolaBeranda() {
     console.log("[Kelola Beranda] Menjalankan initKelolaBeranda()...");
     window.loadBerandaData();

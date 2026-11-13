@@ -825,6 +825,19 @@
                   ? 'Pendaftaran Dibuka TP ' + (ppdbData.academic_year || '')
                   : 'Pendaftaran Ditutup';
               }
+              if (ppdbData.contact_person && ppdbData.contact_person.popup_banner) {
+                if (typeof window.initHomePpdbPopup === 'function') {
+                  window.initHomePpdbPopup(ppdbData.contact_person.popup_banner);
+                }
+              } else {
+                if (typeof window.initHomePpdbPopup === 'function') {
+                  window.initHomePpdbPopup(null);
+                }
+              }
+            } else {
+              if (typeof window.initHomePpdbPopup === 'function') {
+                window.initHomePpdbPopup(null);
+              }
             }
 
             // 4. Ambil Informasi Kontak & Footer dari Supabase
@@ -874,6 +887,304 @@
       })();
     </script>
     <script type="module" src="/src/main.js?v=20261106_03"></script>
+    <!-- ======================================================== -->
+    <!-- MODAL POP-UP IKLAN BROSUR PPDB (5 JENJANG PENDIDIKAN)   -->
+    <!-- ======================================================== -->
+    <div id="homePpdbModal" class="hidden fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-4 bg-slate-900/80 backdrop-blur-sm transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="popupModalTitle">
+      <div id="homePpdbModalDialog" class="relative w-full max-w-md sm:max-w-lg md:max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-emerald-200 flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
+        <!-- Header Pop-up Banner -->
+        <div class="relative p-4 sm:p-5 bg-gradient-to-r from-emerald-800 via-emerald-900 to-teal-950 text-white flex items-start justify-between gap-3 shadow-sm select-none">
+          <div class="space-y-1.5 pr-8">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="popupModalBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-400 text-emerald-950 shadow-xs">
+                SDI AL KINDY
+              </span>
+              <span id="popupModalCounter" class="text-xs font-semibold text-emerald-200 bg-emerald-950/70 px-2 py-0.5 rounded-full border border-emerald-700/50">
+                1 / 5
+              </span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-300">
+                <i class="fas fa-bullhorn text-amber-300"></i> Info Brosur PPDB
+              </span>
+            </div>
+            <h3 id="popupModalTitle" class="text-base sm:text-lg md:text-xl font-bold font-playfair text-white leading-snug">
+              Penerimaan Peserta Didik Baru (PPDB)
+            </h3>
+            <p id="popupModalSubtitle" class="text-xs sm:text-sm text-emerald-100 line-clamp-2">
+              Sekolah Dasar Berbasis Al-Qur'an &amp; Karakter Islami
+            </p>
+          </div>
+
+          <!-- Tombol Tutup (X) Aksesibel -->
+          <button type="button" onclick="window.closeHomePpdbModal()" aria-label="Tutup Pop-up Brosur" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/30 hover:bg-red-600 text-white flex items-center justify-center transition-colors shadow-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-white">
+            <i class="fas fa-times text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Carousel Slide Area (Tampilan Gambar Brosur) -->
+        <div id="popupCarouselContainer" class="relative bg-slate-950 flex items-center justify-center overflow-hidden flex-1 min-h-[280px] max-h-[50vh] sm:max-h-[56vh] select-none group">
+          <!-- Slide Image -->
+          <img id="popupModalImage" src="/media/logo/SDI.jpg" alt="Brosur Pendaftaran PPDB" class="w-full h-full object-contain max-h-[50vh] sm:max-h-[56vh] transition-opacity duration-300 cursor-pointer" onclick="window.openCurrentPpdbLink()">
+
+          <!-- Navigasi Panah Kiri -->
+          <button type="button" onclick="window.slideHomePpdb(-1)" aria-label="Slide Brosur Sebelumnya" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-emerald-900 shadow-xl flex items-center justify-center transition-all hover:scale-110 z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <i class="fas fa-chevron-left text-sm"></i>
+          </button>
+
+          <!-- Navigasi Panah Kanan -->
+          <button type="button" onclick="window.slideHomePpdb(1)" aria-label="Slide Brosur Berikutnya" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-emerald-900 shadow-xl flex items-center justify-center transition-all hover:scale-110 z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <i class="fas fa-chevron-right text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Quick Jenjang Tabs Selector -->
+        <div class="px-3 pt-2.5 pb-1 bg-white border-t border-slate-100 flex items-center justify-between gap-1 overflow-x-auto" id="popupJenjangQuickTabs">
+          <button type="button" onclick="window.goToHomePpdbSlide(0)" class="popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-bold transition bg-emerald-50 text-emerald-800 border border-emerald-300">SDI</button>
+          <button type="button" onclick="window.goToHomePpdbSlide(1)" class="popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-medium transition text-slate-600 hover:bg-slate-100">MI</button>
+          <button type="button" onclick="window.goToHomePpdbSlide(2)" class="popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-medium transition text-slate-600 hover:bg-slate-100">MTs</button>
+          <button type="button" onclick="window.goToHomePpdbSlide(3)" class="popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-medium transition text-slate-600 hover:bg-slate-100">MA</button>
+          <button type="button" onclick="window.goToHomePpdbSlide(4)" class="popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-medium transition text-slate-600 hover:bg-slate-100">Ponpes</button>
+        </div>
+
+        <!-- Modal Footer CTA -->
+        <div class="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <!-- Dots Indicator -->
+          <div class="flex items-center gap-1.5" id="popupModalDots">
+            <button type="button" onclick="window.goToHomePpdbSlide(0)" aria-label="Slide 1" class="w-5 h-2 rounded-full bg-emerald-600 transition-all"></button>
+            <button type="button" onclick="window.goToHomePpdbSlide(1)" aria-label="Slide 2" class="w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+            <button type="button" onclick="window.goToHomePpdbSlide(2)" aria-label="Slide 3" class="w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+            <button type="button" onclick="window.goToHomePpdbSlide(3)" aria-label="Slide 4" class="w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+            <button type="button" onclick="window.goToHomePpdbSlide(4)" aria-label="Slide 5" class="w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"></button>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <a id="popupModalCta" href="/ppdb#sdi" class="flex-1 sm:flex-none text-center bg-gradient-to-r from-emerald-700 to-emerald-800 hover:from-emerald-800 hover:to-emerald-900 text-white font-semibold py-2.5 px-5 rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 hover:scale-[1.02]">
+              <span>Buka Brosur / Info Lengkap</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+            <button type="button" onclick="window.closeHomePpdbModal()" class="px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-xl transition cursor-pointer">
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tombol Mengambang (Floating Launcher) untuk Membuka Brosur Kapan Saja -->
+    <button id="btnFloatingPpdbBrochure" onclick="window.openHomePpdbModal(true)" aria-label="Buka Brosur PPDB 5 Jenjang" class="fixed bottom-5 left-5 z-[90] flex items-center gap-2.5 px-4 py-2.5 bg-gradient-to-r from-emerald-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-950 text-white font-medium text-xs sm:text-sm rounded-full shadow-xl border-2 border-amber-400 hover:scale-105 transition-all transform cursor-pointer group">
+      <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+      <i class="fas fa-bullhorn text-amber-300 group-hover:rotate-12 transition-transform"></i>
+      <span class="font-semibold tracking-wide">Brosur PPDB 5 Jenjang</span>
+    </button>
+
+    <!-- Skrip Pengendali Pop-up Brosur PPDB Carousel -->
+    <script>
+      (function () {
+        let currentSlide = 0;
+        let autoSlideInterval = null;
+        let popupBannerConfig = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const defaultSlides = [
+          { jenjang: 'sdi', name: 'SD Islam (SDI) AL KINDY', badge: 'SDI AL KINDY', title: 'Penerimaan Peserta Didik Baru (PPDB)', subtitle: "Sekolah Dasar Berbasis Al-Qur'an & Karakter Islami", image_url: '/media/logo/SDI.jpg', link_url: '/ppdb#sdi' },
+          { jenjang: 'mi', name: 'Madrasah Ibtidaiyah (MI) Nahjul Huda', badge: 'MI NAHJUL HUDA', title: 'Penerimaan Peserta Didik Baru (PPDB)', subtitle: 'Pendidikan Dasar Islam Terpadu & Berakhlak Mulia', image_url: '/media/logo/MI.jpg', link_url: '/ppdb#mi' },
+          { jenjang: 'mts', name: 'Madrasah Tsanawiyah (MTs) Nahjul Huda', badge: 'MTS NAHJUL HUDA', title: 'Penerimaan Murid Baru (SPMB)', subtitle: 'Dapatkan Promo Spesial SPMB: GRATIS UANG PANGKAL!', image_url: '/media/logo/MTs.jpg', link_url: '/ppdb#mts' },
+          { jenjang: 'ma', name: 'Madrasah Aliyah (MA) Nahjul Huda', badge: 'MA NAHJUL HUDA', title: 'Penerimaan Murid Baru (SPMB)', subtitle: 'Madrasah Aliyah Unggul Menuju Perguruan Tinggi Favorit', image_url: '/media/logo/MA.jpg', link_url: '/ppdb#ma' },
+          { jenjang: 'ponpes', name: 'Pondok Pesantren Assurur', badge: 'PONPES ASSURUR', title: 'Penerimaan Santri Baru (PSB)', subtitle: "Pondok Pesantren Tahfidz Qur'an & Pendalaman Kitab Kuning", image_url: '/media/logo/Ponpes.jpg', link_url: '/ppdb#ponpes' }
+        ];
+
+        function renderSlide(index) {
+          const slides = (popupBannerConfig && Array.isArray(popupBannerConfig.slides) && popupBannerConfig.slides.length > 0)
+            ? popupBannerConfig.slides
+            : defaultSlides;
+          
+          const total = slides.length;
+          currentSlide = ((index % total) + total) % total;
+          const s = slides[currentSlide];
+
+          const badgeEl = document.getElementById('popupModalBadge');
+          if (badgeEl) badgeEl.textContent = s.badge || s.name || 'PPDB';
+
+          const counterEl = document.getElementById('popupModalCounter');
+          if (counterEl) counterEl.textContent = `${currentSlide + 1} / ${total}`;
+
+          const titleEl = document.getElementById('popupModalTitle');
+          if (titleEl) titleEl.textContent = s.title || 'Penerimaan Peserta Didik Baru';
+
+          const subEl = document.getElementById('popupModalSubtitle');
+          if (subEl) subEl.textContent = s.subtitle || '';
+
+          const imgEl = document.getElementById('popupModalImage');
+          if (imgEl) {
+            imgEl.style.opacity = '0.3';
+            const newImg = new Image();
+            newImg.onload = function () {
+              imgEl.src = s.image_url || '/media/logo/SDI.jpg';
+              imgEl.style.opacity = '1';
+            };
+            newImg.onerror = function () {
+              imgEl.src = '/media/logo/SDI.jpg';
+              imgEl.style.opacity = '1';
+            };
+            newImg.src = s.image_url || '/media/logo/SDI.jpg';
+          }
+
+          const ctaEl = document.getElementById('popupModalCta');
+          if (ctaEl) ctaEl.href = s.link_url || '/ppdb';
+
+          // Update Dots
+          const dots = document.querySelectorAll('#popupModalDots button');
+          dots.forEach((dot, idx) => {
+            if (idx === currentSlide) {
+              dot.className = 'w-6 h-2 rounded-full bg-emerald-600 transition-all';
+            } else {
+              dot.className = 'w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all cursor-pointer';
+            }
+          });
+
+          // Update Quick Jenjang Tabs
+          const quickTabs = document.querySelectorAll('#popupJenjangQuickTabs .popup-quick-tab');
+          quickTabs.forEach((tab, idx) => {
+            if (idx === currentSlide) {
+              tab.className = 'popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-bold transition bg-emerald-50 text-emerald-800 border border-emerald-300';
+            } else {
+              tab.className = 'popup-quick-tab flex-1 text-center py-1 px-1.5 rounded-lg text-[11px] font-medium transition text-slate-600 hover:bg-slate-100';
+            }
+          });
+        }
+
+        function startAutoSlide() {
+          stopAutoSlide();
+          const isAuto = popupBannerConfig ? popupBannerConfig.auto_slide !== false : true;
+          const duration = (popupBannerConfig && popupBannerConfig.slide_duration) ? popupBannerConfig.slide_duration : 5000;
+          if (isAuto) {
+            autoSlideInterval = setInterval(function () {
+              renderSlide(currentSlide + 1);
+            }, duration);
+          }
+        }
+
+        function stopAutoSlide() {
+          if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+          }
+        }
+
+        window.openHomePpdbModal = function (force) {
+          const modal = document.getElementById('homePpdbModal');
+          if (!modal) return;
+
+          renderSlide(currentSlide);
+          modal.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+          startAutoSlide();
+        };
+
+        window.closeHomePpdbModal = function () {
+          stopAutoSlide();
+          const modal = document.getElementById('homePpdbModal');
+          if (modal) {
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+          }
+          try {
+            sessionStorage.setItem('nahjul_ppdb_popup_seen', '1');
+          } catch (e) {}
+        };
+
+        window.slideHomePpdb = function (step) {
+          stopAutoSlide();
+          renderSlide(currentSlide + step);
+          startAutoSlide();
+        };
+
+        window.goToHomePpdbSlide = function (idx) {
+          stopAutoSlide();
+          renderSlide(idx);
+          startAutoSlide();
+        };
+
+        window.openCurrentPpdbLink = function () {
+          const ctaEl = document.getElementById('popupModalCta');
+          if (ctaEl && ctaEl.href) {
+            window.location.href = ctaEl.href;
+          }
+        };
+
+        // Close when clicking backdrop
+        const modalBackdrop = document.getElementById('homePpdbModal');
+        if (modalBackdrop) {
+          modalBackdrop.addEventListener('click', function (e) {
+            if (e.target === modalBackdrop) {
+              window.closeHomePpdbModal();
+            }
+          });
+        }
+
+        // Keyboard ESC listener
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            const modal = document.getElementById('homePpdbModal');
+            if (modal && !modal.classList.contains('hidden')) {
+              window.closeHomePpdbModal();
+            }
+          }
+        });
+
+        // Pause on Hover
+        const carouselBox = document.getElementById('popupCarouselContainer');
+        if (carouselBox) {
+          carouselBox.addEventListener('mouseenter', stopAutoSlide);
+          carouselBox.addEventListener('mouseleave', startAutoSlide);
+
+          // Touch Swipe on Mobile
+          carouselBox.addEventListener('touchstart', function (e) {
+            stopAutoSlide();
+            touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+
+          carouselBox.addEventListener('touchend', function (e) {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchEndX - touchStartX;
+            if (Math.abs(diff) > 40) {
+              if (diff < 0) {
+                renderSlide(currentSlide + 1); // Swipe kiri -> next
+              } else {
+                renderSlide(currentSlide - 1); // Swipe kanan -> prev
+              }
+            }
+            startAutoSlide();
+          }, { passive: true });
+        }
+
+        // Inisialisasi pop-up dengan konfigurasi live
+        window.initHomePpdbPopup = function (config) {
+          if (config && typeof config === 'object') {
+            popupBannerConfig = config;
+          }
+          const isActive = popupBannerConfig ? popupBannerConfig.active !== false : true;
+          const floatingBtn = document.getElementById('btnFloatingPpdbBrochure');
+          if (floatingBtn) {
+            floatingBtn.style.display = isActive ? 'flex' : 'none';
+          }
+
+          if (!isActive) return;
+
+          let seen = false;
+          try {
+            seen = sessionStorage.getItem('nahjul_ppdb_popup_seen') === '1';
+          } catch (e) {}
+
+          if (!seen) {
+            setTimeout(function () {
+              window.openHomePpdbModal(false);
+            }, 1200);
+          }
+        };
+      })();
+    </script>
+
     <!-- Service Worker Killer (Anti-Cache Global) -->
   <script>
     if ('serviceWorker' in navigator) {

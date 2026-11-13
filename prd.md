@@ -157,3 +157,50 @@ Mengacu pada aturan ketat `antislop-layoutmobile` dan `antislop-human`:
 4. Menguji hapus data galeri -> Hanya menghapus data dengan ID yang bersangkutan.
 5. Memverifikasi halaman publik `galeri.html` di layar HP (375px - 414px), Tablet (768px - 820px), dan Desktop (1280px+).
 6. Memverifikasi build produksi `npm run build` berhasil 100% tanpa peringatan kritis.
+
+---
+
+### 8. Spesifikasi Fitur: Pop-up Brosur PPDB Beranda (5 Slide Jenjang Pendidikan)
+
+#### 8.1. Latar Belakang & Tujuan
+Menyediakan media promosi dan iklan pendaftaran peserta didik baru (PPDB / SPMB / PSB) yang tampil secara otomatis saat pengunjung pertama kali membuka beranda website Yayasan Nahjul Huda (`index.html` / `/`). Fitur ini dirancang khusus untuk memfasilitasi panitia sekolah dalam mengunggah brosur / flyer resmi pendaftaran untuk ke-5 jenjang pendidikan.
+
+#### 8.2. Arsitektur Komponen Pop-up Beranda (`index.html`)
+1. **5 Slide Jenjang Pendidikan**:
+   - Slide 1: **SD Islam (SDI) AL KINDY**
+   - Slide 2: **Madrasah Ibtidaiyah (MI) Nahjul Huda**
+   - Slide 3: **Madrasah Tsanawiyah (MTs) Nahjul Huda**
+   - Slide 4: **Madrasah Aliyah (MA) Nahjul Huda**
+   - Slide 5: **Pondok Pesantren Assurur**
+2. **Atribut Tampilan Tiap Slide**:
+   - **Badge Jenjang**: Badge berwarna emas/hijau (contoh: `SDI AL KINDY`).
+   - **Counter Indikator**: Nomor slide aktif (contoh: `1 / 5`).
+   - **Judul Slide**: Judul promosi penerimaan (contoh: `Penerimaan Peserta Didik Baru (PPDB)`).
+   - **Subtitle / Keterangan**: Deskripsi keunggulan jenjang pendidikan.
+   - **Tampilan Foto Brosur**: Wadah poster responsif dengan rasio proporsional, border lembut, dan animasi transisi halus.
+   - **Tombol Aksi Utama (CTA)**: Tombol "Buka Brosur / Info Lengkap" yang langsung mengarahkan ke tab jenjang terkait di `/ppdb#<jenjang>`.
+3. **Mekanisme Kontrol & Interaksi**:
+   - **Auto-Slide**: Rotasi otomatis sesuai durasi (3s, 4s, 5s, 7s) yang dijeda secara cerdas saat disentuh (*touch*) atau didekati kursor (*hover*).
+   - **Navigasi Panah & Tab Cepat**: Tombol panah kiri/kanan dan pill selector cepat jenjang pendidikan (SDI, MI, MTs, MA, Ponpes).
+   - **Indikator Titik (Dots Pagination)**: 5 titik interaktif di bagian bawah modal.
+   - **Dukungan Touch Swipe Mobile**: Pengguna mobile dapat menggeser layar ke kiri atau kanan untuk berpindah slide brosur.
+   - **Mekanisme Tutup & Anti-Spam**:
+     - Tombol silang (X) di pojok kanan atas.
+     - Klik area luar modal (backdrop).
+     - Tombol ESC pada keyboard.
+     - Menggunakan `sessionStorage` (`nahjul_ppdb_popup_seen`) agar pengunjung tidak terganggu oleh kemunculan pop-up berulang kali di setiap refresh dalam satu sesi.
+   - **Tombol Mengambang (Floating Launcher)**: Tombol pill elegan (`📢 Brosur PPDB 5 Jenjang`) di pojok kiri bawah beranda agar pengunjung dapat membuka kembali pop-up brosur kapan saja.
+
+#### 8.3. Pengelolaan di Panel Admin CMS (`kelola.html` & `kelola-beranda.js`)
+1. **Lokasi Menu**: Berada di menu **Kelola Beranda** (`#beranda`), Bagian 6: **Pop-up Brosur PPDB Beranda (Slide Otomatis / Iklan)**.
+2. **Pengaturan Global**:
+   - Toggle Status Pop-up (Aktif / Nonaktif).
+   - Toggle Auto-Slide (Aktif / Nonaktif).
+   - Pilihan Durasi Rotasi Slide (3s, 4s, 5s, 7s).
+   - Tombol **Pratinjau Pop-up Langsung** untuk menguji slider di dalam admin sebelum menyimpan.
+3. **Pengelolaan 5 Slide Jenjang**:
+   - Tab navigasi untuk masing-masing jenjang.
+   - Upload file brosur dengan kompresi otomatis di sisi klien (`image-compressor.js`) ke Supabase Storage atau fallback compressed DataURL yang ringan (<80KB).
+   - Kustomisasi badge, judul, subtitle, dan tautan tombol.
+4. **Penyimpanan Permanen**:
+   - Disimpan secara aman di dalam kolom JSONB `ppdb_info.contact_person.popup_banner` tanpa merusak konfigurasi kontak atau data jenjang lainnya.
