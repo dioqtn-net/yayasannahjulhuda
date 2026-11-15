@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+Allow: /favicon.ico
+Allow: /logo.png
+Allow: /favicon-48x48.png
+Allow: /favicon-96x96.png
+Allow: /favicon-144x144.png
+Allow: /favicon-192x192.png
+Allow: /favicon-512x512.png
+Allow: /apple-touch-icon.png
+Allow: /media/
+
+# Disallow admin & authentication panels from search results
+Disallow: /login
+Disallow: /login.html
+Disallow: /kelola
+Disallow: /kelola.html
+Disallow: /dashboard
+Disallow: /dashboard.html
+
+# Googlebot specific rules
+User-agent: Googlebot
+Allow: /
+Allow: /favicon.ico
+Allow: /logo.png
+Allow: /favicon-48x48.png
+Allow: /favicon-96x96.png
+Allow: /favicon-192x192.png
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /favicon.ico
+Allow: /logo.png
+Allow: /favicon-48x48.png
+Allow: /favicon-96x96.png
+Allow: /favicon-192x192.png
+Allow: /media/
+
+# Sitemap location
+Sitemap: https://yayasannahjulhuda.or.id/sitemap.xml

@@ -204,3 +204,27 @@ Menyediakan media promosi dan iklan pendaftaran peserta didik baru (PPDB / SPMB 
    - Kustomisasi badge, judul, subtitle, dan tautan tombol.
 4. **Penyimpanan Permanen**:
    - Disimpan secara aman di dalam kolom JSONB `ppdb_info.contact_person.popup_banner` tanpa merusak konfigurasi kontak atau data jenjang lainnya.
+
+---
+
+### 9. Spesifikasi Standar Google Search Favicon, Logo & SEO
+
+#### 9.1. Persyaratan Mutlak Google Favicon SERP
+Sesuai dengan pedoman resmi *Google Search Central: Define a favicon to show in search results*:
+1. **Multi-Resolusi Berbasis Kelipatan 48px**:
+   - Googlebot mensyaratkan favicon berupa kelipatan 48 piksel persegi (`48x48`, `96x96`, `144x144`, `192x192`, `512x512`).
+   - Berkas statis wajib tersedia di root domain:
+     - `/favicon.ico` (multi-size: 16x16, 32x32, 48x48)
+     - `/favicon-48x48.png` (ukuran utama yang diambil Googlebot-Image)
+     - `/favicon-96x96.png`, `/favicon-144x144.png`, `/favicon-192x192.png`, `/favicon-512x512.png`
+     - `/apple-touch-icon.png` (180x180)
+     - `/site.webmanifest`
+2. **Kestabilan URL (No Cache-Busting Query)**:
+   - Dilarang menyertakan parameter dinamis (`?v=...`) pada tag icon favicon, karena Googlebot-Image memerlukan URL permanen yang stabil.
+3. **Struktur Data Terstruktur (JSON-LD Schema.org)**:
+   - Halaman utama wajib menyertakan skema `@type: EducationalOrganization` dan `@type: WebSite` dengan properti `logo` dan `url` kanonikal eksplisit.
+4. **Perayapan Robot & Sitemap**:
+   - `/robots.txt` wajib mengizinkan perayapan file favicon dan menyertakan URL `/sitemap.xml`.
+   - `/sitemap.xml` memuat seluruh halaman publik dengan metadata `lastmod` dan tag `<image:image>` untuk logo resmi.
+5. **Meta Tag Kanonikal & Deskripsi**:
+   - Menghindari konten placeholder dengan menyediakan deskripsi SEO spesifik pada setiap halaman publik dan tag kanonikal (`https://yayasannahjulhuda.or.id/`).
